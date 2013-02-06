@@ -509,9 +509,9 @@ var plugCubedModel = Class.extend({
             color = 'BE187D';
         else {
             switch (vote) {
-                case -1: color = 'ED1C24';
-                case 1:  color = '3FFF00';
-                default: color = 'FFFFFF';
+                case -1: color = 'ED1C24'; break;
+                case 1:  color = '3FFF00'; break;
+                default: color = 'FFFFFF'; break;
             }
         }
         return '#' + color;
