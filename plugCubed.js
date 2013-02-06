@@ -400,14 +400,14 @@ var plugCubedModel = Class.extend({
     updateCustomColors: function() {
         if (this.settings.customColors)
             this.customColorsStyle.text(
-                '.chat-from { color:#' + this.settings.colors.regular + '; }' +
-                '.chat-from-featureddj { color:#' + this.settings.colors.featureddj + '; }' +
-                '.chat-from-bouncer { color:#' + this.settings.colors.bouncer + '; }' +
-                '.chat-from-manager { color:#' + this.settings.colors.manager + '; }' +
-                '.chat-from-cohost { color:#' + this.settings.colors.cohost + '; }' +
-                '.chat-from-host { color:#' + this.settings.colors.host + '; }' +
-                '.chat-from-ambassador { color:#' + this.settings.colors.ambassador + '; }' +
-                '.chat-from-admin { color:#' + this.settings.colors.admin + '; }'
+                '.chat-from { color:#' + this.settings.colors.regular + '!important; }' +
+                '.chat-from-featureddj { color:#' + this.settings.colors.featureddj + '!important; }' +
+                '.chat-from-bouncer { color:#' + this.settings.colors.bouncer + '!important; }' +
+                '.chat-from-manager { color:#' + this.settings.colors.manager + '!important; }' +
+                '.chat-from-cohost { color:#' + this.settings.colors.cohost + '!important; }' +
+                '.chat-from-host { color:#' + this.settings.colors.host + '!important; }' +
+                '.chat-from-ambassador { color:#' + this.settings.colors.ambassador + '!important; }' +
+                '.chat-from-admin { color:#' + this.settings.colors.admin + '!important; }'
             );
         else
             this.customColorsStyle.text('');
