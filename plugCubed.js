@@ -24,6 +24,11 @@ String.prototype.equalsIgnoreCase = function(other) {
 Math.randomRange = function(min,max) {
     return min + Math.floor(Math.random()*(max-min+1));
 };
+String.prototype.isHEX = function() {
+    if (this.substr(0,1) !== "#") a = "#" + this;
+    else a = this;
+    return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(a);
+}
 
 var plugCubedModel = Class.extend({
     guiButtons: {},
@@ -31,7 +36,7 @@ var plugCubedModel = Class.extend({
         return typeof(pdpSocket) !== 'undefined' && pdpSocket._base_url === 'http://socket.plugpony.net:9000/gateway';
     },
     init: function() {
-        this.version = "Running plug&#179; version 1.0.0";
+        this.version = "Running plug&#179; version 1.0.1";
         this.proxy = {
             menu: {
                 onAutoWootClick:  $.proxy(this.onAutoWootClick, this),
@@ -39,7 +44,8 @@ var plugCubedModel = Class.extend({
                 onUserlistClick:  $.proxy(this.onUserlistClick, this),
                 onAFKClick:       $.proxy(this.onAFKClick,      this),
                 onNotifyClick:    $.proxy(this.onNotifyClick,   this),
-                onStreamClick:    $.proxy(this.onStreamClick,   this)
+                onStreamClick:    $.proxy(this.onStreamClick,   this),
+                onColorClick:     $.proxy(this.onColorClick,    this)
             },
             onDjAdvance:          $.proxy(this.onDjAdvance,     this),
             onVoteUpdate:         $.proxy(this.onVoteUpdate,    this),
@@ -59,6 +65,9 @@ var plugCubedModel = Class.extend({
         };
         this.defaultAwayMsg = 'I\'m away from keyboard.';
 
+        this.customColorsStyle = $('<style type="text/css"></css>');
+        $('head').append(this.customColorsStyle);
+
         this.log(this.version, null, this.colors.infoMessage1);
         this.log("Use '/commands' to see expanded chat commands.", null, this.colors.infoMessage2);
 
@@ -69,6 +78,16 @@ var plugCubedModel = Class.extend({
 
         Models.chat.chatCommand = this.customChatCommand;
         ChatModel.chatCommand   = this.customChatCommand;
+        Dialog.getInputField = function(a,b,c,d,e,f) {
+            a = $('<input type="text" name="'+a+'" placeholder="'+c+'" maxlength="'+e+'" onKeyPress="return Dialog.onKeyPressHandler(event)"/>')
+                .attr("value",d)
+                .data("ph",c)
+                .focus($.proxy(this.onInputFocus,this))
+                .blur($.proxy(this.onInputBlur,this));
+            f&&a.attr("disabled","disabled");
+            return $("<div/>").addClass("dialog-input-container").append($("<span/>").addClass("dialog-input-label").text(b))
+            .append($("<div/>").addClass("dialog-input-background").addClass("dialog-input").append(a))
+        }
         
         this.loadSettings();
 
@@ -76,8 +95,8 @@ var plugCubedModel = Class.extend({
             '#side-left .sidebar-content p { margin: 0; padding-top: 2px; text-indent: 15px; font-size: 10px; height:15px; }',
             '#side-left .sidebar-content p:hover { color:#66ff33; }',
             '#side-left .sidebar-content p:first-child { padding-top: 0px !important; }',
-            '#side-left .sidebar-content h1.users { text-indent: 8px; color: #6FF; font-size: 16px; }',
-            '#side-left .sidebar-content h1.waitlistspot { color: #66FFFF; text-align: left; font-size: 15px; margin-left: 8px }',
+            '#side-left .sidebar-content h1.users { text-indent: 8px; color: #66FFFF; font-size: 16px; }',
+            '#side-left .sidebar-content h3.waitlistspot { color: #66FFFF; text-align: left; font-size: 15px; margin-left: 8px }',
             '#side-left .sidebar-content p span.admin_current,#side-left .sidebar-content p span.admin_meh,#side-left .sidebar-content p span.admin_undecided,#side-left .sidebar-content p span.admin_woot,#side-left .sidebar-content p span.ambassador_current,',
             '#side-left .sidebar-content p span.ambassador_meh,#side-left .sidebar-content p span.ambassador_undecided,#side-left .sidebar-content p span.ambassador_woot,#side-left .sidebar-content p span.bouncer_current,#side-left .sidebar-content p span.bouncer_meh,',
             '#side-left .sidebar-content p span.bouncer_undecided,#side-left .sidebar-content p span.bouncer_woot,#side-left .sidebar-content p span.host_current,#side-left .sidebar-content p span.host_meh,#side-left .sidebar-content p span.host_undecided,',
@@ -122,7 +141,15 @@ var plugCubedModel = Class.extend({
                 '-khtml-user-select: none;',
                 '-webkit-user-select: none;',
                 'user-select: none;',
-                'background: #424242;',
+                'background: rgb(69,72,77);',
+                'background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ1NDg0ZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);',
+                'background: -moz-linear-gradient(top,  rgba(69,72,77,1) 0%, rgba(0,0,0,1) 100%);',
+                'background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,1)), color-stop(100%,rgba(0,0,0,1)));',
+                'background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);',
+                'background: -o-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);',
+                'background: -ms-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);',
+                'background: linear-gradient(to bottom,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);',
+                'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#45484d\', endColorstr=\'#000000\',GradientType=0 );',
             '}',
             '.sidebar#side-left {',
                 'left: -220px;',
@@ -184,7 +211,7 @@ var plugCubedModel = Class.extend({
                 'min-width: 100%;',
                 'cursor: pointer;',
                 'padding: 5px;',
-                'border-radius: 3px;',
+                'border-radius: 5px;',
             '}',
             '#side-left a span {',
                 'padding-right: 8px;',
@@ -195,9 +222,9 @@ var plugCubedModel = Class.extend({
             '#side-left hr {',
                 'height: 0;',
                 'border: none;',
-                'border-top: 1px solid #333;',
+                'border-top: 1px solid #AAA;',
                 'padding: 0;',
-                'margin: 15px 0;',
+                'margin: 10px 0;',
             '}',
             '#side-right .sidebar-handle {',
                 'float: left;',
@@ -218,9 +245,9 @@ var plugCubedModel = Class.extend({
             '#side-right hr {',
                 'height: 0;',
                 'border: none;',
-                'border-top: 1px solid #333;',
+                'border-top: 1px solid #AAA;',
                 'padding: 0;',
-                'margin: 15px 0;',
+                'margin: 10px 0px 10px 3px;',
             '}',
             '[class^="status-"], [class*=" status-"] {',
                 'border-radius: 50%;',
@@ -231,7 +258,13 @@ var plugCubedModel = Class.extend({
                 'margin-right: 5px;',
             '}',
             '.status-on { background: green; }',
-            '.status-off { background: red; }'
+            '.status-off { background: red; }',
+            '#dialog-custom-colors { width: 230px; height: 360px; }',
+            '#dialog-custom-colors .dialog-body { height: 125px; }',
+            '#dialog-custom-colors .dialog-cancel-button { right: 100px; }',
+            '#dialog-custom-colors .dialog-submit-button { width: 75px; }',
+            '#dialog-custom-colors .dialog-checkbox-container-enabled { left: 10px; top: 5px; }',
+            '#dialog-custom-colors .dialog-input-background { width: 60px; left:150px; }'
         ];
         var scripts = [
         '/**',
@@ -283,9 +316,9 @@ var plugCubedModel = Class.extend({
         for (var i in users) {
             var a = users[i];
             if (a.wootcount === undefined) a.wootcount = 0;
-            if (a.mehcount === undefined)  a.mehcount = 0;
-            if (a.curVote === undefined)   a.curVote = 0;
-            if (a.joinTime === undefined)  a.joinTime = this.getTimestamp();
+            if (a.mehcount  === undefined) a.mehcount  = 0;
+            if (a.curVote   === undefined) a.curVote   = 0;
+            if (a.joinTime  === undefined) a.joinTime  = this.getTimestamp();
         }
     },
     close: function() {
@@ -306,6 +339,7 @@ var plugCubedModel = Class.extend({
         $('#plugcubed-js').remove();
         $('#side-right').remove();
         $('#side-left').remove();
+        this.customColorsStyle.remove();
     },
     showUserlist: function() {
         $("#side-left").show().animate({ "left": "0px" }, 300, "easeOutQuart");
@@ -332,7 +366,18 @@ var plugCubedModel = Class.extend({
         userlist    : false,
         autorespond : false,
         menu        : false,
-        notify      : false
+        notify      : false,
+        customColors: false,
+        colors      : {
+            regular    : 'B0B0B0',
+            featureddj : 'E90E82',
+            bouncer    : 'E90E82',
+            manager    : 'E90E82',
+            cohost     : 'E90E82',
+            host       : 'E90E82',
+            ambassador : '9A50FF',
+            admin      : '42A5DC'
+        }
     },
     loadSettings: function() {
         if (localStorage.plugCubed === undefined) return;
@@ -346,11 +391,27 @@ var plugCubedModel = Class.extend({
             this.populateUserlist();
             this.showUserlist();
         }
+        if (this.settings.customColors)
+            this.updateCustomColors();
     },
-    saveSettings: function () {
+    saveSettings: function() {
         localStorage.plugCubed = JSON.stringify(this.settings);
     },
-    /*API listeners*/
+    updateCustomColors: function() {
+        if (this.settings.customColors)
+            this.customColorsStyle.text(
+                '.chat-from { color:#' + this.settings.colors.regular + '; }' +
+                '.chat-from-featureddj { color:#' + this.settings.colors.featureddj + '; }' +
+                '.chat-from-bouncer { color:#' + this.settings.colors.bouncer + '; }' +
+                '.chat-from-manager { color:#' + this.settings.colors.manager + '; }' +
+                '.chat-from-cohost { color:#' + this.settings.colors.cohost + '; }' +
+                '.chat-from-host { color:#' + this.settings.colors.host + '; }' +
+                '.chat-from-ambassador { color:#' + this.settings.colors.ambassador + '; }' +
+                '.chat-from-admin { color:#' + this.settings.colors.admin + '; }'
+            );
+        else
+            this.customColorsStyle.text('');
+    },
     initAPIListeners: function() {
         API.addEventListener(API.DJ_ADVANCE,    this.proxy.onDjAdvance);
         API.addEventListener(API.VOTE_UPDATE,   this.proxy.onVoteUpdate);
@@ -359,14 +420,14 @@ var plugCubedModel = Class.extend({
         API.addEventListener(API.USER_LEAVE,    this.proxy.onUserLeave);
         API.addEventListener(API.CHAT,          this.proxy.onChat);
     },
-    /*UserInterface*/
     initGUI: function() {
-        this.addGUIButton(this.settings.autowoot,      'woot',        'Autowoot',   this.proxy.menu.onAutoWootClick);
-        this.addGUIButton(this.settings.autojoin,      'join',        'Autojoin',   this.proxy.menu.onAutoJoinClick);
-        this.addGUIButton(this.settings.userlist,      'userlist',    'Userlist',   this.proxy.menu.onUserlistClick);
-        this.addGUIButton(this.settings.autorespond,   'autorespond', 'AFK Status', this.proxy.menu.onAFKClick);
-        this.addGUIButton(this.settings.notify,        'notify',      'Notify',     this.proxy.menu.onNotifyClick);
-        this.addGUIButton(!DB.settings.streamDisabled, 'stream',      'Stream',     this.proxy.menu.onStreamClick);
+        this.addGUIButton(this.settings.autowoot,      'woot',        'Autowoot',           this.proxy.menu.onAutoWootClick);
+        this.addGUIButton(this.settings.autojoin,      'join',        'Autojoin',           this.proxy.menu.onAutoJoinClick);
+        this.addGUIButton(this.settings.userlist,      'userlist',    'Userlist',           this.proxy.menu.onUserlistClick);
+        this.addGUIButton(this.settings.customColors,  'colors',      'Custom chat colors', this.proxy.menu.onColorClick);
+        this.addGUIButton(this.settings.autorespond,   'autorespond', 'AFK Status',         this.proxy.menu.onAFKClick);
+        this.addGUIButton(this.settings.notify,        'notify',      'Notify',             this.proxy.menu.onNotifyClick);
+        this.addGUIButton(!DB.settings.streamDisabled, 'stream',      'Stream',             this.proxy.menu.onStreamClick);
     },
     addGUIButton: function(setting,id,text,callback) {
         if (this.guiButtons[id] !== undefined) return;
@@ -387,8 +448,8 @@ var plugCubedModel = Class.extend({
 
         $('#side-left .sidebar-content').html('<h1 class="users">Users: ' + API.getUsers().length + '</h1>');
         var spot = Models.room.getWaitListPosition();
-        if (spot !== null)
-            $('#side-left .sidebar-content').append('<h1 class="waitlistspot">Waitlist:</span> ' + spot + ' / ' + Models.room.data.waitList.length + '</h3><br />');
+        var waitlistDiv = $('<h3></h3>').addClass('waitlistspot').text('Waitlist: ' + (spot !== null ? spot + ' / ' : '') + Models.room.data.waitList.length);
+        $('#side-left .sidebar-content').append(waitlistDiv).append('<hr />');
         var users = API.getUsers();
         for (var i in users)
             this.appendUser(users[i]);
@@ -419,7 +480,6 @@ var plugCubedModel = Class.extend({
             });
         }
     },
-    /*Userlist Creation*/
     appendUser: function(user) {
         var username = user.username,prefix;
 
@@ -437,18 +497,24 @@ var plugCubedModel = Class.extend({
             else
                 this.drawUserlistItem(prefix + '_current', '#66FFFF', username);
         } else if (prefix === 'normal')
-            this.drawUserlistItem('void',this.colorByVote(user.vote), username);
+            this.drawUserlistItem('void',this.colorByVote(user.vote,user.curated), username);
         else
-            this.drawUserlistItem(prefix + this.prefixByVote(user.vote), this.colorByVote(user.vote), username);
+            this.drawUserlistItem(prefix + this.prefixByVote(user.vote), this.colorByVote(user.vote,user.curated), username);
     },
-    colorByVote: function(vote) {
-        if (vote === undefined)
-            return '#FFFFFF';
-        switch (vote) {
-            case -1: return '#ED1C24';
-            case 1:  return '#3FFF00';
-            default: return '#FFFFFF';
+    colorByVote: function(vote,curated) {
+        var color = '';
+        if (vote === undefined && curated !== true)
+            color = 'FFFFFF';
+        else if (curated === true)
+            color = 'BE187D';
+        else {
+            switch (vote) {
+                case -1: color = 'ED1C24';
+                case 1:  color = '3FFF00';
+                default: color = 'FFFFFF';
+            }
         }
+        return '#' + color;
     },
     prefixByVote: function(vote) {
         var prefix = '';
@@ -480,7 +546,6 @@ var plugCubedModel = Class.extend({
         }
         return null;
     },
-    /*Moderation*/
     moderation: function(target,type) {
         if (Models.room.data.staff[Models.user.data.id] && Models.room.data.staff[Models.user.data.id] >= Models.user.BOUNCER) {
             var service;
@@ -589,6 +654,69 @@ var plugCubedModel = Class.extend({
         this.changeGUIColor('stream',DB.settings.streamDisabled);
         API.sendChat(DB.settings.streamDisabled ? "/stream on" : "/stream off");
     },
+    onColorClick: function() {
+        Dialog.closeDialog();
+        Dialog.context = "isCustomChatColors";
+        Dialog.submitFunc = $.proxy(this.onColorSubmit, this);
+        Dialog.showDialog(
+            $("<div/>")
+            .attr("id", "dialog-custom-colors")
+            .addClass("dialog")
+            .css("left",Main.LEFT+(Main.WIDTH-230)/2)
+            .css("top",208.5)
+            .append(Dialog.getHeader("Custom chat colors"))
+            .append(
+                $("<div/>")
+                .addClass("dialog-body")
+                .append(
+                    $("<form/>")
+                    .submit("return false")
+                    .append(Dialog.getCheckBox("Enable custom", "enabled", this.settings.customColors))
+                    .append($(Dialog.getInputField("regular", 'Regular', 'B0B0B0', this.settings.colors.regular, 6)).css('top',30))
+                    .append($(Dialog.getInputField("featureddj", 'Featured DJ', 'E90E82', this.settings.colors.featureddj, 6)).css('top',60))
+                    .append($(Dialog.getInputField("bouncer", 'Bouncer', 'E90E82', this.settings.colors.bouncer, 6)).css('top',90))
+                    .append($(Dialog.getInputField("manager", 'Manager', 'E90E82', this.settings.colors.manager, 6)).css('top',120))
+                    .append($(Dialog.getInputField("cohost", 'Co-Host', 'E90E82', this.settings.colors.cohost, 6)).css('top',150))
+                    .append($(Dialog.getInputField("host", 'Host', 'E90E82', this.settings.colors.host, 6)).css('top',180))
+                    .append($(Dialog.getInputField("ambassador", 'Ambassador', '9A50FF', this.settings.colors.ambassador, 6)).css('top',210))
+                    .append($(Dialog.getInputField("admin", 'Admin', '42A5DC', this.settings.colors.admin, 6)).css('top',240))
+                )
+            )
+            .append(Dialog.getCancelButton())
+            .append(Dialog.getSubmitButton(Lang.dialog.save))
+        )
+    },
+    onColorSubmit: function() {
+        var a = $("input[name=regular]"),
+            b = $("input[name=featureddj]"),
+            c = $("input[name=bouncer]"),
+            d = $("input[name=manager]"),
+            e = $("input[name=cohost]"),
+            f = $("input[name=host]"),
+            g = $("input[name=ambassador]"),
+            h = $("input[name=admin]");
+        this.settings.customColors = $("#dialog-checkbox-enabled").is(":checked");
+        if (a.val() === "")  a.data('ph');
+        else if (a.val().isHEX()) this.settings.colors.regular = a.val();
+        if (b.val() === "")  b.data('ph');
+        else if (b.val().isHEX()) this.settings.colors.featureddj = b.val();
+        if (c.val() === "")  c.data('ph');
+        else if (c.val().isHEX()) this.settings.colors.bouncer = c.val();
+        if (d.val() === "")  d.data('ph');
+        else if (d.val().isHEX()) this.settings.colors.manager = d.val();
+        if (e.val() === "")  e.data('ph');
+        else if (e.val().isHEX()) this.settings.colors.cohost = e.val();
+        if (f.val() === "")  f.data('ph');
+        else if (f.val().isHEX()) this.settings.colors.host = f.val();
+        if (g.val() === "")  g.data('ph');
+        else if (g.val().isHEX()) this.settings.colors.ambassador = g.val();
+        if (h.val() === "")  h.data('ph');
+        else if (h.val().isHEX()) this.settings.colors.admin = h.val();
+        this.updateCustomColors();
+        this.changeGUIColor('colors',this.settings.customColors);
+        this.saveSettings();
+        Dialog.closeDialog();
+    },
     onVoteUpdate: function(data) {
         var a = Models.room.userHash[data.user.id];
         this.onUserlistUpdate();
@@ -669,7 +797,6 @@ var plugCubedModel = Class.extend({
         return (time.getHours()+":"+minutes);
     
     },
-    /*ChatCommands*/
     customChatCommand: function(value) {
         if (Models.chat._chatCommand(value) === true) {
             if (value == '/stream on' || value == '/stream off')
@@ -809,41 +936,11 @@ var plugCubedModel = Class.extend({
         }
         if (Models.user.hasPermission(Models.user.MANAGER)) {
             if (value.indexOf("/lock") === 0) {
-                $.ajax({
-                url: "http://plug.dj/_/gateway/room.update_options",
-                type: 'POST',
-                data: JSON.stringify({
-                    service: "room.update_options",
-                    body: [Slug,{
-                        "boothLocked":     true,
-                        "waitListEnabled": Models.room.data.waitListEnabled,
-                        "maxPlays":        Models.room.data.maxPlays,
-                        "maxDJs":          Models.room.data.maxDJs
-                    }]
-                }),
-                async: this.async,
-                dataType: 'json',
-                contentType: 'application/json'
-                }).done;
+                new RoomPropsService(Slug,true,Models.room.data.waitListEnabled,Models.room.data.maxPlays,Models.room.data.maxDJs);
                 return true;
             }
             if (value.indexOf("/unlock") === 0) {
-                $.ajax({
-                url: "http://plug.dj/_/gateway/room.update_options",
-                type: 'POST',
-                data: JSON.stringify({
-                    service: "room.update_options",
-                    body: [Slug,{
-                        "boothLocked":     false,
-                        "waitListEnabled": Models.room.data.waitListEnabled,
-                        "maxPlays":        Models.room.data.maxPlays,
-                        "maxDJs":          Models.room.data.maxDJs
-                    }]
-                }),
-                async: this.async,
-                dataType: 'json',
-                contentType: 'application/json'
-                }).done;
+                new RoomPropsService(Slug,false,Models.room.data.waitListEnabled,Models.room.data.maxPlays,Models.room.data.maxDJs);
                 return true;
             }
         }
