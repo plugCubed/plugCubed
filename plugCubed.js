@@ -305,7 +305,7 @@ var plugCubedModel = Class.extend({
         '    <div class="sidebar-handle"><span>||</span></div>' +
         '    <div class="sidebar-content"></div>' +
         '</div>');
-        $('body').append('<script type="text/javascript">' + "\n" + scripts.join("\n") + "\n" + '</script>');
+        $('body').append('<script type="text/javascript" id="plugcubed-js-extra">' + "\n" + scripts.join("\n") + "\n" + '</script>');
         this.initGUI();
         this.initAPIListeners();
         if (this.settings.userlist) {
@@ -336,7 +336,7 @@ var plugCubedModel = Class.extend({
             delete plugCubed.guiButtons[i];
         }
         $('#plugcubed-css').remove();
-        $('#plugcubed-js').remove();
+        $('#plugcubed-js-extra').remove();
         $('#side-right').remove();
         $('#side-left').remove();
         this.customColorsStyle.remove();
@@ -567,8 +567,11 @@ var plugCubedModel = Class.extend({
             var rank,
                 status,
                 voted,
-                points    = user.djPoints + user.curatorPoints + user.listenerPoints,
-                voteTotal = user.wootcount + user.mehcount;
+                position,
+                points      = user.djPoints + user.curatorPoints + user.listenerPoints,
+                voteTotal   = user.wootcount + user.mehcount,
+                waitlistpos = Models.room.getWaitListPosition(user.id),
+                boothpos    = -1;
 
                  if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.FEATUREDDJ) rank = 'Featured DJ';
             else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.BOUNCER)    rank = 'Bouncer';
@@ -578,6 +581,16 @@ var plugCubedModel = Class.extend({
             else if (Models.room.ambassadors[user.id])                                                             rank = 'Ambassador';
             else if (Models.room.admins[user.id])                                                                  rank = 'Admin';
             else                                                                                                   rank = 'User';
+
+            if (waitlistpos === null) {
+                for (var i = 1;i < Models.room.data.djs.length;i++)
+                    boothpos = Models.room.data.djs[i].user.id === Models.user.data.id ? i : boothpos;
+                if (boothpos < 0)
+                    position = "Not in waitlist nor booth";
+                else
+                    position = (boothpos + 1) + "/" + Models.room.data.djs.length + " in booth";
+            } else
+                position = waitlistpos + "/" + Models.room.data.waitlist.length + " in waitlist";
 
             switch (user.status) {
                 case -1: status = "Idle"; break;
@@ -593,13 +606,14 @@ var plugCubedModel = Class.extend({
                 case 1:   voted = "Woot"; break;
             }
             
-            this.log('<table style="width:100%"><tr><td colspan="2"><strong>Name</strong>: <span style="color:#FFFFFF">' + user.username + '</span></td></tr>' + 
-            '<tr><td colspan="2"><strong>ID</strong>: <span style="color:#FFFFFF">' + user.id + '</span></td></tr>' + 
-             '<tr><td><strong>Rank</strong>: <span style="color:#FFFFFF">' + rank + '</span></td><td><strong>Time Joined</strong>: <span style="color:#FFFFFF">' + user.joinTime + '</span></td></tr>' + 
-            '<tr><td><strong>Status</strong>: <span style="color:#FFFFFF">' + status + '</span></td><td><strong>Vote</strong>: <span style="color:#FFFFFF">' + voted + '</span></td></tr>' + 
-            '<tr><td><strong>Points</strong>: <span style="color:#FFFFFF">' + points + '</span></td><td><strong>Fans</strong>: <span style="color:#FFFFFF">' + user.fans + '</span></td></tr>' + 
-            '<tr><td><strong>Woot Count</strong>: <span style="color:#FFFFFF">' + user.wootcount + '</span></td><td><strong>Meh Count</strong>: <span style="color:#FFFFFF">' + user.mehcount + '</span></td></tr>' + 
-            '<tr><td colspan="2" ><strong>Woot/Meh ratio</strong>: <span style="color:#FFFFFF">' + (voteTotal === 0 ? '0' : (user.wootcount/voteTotal).toFixed(2)) + '</span></td></tr></table>', null, "#cc00cc");
+            this.log('<table style="width:100%"><tr><td colspan="2"><strong>Name</strong>: <span style="color:#FFFFFF">' + user.username + '</span></td></tr>' +
+            '<tr><td colspan="2"><strong>ID</strong>: <span style="color:#FFFFFF">' + user.id + '</span></td></tr>' +
+             '<tr><td><strong>Rank</strong>: <span style="color:#FFFFFF">' + rank + '</span></td><td><strong>Time Joined</strong>: <span style="color:#FFFFFF">' + user.joinTime + '</span></td></tr>' +
+            '<tr><td><strong>Status</strong>: <span style="color:#FFFFFF">' + status + '</span></td><td><strong>Vote</strong>: <span style="color:#FFFFFF">' + voted + '</span></td></tr>' +
+            '<tr><td colspan="2"><strong>Position</strong>: <span style="color:#FFFFFF">' + position + '</span></td></tr>' +
+            '<tr><td><strong>Points</strong>: <span style="color:#FFFFFF">' + points + '</span></td><td><strong>Fans</strong>: <span style="color:#FFFFFF">' + user.fans + '</span></td></tr>' +
+            '<tr><td><strong>Woot Count</strong>: <span style="color:#FFFFFF">' + user.wootcount + '</span></td><td><strong>Meh Count</strong>: <span style="color:#FFFFFF">' + user.mehcount + '</span></td></tr>' +
+            '<tr><td colspan="2"><strong>Woot/Meh ratio</strong>: <span style="color:#FFFFFF">' + (voteTotal === 0 ? '0' : (user.wootcount/voteTotal).toFixed(2)) + '</span></td></tr></table>', null, "#cc00cc");
         }
     },
     onAutoWootClick: function() {
@@ -900,8 +914,19 @@ var plugCubedModel = Class.extend({
             var spot = Models.room.getWaitListPosition();
             if (spot !== null)
                 plugCubed.log("Position in waitlist " + spot + "/" + Models.room.data.waitList.length, null, plugCubed.colors.infoMessage2);
-            else
-                plugCubed.log("Not in waitlist", null, plugCubed.colors.infoMessage2);
+            else {
+                spot = -1;
+                for (var i = 1;i < Models.room.data.djs.length;i++)
+                    spot = Models.room.data.djs[i].user.id === Models.user.data.id ? i : spot;
+                if (i < 0)
+                    plugCubed.log("Not in waitlist nor booth", null, plugCubed.colors.infoMessage2);
+                else if (i === 0)
+                    plugCubed.log("You are DJing",null,plugCubed.colors.infoMessage2);
+                else if (i === 1)
+                    plugCubed.log("You are DJing next",null,plugCubed.colors.infoMessage2);
+                else
+                    plugCubed.log("Position in booth " + (spot + 1) + "/" + Models.room.data.djs.length, null, plugCubed.colors.infoMessage2);
+            }
             return true;
         }
         if (Models.user.hasPermission(Models.user.BOUNCER)) {
