@@ -36,7 +36,7 @@ var plugCubedModel = Class.extend({
         return typeof(pdpSocket) !== 'undefined' && pdpSocket._base_url === 'http://socket.plugpony.net:9000/gateway';
     },
     init: function() {
-        this.version = "Running plug&#179; version 1.0.2";
+        this.version = "Running plug&#179; version 1.0.3";
         this.proxy = {
             menu: {
                 onAutoWootClick:  $.proxy(this.onAutoWootClick, this),
@@ -584,7 +584,7 @@ var plugCubedModel = Class.extend({
 
             if (waitlistpos === null) {
                 for (var i = 1;i < Models.room.data.djs.length;i++)
-                    boothpos = Models.room.data.djs[i].user.id === Models.user.data.id ? i : boothpos;
+                    boothpos = Models.room.data.djs[i].user.id === user.id ? i : boothpos;
                 if (boothpos < 0)
                     position = "Not in waitlist nor booth";
                 else
@@ -918,11 +918,11 @@ var plugCubedModel = Class.extend({
                 spot = -1;
                 for (var i = 1;i < Models.room.data.djs.length;i++)
                     spot = Models.room.data.djs[i].user.id === Models.user.data.id ? i : spot;
-                if (i < 0)
+                if (spot < 0)
                     plugCubed.log("Not in waitlist nor booth", null, plugCubed.colors.infoMessage2);
-                else if (i === 0)
+                else if (spot === 0)
                     plugCubed.log("You are DJing",null,plugCubed.colors.infoMessage2);
-                else if (i === 1)
+                else if (spot === 1)
                     plugCubed.log("You are DJing next",null,plugCubed.colors.infoMessage2);
                 else
                     plugCubed.log("Position in booth " + (spot + 1) + "/" + Models.room.data.djs.length, null, plugCubed.colors.infoMessage2);
