@@ -590,7 +590,7 @@ var plugCubedModel = Class.extend({
                 else
                     position = (boothpos + 1) + "/" + Models.room.data.djs.length + " in booth";
             } else
-                position = waitlistpos + "/" + Models.room.data.waitlist.length + " in waitlist";
+                position = waitlistpos + "/" + Models.room.data.waitList.length + " in waitlist";
 
             switch (user.status) {
                 case -1: status = "Idle"; break;
