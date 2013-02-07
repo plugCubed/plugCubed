@@ -424,7 +424,7 @@ var plugCubedModel = Class.extend({
         this.addGUIButton(this.settings.autowoot,      'woot',        'Autowoot',           this.proxy.menu.onAutoWootClick);
         this.addGUIButton(this.settings.autojoin,      'join',        'Autojoin',           this.proxy.menu.onAutoJoinClick);
         this.addGUIButton(this.settings.userlist,      'userlist',    'Userlist',           this.proxy.menu.onUserlistClick);
-        this.addGUIButton(this.settings.customColors,  'colors',      'Custom chat colors', this.proxy.menu.onColorClick);
+        this.addGUIButton(this.settings.customColors,  'colors',      'Custom Chat Colors', this.proxy.menu.onColorClick);
         this.addGUIButton(this.settings.autorespond,   'autorespond', 'AFK Status',         this.proxy.menu.onAFKClick);
         this.addGUIButton(this.settings.notify,        'notify',      'Notify',             this.proxy.menu.onNotifyClick);
         this.addGUIButton(!DB.settings.streamDisabled, 'stream',      'Stream',             this.proxy.menu.onStreamClick);
@@ -664,7 +664,7 @@ var plugCubedModel = Class.extend({
             .addClass("dialog")
             .css("left",Main.LEFT+(Main.WIDTH-230)/2)
             .css("top",208.5)
-            .append(Dialog.getHeader("Custom chat colors"))
+            .append(Dialog.getHeader("Custom Chat Colors"))
             .append(
                 $("<div/>")
                 .addClass("dialog-body")
