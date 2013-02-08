@@ -36,7 +36,7 @@ var plugCubedModel = Class.extend({
         return typeof(pdpSocket) !== 'undefined' && pdpSocket._base_url === 'http://socket.plugpony.net:9000/gateway';
     },
     init: function() {
-        this.version = "Running plug&#179; version 1.0.5";
+        this.version = "Running plug&#179; version 1.0.6";
         this.proxy = {
             menu: {
                 onAutoWootClick:  $.proxy(this.onAutoWootClick, this),
@@ -249,7 +249,7 @@ var plugCubedModel = Class.extend({
             '}',
             '.status-on { background: green; }',
             '.status-off { background: red; }',
-            '#dialog-custom-colors { width: 230px; height: 360px; }',
+            '#dialog-custom-colors { width: 230px; height: 390px; }',
             '#dialog-custom-colors .dialog-body { height: 125px; }',
             '#dialog-custom-colors .dialog-cancel-button { right: 100px; }',
             '#dialog-custom-colors .dialog-submit-button { width: 75px; }',
@@ -359,6 +359,7 @@ var plugCubedModel = Class.extend({
         notify      : false,
         customColors: false,
         colors      : {
+            you        : 'FFDD6F',
             regular    : 'B0B0B0',
             featureddj : 'E90E82',
             bouncer    : 'E90E82',
@@ -391,22 +392,24 @@ var plugCubedModel = Class.extend({
         if (this.settings.customColors)
             this.customColorsStyle.text(
                 [
-                    '.chat-message .chat-from { color:#' + this.settings.colors.regular + '!important; }',
-                    '.chat-message .chat-from-featureddj{ color:#' + this.settings.colors.featureddj + '!important; }',
-                    '.chat-message .chat-from-bouncer { color:#' + this.settings.colors.bouncer + '!important; }',
-                    '.chat-message .chat-from-manager { color:#' + this.settings.colors.manager + '!important; }',
-                    '.chat-message .chat-from-cohost { color:#' + this.settings.colors.cohost + '!important; }',
-                    '.chat-message .chat-from-host { color:#' + this.settings.colors.host + '!important; }',
-                    '.chat-message .chat-from-ambassador { color:#' + this.settings.colors.ambassador + '!important; }',
-                    '.chat-message .chat-from-admin { color:#' + this.settings.colors.admin + '!important; }',
-                    '.chat-emote .chat-from, ',
-                    '.chat-emote .chat-from-featureddj, ',
-                    '.chat-emote .chat-from-bouncer, ',
-                    '.chat-emote .chat-from-manager, ',
-                    '.chat-emote .chat-from-cohost, ',
-                    '.chat-emote .chat-from-host, ',
-                    '.chat-emote .chat-from-ambassador, ',
-                    '.chat-emote .chat-from-admin { color:#DEE97D!important; }'
+                    '.chat-message .chat-from,',
+                    '.chat-mention .chat-from { color:#' + this.settings.colors.regular + '!important; }',
+                    '.chat-message .chat-from-featureddj,',
+                    '.chat-mention .chat-from-featureddj { color:#' + this.settings.colors.featureddj + '!important; }',
+                    '.chat-message .chat-from-bouncer,',
+                    '.chat-mention .chat-from-bouncer { color:#' + this.settings.colors.bouncer + '!important; }',
+                    '.chat-message .chat-from-manager,',
+                    '.chat-mention .chat-from-manager { color:#' + this.settings.colors.manager + '!important; }',
+                    '.chat-message .chat-from-cohost,',
+                    '.chat-mention .chat-from-cohost { color:#' + this.settings.colors.cohost + '!important; }',
+                    '.chat-message .chat-from-host,',
+                    '.chat-mention .chat-from-host { color:#' + this.settings.colors.host + '!important; }',
+                    '.chat-message .chat-from-ambassador,',
+                    '.chat-mention .chat-from-ambassador { color:#' + this.settings.colors.ambassador + '!important; }',
+                    '.chat-message .chat-from-admin,',
+                    '.chat-mention .chat-from-admin { color:#' + this.settings.colors.admin + '!important; }',
+                    '.chat-message .chat-from-you,',
+                    '.chat-mention .chat-from-you { color:#' + this.settings.colors.you + '!important; }'
                 ].join("\n")
             );
         else
@@ -690,14 +693,15 @@ var plugCubedModel = Class.extend({
                     $("<form/>")
                     .submit("return false")
                     .append(Dialog.getCheckBox("Enable custom", "enabled", this.settings.customColors))
-                    .append($(Dialog.getInputField("regular", 'Regular', 'B0B0B0', this.settings.colors.regular, 6)).css('top',30))
-                    .append($(Dialog.getInputField("featureddj", 'Featured DJ', 'E90E82', this.settings.colors.featureddj, 6)).css('top',60))
-                    .append($(Dialog.getInputField("bouncer", 'Bouncer', 'E90E82', this.settings.colors.bouncer, 6)).css('top',90))
-                    .append($(Dialog.getInputField("manager", 'Manager', 'E90E82', this.settings.colors.manager, 6)).css('top',120))
-                    .append($(Dialog.getInputField("cohost", 'Co-Host', 'E90E82', this.settings.colors.cohost, 6)).css('top',150))
-                    .append($(Dialog.getInputField("host", 'Host', 'E90E82', this.settings.colors.host, 6)).css('top',180))
-                    .append($(Dialog.getInputField("ambassador", 'Ambassador', '9A50FF', this.settings.colors.ambassador, 6)).css('top',210))
-                    .append($(Dialog.getInputField("admin", 'Admin', '42A5DC', this.settings.colors.admin, 6)).css('top',240))
+                    .append($(Dialog.getInputField("you", 'You', 'FFDD6F', this.settings.colors.you, 6)).css('top',30))
+                    .append($(Dialog.getInputField("regular", 'Regular', 'B0B0B0', this.settings.colors.regular, 6)).css('top',60))
+                    .append($(Dialog.getInputField("featureddj", 'Featured DJ', 'E90E82', this.settings.colors.featureddj, 6)).css('top',90))
+                    .append($(Dialog.getInputField("bouncer", 'Bouncer', 'E90E82', this.settings.colors.bouncer, 6)).css('top',120))
+                    .append($(Dialog.getInputField("manager", 'Manager', 'E90E82', this.settings.colors.manager, 6)).css('top',150))
+                    .append($(Dialog.getInputField("cohost", 'Co-Host', 'E90E82', this.settings.colors.cohost, 6)).css('top',180))
+                    .append($(Dialog.getInputField("host", 'Host', 'E90E82', this.settings.colors.host, 6)).css('top',210))
+                    .append($(Dialog.getInputField("ambassador", 'Ambassador', '9A50FF', this.settings.colors.ambassador, 6)).css('top',240))
+                    .append($(Dialog.getInputField("admin", 'Admin', '42A5DC', this.settings.colors.admin, 6)).css('top',270))
                 )
             )
             .append(Dialog.getCancelButton())
@@ -705,23 +709,25 @@ var plugCubedModel = Class.extend({
         )
     },
     onColorSubmit: function() {
-        var a = $("input[name=regular]"),
-            b = $("input[name=featureddj]"),
-            c = $("input[name=bouncer]"),
-            d = $("input[name=manager]"),
-            e = $("input[name=cohost]"),
-            f = $("input[name=host]"),
-            g = $("input[name=ambassador]"),
-            h = $("input[name=admin]");
+        var a = $("input[name=you]"),
+            b = $("input[name=regular]"),
+            c = $("input[name=featureddj]"),
+            d = $("input[name=bouncer]"),
+            e = $("input[name=manager]"),
+            f = $("input[name=cohost]"),
+            g = $("input[name=host]"),
+            h = $("input[name=ambassador]"),
+            i = $("input[name=admin]");
         this.settings.customColors = $("#dialog-checkbox-enabled").is(":checked");
-        this.settings.colors.regular    = a.val() === "" || !a.val().isHEX() ? a.data('ph') : a.val();
-        this.settings.colors.featureddj = b.val() === "" || !b.val().isHEX() ? b.data('ph') : b.val();
-        this.settings.colors.bouncer    = c.val() === "" || !c.val().isHEX() ? c.data('ph') : c.val();
-        this.settings.colors.manager    = d.val() === "" || !d.val().isHEX() ? d.data('ph') : d.val();
-        this.settings.colors.cohost     = e.val() === "" || !e.val().isHEX() ? e.data('ph') : e.val();
-        this.settings.colors.host       = f.val() === "" || !f.val().isHEX() ? f.data('ph') : f.val();
-        this.settings.colors.ambassador = g.val() === "" || !g.val().isHEX() ? g.data('ph') : g.val();
-        this.settings.colors.admin      = h.val() === "" || !h.val().isHEX() ? h.data('ph') : h.val();
+        this.settings.colors.you        = a.val() === "" || !a.val().isHEX() ? a.data('ph') : a.val();
+        this.settings.colors.regular    = b.val() === "" || !b.val().isHEX() ? b.data('ph') : b.val();
+        this.settings.colors.featureddj = c.val() === "" || !c.val().isHEX() ? c.data('ph') : c.val();
+        this.settings.colors.bouncer    = d.val() === "" || !d.val().isHEX() ? d.data('ph') : d.val();
+        this.settings.colors.manager    = e.val() === "" || !e.val().isHEX() ? e.data('ph') : e.val();
+        this.settings.colors.cohost     = f.val() === "" || !f.val().isHEX() ? f.data('ph') : f.val();
+        this.settings.colors.host       = g.val() === "" || !g.val().isHEX() ? g.data('ph') : g.val();
+        this.settings.colors.ambassador = h.val() === "" || !h.val().isHEX() ? h.data('ph') : h.val();
+        this.settings.colors.admin      = i.val() === "" || !i.val().isHEX() ? i.data('ph') : i.val();
         this.updateCustomColors();
         this.changeGUIColor('colors',this.settings.customColors);
         this.saveSettings();
