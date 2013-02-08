@@ -36,7 +36,7 @@ var plugCubedModel = Class.extend({
         return typeof(pdpSocket) !== 'undefined' && pdpSocket._base_url === 'http://socket.plugpony.net:9000/gateway';
     },
     init: function() {
-        this.version = "Running plug&#179; version 1.0.4";
+        this.version = "Running plug&#179; version 1.0.5";
         this.proxy = {
             menu: {
                 onAutoWootClick:  $.proxy(this.onAutoWootClick, this),
@@ -78,16 +78,6 @@ var plugCubedModel = Class.extend({
 
         Models.chat.chatCommand = this.customChatCommand;
         ChatModel.chatCommand   = this.customChatCommand;
-        Dialog.getInputField = function(a,b,c,d,e,f) {
-            a = $('<input type="text" name="'+a+'" placeholder="'+c+'" maxlength="'+e+'" onKeyPress="return Dialog.onKeyPressHandler(event)"/>')
-                .attr("value",d)
-                .data("ph",c)
-                .focus($.proxy(this.onInputFocus,this))
-                .blur($.proxy(this.onInputBlur,this));
-            f&&a.attr("disabled","disabled");
-            return $("<div/>").addClass("dialog-input-container").append($("<span/>").addClass("dialog-input-label").text(b))
-            .append($("<div/>").addClass("dialog-input-background").addClass("dialog-input").append(a))
-        }
         
         this.loadSettings();
 
@@ -267,36 +257,36 @@ var plugCubedModel = Class.extend({
             '#dialog-custom-colors .dialog-input-background { width: 60px; left:150px; }'
         ];
         var scripts = [
-        '/**',
-        '* hoverIntent r6 // 2011.02.26 // jQuery 1.5.1+',
-        '* <http://cherne.net/brian/resources/jquery.hoverIntent.html>',
-        '* ',
-        '* @param  f  onMouseOver function || An object with configuration options',
-        '* @param  g  onMouseOut function  || Nothing (use configuration options object)',
-        '* @author    Brian Cherne brian(at)cherne(dot)net',
-        '*/',
-        "(function($){$.fn.hoverIntent=function(f,g){var cfg={sensitivity:7,interval:100,timeout:0};cfg=$.extend(cfg,g?{over:f,out:g}:f);var cX,cY,pX,pY;var track=function(ev){cX=ev.pageX;cY=ev.pageY};var compare=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);if((Math.abs(pX-cX)+Math.abs(pY-cY))<cfg.sensitivity){$(ob).unbind('mousemove',track);ob.hoverIntent_s=1;return cfg.over.apply(ob,[ev])}else{pX=cX;pY=cY;ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}};var delay=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);ob.hoverIntent_s=0;return cfg.out.apply(ob,[ev])};var handleHover=function(e){var ev=jQuery.extend({},e);var ob=this;if(ob.hoverIntent_t){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t)}if(e.type=='mouseenter'){pX=ev.pageX;pY=ev.pageY;$(ob).bind('mousemove',track);if(ob.hoverIntent_s!=1){ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}}else{$(ob).unbind('mousemove',track);if(ob.hoverIntent_s==1){ob.hoverIntent_t=setTimeout(function(){delay(ev,ob)},cfg.timeout)}}};return this.bind('mouseenter',handleHover).bind('mouseleave',handleHover)}})(jQuery);",
-        'if (jQuery.easing.easeOutQuart === undefined) jQuery.easing.easeOutQuart = function (a,b,c,d,e) { return -d*((b=b/e-1)*b*b*b-1)+c; }',
-        '$("#side-right")',
-        '    .hoverIntent(function() {',
-        '        var timeout_r = $(this)',
-        '            .data("timeout_r");',
-        '        if (timeout_r) {',
-        '            clearTimeout(timeout_r);',
-        '        }',
-        '        $(this)',
-        '            .animate({',
-        '                "right": "0px"',
-        '            }, 300, "easeOutQuart");',
-        '    }, function() {',
-        '        $(this)',
-        '            .data("timeout_r", setTimeout($.proxy(function() {',
-        '            $(this)',
-        '                .animate({',
-        '                    "right": "-190px"',
-        '                }, 300, "easeOutQuart");',
-        '       }, this), 500));',
-        '    });'
+            '/**',
+            '* hoverIntent r6 // 2011.02.26 // jQuery 1.5.1+',
+            '* <http://cherne.net/brian/resources/jquery.hoverIntent.html>',
+            '* ',
+            '* @param  f  onMouseOver function || An object with configuration options',
+            '* @param  g  onMouseOut function  || Nothing (use configuration options object)',
+            '* @author    Brian Cherne brian(at)cherne(dot)net',
+            '*/',
+            "(function($){$.fn.hoverIntent=function(f,g){var cfg={sensitivity:7,interval:100,timeout:0};cfg=$.extend(cfg,g?{over:f,out:g}:f);var cX,cY,pX,pY;var track=function(ev){cX=ev.pageX;cY=ev.pageY};var compare=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);if((Math.abs(pX-cX)+Math.abs(pY-cY))<cfg.sensitivity){$(ob).unbind('mousemove',track);ob.hoverIntent_s=1;return cfg.over.apply(ob,[ev])}else{pX=cX;pY=cY;ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}};var delay=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);ob.hoverIntent_s=0;return cfg.out.apply(ob,[ev])};var handleHover=function(e){var ev=jQuery.extend({},e);var ob=this;if(ob.hoverIntent_t){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t)}if(e.type=='mouseenter'){pX=ev.pageX;pY=ev.pageY;$(ob).bind('mousemove',track);if(ob.hoverIntent_s!=1){ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}}else{$(ob).unbind('mousemove',track);if(ob.hoverIntent_s==1){ob.hoverIntent_t=setTimeout(function(){delay(ev,ob)},cfg.timeout)}}};return this.bind('mouseenter',handleHover).bind('mouseleave',handleHover)}})(jQuery);",
+            'if (jQuery.easing.easeOutQuart === undefined) jQuery.easing.easeOutQuart = function (a,b,c,d,e) { return -d*((b=b/e-1)*b*b*b-1)+c; }',
+            '$("#side-right")',
+            '    .hoverIntent(function() {',
+            '        var timeout_r = $(this)',
+            '            .data("timeout_r");',
+            '        if (timeout_r) {',
+            '            clearTimeout(timeout_r);',
+            '        }',
+            '        $(this)',
+            '            .animate({',
+            '                "right": "0px"',
+            '            }, 300, "easeOutQuart");',
+            '    }, function() {',
+            '        $(this)',
+            '            .data("timeout_r", setTimeout($.proxy(function() {',
+            '            $(this)',
+            '                .animate({',
+            '                    "right": "-190px"',
+            '                }, 300, "easeOutQuart");',
+            '       }, this), 500));',
+            '    });'
         ];
         $('body').prepend('<style type="text/css" id="plugcubed-css">' + "\n" + styles.join("\n") + "\n" + '</style>');
         $('body').append('<div id="side-left" class="sidebar">' +
@@ -400,14 +390,24 @@ var plugCubedModel = Class.extend({
     updateCustomColors: function() {
         if (this.settings.customColors)
             this.customColorsStyle.text(
-                '.chat-from { color:#' + this.settings.colors.regular + '!important; }' +
-                '.chat-from-featureddj { color:#' + this.settings.colors.featureddj + '!important; }' +
-                '.chat-from-bouncer { color:#' + this.settings.colors.bouncer + '!important; }' +
-                '.chat-from-manager { color:#' + this.settings.colors.manager + '!important; }' +
-                '.chat-from-cohost { color:#' + this.settings.colors.cohost + '!important; }' +
-                '.chat-from-host { color:#' + this.settings.colors.host + '!important; }' +
-                '.chat-from-ambassador { color:#' + this.settings.colors.ambassador + '!important; }' +
-                '.chat-from-admin { color:#' + this.settings.colors.admin + '!important; }'
+                [
+                    '.chat-message .chat-from { color:#' + this.settings.colors.regular + '!important; }',
+                    '.chat-message .chat-from-featureddj{ color:#' + this.settings.colors.featureddj + '!important; }',
+                    '.chat-message .chat-from-bouncer { color:#' + this.settings.colors.bouncer + '!important; }',
+                    '.chat-message .chat-from-manager { color:#' + this.settings.colors.manager + '!important; }',
+                    '.chat-message .chat-from-cohost { color:#' + this.settings.colors.cohost + '!important; }',
+                    '.chat-message .chat-from-host { color:#' + this.settings.colors.host + '!important; }',
+                    '.chat-message .chat-from-ambassador { color:#' + this.settings.colors.ambassador + '!important; }',
+                    '.chat-message .chat-from-admin { color:#' + this.settings.colors.admin + '!important; }',
+                    '.chat-emote .chat-from, ',
+                    '.chat-emote .chat-from-featureddj, ',
+                    '.chat-emote .chat-from-bouncer, ',
+                    '.chat-emote .chat-from-manager, ',
+                    '.chat-emote .chat-from-cohost, ',
+                    '.chat-emote .chat-from-host, ',
+                    '.chat-emote .chat-from-ambassador, ',
+                    '.chat-emote .chat-from-admin { color:#DEE97D!important; }'
+                ].join("\n")
             );
         else
             this.customColorsStyle.text('');
