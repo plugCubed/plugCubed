@@ -36,7 +36,7 @@ var plugCubedModel = Class.extend({
         return typeof(pdpSocket) !== 'undefined' && pdpSocket._base_url === 'http://socket.plugpony.net:9000/gateway';
     },
     init: function() {
-        this.version = "Running plug&#179; version 1.0.6";
+        this.version = "Running plug&#179; version 1.0.7";
         this.proxy = {
             menu: {
                 onAutoWootClick:  $.proxy(this.onAutoWootClick, this),
@@ -251,6 +251,7 @@ var plugCubedModel = Class.extend({
             '.status-off { background: red; }',
             '#dialog-custom-colors { width: 230px; height: 390px; }',
             '#dialog-custom-colors .dialog-body { height: 125px; }',
+            '#dialog-custom-colors .dialog-default-button { right: 170px; width: 50px; }',
             '#dialog-custom-colors .dialog-cancel-button { right: 100px; }',
             '#dialog-custom-colors .dialog-submit-button { width: 75px; }',
             '#dialog-custom-colors .dialog-checkbox-container-enabled { left: 10px; top: 5px; }',
@@ -704,9 +705,30 @@ var plugCubedModel = Class.extend({
                     .append($(Dialog.getInputField("admin", 'Admin', '42A5DC', this.settings.colors.admin, 6)).css('top',270))
                 )
             )
+            .append($("<div/>").addClass("dialog-button dialog-default-button").click($.proxy(this.onColorDefault,this)).append($("<span/>").text("Default")))
             .append(Dialog.getCancelButton())
             .append(Dialog.getSubmitButton(Lang.dialog.save))
         )
+    },
+    onColorDefault: function() {
+        var a = $("input[name=you]"),
+            b = $("input[name=regular]"),
+            c = $("input[name=featureddj]"),
+            d = $("input[name=bouncer]"),
+            e = $("input[name=manager]"),
+            f = $("input[name=cohost]"),
+            g = $("input[name=host]"),
+            h = $("input[name=ambassador]"),
+            i = $("input[name=admin]");
+        a.val(a.data('ph'));
+        b.val(b.data('ph'));
+        c.val(c.data('ph'));
+        d.val(d.data('ph'));
+        e.val(e.data('ph'));
+        f.val(f.data('ph'));
+        g.val(g.data('ph'));
+        h.val(h.data('ph'));
+        i.val(i.data('ph'));
     },
     onColorSubmit: function() {
         var a = $("input[name=you]"),
