@@ -21,7 +21,7 @@ if (plugCubed !== undefined)
 String.prototype.equalsIgnoreCase = function(other) {
     return this.toLowerCase() === other.toLowerCase();
 };
-Math.randomRange = function(min,max) {
+Math.randomRange = function(min, max) {
     return min + Math.floor(Math.random()*(max-min+1));
 };
 String.prototype.isHEX = function() {
@@ -58,10 +58,7 @@ var plugCubedModel = Class.extend({
             userCommands: "#66FFFF",
             modCommands:  "#FF0000",
             infoMessage1: "#FFFF00",
-            infoMessage2: "#66FFFF",
-            curates:      "#00FF00",
-            userJoin:     "#3366FF",
-            userLeave:    "#3366FF"
+            infoMessage2: "#66FFFF"
         };
         this.defaultAwayMsg = 'I\'m away from keyboard.';
 
@@ -249,7 +246,7 @@ var plugCubedModel = Class.extend({
             '}',
             '.status-on { background: green; }',
             '.status-off { background: red; }',
-            '#dialog-custom-colors { width: 230px; height: 390px; }',
+            '#dialog-custom-colors { width: 230px; height: 480px; }',
             '#dialog-custom-colors .dialog-body { height: 125px; }',
             '#dialog-custom-colors .dialog-default-button { right: 170px; width: 50px; }',
             '#dialog-custom-colors .dialog-cancel-button { right: 100px; }',
@@ -368,7 +365,10 @@ var plugCubedModel = Class.extend({
             cohost     : 'E90E82',
             host       : 'E90E82',
             ambassador : '9A50FF',
-            admin      : '42A5DC'
+            admin      : '42A5DC',
+            join       : '3366FF',
+            leave      : '3366FF',
+            curate     : '00FF00'
         }
     },
     loadSettings: function() {
@@ -433,7 +433,7 @@ var plugCubedModel = Class.extend({
         this.addGUIButton(this.settings.notify,        'notify',      'Notify',             this.proxy.menu.onNotifyClick);
         this.addGUIButton(!DB.settings.streamDisabled, 'stream',      'Stream',             this.proxy.menu.onStreamClick);
     },
-    addGUIButton: function(setting,id,text,callback) {
+    addGUIButton: function(setting, id, text, callback) {
         if (this.guiButtons[id] !== undefined) return;
         if ($('#side-right .sidebar-content').children().length > 0)
             $('#side-right .sidebar-content').append('<hr />');
@@ -550,7 +550,7 @@ var plugCubedModel = Class.extend({
         }
         return null;
     },
-    moderation: function(target,type) {
+    moderation: function(target, type) {
         if (Models.room.data.staff[Models.user.data.id] && Models.room.data.staff[Models.user.data.id] >= Models.user.BOUNCER) {
             var service;
             switch (type) {
@@ -694,15 +694,18 @@ var plugCubedModel = Class.extend({
                     $("<form/>")
                     .submit("return false")
                     .append(Dialog.getCheckBox("Enable custom", "enabled", this.settings.customColors))
-                    .append($(Dialog.getInputField("you", 'You', 'FFDD6F', this.settings.colors.you, 6)).css('top',30))
-                    .append($(Dialog.getInputField("regular", 'Regular', 'B0B0B0', this.settings.colors.regular, 6)).css('top',60))
+                    .append($(Dialog.getInputField("you",        'You',         'FFDD6F', this.settings.colors.you,        6)).css('top',30))
+                    .append($(Dialog.getInputField("regular",    'Regular',     'B0B0B0', this.settings.colors.regular,    6)).css('top',60))
                     .append($(Dialog.getInputField("featureddj", 'Featured DJ', 'E90E82', this.settings.colors.featureddj, 6)).css('top',90))
-                    .append($(Dialog.getInputField("bouncer", 'Bouncer', 'E90E82', this.settings.colors.bouncer, 6)).css('top',120))
-                    .append($(Dialog.getInputField("manager", 'Manager', 'E90E82', this.settings.colors.manager, 6)).css('top',150))
-                    .append($(Dialog.getInputField("cohost", 'Co-Host', 'E90E82', this.settings.colors.cohost, 6)).css('top',180))
-                    .append($(Dialog.getInputField("host", 'Host', 'E90E82', this.settings.colors.host, 6)).css('top',210))
-                    .append($(Dialog.getInputField("ambassador", 'Ambassador', '9A50FF', this.settings.colors.ambassador, 6)).css('top',240))
-                    .append($(Dialog.getInputField("admin", 'Admin', '42A5DC', this.settings.colors.admin, 6)).css('top',270))
+                    .append($(Dialog.getInputField("bouncer",    'Bouncer',     'E90E82', this.settings.colors.bouncer,    6)).css('top',120))
+                    .append($(Dialog.getInputField("manager",    'Manager',     'E90E82', this.settings.colors.manager,    6)).css('top',150))
+                    .append($(Dialog.getInputField("cohost",     'Co-Host',     'E90E82', this.settings.colors.cohost,     6)).css('top',180))
+                    .append($(Dialog.getInputField("host",       'Host',        'E90E82', this.settings.colors.host,       6)).css('top',210))
+                    .append($(Dialog.getInputField("ambassador", 'Ambassador',  '9A50FF', this.settings.colors.ambassador, 6)).css('top',240))
+                    .append($(Dialog.getInputField("admin",      'Admin',       '42A5DC', this.settings.colors.admin,      6)).css('top',270))
+                    .append($(Dialog.getInputField("join",       'User Join',   '3366FF', this.settings.colors.join,       6)).css('top',300))
+                    .append($(Dialog.getInputField("leave",      'User Leave',  '3366FF', this.settings.colors.leave,      6)).css('top',330))
+                    .append($(Dialog.getInputField("curate",     'User Curate', '00FF00', this.settings.colors.curate,     6)).css('top',360))
                 )
             )
             .append($("<div/>").addClass("dialog-button dialog-default-button").click($.proxy(this.onColorDefault,this)).append($("<span/>").text("Default")))
@@ -719,7 +722,10 @@ var plugCubedModel = Class.extend({
             f = $("input[name=cohost]"),
             g = $("input[name=host]"),
             h = $("input[name=ambassador]"),
-            i = $("input[name=admin]");
+            i = $("input[name=admin]"),
+            j = $("input[name=join]"),
+            k = $("input[name=leave]"),
+            l = $("input[name=curate]");
         a.val(a.data('ph'));
         b.val(b.data('ph'));
         c.val(c.data('ph'));
@@ -729,6 +735,9 @@ var plugCubedModel = Class.extend({
         g.val(g.data('ph'));
         h.val(h.data('ph'));
         i.val(i.data('ph'));
+        j.val(j.data('ph'));
+        k.val(k.data('ph'));
+        l.val(l.data('ph'));
     },
     onColorSubmit: function() {
         var a = $("input[name=you]"),
@@ -739,7 +748,10 @@ var plugCubedModel = Class.extend({
             f = $("input[name=cohost]"),
             g = $("input[name=host]"),
             h = $("input[name=ambassador]"),
-            i = $("input[name=admin]");
+            i = $("input[name=admin]"),
+            j = $("input[name=join]"),
+            k = $("input[name=leave]"),
+            l = $("input[name=curate]");
         this.settings.customColors = $("#dialog-checkbox-enabled").is(":checked");
         this.settings.colors.you        = a.val() === "" || !a.val().isHEX() ? a.data('ph') : a.val();
         this.settings.colors.regular    = b.val() === "" || !b.val().isHEX() ? b.data('ph') : b.val();
@@ -750,6 +762,9 @@ var plugCubedModel = Class.extend({
         this.settings.colors.host       = g.val() === "" || !g.val().isHEX() ? g.data('ph') : g.val();
         this.settings.colors.ambassador = h.val() === "" || !h.val().isHEX() ? h.data('ph') : h.val();
         this.settings.colors.admin      = i.val() === "" || !i.val().isHEX() ? i.data('ph') : i.val();
+        this.settings.colors.join       = j.val() === "" || !j.val().isHEX() ? j.data('ph') : j.val();
+        this.settings.colors.leave      = k.val() === "" || !k.val().isHEX() ? k.data('ph') : k.val();
+        this.settings.colors.curate     = l.val() === "" || !l.val().isHEX() ? l.data('ph') : l.val();
         this.updateCustomColors();
         this.changeGUIColor('colors',this.settings.customColors);
         this.saveSettings();
@@ -769,7 +784,7 @@ var plugCubedModel = Class.extend({
     onCurate: function(data) {
         var media = API.getMedia();
         if (this.settings.notify === true)
-            this.log(data.user.username + " added " + media.author + " - " + media.title, null, this.colors.curates);
+            this.log(data.user.username + " added " + media.author + " - " + media.title, null, this.settings.colors.curates);
         Models.room.userHash[data.user.id].curated = true;
         this.onUserlistUpdate();
     },
@@ -793,7 +808,7 @@ var plugCubedModel = Class.extend({
     },
     onUserJoin: function(data) {
         if (this.settings.notify === true)
-            this.log(data.username + " joined the room", null, this.colors.userJoin);
+            this.log(data.username + " joined the room", null, this.settings.colors.join);
         var a = Models.room.userHash[data.id];
         if (a.wootcount === undefined) a.wootcount = 0;
         if (a.mehcount === undefined)  a.mehcount = 0;
@@ -803,7 +818,7 @@ var plugCubedModel = Class.extend({
     },
     onUserLeave: function(data) {
         if (this.settings.notify === true)
-            this.log(data.username + " left the room", null, this.colors.userLeave);
+            this.log(data.username + " left the room", null, this.settings.colors.leave);
         this.onUserlistUpdate();
     },
     onChat: function(data) {
