@@ -941,7 +941,7 @@ var plugCubedModel = Class.extend({
             return Playback.setVolume(0), true;
         if (value == "/unmute")
             return Playback.setVolume(Playback.lastVolume), true;
-        if (plugCubed.detectPdp() && value == "/muteone" || plugCubed.detectPdp() && value == "/singlemute")
+        if (plugCubed.detectPdP() && value == "/muteone" || plugCubed.detectPdP() && value == "/singlemute")
             return $('#button-sound').click(), $('#button-sound').click(), true;
         if (value.indexOf("/nick ") === 0)
             return Models.user.changeDisplayName(value.substr(6)), true;
