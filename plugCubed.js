@@ -36,7 +36,7 @@ var plugCubedModel = Class.extend({
         return typeof(pdpSocket) !== 'undefined' && pdpSocket._base_url === 'http://socket.plugpony.net:9000/gateway';
     },
     init: function() {
-        this.version = "Running plug&#179; version 1.0.7";
+        this.version = "Running plug&#179; version 1.0.8";
         this.proxy = {
             menu: {
                 onAutoWootClick:  $.proxy(this.onAutoWootClick, this),
@@ -870,7 +870,10 @@ var plugCubedModel = Class.extend({
                 "/afk - set status to afk",
                 "/work - set status to working",
                 "/sleep - set status to sleeping",
+                "/join - join dj booth/waitlist",
                 "/leave - leaves dj booth/waitlist",
+                "/mute - set volume to 0",
+                "/unmute - set volume to last volume",
                 "/woot - woots current song",
                 "/meh - mehs current song",
                 "/curate - add current song to your selected playlist",
@@ -934,6 +937,12 @@ var plugCubedModel = Class.extend({
             return $("#button-vote-negative").click(), true;
         if (value == "/version")
             return plugCubed.log(plugCubed.version, null, plugCubed.colors.infoMessage1), true;
+        if (value == "/mute")
+            return Playback.setVolume(0), true;
+        if (value == "/unmute")
+            return Playback.setVolume(Playback.lastVolume), true;
+        if (plugCubed.detectPdp() && value == "/muteone" || plugCubed.detectPdp() && value == "/singlemute")
+            return $('#button-sound').click(), $('#button-sound').click(), true;
         if (value.indexOf("/nick ") === 0)
             return Models.user.changeDisplayName(value.substr(6)), true;
         if (value.indexOf("/curate") === 0) {
