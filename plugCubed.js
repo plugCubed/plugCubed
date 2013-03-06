@@ -35,8 +35,12 @@ var plugCubedModel = Class.extend({
     detectPdP: function() {
         return typeof(pdpSocket) !== 'undefined' && pdpSocket._base_url === 'http://socket.plugpony.net:9000/gateway';
     },
+    version: {
+        major: 1,
+        minor: 1,
+        patch: 0
+    },
     init: function() {
-        this.version = "Running plug&#179; version 1.0.8";
         this.proxy = {
             menu: {
                 onAutoWootClick:  $.proxy(this.onAutoWootClick, this),
@@ -65,7 +69,7 @@ var plugCubedModel = Class.extend({
         this.customColorsStyle = $('<style type="text/css"></css>');
         $('head').append(this.customColorsStyle);
 
-        this.log(this.version, null, this.colors.infoMessage1);
+        this.log("Running plug&#179; version " + this.version.major + "." + this.version.minor + "." + this.version.patch, null, this.colors.infoMessage1)
         this.log("Use '/commands' to see expanded chat commands.", null, this.colors.infoMessage2);
 
         if (Models.chat._chatCommand === undefined)
@@ -539,9 +543,9 @@ var plugCubedModel = Class.extend({
         );
     },
     getUser: function(data) {
+        data = data.trim();
         if (data.substr(0,1) === "@")
             data = data.substr(1);
-        data = data.trim();
 
         var users = API.getUsers();
         for (var i in users) {
@@ -936,7 +940,7 @@ var plugCubedModel = Class.extend({
         if (value == "/meh")
             return $("#button-vote-negative").click(), true;
         if (value == "/version")
-            return plugCubed.log(plugCubed.version, null, plugCubed.colors.infoMessage1), true;
+            return plugCubed.log("Running plug&#179; version " + plugCubed.version.major + "." + plugCubed.version.minor + "." + plugCubed.version.patch, null, plugCubed.colors.infoMessage1), true;
         if (value == "/mute")
             return Playback.setVolume(0), true;
         if (value == "/unmute")
@@ -966,20 +970,22 @@ var plugCubedModel = Class.extend({
             }
             return true;
         }
-        if (value == "/getpos") {
-            var spot = Models.room.getWaitListPosition();
+        if (value.indexOf("/getpos") === 0) {
+            var lookup = plugCubed.getUser(value.substr(7)),
+                user = lookup === null ? Models.user.data : lookup,
+                spot = Models.room.getWaitListPosition(user.id);
             if (spot !== null)
                 plugCubed.log("Position in waitlist " + spot + "/" + Models.room.data.waitList.length, null, plugCubed.colors.infoMessage2);
             else {
                 spot = -1;
-                for (var i = 1;i < Models.room.data.djs.length;i++)
-                    spot = Models.room.data.djs[i].user.id === Models.user.data.id ? i : spot;
+                for (var i = 0;i < Models.room.data.djs.length;i++)
+                    spot = Models.room.data.djs[i].user.id === user.id ? i : spot;
                 if (spot < 0)
                     plugCubed.log("Not in waitlist nor booth", null, plugCubed.colors.infoMessage2);
                 else if (spot === 0)
-                    plugCubed.log("You are DJing",null,plugCubed.colors.infoMessage2);
+                    plugCubed.log((user.id === Models.user.data.id ? "You" : user.username) + " are currently DJing",null,plugCubed.colors.infoMessage2);
                 else if (spot === 1)
-                    plugCubed.log("You are DJing next",null,plugCubed.colors.infoMessage2);
+                    plugCubed.log((user.id === Models.user.data.id ? "You" : user.username) + " are DJing next",null,plugCubed.colors.infoMessage2);
                 else
                     plugCubed.log("Position in booth " + (spot + 1) + "/" + Models.room.data.djs.length, null, plugCubed.colors.infoMessage2);
             }
