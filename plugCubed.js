@@ -827,16 +827,29 @@ var plugCubedModel = Class.extend({
     },
     onChat: function(data) {
         if (data.type == "mention") {
-            if (Models.room.data.staff[data.fromID] && Models.room.data.staff[data.fromID] >= Models.user.BOUNCER && data.message.indexOf("!disable") > 0) {
-                if (this.settings.autojoin) {
-                    this.settings.autojoin = false;
-                    this.changeGUIColor('join',this.settings.autojoin);
-                    this.saveSettings();
-                    API.waitListLeave();
-                    API.sendChat("@" + data.from + " Autojoin disabled");
-                } else
-                    API.sendChat("@" + data.from + " Autojoin was not enabled");
-            } else if (this.settings.autorespond && !this.settings.recent) {
+            if (Models.room.data.staff[data.fromID] && Models.room.data.staff[data.fromID] >= Models.user.BOUNCER) {
+                if (data.message.indexOf("!disable") > 0) {
+                    if (this.settings.autojoin) {
+                        this.settings.autojoin = false;
+                        this.changeGUIColor('join',this.settings.autojoin);
+                        this.saveSettings();
+                        API.waitListLeave();
+                        API.sendChat("@" + data.from + " Autojoin disabled");
+                    } else
+                        API.sendChat("@" + data.from + " Autojoin was not enabled");
+                    return;
+                } else if (data.message.indexOf("!disableafk") > 0) {
+                    if (this.settings.autorespond) {
+                        this.settings.autorespond = false;
+                        this.changeGUIColor('autorespond',this.settings.autorespond);
+                        this.saveSettings();
+                        API.sendChat("@" + data.from + " AFK message disabled");
+                    } else
+                        API.sendChat("@" + data.from + " AFK message was not enabled");
+                    return;
+                }
+            }
+            if (this.settings.autorespond && !this.settings.recent) {
                 this.settings.recent = true;
                 setTimeout(function() { plugCubed.settings.recent = false; plugCubed.saveSettings(); },180000);
                 API.sendChat("@" + data.from + " " + this.settings.awaymsg);
