@@ -786,19 +786,16 @@ var plugCubedModel = Class.extend({
         Dialog.closeDialog();
     },
     onVoteUpdate: function(data) {
-        try {
-            var a = Models.room.userHash[data.user.id];
-            this.onUserlistUpdate();
-            if (a.curVote !== 0) {
-                     if (a.curVote == 1)  a.wootcount--;
-                else if (a.curVote == -1) a.mehcount--;
-            }
-                 if (data.vote == 1)  a.wootcount++;
-            else if (data.vote == -1) a.mehcount++;
-            a.curVote = data.vote;
-        } catch (e) {
-            console.error('[plugCubed] onVoteUpdate error',e);
+        if (!data || !data.user) return;
+        var a = Models.room.userHash[data.user.id];
+        this.onUserlistUpdate();
+        if (a.curVote !== 0) {
+                 if (a.curVote == 1)  a.wootcount--;
+            else if (a.curVote == -1) a.mehcount--;
         }
+             if (data.vote == 1)  a.wootcount++;
+        else if (data.vote == -1) a.mehcount++;
+        a.curVote = data.vote;
     },
     onCurate: function(data) {
         var media = API.getMedia();
