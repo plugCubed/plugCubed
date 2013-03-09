@@ -21,14 +21,14 @@ if (plugCubed !== undefined)
 String.prototype.equalsIgnoreCase = function(other) {
     return this.toLowerCase() === other.toLowerCase();
 };
-Math.randomRange = function(min, max) {
-    return min + Math.floor(Math.random()*(max-min+1));
-};
 String.prototype.isHEX = function() {
     if (this.substr(0,1) !== "#") a = "#" + this;
     else a = this;
     return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(a);
-}
+};
+Math.randomRange = function(min, max) {
+    return min + Math.floor(Math.random()*(max-min+1));
+};
 
 var plugCubedModel = Class.extend({
     guiButtons: {},
@@ -56,7 +56,8 @@ var plugCubedModel = Class.extend({
             onCurate:             $.proxy(this.onCurate,        this),
             onUserJoin:           $.proxy(this.onUserJoin,      this),
             onUserLeave:          $.proxy(this.onUserLeave,     this),
-            onChat:               $.proxy(this.onChat,          this)
+            onChat:               $.proxy(this.onChat,          this),
+            onUserlistUpdate:     $.proxy(this.onUserlistUpdate,this)
         };
         this.colors = {
             userCommands: "#66FFFF",
@@ -322,6 +323,7 @@ var plugCubedModel = Class.extend({
         API.removeEventListener(API.USER_JOIN,       this.proxy.onUserJoin);
         API.removeEventListener(API.USER_LEAVE,      this.proxy.onUserLeave);
         API.removeEventListener(API.CHAT,            this.proxy.onChat);
+        API.removeEventListener('userUpdate',        this.proxy.onUserlistUpdate);
         for (var i in plugCubed.guiButtons) {
             if (i === undefined || plugCubed.guiButtons[i] === undefined) continue;
             $("#plugcubed-btn-" + i).unbind();
@@ -427,6 +429,7 @@ var plugCubedModel = Class.extend({
         API.addEventListener(API.USER_JOIN,     this.proxy.onUserJoin);
         API.addEventListener(API.USER_LEAVE,    this.proxy.onUserLeave);
         API.addEventListener(API.CHAT,          this.proxy.onChat);
+        API.addEventListener('userUpdate',      this.proxy.onUserlistUpdate);
     },
     initGUI: function() {
         this.addGUIButton(this.settings.autowoot,      'woot',        'Autowoot',           this.proxy.menu.onAutoWootClick);
@@ -537,9 +540,17 @@ var plugCubedModel = Class.extend({
     },
     drawUserlistItem: function(prefix, color, username) {
         $('#side-left .sidebar-content').append(
-            '<p><span style="cursor:pointer;color:' + color + ';' +
-            (Models.room.data.djs.length > 0 && Models.room.data.djs[0].username == username ? 'font-size:15px;font-weight:bold;' : '') +
-            '" onclick="$(\'#chat-input-field\').val($(\'#chat-input-field\').val() + \'@' + username + ' \').focus();"><span class="' + prefix + '"></span>' + username + '</span></p>'
+            $('<p></p>')
+                .append(
+                    $('<span></span>')
+                        .css('cursor','pointer')
+                        .css('color',color)
+                        .click(function() {
+                            $('#chat-input-field').val($('#chat-input-field').val() + '@' + username + ' ').focus();
+                        })
+                        .append($('<span></span>').addClass(prefix))
+                        .text(username)
+                )
         );
     },
     getUser: function(data) {
@@ -618,14 +629,14 @@ var plugCubedModel = Class.extend({
                 case 1:   voted = "Woot"; break;
             }
             
-            this.log('<table style="width:100%"><tr><td colspan="2"><strong>Name</strong>: <span style="color:#FFFFFF">' + user.username + '</span></td></tr>' +
+            log('<table style="width:100%;color:#CC00CC"><tr><td colspan="2"><strong>Name</strong>: <span style="color:#FFFFFF">' + user.username + '</span></td></tr>' +
             '<tr><td colspan="2"><strong>ID</strong>: <span style="color:#FFFFFF">' + user.id + '</span></td></tr>' +
              '<tr><td><strong>Rank</strong>: <span style="color:#FFFFFF">' + rank + '</span></td><td><strong>Time Joined</strong>: <span style="color:#FFFFFF">' + user.joinTime + '</span></td></tr>' +
             '<tr><td><strong>Status</strong>: <span style="color:#FFFFFF">' + status + '</span></td><td><strong>Vote</strong>: <span style="color:#FFFFFF">' + voted + '</span></td></tr>' +
             '<tr><td colspan="2"><strong>Position</strong>: <span style="color:#FFFFFF">' + position + '</span></td></tr>' +
             '<tr><td><strong>Points</strong>: <span style="color:#FFFFFF">' + points + '</span></td><td><strong>Fans</strong>: <span style="color:#FFFFFF">' + user.fans + '</span></td></tr>' +
             '<tr><td><strong>Woot Count</strong>: <span style="color:#FFFFFF">' + user.wootcount + '</span></td><td><strong>Meh Count</strong>: <span style="color:#FFFFFF">' + user.mehcount + '</span></td></tr>' +
-            '<tr><td colspan="2"><strong>Woot/Meh ratio</strong>: <span style="color:#FFFFFF">' + (voteTotal === 0 ? '0' : (user.wootcount/voteTotal).toFixed(2)) + '</span></td></tr></table>', null, "#cc00cc");
+            '<tr><td colspan="2"><strong>Woot/Meh ratio</strong>: <span style="color:#FFFFFF">' + (voteTotal === 0 ? '0' : (user.wootcount/voteTotal).toFixed(2)) + '</span></td></tr></table>');
         }
     },
     onAutoWootClick: function() {
@@ -775,15 +786,19 @@ var plugCubedModel = Class.extend({
         Dialog.closeDialog();
     },
     onVoteUpdate: function(data) {
-        var a = Models.room.userHash[data.user.id];
-        this.onUserlistUpdate();
-        if (a.curVote !== 0) {
-                 if (a.curVote == 1)  a.wootcount--;
-            else if (a.curVote == -1) a.mehcount--;
+        try {
+            var a = Models.room.userHash[data.user.id];
+            this.onUserlistUpdate();
+            if (a.curVote !== 0) {
+                     if (a.curVote == 1)  a.wootcount--;
+                else if (a.curVote == -1) a.mehcount--;
+            }
+                 if (data.vote == 1)  a.wootcount++;
+            else if (data.vote == -1) a.mehcount++;
+            a.curVote = data.vote;
+        } catch (e) {
+            console.error('[plugCubed] onVoteUpdate error',e);
         }
-             if (data.vote == 1)  a.wootcount++;
-        else if (data.vote == -1) a.mehcount++;
-        a.curVote = data.vote;
     },
     onCurate: function(data) {
         var media = API.getMedia();
