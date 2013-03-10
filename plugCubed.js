@@ -38,7 +38,7 @@ var plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 1,
-        patch: 0
+        patch: 1
     },
     init: function() {
         this.proxy = {
@@ -504,13 +504,13 @@ var plugCubedModel = Class.extend({
 
         if (Models.room.data.djs.length > 0 && Models.room.data.djs[0].user.id == user.id) {
             if (prefix === 'normal')
-                this.drawUserlistItem('void', '#66FFFF', username);
+                this.appendUserItem('void', '#66FFFF', username);
             else
-                this.drawUserlistItem(prefix + '_current', '#66FFFF', username);
+                this.appendUserItem(prefix + '_current', '#66FFFF', username);
         } else if (prefix === 'normal')
-            this.drawUserlistItem('void',this.colorByVote(user.vote,user.curated), username);
+            this.appendUserItem('void',this.colorByVote(user.vote,user.curated), username);
         else
-            this.drawUserlistItem(prefix + this.prefixByVote(user.vote), this.colorByVote(user.vote,user.curated), username);
+            this.appendUserItem(prefix + this.prefixByVote(user.vote), this.colorByVote(user.vote,user.curated), username);
     },
     colorByVote: function(vote,curated) {
         var color = '';
@@ -538,18 +538,18 @@ var plugCubedModel = Class.extend({
         }
         return '_' + prefix;
     },
-    drawUserlistItem: function(prefix, color, username) {
+    appendUserItem: function(prefix, color, username) {
         $('#side-left .sidebar-content').append(
             $('<p></p>')
                 .append(
                     $('<span></span>')
+                        .append($('<span></span>').addClass(prefix))
                         .css('cursor','pointer')
                         .css('color',color)
                         .click(function() {
                             $('#chat-input-field').val($('#chat-input-field').val() + '@' + username + ' ').focus();
                         })
-                        .append($('<span></span>').addClass(prefix))
-                        .text(username)
+                        .html(function(a,b) { return b + username; })
                 )
         );
     },
@@ -1040,11 +1040,11 @@ var plugCubedModel = Class.extend({
         }
         if (Models.user.hasPermission(Models.user.MANAGER)) {
             if (value.indexOf("/lock") === 0) {
-                new RoomPropsService(Slug,true,Models.room.data.waitListEnabled,Models.room.data.maxPlays,Models.room.data.maxDJs);
+                new RoomPropsService(document.location.href.split('/')[3],true,Models.room.data.waitListEnabled,Models.room.data.maxPlays,Models.room.data.maxDJs);
                 return true;
             }
             if (value.indexOf("/unlock") === 0) {
-                new RoomPropsService(Slug,false,Models.room.data.waitListEnabled,Models.room.data.maxPlays,Models.room.data.maxDJs);
+                new RoomPropsService(document.location.href.split('/')[3],false,Models.room.data.waitListEnabled,Models.room.data.maxPlays,Models.room.data.maxDJs);
                 return true;
             }
         }
