@@ -805,7 +805,7 @@ var plugCubedModel = Class.extend({
         this.onUserlistUpdate();
     },
     onDjAdvance: function(data) {
-        setTimeout($.proxy(this.onDjAdvanceLate,this),Math.randomRange(1,10));
+        setTimeout($.proxy(this.onDjAdvanceLate,this),Math.randomRange(1,10)*1000);
         this.onUserlistUpdate();
         var users = API.getUsers();
         for (var i in users)
