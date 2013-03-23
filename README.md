@@ -31,8 +31,12 @@ Find the URLs for bookmarks at http://colgate.github.com/plugCubed/
 ###License###
 Copyright &copy; 2012-2013 by Jeremy "Colgate" Richardson and Thomas "TAT" Andresen
 
-Permission to use and/or distribute this software for any purpose without fee is hereby granted,
-provided that the above copyright notice and this permission notice appear in all copies.
+Permission to use and/or distribute this software or parts of it for any purpose without
+fee is hereby granted, provided that the above copyright notice and this permission notice
+appear in all copies.
+
+Permission to copy and/or edit this software or parts of it for any purpose is NOT permitted
+without written permission by the authors.
 
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHORS DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE
 INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHORS

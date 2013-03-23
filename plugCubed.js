@@ -1,8 +1,12 @@
 /**
  * @license Copyright (c) 2012-2013 by Jeremy "Colgate" Richardson and Thomas "TAT" Andresen
  * 
- * Permission to use and/or distribute this software for any purpose without fee is hereby granted,
- * provided that the above copyright notice and this permission notice appear in all copies.
+ * Permission to use and/or distribute this software or parts of it for any purpose without
+ * fee is hereby granted, provided that the above copyright notice and this permission notice
+ * appear in all copies.
+ *
+ * Permission to copy and/or edit this software or parts of it for any purpose is NOT permitted
+ * without written permission by the authors.
  * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHORS DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE
  * INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHORS
@@ -38,7 +42,7 @@ var plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 1,
-        patch: 1
+        patch: 2
     },
     init: function() {
         this.proxy = {
@@ -800,7 +804,7 @@ var plugCubedModel = Class.extend({
     onCurate: function(data) {
         var media = API.getMedia();
         if (this.settings.notify === true)
-            this.log(data.user.username + " added " + media.author + " - " + media.title, null, this.settings.colors.curates);
+            this.log(data.user.username + " added " + media.author + " - " + media.title, null, '#'+this.settings.colors.curate);
         Models.room.userHash[data.user.id].curated = true;
         this.onUserlistUpdate();
     },
@@ -824,7 +828,7 @@ var plugCubedModel = Class.extend({
     },
     onUserJoin: function(data) {
         if (this.settings.notify === true)
-            this.log(data.username + " joined the room", null, this.settings.colors.join);
+            this.log(data.username + " joined the room", null, '#'+this.settings.colors.join);
         var a = Models.room.userHash[data.id];
         if (a.wootcount === undefined) a.wootcount = 0;
         if (a.mehcount === undefined)  a.mehcount = 0;
@@ -834,7 +838,7 @@ var plugCubedModel = Class.extend({
     },
     onUserLeave: function(data) {
         if (this.settings.notify === true)
-            this.log(data.username + " left the room", null, this.settings.colors.leave);
+            this.log(data.username + " left the room", null, '#'+this.settings.colors.leave);
         this.onUserlistUpdate();
     },
     onChat: function(data) {
