@@ -17,9 +17,7 @@
  * @author  Jeremy "Colgate" Richardson
  * @author  Thomas "TAT" Andresen
  */
-
-if (Class === undefined)
-    (function(){var e=false,t=/xyz/.test(function(){xyz})?/\b_super\b/:/.*/;plugCubed.Class=function(){};Class.extend=function(n){function o(){if(!e&&plugCubed.init)plugCubed.init.apply(plugCubed,arguments);}var r=plugCubed.prototype;e=true;var i=new plugCubed;e=false;for(var s in n){i[s]=typeof n[s]=="function"&&typeof r[s]=="function"&&t.test(n[s])?function(e,t){return function(){var n=plugCubed._super;plugCubed._super=r[e];var i=t.apply(plugCubed,arguments);plugCubed._super=n;return i;}}(s,n[s]):n[s];}o.prototype=i;o.prototype.constructor=o;o.extend=arguments.callee;return o;};})();
+    
 if (plugCubed !== undefined)
     plugCubed.close();
 String.prototype.equalsIgnoreCase = function(other) {
@@ -41,10 +39,13 @@ var plugCubedModel = Class.extend({
     },
     version: {
         major: 1,
-        minor: 1,
-        patch: 2
+        minor: 2,
+        patch: 0
     },
     init: function() {
+        if (typeof jQuery.fn.tabs === 'undefined')
+            $('head').append('<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>')
+            .append('<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />');
         this.proxy = {
             menu: {
                 onAutoWootClick:  $.proxy(this.onAutoWootClick, this),
@@ -76,6 +77,17 @@ var plugCubedModel = Class.extend({
 
         this.log("Running plug&#179; version " + this.version.major + "." + this.version.minor + "." + this.version.patch, null, this.colors.infoMessage1)
         this.log("Use '/commands' to see expanded chat commands.", null, this.colors.infoMessage2);
+
+        Dialog.showPlugCubedCommands = function(user,mod) {
+            this.closeDialog();
+            var width = 620,content = user;
+            if (mod !== undefined)
+                content = '<div id="plugCubedCommands"><ul><li><a href="#user">User Commands</a></li><li><a href="#mod">Moderation Commands</a></li></ul><div id="user">' + user + '</div><div id="mod">' + mod + '</div></div>';
+            this.showDialog($("<div/>").attr("id","dialog-alert").addClass("dialog").css("left",Main.LEFT+(Main.WIDTH-width-15)/2).css("top",200)
+            .width(width+25).height(470).append(this.getHeader('plug&#179; Commands')).append($("<div/>").addClass("dialog-body")
+            .append(this.getMessage(content).width(width))));
+            $("#plugCubedCommands").tabs();
+        };
 
         if (Models.chat._chatCommand === undefined)
             Models.chat._chatCommand = Models.chat.chatCommand;
@@ -838,30 +850,30 @@ var plugCubedModel = Class.extend({
     },
     onUserLeave: function(data) {
         if (this.settings.notify === true)
-            this.log(data.username + " left the room", null, '#'+this.settings.colors.leave);
+            this.log(data.username + ' left the room', null, '#'+this.settings.colors.leave);
         this.onUserlistUpdate();
     },
     onChat: function(data) {
         if (data.type == "mention") {
             if (Models.room.data.staff[data.fromID] && Models.room.data.staff[data.fromID] >= Models.user.BOUNCER) {
-                if (data.message.indexOf("!disable") > 0) {
+                if (data.message.indexOf('!disable') > 0) {
                     if (this.settings.autojoin) {
                         this.settings.autojoin = false;
                         this.changeGUIColor('join',this.settings.autojoin);
                         this.saveSettings();
                         API.waitListLeave();
-                        API.sendChat("@" + data.from + " Autojoin disabled");
+                        API.sendChat('@' + data.from + ' Autojoin disabled');
                     } else
-                        API.sendChat("@" + data.from + " Autojoin was not enabled");
+                        API.sendChat('@' + data.from + ' Autojoin was not enabled');
                     return;
-                } else if (data.message.indexOf("!disableafk") > 0) {
+                } else if (data.message.indexOf('!disableafk') > 0) {
                     if (this.settings.autorespond) {
                         this.settings.autorespond = false;
                         this.changeGUIColor('autorespond',this.settings.autorespond);
                         this.saveSettings();
-                        API.sendChat("@" + data.from + " AFK message disabled");
+                        API.sendChat("@" + data.from + ' AFK message disabled');
                     } else
-                        API.sendChat("@" + data.from + " AFK message was not enabled");
+                        API.sendChat("@" + data.from + ' AFK message was not enabled');
                     return;
                 }
             }
@@ -894,51 +906,60 @@ var plugCubedModel = Class.extend({
             }
             return true;
         }
-        if (value.indexOf("/commands") === 0) {
+        if (value.indexOf('/commands') === 0) {
             var commands = [
-                "<strong>User Commands</strong>",
-                "/nick - change username",
-                "/idle - set status to idle",
-                "/avail - set status to available",
-                "/afk - set status to afk",
-                "/work - set status to working",
-                "/sleep - set status to sleeping",
-                "/join - join dj booth/waitlist",
-                "/leave - leaves dj booth/waitlist",
-                "/mute - set volume to 0",
-                "/unmute - set volume to last volume",
-                "/woot - woots current song",
-                "/meh - mehs current song",
-                "/curate - add current song to your selected playlist",
-                "/getpos - get current waitlist position",
-                "/version - displays version number",
-                "/commands - shows this list"
+                ['/nick','change username'],
+                ['/idle','set status to idle'],
+                ['/avail','set status to available'],
+                ['/afk','set status to afk'],
+                ['/work','set status to working'],
+                ['/sleep','set status to sleeping'],
+                ['/join','join dj booth/waitlist'],
+                ['/leave','leaves dj booth/waitlist'],
+                ['/mute','set volume to 0'],
+                ['/unmute','set volume to last volume'],
+                ['/woot','woots current song'],
+                ['/meh','mehs current song'],
+                ['/refresh','refresh the video'],
+                ['/curate','add current song to your selected playlist'],
+                ['/getpos','get current waitlist position'],
+                ['/version','displays version number'],
+                ['/commands','shows this list']
             ];
-            plugCubed.log(commands.join('<br />'),null,plugCubed.colors.userCommands);
+            var userCommands = '<table>';
+            for (var i in commands)
+                userCommands += '<tr><td>' + commands[i][0] + '</td><td>' + commands[i][1] + '</td></tr>';
+            userCommands += '</table>';
             if (Models.user.hasPermission(Models.user.BOUNCER)) {
                 commands = [
-                    "<strong>Moderation Commands</strong>",
-                    "/whois (username) - gives general information about user",
-                    "/skip - skip current song",
-                    "/kick (username) - kicks targeted user",
-                    "/lock - locks DJ booth",
-                    "/unlock - unlocks DJ booth",
-                    "/add (username) - adds targeted user to dj booth/waitlist",
-                    "/remove (username) - removes targeted user from dj booth/waitlist"
+                    ['/whois (username)','gives general information about user',Models.user.BOUNCER],
+                    ['/skip','skip current song',Models.user.BOUNCER],
+                    ['/kick (username)','kicks targeted user',Models.user.BOUNCER],
+                    ['/lock','locks DJ booth',Models.user.MANAGER],
+                    ['/unlock','unlocks DJ booth',Models.user.MANAGER],
+                    ['/add (username)','adds targeted user to dj booth/waitlist',Models.user.BOUNCER],
+                    ['/remove (username)','removes targeted user from dj booth/waitlist',Models.user.BOUNCER]
                 ];
-                plugCubed.log(commands.join('<br />'),null,plugCubed.colors.modCommands);
-            }
+                var modCommands = '<table>';
+                for (var i in commands) {
+                    if (Models.user.hasPermission(commands[i][2]))
+                        modCommands += '<tr><td>' + commands[i][0] + '</td><td>' + commands[i][1] + '</td></tr>';
+                }
+                modCommands += '</table>';
+                Dialog.showPlugCubedCommands(userCommands,modCommands);
+            } else
+                Dialog.showPlugCubedCommands(userCommands);
             return true;
         }
-        if (value == "/idle") {
+        if (value == '/idle') {
             Models.user.changeStatus(-1);
             return true;
         }
-        if (value == "/avail" || value == "/available") {
+        if (value == '/avail' || value == '/available') {
             Models.user.changeStatus(0);
             return true;
         }
-        if (value == "/brb" || value == "/away") {
+        if (value == '/brb' || value == '/away') {
             Models.user.changeStatus(1);
             if (plugCubed.settings.autojoin) {
                 plugCubed.settings.autojoin = false;
@@ -947,11 +968,11 @@ var plugCubedModel = Class.extend({
             }
             return true;
         }
-        if (value == "/work" || value == "/working") {
+        if (value == '/work' || value == '/working') {
             Models.user.changeStatus(2);
             return true;
         }
-        if (value == "/sleep" || value == "/sleeping") {
+        if (value == '/sleep' || value == '/sleeping') {
             Models.user.changeStatus(3);
             if (plugCubed.settings.autojoin) {
                 plugCubed.settings.autojoin = false;
@@ -960,30 +981,32 @@ var plugCubedModel = Class.extend({
             }
             return true;
         }
-        if (value == "/join")
+        if (value == '/join')
             return API.waitListJoin(), true;
-        if (value == "/leave")
+        if (value == '/leave')
             return API.waitListLeave(),true;
-        if (value == "/woot")
+        if (value == '/woot')
             return $("#button-vote-positive").click(), true;
-        if (value == "/meh")
+        if (value == '/meh')
             return $("#button-vote-negative").click(), true;
-        if (value == "/version")
+        if (value == '/refresh')
+            return $("#button-refresh").click(), true;
+        if (value == '/version')
             return plugCubed.log("Running plug&#179; version " + plugCubed.version.major + "." + plugCubed.version.minor + "." + plugCubed.version.patch, null, plugCubed.colors.infoMessage1), true;
-        if (value == "/mute")
+        if (value == '/mute')
             return Playback.setVolume(0), true;
-        if (value == "/unmute")
+        if (value == '/unmute')
             return Playback.setVolume(Playback.lastVolume), true;
-        if (plugCubed.detectPdP() && value == "/muteone" || plugCubed.detectPdP() && value == "/singlemute")
+        if (plugCubed.detectPdP() && value == '/muteone' || plugCubed.detectPdP() && value == '/singlemute')
             return $('#button-sound').click(), $('#button-sound').click(), true;
-        if (value.indexOf("/nick ") === 0)
+        if (value.indexOf('/nick ') === 0)
             return Models.user.changeDisplayName(value.substr(6)), true;
-        if (value.indexOf("/curate") === 0) {
+        if (value.indexOf('/curate') === 0) {
             new DJCurateService(Models.playlist.selectedPlaylistID);
             setTimeout(function() { Dialog.closeDialog(); },500);
             return true;
         }
-        if (value == "/alertsoff") {
+        if (value == '/alertsoff') {
             if (plugCubed.settings.notify) {
                 plugCubed.log("Join/leave alerts disabled", null, plugCubed.colors.infoMessage1);
                 plugCubed.settings.notify = false;
@@ -991,7 +1014,7 @@ var plugCubedModel = Class.extend({
             }
             return true;
         }
-        if (value == "/alertson") {
+        if (value == '/alertson') {
             if (!plugCubed.settings.notify) {
                 plugCubed.log("Join/leave alerts enabled", null, plugCubed.colors.infoMessage1);
                 plugCubed.settings.notify = true;
@@ -999,7 +1022,7 @@ var plugCubedModel = Class.extend({
             }
             return true;
         }
-        if (value.indexOf("/getpos") === 0) {
+        if (value.indexOf('/getpos') === 0) {
             var lookup = plugCubed.getUser(value.substr(7)),
                 user = lookup === null ? Models.user.data : lookup,
                 spot = Models.room.getWaitListPosition(user.id);
@@ -1021,33 +1044,37 @@ var plugCubedModel = Class.extend({
             return true;
         }
         if (Models.user.hasPermission(Models.user.BOUNCER)) {
-            if (value.indexOf("/whois ") === 0) {
+            if (value.indexOf('/whois ') === 0) {
                 plugCubed.getUserInfo(value.substr(7));
                 return true;
             }
-            if (value == "/skip") {
+            if (value.indexOf('/skip')) {
+                var reason = value.substr(5).trim(),
+                    user = plugCubed.getUserInfo(Models.room.data.currentDJ);
+                if (reason)
+                    API.sendChat((user === null ? '@' + user.username + ' ' : '') + 'Reason for skip: ' + reason);
                 new ModerationForceSkipService();
                 return true;
             }
-            if (value.indexOf("/kick ") === 0) {
+            if (value.indexOf('/kick ') === 0) {
                 plugCubed.moderation(value.substr(6),'kick');
                 return true;
             }
-            if (value.indexOf("/add ") === 0) {
+            if (value.indexOf('/add ') === 0) {
                 plugCubed.moderation(value.substr(5),'adddj');
                 return true;
             }
-            if (value.indexOf("/remove ") === 0) {
+            if (value.indexOf('/remove ') === 0) {
                 plugCubed.moderation(value.substr(8),'removedj');
                 return true;
             }
         }
         if (Models.user.hasPermission(Models.user.MANAGER)) {
-            if (value.indexOf("/lock") === 0) {
+            if (value.indexOf('/lock') === 0) {
                 new RoomPropsService(document.location.href.split('/')[3],true,Models.room.data.waitListEnabled,Models.room.data.maxPlays,Models.room.data.maxDJs);
                 return true;
             }
-            if (value.indexOf("/unlock") === 0) {
+            if (value.indexOf('/unlock') === 0) {
                 new RoomPropsService(document.location.href.split('/')[3],false,Models.room.data.waitListEnabled,Models.room.data.maxPlays,Models.room.data.maxDJs);
                 return true;
             }
