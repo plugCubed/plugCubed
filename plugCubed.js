@@ -1048,7 +1048,7 @@ var plugCubedModel = Class.extend({
                 plugCubed.getUserInfo(value.substr(7));
                 return true;
             }
-            if (value.indexOf('/skip')) {
+            if (value.indexOf('/skip') === 0) {
                 var reason = value.substr(5).trim(),
                     user = plugCubed.getUserInfo(Models.room.data.currentDJ);
                 if (reason)
