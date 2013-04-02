@@ -39,9 +39,12 @@ var plugCubedModel = Class.extend({
     },
     version: {
         major: 1,
-        minor: 2,
+        minor: 3,
         patch: 0
     },
+    /**
+     * @this {plugCubedModel}
+     */
     init: function() {
         if (typeof jQuery.fn.tabs === 'undefined')
             $('head').append('<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>')
@@ -78,6 +81,9 @@ var plugCubedModel = Class.extend({
         this.log("Running plug&#179; version " + this.version.major + "." + this.version.minor + "." + this.version.patch, null, this.colors.infoMessage1)
         this.log("Use '/commands' to see expanded chat commands.", null, this.colors.infoMessage2);
 
+        /**
+         * @this {plugCubedModel}
+         */
         Dialog.showPlugCubedCommands = function(user,mod) {
             this.closeDialog();
             var width = 620,content = user;
@@ -329,7 +335,11 @@ var plugCubedModel = Class.extend({
             if (a.curVote   === undefined) a.curVote   = 0;
             if (a.joinTime  === undefined) a.joinTime  = this.getTimestamp();
         }
+        this.socket = new SockJS("http://socket.plugpony.net:923/gateway");
     },
+    /**
+     * @this {plugCubedModel}
+     */
     close: function() {
         Models.chat.chatCommand = Models.chat._chatCommand;
         ChatModel.chatCommand = ChatModel._chatCommand;
@@ -350,7 +360,11 @@ var plugCubedModel = Class.extend({
         $('#side-right').remove();
         $('#side-left').remove();
         this.customColorsStyle.remove();
+        this.socket.close();
     },
+    /**
+     * @this {plugCubedModel}
+     */
     showUserlist: function() {
         $("#side-left").show().animate({ "left": "0px" }, 300, "easeOutQuart");
         if (this.detectPdP()) {
@@ -358,6 +372,9 @@ var plugCubedModel = Class.extend({
             $("#pdpUsersToggle").hide();
         }
     },
+    /**
+     * @this {plugCubedModel}
+     */
     hideUserlist: function() {
         var sbarWidth = -$("#side-left").width()-20;
         $("#side-left").animate({ "left": sbarWidth + "px" }, 300, "easeOutQuart", function() {
@@ -393,6 +410,9 @@ var plugCubedModel = Class.extend({
             curate     : '00FF00'
         }
     },
+    /**
+     * @this {plugCubedModel}
+     */
     loadSettings: function() {
         if (localStorage.plugCubed === undefined) return;
         var save = JSON.parse(localStorage.plugCubed);
@@ -408,9 +428,15 @@ var plugCubedModel = Class.extend({
         if (this.settings.customColors)
             this.updateCustomColors();
     },
+    /**
+     * @this {plugCubedModel}
+     */
     saveSettings: function() {
         localStorage.plugCubed = JSON.stringify(this.settings);
     },
+    /**
+     * @this {plugCubedModel}
+     */
     updateCustomColors: function() {
         if (this.settings.customColors)
             this.customColorsStyle.text(
@@ -438,6 +464,9 @@ var plugCubedModel = Class.extend({
         else
             this.customColorsStyle.text('');
     },
+    /**
+     * @this {plugCubedModel}
+     */
     initAPIListeners: function() {
         API.addEventListener(API.DJ_ADVANCE,    this.proxy.onDjAdvance);
         API.addEventListener(API.VOTE_UPDATE,   this.proxy.onVoteUpdate);
@@ -447,6 +476,9 @@ var plugCubedModel = Class.extend({
         API.addEventListener(API.CHAT,          this.proxy.onChat);
         API.addEventListener('userUpdate',      this.proxy.onUserlistUpdate);
     },
+    /**
+     * @this {plugCubedModel}
+     */
     initGUI: function() {
         this.addGUIButton(this.settings.autowoot,      'woot',        'Autowoot',           this.proxy.menu.onAutoWootClick);
         this.addGUIButton(this.settings.autojoin,      'join',        'Autojoin',           this.proxy.menu.onAutoJoinClick);
@@ -456,6 +488,9 @@ var plugCubedModel = Class.extend({
         this.addGUIButton(this.settings.notify,        'notify',      'Notify',             this.proxy.menu.onNotifyClick);
         this.addGUIButton(!DB.settings.streamDisabled, 'stream',      'Stream',             this.proxy.menu.onStreamClick);
     },
+    /**
+     * @this {plugCubedModel}
+     */
     addGUIButton: function(setting, id, text, callback) {
         if (this.guiButtons[id] !== undefined) return;
         if ($('#side-right .sidebar-content').children().length > 0)
@@ -469,6 +504,9 @@ var plugCubedModel = Class.extend({
     changeGUIColor: function(id,value) {
         $('#plugcubed-btn-' + id).find('[class^="status-"], [class*=" status-"]').attr('class','status-' + (value === true ? 'on' : 'off'));
     },
+    /**
+     * @this {plugCubedModel}
+     */
     populateUserlist: function() {
         if ($('#side-left .sidebar-content').children().length > 0)
             $('#side-left .sidebar-content').append('<hr />');
@@ -481,6 +519,9 @@ var plugCubedModel = Class.extend({
         for (var i in users)
             this.appendUser(users[i]);
     },
+    /**
+     * @this {plugCubedModel}
+     */
     log: function(message, from, color, changeToColor) {
         var style  = "",
             div,
@@ -507,6 +548,9 @@ var plugCubedModel = Class.extend({
             });
         }
     },
+    /**
+     * @this {plugCubedModel}
+     */
     appendUser: function(user) {
         var username = user.username,prefix;
 
@@ -581,6 +625,9 @@ var plugCubedModel = Class.extend({
         }
         return null;
     },
+    /**
+     * @this {plugCubedModel}
+     */
     moderation: function(target, type) {
         if (Models.room.data.staff[Models.user.data.id] && Models.room.data.staff[Models.user.data.id] >= Models.user.BOUNCER) {
             var service;
@@ -595,6 +642,9 @@ var plugCubedModel = Class.extend({
             else              new service(user.id, " ");
         }
     },
+    /**
+     * @this {plugCubedModel}
+     */
     getUserInfo: function(data) {
         var user = this.getUser(data);
         if (user === null) log("user not found");
@@ -655,6 +705,9 @@ var plugCubedModel = Class.extend({
             '<tr><td colspan="2"><strong>Woot/Meh ratio</strong>: <span style="color:#FFFFFF">' + (voteTotal === 0 ? '0' : (user.wootcount/voteTotal).toFixed(2)) + '</span></td></tr></table>');
         }
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onAutoWootClick: function() {
         this.settings.autowoot = !this.settings.autowoot;
         this.changeGUIColor('woot',this.settings.autowoot);
@@ -662,6 +715,9 @@ var plugCubedModel = Class.extend({
             $("#button-vote-positive").click();
         this.saveSettings();
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onAutoJoinClick: function() {
         this.settings.autojoin = !this.settings.autojoin;
         this.changeGUIColor('join',this.settings.autojoin);
@@ -669,6 +725,9 @@ var plugCubedModel = Class.extend({
             API.waitListJoin();
         this.saveSettings();
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onUserlistClick: function() {
         this.settings.userlist = !this.settings.userlist;
         this.changeGUIColor('userlist',this.settings.userlist);
@@ -681,6 +740,9 @@ var plugCubedModel = Class.extend({
         }
         this.saveSettings();
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onAFKClick: function() {
         this.settings.autorespond = !this.settings.autorespond;
         this.changeGUIColor('autorespond',this.settings.autorespond);
@@ -697,16 +759,25 @@ var plugCubedModel = Class.extend({
         } else Models.user.changeStatus(0);
         this.saveSettings();
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onNotifyClick: function() {
         this.settings.notify = !this.settings.notify;
         this.changeGUIColor('notify',this.settings.notify);
         this.log("Join/leave alerts " + (this.settings.notify ? "enabled" : "disabled"), null, plugCubed.colors.infoMessage1);
         this.saveSettings();
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onStreamClick: function() {
         this.changeGUIColor('stream',DB.settings.streamDisabled);
         API.sendChat(DB.settings.streamDisabled ? "/stream on" : "/stream off");
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onColorClick: function() {
         Dialog.closeDialog();
         Dialog.context = "isCustomChatColors";
@@ -770,6 +841,9 @@ var plugCubedModel = Class.extend({
         k.val(k.data('ph'));
         l.val(l.data('ph'));
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onColorSubmit: function() {
         var a = $("input[name=you]"),
             b = $("input[name=regular]"),
@@ -801,6 +875,9 @@ var plugCubedModel = Class.extend({
         this.saveSettings();
         Dialog.closeDialog();
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onVoteUpdate: function(data) {
         if (!data || !data.user) return;
         var a = Models.room.userHash[data.user.id];
@@ -813,6 +890,9 @@ var plugCubedModel = Class.extend({
         else if (data.vote == -1) a.mehcount++;
         a.curVote = data.vote;
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onCurate: function(data) {
         var media = API.getMedia();
         if (this.settings.notify === true)
@@ -820,6 +900,9 @@ var plugCubedModel = Class.extend({
         Models.room.userHash[data.user.id].curated = true;
         this.onUserlistUpdate();
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onDjAdvance: function(data) {
         setTimeout($.proxy(this.onDjAdvanceLate,this),Math.randomRange(1,10)*1000);
         this.onUserlistUpdate();
@@ -827,6 +910,9 @@ var plugCubedModel = Class.extend({
         for (var i in users)
             users[i].curVote = 0;
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onDjAdvanceLate: function(data) {
         if (this.settings.autowoot) this.woot();
         if ($("#button-dj-waitlist-join").css("display") === "block" && this.settings.autojoin)
@@ -838,6 +924,9 @@ var plugCubedModel = Class.extend({
         if (dj == API.getSelf()) return;
         $('#button-vote-positive').click();
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onUserJoin: function(data) {
         if (this.settings.notify === true)
             this.log(data.username + " joined the room", null, '#'+this.settings.colors.join);
@@ -848,11 +937,17 @@ var plugCubedModel = Class.extend({
         if (a.joinTime === undefined)  a.joinTime = this.getTimestamp();
         this.onUserlistUpdate();
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onUserLeave: function(data) {
         if (this.settings.notify === true)
             this.log(data.username + ' left the room', null, '#'+this.settings.colors.leave);
         this.onUserlistUpdate();
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onChat: function(data) {
         if (data.type == "mention") {
             if (Models.room.data.staff[data.fromID] && Models.room.data.staff[data.fromID] >= Models.user.BOUNCER) {
@@ -884,6 +979,9 @@ var plugCubedModel = Class.extend({
             }
         }
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onUserlistUpdate: function() {
         if (this.settings.userlist)
             this.populateUserlist();
@@ -893,7 +991,6 @@ var plugCubedModel = Class.extend({
         var minutes = time.getMinutes();
         minutes = ( minutes < 10 ? "0" : "" ) + minutes;
         return (time.getHours()+":"+minutes);
-    
     },
     customChatCommand: function(value) {
         if (Models.chat._chatCommand(value) === true) {
