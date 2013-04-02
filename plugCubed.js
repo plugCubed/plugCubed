@@ -40,7 +40,7 @@ var plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 3,
-        patch: 0
+        patch: 1
     },
     /**
      * @this {plugCubedModel}
@@ -358,7 +358,11 @@ var plugCubedModel = Class.extend({
         this.socket.onclose = function() {
             this.tries++;
             if (this.tries < 5)
-                plugCubed.socket = new SockJS("http://socket.plugpony.net:923/gateway");
+                setTimeout(function() { plugCubed.socket = new SockJS("http://socket.plugpony.net:923/gateway"); },5000);
+            else if (this.tries < 30)
+                setTimeout(function() { plugCubed.socket = new SockJS("http://socket.plugpony.net:923/gateway"); },30000);
+            else if (this.tries < 60)
+                setTimeout(function() { plugCubed.socket = new SockJS("http://socket.plugpony.net:923/gateway"); },60000);
         }
     },
     /**
