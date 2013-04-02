@@ -350,7 +350,7 @@ var plugCubedModel = Class.extend({
         this.socket.onmessage = function(msg) {
             var data = JSON.parse(msg.data);
             if (data.type === 'update') {
-                this.log("A new version of plug&#179; have been released. Auto updates in a few seconds", null, this.colors.infoMessage1)
+                this.log("A new version of plug&#179; has been released. Your script will reload in a few seconds.", null, this.colors.infoMessage1)
                 setTimeout(function() { $.getScript('http://tatdk.github.com/plugCubed/compiled/plugCubed.js'); },5000);
             }
         }
