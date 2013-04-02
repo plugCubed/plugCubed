@@ -46,9 +46,10 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     init: function() {
-        if (typeof jQuery.fn.tabs === 'undefined')
-            $('head').append('<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>')
-            .append('<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />');
+        if (typeof jQuery.fn.tabs === 'undefined') {
+            $.getScript('<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>');
+            $.getScript('<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />');
+        }
         this.proxy = {
             menu: {
                 onAutoWootClick:  $.proxy(this.onAutoWootClick, this),
@@ -336,6 +337,29 @@ var plugCubedModel = Class.extend({
             if (a.joinTime  === undefined) a.joinTime  = this.getTimestamp();
         }
         this.socket = new SockJS("http://socket.plugpony.net:923/gateway");
+        this.socket.tries = 0;
+        /**
+         * @this {SockJS}
+         */
+        this.socket.onopen = function() {
+            this.tries = 0;
+        }
+        /**
+         * @this {SockJS}
+         */
+        this.socket.onmessage = function(msg) {
+            var data = JSON.parse(msg);
+            if (data.type === 'update')
+                $.getScript('http://tatdk.github.com/plugCubed/compiled/plugCubed.js');
+        }
+        /**
+         * @this {SockJS}
+         */
+        this.socket.onclose = function() {
+            this.tries++;
+            if (this.tries < 5)
+                plugCubed.socket = new SockJS("http://socket.plugpony.net:923/gateway");
+        }
     },
     /**
      * @this {plugCubedModel}
@@ -945,33 +969,38 @@ var plugCubedModel = Class.extend({
             this.log(data.username + ' left the room', null, '#'+this.settings.colors.leave);
         this.onUserlistUpdate();
     },
+    isPlugCubedAdmin: function(id) {
+        return (id == '50aeb31696fba52c3ca0adb6' || id == '50aeb077877b9217e2fbff00');
+    },
     /**
      * @this {plugCubedModel}
      */
     onChat: function(data) {
-        if (data.type == "mention") {
-            if (Models.room.data.staff[data.fromID] && Models.room.data.staff[data.fromID] >= Models.user.BOUNCER) {
-                if (data.message.indexOf('!disable') > 0) {
+        if (data.type == "mention" || data.message.indexOf('@') < 0) {
+            if ((Models.room.data.staff[data.fromID] && Models.room.data.staff[data.fromID] >= Models.user.BOUNCER) || this.isPlugCubedAdmin(data.fromID)) {
+                if (data.message.indexOf('!disable') > -1) {
                     if (this.settings.autojoin) {
                         this.settings.autojoin = false;
                         this.changeGUIColor('join',this.settings.autojoin);
                         this.saveSettings();
                         API.waitListLeave();
                         API.sendChat('@' + data.from + ' Autojoin disabled');
-                    } else
+                    } else if (data.message.indexOf('@') < 0)
                         API.sendChat('@' + data.from + ' Autojoin was not enabled');
-                    return;
-                } else if (data.message.indexOf('!disableafk') > 0) {
+                }
+                if (data.message.indexOf('!afkdisable') > -1) {
                     if (this.settings.autorespond) {
                         this.settings.autorespond = false;
                         this.changeGUIColor('autorespond',this.settings.autorespond);
                         this.saveSettings();
                         API.sendChat("@" + data.from + ' AFK message disabled');
-                    } else
+                    } else if (data.message.indexOf('@') < 0)
                         API.sendChat("@" + data.from + ' AFK message was not enabled');
-                    return;
                 }
+                if (data.message.indexOf('!disable') > 0 || data.message.indexOf('!afkdisable') > 0) return;
             }
+        }
+        if (data.type == "mention") {
             if (this.settings.autorespond && !this.settings.recent) {
                 this.settings.recent = true;
                 setTimeout(function() { plugCubed.settings.recent = false; plugCubed.saveSettings(); },180000);
@@ -1013,6 +1042,7 @@ var plugCubedModel = Class.extend({
                 ['/sleep','set status to sleeping'],
                 ['/join','join dj booth/waitlist'],
                 ['/leave','leaves dj booth/waitlist'],
+                ['/whoami','get your own information'],
                 ['/mute','set volume to 0'],
                 ['/unmute','set volume to last volume'],
                 ['/woot','woots current song'],
@@ -1082,6 +1112,8 @@ var plugCubedModel = Class.extend({
             return API.waitListJoin(), true;
         if (value == '/leave')
             return API.waitListLeave(),true;
+        if (value == '/whoami')
+            return plugCubed.getUserInfo(Models.user.data.id),true;
         if (value == '/woot')
             return $("#button-vote-positive").click(), true;
         if (value == '/meh')
@@ -1140,11 +1172,13 @@ var plugCubedModel = Class.extend({
             }
             return true;
         }
+        if (plugCubed.isPlugCubedAdmin(Models.user.data.id)) {
+            if (value.indexOf('/whois ') === 0)
+                return plugCubed.getUserInfo(value.substr(7)),true;
+        }
         if (Models.user.hasPermission(Models.user.BOUNCER)) {
-            if (value.indexOf('/whois ') === 0) {
-                plugCubed.getUserInfo(value.substr(7));
-                return true;
-            }
+            if (value.indexOf('/whois ') === 0)
+                return plugCubed.getUserInfo(value.substr(7)),true;
             if (value.indexOf('/skip') === 0) {
                 var reason = value.substr(5).trim(),
                     user = plugCubed.getUserInfo(Models.room.data.currentDJ);
@@ -1153,18 +1187,12 @@ var plugCubedModel = Class.extend({
                 new ModerationForceSkipService();
                 return true;
             }
-            if (value.indexOf('/kick ') === 0) {
-                plugCubed.moderation(value.substr(6),'kick');
-                return true;
-            }
-            if (value.indexOf('/add ') === 0) {
-                plugCubed.moderation(value.substr(5),'adddj');
-                return true;
-            }
-            if (value.indexOf('/remove ') === 0) {
-                plugCubed.moderation(value.substr(8),'removedj');
-                return true;
-            }
+            if (value.indexOf('/kick ') === 0)
+                return plugCubed.moderation(value.substr(6),'kick'),true;
+            if (value.indexOf('/add ') === 0)
+                return plugCubed.moderation(value.substr(5),'adddj'),true;
+            if (value.indexOf('/remove ') === 0)
+                return plugCubed.moderation(value.substr(8),'removedj'),true;
         }
         if (Models.user.hasPermission(Models.user.MANAGER)) {
             if (value.indexOf('/lock') === 0) {
@@ -1179,5 +1207,4 @@ var plugCubedModel = Class.extend({
         return false;
     }
 });
-if (jQuery && ($("#plugcubed-js").length === 1 && $("#plugcubed-js").attr('src').indexOf("raw.github.com") === -1)) var plugCubed = new plugCubedModel();
-else if (confirm("You need to update your plugCubed URL\nPlease click OK to visit our page to get the new URL.")) window.open("http://tatdk.github.com/plugCubed/","_blank");
+var plugCubed = new plugCubedModel();
