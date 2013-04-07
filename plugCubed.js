@@ -40,7 +40,7 @@ var plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 3,
-        patch: 3
+        patch: 4
     },
     /**
      * @this {plugCubedModel}
@@ -949,9 +949,9 @@ var plugCubedModel = Class.extend({
             API.waitListJoin();
     },
     woot: function() {
+        if (Models.room.data.djs.length === 0) return;
         var dj = Models.room.data.djs[0];
-        if (dj === null) return;
-        if (dj == API.getSelf()) return;
+        if (dj === null || dj == API.getSelf()) return;
         $('#button-vote-positive').click();
     },
     /**
