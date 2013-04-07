@@ -40,15 +40,15 @@ var plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 3,
-        patch: 4
+        patch: 5
     },
     /**
      * @this {plugCubedModel}
      */
     init: function() {
         if (typeof jQuery.fn.tabs === 'undefined') {
-            $.getScript('<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>');
-            $.getScript('<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />');
+            $.getScript('http://code.jquery.com/ui/1.10.2/jquery-ui.js');
+            $('head').append('<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />');
         }
         this.proxy = {
             menu: {
