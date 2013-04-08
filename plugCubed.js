@@ -40,7 +40,7 @@ var plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 3,
-        patch: 5
+        patch: 6
     },
     /**
      * @this {plugCubedModel}
@@ -50,6 +50,7 @@ var plugCubedModel = Class.extend({
             $.getScript('http://code.jquery.com/ui/1.10.2/jquery-ui.js');
             $('head').append('<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />');
         }
+        this.minified = false,
         this.proxy = {
             menu: {
                 onAutoWootClick:  $.proxy(this.onAutoWootClick, this),
@@ -350,8 +351,8 @@ var plugCubedModel = Class.extend({
         this.socket.onmessage = function(msg) {
             var data = JSON.parse(msg.data);
             if (data.type === 'update') {
-                this.log("A new version of plug&#179; has been released. Your script will reload in a few seconds.", null, this.colors.infoMessage1)
-                setTimeout(function() { $.getScript('http://tatdk.github.com/plugCubed/compiled/plugCubed.js'); },5000);
+                this.log("A new version of plug&#179; has been released. Your script will reload in a few seconds.", null, plugCubed.colors.infoMessage1)
+                setTimeout(function() { $.getScript('http://tatdk.github.io/plugCubed/compiled/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
             }
         }
         /**
@@ -783,7 +784,7 @@ var plugCubedModel = Class.extend({
                 this.changeGUIColor('autorespond',false);
                 return;
             }
-            this.settings.awaymsg = a.trim() === '' ? this.defaultAwayMsg : a;
+            this.settings.awaymsg = a.replace('@','').trim() === '' ? this.defaultAwayMsg : a;
             if (Models.user.data.status >= 0)
                 Models.user.changeStatus(1);
         } else Models.user.changeStatus(0);
@@ -982,29 +983,28 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     onChat: function(data) {
-        if (data.type == "mention" || data.message.indexOf('@') < 0) {
-            if ((Models.room.data.staff[data.fromID] && Models.room.data.staff[data.fromID] >= Models.user.BOUNCER) || this.isPlugCubedAdmin(data.fromID)) {
-                if (data.message.indexOf('!disable') > -1) {
-                    if (this.settings.autojoin) {
-                        this.settings.autojoin = false;
-                        this.changeGUIColor('join',this.settings.autojoin);
-                        this.saveSettings();
-                        API.waitListLeave();
-                        API.sendChat('@' + data.from + ' Autojoin disabled');
-                    } else if (data.message.indexOf('@') < 0)
-                        API.sendChat('@' + data.from + ' Autojoin was not enabled');
-                }
-                if (data.message.indexOf('!afkdisable') > -1) {
-                    if (this.settings.autorespond) {
-                        this.settings.autorespond = false;
-                        this.changeGUIColor('autorespond',this.settings.autorespond);
-                        this.saveSettings();
-                        API.sendChat("@" + data.from + ' AFK message disabled');
-                    } else if (data.message.indexOf('@') < 0)
-                        API.sendChat("@" + data.from + ' AFK message was not enabled');
-                }
-                if (data.message.indexOf('!disable') > 0 || data.message.indexOf('!afkdisable') > 0) return;
+        var a = data.type == "mention" && Models.room.data.staff[data.fromID] && Models.room.data.staff[data.fromID] >= Models.user.BOUNCER,b = data.message.indexOf('@') < 0 && this.isPlugCubedAdmin(data.fromID);
+        if (a || b) {
+            if (data.message.indexOf('!disable') > -1) {
+                if (this.settings.autojoin) {
+                    this.settings.autojoin = false;
+                    this.changeGUIColor('join',this.settings.autojoin);
+                    this.saveSettings();
+                    API.waitListLeave();
+                    API.sendChat('@' + data.from + ' Autojoin disabled');
+                } else if (data.message.indexOf('@') < 0)
+                    API.sendChat('@' + data.from + ' Autojoin was not enabled');
             }
+            if (data.message.indexOf('!afkdisable') > -1) {
+                if (this.settings.autorespond) {
+                    this.settings.autorespond = false;
+                    this.changeGUIColor('autorespond',this.settings.autorespond);
+                    this.saveSettings();
+                    API.sendChat("@" + data.from + ' AFK message disabled');
+                } else if (data.message.indexOf('@') < 0)
+                    API.sendChat("@" + data.from + ' AFK message was not enabled');
+            }
+            if (data.message.indexOf('!disable') > 0 || data.message.indexOf('!afkdisable') > 0) return;
         }
         if (data.type == "mention") {
             if (this.settings.autorespond && !this.settings.recent) {
