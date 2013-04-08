@@ -40,7 +40,7 @@ var plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 3,
-        patch: 7
+        patch: 8
     },
     /**
      * @this {plugCubedModel}
@@ -784,7 +784,7 @@ var plugCubedModel = Class.extend({
                 this.changeGUIColor('autorespond',false);
                 return;
             }
-            this.settings.awaymsg = a.replace('@','').trim() === '' ? this.defaultAwayMsg : a;
+            this.settings.awaymsg = a.replace('@','').trim() === '' ? this.defaultAwayMsg : a.replace('@','').trim();
             if (Models.user.data.status >= 0)
                 Models.user.changeStatus(1);
         } else Models.user.changeStatus(0);
