@@ -5,7 +5,7 @@
 // @author         Jeremy "Colgate" Richardson
 // @author         Thomas "TAT" Andresen
 // @include        http://plug.dj/*
-// @version        1.2
+// @version        1.3
 // ==/UserScript==
 
 /*
@@ -29,7 +29,7 @@ script.textContent = "if (typeof Class !== 'undefined' && typeof Slug !== 'undef
     "var plugCubedLoader = Class.extend({" +
         "init: function() {if (typeof Slug !== 'undefined') this.wait();}," +
         "wait: function() {if (typeof API !== 'undefined' && API.isReady) this.run(); else setTimeout($.proxy(this.wait,this),100);}," +
-        "run: function() {console.log('plugCubedLoader v.1.2 enabled!');var a = document.createElement('script');a.setAttribute('id','plugcubed-js');document.body.appendChild(a);a.setAttribute('src','http://tatdk.github.com/plugCubed/compiled/plugCubed.min.js');}" +
+        "run: function() {console.log('plugCubedLoader v.1.3 enabled!');$.getScript('http://tatdk.github.io/plugCubed/compiled/plugCubed.min.js');}" +
     "});" +
     "_PCL = new plugCubedLoader(); }";
 document.head.appendChild(script);
