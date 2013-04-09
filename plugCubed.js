@@ -1215,16 +1215,16 @@ var plugCubedModel = Class.extend({
                 return plugCubed.getUserInfo(value.substr(7)),true;
         }
         if (Models.user.hasPermission(Models.user.BOUNCER)) {
-            if (value.indexOf('/whois ') === 0)
-                return plugCubed.getUserInfo(value.substr(7)),true;
             if (value.indexOf('/skip') === 0) {
                 var reason = value.substr(5).trim(),
-                    user = plugCubed.getUserInfo(Models.room.data.currentDJ);
+                    user = plugCubed.getUser(Models.room.data.currentDJ);
                 if (reason)
                     API.sendChat((user === null ? '@' + user.username + ' ' : '') + 'Reason for skip: ' + reason);
                 new ModerationForceSkipService();
                 return true;
             }
+            if (value.indexOf('/whois ') === 0)
+                return plugCubed.getUserInfo(value.substr(7)),true;
             if (value.indexOf('/kick ') === 0)
                 return plugCubed.moderation(value.substr(6),'kick'),true;
             if (value.indexOf('/add ') === 0)
