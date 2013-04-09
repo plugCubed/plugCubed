@@ -1223,7 +1223,7 @@ var plugCubedModel = Class.extend({
                 var reason = value.substr(5).trim(),
                     user = plugCubed.getUser(Models.room.data.currentDJ);
                 if (reason)
-                    API.sendChat((user === null ? '@' + user.username + ' ' : '') + 'Reason for skip: ' + reason);
+                    API.sendChat((user != null ? '@' + user.username + ' - ' : '') + 'Reason for skip: ' + reason);
                 new ModerationForceSkipService();
                 return true;
             }
