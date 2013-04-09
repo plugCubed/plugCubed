@@ -40,7 +40,7 @@ var plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 3,
-        patch: 9
+        patch: 10
     },
     /**
      * @this {plugCubedModel}
