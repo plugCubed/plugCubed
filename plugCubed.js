@@ -463,7 +463,7 @@ var plugCubedModel = Class.extend({
         if (this.settings.registeredSongs.length > 0 && this.settings.registeredSongs.indexOf(Models.room.data.media.id) > -1) {
             Playback.setVolume(0);
             this.settings.autoMuted = true;
-            this.log(Models.room.data.media.title" auto-muted.", null, this.colors.infoMessage2);
+            this.log(Models.room.data.media.title + " auto-muted.", null, this.colors.infoMessage2);
 
         };
 
@@ -947,14 +947,14 @@ var plugCubedModel = Class.extend({
      */
     onDjAdvance: function(data) {
         setTimeout($.proxy(this.onDjAdvanceLate,this),Math.randomRange(1,10)*1000);
-        if(this.settings.autoMuted && this.settings.registeredSongs.indexOf(data.media.id) < -1){
+        if(this.settings.autoMuted && this.settings.registeredSongs.indexOf(data.media.id) < 0){
             setTimeout(function(){ Playback.setVolume(Playback.lastVolume) },800)
             this.settings.autoMuted = false;
         }
-        if(!this.settings.autoMuted && this.settings.registeredSongs(data.media.id) > -1) {
+        if(!this.settings.autoMuted && this.settings.registeredSongs.indexOf(data.media.id) > -1) {
             setTimeout(function() { Playback.setVolume(0);}, 800)
             this.settings.autoMuted = true;
-            this.log(data.media.title" auto-muted.", null, this.colors.infoMessage2);
+            this.log(data.media.title + " auto-muted.", null, this.colors.infoMessage2);
 
         }
         this.onUserlistUpdate();
@@ -1163,11 +1163,14 @@ var plugCubedModel = Class.extend({
             setTimeout(function() { Dialog.closeDialog(); },500);
             return true;
         }
-        if (value == '/automute' && this.settings.registeredSongs.indexOf(Models.room.data.media.id) < -1) {
-            this.settings.registeredSongs.push(Models.room.data.media.id);
-            this.settings.autoMuted = true;
-            Playback.setVolume(0);
-            this.log(data.media.title" registered to auto-mute on future plays.", null, this.colors.infoMessage2);
+        if (value == '/automute') {
+            if (plugCubed.settings.registeredSongs.indexOf(Models.room.data.media.id) < 0) {
+                plugCubed.settings.registeredSongs.push(Models.room.data.media.id);
+                plugCubed.settings.autoMuted = true;
+                Playback.setVolume(0);
+                plugCubed.log(Models.room.data.media.title + " registered to auto-mute on future plays.", null, plugCubed.colors.infoMessage2);
+                plugCubed.saveSettings();
+            }
             return true;
         }
         if (value == '/alertsoff') {
