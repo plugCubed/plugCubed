@@ -966,7 +966,7 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     onDjAdvanceLate: function(data) {
-        if (this.settings.autowoot && this.settings.registeredSongs.indexOf(data.media.id) < 0) this.woot();
+        if (this.settings.autowoot && this.settings.registeredSongs.indexOf(Models.room.data.media.id) < 0) this.woot();
         if ($("#button-dj-waitlist-join").css("display") === "block" && this.settings.autojoin)
             Room.onWaitListJoinClick();
     },
