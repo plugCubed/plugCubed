@@ -796,7 +796,7 @@ var plugCubedModel = Class.extend({
             }
             a = a.split('@').join('').trim();
             this.settings.awaymsg = a === '' ? this.defaultAwayMsg : a;
-            if (Models.user.data.status >= 0)
+            if (Models.user.data.status <= 0)
                 Models.user.changeStatus(1);
         } else Models.user.changeStatus(0);
         this.saveSettings();
