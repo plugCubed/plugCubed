@@ -1163,6 +1163,10 @@ var plugCubedModel = Class.extend({
             setTimeout(function() { Dialog.closeDialog(); },500);
             return true;
         }
+        if (value == '/nextsong') {
+            var a = Models.playlistMedia(Models.playlist.selectedPlaylistID).data[0];
+            return plugCubed.log("Your next queued song is " + a.title + " by " + a.author, null, plugCubed.colors.infoMessage1), true;
+        }
         if (value == '/automute') {
             if (plugCubed.settings.registeredSongs.indexOf(Models.room.data.media.id) < 0) {
                 plugCubed.settings.registeredSongs.push(Models.room.data.media.id);
