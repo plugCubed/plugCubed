@@ -40,7 +40,7 @@ var plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 4,
-        patch: 0
+        patch: 1
     },
     /**
      * @this {plugCubedModel}
@@ -344,6 +344,7 @@ var plugCubedModel = Class.extend({
          */
         this.socket.onopen = function() {
             this.tries = 0;
+            this.send(JSON.stringify({id:Models.user.data.id}));
         }
         /**
          * @this {SockJS}
@@ -351,6 +352,8 @@ var plugCubedModel = Class.extend({
         this.socket.onmessage = function(msg) {
             var data = JSON.parse(msg.data);
             if (data.type === 'update') {
+                plugCubed.socket.onclose = function() {};
+                plugCubed.socket.close();
                 plugCubed.log("A new version of plug&#179; has been released. Your script will reload in a few seconds.", null, plugCubed.colors.infoMessage1)
                 setTimeout(function() { $.getScript('http://tatdk.github.io/plugCubed/compiled/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
             }
