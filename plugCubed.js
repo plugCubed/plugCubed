@@ -1223,12 +1223,17 @@ var plugCubedModel = Class.extend({
         }
         if (Models.user.hasPermission(Models.user.BOUNCER)) {
             if (value.indexOf('/skip') === 0) {
-                var reason = value.substr(5).trim(),
-                    user = plugCubed.getUser(Models.room.data.currentDJ);
-                if (reason)
-                    API.sendChat((user != null ? '@' + user.username + ' - ' : '') + 'Reason for skip: ' + reason);
-                new ModerationForceSkipService();
-                return true;
+                if (Models.room.data.djs[0].user.id == Models.user.data.id) {
+                    Room.onSkipClick();
+                    return true;
+                } else {
+                    var reason = value.substr(5).trim(),
+                        user = plugCubed.getUser(Models.room.data.currentDJ);
+                    if (reason)
+                        API.sendChat((user != null ? '@' + user.username + ' - ' : '') + 'Reason for skip: ' + reason);
+                    new ModerationForceSkipService();
+                    return true;
+                }
             }
             if (value.indexOf('/whois ') === 0)
                 return plugCubed.getUserInfo(value.substr(7)),true;
