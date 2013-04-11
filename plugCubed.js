@@ -1140,7 +1140,7 @@ var plugCubedModel = Class.extend({
             return true;
         }
         if (value == '/join')
-            return API.waitListJoin(), true;
+            return Room.onWaitListJoinClick(), true;
         if (value == '/leave')
             return API.waitListLeave(),true;
         if (value == '/whoami')
