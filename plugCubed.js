@@ -285,7 +285,13 @@ var plugCubedModel = Class.extend({
             '#dialog-custom-colors .dialog-cancel-button { right: 100px; }',
             '#dialog-custom-colors .dialog-submit-button { width: 75px; }',
             '#dialog-custom-colors .dialog-checkbox-container-enabled { left: 10px; top: 5px; }',
-            '#dialog-custom-colors .dialog-input-background { width: 60px; left:150px; }'
+            '#dialog-custom-colors .dialog-input-background { width: 60px; left:150px; }',
+            '#dialog-notify { width: 190px; height: 220px; }',
+            '#dialog-notify .dialog-body { height: 125px; }',
+            '#dialog-notify .dialog-cancel-button { width: 85px; right: 98px; }',
+            '#dialog-notify .dialog-submit-button { width: 85px; right: 5px; }',
+            '#dialog-notify .dialog-checkbox-container-enabled { left: 10px; top: 5px; }',
+            '#dialog-notify .dialog-input-background { width: 60px; left:150px; }'
         ];
         var scripts = [
             '/**',
@@ -446,6 +452,13 @@ var plugCubedModel = Class.extend({
             join       : '3366FF',
             leave      : '3366FF',
             curate     : '00FF00'
+        },
+        alerts: {
+            join: false,
+            leave: false,
+            curate: false,
+            songUpdate: false,
+            songStats: false
         },
         registeredSongs: [],
         autoMuted: false
@@ -815,10 +828,45 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     onNotifyClick: function() {
-        this.settings.notify = !this.settings.notify;
+        Dialog.closeDialog();
+        Dialog.context = "isNotifySettings";
+        Dialog.submitFunc = $.proxy(this.onNotifySubmit, this);
+        Dialog.showDialog(
+            $("<div/>")
+            .attr("id", "dialog-notify")
+            .addClass("dialog")
+            .css("left",Main.LEFT+(Main.WIDTH-230)/2)
+            .css("top",208.5)
+            .append(Dialog.getHeader("Chat Notifications"))
+            .append(
+                $("<div/>")
+                .addClass("dialog-body")
+                .append(
+                    $("<form/>")
+                    .submit("return false")
+                    .append(Dialog.getCheckBox("Enable alerts", "enabled", this.settings.notify).css('top',10).css('left',10))
+                    .append(Dialog.getCheckBox("User Join", "join", this.settings.alerts.join).css('top',30).css('left',30))
+                    .append(Dialog.getCheckBox("User Leave", "leave", this.settings.alerts.leave).css('top',50).css('left',30))
+                    .append(Dialog.getCheckBox("User Curate", "curate", this.settings.alerts.curate).css('top',70).css('left',30))
+                    .append(Dialog.getCheckBox("Song Stats", "songStats", this.settings.alerts.songStats).css('top',90).css('left',30))
+                    .append(Dialog.getCheckBox("Song Updates", "songUpdate", this.settings.alerts.songUpdate).css('top',110).css('left',30))
+
+                )
+            )
+            .append(Dialog.getCancelButton())
+            .append(Dialog.getSubmitButton(Lang.dialog.save))
+        )
+    },
+    onNotifySubmit: function() {
+        this.settings.notify = $("#dialog-checkbox-enabled").is(":checked");
+        this.settings.alerts.join = $("#dialog-checkbox-join").is(":checked");
+        this.settings.alerts.leave = $("#dialog-checkbox-leave").is(":checked");
+        this.settings.alerts.curate = $("#dialog-checkbox-curate").is(":checked");
+        this.settings.alerts.songStats = $("#dialog-checkbox-songStats").is(":checked");
+        this.settings.alerts.songUpdate = $("#dialog-checkbox-songUpdate").is(":checked");
         this.changeGUIColor('notify',this.settings.notify);
-        this.log("Join/leave alerts " + (this.settings.notify ? "enabled" : "disabled"), null, plugCubed.colors.infoMessage1);
         this.saveSettings();
+        Dialog.closeDialog();
     },
     /**
      * @this {plugCubedModel}
@@ -947,7 +995,7 @@ var plugCubedModel = Class.extend({
      */
     onCurate: function(data) {
         var media = API.getMedia();
-        if (this.settings.notify === true)
+        if (this.settings.notify === true && this.settings.alerts.curate === true)
             this.log(data.user.username + " added " + media.author + " - " + media.title, null, '#'+this.settings.colors.curate);
         Models.room.userHash[data.user.id].curated = true;
         this.onUserlistUpdate();
@@ -956,6 +1004,10 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     onDjAdvance: function(data) {
+        if (this.settings.notify === true) {
+            if (this.settings.alerts.songStats === true) this.log('Stats:   ' + data.lastPlay.score.positive + ' woots -- ' + data.lastPlay.score.negative + ' mehs -- ' +     data.lastPlay.score.curates + ' curates', null, this.colors.infoMessage2)
+            if (this.settings.alerts.songUpdate === true) this.log('Now Playing: ' + data.media.title + ' by ' + data.media.author + '<br />Played by: ' + data.dj.username, null, this.colors.infoMessage1)
+        }
         setTimeout($.proxy(this.onDjAdvanceLate,this),Math.randomRange(1,10)*1000);
         if(Models.user.getPermission() >= Models.user.BOUNCER || this.isPlugCubedAdmin(Models.user.data.id)) this.onHistoryCheck(data.media.id)
         var obj = {
@@ -1003,7 +1055,7 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     onUserJoin: function(data) {
-        if (this.settings.notify === true)
+        if (this.settings.notify === true && this.settings.alerts.join === true)
             this.log(Utils.cleanTypedString(data.username + " joined the room"), null, '#'+this.settings.colors.join);
         var a = Models.room.userHash[data.id];
         if (a.wootcount === undefined) a.wootcount = 0;
@@ -1016,7 +1068,7 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     onUserLeave: function(data) {
-        if (this.settings.notify === true)
+        if (this.settings.notify === true && this.settings.alerts.leave === true)
             this.log(Utils.cleanTypedString(data.username + ' left the room'), null, '#'+this.settings.colors.leave);
         this.onUserlistUpdate();
     },
