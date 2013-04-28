@@ -9,6 +9,7 @@ New features are being added daily, however the current list of features is as f
 * User list : A dynamic list of every user in the room, color-coded based on their current vote. Green = Woot, Red =   Meh, White = No vote, Pink = Curate. Special usergroups are denoted by the icon you'd normally see in the chat
 * Unique Sidebar UI : Allows you to easily configure your plugCubed experience; enable or disable each of its features at the click of a button. Red = Off, Green = On
 * Hide video : Allows you to hide videos from your view
+* History alerts : Alert moderators when a song is in the history.
 * A variety of chat commands that enable you to 
     * change your display name with /nick
     * change user status with /avail, /afk, /work, /sleep
