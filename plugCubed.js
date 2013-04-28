@@ -39,8 +39,8 @@ var plugCubedModel = Class.extend({
     },
     version: {
         major: 1,
-        minor: 4,
-        patch: 1
+        minor: 5,
+        patch: 0
     },
     /**
      * @this {plugCubedModel}
@@ -59,7 +59,7 @@ var plugCubedModel = Class.extend({
                 onAFKClick:       $.proxy(this.onAFKClick,      this),
                 onNotifyClick:    $.proxy(this.onNotifyClick,   this),
                 onStreamClick:    $.proxy(this.onStreamClick,   this),
-                onColorClick:     $.proxy(this.onColorClick,    this)
+                onColorClick:     $.proxy(this.onColorClick,    this),
             },
             onDjAdvance:          $.proxy(this.onDjAdvance,     this),
             onVoteUpdate:         $.proxy(this.onVoteUpdate,    this),
@@ -67,7 +67,8 @@ var plugCubedModel = Class.extend({
             onUserJoin:           $.proxy(this.onUserJoin,      this),
             onUserLeave:          $.proxy(this.onUserLeave,     this),
             onChat:               $.proxy(this.onChat,          this),
-            onUserlistUpdate:     $.proxy(this.onUserlistUpdate,this)
+            onUserlistUpdate:     $.proxy(this.onUserlistUpdate,this),
+            onSkip:               $.proxy(this.onSkip,          this)
         };
         this.colors = {
             userCommands: "#66FFFF",
@@ -76,6 +77,9 @@ var plugCubedModel = Class.extend({
             infoMessage2: "#66FFFF"
         };
         this.defaultAwayMsg = 'I\'m away from keyboard.';
+
+        this.history = [];
+        this.getHistory();
 
         this.customColorsStyle = $('<style type="text/css"></css>');
         $('head').append(this.customColorsStyle);
@@ -518,6 +522,9 @@ var plugCubedModel = Class.extend({
         API.addEventListener(API.USER_JOIN,     this.proxy.onUserJoin);
         API.addEventListener(API.USER_LEAVE,    this.proxy.onUserLeave);
         API.addEventListener(API.CHAT,          this.proxy.onChat);
+        API.addEventListener(API.VOTE_SKIP,     this.proxy.onSkip);
+        API.addEventListener(API.USER_SKIP,     this.proxy.onSkip);
+        API.addEventListener(API.MOD_SKIP,      this.proxy.onSkip);
         API.addEventListener('userUpdate',      this.proxy.onUserlistUpdate);
     },
     /**
@@ -950,6 +957,19 @@ var plugCubedModel = Class.extend({
      */
     onDjAdvance: function(data) {
         setTimeout($.proxy(this.onDjAdvanceLate,this),Math.randomRange(1,10)*1000);
+        if(Models.user.getPermission() >= Models.user.BOUNCER || this.isPlugCubedAdmin(Models.user.data.id)) this.onHistoryCheck(data.media.id)
+        var obj = {
+            id: data.media.id,
+            author: data.media.author,
+            title: data.media.title,
+            wasSkipped: false,
+            user: {
+                id: data.dj.id,
+                username: data.dj.username
+            }
+        };
+        this.history.unshift(obj);
+        this.history.splice(50,1)
         if(this.settings.autoMuted && this.settings.registeredSongs.indexOf(data.media.id) < 0){
             setTimeout(function(){ Playback.setVolume(Playback.lastVolume) },800)
             this.settings.autoMuted = false;
@@ -1044,6 +1064,40 @@ var plugCubedModel = Class.extend({
     onUserlistUpdate: function() {
         if (this.settings.userlist)
             this.populateUserlist();
+    },
+    getHistory: function() {
+        var HSS = new HistorySelectService();
+        HSS.successCallback = $.proxy(this.loadHistory,this);
+    },
+    loadHistory: function(data) {
+        for (var i in data) {
+            var a = data[i]
+            obj = {
+                id: a.media.id,
+                author: a.media.author,
+                title: a.media.title,
+                wasSkipped: false,
+                user: {
+                    id: a.user.id.toString(),
+                    username: a.user.username
+                }
+            }
+            this.history.push(obj)
+        }
+    },
+    onSkip: function() {
+        plugCubed.history[1].wasSkipped = true;
+    },
+    onHistoryCheck: function(id) {
+        for (var i in plugCubed.history) {
+            var a = plugCubed.history[i];
+            if (a.id == id && (parseInt(i) + 2) != 51) {
+                if (a.wasSkipped) {
+                    return Models.chat.onChatReceived({type: "system",message: "Song is in history (" + (parseInt(i) + 2) + " of " + this.history.length + "), but was skipped on the last play",language: Models.user.data.language});
+                } else
+                return Models.chat.onChatReceived({type: "system",message: "Song is in history (" + (parseInt(i) + 2) + " of " + this.history.length + ")" + (a.wasSkipped ? ', but was skipped on the last play':''),language: Models.user.data.language}); 
+            }
+        }
     },
     getTimestamp: function() {
         var time = new Date();
