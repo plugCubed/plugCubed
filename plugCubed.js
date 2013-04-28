@@ -984,7 +984,7 @@ var plugCubedModel = Class.extend({
      */
     onUserJoin: function(data) {
         if (this.settings.notify === true)
-            this.log(data.username + " joined the room", null, '#'+this.settings.colors.join);
+            this.log(Utils.cleanTypedString(data.username + " joined the room"), null, '#'+this.settings.colors.join);
         var a = Models.room.userHash[data.id];
         if (a.wootcount === undefined) a.wootcount = 0;
         if (a.mehcount === undefined)  a.mehcount = 0;
@@ -997,7 +997,7 @@ var plugCubedModel = Class.extend({
      */
     onUserLeave: function(data) {
         if (this.settings.notify === true)
-            this.log(data.username + ' left the room', null, '#'+this.settings.colors.leave);
+            this.log(Utils.cleanTypedString(data.username + ' left the room'), null, '#'+this.settings.colors.leave);
         this.onUserlistUpdate();
     },
     isPlugCubedAdmin: function(id) {
