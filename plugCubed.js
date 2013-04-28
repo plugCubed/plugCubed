@@ -1237,8 +1237,15 @@ var plugCubedModel = Class.extend({
             }
             if (value.indexOf('/whois ') === 0)
                 return plugCubed.getUserInfo(value.substr(7)),true;
-            if (value.indexOf('/kick ') === 0)
-                return plugCubed.moderation(value.substr(6),'kick'),true;
+            if (value.indexOf('/kick ') === 0) {
+                if (value.indexOf('::') > 0) {
+                    var data = value.substr(5).split('::'),
+                        user = plugCubed.getUser(data[0])
+                    new ModerationKickUserService(user.id,data[1])
+                    return true;
+                } else
+                    return plugCubed.moderation(value.substr(6),'kick'),true;
+            }
             if (value.indexOf('/add ') === 0)
                 return plugCubed.moderation(value.substr(5),'adddj'),true;
             if (value.indexOf('/remove ') === 0)
