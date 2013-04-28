@@ -1007,7 +1007,7 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     onChat: function(data) {
-        var a = data.type == "mention" && Models.room.data.staff[data.fromID] && Models.room.data.staff[data.fromID] >= Models.user.BOUNCER,b = data.message.indexOf('@') < 0 && this.isPlugCubedAdmin(data.fromID);
+        var a = data.type == "mention" && (Models.room.data.staff[data.fromID] && Models.room.data.staff[data.fromID] >= Models.user.BOUNCER),b = data.message.indexOf('@') < 0 && this.isPlugCubedAdmin(data.fromID);
         if (a || b) {
             if (data.message.indexOf('!disable') > -1) {
                 if (this.settings.autojoin) {
@@ -1016,7 +1016,7 @@ var plugCubedModel = Class.extend({
                     this.saveSettings();
                     API.waitListLeave();
                     API.sendChat('@' + data.from + ' Autojoin disabled');
-                } else if (data.message.indexOf('@') < 0)
+                } else
                     API.sendChat('@' + data.from + ' Autojoin was not enabled');
             }
             if (data.message.indexOf('!afkdisable') > -1) {
@@ -1025,7 +1025,7 @@ var plugCubedModel = Class.extend({
                     this.changeGUIColor('autorespond',this.settings.autorespond);
                     this.saveSettings();
                     API.sendChat("@" + data.from + ' AFK message disabled');
-                } else if (data.message.indexOf('@') < 0)
+                } else
                     API.sendChat("@" + data.from + ' AFK message was not enabled');
             }
             if (data.message.indexOf('!disable') > 0 || data.message.indexOf('!afkdisable') > 0) return;
