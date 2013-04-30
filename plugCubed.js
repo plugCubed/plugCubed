@@ -39,7 +39,7 @@ var plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 5,
-        patch: 0
+        patch: 1
     },
     /**
      * @this {plugCubedModel}
@@ -119,6 +119,7 @@ var plugCubedModel = Class.extend({
             '#side-left .sidebar-content p span.admin_current,#side-left .sidebar-content p span.admin_meh,#side-left .sidebar-content p span.admin_undecided,#side-left .sidebar-content p span.admin_woot,#side-left .sidebar-content p span.ambassador_current,',
             '#side-left .sidebar-content p span.ambassador_meh,#side-left .sidebar-content p span.ambassador_undecided,#side-left .sidebar-content p span.ambassador_woot,#side-left .sidebar-content p span.bouncer_current,#side-left .sidebar-content p span.bouncer_meh,',
             '#side-left .sidebar-content p span.bouncer_undecided,#side-left .sidebar-content p span.bouncer_woot,#side-left .sidebar-content p span.host_current,#side-left .sidebar-content p span.host_meh,#side-left .sidebar-content p span.host_undecided,',
+            '#side-left .sidebar-content p span.fdj_undecided,#side-left .sidebar-content p span.fdj_woot,#side-left .sidebar-content p span.fdj_meh,#side-left .sidebar-content p span.fdj_current,#side-left .sidebar-content p span.woot_undecided,#side-left .sidebar-content p span.curate_meh,#side-left .sidebar-content p span.curate_woot,',
             '#side-left .sidebar-content p span.host_woot,#side-left .sidebar-content p span.manager_current,#side-left .sidebar-content p span.manager_meh,#side-left .sidebar-content p span.manager_undecided,#side-left .sidebar-content p span.manager_woot,#side-left .sidebar-content p span.void {',
             '    background: url(http://tatdk.github.com/plugCubed/images/sprites.png) no-repeat;width:15px;height: 15px;position: relative;left: -5px;top:4px;display:inline-block',
             '}',
@@ -142,7 +143,14 @@ var plugCubedModel = Class.extend({
             '#side-left .sidebar-content p span.manager_meh {background-position: -30px -45px;}',
             '#side-left .sidebar-content p span.manager_undecided {background-position: -15px -45px;}',
             '#side-left .sidebar-content p span.manager_woot {background-position: 0 -45px;}',
-            '#side-left .sidebar-content p span.void {background-position: 0px -75px;}',
+            '#side-left .sidebar-content p span.fdj_current {background-position: -45px -75px;}',
+            '#side-left .sidebar-content p span.fdj_meh {background-position: -30px -75px;}',
+            '#side-left .sidebar-content p span.fdj_undecided {background-position: -15px -75px;}',
+            '#side-left .sidebar-content p span.fdj_woot {background-position: 0 -75px;}',
+            '#side-left .sidebar-content p span.curate_meh {background-position: -30px -90px;}',
+            '#side-left .sidebar-content p span.curate_undecided {background-position: -15px -90px;}',
+            '#side-left .sidebar-content p span.curate_woot {background-position: 0 -90px;}',
+            '#side-left .sidebar-content p span.void {background-position: 0px -105px;}',
             '#plugcubed-gui { position: absolute; margin-left:-522px; top: -320px; }',
             '#plugcubed-gui h2 { background-color: #0b0b0b; height: 112px; width: 156px; margin: 0; color: #fff; font-size: 13px; font-variant: small-caps; padding: 8px 0 0 12px; border-top: 1px dotted #292929; }',
             '#plugcubed-gui ul {list-style-type:none; margin:0; padding:0;}',
@@ -617,13 +625,15 @@ var plugCubedModel = Class.extend({
     appendUser: function(user) {
         var username = user.username,prefix;
 
-             if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.BOUNCER) prefix = 'bouncer';
-        else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.MANAGER) prefix = 'manager';
-        else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.COHOST)  prefix = 'host';
-        else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == 5)                   prefix = 'host';
-        else if (Models.room.ambassadors[user.id])                                                          prefix = 'ambassador';
-        else if (Models.room.admins[user.id])                                                               prefix = 'admin';
-        else                                                                                                prefix = 'normal';
+             if (user.curated == true)                                                                          prefix = 'curate';
+        else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.FEATUREDDJ)  prefix = 'fdj';
+        else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.BOUNCER)     prefix = 'bouncer';
+        else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.MANAGER)     prefix = 'manager';
+        else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.COHOST)      prefix = 'host';
+        else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == 5)                       prefix = 'host';
+        else if (Models.room.ambassadors[user.id])                                                              prefix = 'ambassador';
+        else if (Models.room.admins[user.id])                                                                   prefix = 'admin';
+        else                                                                                                    prefix = 'normal';
 
         if (Models.room.data.djs.length > 0 && Models.room.data.djs[0].user.id == user.id) {
             if (prefix === 'normal')
@@ -631,16 +641,15 @@ var plugCubedModel = Class.extend({
             else
                 this.appendUserItem(prefix + '_current', '#66FFFF', username);
         } else if (prefix === 'normal')
-            this.appendUserItem('void',this.colorByVote(user.vote,user.curated), username);
+            this.appendUserItem('void',this.colorByVote(user.vote), username);
         else
-            this.appendUserItem(prefix + this.prefixByVote(user.vote), this.colorByVote(user.vote,user.curated), username);
+            this.appendUserItem(prefix + this.prefixByVote(user.vote), this.colorByVote(user.vote), username);
     },
-    colorByVote: function(vote,curated) {
+    colorByVote: function(vote) {
         var color = '';
-        if (vote === undefined && curated !== true)
+        if (vote === undefined)
             color = 'FFFFFF';
-        else if (curated === true)
-            color = 'BE187D';
+
         else {
             switch (vote) {
                 case -1: color = 'ED1C24'; break;
