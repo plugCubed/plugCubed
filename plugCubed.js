@@ -17,7 +17,6 @@
  * @author  Jeremy "Colgate" Richardson
  * @author  Thomas "TAT" Andresen
  */
-    
 if (plugCubed !== undefined)
     plugCubed.close();
 String.prototype.equalsIgnoreCase = function(other) {
