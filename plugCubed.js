@@ -581,7 +581,9 @@ var plugCubedModel = Class.extend({
     populateUserlist: function() {
         if ($('#side-left .sidebar-content').children().length > 0)
             $('#side-left .sidebar-content').append('<hr />');
-
+        $('#side-left .sidebar-content').bind("contextmenu",function(e){
+              return false;
+       });
         $('#side-left .sidebar-content').html('<h1 class="users">Users: ' + API.getUsers().length + '</h1>');
         var spot = Models.room.getWaitListPosition();
         var waitlistDiv = $('<h3></h3>').addClass('waitlistspot').text('Waitlist: ' + (spot !== null ? spot + ' / ' : '') + Models.room.data.waitList.length);
@@ -678,8 +680,18 @@ var plugCubedModel = Class.extend({
                         .append($('<span></span>').addClass(prefix))
                         .css('cursor','pointer')
                         .css('color',color)
-                        .click(function() {
-                            $('#chat-input-field').val($('#chat-input-field').val() + '@' + username + ' ').focus();
+                        .mousedown(function(event) {
+                            switch(event.which) {
+                                case 1:
+                                    $('#chat-input-field').val($('#chat-input-field').val() + '@' + username + ' ').focus();
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    if (Models.room.data.staff[Models.user.data.id] && Models.room.data.staff[Models.user.data.id] >= Models.user.BOUNCER || plugCubed.isPlugCubedAdmin(Models.user.data.id))
+                                    plugCubed.getUserInfo(username);
+                                    break;
+                            }
                         })
                         .html(function(a,b) { return b + username; })
                 )
