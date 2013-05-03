@@ -206,7 +206,9 @@ var plugCubedModel = Class.extend({
             '    color: #000;',
             '}',
             '#side-left .sidebar-handle {',
-            '    float: right;',
+            'position: absolute;',
+            'right: 0;',
+            'cursor: col-resize;',
             '}',
             '.sidebar-content {',
             '    position: absolute;',
@@ -579,11 +581,18 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     populateUserlist: function() {
+        $("#side-left .sidebar-handle")
+                .draggable({
+                    axis: 'x',
+                    drag: function(event, ui) {
+                        newWidth = ui.position.left;
+                        $("#side-left")
+                            .width(newWidth + 10);
+                    },
+                });
         if ($('#side-left .sidebar-content').children().length > 0)
             $('#side-left .sidebar-content').append('<hr />');
-        $('#side-left .sidebar-content').bind("contextmenu",function(e){
-              return false;
-       });
+        $('#side-left .sidebar-content').bind("contextmenu",function(e){return false;});
         $('#side-left .sidebar-content').html('<h1 class="users">Users: ' + API.getUsers().length + '</h1>');
         var spot = Models.room.getWaitListPosition();
         var waitlistDiv = $('<h3></h3>').addClass('waitlistspot').text('Waitlist: ' + (spot !== null ? spot + ' / ' : '') + Models.room.data.waitList.length);
