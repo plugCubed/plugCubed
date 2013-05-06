@@ -22,6 +22,7 @@ if (plugCubed !== undefined)
 String.prototype.equalsIgnoreCase = function(other) {
     return this.toLowerCase() === other.toLowerCase();
 };
+String.prototype.isNumber = function() { return !isNaN(parseInt(this,10)) && isFinite(this); };
 String.prototype.isHEX = function() {
     if (this.substr(0,1) !== "#") a = "#" + this;
     else a = this;
@@ -39,7 +40,7 @@ var plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 5,
-        patch: 1
+        patch: 2
     },
     /**
      * @this {plugCubedModel}
@@ -1374,10 +1375,21 @@ var plugCubedModel = Class.extend({
                 return plugCubed.getUserInfo(value.substr(7)),true;
             if (value.indexOf('/kick ') === 0) {
                 if (value.indexOf('::') > 0) {
-                    var data = value.substr(5).split('::'),
-                        user = plugCubed.getUser(data[0])
-                    new ModerationKickUserService(user.id,data[1])
-                    return true;
+                    var data = value.substr(5).split(':: '),
+                        time = 60;
+                        if (data.length == 2) {
+                            if (data[1].isNumber()) {
+                                time = parseFloat(data[1])
+                            }
+                            user = plugCubed.getUser(data[0])
+                            new ModerationKickUserService(user.id,(data[1].isNumber()?' ':data[1]),time)
+                            return true;
+                        } else if (data.length == 3) {
+                            time = parseFloat(data[2])
+                            user = plugCubed.getUser(data[0])
+                            new ModerationKickUserService(user.id,data[1],time)
+                            return true;
+                        }
                 } else
                     return plugCubed.moderation(value.substr(6),'kick'),true;
             }
