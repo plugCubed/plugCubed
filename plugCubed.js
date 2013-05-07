@@ -785,7 +785,6 @@ var plugCubedModel = Class.extend({
                 default:  voted = "Undecided"; break;
                 case 1:   voted = "Woot"; break;
             }
-            f
             log('<table style="width:100%;color:#CC00CC"><tr><td colspan="2"><strong>Name</strong>: <span style="color:#FFFFFF">' + user.username + '</span></td></tr>' +
             (this.isPlugCubedAdmin(user.id)?'<tr><td colspan="2"><strong>Title</strong>: <span style="color:#FFFFFF">plugCubed Developer</span></td></tr>':'') +
             '<tr><td colspan="2"><strong>ID</strong>: <span style="color:#FFFFFF">' + user.id + '</span></td></tr>' +
