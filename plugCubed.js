@@ -587,15 +587,6 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     populateUserlist: function() {
-        $("#side-left .sidebar-handle")
-                .draggable({
-                    axis: 'x',
-                    drag: function(event, ui) {
-                        newWidth = ui.position.left;
-                        $("#side-left")
-                            .width(newWidth + 10);
-                    },
-                });
         if ($('#side-left .sidebar-content').children().length > 0)
             $('#side-left .sidebar-content').append('<hr />');
         $('#side-left .sidebar-content').bind("contextmenu",function(e){return false;});
@@ -796,6 +787,7 @@ var plugCubedModel = Class.extend({
             }
             
             log('<table style="width:100%;color:#CC00CC"><tr><td colspan="2"><strong>Name</strong>: <span style="color:#FFFFFF">' + user.username + '</span></td></tr>' +
+            (this.isPlugCubedAdmin(user.id)?'<tr><td colspan="2"><strong>Title</strong>: <span style="color:#FFFFFF">plugCubed Developer</span></td></tr>':'') +
             '<tr><td colspan="2"><strong>ID</strong>: <span style="color:#FFFFFF">' + user.id + '</span></td></tr>' +
              '<tr><td><strong>Rank</strong>: <span style="color:#FFFFFF">' + rank + '</span></td><td><strong>Time Joined</strong>: <span style="color:#FFFFFF">' + user.joinTime + '</span></td></tr>' +
             '<tr><td><strong>Status</strong>: <span style="color:#FFFFFF">' + status + '</span></td><td><strong>Vote</strong>: <span style="color:#FFFFFF">' + voted + '</span></td></tr>' +
