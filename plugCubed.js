@@ -40,7 +40,7 @@ var plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 5,
-        patch: 3
+        patch: 4
     },
     /**
      * @this {plugCubedModel}
@@ -884,6 +884,9 @@ var plugCubedModel = Class.extend({
             .append(Dialog.getSubmitButton(Lang.dialog.save))
         )
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onNotifySubmit: function() {
         this.settings.notify = $("#dialog-checkbox-enabled").is(":checked");
         this.settings.alerts.join = $("#dialog-checkbox-join").is(":checked");
@@ -1047,8 +1050,8 @@ var plugCubedModel = Class.extend({
                 username: data.dj.username
             }
         };
-        this.history.unshift(obj);
-        this.history.splice(50,1)
+        plugCubed.history.unshift(obj);
+        plugCubed.history.splice(50,plugCubed.history.length-50);
         if(this.settings.autoMuted && this.settings.registeredSongs.indexOf(data.media.id) < 0){
             setTimeout(function(){ Playback.setVolume(Playback.lastVolume) },800)
             this.settings.autoMuted = false;
@@ -1144,13 +1147,20 @@ var plugCubedModel = Class.extend({
         if (this.settings.userlist)
             this.populateUserlist();
     },
+    /**
+     * @this {plugCubedModel}
+     */
     getHistory: function() {
         var HSS = new HistorySelectService();
         HSS.successCallback = $.proxy(this.loadHistory,this);
     },
+    /**
+     * @this {plugCubedModel}
+     */
     loadHistory: function(data) {
+        plugCubed.history = [];
         for (var i in data) {
-            var a = data[i]
+            var a = data[i],
             obj = {
                 id: a.media.id,
                 author: a.media.author,
@@ -1160,29 +1170,31 @@ var plugCubedModel = Class.extend({
                     id: a.user.id.toString(),
                     username: a.user.username
                 }
-            }
-            this.history.push(obj)
+            };
+            plugCubed.history.push(obj);
         }
     },
     onSkip: function() {
         plugCubed.history[1].wasSkipped = true;
     },
     onHistoryCheck: function(id) {
+        var found = -1;
         for (var i in plugCubed.history) {
             var a = plugCubed.history[i];
-            if (a.id == id && (parseInt(i) + 2) != 51) {
-                if (a.wasSkipped) {
-                    return Models.chat.onChatReceived({type: "system",message: "Song is in history (" + (parseInt(i) + 2) + " of " + this.history.length + "), but was skipped on the last play",language: Models.user.data.language});
-                } else
-                return Models.chat.onChatReceived({type: "system",message: "Song is in history (" + (parseInt(i) + 2) + " of " + this.history.length + ")" + (a.wasSkipped ? ', but was skipped on the last play':''),language: Models.user.data.language}); 
+            if (a.id == id && (~~i + 2) < 51) {
+                found = ~~i + 2;
+                if (!a.wasSkipped)
+                    return Models.chat.onChatReceived({type: 'system',message: 'Song is in history (' + found + ' of ' + plugCubed.history.length + ')',language: Models.user.data.language});
             }
         }
+        if (found > 0)
+            return Models.chat.onChatReceived({type: 'system',message: 'Song is in history (' + found + ' of ' + plugCubed.history.length + '), but was skipped on the last play',language: Models.user.data.language});
     },
     getTimestamp: function() {
         var time = new Date();
         var minutes = time.getMinutes();
-        minutes = ( minutes < 10 ? "0" : "" ) + minutes;
-        return (time.getHours()+":"+minutes);
+        minutes = (minutes < 10 ? '0' : '') + minutes;
+        return time.getHours() + ':' + minutes;
     },
     customChatCommand: function(value) {
         if (Models.chat._chatCommand(value) === true) {
@@ -1197,24 +1209,24 @@ var plugCubedModel = Class.extend({
         }
         if (value.indexOf('/commands') === 0) {
             var commands = [
-                ['/nick','change username'],
-                ['/idle','set status to idle'],
-                ['/avail','set status to available'],
-                ['/afk','set status to afk'],
-                ['/work','set status to working'],
-                ['/sleep','set status to sleeping'],
-                ['/join','join dj booth/waitlist'],
-                ['/leave','leaves dj booth/waitlist'],
-                ['/whoami','get your own information'],
-                ['/mute','set volume to 0'],
+                ['/nick'    ,'change username'],
+                ['/idle'    ,'set status to idle'],
+                ['/avail'   ,'set status to available'],
+                ['/afk'     ,'set status to afk'],
+                ['/work'    ,'set status to working'],
+                ['/sleep'   ,'set status to sleeping'],
+                ['/join'    ,'join dj booth/waitlist'],
+                ['/leave'   ,'leaves dj booth/waitlist'],
+                ['/whoami'  ,'get your own information'],
+                ['/mute'    ,'set volume to 0'],
                 ['/automute', 'register currently playing song to automatically mute on future plays'],
-                ['/unmute','set volume to last volume'],
-                ['/woot','woots current song'],
-                ['/meh','mehs current song'],
-                ['/refresh','refresh the video'],
-                ['/curate','add current song to your selected playlist'],
-                ['/getpos','get current waitlist position'],
-                ['/version','displays version number'],
+                ['/unmute'  ,'set volume to last volume'],
+                ['/woot'    ,'woots current song'],
+                ['/meh'     ,'mehs current song'],
+                ['/refresh' ,'refresh the video'],
+                ['/curate'  ,'add current song to your selected playlist'],
+                ['/getpos'  ,'get current waitlist position'],
+                ['/version' ,'displays version number'],
                 ['/commands','shows this list']
             ];
             var userCommands = '<table>';
@@ -1223,13 +1235,13 @@ var plugCubedModel = Class.extend({
             userCommands += '</table>';
             if (Models.user.hasPermission(Models.user.BOUNCER)) {
                 commands = [
-                    ['/whois (username)','gives general information about user',Models.user.BOUNCER],
-                    ['/skip','skip current song',Models.user.BOUNCER],
-                    ['/kick (username)','kicks targeted user',Models.user.BOUNCER],
-                    ['/lock','locks DJ booth',Models.user.MANAGER],
-                    ['/unlock','unlocks DJ booth',Models.user.MANAGER],
-                    ['/add (username)','adds targeted user to dj booth/waitlist',Models.user.BOUNCER],
-                    ['/remove (username)','removes targeted user from dj booth/waitlist',Models.user.BOUNCER]
+                    ['/whois (username)'    ,'gives general information about user'         ,Models.user.BOUNCER],
+                    ['/skip'                ,'skip current song'                            ,Models.user.BOUNCER],
+                    ['/kick (username)'     ,'kicks targeted user'                          ,Models.user.BOUNCER],
+                    ['/lock'                ,'locks DJ booth'                               ,Models.user.MANAGER],
+                    ['/unlock'              ,'unlocks DJ booth'                             ,Models.user.MANAGER],
+                    ['/add (username)'      ,'adds targeted user to dj booth/waitlist'      ,Models.user.BOUNCER],
+                    ['/remove (username)'   ,'removes targeted user from dj booth/waitlist' ,Models.user.BOUNCER]
                 ];
                 var modCommands = '<table>';
                 for (var i in commands) {
