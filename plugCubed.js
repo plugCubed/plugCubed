@@ -156,7 +156,7 @@ var plugCubedModel = Class.extend({
             '#side-left .sidebar-content p span.vip_current {background-position: -45px -105px;}',
             '#side-left .sidebar-content p span.vip_meh {background-position: -30px -105px;}',
             '#side-left .sidebar-content p span.vip_undecided {background-position: -15px -105px;}',
-            '#side-left .sidebar-content p span.vip_woot {background-position: 0 -150px;}',
+            '#side-left .sidebar-content p span.vip_woot {background-position: 0 -105px;}',
             '#side-left .sidebar-content p span.curate_meh {background-position: -30px -120px;}',
             '#side-left .sidebar-content p span.curate_undecided {background-position: -15px -120px;}',
             '#side-left .sidebar-content p span.curate_woot {background-position: 0 -120px;}',
