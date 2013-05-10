@@ -639,7 +639,7 @@ var plugCubedModel = Class.extend({
 
              if (user.curated == true)                                                                          prefix = 'curate';
         else if (this.isPlugCubedAdmin(user.id))                                                                prefix = 'plugcubed';
-        else if (this.isPlugCubedVIP(user.id))                                                                  prefix = 'plugcubed';
+        else if (this.isPlugCubedVIP(user.id))                                                                  prefix = 'vip';
         else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.FEATUREDDJ)  prefix = 'fdj';
         else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.BOUNCER)     prefix = 'bouncer';
         else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.MANAGER)     prefix = 'manager';
@@ -1112,7 +1112,7 @@ var plugCubedModel = Class.extend({
         return (id == '50aeb31696fba52c3ca0adb6' || id == '50aeb077877b9217e2fbff00');
     },
     isPlugCubedVIP: function(id) {
-        return (id == '5112c273d6e4a94ec0554792');
+        return (id == '5112c273d6e4a94ec0554792' || id == '50b1961c96fba57db2230417');
     },
     /**
      * @this {plugCubedModel}
