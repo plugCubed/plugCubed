@@ -121,7 +121,7 @@ var plugCubedModel = Class.extend({
             '#side-left .sidebar-content p span.ambassador_meh,#side-left .sidebar-content p span.ambassador_undecided,#side-left .sidebar-content p span.ambassador_woot,#side-left .sidebar-content p span.bouncer_current,#side-left .sidebar-content p span.bouncer_meh,',
             '#side-left .sidebar-content p span.bouncer_undecided,#side-left .sidebar-content p span.bouncer_woot,#side-left .sidebar-content p span.host_current,#side-left .sidebar-content p span.host_meh,#side-left .sidebar-content p span.host_undecided,',
             '#side-left .sidebar-content p span.fdj_undecided,#side-left .sidebar-content p span.fdj_woot,#side-left .sidebar-content p span.fdj_meh,#side-left .sidebar-content p span.fdj_current,#side-left .sidebar-content p span.woot_undecided,#side-left .sidebar-content p span.curate_meh,#side-left .sidebar-content p span.curate_woot,',
-            '#side-left .sidebar-content p span.plugcubed_undecided,#side-left .sidebar-content p span.plugcubed_woot,#side-left .sidebar-content p span.plugcubed_meh,#side-left .sidebar-content p span.plugcubed_current,',
+            '#side-left .sidebar-content p span.plugcubed_undecided,#side-left .sidebar-content p span.plugcubed_woot,#side-left .sidebar-content p span.plugcubed_meh,#side-left .sidebar-content p span.plugcubed_current,#side-left .sidebar-content p span.vip_woot,#side-left .sidebar-content p span.vip_meh,#side-left .sidebar-content p span.vip_undecided,#side-left .sidebar-content p span.vip_current,',
             '#side-left .sidebar-content p span.host_woot,#side-left .sidebar-content p span.manager_current,#side-left .sidebar-content p span.manager_meh,#side-left .sidebar-content p span.manager_undecided,#side-left .sidebar-content p span.manager_woot,#side-left .sidebar-content p span.void {',
             '    background: url(http://tatdk.github.com/plugCubed/images/sprites.png) no-repeat;width:15px;height: 15px;position: relative;left: -5px;top:4px;display:inline-block',
             '}',
@@ -153,10 +153,14 @@ var plugCubedModel = Class.extend({
             '#side-left .sidebar-content p span.plugcubed_meh {background-position: -30px -90px;}',
             '#side-left .sidebar-content p span.plugcubed_undecided {background-position: -15px -90px;}',
             '#side-left .sidebar-content p span.plugcubed_woot {background-position: 0 -90px;}',
-            '#side-left .sidebar-content p span.curate_meh {background-position: -30px -105px;}',
-            '#side-left .sidebar-content p span.curate_undecided {background-position: -15px -105px;}',
-            '#side-left .sidebar-content p span.curate_woot {background-position: 0 -105px;}',
-            '#side-left .sidebar-content p span.void {background-position: 0px -120px;}',
+            '#side-left .sidebar-content p span.vip_current {background-position: -45px -105px;}',
+            '#side-left .sidebar-content p span.vip_meh {background-position: -30px -105px;}',
+            '#side-left .sidebar-content p span.vip_undecided {background-position: -15px -105px;}',
+            '#side-left .sidebar-content p span.vip_woot {background-position: 0 -150px;}',
+            '#side-left .sidebar-content p span.curate_meh {background-position: -30px -120px;}',
+            '#side-left .sidebar-content p span.curate_undecided {background-position: -15px -120px;}',
+            '#side-left .sidebar-content p span.curate_woot {background-position: 0 -120px;}',
+            '#side-left .sidebar-content p span.void {background-position: 0px -135px;}',
             '#plugcubed-gui { position: absolute; margin-left:-522px; top: -320px; }',
             '#plugcubed-gui h2 { background-color: #0b0b0b; height: 112px; width: 156px; margin: 0; color: #fff; font-size: 13px; font-variant: small-caps; padding: 8px 0 0 12px; border-top: 1px dotted #292929; }',
             '#plugcubed-gui ul {list-style-type:none; margin:0; padding:0;}',
@@ -635,6 +639,7 @@ var plugCubedModel = Class.extend({
 
              if (user.curated == true)                                                                          prefix = 'curate';
         else if (this.isPlugCubedAdmin(user.id))                                                                prefix = 'plugcubed';
+        else if (this.isPlugCubedVIP(user.id))                                                                  prefix = 'plugcubed';
         else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.FEATUREDDJ)  prefix = 'fdj';
         else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.BOUNCER)     prefix = 'bouncer';
         else if (Models.room.data.staff[user.id] && Models.room.data.staff[user.id] == Models.user.MANAGER)     prefix = 'manager';
@@ -787,6 +792,7 @@ var plugCubedModel = Class.extend({
             }
             log('<table style="width:100%;color:#CC00CC"><tr><td colspan="2"><strong>Name</strong>: <span style="color:#FFFFFF">' + user.username + '</span></td></tr>' +
             (this.isPlugCubedAdmin(user.id)?'<tr><td colspan="2"><strong>Title</strong>: <span style="color:#FFFFFF">plugCubed Developer</span></td></tr>':'') +
+            (this.isPlugCubedVIP(user.id)?'<tr><td colspan="2"><strong>Title</strong>: <span style="color:#FFFFFF">plugCubed VIP</span></td></tr>':'') +
             '<tr><td colspan="2"><strong>ID</strong>: <span style="color:#FFFFFF">' + user.id + '</span></td></tr>' +
              '<tr><td><strong>Rank</strong>: <span style="color:#FFFFFF">' + rank + '</span></td><td><strong>Time Joined</strong>: <span style="color:#FFFFFF">' + user.joinTime + '</span></td></tr>' +
             '<tr><td><strong>Status</strong>: <span style="color:#FFFFFF">' + status + '</span></td><td><strong>Vote</strong>: <span style="color:#FFFFFF">' + voted + '</span></td></tr>' +
@@ -1104,6 +1110,9 @@ var plugCubedModel = Class.extend({
     },
     isPlugCubedAdmin: function(id) {
         return (id == '50aeb31696fba52c3ca0adb6' || id == '50aeb077877b9217e2fbff00');
+    },
+    isPlugCubedVIP: function(id) {
+        return (id == '5112c273d6e4a94ec0554792');
     },
     /**
      * @this {plugCubedModel}
