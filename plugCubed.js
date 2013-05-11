@@ -39,8 +39,8 @@ var plugCubedModel = Class.extend({
     },
     version: {
         major: 1,
-        minor: 5,
-        patch: 4
+        minor: 6,
+        patch: 0
     },
     /**
      * @this {plugCubedModel}
@@ -110,248 +110,12 @@ var plugCubedModel = Class.extend({
         ChatModel.chatCommand   = this.customChatCommand;
         
         this.loadSettings();
-
-        var styles = [
-            '#side-left .sidebar-content p { margin: 0; padding-top: 2px; text-indent: 15px; font-size: 10px; height:15px; }',
-            '#side-left .sidebar-content p:hover { color:#66ff33; }',
-            '#side-left .sidebar-content p:first-child { padding-top: 0px !important; }',
-            '#side-left .sidebar-content h1.users { text-indent: 8px; color: #66FFFF; font-size: 16px; }',
-            '#side-left .sidebar-content h3.waitlistspot { color: #66FFFF; text-align: left; font-size: 15px; margin-left: 8px }',
-            '#side-left .sidebar-content p span.admin_current,#side-left .sidebar-content p span.admin_meh,#side-left .sidebar-content p span.admin_undecided,#side-left .sidebar-content p span.admin_woot,#side-left .sidebar-content p span.ambassador_current,',
-            '#side-left .sidebar-content p span.ambassador_meh,#side-left .sidebar-content p span.ambassador_undecided,#side-left .sidebar-content p span.ambassador_woot,#side-left .sidebar-content p span.bouncer_current,#side-left .sidebar-content p span.bouncer_meh,',
-            '#side-left .sidebar-content p span.bouncer_undecided,#side-left .sidebar-content p span.bouncer_woot,#side-left .sidebar-content p span.host_current,#side-left .sidebar-content p span.host_meh,#side-left .sidebar-content p span.host_undecided,',
-            '#side-left .sidebar-content p span.fdj_undecided,#side-left .sidebar-content p span.fdj_woot,#side-left .sidebar-content p span.fdj_meh,#side-left .sidebar-content p span.fdj_current,#side-left .sidebar-content p span.woot_undecided,#side-left .sidebar-content p span.curate_meh,#side-left .sidebar-content p span.curate_woot,',
-            '#side-left .sidebar-content p span.plugcubed_undecided,#side-left .sidebar-content p span.plugcubed_woot,#side-left .sidebar-content p span.plugcubed_meh,#side-left .sidebar-content p span.plugcubed_current,#side-left .sidebar-content p span.vip_woot,#side-left .sidebar-content p span.vip_meh,#side-left .sidebar-content p span.vip_undecided,#side-left .sidebar-content p span.vip_current,',
-            '#side-left .sidebar-content p span.host_woot,#side-left .sidebar-content p span.manager_current,#side-left .sidebar-content p span.manager_meh,#side-left .sidebar-content p span.manager_undecided,#side-left .sidebar-content p span.manager_woot,#side-left .sidebar-content p span.void {',
-            '    background: url(http://tatdk.github.com/plugCubed/images/sprites.png) no-repeat;width:15px;height: 15px;position: relative;left: -5px;top:4px;display:inline-block',
-            '}',
-            '#side-left .sidebar-content p span.admin_current {background-position: -45px 0;}',
-            '#side-left .sidebar-content p span.admin_meh {background-position: -30px 0;}',
-            '#side-left .sidebar-content p span.admin_undecided {background-position: -15px 0;}',
-            '#side-left .sidebar-content p span.admin_woot {background-position: 0 0;}',
-            '#side-left .sidebar-content p span.ambassador_current {background-position: -45px -15px;}',
-            '#side-left .sidebar-content p span.ambassador_meh {background-position: -30px -15px;}',
-            '#side-left .sidebar-content p span.ambassador_undecided {background-position: -15px -15px;}',
-            '#side-left .sidebar-content p span.ambassador_woot {background-position: 0 -15px;}',
-            '#side-left .sidebar-content p span.bouncer_current {background-position: -45px -60px;}',
-            '#side-left .sidebar-content p span.bouncer_meh {background-position: -30px -60px;}',
-            '#side-left .sidebar-content p span.bouncer_undecided {background-position: -15px -60px;}',
-            '#side-left .sidebar-content p span.bouncer_woot {background-position: 0 -60px;}',
-            '#side-left .sidebar-content p span.host_current {background-position: -45px -30px;}',
-            '#side-left .sidebar-content p span.host_meh {background-position: -30px -30px;}',
-            '#side-left .sidebar-content p span.host_undecided {background-position: -15px -30px;}',
-            '#side-left .sidebar-content p span.host_woot {background-position: 0 -30px;}',
-            '#side-left .sidebar-content p span.manager_current {background-position: -45px -45px;}',
-            '#side-left .sidebar-content p span.manager_meh {background-position: -30px -45px;}',
-            '#side-left .sidebar-content p span.manager_undecided {background-position: -15px -45px;}',
-            '#side-left .sidebar-content p span.manager_woot {background-position: 0 -45px;}',
-            '#side-left .sidebar-content p span.fdj_current {background-position: -45px -75px;}',
-            '#side-left .sidebar-content p span.fdj_meh {background-position: -30px -75px;}',
-            '#side-left .sidebar-content p span.fdj_undecided {background-position: -15px -75px;}',
-            '#side-left .sidebar-content p span.fdj_woot {background-position: 0 -75px;}',
-            '#side-left .sidebar-content p span.plugcubed_current {background-position: -45px -90px;}',
-            '#side-left .sidebar-content p span.plugcubed_meh {background-position: -30px -90px;}',
-            '#side-left .sidebar-content p span.plugcubed_undecided {background-position: -15px -90px;}',
-            '#side-left .sidebar-content p span.plugcubed_woot {background-position: 0 -90px;}',
-            '#side-left .sidebar-content p span.vip_current {background-position: -45px -105px;}',
-            '#side-left .sidebar-content p span.vip_meh {background-position: -30px -105px;}',
-            '#side-left .sidebar-content p span.vip_undecided {background-position: -15px -105px;}',
-            '#side-left .sidebar-content p span.vip_woot {background-position: 0 -105px;}',
-            '#side-left .sidebar-content p span.curate_meh {background-position: -30px -120px;}',
-            '#side-left .sidebar-content p span.curate_undecided {background-position: -15px -120px;}',
-            '#side-left .sidebar-content p span.curate_woot {background-position: 0 -120px;}',
-            '#side-left .sidebar-content p span.void {background-position: 0px -135px;}',
-            '#plugcubed-gui { position: absolute; margin-left:-522px; top: -320px; }',
-            '#plugcubed-gui h2 { background-color: #0b0b0b; height: 112px; width: 156px; margin: 0; color: #fff; font-size: 13px; font-variant: small-caps; padding: 8px 0 0 12px; border-top: 1px dotted #292929; }',
-            '#plugcubed-gui ul {list-style-type:none; margin:0; padding:0;}',
-            '#plugcubed-gui li {float:left;}',
-            '#plugcubed-gui p { background: #0b0b0b; height: 32px; padding-top: 8px; padding-left: 8px; cursor: pointer; font-variant: small-caps; width: 84px; font-size: 15px; margin: 0; }',
-            '#plugcubed-gui p:hover {background-color: #3C3C3C}',
-            '#plugcubed-gui h1 { background-color: #0b0b0b; height: 32px; padding-top: 8px; padding-left: 8px; cursor: pointer; font-variant: small-caps; width: 84px; font-size: 20px; margin: 0; }',
-            '.sidebar {',
-            '    position: fixed;',
-            '    top: 0;',
-            '    height: 100%;',
-            '    width: 200px;',
-            '    z-index: 99999;',
-            '    -moz-user-select: none;',
-            '    -khtml-user-select: none;',
-            '    -webkit-user-select: none;',
-            '    user-select: none;',
-            '    background: rgb(69,72,77);',
-            '    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ1NDg0ZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);',
-            '    background: -moz-linear-gradient(top,  rgba(69,72,77,1) 0%, rgba(0,0,0,1) 100%);',
-            '    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,1)), color-stop(100%,rgba(0,0,0,1)));',
-            '    background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);',
-            '    background: -o-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);',
-            '    background: -ms-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);',
-            '    background: linear-gradient(to bottom,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);',
-            '    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#45484d\', endColorstr=\'#000000\',GradientType=0 );',
-            '}',
-            '.sidebar#side-left {',
-            '    left: -220px;',
-            '    z-index: 99999;',
-            '}',
-            '.sidebar#side-right {',
-            '    right: -190px;',
-            '    z-index: 99999;',
-            '}',
-            '.sidebar-handle {',
-            '    width: 12px;',
-            '    height: 100%;',
-            '    z-index: 99999;',
-            '    margin: 0;',
-            '    padding: 0;',
-            '    background: #474747;',
-            '    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, .9);',
-            '    cursor: "ne-resize";',
-            '}',
-            '.sidebar-handle span {',
-            '    display: block;',
-            '    position: absolute;',
-            '    width: 10px;',
-            '    top: 50%;',
-            '    text-align: center;',
-            '    letter-spacing: -1px;',
-            '    color: #000;',
-            '}',
-            '#side-left .sidebar-handle {',
-            'position: absolute;',
-            'right: 0;',
-            'cursor: col-resize;',
-            '}',
-            '.sidebar-content {',
-            '    position: absolute;',
-            '    width: 185px;',
-            '    float: left;',
-            '    height: 100%;',
-            '    padding: 15px;',
-            '    overflow: scroll;',
-            '}',
-            '#side-left a {',
-            '    display: block;',
-            '    min-width: 100%;',
-            '    cursor: pointer;',
-            '    padding: 5px;',
-            '    border-radius: 5px;',
-            '}',
-            '#side-left a span {',
-            '    padding-right: 8px;',
-            '}',
-            '#side-left a:hover {',
-            '    background-color: #333;',
-            '}',
-            '#side-left hr {',
-            '    height: 0;',
-            '    border: none;',
-            '    border-top: 1px solid #AAA;',
-            '    padding: 0;',
-            '    margin: 10px 0;',
-            '}',
-            '#side-right .sidebar-handle {',
-            '    float: left;',
-            '}',
-            '#side-right a {',
-            '    display: block;',
-            '    min-width: 100%;',
-            '    cursor: pointer;',
-            '    padding: 5px;',
-            '    border-radius: 3px;',
-            '}',
-            '#side-right a span {',
-            '    padding-right: 8px;',
-            '}',
-            '#side-right a:hover {',
-            '    background-color: #333;',
-            '}',
-            '#side-right hr {',
-            '    height: 0;',
-            '    border: none;',
-            '    border-top: 1px solid #AAA;',
-            '    padding: 0;',
-            '    margin: 10px 0px 10px 3px;',
-            '}',
-            '.sidebar-content ::-webkit-scrollbar {',
-            '    width: 12px;',
-            '}',
-            '.sidebar-content ::-webkit-scrollbar-track {',
-            '    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); ',
-            '    -webkit-border-radius: 10px;',
-            '    border-radius: 10px;',
-            '}',
-            '.sidebar-content ::-webkit-scrollbar-thumb {',
-            '    -webkit-border-radius: 10px;',
-            '    border-radius: 10px;',
-            '    background: rgba(255,255,255,255,0.4); ',
-            '    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); ',
-            '}',
-            '.sidebar-content ::-webkit-scrollbar-thumb:window-inactive {',
-            '    background: rgba(255,255,255,255,0.2); ',
-            '}',
-            '[class^="status-"], [class*=" status-"] {',
-            '    border-radius: 50%;',
-            '    width: 10px;',
-            '    height: 10px;',
-            '    background: yellow;',
-            '    display: inline-block;',
-            '    margin-right: 5px;',
-            '}',
-            '.status-on { background: green; }',
-            '.status-off { background: red; }',
-            '#dialog-custom-colors { width: 230px; height: 480px; }',
-            '#dialog-custom-colors .dialog-body { height: 125px; }',
-            '#dialog-custom-colors .dialog-default-button { right: 170px; width: 50px; }',
-            '#dialog-custom-colors .dialog-cancel-button { right: 100px; }',
-            '#dialog-custom-colors .dialog-submit-button { width: 75px; }',
-            '#dialog-custom-colors .dialog-checkbox-container-enabled { left: 10px; top: 5px; }',
-            '#dialog-custom-colors .dialog-input-background { width: 60px; left:150px; }',
-            '#dialog-notify { width: 190px; height: 220px; }',
-            '#dialog-notify .dialog-body { height: 125px; }',
-            '#dialog-notify .dialog-cancel-button { width: 85px; right: 98px; }',
-            '#dialog-notify .dialog-submit-button { width: 85px; right: 5px; }',
-            '#dialog-notify .dialog-checkbox-container-enabled { left: 10px; top: 5px; }',
-            '#dialog-notify .dialog-input-background { width: 60px; left:150px; }'
-        ];
-        var scripts = [
-            '/**',
-            '* hoverIntent r6 // 2011.02.26 // jQuery 1.5.1+',
-            '* <http://cherne.net/brian/resources/jquery.hoverIntent.html>',
-            '* ',
-            '* @param  f  onMouseOver function || An object with configuration options',
-            '* @param  g  onMouseOut function  || Nothing (use configuration options object)',
-            '* @author    Brian Cherne brian(at)cherne(dot)net',
-            '*/',
-            "(function($){$.fn.hoverIntent=function(f,g){var cfg={sensitivity:7,interval:100,timeout:0};cfg=$.extend(cfg,g?{over:f,out:g}:f);var cX,cY,pX,pY;var track=function(ev){cX=ev.pageX;cY=ev.pageY};var compare=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);if((Math.abs(pX-cX)+Math.abs(pY-cY))<cfg.sensitivity){$(ob).unbind('mousemove',track);ob.hoverIntent_s=1;return cfg.over.apply(ob,[ev])}else{pX=cX;pY=cY;ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}};var delay=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);ob.hoverIntent_s=0;return cfg.out.apply(ob,[ev])};var handleHover=function(e){var ev=jQuery.extend({},e);var ob=this;if(ob.hoverIntent_t){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t)}if(e.type=='mouseenter'){pX=ev.pageX;pY=ev.pageY;$(ob).bind('mousemove',track);if(ob.hoverIntent_s!=1){ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}}else{$(ob).unbind('mousemove',track);if(ob.hoverIntent_s==1){ob.hoverIntent_t=setTimeout(function(){delay(ev,ob)},cfg.timeout)}}};return this.bind('mouseenter',handleHover).bind('mouseleave',handleHover)}})(jQuery);",
-            'if (jQuery.easing.easeOutQuart === undefined) jQuery.easing.easeOutQuart = function (a,b,c,d,e) { return -d*((b=b/e-1)*b*b*b-1)+c; }',
-            '$("#side-right")',
-            '    .hoverIntent(function() {',
-            '        var timeout_r = $(this)',
-            '            .data("timeout_r");',
-            '        if (timeout_r) {',
-            '            clearTimeout(timeout_r);',
-            '        }',
-            '        $(this)',
-            '            .animate({',
-            '                "right": "0px"',
-            '            }, 300, "easeOutQuart");',
-            '    }, function() {',
-            '        $(this)',
-            '            .data("timeout_r", setTimeout($.proxy(function() {',
-            '            $(this)',
-            '                .animate({',
-            '                    "right": "-190px"',
-            '                }, 300, "easeOutQuart");',
-            '       }, this), 500));',
-            '    });'
-        ];
-        $('body').prepend('<style type="text/css" id="plugcubed-css">' + "\n" + styles.join("\n") + "\n" + '</style>');
-        $('body').append('<div id="side-left" class="sidebar">' +
-        '    <div class="sidebar-content"></div>' +
-        '</div><div id="side-right" class="sidebar">' +
-        '    <div class="sidebar-handle"><span>||</span></div>' +
-        '    <div class="sidebar-content"></div>' +
-        '</div>');
-        $('body').append('<script type="text/javascript" id="plugcubed-js-extra">' + "\n" + scripts.join("\n") + "\n" + '</script>');
+        $('body').prepend('<link rel="stylesheet" type="text/css" href="https://raw.github.com/TATDK/plugCubed/1.6.0/plugCubed.css" />');
+        $('body').append(
+            '<div id="side-left" class="sidebar"><div class="sidebar-content"></div></div>' +
+            '<div id="side-right" class="sidebar"><div class="sidebar-handle"><span>||</span></div><div class="sidebar-content"></div></div>'
+        );
+        $('body').append('<script type="text/javascript" src="https://raw.github.com/TATDK/plugCubed/1.6.0/thirdparty.js"></script>');
         this.initGUI();
         this.initAPIListeners();
         if (this.settings.userlist) {
@@ -384,7 +148,7 @@ var plugCubedModel = Class.extend({
                 plugCubed.socket.onclose = function() {};
                 plugCubed.socket.close();
                 plugCubed.log("A new version of plug&#179; has been released. Your script will reload in a few seconds.", null, plugCubed.colors.infoMessage1)
-                setTimeout(function() { $.getScript('http://tatdk.github.io/plugCubed/compiled/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
+                setTimeout(function() { $.getScript('https://raw.github.com/TATDK/plugCubed/1.6.0/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
             }
         }
         /**
@@ -932,18 +696,18 @@ var plugCubedModel = Class.extend({
                     $("<form/>")
                     .submit("return false")
                     .append(Dialog.getCheckBox("Enable custom", "enabled", this.settings.customColors))
-                    .append($(Dialog.getInputField("you",        'You',         'FFDD6F', this.settings.colors.you,        6)).css('top',30))
-                    .append($(Dialog.getInputField("regular",    'Regular',     'B0B0B0', this.settings.colors.regular,    6)).css('top',60))
-                    .append($(Dialog.getInputField("featureddj", 'Featured DJ', 'E90E82', this.settings.colors.featureddj, 6)).css('top',90))
-                    .append($(Dialog.getInputField("bouncer",    'Bouncer',     'E90E82', this.settings.colors.bouncer,    6)).css('top',120))
-                    .append($(Dialog.getInputField("manager",    'Manager',     'E90E82', this.settings.colors.manager,    6)).css('top',150))
-                    .append($(Dialog.getInputField("cohost",     'Co-Host',     'E90E82', this.settings.colors.cohost,     6)).css('top',180))
-                    .append($(Dialog.getInputField("host",       'Host',        'E90E82', this.settings.colors.host,       6)).css('top',210))
-                    .append($(Dialog.getInputField("ambassador", 'Ambassador',  '9A50FF', this.settings.colors.ambassador, 6)).css('top',240))
-                    .append($(Dialog.getInputField("admin",      'Admin',       '42A5DC', this.settings.colors.admin,      6)).css('top',270))
-                    .append($(Dialog.getInputField("join",       'User Join',   '3366FF', this.settings.colors.join,       6)).css('top',300))
-                    .append($(Dialog.getInputField("leave",      'User Leave',  '3366FF', this.settings.colors.leave,      6)).css('top',330))
-                    .append($(Dialog.getInputField("curate",     'User Curate', '00FF00', this.settings.colors.curate,     6)).css('top',360))
+                    .append($(Dialog.getInputField("you",        'You',         'FFDD6F', this.settings.colors.you,        6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',30))
+                    .append($(Dialog.getInputField("regular",    'Regular',     'B0B0B0', this.settings.colors.regular,    6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',60))
+                    .append($(Dialog.getInputField("featureddj", 'Featured DJ', 'E90E82', this.settings.colors.featureddj, 6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',90))
+                    .append($(Dialog.getInputField("bouncer",    'Bouncer',     'E90E82', this.settings.colors.bouncer,    6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',120))
+                    .append($(Dialog.getInputField("manager",    'Manager',     'E90E82', this.settings.colors.manager,    6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',150))
+                    .append($(Dialog.getInputField("cohost",     'Co-Host',     'E90E82', this.settings.colors.cohost,     6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',180))
+                    .append($(Dialog.getInputField("host",       'Host',        'E90E82', this.settings.colors.host,       6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',210))
+                    .append($(Dialog.getInputField("ambassador", 'Ambassador',  '9A50FF', this.settings.colors.ambassador, 6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',240))
+                    .append($(Dialog.getInputField("admin",      'Admin',       '42A5DC', this.settings.colors.admin,      6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',270))
+                    .append($(Dialog.getInputField("join",       'User Join',   '3366FF', this.settings.colors.join,       6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',300))
+                    .append($(Dialog.getInputField("leave",      'User Leave',  '3366FF', this.settings.colors.leave,      6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',330))
+                    .append($(Dialog.getInputField("curate",     'User Curate', '00FF00', this.settings.colors.curate,     6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',360))
                 )
             )
             .append($("<div/>").addClass("dialog-button dialog-default-button").click($.proxy(this.onColorDefault,this)).append($("<span/>").text("Default")))
