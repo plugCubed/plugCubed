@@ -19,7 +19,6 @@
  */
 if (plugCubed !== undefined)
     plugCubed.close();
-var _PCL;
 String.prototype.equalsIgnoreCase = function(other) {
     return this.toLowerCase() === other.toLowerCase();
 };
@@ -32,16 +31,16 @@ String.prototype.isHEX = function() {
 Math.randomRange = function(min, max) {
     return min + Math.floor(Math.random()*(max-min+1));
 };
-Emoji._emojify = Emoji.emojify
+Emoji._emojify = Emoji.emojify;
 console.info = function(data) {
-        console.log(data);
-         if (_PCL !== undefined) {
-            log('<span style="color: #ff0000">Disconnected at ' + plugCubed.getTimestamp() + '! Reloading the page in a few seconds.</span>');
-            setTimeout(function() {location.reload(true)}, 3000)
-         } else
-            log('<span style="color: #ff0000">Disconnected at ' + plugCubed.getTimestamp() + '! </span>');
+    console.log(data);
+    if (_PCL !== undefined) {
+        log('<span style="color:#FF0000">Disconnected at ' + plugCubed.getTimestamp() + '! Reloading the page in a few seconds.</span>');
+        setTimeout(function() { location.reload(true); },3E3);
+    } else log('<span style="color:#FF0000">Disconnected at ' + plugCubed.getTimestamp() + '! </span>');
 };
-var plugCubedModel = Class.extend({
+var _PCL,
+plugCubedModel = Class.extend({
     guiButtons: {},
     detectPdP: function() {
         return typeof(pdpSocket) !== 'undefined' && pdpSocket._base_url === 'http://socket.plugpony.net:9000/gateway';
@@ -81,10 +80,10 @@ var plugCubedModel = Class.extend({
             onSkip:               $.proxy(this.onSkip,          this)
         };
         this.colors = {
-            userCommands: "#66FFFF",
-            modCommands:  "#FF0000",
-            infoMessage1: "#FFFF00",
-            infoMessage2: "#66FFFF"
+            userCommands: '66FFFF',
+            modCommands:  'FF0000',
+            infoMessage1: 'FFFF00',
+            infoMessage2: '66FFFF'
         };
         this.defaultAwayMsg = 'I\'m away from keyboard.';
 
@@ -96,8 +95,8 @@ var plugCubedModel = Class.extend({
         this.customColorsStyle = $('<style type="text/css"></css>');
         $('head').append(this.customColorsStyle);
 
-        this.log("Running plug&#179; version " + this.version.major + "." + this.version.minor + "." + this.version.patch, null, this.colors.infoMessage1)
-        this.log("Use '/commands' to see expanded chat commands.", null, this.colors.infoMessage2);
+        this.log('Running plug&#179; version ' + this.version.major + '.' + this.version.minor + '.' + this.version.patch, null, this.colors.infoMessage1);
+        this.log('Use \'/commands\' to see expanded chat commands.', null, this.colors.infoMessage2);
 
         /**
          * @this {plugCubedModel}
@@ -110,7 +109,7 @@ var plugCubedModel = Class.extend({
             this.showDialog($("<div/>").attr("id","dialog-alert").addClass("dialog").css("left",Main.LEFT+(Main.WIDTH-width-15)/2).css("top",200)
             .width(width+25).height(470).append(this.getHeader('plug&#179; Commands')).append($("<div/>").addClass("dialog-body")
             .append(this.getMessage(content).width(width))));
-            $("#plugCubedCommands").tabs();
+            $('#plugCubedCommands').tabs();
         };
 
         if (Models.chat._chatCommand === undefined)
@@ -141,7 +140,7 @@ var plugCubedModel = Class.extend({
             if (a.curVote   === undefined) a.curVote   = 0;
             if (a.joinTime  === undefined) a.joinTime  = this.getTimestamp();
         }
-        this.socket = new SockJS("http://socket.plugpony.net:923/gateway");
+        this.socket = new SockJS('http://socket.plugpony.net:923/gateway');
         this.socket.tries = 0;
         /**
          * @this {SockJS}
@@ -158,7 +157,7 @@ var plugCubedModel = Class.extend({
             if (data.type === 'update') {
                 plugCubed.socket.onclose = function() {};
                 plugCubed.socket.close();
-                plugCubed.log("A new version of plug&#179; has been released. Your script will reload in a few seconds.", null, plugCubed.colors.infoMessage1)
+                plugCubed.log('A new version of plug&#179; has been released. Your script will reload in a few seconds.', null, plugCubed.colors.infoMessage1)
                 setTimeout(function() { $.getScript('https://rawgithub.com/TATDK/plugCubed/1.6.0/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
             }
         }
@@ -167,13 +166,17 @@ var plugCubedModel = Class.extend({
          */
         this.socket.onclose = function() {
             this.tries++;
-            if (this.tries < 5)
-                setTimeout(function() { plugCubed.socket = new SockJS("http://socket.plugpony.net:923/gateway"); },5000);
-            else if (this.tries < 30)
-                setTimeout(function() { plugCubed.socket = new SockJS("http://socket.plugpony.net:923/gateway"); },30000);
-            else if (this.tries < 60)
-                setTimeout(function() { plugCubed.socket = new SockJS("http://socket.plugpony.net:923/gateway"); },60000);
+
+            var delay;
+            if (this.tries < 5)       delay = 5;
+            else if (this.tries < 30) delay = 30;
+            else if (this.tries < 60) delay = 60;
+            else                      return;
+
+            setTimeout(function() { plugCubed.socket = new SockJS('http://socket.plugpony.net:923/gateway'); },delay*1E3);
         }
+
+        SocketListener.chat = function(a) { if (typeof plugCubed !== 'undefined' && a.fromID && plugCubed.settings.ignore.indexOf(a.fromID) > -1) return; Models.chat.receive(a); API.delayDispatch(API.CHAT,a); }
     },
     /**
      * @this {plugCubedModel}
@@ -190,7 +193,7 @@ var plugCubedModel = Class.extend({
         API.removeEventListener('userUpdate',        this.proxy.onUserlistUpdate);
         for (var i in plugCubed.guiButtons) {
             if (i === undefined || plugCubed.guiButtons[i] === undefined) continue;
-            $("#plugcubed-btn-" + i).unbind();
+            $('#plugcubed-btn-' + i).unbind();
             delete plugCubed.guiButtons[i];
         }
         $('#plugcubed-css').remove();
@@ -199,6 +202,7 @@ var plugCubedModel = Class.extend({
         $('#side-left').remove();
         this.customColorsStyle.remove();
         this.socket.close();
+        delete plugCubed;
     },
     /**
      * @this {plugCubedModel}
@@ -247,7 +251,7 @@ var plugCubedModel = Class.extend({
         menu        : false,
         notify      : false,
         customColors: false,
-        emoji       : false,
+        emoji       : true,
         colors      : {
             you        : 'FFDD6F',
             regular    : 'B0B0B0',
@@ -262,15 +266,16 @@ var plugCubedModel = Class.extend({
             leave      : '3366FF',
             curate     : '00FF00'
         },
-        alerts: {
-            join: false,
-            leave: false,
-            curate: false,
-            songUpdate: false,
-            songStats: false
+        alerts      : {
+            join       : false,
+            leave      : false,
+            curate     : false,
+            songUpdate : false,
+            songStats  : false
         },
         registeredSongs: [],
-        autoMuted: false
+        ignore         : [],
+        autoMuted      : false
     },
     /**
      * @this {plugCubedModel}
@@ -293,10 +298,7 @@ var plugCubedModel = Class.extend({
             Playback.setVolume(0);
             this.settings.autoMuted = true;
             this.log(Models.room.data.media.title + " auto-muted.", null, this.colors.infoMessage2);
-
         };
-
-
     },
     /**
      * @this {plugCubedModel}
@@ -397,16 +399,16 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     log: function(message, from, color, changeToColor) {
-        var style  = "",
+        var style  = '',
             div,
             scroll = false;
 
-        if (color) style = 'style="color:' + color + ';"';
+        if (color) style = ' style="color:' + (color.substr(0,1) === '#' ? color : '#' + color) + ';"';
 
-        if (from) div = '<div class="chat-message"><span class="chat-from" ' + style + '>' + from + '</span><span class="chat-text" ' + style + '>: ' + message + '</span></div>';
-        else      div = '<div class="chat-message"><span class="chat-text" ' + style + '>' + message + '</span></div>';
+        if (from) div = '<div class="chat-message"><span class="chat-from"' + style + '>' + from + '</span><span class="chat-text"' + style + '>: ' + message + '</span></div>';
+        else      div = '<div class="chat-message"><span class="chat-text"' + style + '>' + message + '</span></div>';
 
-        if ($("#chat-messages")[0].scrollHeight - $("#chat-messages").scrollTop() == $("#chat-messages").outerHeight())
+        if ($('#chat-messages')[0].scrollHeight - $('#chat-messages').scrollTop() == $('#chat-messages').outerHeight())
             scroll = true;
 
         var curChatDiv = Popout ? Popout.Chat.chatMessages : Chat.chatMessages,
@@ -522,11 +524,11 @@ var plugCubedModel = Class.extend({
                 case 'kick':     service = ModerationKickUserService; break;
                 case 'removedj': service = ModerationRemoveDJService; break;
                 case 'adddj':    service = ModerationAddDJService;    break;
-                default:         log("Unknown moderation");          return;
+                default:         log("Unknown moderation");           return;
             }
             var user = this.getUser(target);
-            if (user === null) log("user not found");
-            else              new service(user.id, " ");
+            if (user === null) log("User not found");
+            else               new service(user.id, " ");
         }
     },
     /**
@@ -555,7 +557,7 @@ var plugCubedModel = Class.extend({
             else                                                                                                   rank = 'User';
 
             if (waitlistpos === null) {
-                if (Models.room.data.djs[0].user.id === user.id)
+                if (Models.room.data.djs.length > 0 && Models.room.data.djs[0].user.id === user.id)
                     position = "Currently DJing";
                 else {
                     for (var i = 1;i < Models.room.data.djs.length;i++)
@@ -569,17 +571,17 @@ var plugCubedModel = Class.extend({
                 position = waitlistpos + "/" + Models.room.data.waitList.length + " in waitlist";
 
             switch (user.status) {
-                case -1: status = "Idle"; break;
+                case -1: status = "Idle";      break;
                 default: status = "Available"; break;
-                case 1:  status = "AFK"; break;
-                case 2:  status = "Working"; break;
-                case 3:  status = "Sleeping"; break;
+                case 1:  status = "AFK";       break;
+                case 2:  status = "Working";   break;
+                case 3:  status = "Sleeping";  break;
             }
 
             switch (user.vote) {
-                case -1:  voted = "Meh"; break;
+                case -1:  voted = "Meh";       break;
                 default:  voted = "Undecided"; break;
-                case 1:   voted = "Woot"; break;
+                case 1:   voted = "Woot";      break;
             }
             log('<table style="width:100%;color:#CC00CC"><tr><td colspan="2"><strong>Name</strong>: <span style="color:#FFFFFF">' + user.username + '</span></td></tr>' +
             (this.isPlugCubedAdmin(user.id)?'<tr><td colspan="2"><strong>Title</strong>: <span style="color:#FFFFFF">plugCubed Developer</span></td></tr>':'') +
@@ -786,7 +788,7 @@ var plugCubedModel = Class.extend({
     onCurate: function(data) {
         var media = API.getMedia();
         if (this.settings.notify === true && this.settings.alerts.curate === true)
-            this.log(data.user.username + " added " + media.author + " - " + media.title, null, '#'+this.settings.colors.curate);
+            this.log(data.user.username + " added " + media.author + " - " + media.title, null, this.settings.colors.curate);
         Models.room.userHash[data.user.id].curated = true;
         this.onUserlistUpdate();
     },
@@ -846,7 +848,7 @@ var plugCubedModel = Class.extend({
      */
     onUserJoin: function(data) {
         if (this.settings.notify === true && this.settings.alerts.join === true)
-            this.log(Utils.cleanTypedString(data.username + " joined the room"), null, '#'+this.settings.colors.join);
+            this.log(Utils.cleanTypedString(data.username + " joined the room"), null, this.settings.colors.join);
         var a = Models.room.userHash[data.id];
         if (a.wootcount === undefined) a.wootcount = 0;
         if (a.mehcount === undefined)  a.mehcount = 0;
@@ -859,7 +861,7 @@ var plugCubedModel = Class.extend({
      */
     onUserLeave: function(data) {
         if (this.settings.notify === true && this.settings.alerts.leave === true)
-            this.log(Utils.cleanTypedString(data.username + ' left the room'), null, '#'+this.settings.colors.leave);
+            this.log(Utils.cleanTypedString(data.username + ' left the room'), null, this.settings.colors.leave);
         this.onUserlistUpdate();
     },
     isPlugCubedAdmin: function(id) {
@@ -1081,26 +1083,27 @@ var plugCubedModel = Class.extend({
                 var b = plugCubed.history[i];
                 if (b.id == a.id && (~~i + 2) < 51) {
                     found = ~~i + 2;
+                    break;
                 }
             }
             if (found > 0)
                 return log('<span style="color:'+ plugCubed.colors.infoMessage1 +  '">Your next queued song is ' + a.title + ' by ' + a.author + '</span><br /><span style="color:' + plugCubed.colors.modCommands + '"><strong> Warning: This song is still in the history (' + found + ' of ' + plugCubed.history.length + ')</strong></span>'), true;
             else
-                return plugCubed.log("Your next queued song is " + a.title + " by " + a.author, null, plugCubed.colors.infoMessage1), true;
+                return plugCubed.log('Your next queued song is ' + a.title + ' by ' + a.author, null, plugCubed.colors.infoMessage1), true;
         }
         if (value == '/automute') {
             if (plugCubed.settings.registeredSongs.indexOf(Models.room.data.media.id) < 0) {
                 plugCubed.settings.registeredSongs.push(Models.room.data.media.id);
                 plugCubed.settings.autoMuted = true;
                 Playback.setVolume(0);
-                plugCubed.log(Models.room.data.media.title + " registered to auto-mute on future plays.", null, plugCubed.colors.infoMessage2);
+                plugCubed.log(Models.room.data.media.title + ' registered to auto-mute on future plays.', null, plugCubed.colors.infoMessage2);
                 plugCubed.saveSettings();
             }
             return true;
         }
         if (value == '/alertsoff') {
             if (plugCubed.settings.notify) {
-                plugCubed.log("Join/leave alerts disabled", null, plugCubed.colors.infoMessage1);
+                plugCubed.log('Join/leave alerts disabled', null, plugCubed.colors.infoMessage1);
                 plugCubed.settings.notify = false;
                 plugCubed.changeGUIColor('notify',false);
             }
@@ -1108,32 +1111,38 @@ var plugCubedModel = Class.extend({
         }
         if (value == '/alertson') {
             if (!plugCubed.settings.notify) {
-                plugCubed.log("Join/leave alerts enabled", null, plugCubed.colors.infoMessage1);
+                plugCubed.log('Join/leave alerts enabled', null, plugCubed.colors.infoMessage1);
                 plugCubed.settings.notify = true;
                 plugCubed.changeGUIColor('notify',true);
             }
             return true;
         }
-        if (value.indexOf('/getpos') === 0) {
-            var lookup = plugCubed.getUser(value.substr(7)),
+        if (value.indexOf('/getpos ') === 0) {
+            var lookup = plugCubed.getUser(value.substr(8)),
                 user = lookup === null ? Models.user.data : lookup,
                 spot = Models.room.getWaitListPosition(user.id);
             if (spot !== null)
-                plugCubed.log("Position in waitlist " + spot + "/" + Models.room.data.waitList.length, null, plugCubed.colors.infoMessage2);
+                plugCubed.log('Position in waitlist ' + spot + '/' + Models.room.data.waitList.length, null, plugCubed.colors.infoMessage2);
             else {
                 spot = -1;
                 for (var i = 0;i < Models.room.data.djs.length;i++)
                     spot = Models.room.data.djs[i].user.id === user.id ? i : spot;
                 if (spot < 0)
-                    plugCubed.log("Not in waitlist nor booth", null, plugCubed.colors.infoMessage2);
+                    plugCubed.log('Not in waitlist nor booth', null, plugCubed.colors.infoMessage2);
                 else if (spot === 0)
-                    plugCubed.log((user.id === Models.user.data.id ? "You" : user.username) + " are currently DJing",null,plugCubed.colors.infoMessage2);
+                    plugCubed.log((user.id === Models.user.data.id ? 'You' : user.username) + ' are currently DJing',null,plugCubed.colors.infoMessage2);
                 else if (spot === 1)
-                    plugCubed.log((user.id === Models.user.data.id ? "You" : user.username) + " are DJing next",null,plugCubed.colors.infoMessage2);
+                    plugCubed.log((user.id === Models.user.data.id ? 'You' : user.username) + ' are DJing next',null,plugCubed.colors.infoMessage2);
                 else
-                    plugCubed.log("Position in booth " + (spot + 1) + "/" + Models.room.data.djs.length, null, plugCubed.colors.infoMessage2);
+                    plugCubed.log('Position in booth ' + (spot + 1) + '/' + Models.room.data.djs.length, null, plugCubed.colors.infoMessage2);
             }
             return true;
+        }
+        if (value.indexOf('/ignore ') === 0) {
+            var user = plugCubed.getUser(value.substr(8));
+            if (user === null) return plugCubed.log('User not found', null, plugCubed.colors.infoMessage2),true;
+            if (user.id === Models.user.data.id) return plugCubed.log('You can\'t ignore yourself', null, plugCubed.colors.infoMessage2),true;
+            return plugCubed.settings.ignore.push(user.id),true;
         }
         if (plugCubed.isPlugCubedAdmin(Models.user.data.id)) {
             if (value.indexOf('/whois ') === 0)
@@ -1181,11 +1190,11 @@ var plugCubedModel = Class.extend({
                 return plugCubed.moderation(value.substr(8),'removedj'),true;
         }
         if (Models.user.hasPermission(Models.user.MANAGER)) {
-            if (value.indexOf('/lock') === 0) {
+            if (value === '/lock') {
                 new RoomPropsService(document.location.href.split('/')[3],true,Models.room.data.waitListEnabled,Models.room.data.maxPlays,Models.room.data.maxDJs);
                 return true;
             }
-            if (value.indexOf('/unlock') === 0) {
+            if (value === '/unlock') {
                 new RoomPropsService(document.location.href.split('/')[3],false,Models.room.data.waitListEnabled,Models.room.data.maxPlays,Models.room.data.maxDJs);
                 return true;
             }
