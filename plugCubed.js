@@ -745,6 +745,9 @@ plugCubedModel = Class.extend({
             .append(Dialog.getSubmitButton(Lang.dialog.save))
         );
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onColorDefault: function() {
         for (var i in this.settings.colors) {
             var elem = $('input[name="' + i + '"]');
