@@ -1104,7 +1104,17 @@ var plugCubedModel = Class.extend({
         }
         if (value == '/nextsong') {
             var a = Models.playlistMedia(Models.playlist.selectedPlaylistID).data[0];
-            return plugCubed.log("Your next queued song is " + a.title + " by " + a.author, null, plugCubed.colors.infoMessage1), true;
+            var found = -1;
+            for (var i in plugCubed.history) {
+                var b = plugCubed.history[i];
+                if (b.id == a.id && (~~i + 2) < 51) {
+                    found = ~~i + 2;
+                }
+            }
+            if (found > 0)
+                return log('<span style="color:'+ plugCubed.colors.infoMessage1 +  '">Your next queued song is ' + a.title + ' by ' + a.author + '</span><br /><span style="color:' + plugCubed.colors.modCommands + '"><strong> Warning: This song is still in the history (' + found + ' of ' + plugCubed.history.length + ')</strong></span>'), true;
+            else
+                return plugCubed.log("Your next queued song is " + a.title + " by " + a.author, null, plugCubed.colors.infoMessage1), true;
         }
         if (value == '/automute') {
             if (plugCubed.settings.registeredSongs.indexOf(Models.room.data.media.id) < 0) {
