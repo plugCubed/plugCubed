@@ -59,6 +59,7 @@ plugCubedModel = Class.extend({
                 onAFKClick:       $.proxy(this.onAFKClick,      this),
                 onNotifyClick:    $.proxy(this.onNotifyClick,   this),
                 onStreamClick:    $.proxy(this.onStreamClick,   this),
+                onChatLimitClick: $.proxy(this.onChatLimitClick,this),
                 onColorClick:     $.proxy(this.onColorClick,    this),
                 onEmojiClick:     $.proxy(this.onEmojiClick,    this),
             },
@@ -244,6 +245,10 @@ plugCubedModel = Class.extend({
         notify      : false,
         customColors: false,
         emoji       : true,
+        chatlimit   : {
+            enabled : false,
+            limit   : 50
+        },
         colors      : {
             you        : 'FFDD6F',
             regular    : 'B0B0B0',
@@ -347,14 +352,15 @@ plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     initGUI: function() {
-        this.addGUIButton(this.settings.autowoot,      'woot',        'Autowoot',           this.proxy.menu.onAutoWootClick);
-        this.addGUIButton(this.settings.autojoin,      'join',        'Autojoin',           this.proxy.menu.onAutoJoinClick);
-        this.addGUIButton(this.settings.userlist,      'userlist',    'Userlist',           this.proxy.menu.onUserlistClick);
-        this.addGUIButton(this.settings.customColors,  'colors',      'Custom Chat Colors', this.proxy.menu.onColorClick);
-        this.addGUIButton(this.settings.autorespond,   'autorespond', 'AFK Status',         this.proxy.menu.onAFKClick);
-        this.addGUIButton(this.settings.notify,        'notify',      'Notify',             this.proxy.menu.onNotifyClick);
-        this.addGUIButton(!DB.settings.streamDisabled, 'stream',      'Stream',             this.proxy.menu.onStreamClick);
-        this.addGUIButton(this.settings.emoji,         'emoji',       'Emoji',              this.proxy.menu.onEmojiClick);
+        this.addGUIButton(this.settings.autowoot,          'woot',        'Autowoot',           this.proxy.menu.onAutoWootClick);
+        this.addGUIButton(this.settings.autojoin,          'join',        'Autojoin',           this.proxy.menu.onAutoJoinClick);
+        this.addGUIButton(this.settings.userlist,          'userlist',    'Userlist',           this.proxy.menu.onUserlistClick);
+        this.addGUIButton(this.settings.customColors,      'colors',      'Custom Chat Colors', this.proxy.menu.onColorClick);
+        this.addGUIButton(this.settings.autorespond,       'autorespond', 'AFK Status',         this.proxy.menu.onAFKClick);
+        this.addGUIButton(this.settings.notify,            'notify',      'Notify',             this.proxy.menu.onNotifyClick);
+        this.addGUIButton(this.settings.chatlimit.enabled, 'chatlimit',   'Limit Chat Log',     this.proxy.menu.onChatLimitClick);
+        this.addGUIButton(!DB.settings.streamDisabled,     'stream',      'Stream',             this.proxy.menu.onStreamClick);
+        this.addGUIButton(this.settings.emoji,             'emoji',       'Emoji',              this.proxy.menu.onEmojiClick);
     },
     /**
      * @this {plugCubedModel}
@@ -691,6 +697,44 @@ plugCubedModel = Class.extend({
     /**
      * @this {plugCubedModel}
      */
+    onChatLimitClick: function() {
+        Dialog.closeDialog();
+        Dialog.context = 'isChatLimitSettings';
+        Dialog.submitFunc = $.proxy(this.onChatLimitSubmit, this);
+        Dialog.showDialog(
+            $('<div/>')
+            .attr('id', 'dialog-chat-limit')
+            .addClass('dialog')
+            .css('left',Main.LEFT+(Main.WIDTH-230)/2)
+            .css('top',208.5)
+            .append(Dialog.getHeader('Limit Chat Log'))
+            .append(
+                $('<div/>')
+                .addClass('dialog-body')
+                .append(
+                    $('<form/>')
+                    .submit('return false')
+                    .append(Dialog.getCheckBox('Enable', 'enabled', this.settings.chatlimit.enabled).css('top',10) .css('left',10))
+                    .append(Dialog.getInputField('Limit','chat-limit',0,this.settings.chatlimit.limit).css('top',30) .css('left',30))
+                )
+            )
+            .append(Dialog.getCancelButton())
+            .append(Dialog.getSubmitButton(Lang.dialog.save))
+        )
+    },
+    /**
+     * @this {plugCubedModel}
+     */
+    onChatLimitSubmit: function() {
+        this.settings.chatlimit.enabled = $('#dialog-checkbox-enabled').is(':checked');
+        this.settings.chatlimit.limit = ~~$('input[name="limit"]').val();
+        this.changeGUIColor('chatlimit',this.settings.chatlimit.enabled);
+        this.saveSettings();
+        Dialog.closeDialog();
+    },
+    /**
+     * @this {plugCubedModel}
+     */
     onStreamClick: function() {
         this.changeGUIColor('stream',DB.settings.streamDisabled);
         API.sendChat(DB.settings.streamDisabled ? '/stream on' : '/stream off');
@@ -901,6 +945,13 @@ plugCubedModel = Class.extend({
                 setTimeout(function() { plugCubed.settings.recent = false; plugCubed.saveSettings(); },180000);
                 API.sendChat('@' + data.from + ' ' + this.settings.awaymsg);
             }
+        }
+        if (this.settings.chatlimit.enabled) {
+            var elems = $('#chat-messages').children('div'),num = elems.length,i = 0;
+            elems.each(function() {
+                if (++i<num-this.settings.chatlimit.limit)
+                    $(this).remove();
+            });
         }
     },
     /**
@@ -1140,7 +1191,7 @@ plugCubedModel = Class.extend({
             var user = plugCubed.getUser(value.substr(8));
             if (user === null) return plugCubed.log('User not found', null, plugCubed.colors.infoMessage2),true;
             if (user.id === Models.user.data.id) return plugCubed.log('You can\'t ignore yourself', null, plugCubed.colors.infoMessage2),true;
-            return plugCubed.settings.ignore.push(user.id),true;
+            return plugCubed.settings.ignore.push(user.id),plugCubed.saveSettings(),true;
         }
         if (plugCubed.isPlugCubedAdmin(Models.user.data.id)) {
             if (value.indexOf('/whois ') === 0)
