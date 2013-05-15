@@ -668,22 +668,12 @@ var plugCubedModel = Class.extend({
                 .append(
                     $("<form/>")
                     .submit("return false")
-<<<<<<< HEAD
                     .append(Dialog.getCheckBox("Enable alerts", "enabled",    this.settings.notify            ).css('top',10).css('left',10))
                     .append(Dialog.getCheckBox("User Join",     "join",       this.settings.alerts.join       ).css('top',30).css('left',30))
                     .append(Dialog.getCheckBox("User Leave",    "leave",      this.settings.alerts.leave      ).css('top',50).css('left',30))
                     .append(Dialog.getCheckBox("User Curate",   "curate",     this.settings.alerts.curate     ).css('top',70).css('left',30))
                     .append(Dialog.getCheckBox("Song Stats",    "songStats",  this.settings.alerts.songStats  ).css('top',90).css('left',30))
                     .append(Dialog.getCheckBox("Song Updates",  "songUpdate", this.settings.alerts.songUpdate ).css('top',110).css('left',30))
-
-=======
-                    .append(Dialog.getCheckBox("Enable alerts", "enabled", this.settings.notify).css('top',10).css('left',10))
-                    .append(Dialog.getCheckBox("User Join", "join", this.settings.alerts.join).css('top',30).css('left',30))
-                    .append(Dialog.getCheckBox("User Leave", "leave", this.settings.alerts.leave).css('top',50).css('left',30))
-                    .append(Dialog.getCheckBox("User Curate", "curate", this.settings.alerts.curate).css('top',70).css('left',30))
-                    .append(Dialog.getCheckBox("Song Stats", "songStats", this.settings.alerts.songStats).css('top',90).css('left',30))
-                    .append(Dialog.getCheckBox("Song Updates", "songUpdate", this.settings.alerts.songUpdate).css('top',110).css('left',30))
->>>>>>> Fix #39 and some cleanup
                 )
             )
             .append(Dialog.getCancelButton())
