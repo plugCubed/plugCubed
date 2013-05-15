@@ -949,7 +949,7 @@ plugCubedModel = Class.extend({
         if (this.settings.chatlimit.enabled) {
             var elems = $('#chat-messages').children('div'),num = elems.length,i = 0;
             elems.each(function() {
-                if (++i<num-this.settings.chatlimit.limit)
+                if (++i<num-plugCubed.settings.chatlimit.limit)
                     $(this).remove();
             });
         }
