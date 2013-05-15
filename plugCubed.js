@@ -17,20 +17,12 @@
  * @author  Jeremy "Colgate" Richardson
  * @author  Thomas "TAT" Andresen
  */
-if (plugCubed !== undefined)
+if (typeof plugCubed !== 'undefined')
     plugCubed.close();
-String.prototype.equalsIgnoreCase = function(other) {
-    return this.toLowerCase() === other.toLowerCase();
-};
-String.prototype.isNumber = function() { return !isNaN(parseInt(this,10)) && isFinite(this); };
-String.prototype.isHEX = function() {
-    if (this.substr(0,1) !== "#") a = "#" + this;
-    else a = this;
-    return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(a);
-};
-Math.randomRange = function(min, max) {
-    return min + Math.floor(Math.random()*(max-min+1));
-};
+String.prototype.equalsIgnoreCase = function(other)    { return typeof other !== 'string' ? false : this.toLowerCase() === other.toLowerCase(); };
+String.prototype.isNumber         = function()         { return !isNaN(parseInt(this,10)) && isFinite(this); };
+String.prototype.isHEX            = function()         { return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(this.substr(0,1) === '#' ? this : '#' + this); };
+Math.randomRange                  = function(min, max) { return min + Math.floor(Math.random()*(max-min+1)); };
 Emoji._emojify = Emoji.emojify;
 console.info = function(data) {
     console.log(data);
