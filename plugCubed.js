@@ -31,7 +31,7 @@ String.prototype.isHEX = function() {
 Math.randomRange = function(min, max) {
     return min + Math.floor(Math.random()*(max-min+1));
 };
-
+Emoji._emojify = Emoji.emojify
 var plugCubedModel = Class.extend({
     guiButtons: {},
     detectPdP: function() {
@@ -60,6 +60,7 @@ var plugCubedModel = Class.extend({
                 onNotifyClick:    $.proxy(this.onNotifyClick,   this),
                 onStreamClick:    $.proxy(this.onStreamClick,   this),
                 onColorClick:     $.proxy(this.onColorClick,    this),
+                onEmojiClick:     $.proxy(this.onEmojiClick,    this),
             },
             onDjAdvance:          $.proxy(this.onDjAdvance,     this),
             onVoteUpdate:         $.proxy(this.onVoteUpdate,    this),
@@ -110,7 +111,7 @@ var plugCubedModel = Class.extend({
         ChatModel.chatCommand   = this.customChatCommand;
         
         this.loadSettings();
-        $('body').prepend('<link rel="stylesheet" type="text/css" href="https://raw.github.com/TATDK/plugCubed/1.6.0/plugCubed.css" />');
+        $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://raw.github.com/TATDK/plugCubed/1.6.0/plugCubed.css" />');
         $('body').append(
             '<div id="side-left" class="sidebar"><div class="sidebar-content"></div></div>' +
             '<div id="side-right" class="sidebar"><div class="sidebar-handle"><span>||</span></div><div class="sidebar-content"></div></div>'
@@ -222,6 +223,7 @@ var plugCubedModel = Class.extend({
         menu        : false,
         notify      : false,
         customColors: false,
+        emoji       : false,
         colors      : {
             you        : 'FFDD6F',
             regular    : 'B0B0B0',
@@ -334,6 +336,7 @@ var plugCubedModel = Class.extend({
         this.addGUIButton(this.settings.autorespond,   'autorespond', 'AFK Status',         this.proxy.menu.onAFKClick);
         this.addGUIButton(this.settings.notify,        'notify',      'Notify',             this.proxy.menu.onNotifyClick);
         this.addGUIButton(!DB.settings.streamDisabled, 'stream',      'Stream',             this.proxy.menu.onStreamClick);
+        this.addGUIButton(this.settings.emoji,         'emoji',       'Emoji',              this.proxy.menu.onEmojiClick);
     },
     /**
      * @this {plugCubedModel}
@@ -641,12 +644,12 @@ var plugCubedModel = Class.extend({
                 .append(
                     $("<form/>")
                     .submit("return false")
-                    .append(Dialog.getCheckBox("Enable alerts", "enabled", this.settings.notify).css('top',10).css('left',10))
-                    .append(Dialog.getCheckBox("User Join", "join", this.settings.alerts.join).css('top',30).css('left',30))
-                    .append(Dialog.getCheckBox("User Leave", "leave", this.settings.alerts.leave).css('top',50).css('left',30))
-                    .append(Dialog.getCheckBox("User Curate", "curate", this.settings.alerts.curate).css('top',70).css('left',30))
-                    .append(Dialog.getCheckBox("Song Stats", "songStats", this.settings.alerts.songStats).css('top',90).css('left',30))
-                    .append(Dialog.getCheckBox("Song Updates", "songUpdate", this.settings.alerts.songUpdate).css('top',110).css('left',30))
+                    .append(Dialog.getCheckBox("Enable alerts", "enabled",    this.settings.notify            ).css('top',10).css('left',10))
+                    .append(Dialog.getCheckBox("User Join",     "join",       this.settings.alerts.join       ).css('top',30).css('left',30))
+                    .append(Dialog.getCheckBox("User Leave",    "leave",      this.settings.alerts.leave      ).css('top',50).css('left',30))
+                    .append(Dialog.getCheckBox("User Curate",   "curate",     this.settings.alerts.curate     ).css('top',70).css('left',30))
+                    .append(Dialog.getCheckBox("Song Stats",    "songStats",  this.settings.alerts.songStats  ).css('top',90).css('left',30))
+                    .append(Dialog.getCheckBox("Song Updates",  "songUpdate", this.settings.alerts.songUpdate ).css('top',110).css('left',30))
 
                 )
             )
@@ -674,6 +677,21 @@ var plugCubedModel = Class.extend({
     onStreamClick: function() {
         this.changeGUIColor('stream',DB.settings.streamDisabled);
         API.sendChat(DB.settings.streamDisabled ? "/stream on" : "/stream off");
+    },
+    /**
+     * @this {plugCubedModel}
+     */
+    onEmojiClick: function() {
+        this.settings.emoji = !this.settings.emoji;
+        this.changeGUIColor('emoji',this.settings.emoji);
+        if (!this.settings.emoji) {
+            if (Emoji._emojify === undefined) Emoji._emojify = Emoji.emojify
+            Emoji.emojify = function(data) {return data;}
+        } else {
+            if (Emoji._emojify === undefined) return this.log('Error in reenabling Emoji', null, this.colors.modCommands);
+            Emoji.emojify = Emoji._emojify
+        }
+        this.saveSettings();
     },
     /**
      * @this {plugCubedModel}
