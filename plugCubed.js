@@ -19,6 +19,7 @@
  */
 if (plugCubed !== undefined)
     plugCubed.close();
+var _PCL;
 String.prototype.equalsIgnoreCase = function(other) {
     return this.toLowerCase() === other.toLowerCase();
 };
@@ -32,6 +33,14 @@ Math.randomRange = function(min, max) {
     return min + Math.floor(Math.random()*(max-min+1));
 };
 Emoji._emojify = Emoji.emojify
+console.info = function(data) {
+        console.log(data);
+         if (_PCL !== undefined) {
+            log('<span style="color: #ff0000">Disconnected at ' + plugCubed.getTimestamp() + '! Reloading the page in a few seconds.</span>');
+            setTimeout(function() {location.reload(true)}, 3000)
+         } else
+            log('<span style="color: #ff0000">Disconnected at ' + plugCubed.getTimestamp() + '! </span>');
+};
 var plugCubedModel = Class.extend({
     guiButtons: {},
     detectPdP: function() {
