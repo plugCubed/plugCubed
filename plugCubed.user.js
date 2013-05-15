@@ -24,12 +24,12 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OT
 ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-var script = document.createElement("script");
-script.textContent = "if (typeof Class !== 'undefined' && typeof Slug !== 'undefined') {" +
-    "var plugCubedLoader = Class.extend({" +
-        "init: function() {if (typeof Slug !== 'undefined') this.wait();}," +
-        "wait: function() {if (typeof API !== 'undefined' && API.isReady) this.run(); else setTimeout($.proxy(this.wait,this),100);}," +
-        "run: function() {console.log('plugCubedLoader v.1.3 enabled!');$.getScript('http://tatdk.github.io/plugCubed/compiled/plugCubed.min.js');}" +
-    "});" +
-    "_PCL = new plugCubedLoader(); }";
+var script = document.createElement('script');
+script.textContent = 'if (typeof Class !== \'undefined\' && typeof Slug !== \'undefined\') {' +
+    'var plugCubedLoader = Class.extend({' +
+        'init: function() { if (typeof Slug !== \'undefined\') this.wait(); },' +
+        'wait: function() { if (typeof API !== \'undefined\' && API.isReady) this.run(); else setTimeout($.proxy(this.wait,this),100); },' +
+        'run: function() { console.log(\'plugCubedLoader v.1.3 enabled!\'); $.getScript(\'http://tatdk.github.io/plugCubed/compiled/plugCubed.min.js\'); }' +
+    '});' +
+    '_PCL = new plugCubedLoader(); }';
 document.head.appendChild(script);
