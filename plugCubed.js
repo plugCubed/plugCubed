@@ -1169,20 +1169,17 @@ plugCubedModel = Class.extend({
                 return plugCubed.getUserInfo(value.substr(7)),true;
             if (value.indexOf('/kick ') === 0) {
                 if (value.indexOf('::') > 0) {
-                    var data = value.substr(5).split(':: '),
+                    var data = value.substr(6).split(':: '),
                         time = 60;
                         if (data.length == 2) {
-                            if (data[1].isNumber()) {
-                                time = parseFloat(data[1])
-                            }
-                            user = plugCubed.getUser(data[0])
-                            new ModerationKickUserService(user.id,(data[1].isNumber()?' ':data[1]),time)
-                            return true;
+                            if (data[1].isNumber())
+                                time = parseFloat(data[1]);
+                            user = plugCubed.getUser(data[0]);
+                            return new ModerationKickUserService(user.id,(data[1].isNumber()?' ':data[1]),time),true;
                         } else if (data.length == 3) {
-                            time = parseFloat(data[2])
-                            user = plugCubed.getUser(data[0])
-                            new ModerationKickUserService(user.id,data[1],time)
-                            return true;
+                            time = parseFloat(data[2]);
+                            user = plugCubed.getUser(data[0]);
+                            return new ModerationKickUserService(user.id,data[1],time),true;
                         }
                 } else
                     return plugCubed.moderation(value.substr(6),'kick'),true;
