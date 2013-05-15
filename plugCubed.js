@@ -88,8 +88,10 @@ var plugCubedModel = Class.extend({
         };
         this.defaultAwayMsg = 'I\'m away from keyboard.';
 
-        this.history = [];
-        this.getHistory();
+        setTimeout(function() {
+            plugCubed.history = [];
+            plugCubed.getHistory();
+        },1);
 
         this.customColorsStyle = $('<style type="text/css"></css>');
         $('head').append(this.customColorsStyle);
@@ -124,8 +126,7 @@ var plugCubedModel = Class.extend({
         $('body').append(
             '<div id="side-left" class="sidebar"><div class="sidebar-content"></div></div>' +
             '<div id="side-right" class="sidebar"><div class="sidebar-handle"><span>||</span></div><div class="sidebar-content"></div></div>'
-        );
-        $('body').append('<script type="text/javascript" src="https://raw.github.com/TATDK/plugCubed/1.6.0/thirdparty.js"></script>');
+        ).append('<script type="text/javascript" src="https://raw.github.com/TATDK/plugCubed/1.6.0/thirdparty.js"></script>');
         this.initGUI();
         this.initAPIListeners();
         if (this.settings.userlist) {
@@ -203,7 +204,7 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     showUserlist: function() {
-        $("#side-left").show().animate({ "left": "0px" }, 300, "easeOutQuart");
+        $("#side-left").show().animate({ "left": "0px" }, 300, typeof jQuery.easing.easeOutQuart === 'undefined' ? undefined : "easeOutQuart");
         if (this.detectPdP()) {
             if (userlistShow === true) $("#pdpUsers").hide();
             $("#pdpUsersToggle").hide();
@@ -214,13 +215,27 @@ var plugCubedModel = Class.extend({
      */
     hideUserlist: function() {
         var sbarWidth = -$("#side-left").width()-20;
-        $("#side-left").animate({ "left": sbarWidth + "px" }, 300, "easeOutQuart", function() {
+        $("#side-left").animate({ "left": sbarWidth + "px" }, 300, typeof jQuery.easing.easeOutQuart === 'undefined' ? undefined : "easeOutQuart", function() {
             $("#side-left").hide();
         });
         if (this.detectPdP()) {
             if (userlistShow === true) $("#pdpUsers").show();
             $("#pdpUsersToggle").show();
         }
+    },
+    colorInfo: {
+        you        : { title: 'You',         color: 'FFDD6F' },
+        regular    : { title: 'Regular',     color: 'B0B0B0' },
+        featureddj : { title: 'Featured DJ', color: 'E90E82' },
+        bouncer    : { title: 'Bouncer',     color: 'E90E82' },
+        manager    : { title: 'Manager',     color: 'E90E82' },
+        cohost     : { title: 'Co-Host',     color: 'E90E82' },
+        host       : { title: 'Host',        color: 'E90E82' },
+        ambassador : { title: 'Ambassador',  color: '9A50FF' },
+        admin      : { title: 'Admin',       color: '42A5DC' },
+        join       : { title: 'User Join',   color: '3366FF' },
+        leave      : { title: 'User Leave',  color: '3366FF' },
+        curate     : { title: 'User Curate', color: '00FF00' }
     },
     settings: {
         recent      : false,
@@ -653,6 +668,7 @@ var plugCubedModel = Class.extend({
                 .append(
                     $("<form/>")
                     .submit("return false")
+<<<<<<< HEAD
                     .append(Dialog.getCheckBox("Enable alerts", "enabled",    this.settings.notify            ).css('top',10).css('left',10))
                     .append(Dialog.getCheckBox("User Join",     "join",       this.settings.alerts.join       ).css('top',30).css('left',30))
                     .append(Dialog.getCheckBox("User Leave",    "leave",      this.settings.alerts.leave      ).css('top',50).css('left',30))
@@ -660,6 +676,14 @@ var plugCubedModel = Class.extend({
                     .append(Dialog.getCheckBox("Song Stats",    "songStats",  this.settings.alerts.songStats  ).css('top',90).css('left',30))
                     .append(Dialog.getCheckBox("Song Updates",  "songUpdate", this.settings.alerts.songUpdate ).css('top',110).css('left',30))
 
+=======
+                    .append(Dialog.getCheckBox("Enable alerts", "enabled", this.settings.notify).css('top',10).css('left',10))
+                    .append(Dialog.getCheckBox("User Join", "join", this.settings.alerts.join).css('top',30).css('left',30))
+                    .append(Dialog.getCheckBox("User Leave", "leave", this.settings.alerts.leave).css('top',50).css('left',30))
+                    .append(Dialog.getCheckBox("User Curate", "curate", this.settings.alerts.curate).css('top',70).css('left',30))
+                    .append(Dialog.getCheckBox("Song Stats", "songStats", this.settings.alerts.songStats).css('top',90).css('left',30))
+                    .append(Dialog.getCheckBox("Song Updates", "songUpdate", this.settings.alerts.songUpdate).css('top',110).css('left',30))
+>>>>>>> Fix #39 and some cleanup
                 )
             )
             .append(Dialog.getCancelButton())
@@ -671,11 +695,8 @@ var plugCubedModel = Class.extend({
      */
     onNotifySubmit: function() {
         this.settings.notify = $("#dialog-checkbox-enabled").is(":checked");
-        this.settings.alerts.join = $("#dialog-checkbox-join").is(":checked");
-        this.settings.alerts.leave = $("#dialog-checkbox-leave").is(":checked");
-        this.settings.alerts.curate = $("#dialog-checkbox-curate").is(":checked");
-        this.settings.alerts.songStats = $("#dialog-checkbox-songStats").is(":checked");
-        this.settings.alerts.songUpdate = $("#dialog-checkbox-songUpdate").is(":checked");
+        for (var i in this.settings.alerts)
+            this.settings.alerts[i] = $('#dialog-checkbox-' + i).is(':checked');
         this.changeGUIColor('notify',this.settings.notify);
         this.saveSettings();
         Dialog.closeDialog();
@@ -707,6 +728,16 @@ var plugCubedModel = Class.extend({
      */
     onColorClick: function() {
         Dialog.closeDialog();
+        var body = $("<form/>")
+            .submit("return false")
+            .append(Dialog.getCheckBox("Enable custom", "enabled", this.settings.customColors)),j = 0;
+        for (var i in this.colorInfo)
+            body.append($(Dialog.getInputField(i,this.colorInfo[i].title,this.colorInfo[i].color,this.settings.colors[i],6).css('top',++j*30)).change(function() { $(this).find('.dialog-input-label').css('color','#' + $(this).find('input').val()); }));
+        body = $("<div/>")
+            .addClass("dialog-body")
+            .append(body);
+        for (var i in this.settings.colors)
+            body.find('input[name="' + i + '"]').parents('.dialog-input-container').find('.dialog-input-label').css('color','#' + this.settings.colors[i]);
         Dialog.context = "isCustomChatColors";
         Dialog.submitFunc = $.proxy(this.onColorSubmit, this);
         Dialog.showDialog(
@@ -716,87 +747,28 @@ var plugCubedModel = Class.extend({
             .css("left",Main.LEFT+(Main.WIDTH-230)/2)
             .css("top",208.5)
             .append(Dialog.getHeader("Custom Chat Colors"))
-            .append(
-                $("<div/>")
-                .addClass("dialog-body")
-                .append(
-                    $("<form/>")
-                    .submit("return false")
-                    .append(Dialog.getCheckBox("Enable custom", "enabled", this.settings.customColors))
-                    .append($(Dialog.getInputField("you",        'You',         'FFDD6F', this.settings.colors.you,        6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',30))
-                    .append($(Dialog.getInputField("regular",    'Regular',     'B0B0B0', this.settings.colors.regular,    6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',60))
-                    .append($(Dialog.getInputField("featureddj", 'Featured DJ', 'E90E82', this.settings.colors.featureddj, 6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',90))
-                    .append($(Dialog.getInputField("bouncer",    'Bouncer',     'E90E82', this.settings.colors.bouncer,    6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',120))
-                    .append($(Dialog.getInputField("manager",    'Manager',     'E90E82', this.settings.colors.manager,    6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',150))
-                    .append($(Dialog.getInputField("cohost",     'Co-Host',     'E90E82', this.settings.colors.cohost,     6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',180))
-                    .append($(Dialog.getInputField("host",       'Host',        'E90E82', this.settings.colors.host,       6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',210))
-                    .append($(Dialog.getInputField("ambassador", 'Ambassador',  '9A50FF', this.settings.colors.ambassador, 6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',240))
-                    .append($(Dialog.getInputField("admin",      'Admin',       '42A5DC', this.settings.colors.admin,      6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',270))
-                    .append($(Dialog.getInputField("join",       'User Join',   '3366FF', this.settings.colors.join,       6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',300))
-                    .append($(Dialog.getInputField("leave",      'User Leave',  '3366FF', this.settings.colors.leave,      6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',330))
-                    .append($(Dialog.getInputField("curate",     'User Curate', '00FF00', this.settings.colors.curate,     6).change(function() { $(this).parent('.dialog-input-container').find('.dialog-input-label').css('color','#' + $(this).val()); })).css('top',360))
-                )
-            )
+            .append(body)
             .append($("<div/>").addClass("dialog-button dialog-default-button").click($.proxy(this.onColorDefault,this)).append($("<span/>").text("Default")))
             .append(Dialog.getCancelButton())
             .append(Dialog.getSubmitButton(Lang.dialog.save))
-        )
+        );
     },
     onColorDefault: function() {
-        var a = $("input[name=you]"),
-            b = $("input[name=regular]"),
-            c = $("input[name=featureddj]"),
-            d = $("input[name=bouncer]"),
-            e = $("input[name=manager]"),
-            f = $("input[name=cohost]"),
-            g = $("input[name=host]"),
-            h = $("input[name=ambassador]"),
-            i = $("input[name=admin]"),
-            j = $("input[name=join]"),
-            k = $("input[name=leave]"),
-            l = $("input[name=curate]");
-        a.val(a.data('ph'));
-        b.val(b.data('ph'));
-        c.val(c.data('ph'));
-        d.val(d.data('ph'));
-        e.val(e.data('ph'));
-        f.val(f.data('ph'));
-        g.val(g.data('ph'));
-        h.val(h.data('ph'));
-        i.val(i.data('ph'));
-        j.val(j.data('ph'));
-        k.val(k.data('ph'));
-        l.val(l.data('ph'));
+        for (var i in this.settings.colors) {
+            var elem = $('input[name="' + i + '"]');
+            elem.val(elem.data('ph'));
+            elem.parents('.dialog-input-container').find('.dialog-input-label').css('color','#' + elem.val());
+        }
     },
     /**
      * @this {plugCubedModel}
      */
     onColorSubmit: function() {
-        var a = $("input[name=you]"),
-            b = $("input[name=regular]"),
-            c = $("input[name=featureddj]"),
-            d = $("input[name=bouncer]"),
-            e = $("input[name=manager]"),
-            f = $("input[name=cohost]"),
-            g = $("input[name=host]"),
-            h = $("input[name=ambassador]"),
-            i = $("input[name=admin]"),
-            j = $("input[name=join]"),
-            k = $("input[name=leave]"),
-            l = $("input[name=curate]");
         this.settings.customColors = $("#dialog-checkbox-enabled").is(":checked");
-        this.settings.colors.you        = a.val() === "" || !a.val().isHEX() ? a.data('ph') : a.val();
-        this.settings.colors.regular    = b.val() === "" || !b.val().isHEX() ? b.data('ph') : b.val();
-        this.settings.colors.featureddj = c.val() === "" || !c.val().isHEX() ? c.data('ph') : c.val();
-        this.settings.colors.bouncer    = d.val() === "" || !d.val().isHEX() ? d.data('ph') : d.val();
-        this.settings.colors.manager    = e.val() === "" || !e.val().isHEX() ? e.data('ph') : e.val();
-        this.settings.colors.cohost     = f.val() === "" || !f.val().isHEX() ? f.data('ph') : f.val();
-        this.settings.colors.host       = g.val() === "" || !g.val().isHEX() ? g.data('ph') : g.val();
-        this.settings.colors.ambassador = h.val() === "" || !h.val().isHEX() ? h.data('ph') : h.val();
-        this.settings.colors.admin      = i.val() === "" || !i.val().isHEX() ? i.data('ph') : i.val();
-        this.settings.colors.join       = j.val() === "" || !j.val().isHEX() ? j.data('ph') : j.val();
-        this.settings.colors.leave      = k.val() === "" || !k.val().isHEX() ? k.data('ph') : k.val();
-        this.settings.colors.curate     = l.val() === "" || !l.val().isHEX() ? l.data('ph') : l.val();
+        for (var i in this.settings.colors) {
+            var elem = $('input[name="' + i + '"]');
+            this.settings.colors[i] = elem.val() === '' || !elem.val().isHEX() ? elem.data('ph') : elem.val();
+        }
         this.updateCustomColors();
         this.changeGUIColor('colors',this.settings.customColors);
         this.saveSettings();
@@ -809,12 +781,13 @@ var plugCubedModel = Class.extend({
         if (!data || !data.user) return;
         var a = Models.room.userHash[data.user.id];
         this.onUserlistUpdate();
-        if (a.curVote !== 0) {
-                 if (a.curVote == 1)  a.wootcount--;
-            else if (a.curVote == -1) a.mehcount--;
-        }
-             if (data.vote == 1)  a.wootcount++;
-        else if (data.vote == -1) a.mehcount++;
+
+        if (a.curVote === 1)       a.wootcount--;
+        else if (a.curVote === -1) a.mehcount--;
+
+        if (data.vote === 1)       a.wootcount++;
+        else if (data.vote === -1) a.mehcount++;
+
         a.curVote = data.vote;
     },
     /**
