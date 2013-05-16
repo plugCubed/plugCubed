@@ -1147,8 +1147,8 @@ plugCubedModel = Class.extend({
             var found = -1;
             for (var i in plugCubed.history) {
                 var b = plugCubed.history[i];
-                if (b.id == a.id && ++~~i < 51) {
-                    found = ++~~i;
+                if (b.id == a.id && ~~i + 1 < 51) {
+                    found = ~~i + 1;
                     break;
                 }
             }
