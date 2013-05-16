@@ -459,3 +459,31 @@
     width: 60px;
     left: 150px;
 }
+#dialog-chat-limit {
+    width: 190px;
+    height: 150px;
+}
+
+#dialog-chat-limit .dialog-body {
+    height: 125px;
+}
+
+#dialog-chat-limit .dialog-cancel-button {
+    width: 85px;
+    right: 98px;
+}
+
+#dialog-chat-limit .dialog-submit-button {
+    width: 85px;
+    right: 5px;
+}
+
+#dialog-chat-limit .dialog-checkbox-container-enabled {
+    left: 10px;
+    top: 5px;
+}
+
+#dialog-chat-limit .dialog-input-background {
+    width: 40px;
+    left: 138px;
+}

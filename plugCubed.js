@@ -114,7 +114,7 @@ plugCubedModel = Class.extend({
         ChatModel.chatCommand   = this.customChatCommand;
         
         this.loadSettings();
-        $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://rawgithub.com/TATDK/plugCubed/1.6.0/plugCubed.css" />');
+        $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://dl.dropboxusercontent.com/u/53727046/scripts/plugCubed.css" />');
         $('body').append(
             '<div id="side-left" class="sidebar"><div class="sidebar-content"></div></div>' +
             '<div id="side-right" class="sidebar"><div class="sidebar-handle"><span>||</span></div><div class="sidebar-content"></div></div>'
@@ -719,7 +719,7 @@ plugCubedModel = Class.extend({
                     $('<form/>')
                     .submit('return false')
                     .append(Dialog.getCheckBox('Enable', 'enabled', this.settings.chatlimit.enabled).css('top',10) .css('left',10))
-                    .append(Dialog.getInputField('Limit','chat-limit',0,this.settings.chatlimit.limit).css('top',30) .css('left',30))
+                    .append(Dialog.getInputField('Limit','chat-limit',0,this.settings.chatlimit.limit).css('top',30) .css('left',10))
                 )
             )
             .append(Dialog.getCancelButton())
