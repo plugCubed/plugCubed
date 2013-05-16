@@ -1033,25 +1033,26 @@ plugCubedModel = Class.extend({
         }
         if (value.indexOf('/commands') === 0) {
             var commands = [
-                ['/nick'    ,'change username'],
-                ['/idle'    ,'set status to idle'],
-                ['/avail'   ,'set status to available'],
-                ['/afk'     ,'set status to afk'],
-                ['/work'    ,'set status to working'],
-                ['/sleep'   ,'set status to sleeping'],
-                ['/join'    ,'join dj booth/waitlist'],
-                ['/leave'   ,'leaves dj booth/waitlist'],
-                ['/whoami'  ,'get your own information'],
-                ['/mute'    ,'set volume to 0'],
-                ['/automute', 'register currently playing song to automatically mute on future plays'],
-                ['/unmute'  ,'set volume to last volume'],
-                ['/woot'    ,'woots current song'],
-                ['/meh'     ,'mehs current song'],
-                ['/refresh' ,'refresh the video'],
-                ['/curate'  ,'add current song to your selected playlist'],
-                ['/getpos'  ,'get current waitlist position'],
-                ['/version' ,'displays version number'],
-                ['/commands','shows this list']
+                ['/nick'              ,'change username'],
+                ['/idle'              ,'set status to idle'],
+                ['/avail'             ,'set status to available'],
+                ['/afk'               ,'set status to afk'],
+                ['/work'              ,'set status to working'],
+                ['/sleep'             ,'set status to sleeping'],
+                ['/join'              ,'join dj booth/waitlist'],
+                ['/leave'             ,'leaves dj booth/waitlist'],
+                ['/whoami'            ,'get your own information'],
+                ['/mute'              ,'set volume to 0'],
+                ['/automute'          ,'register currently playing song to automatically mute on future plays'],
+                ['/unmute'            ,'set volume to last volume'],
+                ['/woot'              ,'woots current song'],
+                ['/meh'               ,'mehs current song'],
+                ['/refresh'           ,'refresh the video'],
+                ['/ignore (username)' ,'ignore all chat messages from user']
+                ['/curate'            ,'add current song to your selected playlist'],
+                ['/getpos'            ,'get current waitlist position'],
+                ['/version'           ,'displays version number'],
+                ['/commands'          ,'shows this list']
             ];
             var userCommands = '<table>';
             for (var i in commands)
