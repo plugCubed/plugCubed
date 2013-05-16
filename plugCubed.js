@@ -1048,7 +1048,7 @@ plugCubedModel = Class.extend({
                 ['/woot'              ,'woots current song'],
                 ['/meh'               ,'mehs current song'],
                 ['/refresh'           ,'refresh the video'],
-                ['/ignore (username)' ,'ignore all chat messages from user']
+                ['/ignore (username)' ,'ignore all chat messages from user'],
                 ['/curate'            ,'add current song to your selected playlist'],
                 ['/getpos'            ,'get current waitlist position'],
                 ['/version'           ,'displays version number'],
