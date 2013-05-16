@@ -1003,12 +1003,14 @@ plugCubedModel = Class.extend({
                 found = ~~i + 2;
                 if (!a.wasSkipped) {
                     document.getElementById("chat-sound").playMentionSound()
+                    setTimeout(function(){document.getElementById("chat-sound").playMentionSound()},100);
                     return Models.chat.onChatReceived({type: 'system',message: 'Song is in history (' + found + ' of ' + plugCubed.history.length + ')',language: Models.user.data.language});
                 }
             }
         }
         if (found > 0) {
             document.getElementById("chat-sound").playMentionSound()
+            setTimeout(function(){document.getElementById("chat-sound").playMentionSound()},100);
             return Models.chat.onChatReceived({type: 'system',message: 'Song is in history (' + found + ' of ' + plugCubed.history.length + '), but was skipped on the last play',language: Models.user.data.language});
         }
     },
