@@ -114,7 +114,7 @@ plugCubedModel = Class.extend({
         ChatModel.chatCommand   = this.customChatCommand;
         
         this.loadSettings();
-        $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://dl.dropboxusercontent.com/u/53727046/scripts/plugCubed.css" />');
+        $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://rawgithub.com/TATDK/plugCubed/1.6.0/plugCubed.css" />');
         $('body').append(
             '<div id="side-left" class="sidebar"><div class="sidebar-content"></div></div>' +
             '<div id="side-right" class="sidebar"><div class="sidebar-handle"><span>||</span></div><div class="sidebar-content"></div></div>'
@@ -1001,14 +1001,16 @@ plugCubedModel = Class.extend({
             var a = plugCubed.history[i];
             if (a.id == id && (~~i + 2) < 51) {
                 found = ~~i + 2;
-                if (!a.wasSkipped)
+                if (!a.wasSkipped) {
                     document.getElementById("chat-sound").playMentionSound()
                     return Models.chat.onChatReceived({type: 'system',message: 'Song is in history (' + found + ' of ' + plugCubed.history.length + ')',language: Models.user.data.language});
+                }
             }
         }
-        if (found > 0)
+        if (found > 0) {
             document.getElementById("chat-sound").playMentionSound()
             return Models.chat.onChatReceived({type: 'system',message: 'Song is in history (' + found + ' of ' + plugCubed.history.length + '), but was skipped on the last play',language: Models.user.data.language});
+        }
     },
     getTimestamp: function() {
         var time = new Date();
