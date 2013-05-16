@@ -221,18 +221,20 @@ plugCubedModel = Class.extend({
         }
     },
     colorInfo: {
-        you        : { title: 'You',         color: 'FFDD6F' },
-        regular    : { title: 'Regular',     color: 'B0B0B0' },
-        featureddj : { title: 'Featured DJ', color: 'E90E82' },
-        bouncer    : { title: 'Bouncer',     color: 'E90E82' },
-        manager    : { title: 'Manager',     color: 'E90E82' },
-        cohost     : { title: 'Co-Host',     color: 'E90E82' },
-        host       : { title: 'Host',        color: 'E90E82' },
-        ambassador : { title: 'Ambassador',  color: '9A50FF' },
-        admin      : { title: 'Admin',       color: '42A5DC' },
-        join       : { title: 'User Join',   color: '3366FF' },
-        leave      : { title: 'User Leave',  color: '3366FF' },
-        curate     : { title: 'User Curate', color: '00FF00' }
+        you        : { title: 'You',          color: 'FFDD6F' },
+        regular    : { title: 'Regular',      color: 'B0B0B0' },
+        featureddj : { title: 'Featured DJ',  color: 'E90E82' },
+        bouncer    : { title: 'Bouncer',      color: 'E90E82' },
+        manager    : { title: 'Manager',      color: 'E90E82' },
+        cohost     : { title: 'Co-Host',      color: 'E90E82' },
+        host       : { title: 'Host',         color: 'E90E82' },
+        ambassador : { title: 'Ambassador',   color: '9A50FF' },
+        admin      : { title: 'Admin',        color: '42A5DC' },
+        join       : { title: 'User Join',    color: '3366FF' },
+        leave      : { title: 'User Leave',   color: '3366FF' },
+        curate     : { title: 'User Curate',  color: '00FF00' },
+        stats      : { title: 'Song Stats',   color: '66FFFF' },
+        updates    : { title: 'Song Updates', color: 'FFFF00' }
     },
     settings: {
         recent      : false,
@@ -261,7 +263,9 @@ plugCubedModel = Class.extend({
             admin      : '42A5DC',
             join       : '3366FF',
             leave      : '3366FF',
-            curate     : '00FF00'
+            curate     : '00FF00',
+            stats      : '66FFFF',
+            updates    : 'FFFF00'
         },
         alerts      : {
             join       : false,
@@ -998,10 +1002,12 @@ plugCubedModel = Class.extend({
             if (a.id == id && (~~i + 2) < 51) {
                 found = ~~i + 2;
                 if (!a.wasSkipped)
+                    document.getElementById("chat-sound").playMentionSound()
                     return Models.chat.onChatReceived({type: 'system',message: 'Song is in history (' + found + ' of ' + plugCubed.history.length + ')',language: Models.user.data.language});
             }
         }
         if (found > 0)
+            document.getElementById("chat-sound").playMentionSound()
             return Models.chat.onChatReceived({type: 'system',message: 'Song is in history (' + found + ' of ' + plugCubed.history.length + '), but was skipped on the last play',language: Models.user.data.language});
     },
     getTimestamp: function() {
