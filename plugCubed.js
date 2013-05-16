@@ -300,6 +300,10 @@ plugCubedModel = Class.extend({
             this.settings.autoMuted = true;
             this.log(Models.room.data.media.title + ' auto-muted.', null, this.colors.infoMessage2);
         };
+        if (!this.settings.emoji) {
+            if (Emoji._emojify === undefined) Emoji._emojify = Emoji.emojify
+            Emoji.emojify = function(data) {return data;}
+        }
     },
     /**
      * @this {plugCubedModel}
