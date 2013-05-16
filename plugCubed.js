@@ -718,8 +718,8 @@ plugCubedModel = Class.extend({
                 .append(
                     $('<form/>')
                     .submit('return false')
-                    .append(Dialog.getCheckBox('Enable', 'enabled', this.settings.chatlimit.enabled).css('top',10) .css('left',10))
-                    .append(Dialog.getInputField('Limit','chat-limit',0,this.settings.chatlimit.limit).css('top',30) .css('left',10))
+                    .append(Dialog.getCheckBox('Enable','enabled',this.settings.chatlimit.enabled).css('top',10) .css('left',10))
+                    .append(Dialog.getInputField('chat-limit','Limit',0,this.settings.chatlimit.limit).css('top',30) .css('left',10))
                 )
             )
             .append(Dialog.getCancelButton())
