@@ -1176,7 +1176,7 @@ plugCubedModel = Class.extend({
             }
             return true;
         }
-        if (value.indexOf('/getpos ') === 0) {
+        if (value.indexOf('/getpos') === 0) {
             var lookup = plugCubed.getUser(value.substr(8)),
                 user = lookup === null ? Models.user.data : lookup,
                 spot = Models.room.getWaitListPosition(user.id);
