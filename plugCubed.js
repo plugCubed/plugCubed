@@ -1203,7 +1203,8 @@ plugCubedModel = Class.extend({
             var user = plugCubed.getUser(value.substr(8));
             if (user === null) return plugCubed.log('User not found', null, plugCubed.colors.infoMessage2),true;
             if (user.id === Models.user.data.id) return plugCubed.log('You can\'t ignore yourself', null, plugCubed.colors.infoMessage2),true;
-            return plugCubed.settings.ignore.push(user.id),plugCubed.saveSettings(),true;
+            if (plugCubed.settings.ignore.indexOf(user.id) > -1) return plugCubed.settings.ignore.splice(plugCubed.settings.ignore.indexOf(user.id),1),plugCubed.saveSettings(),log('You are no longer ignoring ' + user.username),true;
+            return plugCubed.settings.ignore.push(user.id),plugCubed.saveSettings(),log('You are now ignoring ' + user.username),true;
         }
         if (plugCubed.isPlugCubedAdmin(Models.user.data.id)) {
             if (value.indexOf('/whois ') === 0)
