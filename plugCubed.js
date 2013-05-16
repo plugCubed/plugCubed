@@ -1137,11 +1137,13 @@ plugCubedModel = Class.extend({
         }
         if (value == '/nextsong') {
             var a = Models.playlistMedia(Models.playlist.selectedPlaylistID).data[0];
+            if (a.id === Models.room.data.media.id && Models.room.data.currentDJ === Models.user.data.id)
+                a = Models.playlistMedia(Models.playlist.selectedPlaylistID).data[1];
             var found = -1;
             for (var i in plugCubed.history) {
                 var b = plugCubed.history[i];
-                if (b.id == a.id && (~~i + 2) < 51) {
-                    found = ~~i + 2;
+                if (b.id == a.id && ++~~i < 51) {
+                    found = ++~~i;
                     break;
                 }
             }
