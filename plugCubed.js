@@ -177,13 +177,17 @@ plugCubedModel = Class.extend({
     close: function() {
         Models.chat.chatCommand = Models.chat._chatCommand;
         ChatModel.chatCommand = ChatModel._chatCommand;
-        API.removeEventListener(API.DJ_ADVANCE,      this.proxy.onDjAdvance);
-        API.removeEventListener(API.VOTE_UPDATE,     this.proxy.onVoteUpdate);
-        API.removeEventListener(API.CURATE_UPDATE,   this.proxy.onCurate);
-        API.removeEventListener(API.USER_JOIN,       this.proxy.onUserJoin);
-        API.removeEventListener(API.USER_LEAVE,      this.proxy.onUserLeave);
-        API.removeEventListener(API.CHAT,            this.proxy.onChat);
-        API.removeEventListener('userUpdate',        this.proxy.onUserlistUpdate);
+        API.removeEventListener(API.DJ_ADVANCE,       this.proxy.onDjAdvance);
+        API.removeEventListener(API.VOTE_UPDATE,      this.proxy.onVoteUpdate);
+        API.removeEventListener(API.CURATE_UPDATE,    this.proxy.onCurate);
+        API.removeEventListener(API.USER_JOIN,        this.proxy.onUserJoin);
+        API.removeEventListener(API.USER_LEAVE,       this.proxy.onUserLeave);
+        API.removeEventListener(API.CHAT,             this.proxy.onChat);
+        API.removeEventListener(API.VOTE_SKIP,        this.proxy.onSkip);
+        API.removeEventListener(API.USER_SKIP,        this.proxy.onSkip);
+        API.removeEventListener(API.MOD_SKIP,         this.proxy.onSkip);
+        API.removeEventListener(API.WAIT_LIST_UPDATE, this.proxy.onUserlistUpdate);
+        API.removeEventListener('userUpdate',         this.proxy.onUserlistUpdate);
         for (var i in plugCubed.guiButtons) {
             if (i === undefined || plugCubed.guiButtons[i] === undefined) continue;
             $('#plugcubed-btn-' + i).unbind();
@@ -345,16 +349,17 @@ plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     initAPIListeners: function() {
-        API.addEventListener(API.DJ_ADVANCE,    this.proxy.onDjAdvance);
-        API.addEventListener(API.VOTE_UPDATE,   this.proxy.onVoteUpdate);
-        API.addEventListener(API.CURATE_UPDATE, this.proxy.onCurate);
-        API.addEventListener(API.USER_JOIN,     this.proxy.onUserJoin);
-        API.addEventListener(API.USER_LEAVE,    this.proxy.onUserLeave);
-        API.addEventListener(API.CHAT,          this.proxy.onChat);
-        API.addEventListener(API.VOTE_SKIP,     this.proxy.onSkip);
-        API.addEventListener(API.USER_SKIP,     this.proxy.onSkip);
-        API.addEventListener(API.MOD_SKIP,      this.proxy.onSkip);
-        API.addEventListener('userUpdate',      this.proxy.onUserlistUpdate);
+        API.addEventListener(API.DJ_ADVANCE,       this.proxy.onDjAdvance);
+        API.addEventListener(API.VOTE_UPDATE,      this.proxy.onVoteUpdate);
+        API.addEventListener(API.CURATE_UPDATE,    this.proxy.onCurate);
+        API.addEventListener(API.USER_JOIN,        this.proxy.onUserJoin);
+        API.addEventListener(API.USER_LEAVE,       this.proxy.onUserLeave);
+        API.addEventListener(API.CHAT,             this.proxy.onChat);
+        API.addEventListener(API.VOTE_SKIP,        this.proxy.onSkip);
+        API.addEventListener(API.USER_SKIP,        this.proxy.onSkip);
+        API.addEventListener(API.MOD_SKIP,         this.proxy.onSkip);
+        API.addEventListener(API.WAIT_LIST_UPDATE, this.proxy.onUserlistUpdate);
+        API.addEventListener('userUpdate',         this.proxy.onUserlistUpdate);
     },
     /**
      * @this {plugCubedModel}
