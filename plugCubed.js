@@ -114,11 +114,11 @@ plugCubedModel = Class.extend({
         ChatModel.chatCommand   = this.customChatCommand;
         
         this.loadSettings();
-        $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://rawgithub.com/TATDK/plugCubed/1.6.0/plugCubed.css" />');
+        $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://tatdk.github.io/plugCubed/compiled/plugCubed.css" />');
         $('body').append(
             '<div id="side-left" class="sidebar"><div class="sidebar-content"></div></div>' +
             '<div id="side-right" class="sidebar"><div class="sidebar-handle"><span>||</span></div><div class="sidebar-content"></div></div>'
-        ).append('<script type="text/javascript" src="https://rawgithub.com/TATDK/plugCubed/1.6.0/thirdparty.js"></script>');
+        ).append('<script type="text/javascript" src="http://tatdk.github.io/plugCubed/compiled/thirdparty.js"></script>');
         this.initGUI();
         this.initAPIListeners();
         if (this.settings.userlist) {
@@ -151,7 +151,7 @@ plugCubedModel = Class.extend({
                 plugCubed.socket.onclose = function() {};
                 plugCubed.socket.close();
                 plugCubed.log('A new version of plug&#179; has been released. Your script will reload in a few seconds.', null, plugCubed.colors.infoMessage1)
-                setTimeout(function() { $.getScript('https://rawgithub.com/TATDK/plugCubed/1.6.0/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
+                setTimeout(function() { $.getScript('http://tatdk.github.io/plugCubed/compiled/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
             }
         }
         /**
