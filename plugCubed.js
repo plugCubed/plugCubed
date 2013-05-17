@@ -17,30 +17,30 @@
  * @author  Jeremy "Colgate" Richardson
  * @author  Thomas "TAT" Andresen
  */
-if (plugCubed !== undefined)
+if (typeof plugCubed !== 'undefined')
     plugCubed.close();
-String.prototype.equalsIgnoreCase = function(other) {
-    return this.toLowerCase() === other.toLowerCase();
+String.prototype.equalsIgnoreCase = function(other)    { return typeof other !== 'string' ? false : this.toLowerCase() === other.toLowerCase(); };
+String.prototype.isNumber         = function()         { return !isNaN(parseInt(this,10)) && isFinite(this); };
+String.prototype.isHEX            = function()         { return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(this.substr(0,1) === '#' ? this : '#' + this); };
+Math.randomRange                  = function(min, max) { return min + Math.floor(Math.random()*(max-min+1)); };
+Emoji._emojify = Emoji.emojify;
+console.info = function(data) {
+    console.log(data);
+    if (_PCL !== undefined) {
+        log('<span style="color:#FF0000">Disconnected at ' + plugCubed.getTimestamp() + '! Reloading the page in a few seconds.</span>');
+        setTimeout(function() { location.reload(true); },3E3);
+    } else log('<span style="color:#FF0000">Disconnected at ' + plugCubed.getTimestamp() + '! </span>');
 };
-String.prototype.isNumber = function() { return !isNaN(parseInt(this,10)) && isFinite(this); };
-String.prototype.isHEX = function() {
-    if (this.substr(0,1) !== "#") a = "#" + this;
-    else a = this;
-    return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(a);
-};
-Math.randomRange = function(min, max) {
-    return min + Math.floor(Math.random()*(max-min+1));
-};
-
-var plugCubedModel = Class.extend({
+var _PCL,
+plugCubedModel = Class.extend({
     guiButtons: {},
     detectPdP: function() {
         return typeof(pdpSocket) !== 'undefined' && pdpSocket._base_url === 'http://socket.plugpony.net:9000/gateway';
     },
     version: {
         major: 1,
-        minor: 5,
-        patch: 4
+        minor: 6,
+        patch: 0
     },
     /**
      * @this {plugCubedModel}
@@ -59,7 +59,9 @@ var plugCubedModel = Class.extend({
                 onAFKClick:       $.proxy(this.onAFKClick,      this),
                 onNotifyClick:    $.proxy(this.onNotifyClick,   this),
                 onStreamClick:    $.proxy(this.onStreamClick,   this),
+                onChatLimitClick: $.proxy(this.onChatLimitClick,this),
                 onColorClick:     $.proxy(this.onColorClick,    this),
+                onEmojiClick:     $.proxy(this.onEmojiClick,    this),
             },
             onDjAdvance:          $.proxy(this.onDjAdvance,     this),
             onVoteUpdate:         $.proxy(this.onVoteUpdate,    this),
@@ -71,21 +73,23 @@ var plugCubedModel = Class.extend({
             onSkip:               $.proxy(this.onSkip,          this)
         };
         this.colors = {
-            userCommands: "#66FFFF",
-            modCommands:  "#FF0000",
-            infoMessage1: "#FFFF00",
-            infoMessage2: "#66FFFF"
+            userCommands: '66FFFF',
+            modCommands:  'FF0000',
+            infoMessage1: 'FFFF00',
+            infoMessage2: '66FFFF'
         };
         this.defaultAwayMsg = 'I\'m away from keyboard.';
 
-        this.history = [];
-        this.getHistory();
+        setTimeout(function() {
+            plugCubed.history = [];
+            plugCubed.getHistory();
+        },1);
 
         this.customColorsStyle = $('<style type="text/css"></css>');
         $('head').append(this.customColorsStyle);
 
-        this.log("Running plug&#179; version " + this.version.major + "." + this.version.minor + "." + this.version.patch, null, this.colors.infoMessage1)
-        this.log("Use '/commands' to see expanded chat commands.", null, this.colors.infoMessage2);
+        this.log('Running plug&#179; version ' + this.version.major + '.' + this.version.minor + '.' + this.version.patch, null, this.colors.infoMessage1);
+        this.log('Use \'/commands\' to see expanded chat commands.', null, this.colors.infoMessage2);
 
         /**
          * @this {plugCubedModel}
@@ -95,10 +99,10 @@ var plugCubedModel = Class.extend({
             var width = 620,content = user;
             if (mod !== undefined)
                 content = '<div id="plugCubedCommands"><ul><li><a href="#user">User Commands</a></li><li><a href="#mod">Moderation Commands</a></li></ul><div id="user">' + user + '</div><div id="mod">' + mod + '</div></div>';
-            this.showDialog($("<div/>").attr("id","dialog-alert").addClass("dialog").css("left",Main.LEFT+(Main.WIDTH-width-15)/2).css("top",200)
-            .width(width+25).height(470).append(this.getHeader('plug&#179; Commands')).append($("<div/>").addClass("dialog-body")
+            this.showDialog($('<div/>').attr('id','dialog-alert').addClass('dialog').css('left',Main.LEFT+(Main.WIDTH-width-15)/2).css('top',200)
+            .width(width+25).height(470).append(this.getHeader('plug&#179; Commands')).append($('<div/>').addClass('dialog-body')
             .append(this.getMessage(content).width(width))));
-            $("#plugCubedCommands").tabs();
+            $('#plugCubedCommands').tabs();
         };
 
         if (Models.chat._chatCommand === undefined)
@@ -110,248 +114,11 @@ var plugCubedModel = Class.extend({
         ChatModel.chatCommand   = this.customChatCommand;
         
         this.loadSettings();
-
-        var styles = [
-            '#side-left .sidebar-content p { margin: 0; padding-top: 2px; text-indent: 15px; font-size: 10px; height:15px; }',
-            '#side-left .sidebar-content p:hover { color:#66ff33; }',
-            '#side-left .sidebar-content p:first-child { padding-top: 0px !important; }',
-            '#side-left .sidebar-content h1.users { text-indent: 8px; color: #66FFFF; font-size: 16px; }',
-            '#side-left .sidebar-content h3.waitlistspot { color: #66FFFF; text-align: left; font-size: 15px; margin-left: 8px }',
-            '#side-left .sidebar-content p span.admin_current,#side-left .sidebar-content p span.admin_meh,#side-left .sidebar-content p span.admin_undecided,#side-left .sidebar-content p span.admin_woot,#side-left .sidebar-content p span.ambassador_current,',
-            '#side-left .sidebar-content p span.ambassador_meh,#side-left .sidebar-content p span.ambassador_undecided,#side-left .sidebar-content p span.ambassador_woot,#side-left .sidebar-content p span.bouncer_current,#side-left .sidebar-content p span.bouncer_meh,',
-            '#side-left .sidebar-content p span.bouncer_undecided,#side-left .sidebar-content p span.bouncer_woot,#side-left .sidebar-content p span.host_current,#side-left .sidebar-content p span.host_meh,#side-left .sidebar-content p span.host_undecided,',
-            '#side-left .sidebar-content p span.fdj_undecided,#side-left .sidebar-content p span.fdj_woot,#side-left .sidebar-content p span.fdj_meh,#side-left .sidebar-content p span.fdj_current,#side-left .sidebar-content p span.woot_undecided,#side-left .sidebar-content p span.curate_meh,#side-left .sidebar-content p span.curate_woot,',
-            '#side-left .sidebar-content p span.plugcubed_undecided,#side-left .sidebar-content p span.plugcubed_woot,#side-left .sidebar-content p span.plugcubed_meh,#side-left .sidebar-content p span.plugcubed_current,#side-left .sidebar-content p span.vip_woot,#side-left .sidebar-content p span.vip_meh,#side-left .sidebar-content p span.vip_undecided,#side-left .sidebar-content p span.vip_current,',
-            '#side-left .sidebar-content p span.host_woot,#side-left .sidebar-content p span.manager_current,#side-left .sidebar-content p span.manager_meh,#side-left .sidebar-content p span.manager_undecided,#side-left .sidebar-content p span.manager_woot,#side-left .sidebar-content p span.void {',
-            '    background: url(http://tatdk.github.com/plugCubed/images/sprites.png) no-repeat;width:15px;height: 15px;position: relative;left: -5px;top:4px;display:inline-block',
-            '}',
-            '#side-left .sidebar-content p span.admin_current {background-position: -45px 0;}',
-            '#side-left .sidebar-content p span.admin_meh {background-position: -30px 0;}',
-            '#side-left .sidebar-content p span.admin_undecided {background-position: -15px 0;}',
-            '#side-left .sidebar-content p span.admin_woot {background-position: 0 0;}',
-            '#side-left .sidebar-content p span.ambassador_current {background-position: -45px -15px;}',
-            '#side-left .sidebar-content p span.ambassador_meh {background-position: -30px -15px;}',
-            '#side-left .sidebar-content p span.ambassador_undecided {background-position: -15px -15px;}',
-            '#side-left .sidebar-content p span.ambassador_woot {background-position: 0 -15px;}',
-            '#side-left .sidebar-content p span.bouncer_current {background-position: -45px -60px;}',
-            '#side-left .sidebar-content p span.bouncer_meh {background-position: -30px -60px;}',
-            '#side-left .sidebar-content p span.bouncer_undecided {background-position: -15px -60px;}',
-            '#side-left .sidebar-content p span.bouncer_woot {background-position: 0 -60px;}',
-            '#side-left .sidebar-content p span.host_current {background-position: -45px -30px;}',
-            '#side-left .sidebar-content p span.host_meh {background-position: -30px -30px;}',
-            '#side-left .sidebar-content p span.host_undecided {background-position: -15px -30px;}',
-            '#side-left .sidebar-content p span.host_woot {background-position: 0 -30px;}',
-            '#side-left .sidebar-content p span.manager_current {background-position: -45px -45px;}',
-            '#side-left .sidebar-content p span.manager_meh {background-position: -30px -45px;}',
-            '#side-left .sidebar-content p span.manager_undecided {background-position: -15px -45px;}',
-            '#side-left .sidebar-content p span.manager_woot {background-position: 0 -45px;}',
-            '#side-left .sidebar-content p span.fdj_current {background-position: -45px -75px;}',
-            '#side-left .sidebar-content p span.fdj_meh {background-position: -30px -75px;}',
-            '#side-left .sidebar-content p span.fdj_undecided {background-position: -15px -75px;}',
-            '#side-left .sidebar-content p span.fdj_woot {background-position: 0 -75px;}',
-            '#side-left .sidebar-content p span.plugcubed_current {background-position: -45px -90px;}',
-            '#side-left .sidebar-content p span.plugcubed_meh {background-position: -30px -90px;}',
-            '#side-left .sidebar-content p span.plugcubed_undecided {background-position: -15px -90px;}',
-            '#side-left .sidebar-content p span.plugcubed_woot {background-position: 0 -90px;}',
-            '#side-left .sidebar-content p span.vip_current {background-position: -45px -105px;}',
-            '#side-left .sidebar-content p span.vip_meh {background-position: -30px -105px;}',
-            '#side-left .sidebar-content p span.vip_undecided {background-position: -15px -105px;}',
-            '#side-left .sidebar-content p span.vip_woot {background-position: 0 -105px;}',
-            '#side-left .sidebar-content p span.curate_meh {background-position: -30px -120px;}',
-            '#side-left .sidebar-content p span.curate_undecided {background-position: -15px -120px;}',
-            '#side-left .sidebar-content p span.curate_woot {background-position: 0 -120px;}',
-            '#side-left .sidebar-content p span.void {background-position: 0px -135px;}',
-            '#plugcubed-gui { position: absolute; margin-left:-522px; top: -320px; }',
-            '#plugcubed-gui h2 { background-color: #0b0b0b; height: 112px; width: 156px; margin: 0; color: #fff; font-size: 13px; font-variant: small-caps; padding: 8px 0 0 12px; border-top: 1px dotted #292929; }',
-            '#plugcubed-gui ul {list-style-type:none; margin:0; padding:0;}',
-            '#plugcubed-gui li {float:left;}',
-            '#plugcubed-gui p { background: #0b0b0b; height: 32px; padding-top: 8px; padding-left: 8px; cursor: pointer; font-variant: small-caps; width: 84px; font-size: 15px; margin: 0; }',
-            '#plugcubed-gui p:hover {background-color: #3C3C3C}',
-            '#plugcubed-gui h1 { background-color: #0b0b0b; height: 32px; padding-top: 8px; padding-left: 8px; cursor: pointer; font-variant: small-caps; width: 84px; font-size: 20px; margin: 0; }',
-            '.sidebar {',
-            '    position: fixed;',
-            '    top: 0;',
-            '    height: 100%;',
-            '    width: 200px;',
-            '    z-index: 99999;',
-            '    -moz-user-select: none;',
-            '    -khtml-user-select: none;',
-            '    -webkit-user-select: none;',
-            '    user-select: none;',
-            '    background: rgb(69,72,77);',
-            '    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ1NDg0ZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);',
-            '    background: -moz-linear-gradient(top,  rgba(69,72,77,1) 0%, rgba(0,0,0,1) 100%);',
-            '    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,1)), color-stop(100%,rgba(0,0,0,1)));',
-            '    background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);',
-            '    background: -o-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);',
-            '    background: -ms-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);',
-            '    background: linear-gradient(to bottom,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);',
-            '    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#45484d\', endColorstr=\'#000000\',GradientType=0 );',
-            '}',
-            '.sidebar#side-left {',
-            '    left: -220px;',
-            '    z-index: 99999;',
-            '}',
-            '.sidebar#side-right {',
-            '    right: -190px;',
-            '    z-index: 99999;',
-            '}',
-            '.sidebar-handle {',
-            '    width: 12px;',
-            '    height: 100%;',
-            '    z-index: 99999;',
-            '    margin: 0;',
-            '    padding: 0;',
-            '    background: #474747;',
-            '    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, .9);',
-            '    cursor: "ne-resize";',
-            '}',
-            '.sidebar-handle span {',
-            '    display: block;',
-            '    position: absolute;',
-            '    width: 10px;',
-            '    top: 50%;',
-            '    text-align: center;',
-            '    letter-spacing: -1px;',
-            '    color: #000;',
-            '}',
-            '#side-left .sidebar-handle {',
-            'position: absolute;',
-            'right: 0;',
-            'cursor: col-resize;',
-            '}',
-            '.sidebar-content {',
-            '    position: absolute;',
-            '    width: 185px;',
-            '    float: left;',
-            '    height: 100%;',
-            '    padding: 15px;',
-            '    overflow: scroll;',
-            '}',
-            '#side-left a {',
-            '    display: block;',
-            '    min-width: 100%;',
-            '    cursor: pointer;',
-            '    padding: 5px;',
-            '    border-radius: 5px;',
-            '}',
-            '#side-left a span {',
-            '    padding-right: 8px;',
-            '}',
-            '#side-left a:hover {',
-            '    background-color: #333;',
-            '}',
-            '#side-left hr {',
-            '    height: 0;',
-            '    border: none;',
-            '    border-top: 1px solid #AAA;',
-            '    padding: 0;',
-            '    margin: 10px 0;',
-            '}',
-            '#side-right .sidebar-handle {',
-            '    float: left;',
-            '}',
-            '#side-right a {',
-            '    display: block;',
-            '    min-width: 100%;',
-            '    cursor: pointer;',
-            '    padding: 5px;',
-            '    border-radius: 3px;',
-            '}',
-            '#side-right a span {',
-            '    padding-right: 8px;',
-            '}',
-            '#side-right a:hover {',
-            '    background-color: #333;',
-            '}',
-            '#side-right hr {',
-            '    height: 0;',
-            '    border: none;',
-            '    border-top: 1px solid #AAA;',
-            '    padding: 0;',
-            '    margin: 10px 0px 10px 3px;',
-            '}',
-            '.sidebar-content ::-webkit-scrollbar {',
-            '    width: 12px;',
-            '}',
-            '.sidebar-content ::-webkit-scrollbar-track {',
-            '    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); ',
-            '    -webkit-border-radius: 10px;',
-            '    border-radius: 10px;',
-            '}',
-            '.sidebar-content ::-webkit-scrollbar-thumb {',
-            '    -webkit-border-radius: 10px;',
-            '    border-radius: 10px;',
-            '    background: rgba(255,255,255,255,0.4); ',
-            '    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); ',
-            '}',
-            '.sidebar-content ::-webkit-scrollbar-thumb:window-inactive {',
-            '    background: rgba(255,255,255,255,0.2); ',
-            '}',
-            '[class^="status-"], [class*=" status-"] {',
-            '    border-radius: 50%;',
-            '    width: 10px;',
-            '    height: 10px;',
-            '    background: yellow;',
-            '    display: inline-block;',
-            '    margin-right: 5px;',
-            '}',
-            '.status-on { background: green; }',
-            '.status-off { background: red; }',
-            '#dialog-custom-colors { width: 230px; height: 480px; }',
-            '#dialog-custom-colors .dialog-body { height: 125px; }',
-            '#dialog-custom-colors .dialog-default-button { right: 170px; width: 50px; }',
-            '#dialog-custom-colors .dialog-cancel-button { right: 100px; }',
-            '#dialog-custom-colors .dialog-submit-button { width: 75px; }',
-            '#dialog-custom-colors .dialog-checkbox-container-enabled { left: 10px; top: 5px; }',
-            '#dialog-custom-colors .dialog-input-background { width: 60px; left:150px; }',
-            '#dialog-notify { width: 190px; height: 220px; }',
-            '#dialog-notify .dialog-body { height: 125px; }',
-            '#dialog-notify .dialog-cancel-button { width: 85px; right: 98px; }',
-            '#dialog-notify .dialog-submit-button { width: 85px; right: 5px; }',
-            '#dialog-notify .dialog-checkbox-container-enabled { left: 10px; top: 5px; }',
-            '#dialog-notify .dialog-input-background { width: 60px; left:150px; }'
-        ];
-        var scripts = [
-            '/**',
-            '* hoverIntent r6 // 2011.02.26 // jQuery 1.5.1+',
-            '* <http://cherne.net/brian/resources/jquery.hoverIntent.html>',
-            '* ',
-            '* @param  f  onMouseOver function || An object with configuration options',
-            '* @param  g  onMouseOut function  || Nothing (use configuration options object)',
-            '* @author    Brian Cherne brian(at)cherne(dot)net',
-            '*/',
-            "(function($){$.fn.hoverIntent=function(f,g){var cfg={sensitivity:7,interval:100,timeout:0};cfg=$.extend(cfg,g?{over:f,out:g}:f);var cX,cY,pX,pY;var track=function(ev){cX=ev.pageX;cY=ev.pageY};var compare=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);if((Math.abs(pX-cX)+Math.abs(pY-cY))<cfg.sensitivity){$(ob).unbind('mousemove',track);ob.hoverIntent_s=1;return cfg.over.apply(ob,[ev])}else{pX=cX;pY=cY;ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}};var delay=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);ob.hoverIntent_s=0;return cfg.out.apply(ob,[ev])};var handleHover=function(e){var ev=jQuery.extend({},e);var ob=this;if(ob.hoverIntent_t){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t)}if(e.type=='mouseenter'){pX=ev.pageX;pY=ev.pageY;$(ob).bind('mousemove',track);if(ob.hoverIntent_s!=1){ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}}else{$(ob).unbind('mousemove',track);if(ob.hoverIntent_s==1){ob.hoverIntent_t=setTimeout(function(){delay(ev,ob)},cfg.timeout)}}};return this.bind('mouseenter',handleHover).bind('mouseleave',handleHover)}})(jQuery);",
-            'if (jQuery.easing.easeOutQuart === undefined) jQuery.easing.easeOutQuart = function (a,b,c,d,e) { return -d*((b=b/e-1)*b*b*b-1)+c; }',
-            '$("#side-right")',
-            '    .hoverIntent(function() {',
-            '        var timeout_r = $(this)',
-            '            .data("timeout_r");',
-            '        if (timeout_r) {',
-            '            clearTimeout(timeout_r);',
-            '        }',
-            '        $(this)',
-            '            .animate({',
-            '                "right": "0px"',
-            '            }, 300, "easeOutQuart");',
-            '    }, function() {',
-            '        $(this)',
-            '            .data("timeout_r", setTimeout($.proxy(function() {',
-            '            $(this)',
-            '                .animate({',
-            '                    "right": "-190px"',
-            '                }, 300, "easeOutQuart");',
-            '       }, this), 500));',
-            '    });'
-        ];
-        $('body').prepend('<style type="text/css" id="plugcubed-css">' + "\n" + styles.join("\n") + "\n" + '</style>');
-        $('body').append('<div id="side-left" class="sidebar">' +
-        '    <div class="sidebar-content"></div>' +
-        '</div><div id="side-right" class="sidebar">' +
-        '    <div class="sidebar-handle"><span>||</span></div>' +
-        '    <div class="sidebar-content"></div>' +
-        '</div>');
-        $('body').append('<script type="text/javascript" id="plugcubed-js-extra">' + "\n" + scripts.join("\n") + "\n" + '</script>');
+        $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://tatdk.github.io/plugCubed/compiled/plugCubed.css" />');
+        $('body').append(
+            '<div id="side-left" class="sidebar"><div class="sidebar-content"></div></div>' +
+            '<div id="side-right" class="sidebar"><div class="sidebar-handle"><span>||</span></div><div class="sidebar-content"></div></div>'
+        ).append('<script type="text/javascript" src="http://tatdk.github.io/plugCubed/compiled/thirdparty.js"></script>');
         this.initGUI();
         this.initAPIListeners();
         if (this.settings.userlist) {
@@ -366,7 +133,7 @@ var plugCubedModel = Class.extend({
             if (a.curVote   === undefined) a.curVote   = 0;
             if (a.joinTime  === undefined) a.joinTime  = this.getTimestamp();
         }
-        this.socket = new SockJS("http://socket.plugpony.net:923/gateway");
+        this.socket = new SockJS('http://socket.plugpony.net:923/gateway');
         this.socket.tries = 0;
         /**
          * @this {SockJS}
@@ -383,7 +150,7 @@ var plugCubedModel = Class.extend({
             if (data.type === 'update') {
                 plugCubed.socket.onclose = function() {};
                 plugCubed.socket.close();
-                plugCubed.log("A new version of plug&#179; has been released. Your script will reload in a few seconds.", null, plugCubed.colors.infoMessage1)
+                plugCubed.log('A new version of plug&#179; has been released. Your script will reload in a few seconds.', null, plugCubed.colors.infoMessage1)
                 setTimeout(function() { $.getScript('http://tatdk.github.io/plugCubed/compiled/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
             }
         }
@@ -392,13 +159,17 @@ var plugCubedModel = Class.extend({
          */
         this.socket.onclose = function() {
             this.tries++;
-            if (this.tries < 5)
-                setTimeout(function() { plugCubed.socket = new SockJS("http://socket.plugpony.net:923/gateway"); },5000);
-            else if (this.tries < 30)
-                setTimeout(function() { plugCubed.socket = new SockJS("http://socket.plugpony.net:923/gateway"); },30000);
-            else if (this.tries < 60)
-                setTimeout(function() { plugCubed.socket = new SockJS("http://socket.plugpony.net:923/gateway"); },60000);
+
+            var delay;
+            if (this.tries < 5)       delay = 5;
+            else if (this.tries < 30) delay = 30;
+            else if (this.tries < 60) delay = 60;
+            else                      return;
+
+            setTimeout(function() { plugCubed.socket = new SockJS('http://socket.plugpony.net:923/gateway'); },delay*1E3);
         }
+
+        SocketListener.chat = function(a) { if (typeof plugCubed !== 'undefined' && a.fromID && plugCubed.settings.ignore.indexOf(a.fromID) > -1) return; Models.chat.receive(a); API.delayDispatch(API.CHAT,a); }
     },
     /**
      * @this {plugCubedModel}
@@ -406,16 +177,20 @@ var plugCubedModel = Class.extend({
     close: function() {
         Models.chat.chatCommand = Models.chat._chatCommand;
         ChatModel.chatCommand = ChatModel._chatCommand;
-        API.removeEventListener(API.DJ_ADVANCE,      this.proxy.onDjAdvance);
-        API.removeEventListener(API.VOTE_UPDATE,     this.proxy.onVoteUpdate);
-        API.removeEventListener(API.CURATE_UPDATE,   this.proxy.onCurate);
-        API.removeEventListener(API.USER_JOIN,       this.proxy.onUserJoin);
-        API.removeEventListener(API.USER_LEAVE,      this.proxy.onUserLeave);
-        API.removeEventListener(API.CHAT,            this.proxy.onChat);
-        API.removeEventListener('userUpdate',        this.proxy.onUserlistUpdate);
+        API.removeEventListener(API.DJ_ADVANCE,       this.proxy.onDjAdvance);
+        API.removeEventListener(API.VOTE_UPDATE,      this.proxy.onVoteUpdate);
+        API.removeEventListener(API.CURATE_UPDATE,    this.proxy.onCurate);
+        API.removeEventListener(API.USER_JOIN,        this.proxy.onUserJoin);
+        API.removeEventListener(API.USER_LEAVE,       this.proxy.onUserLeave);
+        API.removeEventListener(API.CHAT,             this.proxy.onChat);
+        API.removeEventListener(API.VOTE_SKIP,        this.proxy.onSkip);
+        API.removeEventListener(API.USER_SKIP,        this.proxy.onSkip);
+        API.removeEventListener(API.MOD_SKIP,         this.proxy.onSkip);
+        API.removeEventListener(API.WAIT_LIST_UPDATE, this.proxy.onUserlistUpdate);
+        API.removeEventListener('userUpdate',         this.proxy.onUserlistUpdate);
         for (var i in plugCubed.guiButtons) {
             if (i === undefined || plugCubed.guiButtons[i] === undefined) continue;
-            $("#plugcubed-btn-" + i).unbind();
+            $('#plugcubed-btn-' + i).unbind();
             delete plugCubed.guiButtons[i];
         }
         $('#plugcubed-css').remove();
@@ -424,29 +199,46 @@ var plugCubedModel = Class.extend({
         $('#side-left').remove();
         this.customColorsStyle.remove();
         this.socket.close();
+        delete plugCubed;
     },
     /**
      * @this {plugCubedModel}
      */
     showUserlist: function() {
-        $("#side-left").show().animate({ "left": "0px" }, 300, "easeOutQuart");
+        $('#side-left').show().animate({ 'left': '0px' }, 300, typeof jQuery.easing.easeOutQuart === 'undefined' ? undefined : 'easeOutQuart');
         if (this.detectPdP()) {
-            if (userlistShow === true) $("#pdpUsers").hide();
-            $("#pdpUsersToggle").hide();
+            if (userlistShow === true) $('#pdpUsers').hide();
+            $('#pdpUsersToggle').hide();
         }
     },
     /**
      * @this {plugCubedModel}
      */
     hideUserlist: function() {
-        var sbarWidth = -$("#side-left").width()-20;
-        $("#side-left").animate({ "left": sbarWidth + "px" }, 300, "easeOutQuart", function() {
-            $("#side-left").hide();
+        var sbarWidth = -$('#side-left').width()-20;
+        $('#side-left').animate({ 'left': sbarWidth + 'px' }, 300, typeof jQuery.easing.easeOutQuart === 'undefined' ? undefined : 'easeOutQuart', function() {
+            $('#side-left').hide();
         });
         if (this.detectPdP()) {
-            if (userlistShow === true) $("#pdpUsers").show();
-            $("#pdpUsersToggle").show();
+            if (userlistShow === true) $('#pdpUsers').show();
+            $('#pdpUsersToggle').show();
         }
+    },
+    colorInfo: {
+        you        : { title: 'You',          color: 'FFDD6F' },
+        regular    : { title: 'Regular',      color: 'B0B0B0' },
+        featureddj : { title: 'Featured DJ',  color: 'E90E82' },
+        bouncer    : { title: 'Bouncer',      color: 'E90E82' },
+        manager    : { title: 'Manager',      color: 'E90E82' },
+        cohost     : { title: 'Co-Host',      color: 'E90E82' },
+        host       : { title: 'Host',         color: 'E90E82' },
+        ambassador : { title: 'Ambassador',   color: '9A50FF' },
+        admin      : { title: 'Admin',        color: '42A5DC' },
+        join       : { title: 'User Join',    color: '3366FF' },
+        leave      : { title: 'User Leave',   color: '3366FF' },
+        curate     : { title: 'User Curate',  color: '00FF00' },
+        stats      : { title: 'Song Stats',   color: '66FFFF' },
+        updates    : { title: 'Song Updates', color: 'FFFF00' }
     },
     settings: {
         recent      : false,
@@ -458,6 +250,11 @@ var plugCubedModel = Class.extend({
         menu        : false,
         notify      : false,
         customColors: false,
+        emoji       : true,
+        chatlimit   : {
+            enabled : false,
+            limit   : 50
+        },
         colors      : {
             you        : 'FFDD6F',
             regular    : 'B0B0B0',
@@ -470,17 +267,20 @@ var plugCubedModel = Class.extend({
             admin      : '42A5DC',
             join       : '3366FF',
             leave      : '3366FF',
-            curate     : '00FF00'
+            curate     : '00FF00',
+            stats      : '66FFFF',
+            updates    : 'FFFF00'
         },
-        alerts: {
-            join: false,
-            leave: false,
-            curate: false,
-            songUpdate: false,
-            songStats: false
+        alerts      : {
+            join       : false,
+            leave      : false,
+            curate     : false,
+            songUpdate : false,
+            songStats  : false
         },
         registeredSongs: [],
-        autoMuted: false
+        ignore         : [],
+        autoMuted      : false
     },
     /**
      * @this {plugCubedModel}
@@ -502,11 +302,12 @@ var plugCubedModel = Class.extend({
         if (this.settings.registeredSongs.length > 0 && this.settings.registeredSongs.indexOf(Models.room.data.media.id) > -1) {
             Playback.setVolume(0);
             this.settings.autoMuted = true;
-            this.log(Models.room.data.media.title + " auto-muted.", null, this.colors.infoMessage2);
-
+            this.log(Models.room.data.media.title + ' auto-muted.', null, this.colors.infoMessage2);
         };
-
-
+        if (!this.settings.emoji) {
+            if (Emoji._emojify === undefined) Emoji._emojify = Emoji.emojify
+            Emoji.emojify = function(data) {return data;}
+        }
     },
     /**
      * @this {plugCubedModel}
@@ -548,28 +349,31 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     initAPIListeners: function() {
-        API.addEventListener(API.DJ_ADVANCE,    this.proxy.onDjAdvance);
-        API.addEventListener(API.VOTE_UPDATE,   this.proxy.onVoteUpdate);
-        API.addEventListener(API.CURATE_UPDATE, this.proxy.onCurate);
-        API.addEventListener(API.USER_JOIN,     this.proxy.onUserJoin);
-        API.addEventListener(API.USER_LEAVE,    this.proxy.onUserLeave);
-        API.addEventListener(API.CHAT,          this.proxy.onChat);
-        API.addEventListener(API.VOTE_SKIP,     this.proxy.onSkip);
-        API.addEventListener(API.USER_SKIP,     this.proxy.onSkip);
-        API.addEventListener(API.MOD_SKIP,      this.proxy.onSkip);
-        API.addEventListener('userUpdate',      this.proxy.onUserlistUpdate);
+        API.addEventListener(API.DJ_ADVANCE,       this.proxy.onDjAdvance);
+        API.addEventListener(API.VOTE_UPDATE,      this.proxy.onVoteUpdate);
+        API.addEventListener(API.CURATE_UPDATE,    this.proxy.onCurate);
+        API.addEventListener(API.USER_JOIN,        this.proxy.onUserJoin);
+        API.addEventListener(API.USER_LEAVE,       this.proxy.onUserLeave);
+        API.addEventListener(API.CHAT,             this.proxy.onChat);
+        API.addEventListener(API.VOTE_SKIP,        this.proxy.onSkip);
+        API.addEventListener(API.USER_SKIP,        this.proxy.onSkip);
+        API.addEventListener(API.MOD_SKIP,         this.proxy.onSkip);
+        API.addEventListener(API.WAIT_LIST_UPDATE, this.proxy.onUserlistUpdate);
+        API.addEventListener('userUpdate',         this.proxy.onUserlistUpdate);
     },
     /**
      * @this {plugCubedModel}
      */
     initGUI: function() {
-        this.addGUIButton(this.settings.autowoot,      'woot',        'Autowoot',           this.proxy.menu.onAutoWootClick);
-        this.addGUIButton(this.settings.autojoin,      'join',        'Autojoin',           this.proxy.menu.onAutoJoinClick);
-        this.addGUIButton(this.settings.userlist,      'userlist',    'Userlist',           this.proxy.menu.onUserlistClick);
-        this.addGUIButton(this.settings.customColors,  'colors',      'Custom Chat Colors', this.proxy.menu.onColorClick);
-        this.addGUIButton(this.settings.autorespond,   'autorespond', 'AFK Status',         this.proxy.menu.onAFKClick);
-        this.addGUIButton(this.settings.notify,        'notify',      'Notify',             this.proxy.menu.onNotifyClick);
-        this.addGUIButton(!DB.settings.streamDisabled, 'stream',      'Stream',             this.proxy.menu.onStreamClick);
+        this.addGUIButton(this.settings.autowoot,          'woot',        'Autowoot',           this.proxy.menu.onAutoWootClick);
+        this.addGUIButton(this.settings.autojoin,          'join',        'Autojoin',           this.proxy.menu.onAutoJoinClick);
+        this.addGUIButton(this.settings.userlist,          'userlist',    'Userlist',           this.proxy.menu.onUserlistClick);
+        this.addGUIButton(this.settings.customColors,      'colors',      'Custom Chat Colors', this.proxy.menu.onColorClick);
+        this.addGUIButton(this.settings.autorespond,       'autorespond', 'AFK Status',         this.proxy.menu.onAFKClick);
+        this.addGUIButton(this.settings.notify,            'notify',      'Notify',             this.proxy.menu.onNotifyClick);
+        this.addGUIButton(this.settings.chatlimit.enabled, 'chatlimit',   'Limit Chat Log',     this.proxy.menu.onChatLimitClick);
+        this.addGUIButton(!DB.settings.streamDisabled,     'stream',      'Stream',             this.proxy.menu.onStreamClick);
+        this.addGUIButton(this.settings.emoji,             'emoji',       'Emoji',              this.proxy.menu.onEmojiClick);
     },
     /**
      * @this {plugCubedModel}
@@ -593,7 +397,7 @@ var plugCubedModel = Class.extend({
     populateUserlist: function() {
         if ($('#side-left .sidebar-content').children().length > 0)
             $('#side-left .sidebar-content').append('<hr />');
-        $('#side-left .sidebar-content').bind("contextmenu",function(e){return false;});
+        $('#side-left .sidebar-content').bind('contextmenu',function(e){return false;});
         $('#side-left .sidebar-content').html('<h1 class="users">Users: ' + API.getUsers().length + '</h1>');
         var spot = Models.room.getWaitListPosition();
         var waitlistDiv = $('<h3></h3>').addClass('waitlistspot').text('Waitlist: ' + (spot !== null ? spot + ' / ' : '') + Models.room.data.waitList.length);
@@ -606,16 +410,16 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     log: function(message, from, color, changeToColor) {
-        var style  = "",
+        var style  = '',
             div,
             scroll = false;
 
-        if (color) style = 'style="color:' + color + ';"';
+        if (color) style = ' style="color:' + (color.substr(0,1) === '#' ? color : '#' + color) + ';"';
 
-        if (from) div = '<div class="chat-message"><span class="chat-from" ' + style + '>' + from + '</span><span class="chat-text" ' + style + '>: ' + message + '</span></div>';
-        else      div = '<div class="chat-message"><span class="chat-text" ' + style + '>' + message + '</span></div>';
+        if (from) div = '<div class="chat-message"><span class="chat-from"' + style + '>' + from + '</span><span class="chat-text"' + style + '>: ' + message + '</span></div>';
+        else      div = '<div class="chat-message"><span class="chat-text"' + style + '>' + message + '</span></div>';
 
-        if ($("#chat-messages")[0].scrollHeight - $("#chat-messages").scrollTop() == $("#chat-messages").outerHeight())
+        if ($('#chat-messages')[0].scrollHeight - $('#chat-messages').scrollTop() == $('#chat-messages').outerHeight())
             scroll = true;
 
         var curChatDiv = Popout ? Popout.Chat.chatMessages : Chat.chatMessages,
@@ -711,7 +515,7 @@ var plugCubedModel = Class.extend({
     },
     getUser: function(data) {
         data = data.trim();
-        if (data.substr(0,1) === "@")
+        if (data.substr(0,1) === '@')
             data = data.substr(1);
 
         var users = API.getUsers();
@@ -731,11 +535,11 @@ var plugCubedModel = Class.extend({
                 case 'kick':     service = ModerationKickUserService; break;
                 case 'removedj': service = ModerationRemoveDJService; break;
                 case 'adddj':    service = ModerationAddDJService;    break;
-                default:         log("Unknown moderation");          return;
+                default:         log('Unknown moderation');           return;
             }
             var user = this.getUser(target);
-            if (user === null) log("user not found");
-            else              new service(user.id, " ");
+            if (user === null) log('User not found');
+            else               new service(user.id,' ');
         }
     },
     /**
@@ -743,7 +547,7 @@ var plugCubedModel = Class.extend({
      */
     getUserInfo: function(data) {
         var user = this.getUser(data);
-        if (user === null) log("user not found");
+        if (user === null) log('User not found');
         else {
             var rank,
                 status,
@@ -764,40 +568,43 @@ var plugCubedModel = Class.extend({
             else                                                                                                   rank = 'User';
 
             if (waitlistpos === null) {
-                if (Models.room.data.djs[0].user.id === user.id)
-                    position = "Currently DJing";
-                else {
+                if (Models.room.data.djs.length > 0 && Models.room.data.djs[0].user.id === user.id) {
+                    position = 'Currently DJing';
+                    boothpos = 0;
+                } else {
                     for (var i = 1;i < Models.room.data.djs.length;i++)
                         boothpos = Models.room.data.djs[i].user.id === user.id ? i : boothpos;
                     if (boothpos < 0)
-                        position = "Not in waitlist nor booth";
+                        position = 'Not in waitlist nor booth';
                     else
-                        position = (boothpos + 1) + "/" + Models.room.data.djs.length + " in booth";
+                        position = (boothpos + 1) + '/' + Models.room.data.djs.length + ' in booth';
                 }
             } else
-                position = waitlistpos + "/" + Models.room.data.waitList.length + " in waitlist";
+                position = waitlistpos + '/' + Models.room.data.waitList.length + ' in waitlist';
 
             switch (user.status) {
-                case -1: status = "Idle"; break;
-                default: status = "Available"; break;
-                case 1:  status = "AFK"; break;
-                case 2:  status = "Working"; break;
-                case 3:  status = "Sleeping"; break;
+                case -1: status = 'Idle';      break;
+                default: status = 'Available'; break;
+                case 1:  status = 'AFK';       break;
+                case 2:  status = 'Working';   break;
+                case 3:  status = 'Sleeping';  break;
             }
 
             switch (user.vote) {
-                case -1:  voted = "Meh"; break;
-                default:  voted = "Undecided"; break;
-                case 1:   voted = "Woot"; break;
+                case -1:  voted = 'Meh';       break;
+                default:  voted = 'Undecided'; break;
+                case 1:   voted = 'Woot';      break;
             }
+            if (boothpos === 0) voted = 'DJing';
+
             log('<table style="width:100%;color:#CC00CC"><tr><td colspan="2"><strong>Name</strong>: <span style="color:#FFFFFF">' + user.username + '</span></td></tr>' +
             (this.isPlugCubedAdmin(user.id)?'<tr><td colspan="2"><strong>Title</strong>: <span style="color:#FFFFFF">plugCubed Developer</span></td></tr>':'') +
             (this.isPlugCubedVIP(user.id)?'<tr><td colspan="2"><strong>Title</strong>: <span style="color:#FFFFFF">plugCubed VIP</span></td></tr>':'') +
             '<tr><td colspan="2"><strong>ID</strong>: <span style="color:#FFFFFF">' + user.id + '</span></td></tr>' +
-             '<tr><td><strong>Rank</strong>: <span style="color:#FFFFFF">' + rank + '</span></td><td><strong>Time Joined</strong>: <span style="color:#FFFFFF">' + user.joinTime + '</span></td></tr>' +
-            '<tr><td><strong>Status</strong>: <span style="color:#FFFFFF">' + status + '</span></td><td><strong>Vote</strong>: <span style="color:#FFFFFF">' + voted + '</span></td></tr>' +
+            '<tr><td><strong> Rank</strong>: <span style="color:#FFFFFF">' + rank + '</span></td><td><strong>Time Joined</strong>: <span style="color:#FFFFFF">' + user.joinTime + '</span></td></tr>' +
+            '<tr><td><strong>Status</strong>: <span style="color:#FFFFFF">' + status + '</span></td><td><strong> Vote</strong>: <span style="color:#FFFFFF">' + voted + '</span></td></tr>' +
             '<tr><td colspan="2"><strong>Position</strong>: <span style="color:#FFFFFF">' + position + '</span></td></tr>' +
-            '<tr><td><strong>Points</strong>: <span style="color:#FFFFFF">' + points + '</span></td><td><strong>Fans</strong>: <span style="color:#FFFFFF">' + user.fans + '</span></td></tr>' +
+            '<tr><td><strong>Points</strong>: <span style="color:#FFFFFF" title = "' + user.djPoints + '  DJ Points  +  ' + user.listenerPoints + '  Listener Points  +  ' + user.curatorPoints + '  Curator Points">' + points + '</span></td><td><strong> Fans</strong>: <span style="color:#FFFFFF">' + user.fans + '</span></td></tr>' +
             '<tr><td><strong>Woot Count</strong>: <span style="color:#FFFFFF">' + user.wootcount + '</span></td><td><strong>Meh Count</strong>: <span style="color:#FFFFFF">' + user.mehcount + '</span></td></tr>' +
             '<tr><td colspan="2"><strong>Woot/Meh ratio</strong>: <span style="color:#FFFFFF">' + (voteTotal === 0 ? '0' : (user.wootcount/voteTotal).toFixed(2)) + '</span></td></tr></table>');
         }
@@ -809,7 +616,7 @@ var plugCubedModel = Class.extend({
         this.settings.autowoot = !this.settings.autowoot;
         this.changeGUIColor('woot',this.settings.autowoot);
         if (this.settings.autowoot)
-            $("#button-vote-positive").click();
+            $('#button-vote-positive').click();
         this.saveSettings();
     },
     /**
@@ -818,7 +625,7 @@ var plugCubedModel = Class.extend({
     onAutoJoinClick: function() {
         this.settings.autojoin = !this.settings.autojoin;
         this.changeGUIColor('join',this.settings.autojoin);
-        if (this.settings.autojoin && $("#button-dj-waitlist-join").length > 0)
+        if (this.settings.autojoin && $('#button-dj-waitlist-join').length > 0)
             API.waitListJoin();
         this.saveSettings();
     },
@@ -832,7 +639,7 @@ var plugCubedModel = Class.extend({
             this.populateUserlist();
             this.showUserlist();
         } else {
-            $("#side-left .sidebar-content").empty();
+            $('#side-left .sidebar-content').empty();
             this.hideUserlist();
         }
         this.saveSettings();
@@ -844,7 +651,7 @@ var plugCubedModel = Class.extend({
         this.settings.autorespond = !this.settings.autorespond;
         this.changeGUIColor('autorespond',this.settings.autorespond);
         if (this.settings.autorespond) {
-            var a = prompt("Please enter your away message here.\nThis is what you will reply via @mention.",this.settings.awaymsg === '' ? this.defaultAwayMsg : this.settings.awaymsg);
+            var a = prompt('Please enter your away message here.\nThis is what you will reply via @mention.',this.settings.awaymsg === '' ? this.defaultAwayMsg : this.settings.awaymsg);
             if (a === null) {
                 this.settings.autorespond = false;
                 this.changeGUIColor('autorespond',false);
@@ -862,28 +669,27 @@ var plugCubedModel = Class.extend({
      */
     onNotifyClick: function() {
         Dialog.closeDialog();
-        Dialog.context = "isNotifySettings";
+        Dialog.context = 'isNotifySettings';
         Dialog.submitFunc = $.proxy(this.onNotifySubmit, this);
         Dialog.showDialog(
-            $("<div/>")
-            .attr("id", "dialog-notify")
-            .addClass("dialog")
-            .css("left",Main.LEFT+(Main.WIDTH-230)/2)
-            .css("top",208.5)
-            .append(Dialog.getHeader("Chat Notifications"))
+            $('<div/>')
+            .attr('id', 'dialog-notify')
+            .addClass('dialog')
+            .css('left',Main.LEFT+(Main.WIDTH-230)/2)
+            .css('top',208.5)
+            .append(Dialog.getHeader('Chat Notifications'))
             .append(
-                $("<div/>")
-                .addClass("dialog-body")
+                $('<div/>')
+                .addClass('dialog-body')
                 .append(
-                    $("<form/>")
-                    .submit("return false")
-                    .append(Dialog.getCheckBox("Enable alerts", "enabled", this.settings.notify).css('top',10).css('left',10))
-                    .append(Dialog.getCheckBox("User Join", "join", this.settings.alerts.join).css('top',30).css('left',30))
-                    .append(Dialog.getCheckBox("User Leave", "leave", this.settings.alerts.leave).css('top',50).css('left',30))
-                    .append(Dialog.getCheckBox("User Curate", "curate", this.settings.alerts.curate).css('top',70).css('left',30))
-                    .append(Dialog.getCheckBox("Song Stats", "songStats", this.settings.alerts.songStats).css('top',90).css('left',30))
-                    .append(Dialog.getCheckBox("Song Updates", "songUpdate", this.settings.alerts.songUpdate).css('top',110).css('left',30))
-
+                    $('<form/>')
+                    .submit('return false')
+                    .append(Dialog.getCheckBox('Enable alerts', 'enabled',    this.settings.notify            ).css('top',10) .css('left',10))
+                    .append(Dialog.getCheckBox('User Join',     'join',       this.settings.alerts.join       ).css('top',30) .css('left',30))
+                    .append(Dialog.getCheckBox('User Leave',    'leave',      this.settings.alerts.leave      ).css('top',50) .css('left',30))
+                    .append(Dialog.getCheckBox('User Curate',   'curate',     this.settings.alerts.curate     ).css('top',70) .css('left',30))
+                    .append(Dialog.getCheckBox('Song Stats',    'songStats',  this.settings.alerts.songStats  ).css('top',90) .css('left',30))
+                    .append(Dialog.getCheckBox('Song Updates',  'songUpdate', this.settings.alerts.songUpdate ).css('top',110).css('left',30))
                 )
             )
             .append(Dialog.getCancelButton())
@@ -894,13 +700,48 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     onNotifySubmit: function() {
-        this.settings.notify = $("#dialog-checkbox-enabled").is(":checked");
-        this.settings.alerts.join = $("#dialog-checkbox-join").is(":checked");
-        this.settings.alerts.leave = $("#dialog-checkbox-leave").is(":checked");
-        this.settings.alerts.curate = $("#dialog-checkbox-curate").is(":checked");
-        this.settings.alerts.songStats = $("#dialog-checkbox-songStats").is(":checked");
-        this.settings.alerts.songUpdate = $("#dialog-checkbox-songUpdate").is(":checked");
+        this.settings.notify = $('#dialog-checkbox-enabled').is(':checked');
+        for (var i in this.settings.alerts)
+            this.settings.alerts[i] = $('#dialog-checkbox-' + i).is(':checked');
         this.changeGUIColor('notify',this.settings.notify);
+        this.saveSettings();
+        Dialog.closeDialog();
+    },
+    /**
+     * @this {plugCubedModel}
+     */
+    onChatLimitClick: function() {
+        Dialog.closeDialog();
+        Dialog.context = 'isChatLimitSettings';
+        Dialog.submitFunc = $.proxy(this.onChatLimitSubmit, this);
+        Dialog.showDialog(
+            $('<div/>')
+            .attr('id', 'dialog-chat-limit')
+            .addClass('dialog')
+            .css('left',Main.LEFT+(Main.WIDTH-230)/2)
+            .css('top',208.5)
+            .append(Dialog.getHeader('Limit Chat Log'))
+            .append(
+                $('<div/>')
+                .addClass('dialog-body')
+                .append(
+                    $('<form/>')
+                    .submit('return false')
+                    .append(Dialog.getCheckBox('Enable','enabled',this.settings.chatlimit.enabled).css('top',10) .css('left',10))
+                    .append(Dialog.getInputField('chat-limit','Limit',0,this.settings.chatlimit.limit).css('top',30) .css('left',10))
+                )
+            )
+            .append(Dialog.getCancelButton())
+            .append(Dialog.getSubmitButton(Lang.dialog.save))
+        )
+    },
+    /**
+     * @this {plugCubedModel}
+     */
+    onChatLimitSubmit: function() {
+        this.settings.chatlimit.enabled = $('#dialog-checkbox-enabled').is(':checked');
+        this.settings.chatlimit.limit = ~~$('input[name="chat-limit"]').val();
+        this.changeGUIColor('chatlimit',this.settings.chatlimit.enabled);
         this.saveSettings();
         Dialog.closeDialog();
     },
@@ -909,103 +750,72 @@ var plugCubedModel = Class.extend({
      */
     onStreamClick: function() {
         this.changeGUIColor('stream',DB.settings.streamDisabled);
-        API.sendChat(DB.settings.streamDisabled ? "/stream on" : "/stream off");
+        API.sendChat(DB.settings.streamDisabled ? '/stream on' : '/stream off');
+    },
+    /**
+     * @this {plugCubedModel}
+     */
+    onEmojiClick: function() {
+        this.settings.emoji = !this.settings.emoji;
+        this.changeGUIColor('emoji',this.settings.emoji);
+        if (!this.settings.emoji) {
+            if (Emoji._emojify === undefined) Emoji._emojify = Emoji.emojify
+            Emoji.emojify = function(data) {return data;}
+        } else {
+            if (Emoji._emojify === undefined) return this.log('Error in reenabling Emoji', null, this.colors.modCommands);
+            Emoji.emojify = Emoji._emojify
+        }
+        this.saveSettings();
     },
     /**
      * @this {plugCubedModel}
      */
     onColorClick: function() {
         Dialog.closeDialog();
-        Dialog.context = "isCustomChatColors";
+        var body = $('<form/>')
+            .submit('return false')
+            .append(Dialog.getCheckBox('Enable custom', 'enabled', this.settings.customColors)),j = 0;
+        for (var i in this.colorInfo)
+            body.append($(Dialog.getInputField(i,this.colorInfo[i].title,this.colorInfo[i].color,this.settings.colors[i],6).css('top',++j*30)).change(function() { $(this).find('.dialog-input-label').css('color','#' + $(this).find('input').val()); }));
+        body = $('<div/>')
+            .addClass('dialog-body')
+            .append(body);
+        for (var i in this.settings.colors)
+            body.find('input[name="' + i + '"]').parents('.dialog-input-container').find('.dialog-input-label').css('color','#' + this.settings.colors[i]);
+        Dialog.context = 'isCustomChatColors';
         Dialog.submitFunc = $.proxy(this.onColorSubmit, this);
         Dialog.showDialog(
-            $("<div/>")
-            .attr("id", "dialog-custom-colors")
-            .addClass("dialog")
-            .css("left",Main.LEFT+(Main.WIDTH-230)/2)
-            .css("top",208.5)
-            .append(Dialog.getHeader("Custom Chat Colors"))
-            .append(
-                $("<div/>")
-                .addClass("dialog-body")
-                .append(
-                    $("<form/>")
-                    .submit("return false")
-                    .append(Dialog.getCheckBox("Enable custom", "enabled", this.settings.customColors))
-                    .append($(Dialog.getInputField("you",        'You',         'FFDD6F', this.settings.colors.you,        6)).css('top',30))
-                    .append($(Dialog.getInputField("regular",    'Regular',     'B0B0B0', this.settings.colors.regular,    6)).css('top',60))
-                    .append($(Dialog.getInputField("featureddj", 'Featured DJ', 'E90E82', this.settings.colors.featureddj, 6)).css('top',90))
-                    .append($(Dialog.getInputField("bouncer",    'Bouncer',     'E90E82', this.settings.colors.bouncer,    6)).css('top',120))
-                    .append($(Dialog.getInputField("manager",    'Manager',     'E90E82', this.settings.colors.manager,    6)).css('top',150))
-                    .append($(Dialog.getInputField("cohost",     'Co-Host',     'E90E82', this.settings.colors.cohost,     6)).css('top',180))
-                    .append($(Dialog.getInputField("host",       'Host',        'E90E82', this.settings.colors.host,       6)).css('top',210))
-                    .append($(Dialog.getInputField("ambassador", 'Ambassador',  '9A50FF', this.settings.colors.ambassador, 6)).css('top',240))
-                    .append($(Dialog.getInputField("admin",      'Admin',       '42A5DC', this.settings.colors.admin,      6)).css('top',270))
-                    .append($(Dialog.getInputField("join",       'User Join',   '3366FF', this.settings.colors.join,       6)).css('top',300))
-                    .append($(Dialog.getInputField("leave",      'User Leave',  '3366FF', this.settings.colors.leave,      6)).css('top',330))
-                    .append($(Dialog.getInputField("curate",     'User Curate', '00FF00', this.settings.colors.curate,     6)).css('top',360))
-                )
-            )
-            .append($("<div/>").addClass("dialog-button dialog-default-button").click($.proxy(this.onColorDefault,this)).append($("<span/>").text("Default")))
+            $('<div/>')
+            .attr('id', 'dialog-custom-colors')
+            .addClass('dialog')
+            .css('left',Main.LEFT+(Main.WIDTH-230)/2)
+            .css('top',208.5)
+            .append(Dialog.getHeader('Custom Chat Colors'))
+            .append(body)
+            .append($('<div/>').addClass('dialog-button dialog-default-button').click($.proxy(this.onColorDefault,this)).append($('<span/>').text('Default')))
             .append(Dialog.getCancelButton())
             .append(Dialog.getSubmitButton(Lang.dialog.save))
-        )
+        );
     },
+    /**
+     * @this {plugCubedModel}
+     */
     onColorDefault: function() {
-        var a = $("input[name=you]"),
-            b = $("input[name=regular]"),
-            c = $("input[name=featureddj]"),
-            d = $("input[name=bouncer]"),
-            e = $("input[name=manager]"),
-            f = $("input[name=cohost]"),
-            g = $("input[name=host]"),
-            h = $("input[name=ambassador]"),
-            i = $("input[name=admin]"),
-            j = $("input[name=join]"),
-            k = $("input[name=leave]"),
-            l = $("input[name=curate]");
-        a.val(a.data('ph'));
-        b.val(b.data('ph'));
-        c.val(c.data('ph'));
-        d.val(d.data('ph'));
-        e.val(e.data('ph'));
-        f.val(f.data('ph'));
-        g.val(g.data('ph'));
-        h.val(h.data('ph'));
-        i.val(i.data('ph'));
-        j.val(j.data('ph'));
-        k.val(k.data('ph'));
-        l.val(l.data('ph'));
+        for (var i in this.settings.colors) {
+            var elem = $('input[name="' + i + '"]');
+            elem.val(elem.data('ph'));
+            elem.parents('.dialog-input-container').find('.dialog-input-label').css('color','#' + elem.val());
+        }
     },
     /**
      * @this {plugCubedModel}
      */
     onColorSubmit: function() {
-        var a = $("input[name=you]"),
-            b = $("input[name=regular]"),
-            c = $("input[name=featureddj]"),
-            d = $("input[name=bouncer]"),
-            e = $("input[name=manager]"),
-            f = $("input[name=cohost]"),
-            g = $("input[name=host]"),
-            h = $("input[name=ambassador]"),
-            i = $("input[name=admin]"),
-            j = $("input[name=join]"),
-            k = $("input[name=leave]"),
-            l = $("input[name=curate]");
-        this.settings.customColors = $("#dialog-checkbox-enabled").is(":checked");
-        this.settings.colors.you        = a.val() === "" || !a.val().isHEX() ? a.data('ph') : a.val();
-        this.settings.colors.regular    = b.val() === "" || !b.val().isHEX() ? b.data('ph') : b.val();
-        this.settings.colors.featureddj = c.val() === "" || !c.val().isHEX() ? c.data('ph') : c.val();
-        this.settings.colors.bouncer    = d.val() === "" || !d.val().isHEX() ? d.data('ph') : d.val();
-        this.settings.colors.manager    = e.val() === "" || !e.val().isHEX() ? e.data('ph') : e.val();
-        this.settings.colors.cohost     = f.val() === "" || !f.val().isHEX() ? f.data('ph') : f.val();
-        this.settings.colors.host       = g.val() === "" || !g.val().isHEX() ? g.data('ph') : g.val();
-        this.settings.colors.ambassador = h.val() === "" || !h.val().isHEX() ? h.data('ph') : h.val();
-        this.settings.colors.admin      = i.val() === "" || !i.val().isHEX() ? i.data('ph') : i.val();
-        this.settings.colors.join       = j.val() === "" || !j.val().isHEX() ? j.data('ph') : j.val();
-        this.settings.colors.leave      = k.val() === "" || !k.val().isHEX() ? k.data('ph') : k.val();
-        this.settings.colors.curate     = l.val() === "" || !l.val().isHEX() ? l.data('ph') : l.val();
+        this.settings.customColors = $('#dialog-checkbox-enabled').is(':checked');
+        for (var i in this.settings.colors) {
+            var elem = $('input[name="' + i + '"]');
+            this.settings.colors[i] = elem.val() === '' || !elem.val().isHEX() ? elem.data('ph') : elem.val();
+        }
         this.updateCustomColors();
         this.changeGUIColor('colors',this.settings.customColors);
         this.saveSettings();
@@ -1018,12 +828,13 @@ var plugCubedModel = Class.extend({
         if (!data || !data.user) return;
         var a = Models.room.userHash[data.user.id];
         this.onUserlistUpdate();
-        if (a.curVote !== 0) {
-                 if (a.curVote == 1)  a.wootcount--;
-            else if (a.curVote == -1) a.mehcount--;
-        }
-             if (data.vote == 1)  a.wootcount++;
-        else if (data.vote == -1) a.mehcount++;
+
+        if (a.curVote === 1)       a.wootcount--;
+        else if (a.curVote === -1) a.mehcount--;
+
+        if (data.vote === 1)       a.wootcount++;
+        else if (data.vote === -1) a.mehcount++;
+
         a.curVote = data.vote;
     },
     /**
@@ -1032,7 +843,7 @@ var plugCubedModel = Class.extend({
     onCurate: function(data) {
         var media = API.getMedia();
         if (this.settings.notify === true && this.settings.alerts.curate === true)
-            this.log(data.user.username + " added " + media.author + " - " + media.title, null, '#'+this.settings.colors.curate);
+            this.log(data.user.username + ' added ' + media.author + ' - ' + media.title, null, this.settings.colors.curate);
         Models.room.userHash[data.user.id].curated = true;
         this.onUserlistUpdate();
     },
@@ -1041,31 +852,31 @@ var plugCubedModel = Class.extend({
      */
     onDjAdvance: function(data) {
         if (this.settings.notify === true) {
-            if (this.settings.alerts.songStats === true) this.log('Stats:   ' + data.lastPlay.score.positive + ' woots -- ' + data.lastPlay.score.negative + ' mehs -- ' +     data.lastPlay.score.curates + ' curates', null, this.colors.infoMessage2)
-            if (this.settings.alerts.songUpdate === true) this.log('Now Playing: ' + data.media.title + ' by ' + data.media.author + '<br />Played by: ' + data.dj.username, null, this.colors.infoMessage1)
+            if (this.settings.alerts.songStats === true) this.log('Stats:   ' + data.lastPlay.score.positive + ' woots -- ' + data.lastPlay.score.negative + ' mehs -- ' +     data.lastPlay.score.curates + ' curates', null, this.settings.colors.stats)
+            if (this.settings.alerts.songUpdate === true) this.log('Now Playing: ' + data.media.title + ' by ' + data.media.author + '<br />Played by: ' + data.dj.username, null, this.settings.colors.updates)
         }
         setTimeout($.proxy(this.onDjAdvanceLate,this),Math.randomRange(1,10)*1000);
         if(Models.user.getPermission() >= Models.user.BOUNCER || this.isPlugCubedAdmin(Models.user.data.id)) this.onHistoryCheck(data.media.id)
         var obj = {
-            id: data.media.id,
-            author: data.media.author,
-            title: data.media.title,
-            wasSkipped: false,
-            user: {
-                id: data.dj.id,
-                username: data.dj.username
+            id         : data.media.id,
+            author     : data.media.author,
+            title      : data.media.title,
+            wasSkipped : false,
+            user       : {
+                id       : data.dj.id,
+                username : data.dj.username
             }
         };
         plugCubed.history.unshift(obj);
         plugCubed.history.splice(50,plugCubed.history.length-50);
-        if(this.settings.autoMuted && this.settings.registeredSongs.indexOf(data.media.id) < 0){
-            setTimeout(function(){ Playback.setVolume(Playback.lastVolume) },800)
+        if (this.settings.autoMuted && this.settings.registeredSongs.indexOf(data.media.id) < 0) {
+            setTimeout(function(){ Playback.setVolume(Playback.lastVolume); },800);
             this.settings.autoMuted = false;
         }
-        if(!this.settings.autoMuted && this.settings.registeredSongs.indexOf(data.media.id) > -1) {
-            setTimeout(function() { Playback.setVolume(0);}, 800)
+        if (!this.settings.autoMuted && this.settings.registeredSongs.indexOf(data.media.id) > -1) {
+            setTimeout(function() { Playback.setVolume(0); }, 800);
             this.settings.autoMuted = true;
-            this.log(data.media.title + " auto-muted.", null, this.colors.infoMessage2);
+            this.log(data.media.title + ' auto-muted.', null, this.colors.infoMessage2);
 
         }
         this.onUserlistUpdate();
@@ -1078,7 +889,7 @@ var plugCubedModel = Class.extend({
      */
     onDjAdvanceLate: function(data) {
         if (this.settings.autowoot && this.settings.registeredSongs.indexOf(Models.room.data.media.id) < 0) this.woot();
-        if ($("#button-dj-waitlist-join").css("display") === "block" && this.settings.autojoin)
+        if ($('#button-dj-waitlist-join').css('display') === 'block' && this.settings.autojoin)
             Room.onWaitListJoinClick();
     },
     woot: function() {
@@ -1092,7 +903,7 @@ var plugCubedModel = Class.extend({
      */
     onUserJoin: function(data) {
         if (this.settings.notify === true && this.settings.alerts.join === true)
-            this.log(Utils.cleanTypedString(data.username + " joined the room"), null, '#'+this.settings.colors.join);
+            this.log(Utils.cleanTypedString(data.username + ' joined the room'), null, this.settings.colors.join);
         var a = Models.room.userHash[data.id];
         if (a.wootcount === undefined) a.wootcount = 0;
         if (a.mehcount === undefined)  a.mehcount = 0;
@@ -1105,7 +916,7 @@ var plugCubedModel = Class.extend({
      */
     onUserLeave: function(data) {
         if (this.settings.notify === true && this.settings.alerts.leave === true)
-            this.log(Utils.cleanTypedString(data.username + ' left the room'), null, '#'+this.settings.colors.leave);
+            this.log(Utils.cleanTypedString(data.username + ' left the room'), null, this.settings.colors.leave);
         this.onUserlistUpdate();
     },
     isPlugCubedAdmin: function(id) {
@@ -1118,7 +929,7 @@ var plugCubedModel = Class.extend({
      * @this {plugCubedModel}
      */
     onChat: function(data) {
-        var a = data.type == "mention" && (Models.room.data.staff[data.fromID] && Models.room.data.staff[data.fromID] >= Models.user.BOUNCER),b = data.message.indexOf('@') < 0 && this.isPlugCubedAdmin(data.fromID);
+        var a = data.type == 'mention' && (Models.room.data.staff[data.fromID] && Models.room.data.staff[data.fromID] >= Models.user.BOUNCER),b = data.message.indexOf('@') < 0 && this.isPlugCubedAdmin(data.fromID);
         if (a || b) {
             if (data.message.indexOf('!disable') > -1) {
                 if (this.settings.autojoin) {
@@ -1135,18 +946,25 @@ var plugCubedModel = Class.extend({
                     this.settings.autorespond = false;
                     this.changeGUIColor('autorespond',this.settings.autorespond);
                     this.saveSettings();
-                    API.sendChat("@" + data.from + ' AFK message disabled');
+                    API.sendChat('@' + data.from + ' AFK message disabled');
                 } else
-                    API.sendChat("@" + data.from + ' AFK message was not enabled');
+                    API.sendChat('@' + data.from + ' AFK message was not enabled');
             }
             if (data.message.indexOf('!disable') > 0 || data.message.indexOf('!afkdisable') > 0) return;
         }
-        if (data.type == "mention") {
+        if (data.type == 'mention') {
             if (this.settings.autorespond && !this.settings.recent) {
                 this.settings.recent = true;
                 setTimeout(function() { plugCubed.settings.recent = false; plugCubed.saveSettings(); },180000);
-                API.sendChat("@" + data.from + " " + this.settings.awaymsg);
+                API.sendChat('@' + data.from + ' ' + this.settings.awaymsg);
             }
+        }
+        if (this.settings.chatlimit.enabled) {
+            var elems = $('#chat-messages').children('div'),num = elems.length,i = 0;
+            elems.each(function() {
+                if (++i<num-plugCubed.settings.chatlimit.limit)
+                    $(this).remove();
+            });
         }
     },
     /**
@@ -1192,12 +1010,18 @@ var plugCubedModel = Class.extend({
             var a = plugCubed.history[i];
             if (a.id == id && (~~i + 2) < 51) {
                 found = ~~i + 2;
-                if (!a.wasSkipped)
+                if (!a.wasSkipped) {
+                    document.getElementById("chat-sound").playMentionSound()
+                    setTimeout(function(){document.getElementById("chat-sound").playMentionSound()},100);
                     return Models.chat.onChatReceived({type: 'system',message: 'Song is in history (' + found + ' of ' + plugCubed.history.length + ')',language: Models.user.data.language});
+                }
             }
         }
-        if (found > 0)
+        if (found > 0) {
+            document.getElementById("chat-sound").playMentionSound()
+            setTimeout(function(){document.getElementById("chat-sound").playMentionSound()},100);
             return Models.chat.onChatReceived({type: 'system',message: 'Song is in history (' + found + ' of ' + plugCubed.history.length + '), but was skipped on the last play',language: Models.user.data.language});
+        }
     },
     getTimestamp: function() {
         var time = new Date();
@@ -1218,25 +1042,26 @@ var plugCubedModel = Class.extend({
         }
         if (value.indexOf('/commands') === 0) {
             var commands = [
-                ['/nick'    ,'change username'],
-                ['/idle'    ,'set status to idle'],
-                ['/avail'   ,'set status to available'],
-                ['/afk'     ,'set status to afk'],
-                ['/work'    ,'set status to working'],
-                ['/sleep'   ,'set status to sleeping'],
-                ['/join'    ,'join dj booth/waitlist'],
-                ['/leave'   ,'leaves dj booth/waitlist'],
-                ['/whoami'  ,'get your own information'],
-                ['/mute'    ,'set volume to 0'],
-                ['/automute', 'register currently playing song to automatically mute on future plays'],
-                ['/unmute'  ,'set volume to last volume'],
-                ['/woot'    ,'woots current song'],
-                ['/meh'     ,'mehs current song'],
-                ['/refresh' ,'refresh the video'],
-                ['/curate'  ,'add current song to your selected playlist'],
-                ['/getpos'  ,'get current waitlist position'],
-                ['/version' ,'displays version number'],
-                ['/commands','shows this list']
+                ['/nick'              ,'change username'],
+                ['/idle'              ,'set status to idle'],
+                ['/avail'             ,'set status to available'],
+                ['/afk'               ,'set status to afk'],
+                ['/work'              ,'set status to working'],
+                ['/sleep'             ,'set status to sleeping'],
+                ['/join'              ,'join dj booth/waitlist'],
+                ['/leave'             ,'leaves dj booth/waitlist'],
+                ['/whoami'            ,'get your own information'],
+                ['/mute'              ,'set volume to 0'],
+                ['/automute'          ,'register currently playing song to automatically mute on future plays'],
+                ['/unmute'            ,'set volume to last volume'],
+                ['/woot'              ,'woots current song'],
+                ['/meh'               ,'mehs current song'],
+                ['/refresh'           ,'refresh the video'],
+                ['/ignore (username)' ,'ignore all chat messages from user'],
+                ['/curate'            ,'add current song to your selected playlist'],
+                ['/getpos'            ,'get current waitlist position'],
+                ['/version'           ,'displays version number'],
+                ['/commands'          ,'shows this list']
             ];
             var userCommands = '<table>';
             for (var i in commands)
@@ -1300,13 +1125,13 @@ var plugCubedModel = Class.extend({
         if (value == '/whoami')
             return plugCubed.getUserInfo(Models.user.data.id),true;
         if (value == '/woot')
-            return $("#button-vote-positive").click(), true;
+            return $('#button-vote-positive').click(), true;
         if (value == '/meh')
-            return $("#button-vote-negative").click(), true;
+            return $('#button-vote-negative').click(), true;
         if (value == '/refresh')
-            return $("#button-refresh").click(), true;
+            return $('#button-refresh').click(), true;
         if (value == '/version')
-            return plugCubed.log("Running plug&#179; version " + plugCubed.version.major + "." + plugCubed.version.minor + "." + plugCubed.version.patch, null, plugCubed.colors.infoMessage1), true;
+            return plugCubed.log('Running plug&#179; version ' + plugCubed.version.major + '.' + plugCubed.version.minor + '.' + plugCubed.version.patch, null, plugCubed.colors.infoMessage1), true;
         if (value == '/mute')
             return Playback.setVolume(0), true;
         if (value == '/unmute')
@@ -1322,21 +1147,40 @@ var plugCubedModel = Class.extend({
         }
         if (value == '/nextsong') {
             var a = Models.playlistMedia(Models.playlist.selectedPlaylistID).data[0];
-            return plugCubed.log("Your next queued song is " + a.title + " by " + a.author, null, plugCubed.colors.infoMessage1), true;
+            if (a.id === Models.room.data.media.id && Models.room.data.currentDJ === Models.user.data.id)
+                a = Models.playlistMedia(Models.playlist.selectedPlaylistID).data[1];
+            var found = -1;
+            for (var i in plugCubed.history) {
+                var b = plugCubed.history[i];
+                if (b.id == a.id && ~~i + 1 < 51) {
+                    found = ~~i + 1;
+                    break;
+                }
+            }
+            if (found > 0)
+                return log('<span style="color:'+ plugCubed.colors.infoMessage1 +  '">Your next queued song is ' + a.title + ' by ' + a.author + '</span><br /><span style="color:' + plugCubed.colors.modCommands + '"><strong> Warning: This song is still in the history (' + found + ' of ' + plugCubed.history.length + ')</strong></span>'), true;
+            else
+                return plugCubed.log('Your next queued song is ' + a.title + ' by ' + a.author, null, plugCubed.colors.infoMessage1), true;
         }
         if (value == '/automute') {
             if (plugCubed.settings.registeredSongs.indexOf(Models.room.data.media.id) < 0) {
                 plugCubed.settings.registeredSongs.push(Models.room.data.media.id);
                 plugCubed.settings.autoMuted = true;
                 Playback.setVolume(0);
-                plugCubed.log(Models.room.data.media.title + " registered to auto-mute on future plays.", null, plugCubed.colors.infoMessage2);
+                plugCubed.log(Models.room.data.media.title + ' registered to auto-mute on future plays.', null, plugCubed.colors.infoMessage2);
+                plugCubed.saveSettings();
+            } else {
+                plugCubed.settings.registeredSongs.splice(plugCubed.settings.registeredSongs.indexOf(Models.room.data.media.id), 1);
+                plugCubed.settings.autoMuted = false;
+                Playback.setVolume(Playback.lastVolume);
+                plugCubed.log(Models.room.data.media.title + ' removed from automute registry.', null, plugCubed.colors.infoMessage2);
                 plugCubed.saveSettings();
             }
             return true;
         }
         if (value == '/alertsoff') {
             if (plugCubed.settings.notify) {
-                plugCubed.log("Join/leave alerts disabled", null, plugCubed.colors.infoMessage1);
+                plugCubed.log('Join/leave alerts disabled', null, plugCubed.colors.infoMessage1);
                 plugCubed.settings.notify = false;
                 plugCubed.changeGUIColor('notify',false);
             }
@@ -1344,32 +1188,39 @@ var plugCubedModel = Class.extend({
         }
         if (value == '/alertson') {
             if (!plugCubed.settings.notify) {
-                plugCubed.log("Join/leave alerts enabled", null, plugCubed.colors.infoMessage1);
+                plugCubed.log('Join/leave alerts enabled', null, plugCubed.colors.infoMessage1);
                 plugCubed.settings.notify = true;
                 plugCubed.changeGUIColor('notify',true);
             }
             return true;
         }
         if (value.indexOf('/getpos') === 0) {
-            var lookup = plugCubed.getUser(value.substr(7)),
+            var lookup = plugCubed.getUser(value.substr(8)),
                 user = lookup === null ? Models.user.data : lookup,
                 spot = Models.room.getWaitListPosition(user.id);
             if (spot !== null)
-                plugCubed.log("Position in waitlist " + spot + "/" + Models.room.data.waitList.length, null, plugCubed.colors.infoMessage2);
+                plugCubed.log('Position in waitlist ' + spot + '/' + Models.room.data.waitList.length, null, plugCubed.colors.infoMessage2);
             else {
                 spot = -1;
                 for (var i = 0;i < Models.room.data.djs.length;i++)
                     spot = Models.room.data.djs[i].user.id === user.id ? i : spot;
                 if (spot < 0)
-                    plugCubed.log("Not in waitlist nor booth", null, plugCubed.colors.infoMessage2);
+                    plugCubed.log('Not in waitlist nor booth', null, plugCubed.colors.infoMessage2);
                 else if (spot === 0)
-                    plugCubed.log((user.id === Models.user.data.id ? "You" : user.username) + " are currently DJing",null,plugCubed.colors.infoMessage2);
+                    plugCubed.log((user.id === Models.user.data.id ? 'You' : user.username) + ' are currently DJing',null,plugCubed.colors.infoMessage2);
                 else if (spot === 1)
-                    plugCubed.log((user.id === Models.user.data.id ? "You" : user.username) + " are DJing next",null,plugCubed.colors.infoMessage2);
+                    plugCubed.log((user.id === Models.user.data.id ? 'You' : user.username) + ' are DJing next',null,plugCubed.colors.infoMessage2);
                 else
-                    plugCubed.log("Position in booth " + (spot + 1) + "/" + Models.room.data.djs.length, null, plugCubed.colors.infoMessage2);
+                    plugCubed.log('Position in booth ' + (spot + 1) + '/' + Models.room.data.djs.length, null, plugCubed.colors.infoMessage2);
             }
             return true;
+        }
+        if (value.indexOf('/ignore ') === 0) {
+            var user = plugCubed.getUser(value.substr(8));
+            if (user === null) return plugCubed.log('User not found', null, plugCubed.colors.infoMessage2),true;
+            if (user.id === Models.user.data.id) return plugCubed.log('You can\'t ignore yourself', null, plugCubed.colors.infoMessage2),true;
+            if (plugCubed.settings.ignore.indexOf(user.id) > -1) return plugCubed.settings.ignore.splice(plugCubed.settings.ignore.indexOf(user.id),1),plugCubed.saveSettings(),log('You are no longer ignoring ' + user.username),true;
+            return plugCubed.settings.ignore.push(user.id),plugCubed.saveSettings(),log('You are now ignoring ' + user.username),true;
         }
         if (plugCubed.isPlugCubedAdmin(Models.user.data.id)) {
             if (value.indexOf('/whois ') === 0)
@@ -1393,20 +1244,17 @@ var plugCubedModel = Class.extend({
                 return plugCubed.getUserInfo(value.substr(7)),true;
             if (value.indexOf('/kick ') === 0) {
                 if (value.indexOf('::') > 0) {
-                    var data = value.substr(5).split(':: '),
+                    var data = value.substr(6).split(':: '),
                         time = 60;
                         if (data.length == 2) {
-                            if (data[1].isNumber()) {
-                                time = parseFloat(data[1])
-                            }
-                            user = plugCubed.getUser(data[0])
-                            new ModerationKickUserService(user.id,(data[1].isNumber()?' ':data[1]),time)
-                            return true;
+                            if (data[1].isNumber())
+                                time = parseFloat(data[1]);
+                            user = plugCubed.getUser(data[0]);
+                            return new ModerationKickUserService(user.id,(data[1].isNumber()?' ':data[1]),time),true;
                         } else if (data.length == 3) {
-                            time = parseFloat(data[2])
-                            user = plugCubed.getUser(data[0])
-                            new ModerationKickUserService(user.id,data[1],time)
-                            return true;
+                            time = parseFloat(data[2]);
+                            user = plugCubed.getUser(data[0]);
+                            return new ModerationKickUserService(user.id,data[1],time),true;
                         }
                 } else
                     return plugCubed.moderation(value.substr(6),'kick'),true;
@@ -1417,11 +1265,11 @@ var plugCubedModel = Class.extend({
                 return plugCubed.moderation(value.substr(8),'removedj'),true;
         }
         if (Models.user.hasPermission(Models.user.MANAGER)) {
-            if (value.indexOf('/lock') === 0) {
+            if (value === '/lock') {
                 new RoomPropsService(document.location.href.split('/')[3],true,Models.room.data.waitListEnabled,Models.room.data.maxPlays,Models.room.data.maxDJs);
                 return true;
             }
-            if (value.indexOf('/unlock') === 0) {
+            if (value === '/unlock') {
                 new RoomPropsService(document.location.href.split('/')[3],false,Models.room.data.waitListEnabled,Models.room.data.maxPlays,Models.room.data.maxDJs);
                 return true;
             }
