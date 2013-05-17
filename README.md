@@ -2,30 +2,42 @@ plug&#179; (plugCubed)
 ====================
 
 ###Features List###
-New features are being added daily, however the current list of features is as follows:
-* Auto-woot : Automatically WOOT! each song as it is played
-* Auto-joining : Automatically re-append yourself to the DJ Waitlist once you've been moved back to the crowd
-   * (Moderators can turn this off by @mentioning you and using the !disable command. Useful in rooms that disallow afk - autojoining)
-* User list : A dynamic list of every user in the room, color-coded based on their current vote. Green = Woot, Red =   Meh, White = No vote, Pink = Curate. Special usergroups are denoted by the icon you'd normally see in the chat
+* Auto-woot : Automatically WOOT! each song as it is played.
+* Auto-joining : Automatically rejoin the DJ Waitlist once you've been moved back to the crowd.
+   * (Room staff can turn this off by @mentioning your username and using !disable.)
+* User list : A dynamic list of every user in the room, color-coded based on their current vote. Green = Woot, Red =   Meh, White = No vote. Special usergroups are denoted by the icon you'd normally see in the chat.
 * Unique Sidebar UI : Allows you to easily configure your plugCubed experience; enable or disable each of its features at the click of a button. Red = Off, Green = On
-* Hide video : Allows you to hide videos from your view
-* History alerts : Alert moderators when a song is in the history.
+* Custom chat logged notifications that display
+    * User join/leave alerts
+    * User Curate alerts
+    * Song Statistics on DJ Advance
+    * Now Playing alerts
 * A variety of chat commands that enable you to 
     * change your display name with /nick
-    * change user status with /avail, /afk, /work, /sleep
-    * join/leave the dj booth with /join or /leave
+    * change user status with /idle, /avail, /afk, /work, /sleep
+    * join/leave the waitlist or dj booth with /join or /leave
     * woot or meh a song with /woot or /meh
     * Mute and unmute songs with /mute or /unmute
     * Register songs to be automatically muted on subsequent plays with /automute
-* Chat notifications for when users enter/leave the room, plus when songs are curated.
-* Moderation Tools in chat command form
-    * /kick = Kick targeted username
-    * /add = Add targeted username to DJ booth/waitlist
-    * /remove = Remove targeted username to DJ booth/waitlist
-    * /whois = gets whois information on targeted user
+    * Get your current waitlist position with /getpos
+    * Get your personal user info with /whoami
+* Custom Moderation Tools
+    * History alerts : Display in chat when a song is in the history.
+    * User Data logging : Record user join time, vote counts, rank, status, points breakdown(mouseover points value), and much more.
+    * Moderation in chat command form
+        * Bouncer +
+            * /kick = Kick targeted username
+                * If you would like to specify a reason, use /kick @username :: reason
+                * Host/Ambassador can use Timed kicks by using /kick @username :: reason :: time OR /kick @username :: time
+            * /add = Add targeted username to DJ booth/waitlist
+            * /remove = Remove targeted username to DJ booth/waitlist
+            * /whois = gets whois information on targeted user
+        * Manager +
+            * /lock = Lock the DJ booth
+            * /unlock = Unlock the DJ booth
 
 ###Installation###
-Find the URLs for bookmarks at http://colgate.github.com/plugCubed/
+Find the URLs for bookmarks at http://tatdk.github.io/plugCubed/
 
 ###Authors###
 * Jeremy "Colgate" Richardson
@@ -46,5 +58,3 @@ INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHA
 BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
 RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-
-###Version History###
