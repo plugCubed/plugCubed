@@ -1167,8 +1167,10 @@ plugCubedModel = Class.extend({
             } else {
                 plugCubed.settings.registeredSongs.splice(plugCubed.settings.registeredSongs.indexOf(Models.room.data.media.id), 1);
                 plugCubed.settings.autoMuted = false;
-                playback.setVolume(playback.lastVolume)
+                Playback.setVolume(Playback.lastVolume);
                 plugCubed.log(Models.room.data.media.title + ' removed from automute registry.', null, plugCubed.colors.infoMessage2);
+                plugCubed.saveSettings();
+            }
             return true;
         }
         if (value == '/alertsoff') {
