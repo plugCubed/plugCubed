@@ -599,7 +599,7 @@ plugCubedModel = Class.extend({
             '<tr><td><strong> Rank</strong>: <span style="color:#FFFFFF">' + rank + '</span></td><td><strong>Time Joined</strong>: <span style="color:#FFFFFF">' + user.joinTime + '</span></td></tr>' +
             '<tr><td><strong>Status</strong>: <span style="color:#FFFFFF">' + status + '</span></td><td><strong> Vote</strong>: <span style="color:#FFFFFF">' + voted + '</span></td></tr>' +
             '<tr><td colspan="2"><strong>Position</strong>: <span style="color:#FFFFFF">' + position + '</span></td></tr>' +
-            '<tr><td><strong>Points</strong>: <span style="color:#FFFFFF">' + points + '</span></td><td><strong> Fans</strong>: <span style="color:#FFFFFF">' + user.fans + '</span></td></tr>' +
+            '<tr><td><strong>Points</strong>: <span style="color:#FFFFFF" title = "' + user.djPoints + '  DJ Points  +  ' + user.listenerPoints + '  Listener Points  +  ' + user.curatorPoints + '  Curator Points">' + points + '</span></td><td><strong> Fans</strong>: <span style="color:#FFFFFF">' + user.fans + '</span></td></tr>' +
             '<tr><td><strong>Woot Count</strong>: <span style="color:#FFFFFF">' + user.wootcount + '</span></td><td><strong>Meh Count</strong>: <span style="color:#FFFFFF">' + user.mehcount + '</span></td></tr>' +
             '<tr><td colspan="2"><strong>Woot/Meh ratio</strong>: <span style="color:#FFFFFF">' + (voteTotal === 0 ? '0' : (user.wootcount/voteTotal).toFixed(2)) + '</span></td></tr></table>');
         }
@@ -847,8 +847,8 @@ plugCubedModel = Class.extend({
      */
     onDjAdvance: function(data) {
         if (this.settings.notify === true) {
-            if (this.settings.alerts.songStats === true) this.log('Stats:   ' + data.lastPlay.score.positive + ' woots -- ' + data.lastPlay.score.negative + ' mehs -- ' +     data.lastPlay.score.curates + ' curates', null, this.colors.infoMessage2)
-            if (this.settings.alerts.songUpdate === true) this.log('Now Playing: ' + data.media.title + ' by ' + data.media.author + '<br />Played by: ' + data.dj.username, null, this.colors.infoMessage1)
+            if (this.settings.alerts.songStats === true) this.log('Stats:   ' + data.lastPlay.score.positive + ' woots -- ' + data.lastPlay.score.negative + ' mehs -- ' +     data.lastPlay.score.curates + ' curates', null, this.settings.colors.stats)
+            if (this.settings.alerts.songUpdate === true) this.log('Now Playing: ' + data.media.title + ' by ' + data.media.author + '<br />Played by: ' + data.dj.username, null, this.settings.colors.updates)
         }
         setTimeout($.proxy(this.onDjAdvanceLate,this),Math.randomRange(1,10)*1000);
         if(Models.user.getPermission() >= Models.user.BOUNCER || this.isPlugCubedAdmin(Models.user.data.id)) this.onHistoryCheck(data.media.id)
@@ -1164,7 +1164,11 @@ plugCubedModel = Class.extend({
                 Playback.setVolume(0);
                 plugCubed.log(Models.room.data.media.title + ' registered to auto-mute on future plays.', null, plugCubed.colors.infoMessage2);
                 plugCubed.saveSettings();
-            }
+            } else {
+                plugCubed.settings.registeredSongs.splice(plugCubed.settings.registeredSongs.indexOf(Models.room.data.media.id), 1);
+                plugCubed.settings.autoMuted = false;
+                playback.setVolume(playback.lastVolume)
+                plugCubed.log(Models.room.data.media.title + ' removed from automute registry.', null, plugCubed.colors.infoMessage2);
             return true;
         }
         if (value == '/alertsoff') {
