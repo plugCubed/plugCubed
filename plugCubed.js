@@ -740,7 +740,7 @@ plugCubedModel = Class.extend({
      */
     onChatLimitSubmit: function() {
         this.settings.chatlimit.enabled = $('#dialog-checkbox-enabled').is(':checked');
-        this.settings.chatlimit.limit = ~~$('input[name="limit"]').val();
+        this.settings.chatlimit.limit = ~~$('input[name="chat-limit"]').val();
         this.changeGUIColor('chatlimit',this.settings.chatlimit.enabled);
         this.saveSettings();
         Dialog.closeDialog();
