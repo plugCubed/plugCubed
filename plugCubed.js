@@ -198,6 +198,7 @@ plugCubedModel = Class.extend({
         $('#side-right').remove();
         $('#side-left').remove();
         this.customColorsStyle.remove();
+        this.socket.onclose = function() {};
         this.socket.close();
         delete plugCubed;
     },
