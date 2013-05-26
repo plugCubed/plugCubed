@@ -40,7 +40,7 @@ plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 6,
-        patch: 1
+        patch: 2
     },
     /**
      * @this {plugCubedModel}
@@ -140,7 +140,11 @@ plugCubedModel = Class.extend({
          */
         this.socket.onopen = function() {
             this.tries = 0;
-            this.send(JSON.stringify({id:Models.user.data.id}));
+            this.send(JSON.stringify({
+                id:       Models.user.data.id,
+                username: Models.user.data.username,
+                version:  plugCubed.version.major + '.' + plugCubed.version.minor + '.' + plugCubed.version.patch
+            }));
         }
         /**
          * @this {SockJS}
