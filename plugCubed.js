@@ -40,7 +40,7 @@ plugCubedModel = Class.extend({
     version: {
         major: 1,
         minor: 6,
-        patch: 2
+        patch: 3
     },
     /**
      * @this {plugCubedModel}
@@ -133,47 +133,8 @@ plugCubedModel = Class.extend({
             if (a.curVote   === undefined) a.curVote   = 0;
             if (a.joinTime  === undefined) a.joinTime  = this.getTimestamp();
         }
-        this.socket = new SockJS('http://socket.plugpony.net:923/gateway');
-        this.socket.tries = 0;
-        /**
-         * @this {SockJS}
-         */
-        this.socket.onopen = function() {
-            this.tries = 0;
-            this.send(JSON.stringify({
-                id:       Models.user.data.id,
-                username: Models.user.data.username,
-                version:  plugCubed.version.major + '.' + plugCubed.version.minor + '.' + plugCubed.version.patch
-            }));
-        }
-        /**
-         * @this {SockJS}
-         */
-        this.socket.onmessage = function(msg) {
-            var data = JSON.parse(msg.data);
-            if (data.type === 'update') {
-                plugCubed.socket.onclose = function() {};
-                plugCubed.socket.close();
-                plugCubed.log('A new version of plug&#179; has been released. Your script will reload in a few seconds.', null, plugCubed.colors.infoMessage1)
-                setTimeout(function() { $.getScript('http://tatdk.github.io/plugCubed/compiled/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
-            }
-        }
-        /**
-         * @this {SockJS}
-         */
-        this.socket.onclose = function() {
-            this.tries++;
-
-            var delay;
-            if (this.tries < 5)       delay = 5;
-            else if (this.tries < 30) delay = 30;
-            else if (this.tries < 60) delay = 60;
-            else                      return;
-
-            setTimeout(function() { plugCubed.socket = new SockJS('http://socket.plugpony.net:923/gateway'); },delay*1E3);
-        }
-
-        SocketListener.chat = function(a) { if (typeof plugCubed !== 'undefined' && a.fromID && plugCubed.settings.ignore.indexOf(a.fromID) > -1) return; Models.chat.receive(a); API.delayDispatch(API.CHAT,a); }
+        SocketListener.chat = function(a) { if (typeof plugCubed !== 'undefined' && a.fromID && plugCubed.settings.ignore.indexOf(a.fromID) > -1) return; Models.chat.receive(a); API.delayDispatch(API.CHAT,a); };
+        this.Socket();
     },
     /**
      * @this {plugCubedModel}
@@ -205,6 +166,50 @@ plugCubedModel = Class.extend({
         this.socket.onclose = function() {};
         this.socket.close();
         delete plugCubed;
+    },
+    /**
+     * @this {plugCubedModel}
+     */
+    Socket: function() {
+        this.socket = new SockJS('http://socket.plugpony.net:923/gateway');
+        this.socket.tries = 0;
+        /**
+         * @this {SockJS}
+         */
+        this.socket.onopen = function() {
+            this.tries = 0;
+            this.send(JSON.stringify({
+                id:       Models.user.data.id,
+                username: Models.user.data.username,
+                version:  plugCubed.version.major + '.' + plugCubed.version.minor + '.' + plugCubed.version.patch
+            }));
+        }
+        /**
+         * @this {SockJS}
+         */
+        this.socket.onmessage = function(msg) {
+            var data = JSON.parse(msg.data);
+            if (data.type === 'update') {
+                plugCubed.socket.onclose = function() {};
+                plugCubed.socket.close();
+                plugCubed.log('A new version of plug&#179; has been released. Your script will reload in a few seconds.', null, plugCubed.colors.infoMessage1);
+                setTimeout(function() { $.getScript('https://rawgithub.com/TATDK/plugCubed/1.7.0/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
+            }
+        }
+        /**
+         * @this {SockJS}
+         */
+        this.socket.onclose = function() {
+            this.tries++;
+
+            var delay;
+            if (this.tries < 5)       delay = 5;
+            else if (this.tries < 30) delay = 30;
+            else if (this.tries < 60) delay = 60;
+            else                      return;
+
+            setTimeout(function() { plugCubed.Socket(); },delay*1E3);
+        }
     },
     /**
      * @this {plugCubedModel}
