@@ -60,7 +60,7 @@ plugCubedModel = Class.extend({
          * @this {plugCubedModel.version}
          */
         toString: function() {
-            return this.major + '.' + this.minor + '.' + this.patch + (this.prerelease !== undefined ? '-' + this.prerelease : '');
+            return this.major + '.' + this.minor + '.' + this.patch + (this.prerelease !== undefined && this.prerelease !== '' ? '-' + this.prerelease : '');
         }
     },
     /**
