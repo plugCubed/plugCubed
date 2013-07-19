@@ -399,9 +399,22 @@
     background: red;
 }
 
+#dialog-commands {
+    width: 620px;
+    height: 610px;
+}
+
+#dialog-commands .dialog-submit-button {
+    width: 75px;
+}
+
 #dialog-custom-colors {
     width: 230px;
     height: 540px;
+}
+
+#dialog-custom-colors {
+    width: 60px;
 }
 
 #dialog-custom-colors .dialog-body {
