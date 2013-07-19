@@ -54,7 +54,7 @@ plugCubedModel = Class.extend({
     version: {
         major: 2,
         minor: 0,
-        patch: 0,
+        patch: 1,
         prerelease: '',
         /**
          * @this {plugCubedModel.version}
@@ -1367,7 +1367,7 @@ if (localStorage.plugCubedLang === undefined) {
 
                 this.languages = [];
 
-                $.getJSON('http://tatdk.github.io/plugCubed/compiled/lang.txt',function(data) { self.languages = data; self.show(); })
+                $.getJSON('http://rawgithub.com/TATDK/plugCubed/gh-pages/compiled/lang.txt',function(data) { self.languages = data; self.show(); })
                 .done(function() { if (self.languages.length === 0) log('<span style="color:#FF0000">Error loading plugCubed</span>'); });
             }
         });
