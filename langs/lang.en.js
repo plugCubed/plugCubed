@@ -2,7 +2,7 @@
 plugCubed.lang = {
     disconnected          : "Disconnected at %1!",
     reloading             : "Reloading the page in a few seconds.",
-    afk                   : "I'm away from keyboard.",
+    AFK                   : "I'm away from keyboard.",
     running               : 'Running plug&#179; version %1',
     commandsHelp          : 'Use \'/commands\' to see expanded chat commands.',
     newVersion            : 'A new version of plug&#179; has been released. Your script will reload in a few seconds.',

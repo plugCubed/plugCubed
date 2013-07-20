@@ -5,7 +5,7 @@
 // @author         Jeremy "Colgate" Richardson
 // @author         Thomas "TAT" Andresen
 // @include        http://plug.dj/*
-// @version        1.3
+// @version        1.4
 // ==/UserScript==
 
 /*
@@ -25,11 +25,9 @@ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 var script = document.createElement('script');
-script.textContent = 'if (typeof Class !== \'undefined\' && typeof Slug !== \'undefined\') {' +
-    'var plugCubedLoader = Class.extend({' +
-        'init: function() { if (typeof Slug !== \'undefined\') this.wait(); },' +
-        'wait: function() { if (typeof API !== \'undefined\' && API.isReady) this.run(); else setTimeout($.proxy(this.wait,this),100); },' +
-        'run: function() { console.log(\'plugCubedLoader v.1.3 enabled!\'); $.getScript(\'http://tatdk.github.io/plugCubed/compiled/plugCubed.min.js\'); }' +
-    '});' +
-    '_PCL = new plugCubedLoader(); }';
+script.textContent = '(function() { var a = {' +
+    'b: function() { if (typeof API !== \'undefined\' && API.enabled) this.c(); else setTimeout($.proxy(this.b,this),100); },' +
+    'c: function() { console.log(\'plugCubedLoader v.1.4 enabled!\'); $.getScript(\'http://tatdk.github.io/plugCubed/compiled/plugCubed.min.js\'); }' +
+'};' +
+'a.b(); })()';
 document.head.appendChild(script);
