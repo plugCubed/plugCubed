@@ -54,7 +54,7 @@ plugCubedModel = Class.extend({
     version: {
         major: 2,
         minor: 0,
-        patch: 2,
+        patch: 3,
         prerelease: '',
         /**
          * @this {plugCubedModel.version}
@@ -499,10 +499,10 @@ plugCubedModel = Class.extend({
             this.settings.autoMuted = true;
             API.chatLog(this.i18n('automuted',[Models.room.data.media.title]));
         }
-        if (JSON.parse(require('app/store/LocalStorage').getItem('prefs')).emoji === undefined) {
-            var a = JSON.parse(require('app/store/LocalStorage').getItem('prefs'));
+        if (JSON.parse(require('app/store/LocalStorage').getItem('stngs')).emoji === undefined) {
+            var a = JSON.parse(require('app/store/LocalStorage').getItem('stngs'));
             a.emoji = true;
-            require('app/store/LocalStorage').setItem('prefs',JSON.stringify(a));
+            require('app/store/LocalStorage').setItem('stngs',JSON.stringify(a));
         }
     },
     /**
@@ -569,8 +569,8 @@ plugCubedModel = Class.extend({
         this.addGUIButton(this.settings.autorespond,                                                         'autorespond', this.i18n('menu.afkstatus'));
         this.addGUIButton((this.settings.notify & 1) === 1,                                                  'notify',      this.i18n('menu.notify'));
         this.addGUIButton(this.settings.chatlimit.enabled,                                                   'chatlimit',   this.i18n('menu.limitchatlog'));
-        this.addGUIButton(!JSON.parse(require('app/store/LocalStorage').getItem('prefs')).streamDisabled, 'stream',      this.i18n('menu.stream'));
-        this.addGUIButton(JSON.parse(require('app/store/LocalStorage').getItem('prefs')).emoji,           'emoji',       this.i18n('menu.emoji'));
+        this.addGUIButton(!JSON.parse(require('app/store/LocalStorage').getItem('stngs')).streamDisabled, 'stream',      this.i18n('menu.stream'));
+        this.addGUIButton(JSON.parse(require('app/store/LocalStorage').getItem('stngs')).emoji,           'emoji',       this.i18n('menu.emoji'));
     },
     /**
      * @this {plugCubedModel}
@@ -834,12 +834,12 @@ plugCubedModel = Class.extend({
                 require(['plugCubed/dialog/chatLimit','app/base/Context','app/events/ShowDialogEvent'],function(a,b,c) {b.dispatch(new c(c.SHOW,new a()))});
                 break;
             case 'stream':
-                var a = JSON.parse(require('app/store/LocalStorage').getItem('prefs')).streamDisabled;
+                var a = JSON.parse(require('app/store/LocalStorage').getItem('stngs')).streamDisabled;
                 this.changeGUIColor('stream',a);
                 return API.sendChat(a ? '/stream on' : '/stream off');
                 break;
             case 'emoji':
-                var a = JSON.parse(require('app/store/LocalStorage').getItem('prefs')).emoji === false;
+                var a = JSON.parse(require('app/store/LocalStorage').getItem('stngs')).emoji === false;
                 this.changeGUIColor('emoji',a);
                 return API.sendChat(a ? '/emoji on' : '/emoji off');
                 break;
