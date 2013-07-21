@@ -221,7 +221,7 @@ plugCubedModel = Class.extend({
                 className: 'dialog',
                 render: function() {
                     var body = $('<table style="width:100%;padding:5px"/>');
-                    body.append('<tr><td>' + plugCubed.i18n('enable') + '</td><td align="right"><input type="checkbox" name="enabled"' + (plugCubed.settings.chatlimit.enabled ? ' checked="checked"' : '') + ' /></td></tr>');
+                    body.append('<tr><td>' + plugCubed.i18n('enable') + '</td><td align="right"><input type="checkbox" name="enabled"' + (plugCubed.settings.customColors ? ' checked="checked"' : '') + ' /></td></tr>');
                     for (var i in plugCubed.colorInfo)
                         body.append(
                             $('<tr/>')
@@ -256,6 +256,7 @@ plugCubedModel = Class.extend({
                     }
                     plugCubed.changeGUIColor('colors',plugCubed.settings.customColors);
                     plugCubed.saveSettings();
+                    plugCubed.updateCustomColors();
                     this.close();
                 }
             });
