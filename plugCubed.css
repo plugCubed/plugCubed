@@ -413,7 +413,7 @@
     height: 540px;
 }
 
-#dialog-custom-colors input[type="text"] {
+#dialog-custom-colors input[type="text"],#dialog-chat-limit input[type="text"] {
     width: 60px;
 }
 

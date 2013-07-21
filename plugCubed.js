@@ -61,7 +61,7 @@ plugCubedModel = Class.extend({
         major: 2,
         minor: 0,
         patch: 4,
-        prerelease: 'alpha',
+        prerelease: 'alpha.1',
         /**
          * @this {plugCubedModel.version}
          */
@@ -270,7 +270,7 @@ plugCubedModel = Class.extend({
                 render: function() {
                     return this.$el.append(this.getHeader(plugCubed.i18n('chatLimit.header'))).append(this.getBody().append('<table style="width: 100%;">' + 
                         '<tr><td>' + plugCubed.i18n('enable')          + '</td><td align="right"><input type="checkbox" name="enabled"' + (plugCubed.settings.chatlimit.enabled ? ' checked="checked"' : '') + ' /></td></tr>' +
-                        '<tr><td>' + plugCubed.i18n('chatLimit.limit') + '</td><td align="right"><input type="text" name="limit" value="' + plugCubed.settings.chatlimit.limit + ' /></td></tr>' +
+                        '<tr><td>' + plugCubed.i18n('chatLimit.limit') + '</td><td align="right"><input type="text" name="limit" value="' + plugCubed.settings.chatlimit.limit + '" /></td></tr>' +
                     '</table>')).append(this.getSubmitButton(Lang.dialog.ok)),this._super();
                 },
                 submit: function() {
