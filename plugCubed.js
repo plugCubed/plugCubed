@@ -1282,7 +1282,7 @@ plugCubedModel = Class.extend({
                     $('#button-skip-this').click();
                     return true;
                 } else {
-                    if (value.length > 5) {
+                    if (value.length > 5)
                         API.sendChat('@' + API.getDJs()[0].username + ' - ' + 'Reason for skip: ' + value.substr(5).trim());
                     API.moderateForceSkip();
                     return true;
