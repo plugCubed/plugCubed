@@ -60,8 +60,8 @@ plugCubedModel = Class.extend({
     version: {
         major: 2,
         minor: 0,
-        patch: 3,
-        prerelease: '',
+        patch: 4,
+        prerelease: 'alpha',
         /**
          * @this {plugCubedModel.version}
          */
@@ -1262,7 +1262,7 @@ plugCubedModel = Class.extend({
             if (value.indexOf('/skip') === 0) {
                 if (API.getDJs().length < 1) return;
                 if (API.getBoothPosition() === 0) {
-                    Room.onSkipClick();
+                    $('#button-skip-this').click();
                     return true;
                 } else {
                     var reason = value.substr(5).trim(),
