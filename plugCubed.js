@@ -61,7 +61,7 @@ plugCubedModel = Class.extend({
         major: 2,
         minor: 0,
         patch: 4,
-        prerelease: 'alpha.1',
+        prerelease: 'alpha.2',
         /**
          * @this {plugCubedModel.version}
          */
@@ -606,10 +606,11 @@ plugCubedModel = Class.extend({
         var waitlistDiv = $('<h3></h3>').addClass('waitlistspot').text('Waitlist: ' + (spot != -1 ? spot + ' / ' : '') + API.getWaitList().length);
         $('#side-left .sidebar-content').append(waitlistDiv).append('<hr />');
         var users = API.getUsers();
+        users.sort();
         users.sort(function(a,b) {
             function c(a) {
-                if (this.isPlugCubedAdmin(a.id))                 return 20;
-                if (this.isPlugCubedVIP(a.id))                   return 19;
+                if (plugCubed.isPlugCubedAdmin(a.id))            return 20;
+                if (plugCubed.isPlugCubedVIP(a.id))              return 19;
                 if (API.hasPermission(a.id,API.ROLE.ADMIN))      return API.ROLE.ADMIN;
                 if (API.hasPermission(a.id,API.ROLE.AMBASSADOR)) return API.ROLE.AMBASSADOR;
                 if (API.hasPermission(a.id,API.ROLE.HOST))       return API.ROLE.HOST;
@@ -620,8 +621,8 @@ plugCubedModel = Class.extend({
                                                                  return API.ROLE.NONE;
             }
             var d = c(a),e = c(b);
-            return d < e ? -1 : d > e ? 1 : 0;
-        })
+            return d < e ? 1 : d > e ? -1 : 0;
+        });
         for (var i in users)
             this.appendUser(users[i]);
     },
