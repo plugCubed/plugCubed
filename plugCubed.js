@@ -1282,10 +1282,8 @@ plugCubedModel = Class.extend({
                     $('#button-skip-this').click();
                     return true;
                 } else {
-                    var reason = value.substr(5).trim(),
-                        user = plugCubed.getUser(API.getDJs()[0]);
-                    if (reason)
-                        API.sendChat((user != null ? '@' + user.username + ' - ' : '') + 'Reason for skip: ' + reason);
+                    if (value.length > 5) {
+                        API.sendChat('@' + API.getDJs()[0].username + ' - ' + 'Reason for skip: ' + value.substr(5).trim());
                     API.moderateForceSkip();
                     return true;
                 }
