@@ -87,7 +87,7 @@ plugCubedModel = Class.extend({
         };
         //Load language and third-party scripts
         if (localStorage.plugCubedLang === undefined) return;
-        $.getScript('http://tatdk.github.io/plugCubed/compiled/langs/lang.' + localStorage.plugCubedLang + '.js',$.proxy(this.__init,this));
+        $.getScript('https://rawgithub.com/TATDK/plugCubed/2.1.0/langs/lang.' + localStorage.plugCubedLang + '.js',$.proxy(this.__init,this));
         if (typeof jQuery.fn.tabs === 'undefined') {
             $.getScript('http://code.jquery.com/ui/1.10.2/jquery-ui.js');
             $('head').append('<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />');
@@ -164,11 +164,11 @@ plugCubedModel = Class.extend({
         }
         
         this.loadSettings();
-        $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://tatdk.github.io/plugCubed/compiled/plugCubed.css" />');
+        $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://rawgithub.com/TATDK/plugCubed/2.1.0/plugCubed.css" />');
         $('body').append(
             '<div id="side-left" class="sidebar"><div class="sidebar-content"></div></div>' +
             '<div id="side-right" class="sidebar"><div class="sidebar-handle"><span>||</span></div><div class="sidebar-content"></div></div>'
-        ).append('<script type="text/javascript" src="http://tatdk.github.io/plugCubed/compiled/thirdparty.js"></script>');
+        ).append('<script type="text/javascript" src="https://rawgithub.com/TATDK/plugCubed/2.1.0/thirdparty.js"></script>');
         this.initGUI();
         this.initAPIListeners();
         if (this.settings.userlist) {
@@ -394,7 +394,7 @@ plugCubedModel = Class.extend({
                 plugCubed.socket.onclose = function() {};
                 plugCubed.socket.close();
                 API.chatLog(plugCubed.i18n('newVersion'), null, plugCubed.colors.infoMessage1);
-                setTimeout(function() { $.getScript('http://tatdk.github.io/plugCubed/compiled/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
+                setTimeout(function() { $.getScript('https://rawgithub.com/TATDK/plugCubed/2.1.0/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
                 return;
             }
             if (data.type === 'chat') require('app/facades/ChatFacade').receive(data.data);
@@ -1344,7 +1344,7 @@ if (localStorage.plugCubedLang === undefined) {
                     len = languages.length,
                     x = len == 5 ? 0 : len == 4 ? 75 : len == 3 ? 150 : len == 2 ? 225 : 300;
                 for (var i = 0; i < len; ++i) {
-                    var button = $("<div/>").addClass("lang-button").css('display','inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://tatdk.github.io/plugCubed/compiled/flags/flag.' + languages[i].file + '.png').attr('alt',languages[i].name).height(75).width(150));
+                    var button = $("<div/>").addClass("lang-button").css('display','inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'https://rawgithub.com/TATDK/plugCubed/2.1.0/flags/flag.' + languages[i].file + '.png').attr('alt',languages[i].name).height(75).width(150));
                     row.append(button);
                     x += 150;
                 }
