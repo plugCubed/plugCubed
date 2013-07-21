@@ -275,7 +275,7 @@ plugCubedModel = Class.extend({
                 },
                 submit: function() {
                     plugCubed.settings.chatlimit.enabled = this.$el.find('input[name="enabled"]').is(':checked');
-                    plugCubed.settings.chatlimit.limit = ~~this.$el.find('input[name="chat-limit"]').val();
+                    plugCubed.settings.chatlimit.limit = ~~this.$el.find('input[name="limit"]').val();
                     plugCubed.changeGUIColor('chatlimit',plugCubed.settings.chatlimit.enabled);
                     plugCubed.saveSettings();
                     if (plugCubed.settings.chatlimit.enabled) {
