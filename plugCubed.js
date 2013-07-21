@@ -145,10 +145,9 @@ plugCubedModel = Class.extend({
 
         this.customColorsStyle = $('<style type="text/css" />');
         $('head').append(this.customColorsStyle);
-
-        API.chatLog(this.i18n('running',[this.version.toString()]));
-        API.chatLog(this.i18n('commandsHelp'));
-
+        var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
+        a.append('<div class="chat-update"><span class="chat-text" style="color:#FFFF00">' + this.i18n('running',[this.version.toString()]) + '</span><br /><span class="chat-text" style="color:#66FFFF">' + this.i18n('commandsHelp') + '</span></div>');
+        b && a.scrollTop(a[0].scrollHeight);
         if (window.history && history.pushState) {
             (function(history){
                 if (this.history.plugCubedWasHere === undefined) {
