@@ -361,7 +361,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          * @this {plugCubedModel}
          */
         loadSettings: function() {
-            if (LocalStorage.getItem('plugCubed') === null) return;
+            if (LocalStorage.getItem('plugCubed') === null || LocalStorage.getItem('plugCubed') === '@@@') return;
             var save = JSON.parse(LocalStorage.getItem('plugCubed'));
             for (var i in this.settings) {
                 if (save[i] !== undefined) this.settings[i] = save[i];
