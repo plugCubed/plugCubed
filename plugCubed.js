@@ -56,7 +56,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         version: {
             major: 2,
             minor: 0,
-            patch: 4,
+            patch: 5,
             prerelease: '',
             /**
              * @this {plugCubedModel.version}
@@ -362,29 +362,30 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          * @this {plugCubedModel}
          */
         loadSettings: function() {
-            if (LocalStorage.getItem('plugCubed') === null || LocalStorage.getItem('plugCubed') === '@@@') return;
-            var save = JSON.parse(LocalStorage.getItem('plugCubed'));
-            for (var i in this.settings) {
-                if (save[i] !== undefined) this.settings[i] = save[i];
-            }
-            this.settings.recent = false;
-            if (this.settings.autowoot) this.woot();
-            if (this.settings.userlist) {
-                this.populateUserlist();
-                this.showUserlist();
-            };
-            if (this.settings.customColors)
-                this.updateCustomColors();
-            if (this.settings.registeredSongs.length > 0 && this.settings.registeredSongs.indexOf(Models.room.data.media.id) > -1) {
-                API.setVolume(0);
-                this.settings.autoMuted = true;
-                API.chatLog(this.i18n('automuted',[Models.room.data.media.title]));
-            }
-            if (JSON.parse(LocalStorage.getItem('stngs')).emoji === undefined) {
-                var a = JSON.parse(LocalStorage.getItem('stngs'));
-                a.emoji = true;
-                LocalStorage.setItem('stngs',JSON.stringify(a));
-            }
+            try {
+                var save = JSON.parse(LocalStorage.getItem('plugCubed'));
+                for (var i in this.settings) {
+                    if (save[i] !== undefined) this.settings[i] = save[i];
+                }
+                this.settings.recent = false;
+                if (this.settings.autowoot) this.woot();
+                if (this.settings.userlist) {
+                    this.populateUserlist();
+                    this.showUserlist();
+                };
+                if (this.settings.customColors)
+                    this.updateCustomColors();
+                if (this.settings.registeredSongs.length > 0 && this.settings.registeredSongs.indexOf(Models.room.data.media.id) > -1) {
+                    API.setVolume(0);
+                    this.settings.autoMuted = true;
+                    API.chatLog(this.i18n('automuted',[Models.room.data.media.title]));
+                }
+                if (JSON.parse(LocalStorage.getItem('stngs')).emoji === undefined) {
+                    var a = JSON.parse(LocalStorage.getItem('stngs'));
+                    a.emoji = true;
+                    LocalStorage.setItem('stngs',JSON.stringify(a));
+                }
+            } catch (e) {}
         },
         /**
          * @this {plugCubedModel}
@@ -1323,7 +1324,8 @@ define('plugCubed/dialog/commands',['app/views/dialogs/AbstractDialogView','lang
 });
 
 define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalStorage'],function(Class,Model,LocalStorage) {
-    if (LocalStorage.getItem('plugCubedLang') === null || LocalStorage.getItem('plugCubedLang') === '@@@') {
+    try {
+        JSON.parse(LocalStorage.getItem('plugCubedLang'));
         return Class.extend({
                 init: function() {
                     $('#overlay-container').append($('#avatar-overlay').clone(false,false).attr('id','plugCubedLang-overlay').width(800).height(600).css('position','absolute'));
@@ -1397,7 +1399,8 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
                     .done(function() { if (self.languages.length === 0) log('<span style="color:#FF0000">Error loading plugCubed</span>'); });
                 }
             });
-    } else return Class.extend({ init: function() { plugCubed = new Model(); } });
+    } catch (e) {}
+    return Class.extend({ init: function() { plugCubed = new Model(); } });
 });
 
 require(['plugCubed/Loader'],function(a) { new a(); });
