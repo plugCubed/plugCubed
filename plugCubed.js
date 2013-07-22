@@ -56,8 +56,8 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         version: {
             major: 2,
             minor: 0,
-            patch: 6,
-            prerelease: '',
+            patch: 7,
+            prerelease: 'alpha.1',
             /**
              * @this {plugCubedModel.version}
              */
@@ -1377,7 +1377,7 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
         },
         onLangClick: function(a) {
             a = $(a.currentTarget);
-            LocalStorage.setItem('plugCubedLang',a.data('language'));
+            LocalStorage.setItem('plugCubedLang',a.data('language'),true);
             plugCubed = new Model();
             this.hide();
         },
@@ -1403,4 +1403,4 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
     });
 });
 
-require(['plugCubed/Loader'],function(a) { console.log(a); new a(); });
+require(['plugCubed/Loader'],function(a) { new a(); });
