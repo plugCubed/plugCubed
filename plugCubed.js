@@ -83,7 +83,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 onRoomJoin:           $.proxy(this.onRoomJoin,      this)
             };
             //Load language and third-party scripts
-            $.getScript('https://rawgithub.com/TATDK/plugCubed/2.1.0/langs/lang.' + LocalStorage.getItem('plugCubedLang') + '.js',function() {
+            $.getScript('http://tatdk.github.io/plugCubed/compiled/langs/lang.' + LocalStorage.getItem('plugCubedLang') + '.js',function() {
                 require(['plugCubed/Lang'],function(a) {
                     plugCubed.lang = a;
                     plugCubed.__init();
@@ -166,11 +166,11 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             }
             
             this.loadSettings();
-            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://rawgithub.com/TATDK/plugCubed/2.1.0/plugCubed.css" />');
+            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://tatdk.github.io/plugCubed/compiled/plugCubed.css" />');
             $('body').append(
                 '<div id="side-left" class="sidebar"><div class="sidebar-content"></div></div>' +
                 '<div id="side-right" class="sidebar"><div class="sidebar-handle"><span>||</span></div><div class="sidebar-content"></div></div>'
-            ).append('<script type="text/javascript" src="https://rawgithub.com/TATDK/plugCubed/2.1.0/thirdparty.js"></script>');
+            ).append('<script type="text/javascript" src="http://tatdk.github.io/plugCubed/compiled/thirdparty.js"></script>');
             this.initGUI();
             this.initAPIListeners();
             if (this.settings.userlist) {
@@ -270,7 +270,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     plugCubed.socket.onclose = function() {};
                     plugCubed.socket.close();
                     API.chatLog(plugCubed.i18n('newVersion'), null, plugCubed.colors.infoMessage1);
-                    setTimeout(function() { $.getScript('https://rawgithub.com/TATDK/plugCubed/2.1.0/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
+                    setTimeout(function() { $.getScript('http://tatdk.github.io/plugCubed/compiled/plugCubed.' + (plugCubed.minified ? 'min.' : '') + 'js'); },5000);
                     return;
                 }
                 if (data.type === 'chat') Chat.receive(data.data);
@@ -1365,7 +1365,7 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
                         len = languages.length,
                         x = len == 5 ? 0 : len == 4 ? 75 : len == 3 ? 150 : len == 2 ? 225 : 300;
                     for (var i = 0; i < len; ++i) {
-                        var button = $("<div/>").addClass("lang-button").css('display','inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'https://rawgithub.com/TATDK/plugCubed/2.1.0/flags/flag.' + languages[i].file + '.png').attr('alt',languages[i].name).height(75).width(150));
+                        var button = $("<div/>").addClass("lang-button").css('display','inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://tatdk.github.io/plugCubed/compiled/flags/flag.' + languages[i].file + '.png').attr('alt',languages[i].name).height(75).width(150));
                         row.append(button);
                         x += 150;
                     }
@@ -1374,7 +1374,6 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
                 onLangClick: function(a) {
                     a = $(a.currentTarget);
                     LocalStorage.setItem('plugCubedLang',a.data('language'));
-                    console.log('Clicked on ' + a.data('language'));
                     plugCubed = new Model();
                     this.hide();
                 },
