@@ -57,7 +57,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             major: 2,
             minor: 0,
             patch: 4,
-            prerelease: 'alpha.3',
+            prerelease: '',
             /**
              * @this {plugCubedModel.version}
              */
@@ -238,6 +238,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             requirejs.undef('plugCubed/dialog/chatLimit');
             requirejs.undef('plugCubed/dialog/commands');
             requirejs.undef('plugCubed/Lang');
+            requirejs.undef('plugCubed/Loader');
             delete plugCubed;
         },
         /**
