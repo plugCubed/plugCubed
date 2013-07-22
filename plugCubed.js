@@ -56,7 +56,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         version: {
             major: 2,
             minor: 0,
-            patch: 5,
+            patch: 6,
             prerelease: '',
             /**
              * @this {plugCubedModel.version}
@@ -1326,81 +1326,81 @@ define('plugCubed/dialog/commands',['app/views/dialogs/AbstractDialogView','lang
 define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalStorage'],function(Class,Model,LocalStorage) {
     try {
         JSON.parse(LocalStorage.getItem('plugCubedLang'));
-        return Class.extend({
-                init: function() {
-                    $('#overlay-container').append($('#avatar-overlay').clone(false,false).attr('id','plugCubedLang-overlay').width(800).height(600).css('position','absolute'));
-                    $('#plugCubedLang-overlay').find('.overlay-title').html('plug&#179; language');
-                    $('#plugCubedLang-overlay').find('#avatar-sets').remove();
-                    $('#plugCubedLang-overlay').find('#avatar-panel').attr('id','plugCubedLang-panel').css('padding-top','60px');
-                    $('#plugCubedLang-overlay').find('.overlay-close-button').click($.proxy(this.hide,this));
-                    this.initLanguages();
-                },
-                show: function() {
-                    $("#user-list-overlay").hide();
-                    $("#lobby-overlay").hide();
-                    $("#media-overlay").hide();
-                    $("#avatar-overlay").hide();
-                    $("#plugCubedLang-overlay").show();
-                    $("#overlay-container").show();
-                    this.draw();
-                },
-                hide: function() {
-                    $("#user-list-overlay").hide();
-                    $("#lobby-overlay").hide();
-                    $("#media-overlay").hide();
-                    $("#avatar-overlay").hide();
-                    $("#plugCubedLang-overlay").hide();
-                    $("#overlay-container").hide();
-                },
-                draw: function() {
-                    $("#plugCubedLang-panel").html("").scrollTop(0);
-                    var i,len = this.languages.length,container = $('<div/>');
-                    if (len > 5) {
-                        for (var j = 0;j<len/5;j++)
-                            container.append(this.drawRow(this.languages.slice(j*5,j*5+5)).css('top',j*75));
-                    } else container.append(this.drawRow(this.languages).css('top',j*75));
-                    $("#plugCubedLang-panel").append(container);
-                    $(".lang-button").click($.proxy(this.onLangClick, this));
-                },
-                drawRow: function(languages) {
-                    var row = $("<div/>").addClass("lang-row"),
-                        len = languages.length,
-                        x = len == 5 ? 0 : len == 4 ? 75 : len == 3 ? 150 : len == 2 ? 225 : 300;
-                    for (var i = 0; i < len; ++i) {
-                        var button = $("<div/>").addClass("lang-button").css('display','inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://tatdk.github.io/plugCubed/compiled/flags/flag.' + languages[i].file + '.png').attr('alt',languages[i].name).height(75).width(150));
-                        row.append(button);
-                        x += 150;
-                    }
-                    return row;
-                },
-                onLangClick: function(a) {
-                    a = $(a.currentTarget);
-                    LocalStorage.setItem('plugCubedLang',a.data('language'));
-                    plugCubed = new Model();
-                    this.hide();
-                },
-                initLanguages: function() {
-                    /*
-                    var a = Models.room.data.description;
-                    if (a.indexOf('@p3=') > -1) {
-                        a = a.substr(a.indexOf('@p3=')+4);
-                        if (a.indexOf(' ') > -1)
-                            a.substr(0,a.indexOf(' '));
-                        if (a.indexOf('\n') > -1)
-                            a.substr(0,a.indexOf('\n'));
-                    }
-                    */
-
-                    var self = this;
-
-                    this.languages = [];
-
-                    $.getJSON('http://rawgithub.com/TATDK/plugCubed/gh-pages/compiled/lang.txt',function(data) { self.languages = data; self.show(); })
-                    .done(function() { if (self.languages.length === 0) log('<span style="color:#FF0000">Error loading plugCubed</span>'); });
-                }
-            });
+        return Class.extend({ init: function() { plugCubed = new Model(); } });
     } catch (e) {}
-    return Class.extend({ init: function() { plugCubed = new Model(); } });
+    return Class.extend({
+        init: function() {
+            $('#overlay-container').append($('#avatar-overlay').clone(false,false).attr('id','plugCubedLang-overlay').width(800).height(600).css('position','absolute'));
+            $('#plugCubedLang-overlay').find('.overlay-title').html('plug&#179; language');
+            $('#plugCubedLang-overlay').find('#avatar-sets').remove();
+            $('#plugCubedLang-overlay').find('#avatar-panel').attr('id','plugCubedLang-panel').css('padding-top','60px');
+            $('#plugCubedLang-overlay').find('.overlay-close-button').click($.proxy(this.hide,this));
+            this.initLanguages();
+        },
+        show: function() {
+            $("#user-list-overlay").hide();
+            $("#lobby-overlay").hide();
+            $("#media-overlay").hide();
+            $("#avatar-overlay").hide();
+            $("#plugCubedLang-overlay").show();
+            $("#overlay-container").show();
+            this.draw();
+        },
+        hide: function() {
+            $("#user-list-overlay").hide();
+            $("#lobby-overlay").hide();
+            $("#media-overlay").hide();
+            $("#avatar-overlay").hide();
+            $("#plugCubedLang-overlay").hide();
+            $("#overlay-container").hide();
+        },
+        draw: function() {
+            $("#plugCubedLang-panel").html("").scrollTop(0);
+            var i,len = this.languages.length,container = $('<div/>');
+            if (len > 5) {
+                for (var j = 0;j<len/5;j++)
+                    container.append(this.drawRow(this.languages.slice(j*5,j*5+5)).css('top',j*75));
+            } else container.append(this.drawRow(this.languages).css('top',j*75));
+            $("#plugCubedLang-panel").append(container);
+            $(".lang-button").click($.proxy(this.onLangClick, this));
+        },
+        drawRow: function(languages) {
+            var row = $("<div/>").addClass("lang-row"),
+                len = languages.length,
+                x = len == 5 ? 0 : len == 4 ? 75 : len == 3 ? 150 : len == 2 ? 225 : 300;
+            for (var i = 0; i < len; ++i) {
+                var button = $("<div/>").addClass("lang-button").css('display','inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://tatdk.github.io/plugCubed/compiled/flags/flag.' + languages[i].file + '.png').attr('alt',languages[i].name).height(75).width(150));
+                row.append(button);
+                x += 150;
+            }
+            return row;
+        },
+        onLangClick: function(a) {
+            a = $(a.currentTarget);
+            LocalStorage.setItem('plugCubedLang',a.data('language'));
+            plugCubed = new Model();
+            this.hide();
+        },
+        initLanguages: function() {
+            /*
+            var a = Models.room.data.description;
+            if (a.indexOf('@p3=') > -1) {
+                a = a.substr(a.indexOf('@p3=')+4);
+                if (a.indexOf(' ') > -1)
+                    a.substr(0,a.indexOf(' '));
+                if (a.indexOf('\n') > -1)
+                    a.substr(0,a.indexOf('\n'));
+            }
+            */
+
+            var self = this;
+
+            this.languages = [];
+
+            $.getJSON('http://rawgithub.com/TATDK/plugCubed/gh-pages/compiled/lang.txt',function(data) { self.languages = data; self.show(); })
+            .done(function() { if (self.languages.length === 0) log('<span style="color:#FF0000">Error loading plugCubed</span>'); });
+        }
+    });
 });
 
-require(['plugCubed/Loader'],function(a) { new a(); });
+require(['plugCubed/Loader'],function(a) { console.log(a); new a(); });
