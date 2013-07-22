@@ -83,7 +83,12 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 onRoomJoin:           $.proxy(this.onRoomJoin,      this)
             };
             //Load language and third-party scripts
-            $.getScript('https://rawgithub.com/TATDK/plugCubed/2.1.0/langs/lang.' + LocalStorage.getItem('plugCubedLang') + '.js',$.proxy(this.__init,this));
+            $.getScript('https://rawgithub.com/TATDK/plugCubed/2.1.0/langs/lang.' + LocalStorage.getItem('plugCubedLang') + '.js',function() {
+                require(['plugCubed/Lang'],function(a) {
+                    plugCubed.lang = a;
+                    plugCubed.__init();
+                });
+            });
             if (typeof jQuery.fn.tabs === 'undefined') {
                 $.getScript('http://code.jquery.com/ui/1.10.2/jquery-ui.js');
                 $('head').append('<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />');
@@ -94,6 +99,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          */
         i18n: function(key,replace) {
             var a = this.lang,i;
+            if (a === undefined) return '{' + key + '}';
             key = key.split('.');
             for (i in key) {
                 if (a[key[i]] === undefined) return '{' + key.join('.') + '}';
@@ -109,8 +115,6 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          * @this {plugCubedModel}
          */
         __init: function() {
-            require(['plugCubed/Lang'],function(a) { plugCubed.lang = a; });
-
             this.userData = {};
 
             this.minified = false;
