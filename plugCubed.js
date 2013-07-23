@@ -166,7 +166,8 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             }
             
             this.loadSettings();
-            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://tatdk.github.io/plugCubed/compiled/plugCubed.css" />');
+            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://tatdk.github.io/plugCubed/compiled/plugCubed.css" />').
+                     .prepend('<link rel="stylesheet" type="text/css" id="font-awesome" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">');
             $('body').append(
                 '<div id="side-left" class="sidebar"><div class="sidebar-content"></div></div>' +
                 '<div id="side-right" class="sidebar"><div class="sidebar-handle"><span>||</span></div><div class="sidebar-content"></div></div>'
@@ -222,6 +223,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 delete plugCubed.guiButtons[i];
             }
             $('#plugcubed-css').remove();
+            $('#font-awesome').remove();
             $('#plugcubed-js-extra').remove();
             $('#side-right').remove();
             $('#side-left').remove();
