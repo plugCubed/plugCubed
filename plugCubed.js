@@ -383,7 +383,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 if (JSON.parse(LocalStorage.getItem('stngs')).emoji === undefined) {
                     var a = JSON.parse(LocalStorage.getItem('stngs'));
                     a.emoji = true;
-                    LocalStorage.setItem('stngs',JSON.stringify(a));
+                    LocalStorage.setItem('stngs',JSON.stringify(a),true);
                 }
             } catch (e) {}
         },
