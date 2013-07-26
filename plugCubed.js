@@ -57,7 +57,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             major: 2,
             minor: 0,
             patch: 7,
-            prerelease: 'alpha.1',
+            prerelease: 'alpha.2',
             /**
              * @this {plugCubedModel.version}
              */
@@ -166,12 +166,11 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             }
             
             this.loadSettings();
-            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://tatdk.github.io/plugCubed/compiled/plugCubed.css" />').
+            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://tatdk.github.io/plugCubed/compiled/plugCubed.css" />')
                      .prepend('<link rel="stylesheet" type="text/css" id="font-awesome" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">');
-            $('body').append(
-                '<div id="side-left" class="sidebar"><div class="sidebar-content"></div></div>' +
-                '<div id="side-right" class="sidebar"><div class="sidebar-handle"><span>||</span></div><div class="sidebar-content"></div></div>'
-            ).append('<script type="text/javascript" src="http://tatdk.github.io/plugCubed/compiled/thirdparty.js"></script>');
+            $('body').append($('<div id="side-left" class="sidebar" />').append($('<div class="sidebar-content" />')))
+                     .append($('<div id="side-right" class="sidebar" />').append($('<div class="sidebar-handle"><span>||</span></div>')).append($('<div class="sidebar-content" />')))
+                     .append('<script type="text/javascript" src="http://tatdk.github.io/plugCubed/compiled/thirdparty.js"></script>');
             this.initGUI();
             this.initAPIListeners();
             if (this.settings.userlist) {
@@ -190,6 +189,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             }
 
             this.Socket();
+            this.loaded = true;
         },
         onRoomJoin: function() {
             if (typeof plugCubed !== 'undefined') {
@@ -205,6 +205,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          * @this {plugCubedModel}
          */
         close: function() {
+            if (this.loaded === undefined || this.loaded === false) return;
             API.off(API.CHAT_COMMAND,               this.customChatCommand);
             API.off(API.DJ_ADVANCE,                 this.proxy.onDjAdvance);
             API.off(API.VOTE_UPDATE,                this.proxy.onVoteUpdate);
@@ -241,6 +242,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             requirejs.undef('plugCubed/dialog/commands');
             requirejs.undef('plugCubed/Lang');
             requirejs.undef('plugCubed/Loader');
+            this.loaded = false;
             delete plugCubed;
         },
         /**
