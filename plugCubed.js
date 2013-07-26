@@ -1329,7 +1329,7 @@ define('plugCubed/dialog/commands',['app/views/dialogs/AbstractDialogView','lang
 
 define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalStorage'],function(Class,Model,LocalStorage) {
     try {
-        JSON.parse(LocalStorage.getItem('plugCubedLang'));
+        if (JSON.parse(LocalStorage.getItem('plugCubedLang')) === null) throw new Error('Select language');
         return Class.extend({ init: function() { plugCubed = new Model(); } });
     } catch (e) {}
     return Class.extend({
