@@ -57,7 +57,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             major: 2,
             minor: 0,
             patch: 7,
-            prerelease: 'alpha.2',
+            prerelease: 'alpha.3',
             /**
              * @this {plugCubedModel.version}
              */
@@ -1328,10 +1328,9 @@ define('plugCubed/dialog/commands',['app/views/dialogs/AbstractDialogView','lang
 });
 
 define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalStorage'],function(Class,Model,LocalStorage) {
-    try {
-        if (JSON.parse(LocalStorage.getItem('plugCubedLang')) === null) throw new Error('Select language');
+    var test = LocalStorage.getItem('plugCubedLang');
+    if (test !== null && test !== '@@@')
         return Class.extend({ init: function() { plugCubed = new Model(); } });
-    } catch (e) {}
     return Class.extend({
         init: function() {
             $('#overlay-container').append($('#avatar-overlay').clone(false,false).attr('id','plugCubedLang-overlay').width(800).height(600).css('position','absolute'));
