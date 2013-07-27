@@ -57,7 +57,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             major: 2,
             minor: 0,
             patch: 7,
-            prerelease: 'alpha.3',
+            prerelease: '',
             /**
              * @this {plugCubedModel.version}
              */
