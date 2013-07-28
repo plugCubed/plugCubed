@@ -56,8 +56,8 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         version: {
             major: 2,
             minor: 0,
-            patch: 8,
-            prerelease: '',
+            patch: 9,
+            prerelease: 'alpha.1',
             minified: false,
             /**
              * @this {plugCubedModel.version}
@@ -196,7 +196,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 setTimeout(function() {
                     if (API.enabled) {
                         plugCubed.close();
-                        plugCubed = new plugCubedModel();
+                        $.getScript('http://plugcubed.com/compiled/plugCubed.' + (plugCubed.version.minified ? 'min.' : '') + 'js');
                     } else plugCubed.onRoomJoin();
                 },500);
             }
