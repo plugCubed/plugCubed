@@ -57,7 +57,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             major: 2,
             minor: 0,
             patch: 9,
-            prerelease: 'alpha.1',
+            prerelease: 'alpha.2',
             minified: false,
             /**
              * @this {plugCubedModel.version}
@@ -249,6 +249,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          * @this {plugCubedModel}
          */
         Socket: function() {
+            if (this.socket !== undefined) return;
             this.socket = new SockJS('http://socket.plugpony.net:923/gateway');
             this.socket.tries = 0;
             /**
