@@ -513,7 +513,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         appendUser: function(user) {
             var prefix,username = Utils.cleanTypedString(user.username);
 
-                 if (user.curated == true)                           prefix = 'curate';
+                 if (user.curated !== false)                         prefix = 'curate';
             else if (this.isPlugCubedAdmin(user.id))                 prefix = 'plugcubed';
             else if (this.isPlugCubedVIP(user.id))                   prefix = 'vip';
             else if (API.hasPermission(user.id,API.ROLE.ADMIN))      prefix = 'admin';
@@ -560,7 +560,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 $('<p></p>')
                     .append(
                         $('<span></span>')
-                            .append($('<span></span>').addClass(prefix))
+                            .append($('<span></span>').addClass(prefix).attr('title',prefix))
                             .css('cursor','pointer')
                             .css('color',color)
                             .mousedown(function(event) {
