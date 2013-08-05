@@ -50,14 +50,14 @@ console.info = function(data) {
     }
 };
 
-define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel'],function(Class,Chat,LocalStorage,Utils,Room) {
+define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/base/Context','app/events/MediaCurateEvent'],function(Class,Chat,LocalStorage,Utils,Room,Context,MCE) {
     return Class.extend({
         guiButtons: {},
         version: {
             major: 2,
             minor: 0,
             patch: 9,
-            prerelease: 'alpha.2',
+            prerelease: 'alpha.3',
             minified: false,
             /**
              * @this {plugCubedModel.version}
@@ -1142,6 +1142,14 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                         API.chatLog(plugCubed.i18n('info.userNextDJ',[user.id === API.getUser().id ? plugCubed.i18n('you') : user.username]));
                     else
                         API.chatLog(plugCubed.i18n('info.inbooth',[spot + 1,API.getDJs().length]));
+                }
+                return true;
+            }
+            if (value == '/curate') {
+                var a = JSON.parse(LocalStorage.getItem('playlist')),b;
+                for (var b in a) {
+                    if (a[b].selected)
+                        return Context.dispatch(new MCE(MCE.CURATE,a[b].id)),true;
                 }
                 return true;
             }
