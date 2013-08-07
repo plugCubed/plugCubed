@@ -57,7 +57,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             major: 2,
             minor: 0,
             patch: 9,
-            prerelease: 'alpha.3',
+            prerelease: 'alpha.4',
             minified: false,
             /**
              * @this {plugCubedModel.version}
@@ -278,7 +278,10 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     setTimeout(function() { $.getScript('http://plugcubed.com/compiled/plugCubed.' + (plugCubed.version.minified ? 'min.' : '') + 'js'); },5000);
                     return;
                 }
-                if (data.type === 'chat') Chat.receive(data.data);
+                if (data.type === 'chat' && data.data.chatID && $(".chat-id-" + data.data.chatID).length == 0) {
+                    Chat.receive(data.data);
+                    API.trigger(API.CHAT,data.data);
+                }
             }
             /**
              * @this {SockJS}
@@ -623,8 +626,8 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     position,
                     points      = user.djPoints + user.curatorPoints + user.listenerPoints,
                     voteTotal   = userdata.wootcount + userdata.mehcount,
-                    waitlistpos = API.getWaitListPosition(),
-                    boothpos    = -1,
+                    waitlistpos = API.getWaitListPosition(user.id),
+                    boothpos    = API.getBoothPosition(user.id),
                     djs         = API.getDJs();
 
 
@@ -637,20 +640,14 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 else if (API.hasPermission(user.id,API.ROLE.FEATUREDDJ)) rank = this.i18n('ranks.featureddj');
                 else                                                     rank = this.i18n('ranks.regular');
 
-                if (waitlistpos === -1) {
-                    if (djs.length > 0 && djs[0].id === user.id) {
-                        position = this.i18n('info.djing');
-                        boothpos = 0;
-                    } else {
-                        for (var i = 1;i < djs.length;i++)
-                            boothpos = djs.id === user.id ? i : boothpos;
-                        if (boothpos < 0)
-                            position = this.i18n('info.notinlist');
-                        else
-                            position = this.i18n('info.inbooth',[boothpos + 1,djs.length]);
-                    }
-                } else
+                if (boothpos === 0)
+                    position = this.i18n('info.djing');
+                else if (boothpos > -1)
+                    position = this.i18n('info.inbooth',[boothpos + 1,djs.length]);
+                else if (waitlistpos > -1)
                     position = this.i18n('info.inwaitlist',[waitlistpos,API.getWaitList().length]);
+                else
+                    position = this.i18n('info.notinlist');
 
                 switch (user.status) {
                     default:                  status = this.i18n('status.available'); break;
