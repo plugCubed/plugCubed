@@ -563,7 +563,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 $('<p></p>')
                     .append(
                         $('<span></span>')
-                            .append($('<span></span>').addClass(prefix).attr('title',prefix))
+                            .append($('<span></span>').addClass(prefix))
                             .css('cursor','pointer')
                             .css('color',color)
                             .mousedown(function(event) {
@@ -877,10 +877,10 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             this.onUserlistUpdate();
         },
         isPlugCubedAdmin: function(id) {
-            return (id == '50aeb31696fba52c3ca0adb6' || id == '50aeb077877b9217e2fbff00');
+            return id == '50aeb31696fba52c3ca0adb6' || id == '50aeb077877b9217e2fbff00';
         },
         isPlugCubedVIP: function(id) {
-            return (id == '5112c273d6e4a94ec0554792' || id == '50b1961c96fba57db2230417');
+            return id == '5112c273d6e4a94ec0554792' || id == '50b1961c96fba57db2230417' || id == '5121578196fba506408bb9eb';
         },
         /**
          * @this {plugCubedModel}
