@@ -50,14 +50,14 @@ console.info = function(data) {
     }
 };
 
-define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/base/Context','app/events/MediaCurateEvent'],function(Class,Chat,LocalStorage,Utils,Room,Context,MCE) {
+define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/base/Context','app/events/MediaCurateEvent','app/net/Socket'],function(Class,Chat,LocalStorage,Utils,Room,Context,MCE,Socket) {
     return Class.extend({
         guiButtons: {},
         version: {
             major: 2,
             minor: 0,
             patch: 9,
-            prerelease: 'alpha.4',
+            prerelease: 'alpha.5',
             minified: false,
             /**
              * @this {plugCubedModel.version}
@@ -82,6 +82,12 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 onUserlistUpdate:     $.proxy(this.onUserlistUpdate,this),
                 onSkip:               $.proxy(this.onSkip,          this),
                 onRoomJoin:           $.proxy(this.onRoomJoin,      this)
+            };
+            Socket.listener.chat = function(a) {
+                if (typeof plugCubed !== 'undefined' && plugCubed.settings.ignore.indexOf(a.fromID) > -1)
+                    return;
+                Chat.receive(a);
+                API.dispatch(API.CHAT,a);
             };
             //Load language and third-party scripts
             $.getScript('http://plugCubed.com/compiled/langs/lang.' + LocalStorage.getItem('plugCubedLang') + '.js',function() {
@@ -279,6 +285,8 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     return;
                 }
                 if (data.type === 'chat' && data.data.chatID && $(".chat-id-" + data.data.chatID).length == 0) {
+                    if (plugCubed.settings.ignore.indexOf(data.fromID) > -1)
+                        return;
                     Chat.receive(data.data);
                     API.trigger(API.CHAT,data.data);
                 }
