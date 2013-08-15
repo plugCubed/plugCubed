@@ -772,7 +772,16 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         onVoteUpdate: function(data) {
             if (!data || !data.user) return;
             var a = plugCubedUserData[data.user.id];
-            this.onUserlistUpdate();
+
+            if (a === undefined) {
+                plugCubedUserData[data.id] = {
+                    wootcount: 0,
+                    mehcount:  0,
+                    curVote:   0,
+                    joinTime:  0
+                };
+                a = plugCubedUserData[data.user.id];
+            }
 
             if (a.curVote === 1)       a.wootcount--;
             else if (a.curVote === -1) a.mehcount--;
@@ -781,6 +790,8 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             else if (data.vote === -1) a.mehcount++;
 
             a.curVote = data.vote;
+
+            this.onUserlistUpdate();
         },
         /**
          * @this {plugCubedModel}
