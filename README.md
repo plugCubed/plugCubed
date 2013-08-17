@@ -5,8 +5,12 @@ plug&#179; (plugCubed)
 * Auto-woot : Automatically WOOT! each song as it is played.
 * Auto-joining : Automatically rejoin the DJ Waitlist once you've been moved back to the crowd.
    * (Room staff can turn this off by @mentioning your username and using !disable.)
-* User list : A dynamic list of every user in the room, color-coded based on their current vote. Green = Woot, Red =   Meh, White = No vote. Special usergroups are denoted by the icon you'd normally see in the chat.
-* Unique Sidebar UI : Allows you to easily configure your plugCubed experience; enable or disable each of its features at the click of a button. Red = Off, Green = On
+* User list : A dynamic list of every user in the room, color-coded based on their current vote.
+    * Green = Woot, Red = Meh, White = No vote
+    * Special usergroups are denoted by the icon you'd normally see in the chat.
+* Unique Sidebar UI : Allows you to easily configure your plugCubed experience
+    * Enable or disable each of its features at the click of a button.
+    * Red = Off, Green = On
 * Custom chat logged notifications that display
     * User join/leave alerts
     * User Curate alerts
@@ -14,7 +18,7 @@ plug&#179; (plugCubed)
     * Now Playing alerts
 * A variety of chat commands that enable you to 
     * change your display name with /nick
-    * change user status with /idle, /avail, /afk, /work, /sleep
+    * change user status with /avail, /afk, /work, /sleep
     * join/leave the waitlist or dj booth with /join or /leave
     * woot or meh a song with /woot or /meh
     * Mute and unmute songs with /mute or /unmute
@@ -37,21 +41,28 @@ plug&#179; (plugCubed)
             * /unlock = Unlock the DJ booth
 
 ###Installation###
-Find the URLs for bookmarks at http://tatdk.github.io/plugCubed/
+Find the URLs for bookmarks at http://plugCubed.com/
 
 ###Authors###
 * Jeremy "Colgate" Richardson
 * Thomas "TAT" Andresen
 
+###Translations###
+If you want to help out translating plugCubed, please use http://getlocalization.com/plugCubed/
+
 ###License###
 Copyright &copy; 2012-2013 by Jeremy "Colgate" Richardson and Thomas "TAT" Andresen
 
-Permission to use and/or distribute this software or parts of it for any purpose without
-fee is hereby granted, provided that the above copyright notice and this permission notice
-appear in all copies.
+Permission to use this software for any purpose without fee is hereby granted,
+provided that the above copyright notice and this permission notice appear in all copies.
 
-Permission to copy and/or edit this software or parts of it for any purpose is NOT permitted
-without written permission by the authors.
+Permission to copy and/or edit this software or parts of it for any purpose is permitted,
+provided that the following points are followed.
+* The above copyright notice and this permission notice appear in all copies
+* Within two (2) days after modification is proven working, any modifications are send back to the original authors to be inspected with the goal of inclusion in the official software
+* Any edited version are only test versions and not permitted to be run as a final product
+* Any edited version aren't to be distributed
+* Any edited version have the prerelease version set to something that can be distinguished from a version used in the original software
 
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHORS DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE
 INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHORS
