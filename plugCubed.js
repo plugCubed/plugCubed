@@ -202,7 +202,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 setTimeout(function() {
                     if (API.enabled) {
                         plugCubed.close();
-                        $.getScript('http://plugcubed.com/compiled/plugCubed.' + (plugCubed.version.minified ? 'min.' : '') + 'js');
+                        $.getScript('https://rawgithub.com/TATDK/plugCubed/2.1.0/plugCubed.' + (plugCubed.version.minified ? 'min.' : '') + 'js');
                     } else plugCubed.onRoomJoin();
                 },500);
             }
@@ -281,7 +281,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     plugCubed.socket.onclose = function() {};
                     plugCubed.socket.close();
                     API.chatLog(plugCubed.i18n('newVersion'), null, plugCubed.colors.infoMessage1);
-                    setTimeout(function() { $.getScript('http://plugcubed.com/compiled/plugCubed.' + (plugCubed.version.minified ? 'min.' : '') + 'js'); },5000);
+                    setTimeout(function() { $.getScript('https://rawgithub.com/TATDK/plugCubed/2.1.0/plugCubed.' + (plugCubed.version.minified ? 'min.' : '') + 'js'); },5000);
                     return;
                 }
                 if (data.type === 'chat' && data.data.chatID && $(".chat-id-" + data.data.chatID).length == 0) {
@@ -1423,7 +1423,7 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
 
             this.languages = [];
 
-            $.getJSON('http://rawgithub.com/TATDK/plugCubed/gh-pages/compiled/lang.json',function(data) { self.languages = data; self.show(); })
+            $.getJSON('https://rawgithub.com/TATDK/plugCubed/2.1.0/lang.json',function(data) { self.languages = data; self.show(); })
             .done(function() { if (self.languages.length === 0) log('<span style="color:#FF0000">Error loading plugCubed</span>'); });
         }
     });
