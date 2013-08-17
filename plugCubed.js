@@ -24,7 +24,6 @@
  * @author  Thomas "TAT" Andresen
  */
 if (typeof plugCubed !== 'undefined') plugCubed.close();
-if (typeof plugCubedUserData === 'undefined') var plugCubedUserData = {};
 String.prototype.equalsIgnoreCase     = function(other)    { return typeof other !== 'string' ? false : this.toLowerCase() === other.toLowerCase(); };
 String.prototype.startsWith           = function(other)    { return typeof other !== 'string' || other.length > this.length ? false : this.indexOf(other) === 0; };
 String.prototype.endsWith             = function(other)    { return typeof other !== 'string' || other.length > this.length ? false : this.indexOf(other) === this.length-other.length; };
@@ -33,7 +32,7 @@ String.prototype.endsWithIgnoreCase   = function(other)    { return typeof other
 String.prototype.isNumber             = function()         { return !isNaN(parseInt(this,10)) && isFinite(this); };
 String.prototype.isHEX                = function()         { return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(this.substr(0,1) === '#' ? this : '#' + this); };
 Math.randomRange                      = function(min, max) { return min + Math.floor(Math.random()*(max-min+1)); };
-var _PCL, plugCubed,
+var _PCL, plugCubed, plugCubedUserData,
 disconnected = false;
 console.info = function(data) {
     console.log(data);
@@ -57,7 +56,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             major: 2,
             minor: 0,
             patch: 9,
-            prerelease: 'alpha.5',
+            prerelease: 'alpha.6',
             minified: false,
             /**
              * @this {plugCubedModel.version}
@@ -70,6 +69,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          * @this {plugCubedModel}
          */
         init: function() {
+            if (typeof plugCubedUserData === 'undefined') plugCubedUserData = {};
             if (LocalStorage.getItem('plugCubedLang') === null || LocalStorage.getItem('plugCubedLang') === '@@@') return;
             this.proxy = {
                 menu:                 $.proxy(this.onMenuClick,     this),
@@ -752,7 +752,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     this.changeGUIColor('emoji',a);
                     return API.sendChat(a ? '/emoji on' : '/emoji off');
                     break;
-                default: return API.chatLog(this.i18n('menu.unknown'));
+                default: return API.chatLog(this.i18n('menu.unknownMenuKey'));
             }
             this.saveSettings();
         },
@@ -773,15 +773,13 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             if (!data || !data.user) return;
             var a = plugCubedUserData[data.user.id];
 
-            if (a === undefined) {
-                plugCubedUserData[data.id] = {
+            if (typeof a === 'undefined')
+                a = plugCubedUserData[data.id] = {
                     wootcount: 0,
                     mehcount:  0,
                     curVote:   0,
-                    joinTime:  0
+                    joinTime:  Date.now()
                 };
-                a = plugCubedUserData[data.user.id];
-            }
 
             if (a.curVote === 1)       a.wootcount--;
             else if (a.curVote === -1) a.mehcount--;
@@ -1153,9 +1151,9 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     if (spot < 0)
                         API.chatLog(plugCubed.i18n('info.notinlist'));
                     else if (spot === 0)
-                        API.chatLog(plugCubed.i18n('info.userDjing',[user.id === API.getUser().id ? plugCubed.i18n('you') : user.username]));
+                        API.chatLog(plugCubed.i18n('info.userDjing',[user.id === API.getUser().id ? plugCubed.i18n('ranks.you') : user.username]));
                     else if (spot === 1)
-                        API.chatLog(plugCubed.i18n('info.userNextDJ',[user.id === API.getUser().id ? plugCubed.i18n('you') : user.username]));
+                        API.chatLog(plugCubed.i18n('info.userNextDJ',[user.id === API.getUser().id ? plugCubed.i18n('ranks.you') : user.username]));
                     else
                         API.chatLog(plugCubed.i18n('info.inbooth',[spot + 1,API.getDJs().length]));
                 }
@@ -1425,7 +1423,7 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
 
             this.languages = [];
 
-            $.getJSON('http://rawgithub.com/TATDK/plugCubed/gh-pages/compiled/lang.txt',function(data) { self.languages = data; self.show(); })
+            $.getJSON('http://rawgithub.com/TATDK/plugCubed/gh-pages/compiled/lang.json',function(data) { self.languages = data; self.show(); })
             .done(function() { if (self.languages.length === 0) log('<span style="color:#FF0000">Error loading plugCubed</span>'); });
         }
     });
