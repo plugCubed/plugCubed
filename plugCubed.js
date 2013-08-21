@@ -1007,8 +1007,6 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             ['/mute'              ,'set volume to 0'],
             ['/automute'          ,'register currently playing song to automatically mute on future plays'],
             ['/unmute'            ,'set volume to last volume'],
-            ['/woot'              ,'woots current song'],
-            ['/meh'               ,'mehs current song'],
             ['/refresh'           ,'refresh the video'],
             ['/ignore (username)' ,'ignore all chat messages from user'],
             ['/alertson (word)'   ,'play mention sound whenever word is written in chat'],
@@ -1077,10 +1075,6 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 return API.djLeave(),true;
             if (value == '/whoami')
                 return plugCubed.getUserInfo(API.getUser().id),true;
-            if (value == '/woot')
-                return $('#button-vote-positive').click(), true;
-            if (value == '/meh')
-                return $('#button-vote-negative').click(), true;
             if (value == '/refresh')
                 return $('#button-refresh').click(), true;
             if (value == '/version')
