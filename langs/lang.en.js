@@ -50,9 +50,9 @@ define('plugCubed/Lang',function() {
             position          : 'Position',
             points            : 'Points',
             pointType: {
-                dj            : '%1  DJ Points',
-                listener      : '%1  Listener Points',
-                curator       : '%1  Curator Points'
+                dj            : '%1 DJ Points',
+                listener      : '%1 Listener Points',
+                curator       : '%1 Curator Points'
             },
             fans              : 'Fans',
             wootCount         : 'Woot Count',
@@ -85,8 +85,7 @@ define('plugCubed/Lang',function() {
             notify            : 'Notify',
             limitchatlog      : 'Limit Chat Log',
             stream            : 'Stream',
-            emoji             : 'Emoji',
-            avatarAnimations  : 'Avatar Animations'
+            emoji             : 'Emoji'
         },
         status: {
             available         : 'Available',

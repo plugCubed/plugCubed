@@ -47,6 +47,11 @@ Find the URLs for bookmarks at http://plugCubed.com/
 * Jeremy "Colgate" Richardson
 * Thomas "TAT" Andresen
 
+###Translators###
+| Name              | Languages           |
+| ----------------- | ------------------- |
+| thenotoriousbruce | Portuguese (Brasil) |
+
 ###Translations###
 If you want to help out translating plugCubed, please use http://getlocalization.com/plugCubed/
 
