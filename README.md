@@ -20,7 +20,6 @@ plug&#179; (plugCubed)
     * change your display name with /nick
     * change user status with /avail, /afk, /work, /sleep
     * join/leave the waitlist or dj booth with /join or /leave
-    * woot or meh a song with /woot or /meh
     * Mute and unmute songs with /mute or /unmute
     * Register songs to be automatically muted on subsequent plays with /automute
     * Get your current waitlist position with /getpos
