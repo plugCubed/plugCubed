@@ -10,7 +10,6 @@ define('plugCubed/Lang',function() {
         automuted             : '%1 auto-muted.',
         nextsong              : 'Your next queued song is %1 by %2',
         isHistory             : 'Warning: This song is still in the history (%1 of %2)',
-        you                   : 'You',
         enable                : 'Enable',
         commands: {
             header            : 'plugCubed Commands',
@@ -51,9 +50,9 @@ define('plugCubed/Lang',function() {
             position          : 'Position',
             points            : 'Points',
             pointType: {
-                dj            : '%1  DJ Points',
-                listener      : '%1  Listener Points',
-                curator       : '%1  Curator Points'
+                dj            : '%1 DJ Points',
+                listener      : '%1 Listener Points',
+                curator       : '%1 Curator Points'
             },
             fans              : 'Fans',
             wootCount         : 'Woot Count',
@@ -86,12 +85,9 @@ define('plugCubed/Lang',function() {
             notify            : 'Notify',
             limitchatlog      : 'Limit Chat Log',
             stream            : 'Stream',
-            emoji             : 'Emoji',
-            avatarAnimations  : 'Avatar Animations',
-            unknown           : 'Unknown menu key'
+            emoji             : 'Emoji'
         },
         status: {
-            idle              : 'Idle',
             available         : 'Available',
             afk               : 'AFK',
             working           : 'Working',
@@ -111,6 +107,7 @@ define('plugCubed/Lang',function() {
             userNotFound      : 'User not found',
             ignoreSelf        : 'You can\'t ignore yourself',
             unknownModeration : 'Unknown moderation',
+            unknownMenuKey    : 'Unknown menu key',
             emoji             : 'Error in reenabling Emoji'
         }
     };

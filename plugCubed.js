@@ -24,7 +24,6 @@
  * @author  Thomas "TAT" Andresen
  */
 if (typeof plugCubed !== 'undefined') plugCubed.close();
-if (typeof plugCubedUserData === 'undefined') var plugCubedUserData = {};
 String.prototype.equalsIgnoreCase     = function(other)    { return typeof other !== 'string' ? false : this.toLowerCase() === other.toLowerCase(); };
 String.prototype.startsWith           = function(other)    { return typeof other !== 'string' || other.length > this.length ? false : this.indexOf(other) === 0; };
 String.prototype.endsWith             = function(other)    { return typeof other !== 'string' || other.length > this.length ? false : this.indexOf(other) === this.length-other.length; };
@@ -33,7 +32,7 @@ String.prototype.endsWithIgnoreCase   = function(other)    { return typeof other
 String.prototype.isNumber             = function()         { return !isNaN(parseInt(this,10)) && isFinite(this); };
 String.prototype.isHEX                = function()         { return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(this.substr(0,1) === '#' ? this : '#' + this); };
 Math.randomRange                      = function(min, max) { return min + Math.floor(Math.random()*(max-min+1)); };
-var _PCL, plugCubed,
+var _PCL, plugCubed, plugCubedUserData,
 disconnected = false;
 console.info = function(data) {
     console.log(data);
@@ -50,14 +49,14 @@ console.info = function(data) {
     }
 };
 
-define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel'],function(Class,Chat,LocalStorage,Utils,Room) {
+define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/base/Context','app/events/MediaCurateEvent','app/net/Socket'],function(Class,Chat,LocalStorage,Utils,Room,Context,MCE,Socket) {
     return Class.extend({
         guiButtons: {},
         version: {
             major: 2,
             minor: 0,
-            patch: 8,
-            prerelease: '',
+            patch: 9,
+            prerelease: 'alpha.6',
             minified: false,
             /**
              * @this {plugCubedModel.version}
@@ -70,6 +69,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          * @this {plugCubedModel}
          */
         init: function() {
+            if (typeof plugCubedUserData === 'undefined') plugCubedUserData = {};
             if (LocalStorage.getItem('plugCubedLang') === null || LocalStorage.getItem('plugCubedLang') === '@@@') return;
             this.proxy = {
                 menu:                 $.proxy(this.onMenuClick,     this),
@@ -82,6 +82,12 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 onUserlistUpdate:     $.proxy(this.onUserlistUpdate,this),
                 onSkip:               $.proxy(this.onSkip,          this),
                 onRoomJoin:           $.proxy(this.onRoomJoin,      this)
+            };
+            Socket.listener.chat = function(a) {
+                if (typeof plugCubed !== 'undefined' && plugCubed.settings.ignore.indexOf(a.fromID) > -1)
+                    return;
+                Chat.receive(a);
+                API.dispatch(API.CHAT,a);
             };
             //Load language and third-party scripts
             $.getScript('http://plugCubed.com/compiled/langs/lang.' + LocalStorage.getItem('plugCubedLang') + '.js',function() {
@@ -196,7 +202,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 setTimeout(function() {
                     if (API.enabled) {
                         plugCubed.close();
-                        plugCubed = new plugCubedModel();
+                        $.getScript('https://rawgithub.com/TATDK/plugCubed/2.1.0/plugCubed.' + (plugCubed.version.minified ? 'min.' : '') + 'js');
                     } else plugCubed.onRoomJoin();
                 },500);
             }
@@ -249,6 +255,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          * @this {plugCubedModel}
          */
         Socket: function() {
+            if (this.socket !== undefined) return;
             this.socket = new SockJS('http://socket.plugpony.net:923/gateway');
             this.socket.tries = 0;
             /**
@@ -274,10 +281,15 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     plugCubed.socket.onclose = function() {};
                     plugCubed.socket.close();
                     API.chatLog(plugCubed.i18n('newVersion'), null, plugCubed.colors.infoMessage1);
-                    setTimeout(function() { $.getScript('http://plugcubed.com/compiled/plugCubed.' + (plugCubed.version.minified ? 'min.' : '') + 'js'); },5000);
+                    setTimeout(function() { $.getScript('https://rawgithub.com/TATDK/plugCubed/2.1.0/plugCubed.' + (plugCubed.version.minified ? 'min.' : '') + 'js'); },5000);
                     return;
                 }
-                if (data.type === 'chat') Chat.receive(data.data);
+                if (data.type === 'chat' && data.data.chatID && $(".chat-id-" + data.data.chatID).length == 0) {
+                    if (plugCubed.settings.ignore.indexOf(data.fromID) > -1)
+                        return;
+                    Chat.receive(data.data);
+                    API.trigger(API.CHAT,data.data);
+                }
             }
             /**
              * @this {SockJS}
@@ -512,7 +524,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         appendUser: function(user) {
             var prefix,username = Utils.cleanTypedString(user.username);
 
-                 if (user.curated == true)                           prefix = 'curate';
+                 if (user.curated !== false)                         prefix = 'curate';
             else if (this.isPlugCubedAdmin(user.id))                 prefix = 'plugcubed';
             else if (this.isPlugCubedVIP(user.id))                   prefix = 'vip';
             else if (API.hasPermission(user.id,API.ROLE.ADMIN))      prefix = 'admin';
@@ -622,8 +634,8 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     position,
                     points      = user.djPoints + user.curatorPoints + user.listenerPoints,
                     voteTotal   = userdata.wootcount + userdata.mehcount,
-                    waitlistpos = API.getWaitListPosition(),
-                    boothpos    = -1,
+                    waitlistpos = API.getWaitListPosition(user.id),
+                    boothpos    = API.getBoothPosition(user.id),
                     djs         = API.getDJs();
 
 
@@ -636,20 +648,14 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 else if (API.hasPermission(user.id,API.ROLE.FEATUREDDJ)) rank = this.i18n('ranks.featureddj');
                 else                                                     rank = this.i18n('ranks.regular');
 
-                if (waitlistpos === -1) {
-                    if (djs.length > 0 && djs[0].id === user.id) {
-                        position = this.i18n('info.djing');
-                        boothpos = 0;
-                    } else {
-                        for (var i = 1;i < djs.length;i++)
-                            boothpos = djs.id === user.id ? i : boothpos;
-                        if (boothpos < 0)
-                            position = this.i18n('info.notinlist');
-                        else
-                            position = this.i18n('info.inbooth',[boothpos + 1,djs.length]);
-                    }
-                } else
+                if (boothpos === 0)
+                    position = this.i18n('info.djing');
+                else if (boothpos > -1)
+                    position = this.i18n('info.inbooth',[boothpos + 1,djs.length]);
+                else if (waitlistpos > -1)
                     position = this.i18n('info.inwaitlist',[waitlistpos,API.getWaitList().length]);
+                else
+                    position = this.i18n('info.notinlist');
 
                 switch (user.status) {
                     default:                  status = this.i18n('status.available'); break;
@@ -746,7 +752,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     this.changeGUIColor('emoji',a);
                     return API.sendChat(a ? '/emoji on' : '/emoji off');
                     break;
-                default: return API.chatLog(this.i18n('menu.unknown'));
+                default: return API.chatLog(this.i18n('menu.unknownMenuKey'));
             }
             this.saveSettings();
         },
@@ -766,7 +772,14 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         onVoteUpdate: function(data) {
             if (!data || !data.user) return;
             var a = plugCubedUserData[data.user.id];
-            this.onUserlistUpdate();
+
+            if (typeof a === 'undefined')
+                a = plugCubedUserData[data.id] = {
+                    wootcount: 0,
+                    mehcount:  0,
+                    curVote:   0,
+                    joinTime:  Date.now()
+                };
 
             if (a.curVote === 1)       a.wootcount--;
             else if (a.curVote === -1) a.mehcount--;
@@ -775,6 +788,8 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             else if (data.vote === -1) a.mehcount++;
 
             a.curVote = data.vote;
+
+            this.onUserlistUpdate();
         },
         /**
          * @this {plugCubedModel}
@@ -879,10 +894,10 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             this.onUserlistUpdate();
         },
         isPlugCubedAdmin: function(id) {
-            return (id == '50aeb31696fba52c3ca0adb6' || id == '50aeb077877b9217e2fbff00');
+            return id == '50aeb31696fba52c3ca0adb6' || id == '50aeb077877b9217e2fbff00';
         },
         isPlugCubedVIP: function(id) {
-            return (id == '5112c273d6e4a94ec0554792' || id == '50b1961c96fba57db2230417');
+            return id == '5112c273d6e4a94ec0554792' || id == '50b1961c96fba57db2230417' || id == '5121578196fba506408bb9eb';
         },
         /**
          * @this {plugCubedModel}
@@ -992,8 +1007,6 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             ['/mute'              ,'set volume to 0'],
             ['/automute'          ,'register currently playing song to automatically mute on future plays'],
             ['/unmute'            ,'set volume to last volume'],
-            ['/woot'              ,'woots current song'],
-            ['/meh'               ,'mehs current song'],
             ['/refresh'           ,'refresh the video'],
             ['/ignore (username)' ,'ignore all chat messages from user'],
             ['/alertson (word)'   ,'play mention sound whenever word is written in chat'],
@@ -1062,10 +1075,6 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 return API.djLeave(),true;
             if (value == '/whoami')
                 return plugCubed.getUserInfo(API.getUser().id),true;
-            if (value == '/woot')
-                return $('#button-vote-positive').click(), true;
-            if (value == '/meh')
-                return $('#button-vote-negative').click(), true;
             if (value == '/refresh')
                 return $('#button-refresh').click(), true;
             if (value == '/version')
@@ -1136,11 +1145,19 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     if (spot < 0)
                         API.chatLog(plugCubed.i18n('info.notinlist'));
                     else if (spot === 0)
-                        API.chatLog(plugCubed.i18n('info.userDjing',[user.id === API.getUser().id ? plugCubed.i18n('you') : user.username]));
+                        API.chatLog(plugCubed.i18n('info.userDjing',[user.id === API.getUser().id ? plugCubed.i18n('ranks.you') : user.username]));
                     else if (spot === 1)
-                        API.chatLog(plugCubed.i18n('info.userNextDJ',[user.id === API.getUser().id ? plugCubed.i18n('you') : user.username]));
+                        API.chatLog(plugCubed.i18n('info.userNextDJ',[user.id === API.getUser().id ? plugCubed.i18n('ranks.you') : user.username]));
                     else
                         API.chatLog(plugCubed.i18n('info.inbooth',[spot + 1,API.getDJs().length]));
+                }
+                return true;
+            }
+            if (value == '/curate') {
+                var a = JSON.parse(LocalStorage.getItem('playlist')),b;
+                for (var b in a) {
+                    if (a[b].selected)
+                        return Context.dispatch(new MCE(MCE.CURATE,a[b].id)),true;
                 }
                 return true;
             }
@@ -1400,7 +1417,7 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
 
             this.languages = [];
 
-            $.getJSON('http://rawgithub.com/TATDK/plugCubed/gh-pages/compiled/lang.txt',function(data) { self.languages = data; self.show(); })
+            $.getJSON('https://rawgithub.com/TATDK/plugCubed/2.1.0/lang.json',function(data) { self.languages = data; self.show(); })
             .done(function() { if (self.languages.length === 0) log('<span style="color:#FF0000">Error loading plugCubed</span>'); });
         }
     });
