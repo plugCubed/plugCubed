@@ -49,7 +49,7 @@ console.info = function(data) {
     }
 };
 
-define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/base/Context','app/events/MediaCurateEvent','app/net/Socket','app/models/TheUserModel'],function(Class,Chat,LocalStorage,Utils,Room,Context,MCE,Socket,TUM) {
+define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/base/Context','app/events/MediaCurateEvent','app/net/Socket','app/models/TheUserModel','lang/Lang'],function(Class,Chat,LocalStorage,Utils,Room,Context,MCE,Socket,TUM,Lang) {
     Socket.listener.chat = function(a) {
         if (typeof plugCubed !== 'undefined' && plugCubed.settings.ignore.indexOf(a.fromID) > -1)
             return;
@@ -61,7 +61,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         if (a.r > 1) {
             Chat.receive({
                 type: "update",
-                message: N.messages.friendEnter.split("%NAME%").join($("<span/>").text(a.un).html()),
+                message: Lang.messages.friendEnter.split("%NAME%").join($("<span/>").text(a.un).html()),
                 language: TUM.get("language")
             });
             if (a.r == 3)
@@ -73,7 +73,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         } else {
             Chat.receive({
                 type: "update",
-                message: N.messages.fanEnter.split("%NAME%").join($("<span/>").text(a.un).html()),
+                message: Lang.messages.fanEnter.split("%NAME%").join($("<span/>").text(a.un).html()),
                 language: TUM.get("language")
             });
             TUM.addFollower(a.id);
@@ -86,7 +86,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
         a.append('<div class="chat-update"><span class="chat-text" style="color:#' + (color ? color : 'd1d1d1') + '">' + message + '</span></div>');
     },loadRoomSettings = function() {
-        var a = Models.room.data.description;
+        var a = Room.get('description');
         if (a.indexOf('@p3=') > -1) {
             a = a.substr(a.indexOf('@p3=')+4);
             if (a.indexOf(' ') > -1)
@@ -157,7 +157,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             }
             if (arguments.length > 1) {
                 for (i = 1;i < arguments.length;i++)
-                    a = a.split('%'+(~~i+1)).join(arguments[i]);
+                    a = a.split('%'+i).join(arguments[i]);
             }
             return a;
         },
@@ -180,16 +180,16 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 var data = API.getHistory();
                 for (var i in data) {
                     var a = data[i],
-                    obj = {
-                        id: a.media.id,
-                        author: a.media.author,
-                        title: a.media.title,
-                        wasSkipped: false,
-                        user: {
-                            id: a.user.id.toString(),
-                            username: a.user.username
-                        }
-                    };
+                        obj = {
+                            id: a.media.id,
+                            author: a.media.author,
+                            title: a.media.title,
+                            wasSkipped: false,
+                            user: {
+                                id: a.user.id.toString(),
+                                username: a.user.username
+                            }
+                        };
                     plugCubed.history.push(obj);
                 }
             },1);
@@ -201,10 +201,11 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             b && a.scrollTop(a[0].scrollHeight);
             if (window.history && history.pushState) {
                 (function(history){
-                    if (this.history.plugCubedWasHere === undefined) {
+                    if (this.plugCubedWasHere === undefined) {
+                        console.log('Setting plugCubed onRoomJoin');
                         var ev = new CustomEvent('pushState'),
                             pushState = history.pushState;
-                            this.history.plugCubedWasHere = true;
+                            this.plugCubedWasHere = true;
                         history.pushState = function(state) {
                             window.dispatchEvent(ev);
                             return pushState.apply(history, arguments);
@@ -938,10 +939,10 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             this.onUserlistUpdate();
         },
         isPlugCubedAdmin: function(id) {
-            return id == '50aeb31696fba52c3ca0adb6' || id == '50aeb077877b9217e2fbff00';
+            return id == '50aeb31696fba52c3ca0adb6';
         },
         isPlugCubedVIP: function(id) {
-            return id == '5112c273d6e4a94ec0554792' || id == '50b1961c96fba57db2230417' || id == '5121578196fba506408bb9eb';
+            return id == '5112c273d6e4a94ec0554792' || id == '50b1961c96fba57db2230417' || id == '5121578196fba506408bb9eb' || id == '50aeb077877b9217e2fbff00';
         },
         /**
          * @this {plugCubedModel}
