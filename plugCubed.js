@@ -933,7 +933,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         onUserLeave: function(data) {
             if ((this.settings.notify & 5) === 5) {
                 var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
-                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.leave + '">' + this.i18n('notify.message.left.normal',Utils.cleanTypedString(data.username)) + '</span></div>');
+                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.leave + '">' + this.i18n('notify.message.leave.normal',Utils.cleanTypedString(data.username)) + '</span></div>');
                 b && a.scrollTop(a[0].scrollHeight);
             }
             this.onUserlistUpdate();

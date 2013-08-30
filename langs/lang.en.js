@@ -32,7 +32,17 @@ define('plugCubed/Lang',function() {
                 disabled      : 'Join/leave alerts disabled',
                 curate        : '%1 added %2 - %3',
                 stats         : 'Stats:   %1 woots -- %2 mehs -- %3 curates',
-                updates       : 'Now Playing: %1 by %2<br />Played by: %3'
+                updates       : 'Now Playing: %1 by %2<br />Played by: %3',
+                join: {
+                    normal    : '%1 joined the room',
+                    fan       : 'Your fan %1 joined the room',
+                    friend    : 'Your friend %1 joined the room'
+                },
+                leave: {
+                    normal    : '%1 left the room',
+                    fan       : 'Your fan %1 left the room',
+                    friend    : 'Your friend %1 left the room'
+                }
             }
         },
         info: {
