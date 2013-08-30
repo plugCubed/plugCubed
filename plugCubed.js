@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2012-2013 by Jeremy "Colgate" Richardson and Thomas "TAT" Andresen
+ * @license Copyright (c) 2012-2013 by Thomas "TAT" Andresen and other contributors
  * 
  * Permission to use this software for any purpose without fee is hereby granted, provided
  * that the above copyright notice and this permission notice appear in all copies.
@@ -19,44 +19,93 @@
  * BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
  * RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
  * OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- * @author  Jeremy "Colgate" Richardson
- * @author  Thomas "TAT" Andresen
  */
 if (typeof plugCubed !== 'undefined') plugCubed.close();
-String.prototype.equalsIgnoreCase     = function(other)    { return typeof other !== 'string' ? false : this.toLowerCase() === other.toLowerCase(); };
-String.prototype.startsWith           = function(other)    { return typeof other !== 'string' || other.length > this.length ? false : this.indexOf(other) === 0; };
-String.prototype.endsWith             = function(other)    { return typeof other !== 'string' || other.length > this.length ? false : this.indexOf(other) === this.length-other.length; };
-String.prototype.startsWithIgnoreCase = function(other)    { return typeof other !== 'string' || other.length > this.length ? false : this.toLowerCase().startsWith(other.toLowerCase()); };
-String.prototype.endsWithIgnoreCase   = function(other)    { return typeof other !== 'string' || other.length > this.length ? false : this.toLowerCase().endsWith(other.toLowerCase()); };
-String.prototype.isNumber             = function()         { return !isNaN(parseInt(this,10)) && isFinite(this); };
-String.prototype.isHEX                = function()         { return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(this.substr(0,1) === '#' ? this : '#' + this); };
-Math.randomRange                      = function(min, max) { return min + Math.floor(Math.random()*(max-min+1)); };
+with (String) {
+    prototype.equalsIgnoreCase     = function(a) { return typeof a !== 'string' ? false : this.toLowerCase() === a.toLowerCase(); };
+    prototype.startsWith           = function(a) { return typeof a !== 'string' || a.length > this.length ? false : this.indexOf(a) === 0; };
+    prototype.endsWith             = function(a) { return typeof a !== 'string' || a.length > this.length ? false : this.indexOf(a) === this.length-a.length; };
+    prototype.startsWithIgnoreCase = function(a) { return typeof a !== 'string' || a.length > this.length ? false : this.toLowerCase().startsWith(a.toLowerCase()); };
+    prototype.endsWithIgnoreCase   = function(a) { return typeof a !== 'string' || a.length > this.length ? false : this.toLowerCase().endsWith(a.toLowerCase()); };
+    prototype.isNumber             = function()  { return !isNaN(parseInt(this,10)) && isFinite(this); };
+    prototype.isHEX                = function()  { return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(this.substr(0,1) === '#' ? this : '#' + this); };
+}
+Math.randomRange                   = function(a,b) { return a + Math.floor(Math.random()*(b-a+1)); };
 var _PCL, plugCubed, plugCubedUserData,
 disconnected = false;
 console.info = function(data) {
     console.log(data);
     if (_PCL !== undefined) {
         var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
-        a.append('<div class="chat-update"><span class="chat-text" style="color:#FF0000">' + plugCubed.i18n('disconnected',[plugCubed.getTimestamp()]) + ' ' + plugCubed.i18n('reloading') + '</span></div>');
+        a.append('<div class="chat-update"><span class="chat-text" style="color:#FF0000">' + plugCubed.i18n('disconnected',plugCubed.getTimestamp()) + ' ' + plugCubed.i18n('reloading') + '</span></div>');
         b && a.scrollTop(a[0].scrollHeight);
-        setTimeout(function() { location.reload(true); },3E3);
-    } else if (!disconnected) {
+        return setTimeout(function() { location.reload(true); },3E3);
+    }
+    if (!disconnected) {
         disconnected = true;
         var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
-        a.append('<div class="chat-update"><span class="chat-text" style="color:#FF0000">' + plugCubed.i18n('disconnected',[plugCubed.getTimestamp()]) + '</span></div>');
+        a.append('<div class="chat-update"><span class="chat-text" style="color:#FF0000">' + plugCubed.i18n('disconnected',plugCubed.getTimestamp()) + '</span></div>');
         b && a.scrollTop(a[0].scrollHeight);
     }
 };
 
-define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/base/Context','app/events/MediaCurateEvent','app/net/Socket'],function(Class,Chat,LocalStorage,Utils,Room,Context,MCE,Socket) {
+define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/base/Context','app/events/MediaCurateEvent','app/net/Socket','app/models/TheUserModel'],function(Class,Chat,LocalStorage,Utils,Room,Context,MCE,Socket,TUM) {
+    Socket.listener.chat = function(a) {
+        if (typeof plugCubed !== 'undefined' && plugCubed.settings.ignore.indexOf(a.fromID) > -1)
+            return;
+        Chat.receive(a);
+        API.dispatch(API.CHAT,a);
+    };
+    Socket.listener.followJoin = function(a) {
+        var t = Room.getUserByID(a.id);
+        if (a.r > 1) {
+            Chat.receive({
+                type: "update",
+                message: N.messages.friendEnter.split("%NAME%").join($("<span/>").text(a.un).html()),
+                language: TUM.get("language")
+            });
+            if (a.r == 3)
+                TUM.addFriend(a.id);
+            else
+                TUM.addFollowing(a.id);
+            if (t)
+                API.dispatch(API.FRIEND_JOIN, t.toJSON());
+        } else {
+            Chat.receive({
+                type: "update",
+                message: N.messages.fanEnter.split("%NAME%").join($("<span/>").text(a.un).html()),
+                language: TUM.get("language")
+            });
+            TUM.addFollower(a.id);
+            if (t)
+                API.dispatch(API.FAN_JOIN, t.toJSON());
+        }
+    };
+    var appendChatMessage = function(message,color) {
+        if (!message) return;
+        var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
+        a.append('<div class="chat-update"><span class="chat-text" style="color:#' + (color ? color : 'd1d1d1') + '">' + message + '</span></div>');
+    },loadRoomSettings = function() {
+        var a = Models.room.data.description;
+        if (a.indexOf('@p3=') > -1) {
+            a = a.substr(a.indexOf('@p3=')+4);
+            if (a.indexOf(' ') > -1)
+                a.substr(0,a.indexOf(' '));
+            if (a.indexOf('\n') > -1)
+                a.substr(0,a.indexOf('\n'));
+            appendChatMessage('Loading room settings');
+            $.getJSON(a,function(settings) {
+                appendChatMessage('Loaded room settings');
+            });
+        }
+    };
     return Class.extend({
         guiButtons: {},
         version: {
             major: 2,
             minor: 0,
             patch: 9,
-            prerelease: 'alpha.6',
+            prerelease: 'alpha.7',
             minified: false,
             /**
              * @this {plugCubedModel.version}
@@ -83,12 +132,6 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 onSkip:               $.proxy(this.onSkip,          this),
                 onRoomJoin:           $.proxy(this.onRoomJoin,      this)
             };
-            Socket.listener.chat = function(a) {
-                if (typeof plugCubed !== 'undefined' && plugCubed.settings.ignore.indexOf(a.fromID) > -1)
-                    return;
-                Chat.receive(a);
-                API.dispatch(API.CHAT,a);
-            };
             //Load language and third-party scripts
             $.getScript('http://plugCubed.com/compiled/langs/lang.' + LocalStorage.getItem('plugCubedLang') + '.js',function() {
                 require(['plugCubed/Lang'],function(a) {
@@ -104,7 +147,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         /**
          * @this {plugCubedModel}
          */
-        i18n: function(key,replace) {
+        i18n: function(key) {
             var a = this.lang,i;
             if (a === undefined) return '{' + key + '}';
             key = key.split('.');
@@ -112,9 +155,9 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 if (a[key[i]] === undefined) return '{' + key.join('.') + '}';
                 a = a[key[i]];
             }
-            if (replace) {
-                for (i in replace)
-                    a = a.split('%'+(~~i+1)).join(replace[i]);
+            if (arguments.length > 1) {
+                for (i = 1;i < arguments.length;i++)
+                    a = a.split('%'+(~~i+1)).join(arguments[i]);
             }
             return a;
         },
@@ -154,7 +197,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             this.customColorsStyle = $('<style type="text/css" />');
             $('head').append(this.customColorsStyle);
             var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
-            a.append('<div class="chat-update"><span class="chat-text" style="color:#FFFF00">' + this.i18n('running',[this.version.toString()]) + '</span><br /><span class="chat-text" style="color:#66FFFF">' + this.i18n('commandsHelp') + '</span></div>');
+            a.append('<div class="chat-update"><span class="chat-text" style="color:#FFFF00">' + this.i18n('running',this.version.toString()) + '</span><br /><span class="chat-text" style="color:#66FFFF">' + this.i18n('commandsHelp') + '</span></div>');
             b && a.scrollTop(a[0].scrollHeight);
             if (window.history && history.pushState) {
                 (function(history){
@@ -196,6 +239,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
 
             this.Socket();
             this.loaded = true;
+            loadRoomSettings();
         },
         onRoomJoin: function() {
             if (typeof plugCubed !== 'undefined') {
@@ -394,7 +438,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 if (this.settings.registeredSongs.length > 0 && this.settings.registeredSongs.indexOf(Models.room.data.media.id) > -1) {
                     API.setVolume(0);
                     this.settings.autoMuted = true;
-                    API.chatLog(this.i18n('automuted',[Models.room.data.media.title]));
+                    API.chatLog(this.i18n('automuted',Models.room.data.media.title));
                 }
                 if (JSON.parse(LocalStorage.getItem('stngs')).emoji === undefined) {
                     var a = JSON.parse(LocalStorage.getItem('stngs'));
@@ -651,9 +695,9 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 if (boothpos === 0)
                     position = this.i18n('info.djing');
                 else if (boothpos > -1)
-                    position = this.i18n('info.inbooth',[boothpos + 1,djs.length]);
+                    position = this.i18n('info.inbooth',boothpos + 1,djs.length);
                 else if (waitlistpos > -1)
-                    position = this.i18n('info.inwaitlist',[waitlistpos,API.getWaitList().length]);
+                    position = this.i18n('info.inwaitlist',waitlistpos,API.getWaitList().length);
                 else
                     position = this.i18n('info.notinlist');
 
@@ -682,9 +726,9 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 '<tr><td><strong> ' + this.i18n('info.rank') + '</strong>: <span style="color:#FFFFFF">' + rank + '</span></td><td><strong>' + this.i18n('info.joined') + '</strong>: <span style="color:#FFFFFF">' + this.getTimestamp(userdata.joinTime) + '</span></td></tr>' +
                 '<tr><td><strong>' + this.i18n('info.status') + '</strong>: <span style="color:#FFFFFF">' + status + '</span></td><td><strong> ' + this.i18n('info.vote') + '</strong>: <span style="color:#FFFFFF">' + voted + '</span></td></tr>' +
                 '<tr><td colspan="2"><strong>' + this.i18n('info.position') + '</strong>: <span style="color:#FFFFFF">' + position + '</span></td></tr>' +
-                '<tr><td><strong>' + this.i18n('info.points') + '</strong>: <span style="color:#FFFFFF" title = "' + this.i18n('info.pointType.dj',[user.djPoints]) + '  +  ' + this.i18n('info.pointType.listener',[user.listenerPoints]) + '  +  ' + this.i18n('info.pointType.curator',[user.curatorPoints]) + '">' + points + '</span></td><td><strong> ' + this.i18n('info.fans') + '</strong>: <span style="color:#FFFFFF">' + user.fans + '</span></td></tr>' +
+                '<tr><td><strong>' + this.i18n('info.points') + '</strong>: <span style="color:#FFFFFF" title = "' + this.i18n('info.pointType.dj',user.djPoints) + '  +  ' + this.i18n('info.pointType.listener',user.listenerPoints) + '  +  ' + this.i18n('info.pointType.curator',user.curatorPoints) + '">' + points + '</span></td><td><strong> ' + this.i18n('info.fans') + '</strong>: <span style="color:#FFFFFF">' + user.fans + '</span></td></tr>' +
                 '<tr><td><strong>' + this.i18n('info.wootCount') + '</strong>: <span style="color:#FFFFFF">' + userdata.wootcount + '</span></td><td><strong>' + this.i18n('info.mehCount') + '</strong>: <span style="color:#FFFFFF">' + userdata.mehcount + '</span></td></tr>' +
-                '<tr><td colspan="2"><strong>' + this.i18n('info.ratio') + '</strong>: <span style="color:#FFFFFF">' + (voteTotal === 0 ? '0' : (userdata.wootcount/voteTotal).toFixed(2)) + '</span></td></tr></table></div>');
+                '<tr><td colspan="2"><strong>' + this.i18n('info.ratio') + '</strong>: <span style="color:#FFFFFF">' + (function(a,b) { if (b === 0) return a === 0 ? '0:0' : '1:0'; for (var i = 1;i <= b;i++) { var e = i*(a/b); if (e%1 === 0) return e + ':' + i; } })(userdata.wootcount,userdata.mehcount) + '</span></td></tr></table></div>');
                 b && a.scrollTop(a[0].scrollHeight);
             }
         },
@@ -798,7 +842,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             var media = API.getMedia();
             if ((this.settings.notify & 9) === 9) {
                 var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
-                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.curate + '">' + this.i18n('notify.message.curate',[data.user.username,media.author,media.title]) + '</span></div>');
+                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.curate + '">' + this.i18n('notify.message.curate',data.user.username,media.author,media.title) + '</span></div>');
                 b && a.scrollTop(a[0].scrollHeight);
             }
             API.getUser(data.user.id).curated = true;
@@ -810,12 +854,12 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         onDjAdvance: function(data) {
             if ((this.settings.notify & 17) === 17) {
                 var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
-                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.stats + '">' + this.i18n('notify.message.stats',[data.lastPlay.score.positive,data.lastPlay.score.negative,data.lastPlay.score.curates]) + '</span></div>');
+                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.stats + '">' + this.i18n('notify.message.stats',data.lastPlay.score.positive,data.lastPlay.score.negative,data.lastPlay.score.curates) + '</span></div>');
                 b && a.scrollTop(a[0].scrollHeight);
             }
             if ((this.settings.notify & 33) === 33) {
                 var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
-                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.updates + '">' + this.i18n('notify.message.updates',[data.media.title,data.media.author,data.dj.username]) + '</span></div>');
+                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.updates + '">' + this.i18n('notify.message.updates',data.media.title,data.media.author,data.dj.username) + '</span></div>');
                 b && a.scrollTop(a[0].scrollHeight);
             }
             setTimeout($.proxy(this.onDjAdvanceLate,this),Math.randomRange(1,10)*1000);
@@ -840,7 +884,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 setTimeout(function() { API.setVolume(0); }, 800);
                 this.settings.autoMuted = true;
                 this.lastVolume = API.getVolume();
-                API.chatLog(i18n('automuted',[data.media.title]));
+                API.chatLog(i18n('automuted',data.media.title));
 
             }
             this.onUserlistUpdate();
@@ -870,7 +914,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         onUserJoin: function(data) {
             if ((this.settings.notify & 3) === 3) {
                 var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
-                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.join + '">' + Utils.cleanTypedString(data.username + ' joined the room') + '</span></div>');
+                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.join + '">' + this.i18n('notify.message.join',Utils.cleanTypedString(data.username)) + '</span></div>');
                 b && a.scrollTop(a[0].scrollHeight);
             }
             if (plugCubedUserData[data.id] === undefined)
@@ -888,7 +932,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         onUserLeave: function(data) {
             if ((this.settings.notify & 5) === 5) {
                 var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
-                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.leave + '">' + Utils.cleanTypedString(data.username + ' left the room') + '</span></div>');
+                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.leave + '">' + this.i18n('notify.message.left',Utils.cleanTypedString(data.username)) + '</span></div>');
                 b && a.scrollTop(a[0].scrollHeight);
             }
             this.onUserlistUpdate();
@@ -1029,16 +1073,6 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          * @this {Models.chat}
          */
         customChatCommand: function(value) {
-            /*if (this._chatCommand(value) === true) {
-                if (value == '/stream on' || value == '/stream off')
-                    plugCubed.changeGUIColor('stream',!DB.settings.streamDisabled);
-                if (value == '/afk' && plugCubed.settings.autojoin) {
-                    plugCubed.settings.autojoin = false;
-                    plugCubed.changeGUIColor('join',false);
-                    plugCubed.saveSettings();
-                }
-                return true;
-            }*/
             if (value.indexOf('/commands') === 0) {
                 require(['plugCubed/dialog/commands','app/base/Context','app/events/ShowDialogEvent'],function(a,b,c) {b.dispatch(new c(c.SHOW,new a()))});
                 return true;
@@ -1078,7 +1112,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             if (value == '/refresh')
                 return $('#button-refresh').click(), true;
             if (value == '/version')
-                return API.chatLog(this.i18n('running',[plugCubed.version.toString()])), true;
+                return API.chatLog(plugCubed.i18n('running',plugCubed.version.toString())), true;
             if (value == '/mute') {
                 plugCubed.lastVolume = API.getVolume();
                 API.setVolume(0);
@@ -1092,9 +1126,9 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 var a = API.getNextMedia();
                 if (a === undefined) API.chatLog(plugCubed.i18n('noNextSong'));
                 else if (a.inHistory)
-                    API.chatLog(plugCubed.i18n('nextsong',[a.title,a.author])),API.chatLog(plugCubed.i18n('isHistory',[found,plugCubed.history.length]),true);
+                    API.chatLog(plugCubed.i18n('nextsong',a.title,a.author)),API.chatLog(plugCubed.i18n('isHistory',found,plugCubed.history.length),true);
                 else
-                    API.chatLog(plugCubed.i18n('nextsong',[a.title,a.author]));
+                    API.chatLog(plugCubed.i18n('nextsong',a.title,a.author));
             }
             if (value == '/automute') {
                 var a = API.getMedia();
@@ -1139,17 +1173,17 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     user = lookup === null ? API.getUser() : lookup,
                     spot = API.getWaitListPosition(user.id);
                 if (spot != -1)
-                    API.chatLog(plugCubed.i18n('info.inwaitlist',[spot,API.getWaitList.length]));
+                    API.chatLog(plugCubed.i18n('info.inwaitlist',spot,API.getWaitList.length));
                 else {
                     spot = API.getBoothPosition(user.id);
                     if (spot < 0)
                         API.chatLog(plugCubed.i18n('info.notinlist'));
                     else if (spot === 0)
-                        API.chatLog(plugCubed.i18n('info.userDjing',[user.id === API.getUser().id ? plugCubed.i18n('ranks.you') : user.username]));
+                        API.chatLog(plugCubed.i18n('info.userDjing',user.id === API.getUser().id ? plugCubed.i18n('ranks.you') : user.username));
                     else if (spot === 1)
-                        API.chatLog(plugCubed.i18n('info.userNextDJ',[user.id === API.getUser().id ? plugCubed.i18n('ranks.you') : user.username]));
+                        API.chatLog(plugCubed.i18n('info.userNextDJ',user.id === API.getUser().id ? plugCubed.i18n('ranks.you') : user.username));
                     else
-                        API.chatLog(plugCubed.i18n('info.inbooth',[spot + 1,API.getDJs().length]));
+                        API.chatLog(plugCubed.i18n('info.inbooth',spot + 1,API.getDJs().length));
                 }
                 return true;
             }
@@ -1165,8 +1199,8 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 var user = plugCubed.getUser(value.substr(8));
                 if (user === null) return API.chatLog(plugCubed.i18n('error.userNotFound')),true;
                 if (user.id === API.getUser().id) return API.chatLog(plugCubed.i18n('error.ignoreSelf')),true;
-                if (plugCubed.settings.ignore.indexOf(user.id) > -1) return plugCubed.settings.ignore.splice(plugCubed.settings.ignore.indexOf(user.id),1),plugCubed.saveSettings(),API.chatLog(plugCubed.i18n('ignore.disabled',[user.username])),true;
-                return plugCubed.settings.ignore.push(user.id),plugCubed.saveSettings(),API.chatLog(plugCubed.i18n('ignore.enabled',[user.username])),true;
+                if (plugCubed.settings.ignore.indexOf(user.id) > -1) return plugCubed.settings.ignore.splice(plugCubed.settings.ignore.indexOf(user.id),1),plugCubed.saveSettings(),API.chatLog(plugCubed.i18n('ignore.disabled',user.username)),true;
+                return plugCubed.settings.ignore.push(user.id),plugCubed.saveSettings(),API.chatLog(plugCubed.i18n('ignore.enabled',user.username)),true;
             }
             if (plugCubed.isPlugCubedAdmin(API.getUserid)) {
                 if (value.indexOf('/whois ') === 0)
@@ -1402,17 +1436,6 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
             this.hide();
         },
         initLanguages: function() {
-            /*
-            var a = Models.room.data.description;
-            if (a.indexOf('@p3=') > -1) {
-                a = a.substr(a.indexOf('@p3=')+4);
-                if (a.indexOf(' ') > -1)
-                    a.substr(0,a.indexOf(' '));
-                if (a.indexOf('\n') > -1)
-                    a.substr(0,a.indexOf('\n'));
-            }
-            */
-
             var self = this;
 
             this.languages = [];

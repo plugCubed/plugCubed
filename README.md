@@ -43,8 +43,10 @@ plug&#179; (plugCubed)
 Find the URLs for bookmarks at http://plugCubed.com/
 
 ###Authors###
-* Jeremy "Colgate" Richardson
 * Thomas "TAT" Andresen
+
+###Previous Authors###
+* Jeremy "Colgate" Richardson
 
 ###Translators###
 | Name              | Languages           |
@@ -55,7 +57,7 @@ Find the URLs for bookmarks at http://plugCubed.com/
 If you want to help out translating plugCubed, please use http://getlocalization.com/plugCubed/
 
 ###License###
-Copyright &copy; 2012-2013 by Jeremy "Colgate" Richardson and Thomas "TAT" Andresen
+Copyright &copy; 2012-2013 by Thomas "TAT" Andresen and other contributors
 
 Permission to use this software for any purpose without fee is hereby granted,
 provided that the above copyright notice and this permission notice appear in all copies.

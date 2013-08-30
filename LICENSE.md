@@ -1,4 +1,4 @@
-Copyright (c) 2012-2013 by Jeremy "Colgate" Richardson and Thomas "TAT" Andresen
+Copyright (c) 2012-2013 by Thomas "TAT" Andresen and other contributors
 
 Permission to use this software for any purpose without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies
 
