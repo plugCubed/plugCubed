@@ -905,10 +905,9 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          * @this {plugCubedModel}
          */
         onUserLeave: function(data) {
-            console.log(data);
             if ((this.settings.notify & 5) === 5) {
-                var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
-                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.leave + '">' + this.i18n('notify.message.leave.normal',Utils.cleanTypedString(data.username)) + '</span></div>');
+                var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20,c = data.relationship === 0 ? 'notify.message.leave.normal' : (data.relationship === 3 ? 'notify.message.leave.friend' : 'notify.message.leave.fan');
+                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.leave + '">' + this.i18n(c,Utils.cleanTypedString(data.username)) + '</span></div>');
                 b && a.scrollTop(a[0].scrollHeight);
             }
             this.onUserlistUpdate();
