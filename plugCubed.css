@@ -271,6 +271,7 @@
 .sidebar#side-right {
     right: -190px;
     z-index: 99999;
+    font-size: 14px;
 }
 
 .sidebar-handle {
@@ -363,6 +364,10 @@
 
 #side-right .sidebar-content [class^="icon-"],
 #side-right .sidebar-content [class*=" icon-"] {
+    width: 15px;
+    display: inline-block;
+    font-size: 13px;
+    text-align: center;
     margin-right: 5px;
 }
 

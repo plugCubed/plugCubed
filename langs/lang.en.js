@@ -11,14 +11,11 @@ define('plugCubed/Lang',function() {
         nextsong              : 'Your next queued song is %1 by %2',
         isHistory             : 'Warning: This song is still in the history (%1 of %2)',
         enable                : 'Enable',
+        limit                 : 'Limit',
         commands: {
             header            : 'plugCubed Commands',
             userCommands      : 'User Commands',
             modCommands       : 'Moderation Commands'
-        },
-        chatLimit: {
-            header            : 'Limit Chat Log',
-            limit             : 'Limit'
         },
         notify: {
             header            : 'Chat Notifications',
@@ -88,7 +85,7 @@ define('plugCubed/Lang',function() {
             userlist          : 'Userlist',
             customchatcolors  : 'Custom Chat Colors',
             afkstatus         : 'AFK Status',
-            notify            : 'Notify',
+            notify            : 'Notifications',
             limitchatlog      : 'Limit Chat Log',
             stream            : 'Stream',
             emoji             : 'Emoji'

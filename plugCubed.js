@@ -552,15 +552,15 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          */
         initGUI: function() {
             $('#side-right .sidebar-content').html('');
-            this.addGUIButton(this.settings.autowoot,                                    'woot',        this.i18n('menu.autowoot'),        'heart');
+            this.addGUIButton(this.settings.autowoot,                                    'woot',        this.i18n('menu.autowoot'),         'heart');
             this.addGUIButton(this.settings.autojoin,                                    'join',        this.i18n('menu.autojoin'));
-            this.addGUIButton(this.settings.userlist,                                    'userlist',    this.i18n('menu.userlist'));
-            this.addGUIButton(this.settings.customColors,                                'colors',      this.i18n('menu.customchatcolors'));
-            this.addGUIButton(this.settings.autorespond,                                 'autorespond', this.i18n('menu.afkstatus'),       'plane');
-            this.addGUIButton((this.settings.notify & 1) === 1,                          'notify',      this.i18n('menu.notify'));
-            this.addGUIButton(this.settings.chatlimit.enabled,                           'chatlimit',   this.i18n('menu.limitchatlog'));
-            this.addGUIButton(!JSON.parse(LocalStorage.getItem('stngs')).streamDisabled, 'stream',      this.i18n('menu.stream'),          'facetime-video');
-            this.addGUIButton(JSON.parse(LocalStorage.getItem('stngs')).emoji,           'emoji',       this.i18n('menu.emoji'));
+            this.addGUIButton(this.settings.userlist,                                    'userlist',    this.i18n('menu.userlist'),         'user');
+            this.addGUIButton(this.settings.customColors,                                'colors',      this.i18n('menu.customchatcolors'), 'tint');
+            this.addGUIButton(this.settings.autorespond,                                 'autorespond', this.i18n('menu.afkstatus'),        'reply');
+            this.addGUIButton((this.settings.notify & 1) === 1,                          'notify',      this.i18n('menu.notify'),           'warning-sign');
+            this.addGUIButton(this.settings.chatlimit.enabled,                           'chatlimit',   this.i18n('menu.limitchatlog'),     'ban-circle');
+            this.addGUIButton(!JSON.parse(LocalStorage.getItem('stngs')).streamDisabled, 'stream',      this.i18n('menu.stream'),           'facetime-video');
+            this.addGUIButton(JSON.parse(LocalStorage.getItem('stngs')).emoji,           'emoji',       this.i18n('menu.emoji'),            'smile');
         },
         /**
          * @this {plugCubedModel}
@@ -1265,7 +1265,7 @@ define('plugCubed/dialog/customChatColors',['app/views/dialogs/AbstractDialogVie
                                 )
                         )
                 );
-            return this.$el.append(this.getHeader(plugCubed.i18n('chatLimit.header')))
+            return this.$el.append(this.getHeader(plugCubed.i18n('menu.customchatcolors')))
             .append(this.getBody().append(body))
             .append($('<div/>').addClass('dialog-button dialog-default-button').click(function() {
                 $(this).parent().find('input[type="text"]').each(function() {
@@ -1297,20 +1297,23 @@ define('plugCubed/dialog/chatLimit',['app/views/dialogs/AbstractDialogView','lan
         id: 'dialog-chat-limit',
         className: 'dialog',
         render: function() {
-            return this.$el.append(this.getHeader(plugCubed.i18n('chatLimit.header'))).append(this.getBody().append('<table style="width: 100%;">' + 
-                '<tr><td>' + plugCubed.i18n('enable')          + '</td><td align="right"><input type="checkbox" name="enabled"' + (plugCubed.settings.chatlimit.enabled ? ' checked="checked"' : '') + ' /></td></tr>' +
-                '<tr><td>' + plugCubed.i18n('chatLimit.limit') + '</td><td align="right"><input type="text" name="limit" value="' + plugCubed.settings.chatlimit.limit + '" /></td></tr>' +
+            return this.$el.append(this.getHeader(plugCubed.i18n('menu.limitchatlog'))).append(this.getBody().append('<table style="width: 100%;">' + 
+                '<tr><td>' + plugCubed.i18n('enable') + '</td><td align="right"><input type="checkbox" name="enabled"' + (plugCubed.settings.chatlimit.enabled ? ' checked="checked"' : '') + ' /></td></tr>' +
+                '<tr><td>' + plugCubed.i18n('limit') + '</td><td align="right"><input type="text" name="limit" value="' + plugCubed.settings.chatlimit.limit + '" /></td></tr>' +
             '</table>')).append(this.getSubmitButton(c.dialog.ok)),this._super();
         },
         submit: function() {
-            plugCubed.settings.chatlimit.enabled = this.$el.find('input[name="enabled"]').is(':checked');
-            plugCubed.settings.chatlimit.limit = ~~this.$el.find('input[name="limit"]').val();
-            plugCubed.changeGUIColor('chatlimit',plugCubed.settings.chatlimit.enabled);
+            var a = this.$el.find('input[name="enabled"]').is(':checked'),b = ~~this.$el.find('input[name="limit"]').val();
+            if (b < 1) b = 1;
+            if (b > 1024) { a = false; b = 1024; }
+            plugCubed.settings.chatlimit.enabled = a;
+            plugCubed.settings.chatlimit.limit = b;
+            plugCubed.changeGUIColor('chatlimit',a);
             plugCubed.saveSettings();
-            if (plugCubed.settings.chatlimit.enabled) {
+            if (a) {
                 var elems = $('#chat-messages').children('div'),num = elems.length,i = 0;
                 elems.each(function() {
-                    if (++i<num-plugCubed.settings.chatlimit.limit)
+                    if (++i<num-b)
                         $(this).remove();
                 });
             }
