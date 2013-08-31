@@ -382,26 +382,12 @@
     background: rgba(255,255,255,255,0.2);
 }
 
-[class^="status-"], [class*=" status-"] {
-    border-radius: 50%;
-    width: 10px;
-    height: 10px;
-    background: yellow;
-    display: inline-block;
-    margin-right: 5px;
-}
-
-[class^="icon-"].status-on, [class*=" icon-"].status-on {
-    color: green;
-    display: none;
-}
-
 .status-on {
-    background: green;
+    color: green;
 }
 
 .status-off {
-    background: red;
+    color: red;
 }
 
 #dialog-commands {

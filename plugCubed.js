@@ -155,7 +155,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             major: 2,
             minor: 0,
             patch: 9,
-            prerelease: 'alpha.10',
+            prerelease: 'alpha.11',
             minified: false,
             /**
              * @this {plugCubedModel.version}
@@ -570,7 +570,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             if ($('#side-right .sidebar-content').children().length > 0)
                 $('#side-right .sidebar-content').append('<hr />');
 
-            $('#side-right .sidebar-content').append('<a id="plugcubed-btn-' + id + '"><div class="status-' + (setting ? 'on' : 'off') + (icon ? ' icon-' + icon : '') + '"></div>' + text + '</a>');
+            $('#side-right .sidebar-content').append('<a id="plugcubed-btn-' + id + '"><div class="status-' + (setting ? 'on' : 'off') + ' icon-' + (icon ? icon : 'circle') + '"></div>' + text + '</a>');
             $('#plugcubed-btn-' + id).data('key',id).click(this.proxy.menu);
 
             this.guiButtons[id] = { text: text };
