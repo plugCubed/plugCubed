@@ -155,7 +155,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             major: 2,
             minor: 0,
             patch: 9,
-            prerelease: 'alpha.9',
+            prerelease: 'alpha.10',
             minified: false,
             /**
              * @this {plugCubedModel.version}
@@ -552,7 +552,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          */
         initGUI: function() {
             $('#side-right .sidebar-content').html('');
-            this.addGUIButton(this.settings.autowoot,                                    'woot',        this.i18n('menu.autowoot'));
+            this.addGUIButton(this.settings.autowoot,                                    'woot',        this.i18n('menu.autowoot'), 'heart');
             this.addGUIButton(this.settings.autojoin,                                    'join',        this.i18n('menu.autojoin'));
             this.addGUIButton(this.settings.userlist,                                    'userlist',    this.i18n('menu.userlist'));
             this.addGUIButton(this.settings.customColors,                                'colors',      this.i18n('menu.customchatcolors'));
@@ -565,18 +565,18 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         /**
          * @this {plugCubedModel}
          */
-        addGUIButton: function(setting, id, text) {
+        addGUIButton: function(setting, id, text, icon) {
             if (this.guiButtons[id] !== undefined) return;
             if ($('#side-right .sidebar-content').children().length > 0)
                 $('#side-right .sidebar-content').append('<hr />');
 
-            $('#side-right .sidebar-content').append('<a id="plugcubed-btn-' + id + '"><div class="status-' + (setting ? 'on' : 'off') + '"></div>' + text + '</a>');
+            $('#side-right .sidebar-content').append('<a id="plugcubed-btn-' + id + '"><div class="status-' + (setting ? 'on' : 'off') + (icon ? ' icon-' + icon : '') + '"></div>' + text + '</a>');
             $('#plugcubed-btn-' + id).data('key',id).click(this.proxy.menu);
 
             this.guiButtons[id] = { text: text };
         },
         changeGUIColor: function(id,value) {
-            $('#plugcubed-btn-' + id).find('[class^="status-"], [class*=" status-"]').attr('class','status-' + (value === true ? 'on' : 'off'));
+            $('#plugcubed-btn-' + id).find('[class^="status-"], [class*=" status-"]').removeClass('status-on').removeClass('status-off').addClass('status-' + (value === true ? 'on' : 'off'));
         },
         /**
          * @this {plugCubedModel}
