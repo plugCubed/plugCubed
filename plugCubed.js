@@ -552,14 +552,14 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          */
         initGUI: function() {
             $('#side-right .sidebar-content').html('');
-            this.addGUIButton(this.settings.autowoot,                                    'woot',        this.i18n('menu.autowoot'), 'heart');
+            this.addGUIButton(this.settings.autowoot,                                    'woot',        this.i18n('menu.autowoot'),        'heart');
             this.addGUIButton(this.settings.autojoin,                                    'join',        this.i18n('menu.autojoin'));
             this.addGUIButton(this.settings.userlist,                                    'userlist',    this.i18n('menu.userlist'));
             this.addGUIButton(this.settings.customColors,                                'colors',      this.i18n('menu.customchatcolors'));
-            this.addGUIButton(this.settings.autorespond,                                 'autorespond', this.i18n('menu.afkstatus'));
+            this.addGUIButton(this.settings.autorespond,                                 'autorespond', this.i18n('menu.afkstatus'),       'plane');
             this.addGUIButton((this.settings.notify & 1) === 1,                          'notify',      this.i18n('menu.notify'));
             this.addGUIButton(this.settings.chatlimit.enabled,                           'chatlimit',   this.i18n('menu.limitchatlog'));
-            this.addGUIButton(!JSON.parse(LocalStorage.getItem('stngs')).streamDisabled, 'stream',      this.i18n('menu.stream'));
+            this.addGUIButton(!JSON.parse(LocalStorage.getItem('stngs')).streamDisabled, 'stream',      this.i18n('menu.stream'),          'facetime-video');
             this.addGUIButton(JSON.parse(LocalStorage.getItem('stngs')).emoji,           'emoji',       this.i18n('menu.emoji'));
         },
         /**

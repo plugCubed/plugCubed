@@ -366,8 +366,8 @@
     margin-right: 5px;
 }
 
-#side-right .sidebar-content [class^="icon-"]:hover,
-#side-right .sidebar-content [class*=" icon-"]:hover {
+#side-right .sidebar-content a:hover [class^="icon-"],
+#side-right .sidebar-content a:hover [class*=" icon-"] {
     text-decoration: none;
 }
 
