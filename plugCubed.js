@@ -56,36 +56,18 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         Chat.receive(a);
         API.dispatch(API.CHAT,a);
     };
-    Socket.listener.followJoin = function(a) {
-        var t = Room.getUserByID(a.id);
-        if (a.r > 1) {
-            Chat.receive({
-                type: "update",
-                message: Lang.messages.friendEnter.split("%NAME%").join($("<span/>").text(a.un).html()),
-                language: TUM.get("language")
-            });
-            if (a.r == 3)
-                TUM.addFriend(a.id);
-            else
-                TUM.addFollowing(a.id);
-            if (t)
-                API.dispatch(API.FRIEND_JOIN, t.toJSON());
-        } else {
-            Chat.receive({
-                type: "update",
-                message: Lang.messages.fanEnter.split("%NAME%").join($("<span/>").text(a.un).html()),
-                language: TUM.get("language")
-            });
-            TUM.addFollower(a.id);
-            if (t)
-                API.dispatch(API.FAN_JOIN, t.toJSON());
-        }
-    };
-    var appendChatMessage = function(message,color) {
+    function isPlugCubedDeveloper(id) {
+        return id == '50aeb31696fba52c3ca0adb6';
+    }
+    function isPlugCubedVIP(id) {
+        return id == '5112c273d6e4a94ec0554792' || id == '50b1961c96fba57db2230417' || id == '5121578196fba506408bb9eb' || id == '50aeb077877b9217e2fbff00';
+    }
+    function appendChatMessage(message,color) {
         if (!message) return;
         var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
         a.append('<div class="chat-update"><span class="chat-text" style="color:#' + (color ? color : 'd1d1d1') + '">' + message + '</span></div>');
-    },loadRoomSettings = function() {
+    }
+    function loadRoomSettings() {
         var a = Room.get('description');
         if (a.indexOf('@p3=') > -1) {
             a = a.substr(a.indexOf('@p3=')+4);
@@ -96,16 +78,84 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             appendChatMessage('Loading room settings');
             $.getJSON(a,function(settings) {
                 appendChatMessage('Loaded room settings');
+                $('body').css('background-image',settings.background ? 'url(\'' + settings.background + '\')!important' : '');
             });
         }
-    };
+    }
+    /**
+     * @this {plugCubedModel}
+     */
+    function appendUser(user) {
+        var prefix,username = user.username;
+
+             if (user.curated !== false)                         prefix = 'curate';
+        else if (isPlugCubedDeveloper(user.id))                  prefix = 'plugcubed';
+        else if (isPlugCubedVIP(user.id))                        prefix = 'vip';
+        else if (API.hasPermission(user.id,API.ROLE.ADMIN))      prefix = 'admin';
+        else if (API.hasPermission(user.id,API.ROLE.AMBASSADOR)) prefix = 'ambassador';
+        else if (API.hasPermission(user.id,API.ROLE.HOST))       prefix = 'host';
+        else if (API.hasPermission(user.id,API.ROLE.COHOST))     prefix = 'host';
+        else if (API.hasPermission(user.id,API.ROLE.MANAGER))    prefix = 'manager';
+        else if (API.hasPermission(user.id,API.ROLE.BOUNCER))    prefix = 'bouncer';       
+        else if (API.hasPermission(user.id,API.ROLE.FEATUREDDJ)) prefix = 'fdj';
+        else                                                     prefix = 'normal';
+
+        if (API.getDJs().length > 0 && API.getDJs()[0].id == user.id)
+            appendUserItem(prefix === 'normal' ? 'void' : prefix + '_current', '#66FFFF', user.username);
+        else
+            appendUserItem(prefix === 'normal' ? 'void' : prefix + prefixByVote(user.vote),colorByVote(user.vote), username);
+    }
+    function colorByVote(vote) {
+        if (vote === undefined) return 'FFFFFF';
+        switch (vote) {
+            case -1: return 'ED1C24';
+            case 1:  return '3FFF00';
+            default: return 'FFFFFF';
+        }
+    }
+    function prefixByVote(vote) {
+        var prefix = '';
+        if (vote === undefined)
+            prefix = 'undecided';
+        else switch (vote) {
+            case -1: prefix = 'meh'; break;
+            case 1:  prefix = 'woot'; break;
+            default: prefix = 'undecided'; break;
+        }
+        return '_' + prefix;
+    }
+    function appendUserItem(prefix, color, username) {
+        $('#side-left .sidebar-content').append(
+            $('<p></p>')
+                .append(
+                    $('<span></span>')
+                        .append($('<span></span>').addClass(prefix))
+                        .css('cursor','pointer')
+                        .css('color','#' + color)
+                        .mousedown(function(event) {
+                            switch(event.which) {
+                                case 1:
+                                    $('#chat-input-field').val($('#chat-input-field').val() + '@' + username + ' ').focus();
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    if (API.hasPermission(undefined,API.ROLE.BOUNCER) || isPlugCubedDeveloper(API.getUser().id))
+                                    plugCubed.getUserInfo(username);
+                                    break;
+                            }
+                        })
+                        .html(function(a,b) { return b + Utils.cleanTypedString(username.length > 23 ? username.substr(0,20) + '...' : username); })
+                )
+        );
+    }
     return Class.extend({
         guiButtons: {},
         version: {
             major: 2,
             minor: 0,
             patch: 9,
-            prerelease: 'alpha.7',
+            prerelease: 'alpha.9',
             minified: false,
             /**
              * @this {plugCubedModel.version}
@@ -245,10 +295,8 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         onRoomJoin: function() {
             if (typeof plugCubed !== 'undefined') {
                 setTimeout(function() {
-                    if (API.enabled) {
-                        plugCubed.close();
-                        $.getScript('https://rawgithub.com/TATDK/plugCubed/2.1.0/plugCubed.' + (plugCubed.version.minified ? 'min.' : '') + 'js');
-                    } else plugCubed.onRoomJoin();
+                    if (API.enabled) $.getScript('https://rawgithub.com/TATDK/plugCubed/2.1.0/plugCubed.' + (plugCubed.version.minified ? 'min.' : '') + 'js');
+                    else plugCubed.onRoomJoin();
                 },500);
             }
         },
@@ -268,7 +316,6 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             API.off(API.USER_SKIP,                  this.proxy.onSkip);
             API.off(API.MOD_SKIP,                   this.proxy.onSkip);
             API.off(API.WAIT_LIST_UPDATE,           this.proxy.onUserlistUpdate);
-            window.removeEventListener('pushState', this.proxy.onRoomJoined);
             for (var i in plugCubed.guiButtons) {
                 if (i === undefined || plugCubed.guiButtons[i] === undefined) continue;
                 $('#plugcubed-btn-' + i).unbind();
@@ -546,8 +593,8 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             users.sort();
             users.sort(function(a,b) {
                 function c(a) {
-                    if (plugCubed.isPlugCubedAdmin(a.id))            return 20;
-                    if (plugCubed.isPlugCubedVIP(a.id))              return 19;
+                    if (isPlugCubedDeveloper(a.id))                  return 20;
+                    if (isPlugCubedVIP(a.id))                        return 19;
                     if (API.hasPermission(a.id,API.ROLE.ADMIN))      return API.ROLE.ADMIN;
                     if (API.hasPermission(a.id,API.ROLE.AMBASSADOR)) return API.ROLE.AMBASSADOR;
                     if (API.hasPermission(a.id,API.ROLE.HOST))       return API.ROLE.HOST;
@@ -561,80 +608,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 return d < e ? 1 : d > e ? -1 : 0;
             });
             for (var i in users)
-                this.appendUser(users[i]);
-        },
-        /**
-         * @this {plugCubedModel}
-         */
-        appendUser: function(user) {
-            var prefix,username = Utils.cleanTypedString(user.username);
-
-                 if (user.curated !== false)                         prefix = 'curate';
-            else if (this.isPlugCubedAdmin(user.id))                 prefix = 'plugcubed';
-            else if (this.isPlugCubedVIP(user.id))                   prefix = 'vip';
-            else if (API.hasPermission(user.id,API.ROLE.ADMIN))      prefix = 'admin';
-            else if (API.hasPermission(user.id,API.ROLE.AMBASSADOR)) prefix = 'ambassador';
-            else if (API.hasPermission(user.id,API.ROLE.HOST))       prefix = 'host';
-            else if (API.hasPermission(user.id,API.ROLE.COHOST))     prefix = 'host';
-            else if (API.hasPermission(user.id,API.ROLE.MANAGER))    prefix = 'manager';
-            else if (API.hasPermission(user.id,API.ROLE.BOUNCER))    prefix = 'bouncer';       
-            else if (API.hasPermission(user.id,API.ROLE.FEATUREDDJ)) prefix = 'fdj';
-            else                                                     prefix = 'normal';
-
-            if (API.getDJs().length > 0 && API.getDJs()[0].id == user.id)
-                this.appendUserItem(prefix === 'normal' ? 'void' : prefix + '_current', '#66FFFF', user.username);
-            else
-                this.appendUserItem(prefix === 'normal' ? 'void' : prefix + this.prefixByVote(user.vote),this.colorByVote(user.vote), username);
-        },
-        colorByVote: function(vote) {
-            var color = '';
-            if (vote === undefined)
-                color = 'FFFFFF';
-
-            else {
-                switch (vote) {
-                    case -1: color = 'ED1C24'; break;
-                    case 1:  color = '3FFF00'; break;
-                    default: color = 'FFFFFF'; break;
-                }
-            }
-            return '#' + color;
-        },
-        prefixByVote: function(vote) {
-            var prefix = '';
-            if (vote === undefined)
-                prefix = 'undecided';
-            else switch (vote) {
-                case -1: prefix = 'meh'; break;
-                case 1:  prefix = 'woot'; break;
-                default: prefix = 'undecided'; break;
-            }
-            return '_' + prefix;
-        },
-        appendUserItem: function(prefix, color, username) {
-            $('#side-left .sidebar-content').append(
-                $('<p></p>')
-                    .append(
-                        $('<span></span>')
-                            .append($('<span></span>').addClass(prefix))
-                            .css('cursor','pointer')
-                            .css('color',color)
-                            .mousedown(function(event) {
-                                switch(event.which) {
-                                    case 1:
-                                        $('#chat-input-field').val($('#chat-input-field').val() + '@' + username + ' ').focus();
-                                        break;
-                                    case 2:
-                                        break;
-                                    case 3:
-                                        if (API.hasPermission(undefined,API.ROLE.BOUNCER) || plugCubed.isPlugCubedAdmin(API.getUser().id))
-                                        plugCubed.getUserInfo(username);
-                                        break;
-                                }
-                            })
-                            .html(function(a,b) { return b + username; })
-                    )
-            );
+                appendUser(users[i]);
         },
         getUser: function(data) {
             data = data.trim();
@@ -717,8 +691,8 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 if (boothpos === 0) voted = this.i18n('vote.djing');
 
                 var title = undefined;
-                if (this.isPlugCubedAdmin(user.id)) title = this.i18n('info.specialTitles.developer');
-                if (this.isPlugCubedVIP(user.id))   title = this.i18n('info.specialTitles.vip');
+                if (isPlugCubedDeveloper(user.id)) title = this.i18n('info.specialTitles.developer');
+                if (isPlugCubedVIP(user.id))       title = this.i18n('info.specialTitles.vip');
 
                 var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
                 a.append('<div class="chat-update"><table style="width:100%;color:#CC00CC"><tr><td colspan="2"><strong>' + this.i18n('info.name') + '</strong>: <span style="color:#FFFFFF">' + user.username + '</span></td></tr>' +
@@ -864,7 +838,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 b && a.scrollTop(a[0].scrollHeight);
             }
             setTimeout($.proxy(this.onDjAdvanceLate,this),Math.randomRange(1,10)*1000);
-            if (API.hasPermission(undefined, API.ROLE.BOUNCER) || this.isPlugCubedAdmin(API.getUser().id)) this.onHistoryCheck(data.media.id)
+            if (API.hasPermission(undefined, API.ROLE.BOUNCER) || isPlugCubedDeveloper(API.getUser().id)) this.onHistoryCheck(data.media.id)
             var obj = {
                 id         : data.media.id,
                 author     : data.media.author,
@@ -915,7 +889,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         onUserJoin: function(data) {
             if ((this.settings.notify & 3) === 3) {
                 var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
-                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.join + '">' + this.i18n('notify.message.join.normal',Utils.cleanTypedString(data.username)) + '</span></div>');
+                a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.join + '">' + this.i18n('notify.message.join',Utils.cleanTypedString(data.username)) + '</span></div>');
                 b && a.scrollTop(a[0].scrollHeight);
             }
             if (plugCubedUserData[data.id] === undefined)
@@ -931,6 +905,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          * @this {plugCubedModel}
          */
         onUserLeave: function(data) {
+            console.log(data);
             if ((this.settings.notify & 5) === 5) {
                 var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
                 a.append('<div class="chat-update"><span class="chat-text" style="color:#' + this.settings.colors.leave + '">' + this.i18n('notify.message.leave.normal',Utils.cleanTypedString(data.username)) + '</span></div>');
@@ -938,17 +913,11 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             }
             this.onUserlistUpdate();
         },
-        isPlugCubedAdmin: function(id) {
-            return id == '50aeb31696fba52c3ca0adb6';
-        },
-        isPlugCubedVIP: function(id) {
-            return id == '5112c273d6e4a94ec0554792' || id == '50b1961c96fba57db2230417' || id == '5121578196fba506408bb9eb' || id == '50aeb077877b9217e2fbff00';
-        },
         /**
          * @this {plugCubedModel}
          */
         chatDisable: function(data) {
-            var a = data.type == 'mention' && (API.hasPermission(data.fromID,API.ROLE.BOUNCER)),b = data.message.indexOf('@') < 0 && this.isPlugCubedAdmin(data.fromID);
+            var a = data.type == 'mention' && (API.hasPermission(data.fromID,API.ROLE.BOUNCER)),b = data.message.indexOf('@') < 0 && (API.hasPermission(data.fromID,API.ROLE.HOST) || isPlugCubedDeveloper(data.fromID));
             if (a || b) {
                 if (data.message.indexOf('!disable') > -1) {
                     if (this.settings.autojoin) {
@@ -1203,7 +1172,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 if (plugCubed.settings.ignore.indexOf(user.id) > -1) return plugCubed.settings.ignore.splice(plugCubed.settings.ignore.indexOf(user.id),1),plugCubed.saveSettings(),API.chatLog(plugCubed.i18n('ignore.disabled',user.username)),true;
                 return plugCubed.settings.ignore.push(user.id),plugCubed.saveSettings(),API.chatLog(plugCubed.i18n('ignore.enabled',user.username)),true;
             }
-            if (plugCubed.isPlugCubedAdmin(API.getUserid)) {
+            if (isPlugCubedDeveloper(API.getUserid)) {
                 if (value.indexOf('/whois ') === 0)
                     return plugCubed.getUserInfo(value.substr(7)),true;
             }
