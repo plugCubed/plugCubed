@@ -141,6 +141,9 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 )
         );
     }
+    function playMentionSound() {
+        document.getElementById("chat-sound").playMentionSound();
+    }
     var guiButtons = {},
         version = {
             major: 2,
@@ -948,7 +951,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 }
             } else for (var i in this.settings.alertson) {
                 if (data.message.indexOf(this.settings.alertson[i]) > -1)
-                    document.getElementById("chat-sound").playMentionSound();
+                    playMentionSound();
             }
             if (this.settings.chatlimit.enabled) {
                 var elems = $('#chat-messages').children('div'),num = elems.length,i = 0;
@@ -979,7 +982,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 if (a.id == id && (~~i + 2) < 51) {
                     found = ~~i + 2;
                     if (!a.wasSkipped)
-                        return API.chatLog('Song is in history (' + found + ' of ' + p3history.length + ')',true);
+                        return playMentionSound(),setTimeout(function() { playMentionSound() },50),API.chatLog('Song is in history (' + 1 + ' of ' + 50 + ')',true);
                 }
             }
             if (found > 0)
