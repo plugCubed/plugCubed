@@ -7,7 +7,7 @@ define('plugCubed/Lang',function() {
         running               : 'Running plug&#179; version %1',
         commandsHelp          : 'Use \'/commands\' to see expanded chat commands.',
         newVersion            : 'A new version of plug&#179; has been released. Your script will reload in a few seconds.',
-        automuted             : '%1 auto-muted.',
+        automuted             : '%1 automuted.',
         nextsong              : 'Your next queued song is %1 by %2',
         isHistory             : 'Warning: This song is still in the history (%1 of %2)',
         enable                : 'Enable',
@@ -105,6 +105,10 @@ define('plugCubed/Lang',function() {
         ignore: {
             enabled           : 'You are now ignoring %1',
             disabled          : 'You are no longer ignoring %1'
+        },
+        automute: {
+            registered: '%1 registered to automute on future plays.',
+            unregistered: '%1 removed from automute registry.'
         },
         error: {
             userNotFound      : 'User not found',
