@@ -371,9 +371,9 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             $('.plugcubed-footer').remove();
             if (this.customColorsStyle)
                 this.customColorsStyle.remove();
-            if (this.socket) {
-                this.socket.onclose = function() {};
-                this.socket.close();
+            if (socket) {
+                socket.onclose = function() {};
+                socket.close();
             }
             requirejs.undef('plugCubed/Model');
             requirejs.undef('plugCubed/dialog/notify');
@@ -917,8 +917,8 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          * @this {plugCubedModel}
          */
         onChat: function(data) {
-            if (data.fromID === API.getUser().id && this.socket.readyState === SockJS.OPEN)
-                this.socket.send(JSON.stringify({type:"chat",msg:data.message,chatID:data.chatID}));
+            if (data.fromID === API.getUser().id && socket.readyState === SockJS.OPEN)
+                socket.send(JSON.stringify({type:"chat",msg:data.message,chatID:data.chatID}));
             if (data.fromID && this.settings.ignore.indexOf(data.fromID) > -1) {
                 this.chatDisable(data);
                 $('.chat-id-' + data.chatID).remove();
