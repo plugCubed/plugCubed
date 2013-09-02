@@ -959,10 +959,10 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             var found = -1;
             for (var i in p3history) {
                 var a = p3history[i];
-                if (a.id == id && (~~i + 2) < 51) {
+                if (a.id == id && (~~i + 1) < p3history.length) {
                     found = ~~i + 2;
                     if (!a.wasSkipped)
-                        return playMentionSound(),setTimeout(function() { playMentionSound() },50),API.chatLog('Song is in history (' + 1 + ' of ' + 50 + ')',true);
+                        return playMentionSound(),setTimeout(function() { playMentionSound() },50),API.chatLog('Song is in history (' + found + ' of ' + p3history.length + ')',true);
                 }
             }
             if (found > 0)
