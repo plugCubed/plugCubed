@@ -11,7 +11,14 @@ define('plugCubed/Lang',function() {
         isHistory             : 'Warning: This song is still in the history (%1 of %2)',
         enable                : 'Enable',
         limit                 : 'Limit',
-        AFK                   : "I'm away from keyboard.",
+        historyCheck: {
+            inHistory         : 'Song is in history (%1 of %2)',
+            inHistorySkipped  : 'Song is in history (%1 of %2), but was skipped on the last play'
+        },
+        AFK                   : {
+            information       : 'Please enter your away message here.\nThis is what you will reply via @mention.',
+            default           : 'I\'m away from keyboard.'
+        },
         commands: {
             header            : 'plugCubed Commands',
             userCommands      : 'User Commands',

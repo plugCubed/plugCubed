@@ -263,7 +263,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 infoMessage1: 'FFFF00',
                 infoMessage2: '66FFFF'
             };
-            this.defaultAwayMsg = this.i18n('AFK');
+            this.defaultAwayMsg = this.i18n('AFK.default');
 
             setTimeout(function() {
                 p3history = [];
@@ -319,6 +319,11 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                         curVote:   0,
                         joinTime:  Date.now()
                     }
+            }
+
+            if (this.settings.userlist) {
+                populateUserlist();
+                showUserlist();
             }
 
             this.Socket();
@@ -505,10 +510,6 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 }
                 this.settings.recent = false;
                 if (this.settings.autowoot) woot();
-                if (this.settings.userlist) {
-                    populateUserlist();
-                    showUserlist();
-                };
                 if (this.settings.customColors)
                     this.updateCustomColors();
                 if (this.settings.registeredSongs.length > 0 && this.settings.registeredSongs.indexOf(Models.room.data.media.id) > -1) {
@@ -724,7 +725,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                         showUserlist();
                     } else {
                         $('#side-left .sidebar-content').empty();
-                        this.hideUserlist();
+                        hideUserlist();
                     }
                     break;
                 case 'colors':
@@ -734,7 +735,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     this.settings.autorespond = !this.settings.autorespond;
                     this.changeGUIColor('autorespond',this.settings.autorespond);
                     if (this.settings.autorespond) {
-                        var a = prompt('Please enter your away message here.\nThis is what you will reply via @mention.',this.settings.awaymsg === '' ? this.defaultAwayMsg : this.settings.awaymsg);
+                        var a = prompt(this.i18n('AFK.information'),this.settings.awaymsg === '' ? this.defaultAwayMsg : this.settings.awaymsg);
                         if (a === null) {
                             this.settings.autorespond = false;
                             this.changeGUIColor('autorespond',false);
@@ -959,11 +960,11 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 if (a.id == id && (~~i + 1) < p3history.length) {
                     found = ~~i + 2;
                     if (!a.wasSkipped)
-                        return playMentionSound(),setTimeout(function() { playMentionSound() },50),API.chatLog('Song is in history (' + found + ' of ' + p3history.length + ')',true);
+                        return playMentionSound(),setTimeout(function() { playMentionSound() },50),API.chatLog(this.i18n('historyCheck.inHistory',found,p3history.length),true);
                 }
             }
             if (found > 0)
-                return API.chatLog('Song is in history (' + found + ' of ' + p3history.length + '), but was skipped on the last play',true);
+                return API.chatLog(this.i18n('historyCheck.inHistorySkipped',found,p3history.length),true);
         },
         getTimestamp: function(t) {
             var time = t ? new Date(t) : new Date();
@@ -993,13 +994,12 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             if (value == '/work' || value == '/working')
                 return API.setStatus(2);
             if (value == '/sleep' || value == '/sleeping') {
-                API.setStatus(3);
                 if (plugCubed.settings.autojoin) {
                     plugCubed.settings.autojoin = false;
                     plugCubed.changeGUIColor('join',false);
                     plugCubed.saveSettings();
                 }
-                return;
+                return API.setStatus(3);;
             }
             if (value == '/join')
                 return API.djJoin();
@@ -1012,13 +1012,14 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             if (value == '/version')
                 return API.chatLog(plugCubed.i18n('running',version.toString()));
             if (value == '/mute') {
+                if (API.getVolume() === 0) return;
                 plugCubed.lastVolume = API.getVolume();
                 return API.setVolume(0);
             }
             if (value == '/link')
-                return API.sendChat('plugCubed : http://plugcubed.com'), true;
+                return API.sendChat('plugCubed : http://plugcubed.com');
             if (value == '/unmute')
-                return API.setVolume(plugCubed.lastVolume), true;
+                return API.getVolume() > 0 ? API.setVolume(plugCubed.lastVolume) : true;
             if (value == '/nextsong') {
                 var nextSong = API.getNextMedia(),found = -1;
                 if (nextSong === undefined) return API.chatLog(plugCubed.i18n('noNextSong'));
