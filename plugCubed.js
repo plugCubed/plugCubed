@@ -325,9 +325,6 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             this.loaded = true;
             loadRoomSettings();
 
-            $("#side-right").css('right',0);
-            setTimeout(function() { $("#side-right").animate({"right": "-190px"}, 300, "easeOutQuart"); },500);
-
             $('#footer-links').append($('<div />').addClass('footer').addClass('plugcubed-footer').css('top',12).html(this.i18n('running',version.toString()) + this.i18n('footer.seperator')).append($('<span />').addClass('plugcubed-status').text(this.i18n('footer.socket',this.i18n('footer.unknown')))));
         },
         onRoomJoin: function() {
