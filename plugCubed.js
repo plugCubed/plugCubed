@@ -237,9 +237,6 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 $('head').append('<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />');
             }
         },
-        /**
-         * @this {plugCubedModel}
-         */
         i18n: function(key) {
             var a = p3lang,i;
             if (a === undefined) return '{' + key + '}';
@@ -331,7 +328,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             $("#side-right").css('right',0);
             setTimeout(function() { $("#side-right").animate({"right": "-190px"}, 300, "easeOutQuart"); },500);
 
-            $('#footer-links').append($('<div />').addClass('footer').addClass('plugcubed-footer').css('top',12).html(this.i18n('running',version.toString()))).append($('<span />').addClass('plugcubed-status'));
+            $('#footer-links').append($('<div />').addClass('footer').addClass('plugcubed-footer').css('top',12).html(this.i18n('running',version.toString()) + this.i18n('footer.seperator')).append($('<span />').addClass('plugcubed-status').text(this.i18n('footer.socket',this.i18n('footer.unknown')))));
         },
         onRoomJoin: function() {
             if (typeof plugCubed !== 'undefined') {
@@ -405,6 +402,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                     room:     window.location.pathname.split('/')[1],
                     version:  version.toString()
                 }));
+                $('.plugcubed-status').text(plugCubed.i18n('footer.socket',plugCubed.i18n('footer.online')));
             }
             /**
              * @this {SockJS}
@@ -443,6 +441,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 else                      return;
 
                 setTimeout(function() { plugCubed.Socket(); },delay*1E3);
+                $('.plugcubed-status').text(plugCubed.i18n('footer.socket',plugCubed.i18n('footer.offline')));
             }
         },
         colorInfo: {

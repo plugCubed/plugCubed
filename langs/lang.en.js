@@ -3,7 +3,6 @@ define('plugCubed/Lang',function() {
     return {
         disconnected          : "Disconnected at %1!",
         reloading             : "Reloading the page in a few seconds.",
-        AFK                   : "I'm away from keyboard.",
         running               : 'Running plug&#179; version %1',
         commandsHelp          : 'Use \'/commands\' to see expanded chat commands.',
         newVersion            : 'A new version of plug&#179; has been released. Your script will reload in a few seconds.',
@@ -12,10 +11,18 @@ define('plugCubed/Lang',function() {
         isHistory             : 'Warning: This song is still in the history (%1 of %2)',
         enable                : 'Enable',
         limit                 : 'Limit',
+        AFK                   : "I'm away from keyboard.",
         commands: {
             header            : 'plugCubed Commands',
             userCommands      : 'User Commands',
             modCommands       : 'Moderation Commands'
+        },
+        footer: {
+            socket            : 'Socket status: %1',
+            seperator         : ' | ',
+            online            : 'Online',
+            offline           : 'Offline',
+            unknown           : 'Unknown'
         },
         notify: {
             header            : 'Chat Notifications',
