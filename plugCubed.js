@@ -846,8 +846,11 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             }
             this.onUserlistUpdate();
             var users = API.getUsers();
-            for (var i in users)
+            for (var i in users) {
+                if (plugCubedUserData[users[i].id] === undefined)
+                    this.onUserJoin(users[i]);
                 plugCubedUserData[users[i].id].curVote = 0;
+            }
         },
         /**
          * @this {plugCubedModel}
