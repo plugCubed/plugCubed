@@ -866,7 +866,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
          * @this {plugCubedModel}
          */
         onUserJoin: function(data) {
-            if ((this.settings.notify & 3) === 3 && data.relationship === 0)
+            if ((this.settings.notify & 3) === 3 && Room.getUserByID(data.id).get('relationship') === 0)
                 appendChatMessage(this.i18n('notify.message.join',Utils.cleanTypedString(data.username)),this.settings.colors.join);
             if (plugCubedUserData[data.id] === undefined)
                 plugCubedUserData[data.id] = {
