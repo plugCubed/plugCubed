@@ -688,7 +688,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 if (isPlugCubedDeveloper(user.id)) title = this.i18n('info.specialTitles.developer');
                 if (isPlugCubedVIP(user.id))       title = this.i18n('info.specialTitles.vip');
 
-                appendChatMessage('<table style="width:100%;color:#CC00CC"><tr><td colspan="2"><strong>' + this.i18n('info.name') + '</strong>: <span style="color:#FFFFFF">' + user.username + '</span></td></tr>' +
+                appendChatMessage('<table style="width:100%;color:#CC00CC"><tr><td colspan="2"><strong>' + this.i18n('info.name') + '</strong>: <span style="color:#FFFFFF">' + Utils.cleanTypedString(user.username) + '</span></td></tr>' +
                 (title ? '<tr><td colspan="2"><strong>' + this.i18n('info.title') + '</strong>: <span style="color:#FFFFFF">' + title + '</span></td></tr>' : '') +
                 '<tr><td colspan="2"><strong>' + this.i18n('info.id') + '</strong>: <span style="color:#FFFFFF">' + user.id + '</span></td></tr>' +
                 '<tr><td><strong> ' + this.i18n('info.rank') + '</strong>: <span style="color:#FFFFFF">' + rank + '</span></td><td><strong>' + this.i18n('info.joined') + '</strong>: <span style="color:#FFFFFF">' + this.getTimestamp(userdata.joinTime) + '</span></td></tr>' +
@@ -808,7 +808,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
         onCurate: function(data) {
             var media = API.getMedia();
             if ((this.settings.notify & 9) === 9)
-                appendChatMessage(this.i18n('notify.message.curate',data.user.username,media.author,media.title),this.settings.colors.curate);
+                appendChatMessage(this.i18n('notify.message.curate',Utils.cleanTypedString(data.user.username),media.author,media.title),this.settings.colors.curate);
             this.onUserlistUpdate();
         },
         /**
@@ -818,7 +818,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             if ((this.settings.notify & 17) === 17)
                 appendChatMessage(this.i18n('notify.message.stats',data.lastPlay.score.positive,data.lastPlay.score.negative,data.lastPlay.score.curates),this.settings.colors.stats);
             if ((this.settings.notify & 33) === 33)
-                appendChatMessage(this.i18n('notify.message.updates',data.media.title,data.media.author,data.dj.username),this.settings.colors.updates);
+                appendChatMessage(this.i18n('notify.message.updates',data.media.title,data.media.author,Utils.cleanTypedString(data.dj.username)),this.settings.colors.updates);
             setTimeout($.proxy(this.onDjAdvanceLate,this),Math.randomRange(1,10)*1000);
             if (API.hasPermission(undefined, API.ROLE.BOUNCER) || isPlugCubedDeveloper(API.getUser().id)) this.onHistoryCheck(data.media.id)
             var obj = {
@@ -1080,9 +1080,9 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 if (spot < 0)
                     API.chatLog(plugCubed.i18n('info.notinlist'));
                 else if (spot === 0)
-                    API.chatLog(plugCubed.i18n('info.userDjing',user.id === API.getUser().id ? plugCubed.i18n('ranks.you') : user.username));
+                    API.chatLog(plugCubed.i18n('info.userDjing',user.id === API.getUser().id ? plugCubed.i18n('ranks.you') : Utils.cleanTypedString(user.username)));
                 else if (spot === 1)
-                    API.chatLog(plugCubed.i18n('info.userNextDJ',user.id === API.getUser().id ? plugCubed.i18n('ranks.you') : user.username));
+                    API.chatLog(plugCubed.i18n('info.userNextDJ',user.id === API.getUser().id ? plugCubed.i18n('ranks.you') : Utils.cleanTypedString(user.username)));
                 else
                     API.chatLog(plugCubed.i18n('info.inbooth',spot + 1,API.getDJs().length));
                 return;
@@ -1100,7 +1100,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
                 if (user === null) return API.chatLog(plugCubed.i18n('error.userNotFound')),true;
                 if (user.id === API.getUser().id) return API.chatLog(plugCubed.i18n('error.ignoreSelf')),true;
                 if (plugCubed.settings.ignore.indexOf(user.id) > -1) return plugCubed.settings.ignore.splice(plugCubed.settings.ignore.indexOf(user.id),1),plugCubed.saveSettings(),API.chatLog(plugCubed.i18n('ignore.disabled',user.username)),true;
-                return plugCubed.settings.ignore.push(user.id),plugCubed.saveSettings(),API.chatLog(plugCubed.i18n('ignore.enabled',user.username));
+                return plugCubed.settings.ignore.push(user.id),plugCubed.saveSettings(),API.chatLog(plugCubed.i18n('ignore.enabled',Utils.cleanTypedString(user.username)));
             }
             if (isPlugCubedDeveloper(API.getUserid))
                 return value.indexOf('/whois ') === 0 ? plugCubed.getUserInfo(value.substr(7)) : true;
