@@ -3,23 +3,33 @@ define('plugCubed/Lang',function() {
     return {
         disconnected          : "Disconnected at %1!",
         reloading             : "Reloading the page in a few seconds.",
-        AFK                   : "I'm away from keyboard.",
         running               : 'Running plug&#179; version %1',
         commandsHelp          : 'Use \'/commands\' to see expanded chat commands.',
         newVersion            : 'A new version of plug&#179; has been released. Your script will reload in a few seconds.',
-        automuted             : '%1 auto-muted.',
+        automuted             : '%1 automuted.',
         nextsong              : 'Your next queued song is %1 by %2',
         isHistory             : 'Warning: This song is still in the history (%1 of %2)',
-        you                   : 'You',
         enable                : 'Enable',
+        limit                 : 'Limit',
+        historyCheck: {
+            inHistory         : 'Song is in history (%1 of %2)',
+            inHistorySkipped  : 'Song is in history (%1 of %2), but was skipped on the last play'
+        },
+        AFK                   : {
+            information       : 'Please enter your away message here.\nThis is what you will reply via @mention.',
+            default           : 'I\'m away from keyboard.'
+        },
         commands: {
             header            : 'plugCubed Commands',
             userCommands      : 'User Commands',
             modCommands       : 'Moderation Commands'
         },
-        chatLimit: {
-            header            : 'Limit Chat Log',
-            limit             : 'Limit'
+        footer: {
+            socket            : 'Socket status: %1',
+            seperator         : ' | ',
+            online            : 'Online',
+            offline           : 'Offline',
+            unknown           : 'Unknown'
         },
         notify: {
             header            : 'Chat Notifications',
@@ -33,7 +43,13 @@ define('plugCubed/Lang',function() {
                 disabled      : 'Join/leave alerts disabled',
                 curate        : '%1 added %2 - %3',
                 stats         : 'Stats:   %1 woots -- %2 mehs -- %3 curates',
-                updates       : 'Now Playing: %1 by %2<br />Played by: %3'
+                updates       : 'Now Playing: %1 by %2<br />Played by: %3',
+                join          : '%1 just joined the room',
+                leave: {
+                    normal    : '%1 just left the room',
+                    fan       : 'Your fan %1 just left the room',
+                    friend    : 'Your friend %1 just left the room'
+                }
             }
         },
         info: {
@@ -51,9 +67,9 @@ define('plugCubed/Lang',function() {
             position          : 'Position',
             points            : 'Points',
             pointType: {
-                dj            : '%1  DJ Points',
-                listener      : '%1  Listener Points',
-                curator       : '%1  Curator Points'
+                dj            : '%1 DJ Points',
+                listener      : '%1 Listener Points',
+                curator       : '%1 Curator Points'
             },
             fans              : 'Fans',
             wootCount         : 'Woot Count',
@@ -83,15 +99,12 @@ define('plugCubed/Lang',function() {
             userlist          : 'Userlist',
             customchatcolors  : 'Custom Chat Colors',
             afkstatus         : 'AFK Status',
-            notify            : 'Notify',
+            notify            : 'Notifications',
             limitchatlog      : 'Limit Chat Log',
             stream            : 'Stream',
-            emoji             : 'Emoji',
-            avatarAnimations  : 'Avatar Animations',
-            unknown           : 'Unknown menu key'
+            emoji             : 'Emoji'
         },
         status: {
-            idle              : 'Idle',
             available         : 'Available',
             afk               : 'AFK',
             working           : 'Working',
@@ -107,10 +120,15 @@ define('plugCubed/Lang',function() {
             enabled           : 'You are now ignoring %1',
             disabled          : 'You are no longer ignoring %1'
         },
+        automute: {
+            registered: '%1 registered to automute on future plays.',
+            unregistered: '%1 removed from automute registry.'
+        },
         error: {
             userNotFound      : 'User not found',
             ignoreSelf        : 'You can\'t ignore yourself',
             unknownModeration : 'Unknown moderation',
+            unknownMenuKey    : 'Unknown menu key',
             emoji             : 'Error in reenabling Emoji'
         }
     };

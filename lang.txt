@@ -1,6 +1,0 @@
-[
-    {
-        "file": "en",
-        "name": "English"
-    }
-]

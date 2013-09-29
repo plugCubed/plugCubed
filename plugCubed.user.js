@@ -1,15 +1,14 @@
 // ==UserScript==
 // @name           plugCubedLoader
-// @namespace      TAT
+// @namespace      com.plugCubed
 // @description    Autorun plugCubed on plug.dj
-// @author         Jeremy "Colgate" Richardson
 // @author         Thomas "TAT" Andresen
 // @include        http://plug.dj/*
-// @version        1.4
+// @version        1.5
 // ==/UserScript==
 
 /*
-Copyright (c) 2012-2013 by Jeremy "Colgate" Richardson and Thomas "TAT" Andresen
+Copyright (c) 2012-2013 by Thomas "TAT" Andresen and other contributors
 
 Permission to use this software for any purpose without fee is hereby granted, provided
 that the above copyright notice and this permission notice appear in all copies.
@@ -34,7 +33,7 @@ OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMAN
 var script = document.createElement('script');
 script.textContent = '(function() { var a = {' +
     'b: function() { if (typeof API !== \'undefined\' && API.enabled) this.c(); else setTimeout($.proxy(this.b,this),100); },' +
-    'c: function() { console.log(\'plugCubedLoader v.1.4 enabled!\'); $.getScript(\'http://tatdk.github.io/plugCubed/compiled/plugCubed.min.js\'); }' +
+    'c: function() { console.log(\'plugCubedLoader v.1.5 enabled!\'); $.getScript(\'http://plugCubed.com/compiled/plugCubed.min.js\'); }' +
 '};' +
 'a.b(); })()';
 document.head.appendChild(script);

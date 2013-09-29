@@ -10,16 +10,20 @@
 
 if (typeof jQuery.easing.easeOutQuart === 'undefined') jQuery.easing.easeOutQuart = function (a,b,c,d,e) { return -d*((b=b/e-1)*b*b*b-1)+c; }
 
-$("#side-right").hoverIntent(function() {
-    var timeout_r = $(this).data("timeout_r");
-    if (timeout_r) clearTimeout(timeout_r);
-    $(this).animate({
-        "right": "0px"
-    }, 300, "easeOutQuart");
-}, function() {
-    $(this).data("timeout_r", setTimeout($.proxy(function() {
+$("#side-right").css('right',0);
+setTimeout(function() {
+    $("#side-right").animate({"right": "-190px"}, 300, "easeOutQuart");
+    $("#side-right").hoverIntent(function() {
+        var timeout_r = $(this).data("timeout_r");
+        if (timeout_r) clearTimeout(timeout_r);
         $(this).animate({
-            "right": "-190px"
+            "right": "0px"
         }, 300, "easeOutQuart");
-    }, this), 500));
-});
+    }, function() {
+        $(this).data("timeout_r", setTimeout($.proxy(function() {
+            $(this).animate({
+                "right": "-190px"
+            }, 300, "easeOutQuart");
+        }, this), 500));
+    });
+},800);
