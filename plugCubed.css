@@ -33,7 +33,7 @@
 #side-left .sidebar-content p span.fdj_undecided,#side-left .sidebar-content p span.fdj_woot,#side-left .sidebar-content p span.fdj_meh,#side-left .sidebar-content p span.fdj_current,#side-left .sidebar-content p span.woot_undecided,#side-left .sidebar-content p span.curate_meh,#side-left .sidebar-content p span.curate_woot,
 #side-left .sidebar-content p span.plugcubed_undecided,#side-left .sidebar-content p span.plugcubed_woot,#side-left .sidebar-content p span.plugcubed_meh,#side-left .sidebar-content p span.plugcubed_current,#side-left .sidebar-content p span.vip_woot,#side-left .sidebar-content p span.vip_meh,#side-left .sidebar-content p span.vip_undecided,#side-left .sidebar-content p span.vip_current,
 #side-left .sidebar-content p span.host_woot,#side-left .sidebar-content p span.manager_current,#side-left .sidebar-content p span.manager_meh,#side-left .sidebar-content p span.manager_undecided,#side-left .sidebar-content p span.manager_woot,#side-left .sidebar-content p span.void {
-    background: url('https://rawgithub.com/TATDK/plugCubed/2.1.0/images/sprites.png') no-repeat;
+    background: url('http://plugcubed.com/images/sprites.png') no-repeat;
     width: 15px;
     height: 15px;
     position: relative;
