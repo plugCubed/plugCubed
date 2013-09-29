@@ -33,7 +33,7 @@
 #side-left .sidebar-content p span.fdj_undecided,#side-left .sidebar-content p span.fdj_woot,#side-left .sidebar-content p span.fdj_meh,#side-left .sidebar-content p span.fdj_current,#side-left .sidebar-content p span.woot_undecided,#side-left .sidebar-content p span.curate_meh,#side-left .sidebar-content p span.curate_woot,
 #side-left .sidebar-content p span.plugcubed_undecided,#side-left .sidebar-content p span.plugcubed_woot,#side-left .sidebar-content p span.plugcubed_meh,#side-left .sidebar-content p span.plugcubed_current,#side-left .sidebar-content p span.vip_woot,#side-left .sidebar-content p span.vip_meh,#side-left .sidebar-content p span.vip_undecided,#side-left .sidebar-content p span.vip_current,
 #side-left .sidebar-content p span.host_woot,#side-left .sidebar-content p span.manager_current,#side-left .sidebar-content p span.manager_meh,#side-left .sidebar-content p span.manager_undecided,#side-left .sidebar-content p span.manager_woot,#side-left .sidebar-content p span.void {
-    background: url('http://tatdk.github.io/plugCubed/images/sprites.png') no-repeat;
+    background: url('https://rawgithub.com/TATDK/plugCubed/2.1.0/images/sprites.png') no-repeat;
     width: 15px;
     height: 15px;
     position: relative;
@@ -271,6 +271,7 @@
 .sidebar#side-right {
     right: -190px;
     z-index: 99999;
+    font-size: 14px;
 }
 
 .sidebar-handle {
@@ -361,42 +362,26 @@
     margin: 10px 0px 10px 3px;
 }
 
-.sidebar-content ::-webkit-scrollbar {
-    width: 12px;
-}
-
-.sidebar-content ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-}
-
-.sidebar-content ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: rgba(255,255,255,255,0.4);
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-}
-
-.sidebar-content ::-webkit-scrollbar-thumb:window-inactive {
-    background: rgba(255,255,255,255,0.2);
-}
-
-[class^="status-"], [class*=" status-"] {
-    border-radius: 50%;
-    width: 10px;
-    height: 10px;
-    background: yellow;
+#side-right .sidebar-content [class^="icon-"],
+#side-right .sidebar-content [class*=" icon-"] {
+    width: 15px;
     display: inline-block;
+    font-size: 13px;
+    text-align: center;
     margin-right: 5px;
 }
 
+#side-right .sidebar-content a:hover [class^="icon-"],
+#side-right .sidebar-content a:hover [class*=" icon-"] {
+    text-decoration: none;
+}
+
 .status-on {
-    background: green;
+    color: green;
 }
 
 .status-off {
-    background: red;
+    color: red;
 }
 
 #dialog-commands {
