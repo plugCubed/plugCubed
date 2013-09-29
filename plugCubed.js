@@ -194,7 +194,7 @@ define('plugCubed/Model',['app/base/Class','app/facades/ChatFacade','app/store/L
             major: 2,
             minor: 0,
             patch: 9,
-            prerelease: 'alpha.13',
+            prerelease: '',
             minified: false,
             /**
              * @this {version}
