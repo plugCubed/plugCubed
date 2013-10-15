@@ -1,1 +1,9 @@
-[{"file":"en","name":"English"}]
+[{
+  "file":"en",
+  "name":"English"
+  },
+  {
+  "file":"pt-br",
+  "name":"Português"
+  }
+]
