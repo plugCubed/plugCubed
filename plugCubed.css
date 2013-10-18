@@ -1,3 +1,7 @@
+#side-left .sidebar-content {
+    overflow: auto;
+}
+
 #side-left .sidebar-content p {
     margin: 0;
     padding-top: 2px;
@@ -27,13 +31,47 @@
     margin-left: 8px;
 }
 
-#side-left .sidebar-content p span.admin_current,#side-left .sidebar-content p span.admin_meh,#side-left .sidebar-content p span.admin_undecided,#side-left .sidebar-content p span.admin_woot,#side-left .sidebar-content p span.ambassador_current,
-#side-left .sidebar-content p span.ambassador_meh,#side-left .sidebar-content p span.ambassador_undecided,#side-left .sidebar-content p span.ambassador_woot,#side-left .sidebar-content p span.bouncer_current,#side-left .sidebar-content p span.bouncer_meh,
-#side-left .sidebar-content p span.bouncer_undecided,#side-left .sidebar-content p span.bouncer_woot,#side-left .sidebar-content p span.host_current,#side-left .sidebar-content p span.host_meh,#side-left .sidebar-content p span.host_undecided,
-#side-left .sidebar-content p span.fdj_undecided,#side-left .sidebar-content p span.fdj_woot,#side-left .sidebar-content p span.fdj_meh,#side-left .sidebar-content p span.fdj_current,#side-left .sidebar-content p span.woot_undecided,#side-left .sidebar-content p span.curate_meh,#side-left .sidebar-content p span.curate_woot,
-#side-left .sidebar-content p span.plugcubed_undecided,#side-left .sidebar-content p span.plugcubed_woot,#side-left .sidebar-content p span.plugcubed_meh,#side-left .sidebar-content p span.plugcubed_current,#side-left .sidebar-content p span.vip_woot,#side-left .sidebar-content p span.vip_meh,#side-left .sidebar-content p span.vip_undecided,#side-left .sidebar-content p span.vip_current,
-#side-left .sidebar-content p span.host_woot,#side-left .sidebar-content p span.manager_current,#side-left .sidebar-content p span.manager_meh,#side-left .sidebar-content p span.manager_undecided,#side-left .sidebar-content p span.manager_woot,#side-left .sidebar-content p span.void {
-    background: url('http://plugcubed.com/images/sprites.png') no-repeat;
+#side-left .sidebar-content p span.admin_current,
+#side-left .sidebar-content p span.admin_undecided,
+#side-left .sidebar-content p span.admin_meh,
+#side-left .sidebar-content p span.admin_woot,
+#side-left .sidebar-content p span.ambassador_current,
+#side-left .sidebar-content p span.ambassador_undecided,
+#side-left .sidebar-content p span.ambassador_meh,
+#side-left .sidebar-content p span.ambassador_woot,
+#side-left .sidebar-content p span.bouncer_current,
+#side-left .sidebar-content p span.bouncer_undecided,
+#side-left .sidebar-content p span.bouncer_meh,
+#side-left .sidebar-content p span.bouncer_woot,
+#side-left .sidebar-content p span.host_current,
+#side-left .sidebar-content p span.host_undecided,
+#side-left .sidebar-content p span.host_meh,
+#side-left .sidebar-content p span.host_woot,
+#side-left .sidebar-content p span.fdj_current,
+#side-left .sidebar-content p span.fdj_undecided,
+#side-left .sidebar-content p span.fdj_meh,
+#side-left .sidebar-content p span.fdj_woot,
+#side-left .sidebar-content p span.curate_undecided,
+#side-left .sidebar-content p span.curate_meh,
+#side-left .sidebar-content p span.curate_woot,
+#side-left .sidebar-content p span.p3dev_current,
+#side-left .sidebar-content p span.p3dev_undecided,
+#side-left .sidebar-content p span.p3dev_meh,
+#side-left .sidebar-content p span.p3dev_woot,
+#side-left .sidebar-content p span.p3sponsor_current,
+#side-left .sidebar-content p span.p3sponsor_undecided,
+#side-left .sidebar-content p span.p3sponsor_meh,
+#side-left .sidebar-content p span.p3sponsor_woot,
+#side-left .sidebar-content p span.p3vip_current,
+#side-left .sidebar-content p span.p3vip_undecided,
+#side-left .sidebar-content p span.p3vip_meh,
+#side-left .sidebar-content p span.p3vip_woot,
+#side-left .sidebar-content p span.manager_current,
+#side-left .sidebar-content p span.manager_undecided,
+#side-left .sidebar-content p span.manager_meh,
+#side-left .sidebar-content p span.manager_woot,
+#side-left .sidebar-content p span.void {
+    background: url('http://files.plugcubed.net/images/sprites.png') no-repeat;
     width: 15px;
     height: 15px;
     position: relative;
@@ -42,149 +80,46 @@
     display: inline-block;
 }
 
-#side-left .sidebar-content p span.admin_current {
-    background-position: -45px 0;
-}
-
-#side-left .sidebar-content p span.admin_meh {
-    background-position: -30px 0;
-}
-
-#side-left .sidebar-content p span.admin_undecided {
-    background-position: -15px 0;
-}
-
-#side-left .sidebar-content p span.admin_woot {
-    background-position: 0 0;
-}
-
-#side-left .sidebar-content p span.ambassador_current {
-    background-position: -45px -15px;
-}
-
-#side-left .sidebar-content p span.ambassador_meh {
-    background-position: -30px -15px;
-}
-
-#side-left .sidebar-content p span.ambassador_undecided {
-    background-position: -15px -15px;
-}
-
-#side-left .sidebar-content p span.ambassador_woot {
-    background-position: 0 -15px;
-}
-
-#side-left .sidebar-content p span.bouncer_current {
-    background-position: -45px -60px;
-}
-
-#side-left .sidebar-content p span.bouncer_meh {
-    background-position: -30px -60px;
-}
-
-#side-left .sidebar-content p span.bouncer_undecided {
-    background-position: -15px -60px;
-}
-
-#side-left .sidebar-content p span.bouncer_woot {
-    background-position: 0 -60px;
-}
-
-#side-left .sidebar-content p span.host_current {
-    background-position: -45px -30px;
-}
-
-#side-left .sidebar-content p span.host_meh {
-    background-position: -30px -30px;
-}
-
-#side-left .sidebar-content p span.host_undecided {
-    background-position: -15px -30px;
-}
-
-#side-left .sidebar-content p span.host_woot {
-    background-position: 0 -30px;
-}
-
-#side-left .sidebar-content p span.manager_current {
-    background-position: -45px -45px;
-}
-
-#side-left .sidebar-content p span.manager_meh {
-    background-position: -30px -45px;
-}
-
-#side-left .sidebar-content p span.manager_undecided {
-    background-position: -15px -45px;
-}
-
-#side-left .sidebar-content p span.manager_woot {
-    background-position: 0 -45px;
-}
-
-#side-left .sidebar-content p span.fdj_current {
-    background-position: -45px -75px;
-}
-
-#side-left .sidebar-content p span.fdj_meh {
-    background-position: -30px -75px;
-}
-
-#side-left .sidebar-content p span.fdj_undecided {
-    background-position: -15px -75px;
-}
-
-#side-left .sidebar-content p span.fdj_woot {
-    background-position: 0 -75px;
-}
-
-#side-left .sidebar-content p span.plugcubed_current {
-    background-position: -45px -90px;
-}
-
-#side-left .sidebar-content p span.plugcubed_meh {
-    background-position: -30px -90px;
-}
-
-#side-left .sidebar-content p span.plugcubed_undecided {
-    background-position: -15px -90px;
-}
-
-#side-left .sidebar-content p span.plugcubed_woot {
-    background-position: 0 -90px;
-}
-
-#side-left .sidebar-content p span.vip_current {
-    background-position: -45px -105px;
-}
-
-#side-left .sidebar-content p span.vip_meh {
-    background-position: -30px -105px;
-}
-
-#side-left .sidebar-content p span.vip_undecided {
-    background-position: -15px -105px;
-}
-
-#side-left .sidebar-content p span.vip_woot {
-    background-position: 0 -105px;
-}
-
-#side-left .sidebar-content p span.curate_meh {
-    background-position: -30px -120px;
-}
-
-#side-left .sidebar-content p span.curate_undecided {
-    background-position: -15px -120px;
-}
-
-#side-left .sidebar-content p span.curate_woot {
-    background-position: 0 -120px;
-}
-
-#side-left .sidebar-content p span.void {
-    background-position: 0px -135px;
-}
+#side-left .sidebar-content p span.admin_current        { background-position: -45px      0; }
+#side-left .sidebar-content p span.admin_meh            { background-position: -30px      0; }
+#side-left .sidebar-content p span.admin_undecided      { background-position: -15px      0; }
+#side-left .sidebar-content p span.admin_woot           { background-position:     0      0; }
+#side-left .sidebar-content p span.ambassador_current   { background-position: -45px  -15px; }
+#side-left .sidebar-content p span.ambassador_meh       { background-position: -30px  -15px; }
+#side-left .sidebar-content p span.ambassador_undecided { background-position: -15px  -15px; }
+#side-left .sidebar-content p span.ambassador_woot      { background-position:     0  -15px; }
+#side-left .sidebar-content p span.bouncer_current      { background-position: -45px  -60px; }
+#side-left .sidebar-content p span.bouncer_meh          { background-position: -30px  -60px; }
+#side-left .sidebar-content p span.bouncer_undecided    { background-position: -15px  -60px; }
+#side-left .sidebar-content p span.bouncer_woot         { background-position:     0  -60px; }
+#side-left .sidebar-content p span.host_current         { background-position: -45px  -30px; }
+#side-left .sidebar-content p span.host_meh             { background-position: -30px  -30px; }
+#side-left .sidebar-content p span.host_undecided       { background-position: -15px  -30px; }
+#side-left .sidebar-content p span.host_woot            { background-position:     0  -30px; }
+#side-left .sidebar-content p span.manager_current      { background-position: -45px  -45px; }
+#side-left .sidebar-content p span.manager_meh          { background-position: -30px  -45px; }
+#side-left .sidebar-content p span.manager_undecided    { background-position: -15px  -45px; }
+#side-left .sidebar-content p span.manager_woot         { background-position:     0  -45px; }
+#side-left .sidebar-content p span.fdj_current          { background-position: -45px  -75px; }
+#side-left .sidebar-content p span.fdj_meh              { background-position: -30px  -75px; }
+#side-left .sidebar-content p span.fdj_undecided        { background-position: -15px  -75px; }
+#side-left .sidebar-content p span.fdj_woot             { background-position:     0  -75px; }
+#side-left .sidebar-content p span.p3dev_current        { background-position: -45px  -90px; }
+#side-left .sidebar-content p span.p3dev_meh            { background-position: -30px  -90px; }
+#side-left .sidebar-content p span.p3dev_undecided      { background-position: -15px  -90px; }
+#side-left .sidebar-content p span.p3dev_woot           { background-position:     0  -90px; }
+#side-left .sidebar-content p span.p3sponsor_current    { background-position: -45px -105px; }
+#side-left .sidebar-content p span.p3sponsor_meh        { background-position: -30px -105px; }
+#side-left .sidebar-content p span.p3sponsor_undecided  { background-position: -15px -105px; }
+#side-left .sidebar-content p span.p3sponsor_woot       { background-position:     0 -105px; }
+#side-left .sidebar-content p span.p3vip_current        { background-position: -45px -105px; }
+#side-left .sidebar-content p span.p3vip_meh            { background-position: -30px -105px; }
+#side-left .sidebar-content p span.p3vip_undecided      { background-position: -15px -105px; }
+#side-left .sidebar-content p span.p3vip_woot           { background-position:     0 -105px; }
+#side-left .sidebar-content p span.curate_meh           { background-position: -30px -120px; }
+#side-left .sidebar-content p span.curate_undecided     { background-position: -15px -120px; }
+#side-left .sidebar-content p span.curate_woot          { background-position:     0 -120px; }
+#side-left .sidebar-content p span.void                 { background-position:   0px -135px; }
 
 #plugcubed-gui {
     position: absolute;
@@ -242,6 +177,13 @@
     margin: 0;
 }
 
+.afkTimer {
+    width: 90px;
+    position: absolute;
+    top: 140px;
+    text-align: center;
+}
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -266,10 +208,11 @@
 .sidebar#side-left {
     left: -220px;
     z-index: 99999;
+    border-right: thin solid #666666;
 }
 
 .sidebar#side-right {
-    right: -190px;
+    right: 0px;
     z-index: 99999;
     font-size: 14px;
 }
@@ -295,19 +238,12 @@
     color: #000;
 }
 
-#side-left .sidebar-handle {
-    position: absolute;
-    right: 0;
-    cursor: col-resize;
-}
-
 .sidebar-content {
     position: absolute;
     width: 185px;
     float: left;
     height: 100%;
     padding: 15px;
-    overflow: scroll;
 }
 
 #side-left a {
@@ -374,6 +310,12 @@
 #side-right .sidebar-content a:hover [class^="icon-"],
 #side-right .sidebar-content a:hover [class*=" icon-"] {
     text-decoration: none;
+}
+
+#side-right .sidebar-content #lock {
+    position: absolute;
+    top: 7px;
+    right: 14px;
 }
 
 .status-on {

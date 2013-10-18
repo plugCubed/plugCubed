@@ -1,60 +1,31 @@
 plug&#179; (plugCubed)
 ====================
 
-###Features List###
-* Auto-woot : Automatically WOOT! each song as it is played.
-* Auto-joining : Automatically rejoin the DJ Waitlist once you've been moved back to the crowd.
-   * (Room staff can turn this off by @mentioning your username and using !disable.)
-* User list : A dynamic list of every user in the room, color-coded based on their current vote.
-    * Green = Woot, Red = Meh, White = No vote
-    * Special usergroups are denoted by the icon you'd normally see in the chat.
-* Unique Sidebar UI : Allows you to easily configure your plugCubed experience
-    * Enable or disable each of its features at the click of a button.
-    * Red = Off, Green = On
-* Custom chat logged notifications that display
-    * User join/leave alerts
-    * User Curate alerts
-    * Song Statistics on DJ Advance
-    * Now Playing alerts
-* A variety of chat commands that enable you to 
-    * change your display name with /nick
-    * change user status with /avail, /afk, /work, /sleep
-    * join/leave the waitlist or dj booth with /join or /leave
-    * Mute and unmute songs with /mute or /unmute
-    * Register songs to be automatically muted on subsequent plays with /automute
-    * Get your current waitlist position with /getpos
-    * Get your personal user info with /whoami
-* Custom Moderation Tools
-    * History alerts : Display in chat when a song is in the history.
-    * User Data logging : Record user join time, vote counts, rank, status, points breakdown(mouseover points value), and much more.
-    * Moderation in chat command form
-        * Bouncer +
-            * /kick = Kick targeted username
-                * If you would like to specify a reason, use /kick @username :: reason
-                * Host/Ambassador can use Timed kicks by using /kick @username :: reason :: time OR /kick @username :: time
-            * /add = Add targeted username to DJ booth/waitlist
-            * /remove = Remove targeted username to DJ booth/waitlist
-            * /whois = gets whois information on targeted user
-        * Manager +
-            * /lock = Lock the DJ booth
-            * /unlock = Unlock the DJ booth
+###Information / Installation###
+Find all information and installation informations at http://plugCubed.net/
 
-###Installation###
-Find the URLs for bookmarks at http://plugCubed.com/
-
-###Authors###
+###Developers###
 * Thomas "TAT" Andresen
 
-###Previous Authors###
+###Original Creators###
+* Thomas "TAT" Andresen
 * Jeremy "Colgate" Richardson
 
 ###Translators###
-| Name              | Languages           |
-| ----------------- | ------------------- |
-| thenotoriousbruce | Portuguese (Brasil) |
+No languages other than English are included yet, but will be in one of the upcoming versions.
 
 ###Translations###
-If you want to help out translating plugCubed, please use http://getlocalization.com/plugCubed/
+If you want to help out translating plug&#179;, please use [our project at GetLocalization](http://getlocalization.com/plugCubed/).
+
+###Developers###
+plug&#179; invites other script developers on plug.dj to use our socket server.
+By sharing the same socket server, we can all support shared backup chat system, in case of chatsplits.
+Thereby all the users of the scripts that uses this server will still be able to talk to eachother.
+
+Info about how to connect and communicate with the server will be up soon.
+
+###Sponsors###
+Our socket server is sponsored by [Radiant Music](http://radiantedm.com).
 
 ###License###
 Copyright &copy; 2012-2013 by Thomas "TAT" Andresen and other contributors
@@ -75,3 +46,17 @@ INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHA
 BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
 RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+###Disclaimer###
+This script connects to our own socket server.
+This socket server makes it possible to have some of the features that plug&#179; contains.
+
+The userdata sent to the socket server is your userid, username, roomid and version of plug&#179;.
+All chat messages that you send is also sent to the socket server to act as a backup chat server.
+
+None of the data sent to the socket server is saved.
+As soon as you disconnect all your userdata is no longer existant on the socket server.
+
+Every minute the socket server counts number of clients that are connected and saves that number for statistic purpose only.
+
+This disclaimer can be changed without any notice but we promise we aren't doing anything to harm your informations.

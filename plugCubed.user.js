@@ -4,7 +4,7 @@
 // @description    Autorun plugCubed on plug.dj
 // @author         Thomas "TAT" Andresen
 // @include        http://plug.dj/*
-// @version        1.5
+// @version        1.6
 // ==/UserScript==
 
 /*
@@ -33,7 +33,7 @@ OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMAN
 var script = document.createElement('script');
 script.textContent = '(function() { var a = {' +
     'b: function() { if (typeof API !== \'undefined\' && API.enabled) this.c(); else setTimeout($.proxy(this.b,this),100); },' +
-    'c: function() { console.log(\'plugCubedLoader v.1.5 enabled!\'); $.getScript(\'http://plugCubed.com/compiled/plugCubed.min.js\'); }' +
+    'c: function() { console.log(\'plugCubedLoader v.1.6 enabled!\'); $.getScript(\'http://alpha.plugCubed.net/plugCubed.min.js\'); }' +
 '};' +
 'a.b(); })()';
 document.head.appendChild(script);

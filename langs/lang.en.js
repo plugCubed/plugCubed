@@ -1,8 +1,9 @@
 // lang = 'English';
 define('plugCubed/Lang',function() {
     return {
-        disconnected          : "Disconnected at %1!",
-        reloading             : "Reloading the page in a few seconds.",
+        disconnected          : 'Disconnected at %1!',
+        reconnecting          : 'Please wait, trying to reconnect...',
+        reconnected           : 'Reconnected',
         running               : 'Running plug&#179; version %1',
         commandsHelp          : 'Use \'/commands\' to see expanded chat commands.',
         newVersion            : 'A new version of plug&#179; has been released. Your script will reload in a few seconds.',
@@ -20,7 +21,7 @@ define('plugCubed/Lang',function() {
             default           : 'I\'m away from keyboard.'
         },
         commands: {
-            header            : 'plugCubed Commands',
+            header            : 'plug&#179; Commands',
             userCommands      : 'User Commands',
             modCommands       : 'Moderation Commands'
         },
@@ -53,11 +54,13 @@ define('plugCubed/Lang',function() {
             }
         },
         info: {
+            header            : 'User Information',
             name              : 'Name',
             title             : 'Title',
             specialTitles: {
-                developer     : 'plugCubed Developer',
-                vip           : 'plugCubed VIP'
+                developer     : 'plug&#179; Developer',
+                sponsor       : 'plug&#179; Sponsor',
+                vip           : 'plug&#179; VIP'
             },
             id                : 'ID',
             rank              : 'Rank',
@@ -102,7 +105,9 @@ define('plugCubed/Lang',function() {
             notify            : 'Notifications',
             limitchatlog      : 'Limit Chat Log',
             stream            : 'Stream',
-            emoji             : 'Emoji'
+            emoji             : 'Emoji',
+            afktimers         : 'AFK Timers',
+            roomsettings      : 'Room Settings'
         },
         status: {
             available         : 'Available',
@@ -121,15 +126,16 @@ define('plugCubed/Lang',function() {
             disabled          : 'You are no longer ignoring %1'
         },
         automute: {
-            registered: '%1 registered to automute on future plays.',
-            unregistered: '%1 removed from automute registry.'
+            registered        : '%1 registered to automute on future plays.',
+            unregistered      : '%1 removed from automute registry.'
         },
         error: {
             userNotFound      : 'User not found',
             ignoreSelf        : 'You can\'t ignore yourself',
             unknownModeration : 'Unknown moderation',
             unknownMenuKey    : 'Unknown menu key',
-            emoji             : 'Error in reenabling Emoji'
+            emoji             : 'Error in reenabling Emoji',
+            missingReason     : 'Missing reason'
         }
     };
 });
