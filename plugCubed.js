@@ -377,8 +377,8 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
         version = {
             major: 2,
             minor: 1,
-            patch: 0,
-            prerelease: '',
+            patch: 1,
+            prerelease: 'alpha.1',
             minified: false,
             /**
              * @this {version}
