@@ -1343,6 +1343,22 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                     });
                 }
             }
+            if (API.hasPermission(undefined,API.ROLE.HOST) || isPlugCubedDeveloper()) {
+                if (value.indexOf('/strobe') === 0) {
+                    if (socket.readyState !== SockJS.OPEN) return API.chatLog('Not connected to socket server',true);
+                    if (value.indexOf('off') > -1)
+                        socket.send(JSON.stringify({type:'rave',value:0}));
+                    else
+                        socket.send(JSON.stringify({type:'rave',value:1}));
+                }
+                if (value.indexOf('/rave') === 0) {
+                    if (socket.readyState !== SockJS.OPEN) return API.chatLog('Not connected to socket server',true);
+                    if (value.indexOf('off') > -1)
+                        socket.send(JSON.stringify({type:'rave',value:0}));
+                    else
+                        socket.send(JSON.stringify({type:'rave',value:2}));
+                }
+            }
         }
     });
 });
@@ -1512,6 +1528,8 @@ define('plugCubed/dialog/commands',['app/views/dialogs/AbstractDialogView','lang
         ['/unlock'              ,'unlocks DJ booth'                                   ,API.ROLE.MANAGER],
         ['/add (username)'      ,'adds targeted user to dj booth/waitlist'            ,API.ROLE.BOUNCER],
         ['/remove (username)'   ,'removes targeted user from dj booth/waitlist'       ,API.ROLE.BOUNCER],
+        ['/strobe (on|off)'     ,'enable/disable strobe'                              ,API.ROLE.HOST],
+        ['/rave (on|off)'       ,'enable/disable lights out'                          ,API.ROLE.HOST],
         ['/whois all'           ,'gives userid and username of all users in the room' ,API.ROLE.AMBASSADOR],
         ['/kickall (reason)'    ,'kicks all users in the room with reason'            ,API.ROLE.AMBASSADOR],
         ['/banall (reason)'     ,'bans all users in the room with reason'             ,API.ROLE.AMBASSADOR]
