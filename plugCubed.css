@@ -206,7 +206,7 @@
 }
 
 .sidebar#side-left {
-    left: -220px;
+    left: 0px;
     z-index: 99999;
     border-right: thin solid #666666;
 }
@@ -316,6 +316,12 @@
     position: absolute;
     top: 7px;
     right: 14px;
+}
+
+#side-left .sidebar-content #lock {
+    position: absolute;
+    top: 7px;
+    left: 14px;
 }
 
 .status-on {

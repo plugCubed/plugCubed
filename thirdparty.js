@@ -11,6 +11,23 @@
 if (typeof jQuery.easing.easeOutQuart === 'undefined') jQuery.easing.easeOutQuart = function (a,b,c,d,e) { return -d*((b=b/e-1)*b*b*b-1)+c; }
 
 setTimeout(function() {
+    if (!plugCubed.settings.userlistLocked)
+        $("#side-left").animate({"right": "-190px"}, 300, "easeOutQuart");
+    $("#side-left").hoverIntent(function() {
+        var timeout_l = $(this).data("timeout_l");
+        if (timeout_l) clearTimeout(timeout_l);
+        $(this).animate({
+            "left": "0px"
+        }, 300, "easeOutQuart");
+    }, function() {
+        if (!plugCubed.settings.userlistLocked) {
+            $(this).data("timeout_l", setTimeout($.proxy(function() {
+                $(this).animate({
+                    "left": -$('#side-left').width()-20
+                }, 300, "easeOutQuart");
+            }, this), 500));
+        }
+    });
     if (!plugCubed.settings.menuLocked)
         $("#side-right").animate({"right": "-190px"}, 300, "easeOutQuart");
     $("#side-right").hoverIntent(function() {
