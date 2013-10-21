@@ -12,7 +12,7 @@ if (typeof jQuery.easing.easeOutQuart === 'undefined') jQuery.easing.easeOutQuar
 
 setTimeout(function() {
     if (!plugCubed.settings.userlistLocked)
-        $("#side-left").animate({"right": "-190px"}, 300, "easeOutQuart");
+        $("#side-left").animate({"left": "-188px"}, 300, "easeOutQuart");
     $("#side-left").hoverIntent(function() {
         var timeout_l = $(this).data("timeout_l");
         if (timeout_l) clearTimeout(timeout_l);
@@ -23,7 +23,7 @@ setTimeout(function() {
         if (!plugCubed.settings.userlistLocked) {
             $(this).data("timeout_l", setTimeout($.proxy(function() {
                 $(this).animate({
-                    "left": -$('#side-left').width()-20
+                    "left": "-188px"
                 }, 300, "easeOutQuart");
             }, this), 500));
         }

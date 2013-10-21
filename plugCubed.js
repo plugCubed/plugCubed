@@ -324,10 +324,9 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
         $('#button-vote-positive').click();
     }
     function populateUserlist() {
-        if ($('#side-left .sidebar-content').children().length > 0)
-            $('#side-left .sidebar-content').append('<hr />');
         $('#side-left .sidebar-content').bind('contextmenu',function(e){return false;});
-        $('#side-left .sidebar-content').html('<h1 class="users">Users: ' + API.getUsers().length + '</h1>');
+        $('#side-left .sidebar-content h1,#side-left .sidebar-content h3,#side-left .sidebar-content p,#side-left .sidebar-content hr').remove();
+        $('#side-left .sidebar-content').append('<h1 class="users">Users: ' + API.getUsers().length + '</h1>');
         var spot = API.getWaitListPosition();
         var waitlistDiv = $('<h3></h3>').addClass('waitlistspot').text('Waitlist: ' + (spot != -1 ? spot + ' / ' : '') + API.getWaitList().length);
         $('#side-left .sidebar-content').append(waitlistDiv).append('<hr />');
@@ -495,10 +494,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             for (var i in users)
                 setUserData(users[i].id,'joinTime',Date.now());
 
-            if (this.settings.userlist) {
-                populateUserlist();
-                showUserlist();
-            }
+            populateUserlist();
 
             /**
              * @this {Socket}
@@ -813,7 +809,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             $('#side-right .sidebar-content .plugcubed-btn, #side-right .sidebar-content hr').remove();
             this.addGUIButton(this.settings.autowoot,                                    'woot',        this.i18n('menu.autowoot'),         'heart');
             this.addGUIButton(this.settings.autojoin,                                    'join',        this.i18n('menu.autojoin'));
-            this.addGUIButton(this.settings.userlist,                                    'userlist',    this.i18n('menu.userlist'),         'user');
             this.addGUIButton(this.settings.customColors,                                'colors',      this.i18n('menu.customchatcolors'), 'tint');
             this.addGUIButton(this.settings.autorespond,                                 'autorespond', this.i18n('menu.afkstatus'),        'reply');
             this.addGUIButton((this.settings.notify & 1) === 1,                          'notify',      this.i18n('menu.notify'),           'warning-sign');
@@ -1106,8 +1101,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
          * @this {plugCubedModel}
          */
         onUserlistUpdate: function() {
-            if (this.settings.userlist)
-                populateUserlist();
+            populateUserlist();
         },
         onSkip: function() {
             p3history[1].wasSkipped = true;
