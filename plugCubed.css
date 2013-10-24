@@ -71,7 +71,7 @@
 #side-left .sidebar-content p span.manager_meh,
 #side-left .sidebar-content p span.manager_woot,
 #side-left .sidebar-content p span.void {
-    background: url('http://files.plugcubed.net/images/sprites.png') no-repeat;
+    background: url('http://alpha.plugcubed.net/images/sprites.png') no-repeat;
     width: 15px;
     height: 15px;
     position: relative;
@@ -206,8 +206,9 @@
 }
 
 .sidebar#side-left {
-    left: -220px;
+    left: 0px;
     z-index: 99999;
+    width: 217px;
     border-right: thin solid #666666;
 }
 
@@ -267,7 +268,11 @@
     border: none;
     border-top: 1px solid #AAA;
     padding: 0;
-    margin: 10px 0;
+    margin: 10px 30px 10px 0;
+}
+
+#side-left .sidebar-handle {
+    float: right;
 }
 
 #side-right .sidebar-handle {
@@ -316,6 +321,12 @@
     position: absolute;
     top: 7px;
     right: 14px;
+}
+
+#side-left .sidebar-content #lock {
+    position: absolute;
+    top: 7px;
+    left: 14px;
 }
 
 .status-on {

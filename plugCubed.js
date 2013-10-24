@@ -21,23 +21,37 @@
  * OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 if (typeof plugCubed !== 'undefined') plugCubed.close();
-String.prototype.equalsIgnoreCase     = function(a) { return typeof a !== 'string' ? false : this.toLowerCase() === a.toLowerCase(); };
-String.prototype.startsWith           = function(a) { return typeof a !== 'string' || a.length > this.length ? false : this.indexOf(a) === 0; };
-String.prototype.endsWith             = function(a) { return typeof a !== 'string' || a.length > this.length ? false : this.indexOf(a) === this.length-a.length; };
-String.prototype.startsWithIgnoreCase = function(a) { return typeof a !== 'string' || a.length > this.length ? false : this.toLowerCase().startsWith(a.toLowerCase()); };
-String.prototype.endsWithIgnoreCase   = function(a) { return typeof a !== 'string' || a.length > this.length ? false : this.toLowerCase().endsWith(a.toLowerCase()); };
-String.prototype.isNumber             = function()  { return !isNaN(parseInt(this,10)) && isFinite(this); };
-String.prototype.isHEX                = function()  { return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(this.substr(0,1) === '#' ? this : '#' + this); };
-Math.randomRange                   = function(a,b) { return a + Math.floor(Math.random()*(b-a+1)); };
+String.prototype.equalsIgnoreCase     = function(a)   { return typeof a !== 'string' ? false : this.toLowerCase() === a.toLowerCase(); };
+String.prototype.startsWith           = function(a)   { return typeof a !== 'string' || a.length > this.length ? false : this.indexOf(a) === 0; };
+String.prototype.endsWith             = function(a)   { return typeof a !== 'string' || a.length > this.length ? false : this.indexOf(a) === this.length-a.length; };
+String.prototype.startsWithIgnoreCase = function(a)   { return typeof a !== 'string' || a.length > this.length ? false : this.toLowerCase().startsWith(a.toLowerCase()); };
+String.prototype.endsWithIgnoreCase   = function(a)   { return typeof a !== 'string' || a.length > this.length ? false : this.toLowerCase().endsWith(a.toLowerCase()); };
+String.prototype.isNumber             = function()    { return !isNaN(parseInt(this,10)) && isFinite(this); };
+String.prototype.isHEX                = function()    { return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(this.substr(0,1) === '#' ? this : '#' + this); };
+Math.randomRange                      = function(a,b) { return a + Math.floor(Math.random()*(b-a+1)); };
 var _PCL, plugCubed, plugCubedUserData;
 
 define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/base/Context','app/events/MediaCurateEvent','app/net/Socket','app/net/SocketIO','app/models/TheUserModel','lang/Lang','app/views/room/AudienceView','app/events/RoomJoinEvent','app/events/RoomStateEvent'],function(e,Class,Chat,LocalStorage,Utils,Room,Context,MCE,Socket,SIO,TUM,Lang,Audience,RJE,RSE) {
     SIO.sio.$events.chat = Socket.listener.chat = function(a) {
+        if (a.fromID) setUserData(a.fromID,'lastChat',Date.now());
         if (typeof plugCubed !== 'undefined' && plugCubed.settings.ignore.indexOf(a.fromID) > -1) {
             plugCubed.chatDisable(a);
             return;
         }
-        if (!a.chatID || $(".chat-id-" + a.chatID).length > 0) return;
+        if (!a.chatID || $(".chat-id-" + a.chatID).length > 0) {
+            if (a.fromID) {
+                if (a.fromID === API.getUser().id) {
+                    if (socket.readyState === SockJS.OPEN)
+                        socket.send(JSON.stringify({type:"chat",msg:a.message,chatID:a.chatID}));
+                
+                    if ($(".chat-id-" + a.chatID).data('eventSent') !== true) {
+                        API.dispatch(API.CHAT,a);
+                        $(".chat-id-" + a.chatID).data('eventSent',true);
+                    }
+                }
+            }
+            return;
+        }
         Chat.receive(a);
         API.dispatch(API.CHAT,a);
     };
@@ -300,15 +314,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                 )
         );
     }
-    function showUserlist() {
-        $('#side-left').show().animate({ 'left': '0px' }, 300, typeof jQuery.easing.easeOutQuart === 'undefined' ? undefined : 'easeOutQuart');
-    }
-    function hideUserlist() {
-        var sbarWidth = -$('#side-left').width()-20;
-        $('#side-left').animate({ 'left': sbarWidth + 'px' }, 300, typeof jQuery.easing.easeOutQuart === 'undefined' ? undefined : 'easeOutQuart', function() {
-            $('#side-left').hide();
-        });
-    }
     function playMentionSound() {
         document.getElementById("chat-sound").playMentionSound();
     }
@@ -319,10 +324,9 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
         $('#button-vote-positive').click();
     }
     function populateUserlist() {
-        if ($('#side-left .sidebar-content').children().length > 0)
-            $('#side-left .sidebar-content').append('<hr />');
         $('#side-left .sidebar-content').bind('contextmenu',function(e){return false;});
-        $('#side-left .sidebar-content').html('<h1 class="users">Users: ' + API.getUsers().length + '</h1>');
+        $('#side-left .sidebar-content h1,#side-left .sidebar-content h3,#side-left .sidebar-content p,#side-left .sidebar-content hr').remove();
+        $('#side-left .sidebar-content').append('<h1 class="users">Users: ' + API.getUsers().length + '</h1>');
         var spot = API.getWaitListPosition();
         var waitlistDiv = $('<h3></h3>').addClass('waitlistspot').text('Waitlist: ' + (spot != -1 ? spot + ' / ' : '') + API.getWaitList().length);
         $('#side-left .sidebar-content').append(waitlistDiv).append('<hr />');
@@ -377,7 +381,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
         version = {
             major: 2,
             minor: 1,
-            patch: 0,
+            patch: 2,
             prerelease: '',
             minified: false,
             /**
@@ -413,7 +417,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                 onRoomJoin:           $.proxy(this.onRoomJoin,      this)
             };
             //Load language and third-party scripts
-            $.getScript('http://files.plugcubed.net/langs/lang.' + LocalStorage.getItem('plugCubedLang') + '.js',function() {
+            $.getScript('http://alpha.plugcubed.net/langs/lang.' + LocalStorage.getItem('plugCubedLang') + '.js',function() {
                 require(['plugCubed/Lang'],function(a) {
                     p3lang = a;
                     plugCubed.__init();
@@ -476,13 +480,15 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             this.customColorsStyle = $('<style type="text/css" />');
             $('head').append(this.customColorsStyle);
             appendChatMessage(this.i18n('running',version.toString()) + '</span><br /><span class="chat-text" style="color:#66FFFF">' + this.i18n('commandsHelp'),'FFFF00');
+
+            console.log('__init');
+
             window.addEventListener('pushState',plugCubed.proxy.onRoomJoin);
-            
-            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://files.plugcubed.net/plugCubed.css" />')
+            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://alpha.plugcubed.net/plugCubed.css?=' + Date.now() + '" />')
                      .prepend('<link rel="stylesheet" type="text/css" id="font-awesome" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">')
-                     .append($('<div id="side-left" class="sidebar" />').append($('<div class="sidebar-content" />')))
-                     .append($('<div id="side-right" class="sidebar" />').append($('<div class="sidebar-handle"><span>||</span></div>')).append($('<div class="sidebar-content" />').append($('<div id="lock" class="icon-unlock" />').data('key','lock').click(this.proxy.menu))))
-                     .append('<script type="text/javascript" src="http://files.plugcubed.net/thirdparty.js"></script>');
+                     .append($('<div id="side-left" class="sidebar" />').append($('<div class="sidebar-handle"><span>||</span></div>')).append($('<div class="sidebar-content" />').append($('<div id="lock" class="icon-unlock" />').data('key','ulLock').click(this.proxy.menu))))
+                     .append($('<div id="side-right" class="sidebar" />').append($('<div class="sidebar-handle"><span>||</span></div>')).append($('<div class="sidebar-content" />').append($('<div id="lock" class="icon-unlock" />').data('key','mLock').click(this.proxy.menu))))
+                     .append('<script type="text/javascript" src="http://alpha.plugcubed.net/thirdparty.js?=' + Date.now() + '"></script>');
             this.loadSettings();
             this.initGUI();
             this.initAPIListeners();
@@ -490,38 +496,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             for (var i in users)
                 setUserData(users[i].id,'joinTime',Date.now());
 
-            if (this.settings.userlist) {
-                populateUserlist();
-                showUserlist();
-            }
-
-            /**
-             * @this {Socket}
-             */
-            Socket.open = function (t) {
-                this.backoff = 0, window.Slug ? e.defer(function () {
-                    Context.dispatch(new RJE(RJE.JOIN, Room.get("id")))
-                }) : e.defer(function () {
-                    appendChatMessage(plugCubed.i18n('reconnected'));
-                    Context.dispatch(new RSE(RSE.UPDATE, Room.get("id")))
-                })
-            }
-            /**
-             * @this {Socket}
-             */
-            Socket.close = function (t) {
-                appendChatMessage(plugCubed.i18n('disconnected',plugCubed.getTimestamp()),'FF0000');
-                appendChatMessage(plugCubed.i18n('reconnecting'));
-                if (t && t.wasClean)
-                    window.Slug = Room.get("id"),console.log('This session has now ended. Goodbye.');
-                else console.info("closing", t);
-                var n = this.backoff;
-                n <= 5 && (n += 1);
-                var r = this;
-                n ? e.delay(function() { r.connect(n) }, Math.pow(2, n) * 1e3) : this.connect(n);
-            }
-            Socket.sockjs.onopen = e.bind(Socket.open, Socket);
-            Socket.sockjs.onclose = e.bind(Socket.close, Socket);
+            populateUserlist();
 
             this.Socket();
             this.loaded = true;
@@ -532,7 +507,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
         onRoomJoin: function() {
             if (typeof plugCubed !== 'undefined') {
                 setTimeout(function() {
-                    if (API.enabled) $.getScript('http://files.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js');
+                    if (API.enabled) $.getScript('http://alpha.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js?=' + Date.now());
                     else plugCubed.onRoomJoin();
                 },500);
             }
@@ -598,13 +573,13 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
              */
             socket.onopen = function() {
                 this.tries = 0;
-                console.log('[plug³ Socket Server]','Connected');
+                console.log('[plug³ Socket Server]',this.reconnecting ? 'Reconnected' : 'Connected');
                 var userData = API.getUser();
                 this.send(JSON.stringify({
                     type:     'userdata',
                     id:       userData.id,
                     username: userData.username,
-                    room:     window.location.pathname.split('/')[1],
+                    room:     Room.get('id'),
                     version:  version.toString()
                 }));
                 $('.plugcubed-status').text(plugCubed.i18n('footer.socket',plugCubed.i18n('footer.online')));
@@ -620,7 +595,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                     this.onclose = function() {};
                     this.close();
                     API.chatLog(plugCubed.i18n('newVersion'), null, plugCubed.colors.infoMessage1);
-                    return setTimeout(function() { $.getScript('http://files.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js'); },5000);
+                    return setTimeout(function() { $.getScript('http://alpha.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js'); },5000);
                 }
                 if (type === 'chat') {
                     if (!data.chatID || $(".chat-id-" + data.chatID).length > 0 || plugCubed.settings.ignore.indexOf(data.fromID) > -1)
@@ -629,7 +604,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                     return API.trigger(API.CHAT,data);
                 }
                 if (type === 'rave') {
-                    if (isPlugCubedDeveloper(data.id) || API.hasPermission(data.id,API.ROLE.HOST))
+                    if (isPlugCubedDeveloper(data.id) || isPlugCubedSponsor(data.id) || API.hasPermission(data.id,API.ROLE.HOST))
                         return data.value < 2 ? Audience.strobeMode(data.value === 1) : Audience.lightsOut(true);
                 }
             }
@@ -672,7 +647,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             awaymsg          : '',
             autowoot         : false,
             autojoin         : false,
-            userlist         : false,
             autorespond      : false,
             menu             : false,
             notify           : 0,
@@ -680,6 +654,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             emoji            : true,
             avatarAnimations : true,
             menuLocked       : true,
+            userlistLocked   : true,
             registeredSongs  : [],
             ignore           : [],
             alertson         : [],
@@ -718,6 +693,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                 }
                 this.settings.recent = false;
                 $('#side-right .sidebar-content #lock').attr('class','icon-' + (this.settings.menuLocked ? '' : 'un') + 'lock');
+                $('#side-left .sidebar-content #lock').attr('class','icon-' + (this.settings.userlistLocked ? '' : 'un') + 'lock');
                 if (this.settings.afkTimers) afkTimerEnable();
                 if (this.settings.autowoot) woot();
                 if (this.settings.customColors)
@@ -807,7 +783,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             $('#side-right .sidebar-content .plugcubed-btn, #side-right .sidebar-content hr').remove();
             this.addGUIButton(this.settings.autowoot,                                    'woot',        this.i18n('menu.autowoot'),         'heart');
             this.addGUIButton(this.settings.autojoin,                                    'join',        this.i18n('menu.autojoin'));
-            this.addGUIButton(this.settings.userlist,                                    'userlist',    this.i18n('menu.userlist'),         'user');
             this.addGUIButton(this.settings.customColors,                                'colors',      this.i18n('menu.customchatcolors'), 'tint');
             this.addGUIButton(this.settings.autorespond,                                 'autorespond', this.i18n('menu.afkstatus'),        'reply');
             this.addGUIButton((this.settings.notify & 1) === 1,                          'notify',      this.i18n('menu.notify'),           'warning-sign');
@@ -857,7 +832,11 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
         onMenuClick: function(e) {
             var a = $(e.currentTarget).data('key');
             switch (a) {
-                case 'lock':
+                case 'ulLock':
+                    this.settings.userlistLocked = !this.settings.userlistLocked;
+                    $(e.currentTarget).attr('class','icon-' + (this.settings.userlistLocked ? '' : 'un') + 'lock');
+                    break;
+                case 'mLock':
                     this.settings.menuLocked = !this.settings.menuLocked;
                     $(e.currentTarget).attr('class','icon-' + (this.settings.menuLocked ? '' : 'un') + 'lock');
                     break;
@@ -980,7 +959,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             if ((this.settings.notify & 33) === 33)
                 appendChatMessage(this.i18n('notify.message.updates',data.media.title,data.media.author,Utils.cleanTypedString(data.dj.username)),this.settings.colors.updates);
             setTimeout($.proxy(this.onDjAdvanceLate,this),Math.randomRange(1,10)*1000);
-            if (API.hasPermission(undefined, API.ROLE.BOUNCER) || isPlugCubedDeveloper()) this.onHistoryCheck(data.media.id)
+            this.onHistoryCheck(data.media.id);
             var obj = {
                 id         : data.media.id,
                 author     : data.media.author,
@@ -1069,9 +1048,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
          * @this {plugCubedModel}
          */
         onChat: function(data) {
-            setUserData(data.fromID,'lastChat',Date.now());
-            if (data.fromID === API.getUser().id && socket.readyState === SockJS.OPEN)
-                socket.send(JSON.stringify({type:"chat",msg:data.message,chatID:data.chatID}));
             this.chatDisable(data);
             if (data.type == 'mention') {
                 if (this.settings.autorespond && !this.settings.recent) {
@@ -1099,13 +1075,13 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
          * @this {plugCubedModel}
          */
         onUserlistUpdate: function() {
-            if (this.settings.userlist)
-                populateUserlist();
+            populateUserlist();
         },
         onSkip: function() {
             p3history[1].wasSkipped = true;
         },
         onHistoryCheck: function(id) {
+            if (!API.hasPermission(undefined, API.ROLE.BOUNCER) && !isPlugCubedDeveloper() && (plugCubed.settings.notify & 65) !== 65) return;
             var found = -1;
             for (var i in p3history) {
                 var a = p3history[i];
@@ -1250,7 +1226,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                 return;
             }
             if (value.indexOf('/ignore ') === 0 || value.indexOf('/unignore ') === 0) {
-                var user = getUser(value.substr(8));
+                var user = getUser(value.substr(value.indexOf('/ignore') === 0 ? 8 : 10));
                 if (user === null) return API.chatLog(plugCubed.i18n('error.userNotFound')),true;
                 if (user.id === API.getUser().id) return API.chatLog(plugCubed.i18n('error.ignoreSelf')),true;
                 if (plugCubed.settings.ignore.indexOf(user.id) > -1) return plugCubed.settings.ignore.splice(plugCubed.settings.ignore.indexOf(user.id),1),plugCubed.saveSettings(),API.chatLog(plugCubed.i18n('ignore.disabled',user.username)),true;
@@ -1343,6 +1319,22 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                     });
                 }
             }
+            if (API.hasPermission(undefined,API.ROLE.HOST) || isPlugCubedDeveloper()) {
+                if (value.indexOf('/strobe') === 0) {
+                    if (socket.readyState !== SockJS.OPEN) return API.chatLog('Not connected to socket server',true);
+                    if (value.indexOf('off') > -1)
+                        socket.send(JSON.stringify({type:'rave',value:0}));
+                    else
+                        socket.send(JSON.stringify({type:'rave',value:1}));
+                }
+                if (value.indexOf('/rave') === 0) {
+                    if (socket.readyState !== SockJS.OPEN) return API.chatLog('Not connected to socket server',true);
+                    if (value.indexOf('off') > -1)
+                        socket.send(JSON.stringify({type:'rave',value:0}));
+                    else
+                        socket.send(JSON.stringify({type:'rave',value:2}));
+                }
+            }
         }
     });
 });
@@ -1358,6 +1350,9 @@ define('plugCubed/dialog/notify',['app/views/dialogs/AbstractDialogView','lang/L
                 '<tr><td>' + plugCubed.i18n('notify.curate')  + '</td><td align="right"><input type="checkbox" name="curate"'     + ((plugCubed.settings.notify &  8) ===  8 ? ' checked="checked"' : '') + ' value="8" /></td></tr>' +
                 '<tr><td>' + plugCubed.i18n('notify.stats')   + '</td><td align="right"><input type="checkbox" name="songStats"'  + ((plugCubed.settings.notify & 16) === 16 ? ' checked="checked"' : '') + ' value="16" /></td></tr>' +
                 '<tr><td>' + plugCubed.i18n('notify.updates') + '</td><td align="right"><input type="checkbox" name="songUpdate"' + ((plugCubed.settings.notify & 32) === 32 ? ' checked="checked"' : '') + ' value="32" /></td></tr>' +
+                (API.hasPermission(undefined,API.ROLE.BOUNCER) ?
+                    '<tr><td>' + plugCubed.i18n('notify.history') + '</td><td align="right"><input type="checkbox" name="history"' + ((plugCubed.settings.notify & 64) === 64 ? ' checked="checked"' : '') + ' value="64" /></td></tr>'
+                : '') +
             '</table>')).append(this.getSubmitButton(c.dialog.ok)),this._super();
         },
         submit: function() {
@@ -1512,6 +1507,8 @@ define('plugCubed/dialog/commands',['app/views/dialogs/AbstractDialogView','lang
         ['/unlock'              ,'unlocks DJ booth'                                   ,API.ROLE.MANAGER],
         ['/add (username)'      ,'adds targeted user to dj booth/waitlist'            ,API.ROLE.BOUNCER],
         ['/remove (username)'   ,'removes targeted user from dj booth/waitlist'       ,API.ROLE.BOUNCER],
+        ['/strobe (on|off)'     ,'enable/disable strobe'                              ,API.ROLE.HOST],
+        ['/rave (on|off)'       ,'enable/disable lights out'                          ,API.ROLE.HOST],
         ['/whois all'           ,'gives userid and username of all users in the room' ,API.ROLE.AMBASSADOR],
         ['/kickall (reason)'    ,'kicks all users in the room with reason'            ,API.ROLE.AMBASSADOR],
         ['/banall (reason)'     ,'bans all users in the room with reason'             ,API.ROLE.AMBASSADOR]
@@ -1586,7 +1583,7 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
                 len = languages.length,
                 x = len == 5 ? 0 : len == 4 ? 75 : len == 3 ? 150 : len == 2 ? 225 : 300;
             for (var i = 0; i < len; ++i) {
-                var button = $("<div/>").addClass("lang-button").css('display','inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://files.plugcubed.net/flags/flag.' + languages[i].file + '.png').attr('alt',languages[i].name).height(75).width(150));
+                var button = $("<div/>").addClass("lang-button").css('display','inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://alpha.plugcubed.net/flags/flag.' + languages[i].file + '.png').attr('alt',languages[i].name).height(75).width(150));
                 row.append(button);
                 x += 150;
             }
@@ -1603,7 +1600,7 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
 
             this.languages = [];
 
-            $.getJSON('http://files.plugcubed.net/lang.json',function(data) { self.languages = data; self.show(); })
+            $.getJSON('http://alpha.plugcubed.net/lang.json',function(data) { self.languages = data; self.show(); })
             .done(function() { if (self.languages.length === 0) log('<span style="color:#FF0000">Error loading plugCubed</span>'); });
         }
     });
