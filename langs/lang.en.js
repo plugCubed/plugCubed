@@ -1,9 +1,6 @@
 // lang = 'English';
 define('plugCubed/Lang',function() {
     return {
-        disconnected          : 'Disconnected at %1!',
-        reconnecting          : 'Please wait, trying to reconnect...',
-        reconnected           : 'Reconnected',
         running               : 'Running plug&#179; version %1',
         commandsHelp          : 'Use \'/commands\' to see expanded chat commands.',
         newVersion            : 'A new version of plug&#179; has been released. Your script will reload in a few seconds.',
@@ -99,7 +96,6 @@ define('plugCubed/Lang',function() {
         menu: {
             autowoot          : 'Autowoot',
             autojoin          : 'Autojoin',
-            userlist          : 'Userlist',
             customchatcolors  : 'Custom Chat Colors',
             afkstatus         : 'AFK Status',
             notify            : 'Notifications',

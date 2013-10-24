@@ -208,6 +208,7 @@
 .sidebar#side-left {
     left: 0px;
     z-index: 99999;
+    width: 217px;
     border-right: thin solid #666666;
 }
 

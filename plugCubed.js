@@ -33,13 +33,13 @@ var _PCL, plugCubed, plugCubedUserData;
 
 define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/base/Context','app/events/MediaCurateEvent','app/net/Socket','app/net/SocketIO','app/models/TheUserModel','lang/Lang','app/views/room/AudienceView','app/events/RoomJoinEvent','app/events/RoomStateEvent'],function(e,Class,Chat,LocalStorage,Utils,Room,Context,MCE,Socket,SIO,TUM,Lang,Audience,RJE,RSE) {
     SIO.sio.$events.chat = Socket.listener.chat = function(a) {
+        if (a.fromID) setUserData(a.fromID,'lastChat',Date.now());
         if (typeof plugCubed !== 'undefined' && plugCubed.settings.ignore.indexOf(a.fromID) > -1) {
             plugCubed.chatDisable(a);
             return;
         }
         if (!a.chatID || $(".chat-id-" + a.chatID).length > 0) {
             if (a.fromID) {
-                setUserData(a.fromID,'lastChat',Date.now());
                 if (a.fromID === API.getUser().id) {
                     if (socket.readyState === SockJS.OPEN)
                         socket.send(JSON.stringify({type:"chat",msg:a.message,chatID:a.chatID}));
@@ -381,8 +381,8 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
         version = {
             major: 2,
             minor: 1,
-            patch: 1,
-            prerelease: 'alpha.2',
+            patch: 2,
+            prerelease: '',
             minified: false,
             /**
              * @this {version}
@@ -480,8 +480,10 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             this.customColorsStyle = $('<style type="text/css" />');
             $('head').append(this.customColorsStyle);
             appendChatMessage(this.i18n('running',version.toString()) + '</span><br /><span class="chat-text" style="color:#66FFFF">' + this.i18n('commandsHelp'),'FFFF00');
+
+            console.log('__init');
+
             window.addEventListener('pushState',plugCubed.proxy.onRoomJoin);
-            
             $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://alpha.plugcubed.net/plugCubed.css?=' + Date.now() + '" />')
                      .prepend('<link rel="stylesheet" type="text/css" id="font-awesome" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">')
                      .append($('<div id="side-left" class="sidebar" />').append($('<div class="sidebar-handle"><span>||</span></div>')).append($('<div class="sidebar-content" />').append($('<div id="lock" class="icon-unlock" />').data('key','ulLock').click(this.proxy.menu))))
@@ -495,34 +497,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                 setUserData(users[i].id,'joinTime',Date.now());
 
             populateUserlist();
-
-            /**
-             * @this {Socket}
-             */
-            Socket.open = function (t) {
-                this.backoff = 0, window.Slug ? e.defer(function () {
-                    Context.dispatch(new RJE(RJE.JOIN, Room.get("id")))
-                }) : e.defer(function () {
-                    appendChatMessage(plugCubed.i18n('reconnected'));
-                    Context.dispatch(new RSE(RSE.UPDATE, Room.get("id")))
-                })
-            }
-            /**
-             * @this {Socket}
-             */
-            Socket.close = function (t) {
-                appendChatMessage(plugCubed.i18n('disconnected',plugCubed.getTimestamp()),'FF0000');
-                appendChatMessage(plugCubed.i18n('reconnecting'));
-                if (t && t.wasClean)
-                    window.Slug = Room.get("id"),console.log('This session has now ended. Goodbye.');
-                else console.info("closing", t);
-                var n = this.backoff;
-                n <= 5 && (n += 1);
-                var r = this;
-                n ? e.delay(function() { r.connect(n) }, Math.pow(2, n) * 1e3) : this.connect(n);
-            }
-            Socket.sockjs.onopen = e.bind(Socket.open, Socket);
-            Socket.sockjs.onclose = e.bind(Socket.close, Socket);
 
             this.Socket();
             this.loaded = true;
