@@ -71,7 +71,7 @@
 #side-left .sidebar-content p span.manager_meh,
 #side-left .sidebar-content p span.manager_woot,
 #side-left .sidebar-content p span.void {
-    background: url('http://localhost/plugCubed/images/sprites.png') no-repeat;
+    background: url('http://alpha.plugcubed.net/images/sprites.png') no-repeat;
     width: 15px;
     height: 15px;
     position: relative;

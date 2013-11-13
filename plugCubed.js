@@ -318,7 +318,7 @@ define('plugCubed/Model',['jquery','underscore','app/base/Class','app/facades/Ch
                 onRoomJoin:           $.proxy(this.onRoomJoin,      this)
             };
             //Load language and third-party scripts
-            $.getScript('http://localhost/plugCubed/langs/lang.en.js',function() {
+            $.getScript('http://alpha.plugcubed.net/langs/lang.en.js',function() {
                 require(['plugCubed/Lang'],function(a) {
                     p3lang = a;
                     plugCubed.__init();
@@ -380,8 +380,8 @@ define('plugCubed/Model',['jquery','underscore','app/base/Class','app/facades/Ch
             appendChatMessage(this.i18n('running',version.toString()) + '</span>','FFFF00');
 
             window.addEventListener('pushState',plugCubed.proxy.onRoomJoin);
-            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://localhost/plugCubed/plugCubed.css?=' + Date.now() + '" />')
-                     .append('<script type="text/javascript" src="http://localhost/plugCubed/thirdparty.js?=' + Date.now() + '"></script>');
+            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://alpha.plugcubed.net/plugCubed.css?=' + Date.now() + '" />')
+                     .append('<script type="text/javascript" src="http://alpha.plugcubed.net/thirdparty.js?=' + Date.now() + '"></script>');
             $('#plug-dj').after(menuButton);
             $('#room-bar').css('left',108);
             this.loadSettings();
@@ -402,7 +402,7 @@ define('plugCubed/Model',['jquery','underscore','app/base/Class','app/facades/Ch
         onRoomJoin: function() {
             if (typeof plugCubed !== 'undefined') {
                 setTimeout(function() {
-                    if (API.enabled) $.getScript('http://localhost/plugCubed/plugCubed.' + (version.minified ? 'min.' : '') + 'js?=' + Date.now());
+                    if (API.enabled) $.getScript('http://alpha.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js?=' + Date.now());
                     else plugCubed.onRoomJoin();
                 },500);
             }
@@ -484,7 +484,7 @@ define('plugCubed/Model',['jquery','underscore','app/base/Class','app/facades/Ch
                     this.onclose = function() {};
                     this.close();
                     API.chatLog(plugCubed.i18n('newVersion'), null, plugCubed.colors.infoMessage1);
-                    return setTimeout(function() { $.getScript('http://localhost/plugCubed/plugCubed.' + (version.minified ? 'min.' : '') + 'js'); },5000);
+                    return setTimeout(function() { $.getScript('http://alpha.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js'); },5000);
                 }
                 if (type === 'chat') {
                     if (!data.chatID || $(".chat-id-" + data.chatID).length > 0 || plugCubed.settings.ignore.indexOf(data.fromID) > -1)
@@ -1370,7 +1370,7 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
             var self = this;
             console.log(self);
             this.languages = [];
-            $.getJSON('http://localhost/plugCubed/lang.json',function(data) {
+            $.getJSON('http://alpha.plugcubed.net/lang.json',function(data) {
                 self.languages = data;
                 this.$el.append(this.getHeader('plug&#179; language'))
                             .append(this.getBody().append(this.getMessage(this.draw())));
@@ -1400,7 +1400,7 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
                 len = languages.length,
                 x = len == 5 ? 0 : len == 4 ? 75 : len == 3 ? 150 : len == 2 ? 225 : 300;
             for (var i = 0; i < len; ++i) {
-                var button = $("<div/>").addClass("lang-button").css('display','inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://localhost/plugCubed/flags/flag.' + languages[i].file + '.png').attr('alt',languages[i].name).height(75).width(150));
+                var button = $("<div/>").addClass("lang-button").css('display','inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://alpha.plugcubed.net/flags/flag.' + languages[i].file + '.png').attr('alt',languages[i].name).height(75).width(150));
                 row.append(button);
                 x += 150;
             }
