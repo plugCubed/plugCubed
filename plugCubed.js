@@ -27,26 +27,26 @@ String.prototype.endsWith             = function(a)   { return typeof a !== 'str
 String.prototype.startsWithIgnoreCase = function(a)   { return typeof a !== 'string' || a.length > this.length ? false : this.toLowerCase().startsWith(a.toLowerCase()); };
 String.prototype.endsWithIgnoreCase   = function(a)   { return typeof a !== 'string' || a.length > this.length ? false : this.toLowerCase().endsWith(a.toLowerCase()); };
 String.prototype.isNumber             = function()    { return !isNaN(parseInt(this,10)) && isFinite(this); };
-String.prototype.isHEX                = function()    { return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(this.substr(0,1) === '#' ? this : '#' + this); };
+String.prototype.isRGB                = function()    { return /^(#|)(([0-9A-F]{6}$)|([0-9A-F]{3}$))/i.test(this.substr(0,1) === '#' ? this : '#' + this); };
 Math.randomRange                      = function(a,b) { return a + Math.floor(Math.random()*(b-a+1)); };
 var _PCL, plugCubed, plugCubedUserData;
 
-define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/base/Context','app/events/MediaCurateEvent','app/net/Socket','app/net/SocketIO','app/models/TheUserModel','lang/Lang','app/views/room/AudienceView','app/events/RoomJoinEvent','app/events/RoomStateEvent'],function(e,Class,Chat,LocalStorage,Utils,Room,Context,MCE,Socket,SIO,TUM,Lang,Audience,RJE,RSE) {
+define('plugCubed/Model',['jquery','underscore','app/base/Class','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/base/Context','app/events/MediaCurateEvent','app/net/Socket','app/net/SocketIO','app/models/TheUserModel','lang/Lang','app/views/room/AudienceView','app/events/RoomJoinEvent','app/events/RoomStateEvent'],function($,_,Class,Chat,LocalStorage,Utils,Room,Context,MCE,Socket,SIO,TUM,Lang,Audience,RJE,RSE) {
     SIO.sio.$events.chat = Socket.listener.chat = function(a) {
         if (a.fromID) setUserData(a.fromID,'lastChat',Date.now());
         if (typeof plugCubed !== 'undefined' && plugCubed.settings.ignore.indexOf(a.fromID) > -1) {
             plugCubed.chatDisable(a);
             return;
         }
-        if (!a.chatID || $(".chat-id-" + a.chatID).length > 0) {
+        if (!a.chatID || $(".cid-" + a.chatID).length > 0) {
             if (a.fromID) {
                 if (a.fromID === API.getUser().id) {
                     if (socket.readyState === SockJS.OPEN)
                         socket.send(JSON.stringify({type:"chat",msg:a.message,chatID:a.chatID}));
                 
-                    if ($(".chat-id-" + a.chatID).data('eventSent') !== true) {
+                    if ($(".cid-" + a.chatID).data('eventSent') !== true) {
                         API.dispatch(API.CHAT,a);
-                        $(".chat-id-" + a.chatID).data('eventSent',true);
+                        $(".cid-" + a.chatID).data('eventSent',true);
                     }
                 }
             }
@@ -80,7 +80,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
     function appendChatMessage(message,color) {
         if (!message) return;
         var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
-        a.append('<div class="chat-update"><span class="chat-text" style="color:#' + (color ? color : 'd1d1d1') + '">' + message + '</span></div>');
+        a.append('<div class="message"><span class="text" style="color:#' + (color ? color : 'd1d1d1') + '">' + message + '</span></div>');
         b && a.scrollTop(a[0].scrollHeight);
     }
     function runRoomSettings(settings) {
@@ -93,7 +93,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                 if (settings.colors.chat !== undefined) {
                     var b = {};
                     for (var i in settings.colors.chat) {
-                        if (['admin','ambassador','bouncer','cohost','featureddj','host','manager'].indexOf(i) > -1 && settings.colors.chat[i].isHEX())
+                        if (['admin','ambassador','bouncer','cohost','featureddj','leader','host','manager','volunteer'].indexOf(i) > -1 && settings.colors.chat[i].isRGB())
                             b[i] = settings.colors.chat[i].substr(0,1) === '#' ? settings.colors.chat[i].substr(1) : settings.colors.chat[i];
                     }
                     roomChatColors = b;
@@ -146,6 +146,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
     function loadRoomSettings() {
         var a = Room.get('description'),
             b = plugCubed.settings.useRoomSettings[window.location.pathname.split('/')[1]];
+        if (a === null) return;
             b = b === undefined || b === true ? true : false;
         if (a.indexOf('@p3=') > -1) {
             a = a.substr(a.indexOf('@p3=')+4);
@@ -252,68 +253,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             table.append($('<tr/>').append($('<td/>').append(users[i].username)).append($('<td/>').append(users[i].id)));
         appendChatMessage($('<div/>').append(table).html());
     }
-    function appendUser(user) {
-        var prefix,
-            postfix,
-            isDJ = API.getDJs().length > 0 && API.getDJs()[0].id == user.id,
-            color = 'FFFFFF';
-
-             if (user.curated !== false)                         prefix = 'curate';
-        else if (isPlugCubedDeveloper(user.id))                  prefix = 'p3dev';
-        else if (isPlugCubedSponsor(user.id))                    prefix = 'p3sponsor';
-        else if (isPlugCubedVIP(user.id))                        prefix = 'p3vip';
-        else if (API.hasPermission(user.id,API.ROLE.ADMIN))      prefix = 'admin';
-        else if (API.hasPermission(user.id,API.ROLE.AMBASSADOR)) prefix = 'ambassador';
-        else if (API.hasPermission(user.id,API.ROLE.HOST))       prefix = 'host';
-        else if (API.hasPermission(user.id,API.ROLE.COHOST))     prefix = 'host';
-        else if (API.hasPermission(user.id,API.ROLE.MANAGER))    prefix = 'manager';
-        else if (API.hasPermission(user.id,API.ROLE.BOUNCER))    prefix = 'bouncer';
-        else if (API.hasPermission(user.id,API.ROLE.FEATUREDDJ)) prefix = 'fdj';
-        else                                                     prefix = 'void';
-
-        if (isDJ) color = '66FFFF';
-        else switch (user.vote) {
-            case -1: color = 'ED1C24'; break;
-            case 1:  color = '3FFF00'; break;
-            default: color = 'FFFFFF';
-        }
-
-        if (isDJ) postfix = 'current';
-        else if (user.vote !== undefined) {
-            switch (user.vote) {
-                case -1: postfix = 'meh'; break;
-                case 1:  postfix = 'woot'; break;
-                default: postfix = 'undecided'; break;
-            }
-        } else postfix = 'undecided';
-
-        appendUserItem(prefix === 'void' ? 'void' : prefix + '_' + postfix,color,user.username);
-    }
-    function appendUserItem(prefix, color, username) {
-        $('#side-left .sidebar-content').append(
-            $('<p></p>')
-                .append(
-                    $('<span></span>')
-                        .append($('<span></span>').addClass(prefix))
-                        .css('cursor','pointer')
-                        .css('color','#' + color)
-                        .mousedown(function(event) {
-                            switch(event.which) {
-                                case 1:
-                                    $('#chat-input-field').val($('#chat-input-field').val() + '@' + username + ' ').focus();
-                                    break;
-                                case 2:
-                                    break;
-                                case 3:
-                                    if (API.hasPermission(undefined,API.ROLE.BOUNCER) || isPlugCubedDeveloper())
-                                    getUserInfo(username);
-                                    break;
-                            }
-                        })
-                        .html(function(a,b) { return b + Utils.cleanTypedString(username.length > 23 ? username.substr(0,20) + '...' : username); })
-                )
-        );
-    }
     function playMentionSound() {
         document.getElementById("chat-sound").playMentionSound();
     }
@@ -323,44 +262,8 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
         if (dj === null || dj == API.getUser()) return;
         $('#button-vote-positive').click();
     }
-    function populateUserlist() {
-        $('#side-left .sidebar-content').bind('contextmenu',function(e){return false;});
-        $('#side-left .sidebar-content h1,#side-left .sidebar-content h3,#side-left .sidebar-content p,#side-left .sidebar-content hr').remove();
-        $('#side-left .sidebar-content').append('<h1 class="users">Users: ' + API.getUsers().length + '</h1>');
-        var spot = API.getWaitListPosition();
-        var waitlistDiv = $('<h3></h3>').addClass('waitlistspot').text('Waitlist: ' + (spot != -1 ? spot + ' / ' : '') + API.getWaitList().length);
-        $('#side-left .sidebar-content').append(waitlistDiv).append('<hr />');
-        var users = API.getUsers();
-        users.sort(function(a,b) {
-            function c(a) {
-                if (isPlugCubedDeveloper(a.id))                  return 20;
-                if (isPlugCubedSponsor(a.id))                    return 19;
-                if (isPlugCubedVIP(a.id))                        return 18;
-                if (API.hasPermission(a.id,API.ROLE.ADMIN))      return API.ROLE.ADMIN;
-                if (API.hasPermission(a.id,API.ROLE.AMBASSADOR)) return API.ROLE.AMBASSADOR;
-                if (API.hasPermission(a.id,API.ROLE.HOST))       return API.ROLE.HOST;
-                if (API.hasPermission(a.id,API.ROLE.COHOST))     return API.ROLE.COHOST;
-                if (API.hasPermission(a.id,API.ROLE.MANAGER))    return API.ROLE.MANAGER;
-                if (API.hasPermission(a.id,API.ROLE.BOUNCER))    return API.ROLE.BOUNCER;
-                if (API.hasPermission(a.id,API.ROLE.FEATUREDDJ)) return API.ROLE.FEATUREDDJ;
-                                                                 return API.ROLE.NONE;
-            }
-            var d = c(a),e = c(b);
-            return d < e ? 1 : d > e ? -1 : 0;
-        });
-        for (var i in users)
-            appendUser(users[i]);
-    }
     function afkTimerEnable() {
-        var elements = [
-            $('<div />').addClass('afkTimer').css('left',566),
-            $('<div />').addClass('afkTimer').css('left',256),
-            $('<div />').addClass('afkTimer').css('left',181),
-            $('<div />').addClass('afkTimer').css('left',104),
-            $('<div />').addClass('afkTimer').css('left', 22)
-        ];
-        for (var i in elements)
-            $('#dj-booth').append(elements[i]);
+        $('#dj-booth').append($('<div />').addClass('afkTimer').css('left', 22));
     }
     function afkTimerDisable() {
         $('#dj-booth .afkTimer').remove();
@@ -368,21 +271,19 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
     function afkTimerTick() {
         var a = API.getDJs(),
             b = $('#dj-booth .afkTimer');
-        for (var i = 0;i < 5;i++) {
-            if (i >= a.length) $(b[i]).text('');
-            else {
-                var c = Date.now() - getUserData(a[i].id,'lastChat',getUserData(a[i].id,'joinTime',Date.now()));
-                $(b[i]).text(plugCubed.getTimestamp(c,c < 36E5 ? 'mm:ss' : 'hh:mm:ss'));
-            }
+        if (a.length < 1) b.text('');
+        else {
+            var c = Date.now() - getUserData(a[0].id,'lastChat',getUserData(a[0].id,'joinTime',Date.now()));
+            b.text(plugCubed.getTimestamp(c,c < 36E5 ? 'mm:ss' : 'hh:mm:ss'));
         }
     }
     var guiButtons = {},
         afkTimerInterval,
         version = {
-            major: 2,
-            minor: 1,
-            patch: 2,
-            prerelease: '',
+            major: 3,
+            minor: 0,
+            patch: 0,
+            prerelease: 'alpha.1',
             minified: false,
             /**
              * @this {version}
@@ -396,14 +297,15 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
         socket,
         haveRoomSettings = false,
         roomChatColors = {},
-        roomChatIcons = {};
+        roomChatIcons = {},
+        menuButton = $('<div id="plug-cubed"><i class="icon icon-plug-cubed"></i></div>');
     return Class.extend({
         /**
          * @this {plugCubedModel}
          */
         init: function() {
             if (typeof plugCubedUserData === 'undefined') plugCubedUserData = {};
-            if (LocalStorage.getItem('plugCubedLang') === null || LocalStorage.getItem('plugCubedLang') === '@@@') return;
+            //if (LocalStorage.getItem('plugCubedLang') === null || LocalStorage.getItem('plugCubedLang') === '@@@') return;
             this.proxy = {
                 menu:                 $.proxy(this.onMenuClick,     this),
                 onDjAdvance:          $.proxy(this.onDjAdvance,     this),
@@ -412,21 +314,16 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                 onUserJoin:           $.proxy(this.onUserJoin,      this),
                 onUserLeave:          $.proxy(this.onUserLeave,     this),
                 onChat:               $.proxy(this.onChat,          this),
-                onUserlistUpdate:     $.proxy(this.onUserlistUpdate,this),
                 onSkip:               $.proxy(this.onSkip,          this),
                 onRoomJoin:           $.proxy(this.onRoomJoin,      this)
             };
             //Load language and third-party scripts
-            $.getScript('http://alpha.plugcubed.net/langs/lang.' + LocalStorage.getItem('plugCubedLang') + '.js',function() {
+            $.getScript('http://localhost/plugCubed/langs/lang.en.js',function() {
                 require(['plugCubed/Lang'],function(a) {
                     p3lang = a;
                     plugCubed.__init();
                 });
             });
-            if (typeof jQuery.fn.tabs === 'undefined') {
-                $.getScript('http://code.jquery.com/ui/1.10.2/jquery-ui.js');
-                $('head').append('<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />');
-            }
         },
         i18n: function(key) {
             var a = p3lang,i;
@@ -479,24 +376,22 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
 
             this.customColorsStyle = $('<style type="text/css" />');
             $('head').append(this.customColorsStyle);
-            appendChatMessage(this.i18n('running',version.toString()) + '</span><br /><span class="chat-text" style="color:#66FFFF">' + this.i18n('commandsHelp'),'FFFF00');
-
-            console.log('__init');
+            //appendChatMessage(this.i18n('running',version.toString()) + '</span><br /><span class="chat-text" style="color:#66FFFF">' + this.i18n('commandsHelp'),'FFFF00');
+            appendChatMessage(this.i18n('running',version.toString()) + '</span>','FFFF00');
 
             window.addEventListener('pushState',plugCubed.proxy.onRoomJoin);
-            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://alpha.plugcubed.net/plugCubed.css?=' + Date.now() + '" />')
-                     .prepend('<link rel="stylesheet" type="text/css" id="font-awesome" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">')
-                     .append($('<div id="side-left" class="sidebar" />').append($('<div class="sidebar-handle"><span>||</span></div>')).append($('<div class="sidebar-content" />').append($('<div id="lock" class="icon-unlock" />').data('key','ulLock').click(this.proxy.menu))))
-                     .append($('<div id="side-right" class="sidebar" />').append($('<div class="sidebar-handle"><span>||</span></div>')).append($('<div class="sidebar-content" />').append($('<div id="lock" class="icon-unlock" />').data('key','mLock').click(this.proxy.menu))))
-                     .append('<script type="text/javascript" src="http://alpha.plugcubed.net/thirdparty.js?=' + Date.now() + '"></script>');
+            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://localhost/plugCubed/plugCubed.css?=' + Date.now() + '" />')
+                     .append('<script type="text/javascript" src="http://localhost/plugCubed/thirdparty.js?=' + Date.now() + '"></script>');
+            $('#plug-dj').after(menuButton);
+            $('#room-bar').css('left',108);
             this.loadSettings();
             this.initGUI();
             this.initAPIListeners();
             var users = API.getUsers();
-            for (var i in users)
-                setUserData(users[i].id,'joinTime',Date.now());
-
-            populateUserlist();
+            for (var i in users) {
+                if (getUserData(users[i].id,'joinTime',-1) < 0)
+                    setUserData(users[i].id,'joinTime',Date.now());
+            }
 
             this.Socket();
             this.loaded = true;
@@ -507,7 +402,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
         onRoomJoin: function() {
             if (typeof plugCubed !== 'undefined') {
                 setTimeout(function() {
-                    if (API.enabled) $.getScript('http://alpha.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js?=' + Date.now());
+                    if (API.enabled) $.getScript('http://localhost/plugCubed/plugCubed.' + (version.minified ? 'min.' : '') + 'js?=' + Date.now());
                     else plugCubed.onRoomJoin();
                 },500);
             }
@@ -531,19 +426,13 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             API.off(API.VOTE_SKIP,                  this.proxy.onSkip);
             API.off(API.USER_SKIP,                  this.proxy.onSkip);
             API.off(API.MOD_SKIP,                   this.proxy.onSkip);
-            API.off(API.WAIT_LIST_UPDATE,           this.proxy.onUserlistUpdate);
             for (var i in guiButtons) {
                 if (i === undefined || guiButtons[i] === undefined) continue;
                 $('#plugcubed-btn-' + i).unbind();
                 delete guiButtons[i];
             }
-            $('#plugcubed-css').remove();
-            $('#font-awesome').remove();
-            $('#plugcubed-js-extra').remove();
-            $('#side-right').remove();
-            $('#side-left').remove();
-            $('#notify-dialog').remove();
-            $('.plugcubed-footer').remove();
+            $('#plugcubed-css,#font-awesome,#plugcubed-js-extra,#side-right,#side-left,#notify-dialog,.plugcubed-footer,#plug-cubed').remove();
+            $('#room-bar').css('left',54);
             if (this.customColorsStyle)
                 this.customColorsStyle.remove();
             if (socket) {
@@ -595,7 +484,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                     this.onclose = function() {};
                     this.close();
                     API.chatLog(plugCubed.i18n('newVersion'), null, plugCubed.colors.infoMessage1);
-                    return setTimeout(function() { $.getScript('http://alpha.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js'); },5000);
+                    return setTimeout(function() { $.getScript('http://localhost/plugCubed/plugCubed.' + (version.minified ? 'min.' : '') + 'js'); },5000);
                 }
                 if (type === 'chat') {
                     if (!data.chatID || $(".chat-id-" + data.chatID).length > 0 || plugCubed.settings.ignore.indexOf(data.fromID) > -1)
@@ -646,15 +535,10 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             recent           : false,
             awaymsg          : '',
             autowoot         : false,
-            autojoin         : false,
             autorespond      : false,
-            menu             : false,
-            notify           : 0,
+            notify           : 65,
             customColors     : false,
-            emoji            : true,
             avatarAnimations : true,
-            menuLocked       : true,
-            userlistLocked   : true,
             registeredSongs  : [],
             ignore           : [],
             alertson         : [],
@@ -692,21 +576,18 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                     if (save[i] !== undefined) this.settings[i] = save[i];
                 }
                 this.settings.recent = false;
-                $('#side-right .sidebar-content #lock').attr('class','icon-' + (this.settings.menuLocked ? '' : 'un') + 'lock');
-                $('#side-left .sidebar-content #lock').attr('class','icon-' + (this.settings.userlistLocked ? '' : 'un') + 'lock');
                 if (this.settings.afkTimers) afkTimerEnable();
                 if (this.settings.autowoot) woot();
-                if (this.settings.customColors)
-                    this.updateCustomColors();
+                if (this.settings.customColors) this.updateCustomColors();
                 if (this.settings.registeredSongs.length > 0 && this.settings.registeredSongs.indexOf(Models.room.data.media.id) > -1) {
                     API.setVolume(0);
                     this.settings.autoMuted = true;
                     API.chatLog(this.i18n('automuted',API.getMedia().title));
                 }
-                if (JSON.parse(LocalStorage.getItem('stngs')).emoji === undefined) {
-                    var a = JSON.parse(LocalStorage.getItem('stngs'));
+                if (JSON.parse(LocalStorage.getItem('s01')).emoji === undefined) {
+                    var a = JSON.parse(LocalStorage.getItem('s01'));
                     a.emoji = true;
-                    LocalStorage.setItem('stngs',JSON.stringify(a),true);
+                    LocalStorage.setItem('s01',JSON.stringify(a),true);
                 }
             } catch (e) {}
         },
@@ -773,7 +654,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             API.on(API.VOTE_SKIP,        this.proxy.onSkip);
             API.on(API.USER_SKIP,        this.proxy.onSkip);
             API.on(API.MOD_SKIP,         this.proxy.onSkip);
-            API.on(API.WAIT_LIST_UPDATE, this.proxy.onUserlistUpdate);
         },
         /**
          * @this {plugCubedModel}
@@ -782,13 +662,11 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             guiButtons = {};
             $('#side-right .sidebar-content .plugcubed-btn, #side-right .sidebar-content hr').remove();
             this.addGUIButton(this.settings.autowoot,                                    'woot',        this.i18n('menu.autowoot'),         'heart');
-            this.addGUIButton(this.settings.autojoin,                                    'join',        this.i18n('menu.autojoin'));
             this.addGUIButton(this.settings.customColors,                                'colors',      this.i18n('menu.customchatcolors'), 'tint');
             this.addGUIButton(this.settings.autorespond,                                 'autorespond', this.i18n('menu.afkstatus'),        'reply');
             this.addGUIButton((this.settings.notify & 1) === 1,                          'notify',      this.i18n('menu.notify'),           'warning-sign');
             this.addGUIButton(this.settings.chatlimit.enabled,                           'chatlimit',   this.i18n('menu.limitchatlog'),     'ban-circle');
-            this.addGUIButton(!JSON.parse(LocalStorage.getItem('stngs')).streamDisabled, 'stream',      this.i18n('menu.stream'),           'facetime-video');
-            this.addGUIButton(JSON.parse(LocalStorage.getItem('stngs')).emoji,           'emoji',       this.i18n('menu.emoji'),            'smile');
+            this.addGUIButton(!JSON.parse(LocalStorage.getItem('s01')).streamDisabled,   'stream',      this.i18n('menu.stream'),           'facetime-video');
             if (API.hasPermission(undefined,API.ROLE.BOUNCER))
                 this.addGUIButton(this.settings.afkTimers,                               'afktimers',   this.i18n('menu.afktimers'),        'time');
             if (haveRoomSettings) {
@@ -801,7 +679,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             if ($('#side-right .sidebar-content .plugcubed-btn').length > 0)
                 $('#side-right .sidebar-content').append('<hr />');
 
-            $('#side-right .sidebar-content').append('<a id="plugcubed-btn-' + id + '" class="plugcubed-btn"><div class="status-' + (setting ? 'on' : 'off') + ' icon-' + (icon ? icon : 'circle') + '"></div>' + text + '</a>');
+            $('#side-right .sidebar-content').append('<a id="plugcubed-btn-' + id + '" class="plugcubed-btn"><div class="status-' + (setting ? 'on' : 'off') + ' faicon-' + (icon ? icon : 'circle') + '"></div>' + text + '</a>');
             $('#plugcubed-btn-' + id).data('key',id).click(this.proxy.menu);
 
             guiButtons[id] = { text: text };
@@ -832,36 +710,11 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
         onMenuClick: function(e) {
             var a = $(e.currentTarget).data('key');
             switch (a) {
-                case 'ulLock':
-                    this.settings.userlistLocked = !this.settings.userlistLocked;
-                    $(e.currentTarget).attr('class','icon-' + (this.settings.userlistLocked ? '' : 'un') + 'lock');
-                    break;
-                case 'mLock':
-                    this.settings.menuLocked = !this.settings.menuLocked;
-                    $(e.currentTarget).attr('class','icon-' + (this.settings.menuLocked ? '' : 'un') + 'lock');
-                    break;
                 case 'woot':
                     this.settings.autowoot = !this.settings.autowoot;
                     this.changeGUIColor('woot',this.settings.autowoot);
                     if (this.settings.autowoot)
                         $('#button-vote-positive').click();
-                    break;
-                case 'join':
-                    this.settings.autojoin = !this.settings.autojoin;
-                    this.changeGUIColor('join',this.settings.autojoin);
-                    if (this.settings.autojoin && $('#button-dj-waitlist-join').length > 0 && Room.get('boothLocked') === false)
-                        API.djJoin();
-                    break;
-                case 'userlist':
-                    this.settings.userlist = !this.settings.userlist;
-                    this.changeGUIColor('userlist',this.settings.userlist);
-                    if (this.settings.userlist) {
-                        populateUserlist();
-                        showUserlist();
-                    } else {
-                        $('#side-left .sidebar-content').empty();
-                        hideUserlist();
-                    }
                     break;
                 case 'colors':
                     require(['plugCubed/dialog/customChatColors','app/base/Context','app/events/ShowDialogEvent'],function(a,b,c) {b.dispatch(new c(c.SHOW,new a()))});
@@ -889,12 +742,12 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                     require(['plugCubed/dialog/chatLimit','app/base/Context','app/events/ShowDialogEvent'],function(a,b,c) {b.dispatch(new c(c.SHOW,new a()))});
                     break;
                 case 'stream':
-                    var a = JSON.parse(LocalStorage.getItem('stngs')).streamDisabled;
+                    var a = JSON.parse(LocalStorage.getItem('s01')).streamDisabled;
                     this.changeGUIColor('stream',a);
                     return API.sendChat(a ? '/stream on' : '/stream off');
                     break;
                 case 'emoji':
-                    var a = JSON.parse(LocalStorage.getItem('stngs')).emoji === false;
+                    var a = JSON.parse(LocalStorage.getItem('s01')).emoji === false;
                     this.changeGUIColor('emoji',a);
                     return API.sendChat(a ? '/emoji on' : '/emoji off');
                     break;
@@ -938,8 +791,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             else if (data.vote === -1) setUserData(data.user.id,'mehcount',getUserData(data.user.id,'mehcount',0) + 1);
 
             setUserData(data.user.id,'curVote',data.vote);
-
-            this.onUserlistUpdate();
         },
         /**
          * @this {plugCubedModel}
@@ -948,7 +799,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             var media = API.getMedia();
             if ((this.settings.notify & 9) === 9)
                 appendChatMessage(this.i18n('notify.message.curate',Utils.cleanTypedString(data.user.username),media.author,media.title),this.settings.colors.curate);
-            this.onUserlistUpdate();
         },
         /**
          * @this {plugCubedModel}
@@ -983,7 +833,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                 API.chatLog(i18n('automuted',data.media.title));
 
             }
-            this.onUserlistUpdate();
             var users = API.getUsers();
             for (var i in users)
                 setUserData(users[i].id,'curVote',0);
@@ -993,11 +842,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
          */
         onDjAdvanceLate: function(data) {
             if (this.settings.autowoot && this.settings.registeredSongs.indexOf(API.getHistory()[0].media.id) < 0) woot();
-            if (this.settings.autojoin) {
-                if (Room.get('boothLocked') === true) return;
-                if ($('#button-dj-play').css('display') === 'block' || $('#button-dj-waitlist-join').css('display') === 'block')
-                    API.djJoin();
-            }
         },
         /**
          * @this {plugCubedModel}
@@ -1007,7 +851,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                 appendChatMessage(this.i18n('notify.message.join',Utils.cleanTypedString(data.username)),this.settings.colors.join);
             if (getUserData(data.id,'joinTime',0) === 0)
                 setUserData(data.id,'joinTime',Date.now());
-            this.onUserlistUpdate();
         },
         /**
          * @this {plugCubedModel}
@@ -1017,7 +860,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                 appendChatMessage(this.i18n(data.relationship === 0 ? 'notify.message.leave.normal' : (data.relationship > 1 ? 'notify.message.leave.friend' : 'notify.message.leave.fan'),Utils.cleanTypedString(data.username)),this.settings.colors.leave);
             setUserData(data.id,'disconnects',getUserData(data.id,'disconnects',0) + 1);
             setUserData(data.id,'lastDisconnect',Date.now());
-            this.onUserlistUpdate();
         },
         /**
          * @this {plugCubedModel}
@@ -1025,14 +867,6 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
         chatDisable: function(data) {
             var a = data.type == 'mention' && (API.hasPermission(data.fromID,API.ROLE.BOUNCER)),b = data.message.indexOf('@') < 0 && (API.hasPermission(data.fromID,API.ROLE.HOST) || isPlugCubedDeveloper(data.fromID));
             if (a || b) {
-                if (data.message.indexOf('!disable') > -1) {
-                    if (this.settings.autojoin) {
-                        this.settings.autojoin = false;
-                        this.changeGUIColor('join',this.settings.autojoin);
-                        this.saveSettings();
-                        API.sendChat('@' + data.from + ' Autojoin disabled');
-                    } else API.sendChat('@' + data.from + ' Autojoin was not enabled');
-                }
                 if (data.message.indexOf('!afkdisable') > -1) {
                     if (this.settings.autorespond) {
                         this.settings.autorespond = false;
@@ -1041,7 +875,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                         API.sendChat('@' + data.from + ' AFK message disabled');
                     } else API.sendChat('@' + data.from + ' AFK message was not enabled');
                 }
-                if (data.message.indexOf('!disable') > 0 || data.message.indexOf('!afkdisable') > 0) return;
+                if (data.message.indexOf('!afkdisable') > 0) return;
             }
         },
         /**
@@ -1071,17 +905,11 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                 });
             }
         },
-        /**
-         * @this {plugCubedModel}
-         */
-        onUserlistUpdate: function() {
-            populateUserlist();
-        },
         onSkip: function() {
             p3history[1].wasSkipped = true;
         },
         onHistoryCheck: function(id) {
-            if (!API.hasPermission(undefined, API.ROLE.BOUNCER) && !isPlugCubedDeveloper() && (plugCubed.settings.notify & 65) !== 65) return;
+            if ((!API.hasPermission(undefined, API.ROLE.BOUNCER) && !isPlugCubedDeveloper()) || (plugCubed.settings.notify & 65) !== 65) return;
             var found = -1;
             for (var i in p3history) {
                 var a = p3history[i];
@@ -1116,22 +944,11 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
             if (value == '/avail' || value == '/available')
                 return API.setStatus(0);
             if (value == '/brb' || value == '/away') {
-                API.setStatus(1);
-                if (plugCubed.settings.autojoin) {
-                    plugCubed.settings.autojoin = false;
-                    plugCubed.changeGUIColor('join',false);
-                    plugCubed.saveSettings();
-                }
-                return;
+                return API.setStatus(1);
             }
             if (value == '/work' || value == '/working')
                 return API.setStatus(2);
             if (value == '/sleep' || value == '/sleeping') {
-                if (plugCubed.settings.autojoin) {
-                    plugCubed.settings.autojoin = false;
-                    plugCubed.changeGUIColor('join',false);
-                    plugCubed.saveSettings();
-                }
                 return API.setStatus(3);;
             }
             if (value == '/join')
@@ -1150,7 +967,7 @@ define('plugCubed/Model',['underscore','app/base/Class','app/facades/ChatFacade'
                 return API.setVolume(0);
             }
             if (value == '/link')
-                return API.sendChat('plugCubed : http://plugcubed.com');
+                return API.sendChat('plugCubed : http://plugcubed.net');
             if (value == '/unmute')
                 return API.getVolume() > 0 ? API.setVolume(plugCubed.lastVolume) : true;
             if (value == '/nextsong') {
@@ -1344,14 +1161,12 @@ define('plugCubed/dialog/notify',['app/views/dialogs/AbstractDialogView','lang/L
         className: 'dialog',
         render: function() {
             return this.$el.append(this.getHeader(plugCubed.i18n('notify.header'))).append(this.getBody().append('<table style="width: 100%;">' + 
-                '<tr><td>' + plugCubed.i18n('enable')         + '</td><td align="right"><input type="checkbox" name="enabled"'    + ((plugCubed.settings.notify &  1) ===  1 ? ' checked="checked"' : '') + ' value="1" /></td></tr>' +
-                '<tr><td>' + plugCubed.i18n('notify.join')    + '</td><td align="right"><input type="checkbox" name="join"'       + ((plugCubed.settings.notify &  2) ===  2 ? ' checked="checked"' : '') + ' value="2" /></td></tr>' +
-                '<tr><td>' + plugCubed.i18n('notify.leave')   + '</td><td align="right"><input type="checkbox" name="leave"'      + ((plugCubed.settings.notify &  4) ===  4 ? ' checked="checked"' : '') + ' value="4" /></td></tr>' +
-                '<tr><td>' + plugCubed.i18n('notify.curate')  + '</td><td align="right"><input type="checkbox" name="curate"'     + ((plugCubed.settings.notify &  8) ===  8 ? ' checked="checked"' : '') + ' value="8" /></td></tr>' +
-                '<tr><td>' + plugCubed.i18n('notify.stats')   + '</td><td align="right"><input type="checkbox" name="songStats"'  + ((plugCubed.settings.notify & 16) === 16 ? ' checked="checked"' : '') + ' value="16" /></td></tr>' +
-                '<tr><td>' + plugCubed.i18n('notify.updates') + '</td><td align="right"><input type="checkbox" name="songUpdate"' + ((plugCubed.settings.notify & 32) === 32 ? ' checked="checked"' : '') + ' value="32" /></td></tr>' +
+                '<tr><td>' + plugCubed.i18n('enable')         + '</td><td align="right"><input type="checkbox" name="enabled"'     + ((plugCubed.settings.notify &  1) ===  1 ? ' checked="checked"' : '') + ' value="1" /></td></tr>' +
+                '<tr><td>' + plugCubed.i18n('notify.join')    + '</td><td align="right"><input type="checkbox" name="join"'        + ((plugCubed.settings.notify &  2) ===  2 ? ' checked="checked"' : '') + ' value="2" /></td></tr>' +
+                '<tr><td>' + plugCubed.i18n('notify.leave')   + '</td><td align="right"><input type="checkbox" name="leave"'       + ((plugCubed.settings.notify &  4) ===  4 ? ' checked="checked"' : '') + ' value="4" /></td></tr>' +
+                '<tr><td>' + plugCubed.i18n('notify.curate')  + '</td><td align="right"><input type="checkbox" name="curate"'      + ((plugCubed.settings.notify &  8) ===  8 ? ' checked="checked"' : '') + ' value="8" /></td></tr>' +
                 (API.hasPermission(undefined,API.ROLE.BOUNCER) ?
-                    '<tr><td>' + plugCubed.i18n('notify.history') + '</td><td align="right"><input type="checkbox" name="history"' + ((plugCubed.settings.notify & 64) === 64 ? ' checked="checked"' : '') + ' value="64" /></td></tr>'
+                    '<tr><td>' + plugCubed.i18n('notify.history') + '</td><td align="right"><input type="checkbox" name="history"' + ((plugCubed.settings.notify & 16) === 16 ? ' checked="checked"' : '') + ' value="16" /></td></tr>'
                 : '') +
             '</table>')).append(this.getSubmitButton(c.dialog.ok)),this._super();
         },
@@ -1404,7 +1219,7 @@ define('plugCubed/dialog/customChatColors',['app/views/dialogs/AbstractDialogVie
             plugCubed.settings.customColors = this.$el.find('input[name="enabled"]').is(':checked');
             for (var i in plugCubed.settings.colors) {
                 var a = this.$el.find('input[name="' + i + '"]');
-                plugCubed.settings.colors[i] = a.val() === '' || !a.val().isHEX() ? a.data('default') : a.val();
+                plugCubed.settings.colors[i] = a.val() === '' || !a.val().isRGB() ? a.data('default') : a.val();
             }
             plugCubed.changeGUIColor('colors',plugCubed.settings.customColors);
             plugCubed.saveSettings();
@@ -1530,7 +1345,7 @@ define('plugCubed/dialog/commands',['app/views/dialogs/AbstractDialogView','lang
                 content += '</table></div></div>';
                 content = $(content).tabs();
             }
-            return this.$el.append(this.getHeader(plugCubed.i18n('commands.header'))).append(this.getBody().append(content)).append(this.getSubmitButton(c.dialog.ok)),this._super();
+            return this.$el.append(this.getHeader(plugCubed.i18n('commands.header').split('&#179;').join('³'))).append(this.getBody().append(content)).append(this.getSubmitButton(c.dialog.ok)),this._super();
         },
         submit: function() {
             this.close();
@@ -1538,52 +1353,54 @@ define('plugCubed/dialog/commands',['app/views/dialogs/AbstractDialogView','lang
     });
     return a;
 });
-define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalStorage'],function(Class,Model,LocalStorage) {
+define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalStorage','app/views/dialogs/AbstractDialogView'],function(Class,Model,LocalStorage,ADV) {
     var test = LocalStorage.getItem('plugCubedLang');
+    function appendChatMessage(message,color) {
+        if (!message) return;
+        var a = $('#chat-messages'),b = a.scrollTop() > a[0].scrollHeight - a.height() - 20;
+        a.append('<div class="chat-update"><span class="chat-text" style="color:#' + (color ? color : 'd1d1d1') + '">' + message + '</span></div>');
+        b && a.scrollTop(a[0].scrollHeight);
+    }
     if (test !== null && test !== '@@@')
         return Class.extend({ init: function() { plugCubed = new Model(); } });
-    return Class.extend({
-        init: function() {
+    return ADV.extend({
+        id: 'plugCubedLang-panel',
+        className: 'dialog',
+        render: function() {
+            var self = this;
+            console.log(self);
+            this.languages = [];
+            $.getJSON('http://localhost/plugCubed/lang.json',function(data) {
+                self.languages = data;
+                this.$el.append(this.getHeader('plug&#179; language'))
+                            .append(this.getBody().append(this.getMessage(this.draw())));
+                    _.defer(_.bind(this.adjustTop, this));
+                    $(".lang-button").click($.proxy(this.onLangClick, this));
+                    return this._super();
+            }).done(function() { if (self.languages.length === 0) appendChatMessage('<span style="color:#FF0000">Error loading plugCubed</span>'); });
+            /*
             $('#overlay-container').append($('#avatar-overlay').clone(false,false).attr('id','plugCubedLang-overlay').width(800).height(600).css('position','absolute'));
             $('#plugCubedLang-overlay').find('.overlay-title').html('plug&#179; language');
             $('#plugCubedLang-overlay').find('#avatar-sets').remove();
             $('#plugCubedLang-overlay').find('#avatar-panel').attr('id','plugCubedLang-panel').css('padding-top','60px');
             $('#plugCubedLang-overlay').find('.overlay-close-button').click($.proxy(this.hide,this));
             this.initLanguages();
-        },
-        show: function() {
-            $("#user-list-overlay").hide();
-            $("#lobby-overlay").hide();
-            $("#media-overlay").hide();
-            $("#avatar-overlay").hide();
-            $("#plugCubedLang-overlay").show();
-            $("#overlay-container").show();
-            this.draw();
-        },
-        hide: function() {
-            $("#user-list-overlay").hide();
-            $("#lobby-overlay").hide();
-            $("#media-overlay").hide();
-            $("#avatar-overlay").hide();
-            $("#plugCubedLang-overlay").hide();
-            $("#overlay-container").hide();
+            */
         },
         draw: function() {
-            $("#plugCubedLang-panel").html("").scrollTop(0);
             var i,len = this.languages.length,container = $('<div/>');
             if (len > 5) {
                 for (var j = 0;j<len/5;j++)
                     container.append(this.drawRow(this.languages.slice(j*5,j*5+5)).css('top',j*75));
             } else container.append(this.drawRow(this.languages).css('top',j*75));
-            $("#plugCubedLang-panel").append(container);
-            $(".lang-button").click($.proxy(this.onLangClick, this));
+            return container;
         },
         drawRow: function(languages) {
             var row = $("<div/>").addClass("lang-row"),
                 len = languages.length,
                 x = len == 5 ? 0 : len == 4 ? 75 : len == 3 ? 150 : len == 2 ? 225 : 300;
             for (var i = 0; i < len; ++i) {
-                var button = $("<div/>").addClass("lang-button").css('display','inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://alpha.plugcubed.net/flags/flag.' + languages[i].file + '.png').attr('alt',languages[i].name).height(75).width(150));
+                var button = $("<div/>").addClass("lang-button").css('display','inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://localhost/plugCubed/flags/flag.' + languages[i].file + '.png').attr('alt',languages[i].name).height(75).width(150));
                 row.append(button);
                 x += 150;
             }
@@ -1593,17 +1410,9 @@ define('plugCubed/Loader',['app/base/Class','plugCubed/Model','app/store/LocalSt
             a = $(a.currentTarget);
             LocalStorage.setItem('plugCubedLang',a.data('language'),true);
             plugCubed = new Model();
-            this.hide();
-        },
-        initLanguages: function() {
-            var self = this;
-
-            this.languages = [];
-
-            $.getJSON('http://alpha.plugcubed.net/lang.json',function(data) { self.languages = data; self.show(); })
-            .done(function() { if (self.languages.length === 0) log('<span style="color:#FF0000">Error loading plugCubed</span>'); });
+            this.close();
         }
     });
 });
 
-require(['plugCubed/Loader'],function(a) { new a(); });
+require(['plugCubed/Model'],function(a) { plugCubed = new a(); });

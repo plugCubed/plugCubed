@@ -36,6 +36,7 @@ define('plugCubed/Lang',function() {
             curate            : 'User Curate',
             stats             : 'Song Stats',
             updates           : 'Song Updates',
+            history           : 'Songs in history',
             message: {
                 enabled       : 'Join/leave alerts enabled',
                 disabled      : 'Join/leave alerts disabled',
