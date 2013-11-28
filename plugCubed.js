@@ -1128,32 +1128,14 @@ define('plugCubed/Model',['jquery','underscore','app/base/Class','app/base/Conte
                 if (value === '/unlock')
                     return API.moderateLockWaitList(false);
                 if (value === '/lockskip') {
-                    require(['app/services/room/RoomWaitListLockService'],function(s) {
-                        if (Room.get('boothLocked')) {
-                            API.once(API.DJ_ADVANCE,function() {
-                                var c = new s(Room.get('id'),false,false);
-                                c.parse = function(d) {
-                                    if (d.status !== 0) API.chatLog('Could not unlock booth',true);
-                                }
-                            });
-                            API.moderateForceSkip();
-                            return;
-                        }
-                        var a = new s(Room.get('id'),true,false);
-                        a.parse = function(b) {
-                            if (b.status === 0) {
-                                API.once(API.DJ_ADVANCE,function() {
-                                    var e = new s(Room.get('id'),false,false);
-                                    e.parse = function(f) {
-                                        if (f.status !== 0) API.chatLog('Could not unlock booth',true);
-                                    }
-                                });
-                                API.moderateForceSkip();
-                                return;
-                            }
-                            API.chatLog('Could not lock booth',true);
-                        }
+                    var a = API.getDJ().id;
+                    API.once(API.DJ_ADVANCE,function() {
+                        API.once(API.WAIT_LIST_UPDATE,function() {
+                            API.moderateMoveDJ(a,1);
+                        });
+                        API.moderateAddDJ(a);
                     });
+                    API.moderateForceSkip();
                 }
             }
             if (API.hasPermission(undefined,API.ROLE.HOST) || p3Utils.isPlugCubedDeveloper()) {
