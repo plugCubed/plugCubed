@@ -41,7 +41,7 @@ Math.randomRange = function(a, b) {
 };
 var plugCubed, plugCubedUserData;
 
-define('plugCubed/Model', ['jquery', 'underscore', 'f2428/ad16d/f1b69', 'f2428/ad16d/e4296', 'f2428/edc76/c5818', 'f2428/e236c/edda5', 'f2428/b4a20/bc3a6', 'f2428/c767c/cc12e', 'f2428/a3a2b/c0125', 'f2428/f9894/c155f', 'f2428/f9894/c56b1', 'f2428/c767c/aaf2e', 'lang/Lang', 'f2428/d82ae/dc84c/d60c4', 'f2428/a3a2b/ae041', 'f2428/a3a2b/d8fe8', 'plugCubed/StyleManager', 'f2428/d82ae/dc84c/f68fe/a2ff8', 'f2428/d82ae/dc84c/f68fe/bc1ce', 'plugCubed/RoomUserListRow', 'plugCubed/Lang', 'plugCubed/Utils', 'f2428/e236c/fe0c8', 'f2428/c767c/f82e2', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/Commands'], function($, _, Class, Context, Chat, LocalStorage, Utils, Room, MCE, Socket, SIO, TUM, Lang, Audience, RJE, RSE, Styles, RoomUserListView, RoomUserListRow, _RoomUserListRow, p3Lang, p3Utils, DB, PlaybackModel, dialogColors, dialogCommands) {
+define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c224d/ee0fb', 'b0226/c1eca/ba34b', 'b0226/f622d/fe28d', 'b0226/bfb6e/f98b5', 'b0226/b4ecd/e00ab', 'b0226/fefac/afe6c', 'b0226/f44e5/ba46d', 'b0226/f44e5/f58aa', 'b0226/b4ecd/fd183', 'lang/Lang', 'b0226/a4b41/bea4d/d4e53', 'b0226/fefac/b0449', 'b0226/fefac/a2f38', 'plugCubed/StyleManager', 'b0226/a4b41/bea4d/c1b95/c7c6a', 'b0226/a4b41/bea4d/c1b95/ac816', 'plugCubed/RoomUserListRow', 'plugCubed/Lang', 'plugCubed/Utils', 'b0226/f622d/a577e', 'b0226/b4ecd/c3221', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/Commands'], function($, _, Class, Context, Chat, LocalStorage, Utils, Room, MCE, Socket, SIO, TUM, Lang, Audience, RJE, RSE, Styles, RoomUserListView, RoomUserListRow, _RoomUserListRow, p3Lang, p3Utils, DB, PlaybackModel, dialogColors, dialogCommands) {
     SIO.sio.$events.chat = Socket.listener.chat = function(a) {
         if (typeof plugCubed !== 'undefined') {
             if (a.fromID) setUserData(a.fromID, 'lastChat', Date.now());
@@ -1305,7 +1305,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'f2428/ad16d/f1b69', 'f2428/a
         }
     });
 });
-define('plugCubed/dialogs/CustomChatColors', ['jquery', 'f2428/ad16d/f1b69', 'lang/Lang', 'f2428/ad16d/e4296', 'plugCubed/Lang'], function($, b, c, d, p3Lang) {
+define('plugCubed/dialogs/CustomChatColors', ['jquery', 'b0226/c224d/cf743', 'lang/Lang', 'b0226/c224d/ee0fb', 'plugCubed/Lang'], function($, b, c, d, p3Lang) {
     var div;
     var a = b.extend({
         GUIInput: function(id, text, defaultColor) {
@@ -1390,7 +1390,7 @@ define('plugCubed/dialogs/CustomChatColors', ['jquery', 'f2428/ad16d/f1b69', 'la
     });
     return new a();
 });
-define('plugCubed/dialogs/Userinfo', ['jquery', 'f2428/d82ae/c5e1a/ec372', 'lang/Lang', 'f2428/ad16d/f1b69', 'f2428/ad16d/e4296', 'f2428/a3a2b/f469b', 'plugCubed/Lang'], function($, b, c, d, e, f, p3Lang) {
+define('plugCubed/dialogs/Userinfo', ['jquery', 'b0226/a4b41/d8071/b6e3f', 'lang/Lang', 'b0226/c224d/cf743', 'b0226/c224d/ee0fb', 'b0226/fefac/b3715', 'plugCubed/Lang'], function($, b, c, d, e, f, p3Lang) {
     var a = d.extend({
         init: function(id) {
             e.dispatch(new f(f.SHOW, new b.extend({
@@ -1411,7 +1411,7 @@ define('plugCubed/dialogs/Userinfo', ['jquery', 'f2428/d82ae/c5e1a/ec372', 'lang
     });
     return a;
 });
-define('plugCubed/dialogs/Commands', ['jquery', 'f2428/ad16d/f1b69', 'lang/Lang', 'plugCubed/Lang', 'plugCubed/Utils'], function($, b, c, p3Lang, p3Utils) {
+define('plugCubed/dialogs/Commands', ['jquery', 'b0226/c224d/cf743', 'lang/Lang', 'plugCubed/Lang', 'plugCubed/Utils'], function($, b, c, p3Lang, p3Utils) {
     var userCommands = [
         ['/nick', 'change username'],
         ['/avail', 'set status to available'],
@@ -1466,7 +1466,7 @@ define('plugCubed/dialogs/Commands', ['jquery', 'f2428/ad16d/f1b69', 'lang/Lang'
         });
     return new a();
 });
-define('plugCubed/StyleManager', ['jquery', 'f2428/ad16d/f1b69'], function($, Class) {
+define('plugCubed/StyleManager', ['jquery', 'b0226/c224d/cf743'], function($, Class) {
     var obj,
         styles = {},
         update = function() {
@@ -1522,7 +1522,7 @@ define('plugCubed/Utils', function() {
         }
     };
 });
-define('plugCubed/RoomUserListRow', ['jquery', 'f2428/d82ae/dc84c/f68fe/f639c', 'plugCubed/Utils'], function($, RoomUserListRow, p3Utils) {
+define('plugCubed/RoomUserListRow', ['jquery', 'b0226/a4b41/bea4d/c1b95/aeed0', 'plugCubed/Utils'], function($, RoomUserListRow, p3Utils) {
     return RoomUserListRow.extend({
         vote: function() {
             if (this.model.get("curated") || this.model.get("vote") !== 0) {
@@ -1542,7 +1542,7 @@ define('plugCubed/RoomUserListRow', ['jquery', 'f2428/d82ae/dc84c/f68fe/f639c', 
         }
     });
 });
-define('plugCubed/MenuView', ['jquery', 'underscore', 'backbone', 'f2428/ad16d/e4296'], function($, _, Backbone, Context) {
+define('plugCubed/MenuView', ['jquery', 'underscore', 'backbone', 'b0226/c224d/ee0fb'], function($, _, Backbone, Context) {
     var a = Backbone.View.extend({
         id: 'plug-cubed',
         initialize: function() {
@@ -1599,7 +1599,7 @@ define('plugCubed/MenuView', ['jquery', 'underscore', 'backbone', 'f2428/ad16d/e
     });
     return PlugMenuView;
 });
-define('plugCubed/Lang', ['jquery', 'f2428/ad16d/f1b69'], function($, Class) {
+define('plugCubed/Lang', ['jquery', 'b0226/c224d/cf743'], function($, Class) {
     var language = {},
         isLoaded = false,
         Lang = Class.extend({
@@ -1650,7 +1650,7 @@ define('plugCubed/Lang', ['jquery', 'f2428/ad16d/f1b69'], function($, Class) {
         });
     return new Lang;
 });
-define('plugCubed/Loader', ['jquery', 'f2428/ad16d/f1b69', 'plugCubed/Model', 'f2428/e236c/edda5', 'f2428/d82ae/c5e1a/ec372', 'plugCubed/Lang', 'plugCubed/Utils'], function($, Class, Model, LocalStorage, ADV, p3Lang, p3Utils) {
+define('plugCubed/Loader', ['jquery', 'b0226/c224d/cf743', 'plugCubed/Model', 'b0226/f622d/fe28d', 'b0226/a4b41/d8071/b6e3f', 'plugCubed/Lang', 'plugCubed/Utils'], function($, Class, Model, LocalStorage, ADV, p3Lang, p3Utils) {
     var test = LocalStorage.getItem('plugCubedLang');
     if (test !== null && test !== '@@@')
         return Class.extend({
