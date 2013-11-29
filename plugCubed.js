@@ -80,6 +80,9 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
         plugCubedUserData[a][b] = c;
     }
 
+    /**
+     * @param {RoomSettings} settings
+     */
     function runRoomSettings(settings) {
         if (settings !== undefined) {
             haveRoomSettings = true;
@@ -402,7 +405,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             minor: 0,
             patch: 0,
             prerelease: 'alpha',
-            build: 20,
+            build: 29,
             minified: false,
             /**
              * @this {version}
@@ -726,7 +729,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                 a.push('.message.from-admin > .from,', '.emote.from-admin > .from,', '.mention.from-admin > .from { color:#' + (this.settings.colors.admin !== this.colorInfo.ranks.admin.color ? this.settings.colors.admin : roomChatColors.admin) + '!important; }');
             if ((b && roomChatColors.you) || this.settings.colors.you !== this.colorInfo.ranks.you.color)
                 a.push('.message.from-you > .from,', '.emote.from-you > .from,', '.mention.from-you > .from { color:#' + (this.settings.colors.you !== this.colorInfo.ranks.you.color ? this.settings.colors.you : roomChatColors.you) + '!important; }');
-            if (b && roomChatIcons) {
+            if (b) {
                 if (roomChatIcons.admin)
                     a.push('.message.from-admin > .icon,', '.emote.from-admin > .icon,', '.mention.from-admin > .icon { background-image: url("' + roomChatIcons.admin + '"); background-position: 0 0; }');
                 if (roomChatIcons.ambassador)
