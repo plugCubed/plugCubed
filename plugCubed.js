@@ -405,7 +405,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             minor: 0,
             patch: 0,
             prerelease: 'alpha',
-            build: 29,
+            build: 30,
             minified: false,
             /**
              * @this {version}
@@ -1251,7 +1251,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                 if (value.indexOf('/skip') === 0) {
                     if (API.getDJ() === undefined) return;
                     if (value.length > 5)
-                        API.sendChat('@' + API.getWaitList()[0].username + ' - Reason for skip: ' + value.substr(5).trim());
+                        API.sendChat('@' + API.getDJ().username + ' - Reason for skip: ' + value.substr(5).trim());
                     return API.moderateForceSkip();
                 }
                 if (value.indexOf('/whois ') === 0)
