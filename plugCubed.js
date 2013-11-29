@@ -135,17 +135,21 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
     function loadRoomSettings() {
         var a = Room.get('description'),
             b = plugCubed.settings.useRoomSettings[window.location.pathname.split('/')[1]];
+
         if (a === null) return;
         b = b === undefined || b === true ? true : false;
+
         if (a.indexOf('@p3=') > -1) {
             a = a.substr(a.indexOf('@p3=') + 4);
             if (a.indexOf(' ') > -1)
                 a.substr(0, a.indexOf(' '));
             if (a.indexOf('\n') > -1)
                 a.substr(0, a.indexOf('\n'));
-            if (b) return $.getJSON(a, function(settings) {
-                runRoomSettings(settings);
-            });
+            if (b)
+                return $.getJSON(a, function(settings) {
+                    p3Utils.appendChatMessage('This room is using special settings</span><br /><span class="chat-text" style="color:#66FFFF">You can disable them in the menu', plugCubed.colors.infoMessage2);
+                    runRoomSettings(settings);
+                });
             haveRoomSettings = true;
             plugCubed.initGUI();
         }
@@ -211,8 +215,8 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                 case API.STATUS.WORKING:
                     status = p3Lang.i18n('status.working');
                     break;
-                case API.STATUS.SLEEPING:
-                    status = p3Lang.i18n('status.sleeping');
+                case API.STATUS.GAMING:
+                    status = p3Lang.i18n('status.gaming');
                     break;
             }
 
@@ -327,7 +331,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             infoMessage1: 'FFFF00',
             infoMessage2: '66FFFF'
         };
-        this.defaultAwayMsg = p3Lang.i18n('AFK.default');
+        this.defaultAwayMsg = p3Lang.i18n('autorespond.default');
 
         setTimeout(function() {
             p3history = [];
@@ -350,7 +354,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
 
         this.customColorsStyle = $('<style type="text/css" />');
         $('head').append(this.customColorsStyle);
-        p3Utils.appendChatMessage(p3Lang.i18n('running', version) + '</span><br /><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), 'FFFF00');
+        p3Utils.appendChatMessage(p3Lang.i18n('running', version) + '</span><br /><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), this.colors.infoMessage1);
 
         window.addEventListener('pushState', this.proxy.onRoomJoin);
         $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://alpha.plugcubed.net/plugCubed.css?=' + Date.now() + '" />');
@@ -367,13 +371,13 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
 
         $('#chat-header').append(
             $('<div>').addClass('chat-header-button p3-s-stream').data('key', 'stream').click(this.proxy.onMenuButtonClick).mouseover(function() {
-                Context.trigger('tooltip:show', p3Lang.i18n('menu.stream'), $(this), true);
+                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.stream'), $(this), true);
             }).mouseout(function() {
                 Context.trigger('tooltip:hide');
             })
         ).append(
             $('<div>').addClass('chat-header-button p3-s-clear').data('key', 'clear').click(this.proxy.onMenuButtonClick).mouseover(function() {
-                Context.trigger('tooltip:show', p3Lang.i18n('menu.clear'), $(this), true);
+                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.clear'), $(this), true);
             }).mouseout(function() {
                 Context.trigger('tooltip:hide');
             })
@@ -397,18 +401,20 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             major: 3,
             minor: 0,
             patch: 0,
-            prerelease: 'alpha.11',
+            prerelease: 'alpha',
+            build: 20,
             minified: false,
             /**
              * @this {version}
              */
             toString: function() {
-                return this.major + '.' + this.minor + '.' + this.patch + (this.prerelease !== undefined && this.prerelease !== '' ? '-' + this.prerelease : '') + (this.minified ? '_min' : '');
+                return this.major + '.' + this.minor + '.' + this.patch + (this.prerelease !== undefined && this.prerelease !== '' ? '-' + this.prerelease : '') + (this.minified ? '_min' : '') + ' (Build ' + this.build + ')';
             }
         },
         p3history = [],
         socket,
         haveRoomSettings = false,
+        socketReconnecting = false,
         roomChatColors = {},
         roomChatIcons = {},
         menuButton = $('<div id="plug-cubed"><i class="icon icon-plug-cubed"></i></div>'),
@@ -502,13 +508,13 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             if (socket !== undefined && socket.readyState === SockJS.OPEN) return;
             socket = new SockJS('http://socket.plugcubed.net/gateway');
             socket.tries = 0;
-            console.log('[plug³ Socket Server]', this.reconnecting ? 'Reconnecting' : 'Connecting');
+            console.log('[plug³ Socket Server]', socketReconnecting ? 'Reconnecting' : 'Connecting');
             /**
              * @this {SockJS}
              */
             socket.onopen = function() {
                 this.tries = 0;
-                console.log('[plug³ Socket Server]', this.reconnecting ? 'Reconnected' : 'Connected');
+                console.log('[plug³ Socket Server]', socketReconnecting ? 'Reconnected' : 'Connected');
                 var userData = API.getUser();
                 this.send(JSON.stringify({
                     type: 'userdata',
@@ -561,7 +567,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             socket.onclose = function() {
                 console.log('[plug³ Socket Server]', 'Closed');
                 this.tries++;
-                this.reconnecting = true;
+                socketReconnecting = true;
 
                 var delay;
                 if (this.tries < 5) delay = 5;
@@ -587,27 +593,27 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                 },
                 residentdj: {
                     title: 'ranks.residentdj',
-                    color: 'E90E82'
+                    color: 'AC76FF'
                 },
                 bouncer: {
                     title: 'ranks.bouncer',
-                    color: 'E90E82'
+                    color: 'AC76FF'
                 },
                 manager: {
                     title: 'ranks.manager',
-                    color: 'E90E82'
+                    color: 'AC76FF'
                 },
                 cohost: {
                     title: 'ranks.cohost',
-                    color: 'E90E82'
+                    color: 'AC76FF'
                 },
                 host: {
                     title: 'ranks.host',
-                    color: 'E90E82'
+                    color: 'AC76FF'
                 },
                 ambassador: {
                     title: 'ranks.ambassador',
-                    color: '9A50FF'
+                    color: '89BE6C'
                 },
                 admin: {
                     title: 'ranks.admin',
@@ -831,7 +837,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                         plugCubed.settings.awaymsg = $(this).val().trim();
                     }))
                     .mouseover(function() {
-                        Context.trigger('tooltip:show', 'AFK Message', $(this), true);
+                        Context.trigger('tooltip:show', p3Lang.i18n('tooltip.afk'), $(this), true);
                     })
                     .mouseout(function() {
                         Context.trigger('tooltip:hide');
@@ -895,7 +901,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                     this.changeGUIColor('autorespond', this.settings.autorespond);
                     if (this.settings.autorespond) {
                         if (this.settings.awaymsg.trim() === "") this.settings.awaymsg = this.defaultAwayMsg;
-                        $('#chat-input-field').attr('disabled', 'disabled').attr('placeholder', 'Disable AFK Autorespond to chat');
+                        $('#chat-input-field').attr('disabled', 'disabled').attr('placeholder', p3Lang.i18n('autorespond.disable'));
                         if (API.getUser().status <= 0)
                             API.setStatus(API.STATUS.AFK);
                     } else {
@@ -1057,8 +1063,8 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                         this.settings.autorespond = false;
                         this.changeGUIColor('autorespond', this.settings.autorespond);
                         this.saveSettings();
-                        API.sendChat('@' + data.from + ' AFK message disabled');
-                    } else API.sendChat('@' + data.from + ' AFK message was not enabled');
+                        API.sendChat(p3Lang.i18n('autorespond.commandDisable', '@' + data.from));
+                    } else API.sendChat(p3Lang.i18n('autorespond.commandNotEnabled', '@' + data.from));
                 }
                 if (data.message.indexOf('!afkdisable') > 0) return;
             }
@@ -1072,9 +1078,9 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             if (data.type == 'mention') {
                 if (this.settings.autorespond && !this.settings.recent) {
                     this.settings.recent = true;
-                    $('#chat-input-field').attr('placeholder', 'Next AFK Autorespond will be sent from ' + this.getTimestamp(Date.now() + 18E4));
+                    $('#chat-input-field').attr('placeholder', p3Lang.i18n('autorespond.nextIn', this.getTimestamp(Date.now() + 18E4)));
                     setTimeout(function() {
-                        $('#chat-input-field').attr('placeholder', 'AFK Autorespond on next mention');
+                        $('#chat-input-field').attr('placeholder', p3Lang.i18n('autorespond.next'));
                         plugCubed.settings.recent = false;
                         plugCubed.saveSettings();
                     }, 18E4);
@@ -1108,11 +1114,11 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                     if (!a.wasSkipped)
                         return playMentionSound(), setTimeout(function() {
                             playMentionSound()
-                        }, 50), API.chatLog(p3Lang.i18n('historyCheck.inHistory', found, p3history.length), true);
+                        }, 50), API.chatLog(p3Lang.i18n('notify.message.history', found, p3history.length), true);
                 }
             }
             if (found > 0)
-                return API.chatLog(p3Lang.i18n('historyCheck.inHistorySkipped', found, p3history.length), true);
+                return API.chatLog(p3Lang.i18n('notify.message.historySkipped', found, p3history.length), true);
         },
         getTimestamp: function(t, format) {
             if (!format) format = 'hh:mm';
@@ -1270,7 +1276,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             }
             if (API.hasPermission(undefined, API.ROLE.HOST) || p3Utils.isPlugCubedDeveloper()) {
                 if (value.indexOf('/strobe') === 0) {
-                    if (socket.readyState !== SockJS.OPEN) return API.chatLog('Not connected to socket server', true);
+                    if (socket.readyState !== SockJS.OPEN) return API.chatLog(p3Lang.i18n('error.notConnected'), true);
                     var args = value.split(' ');
                     if (value.indexOf('off') > -1)
                         socket.send(JSON.stringify({
@@ -1289,7 +1295,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                         }));
                 }
                 if (value.indexOf('/rave') === 0) {
-                    if (socket.readyState !== SockJS.OPEN) return API.chatLog('Not connected to socket server', true);
+                    if (socket.readyState !== SockJS.OPEN) return API.chatLog(p3Lang.i18n('error.notConnected'), true);
                     if (value.indexOf('off') > -1)
                         socket.send(JSON.stringify({
                             type: 'rave',
@@ -1314,7 +1320,7 @@ define('plugCubed/dialogs/CustomChatColors', ['jquery', 'b0226/c224d/cf743', 'la
             ).append(
                 $('<span>').addClass('default').css('display', plugCubed.settings.colors[id] === defaultColor ? 'none' : 'block')
                 .mouseover(function() {
-                    d.trigger('tooltip:show', 'Reset to default', $(this), true);
+                    d.trigger('tooltip:show', p3Lang.i18n('tooltip.reset'), $(this), true);
                 })
                 .mouseout(function() {
                     d.trigger('tooltip:hide');
@@ -1413,52 +1419,60 @@ define('plugCubed/dialogs/Userinfo', ['jquery', 'b0226/a4b41/d8071/b6e3f', 'lang
 });
 define('plugCubed/dialogs/Commands', ['jquery', 'b0226/c224d/cf743', 'lang/Lang', 'plugCubed/Lang', 'plugCubed/Utils'], function($, b, c, p3Lang, p3Utils) {
     var userCommands = [
-        ['/nick', 'change username'],
-        ['/avail', 'set status to available'],
-        ['/afk', 'set status to afk'],
-        ['/work', 'set status to working'],
-        ['/gaming', 'set status to gaming'],
-        ['/join', 'join dj booth/waitlist'],
-        ['/leave', 'leaves dj booth/waitlist'],
-        ['/whoami', 'get your own information'],
-        ['/mute', 'set volume to 0'],
-        ['/automute', 'register currently playing song to automatically mute on future plays'],
-        ['/unmute', 'set volume to last volume'],
-        ['/nextsong', 'display next song in playlist and if it\'s in history'],
-        ['/refresh', 'refresh the video'],
-        ['/ignore (username)', 'ignore all chat messages from user'],
-        ['/alertson (word)', 'play mention sound whenever word is written in chat'],
-        ['/curate', 'add current song to your selected playlist'],
-        ['/getpos', 'get current waitlist position'],
-        ['/version', 'displays version number'],
-        ['/commands', 'shows this list'],
-        ['/link', 'paste link to plugCubed website in chat']
+        ['/nick', 'commands.descriptions.nick'],
+        ['/avail', 'commands.descriptions.avail'],
+        ['/afk', 'commands.descriptions.afk'],
+        ['/work', 'commands.descriptions.work'],
+        ['/gaming', 'commands.descriptions.gaming'],
+        ['/join', 'commands.descriptions.join'],
+        ['/leave', 'commands.descriptions.leave'],
+        ['/whoami', 'commands.descriptions.whoami'],
+        ['/mute', 'commands.descriptions.mute'],
+        ['/automute', 'commands.descriptions.automute'],
+        ['/unmute', 'commands.descriptions.unmute'],
+        ['/nextsong', 'commands.descriptions.nextsong'],
+        ['/refresh', 'commands.descriptions.refresh'],
+        ['/ignore (commands.variables.username)', 'commands.descriptions.ignore'],
+        ['/alertson (commands.variables.word)', 'commands.descriptions.alertson'],
+        ['/curate', 'commands.descriptions.curate'],
+        ['/getpos', 'commands.descriptions.getpos'],
+        ['/version', 'commands.descriptions.version'],
+        ['/commands', 'commands.descriptions.commands'],
+        ['/link', 'commands.descriptions.link']
     ],
         modCommands = [
-            ['/whois (username)', 'gives general information about user', API.ROLE.BOUNCER],
-            ['/skip', 'skip current song', API.ROLE.BOUNCER],
-            ['/kick (username)', 'kicks targeted user', API.ROLE.BOUNCER],
-            ['/lockskip', 'locks DJ booth, skip and unlocks afterwards', API.ROLE.MANAGER],
-            ['/lock', 'locks DJ booth', API.ROLE.MANAGER],
-            ['/unlock', 'unlocks DJ booth', API.ROLE.MANAGER],
-            ['/add (username)', 'adds targeted user to dj booth/waitlist', API.ROLE.BOUNCER],
-            ['/remove (username)', 'removes targeted user from dj booth/waitlist', API.ROLE.BOUNCER],
-            ['/strobe (on|off)', 'enable/disable strobe', API.ROLE.HOST],
-            ['/rave (on|off)', 'enable/disable lights out', API.ROLE.HOST],
-            ['/whois all', 'gives userid and username of all users in the room', API.ROLE.AMBASSADOR],
-            ['/kickall (reason)', 'kicks all users in the room with reason', API.ROLE.AMBASSADOR],
-            ['/banall (reason)', 'bans all users in the room with reason', API.ROLE.AMBASSADOR]
+            ['/whois (commands.variables.username)', 'commands.descriptions.whois', API.ROLE.BOUNCER],
+            ['/skip', 'commands.descriptions.skip', API.ROLE.BOUNCER],
+            ['/ban (commands.variables.username)', 'commands.descriptions.ban', API.ROLE.BOUNCER],
+            ['/lockskip', 'commands.descriptions.lockskip', API.ROLE.MANAGER],
+            ['/lock', 'commands.descriptions.lock', API.ROLE.MANAGER],
+            ['/unlock', 'commands.descriptions.unlock', API.ROLE.MANAGER],
+            ['/add (commands.variables.username)', 'commands.descriptions.add', API.ROLE.BOUNCER],
+            ['/remove (commands.variables.username)', 'commands.descriptions.remove', API.ROLE.BOUNCER],
+            ['/strobe (commands.variables.onoff)', 'commands.descriptions.strobe', API.ROLE.HOST],
+            ['/rave (commands.variables.onoff)', 'commands.descriptions.rave', API.ROLE.HOST],
+            ['/whois all', 'commands.descriptions.whois', API.ROLE.AMBASSADOR],
+            ['/banall', 'commands.descriptions.banall', API.ROLE.AMBASSADOR]
         ],
         a = b.extend({
             print: function() {
-                var content = '<strong style="position:absolute;left: 5px;">=== User Commands ===</strong><br />';
-                for (var i in userCommands)
-                    content += '<span style="position:absolute;left: 20px;">' + userCommands[i][0] + '</span><br /><em style="position:absolute;left: 45px;">' + userCommands[i][1] + '</em><br />';
+                var content = '<strong style="font-size:1.4em;">' + p3Lang.i18n('commands.header') + '</strong><br />';
+                content += '<strong style="position:absolute;left: 5px;">=== ' + p3Lang.i18n('commands.userCommands') + ' ===</strong><br />';
+                for (var i in userCommands) {
+                    var command = userCommands[i][0];
+                    if (command.split('(').length > 1)
+                        command = command.split('(')[0] + '(' + p3Lang.i18n(command.split('(')[1].split(')')[0]) + ')';
+                    content += '<span style="position:absolute;left: 20px;">' + command + '</span><br /><em style="position:absolute;left: 45px;">' + p3Lang.i18n(userCommands[i][1]) + '</em><br />';
+                }
                 if (API.hasPermission(undefined, API.ROLE.BOUNCER)) {
-                    content += '<br /><strong style="position:absolute;left: 5px;">=== Moderation Commands ===</strong><br />';
+                    content += '<br /><strong style="position:absolute;left: 5px;">=== ' + p3Lang.i18n('commands.modCommands') + ' ===</strong><br />';
                     for (var i in modCommands) {
-                        if (API.hasPermission(undefined, modCommands[i][2]))
-                            content += '<span style="position:absolute;left: 20px;">' + modCommands[i][0] + '</span><br /><em style="position:absolute;left: 45px;">' + modCommands[i][1] + '</em><br />';
+                        if (API.hasPermission(undefined, modCommands[i][2])) {
+                            var command = modCommands[i][0];
+                            if (command.split('(').length > 1)
+                                command = command.split('(')[0] + '(' + p3Lang.i18n(command.split('(')[1].split(')')[0]) + ')';
+                            content += '<span style="position:absolute;left: 20px;">' + command + '</span><br /><em style="position:absolute;left: 45px;">' + p3Lang.i18n(modCommands[i][1]) + '</em><br />';
+                        }
                     }
                 }
                 p3Utils.appendChatMessage(content);

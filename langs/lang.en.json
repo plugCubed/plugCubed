@@ -4,28 +4,60 @@
     "newVersion": "A new version of plug&#179; has been released. Your script will reload in a few seconds.",
     "automuted": "%1 automuted.",
     "nextsong": "Your next queued song is %1 by %2",
+    "noNextSong": "You have no queued song",
     "isHistory": "Warning: This song is still in the history (%1 of %2)",
-    "enable": "Enable",
-    "limit": "Limit",
-    "historyCheck": {
-        "inHistory": "Song is in history (%1 of %2)",
-        "inHistorySkipped": "Song is in history (%1 of %2), but was skipped on the last play"
-    },
-    "AFK": {
-        "information": "Please enter your away message here.\nThis is what you will reply via @mention.",
-        "default": "I'm away from keyboard."
+    "autorespond": {
+        "default": "I'm away from keyboard.",
+        "disable": "Disable AFK Autorespond to chat",
+        "nextIn": "Next AFK Autorespond will be sent from %1",
+        "next": "AFK Autorespond on next mention",
+        "commandDisable": "%1 AFK message disabled",
+        "commandNotEnabled": "%1 AFK message was not enabled"
     },
     "commands": {
         "header": "plug&#179; Commands",
         "userCommands": "User Commands",
-        "modCommands": "Moderation Commands"
-    },
-    "footer": {
-        "socket": "Socket status: %1",
-        "seperator": " | ",
-        "online": "Online",
-        "offline": "Offline",
-        "unknown": "Unknown"
+        "modCommands": "Moderation Commands",
+        "variables": {
+            "username": "username",
+            "word": "word",
+            "onoff": "on|off",
+            "reason": "reason"
+        },
+        "descriptions": {
+            "nick": "change username",
+            "avail": "set status to available",
+            "afk": "set status to afk",
+            "work": "set status to working",
+            "gaming": "set status to gaming",
+            "join": "join dj booth/waitlist",
+            "leave": "leaves dj booth/waitlist",
+            "whoami": "get your own information",
+            "mute": "set volume to 0",
+            "automute": "register currently playing song to automatically mute on future plays",
+            "unmute": "set volume to last volume",
+            "nextsong": "display next song in playlist and if it's in history",
+            "refresh": "refresh the video",
+            "ignore": "ignore all chat messages from user",
+            "alertson": "play mention sound whenever word is written in chat",
+            "curate": "add current song to your selected playlist",
+            "getpos": "get current waitlist position",
+            "version": "displays version number",
+            "commands": "shows this list",
+            "link": "paste link to plugCubed website in chat",
+            "whois": "gives general information about user",
+            "skip": "skip current song",
+            "ban": "kicks targeted user",
+            "lockskip": "locks DJ booth, skip and unlocks afterwards",
+            "lock": "locks DJ booth",
+            "unlock": "unlocks DJ booth",
+            "add": "adds targeted user to dj booth/waitlist",
+            "remove": "removes targeted user from dj booth/waitlist",
+            "strobe": "enable/disable strobe",
+            "rave": "enable/disable lights out",
+            "whois all": "gives userid and username of all users in the room",
+            "banall": "bans all users in the room"
+        }
     },
     "notify": {
         "header": "Chat Notifications",
@@ -36,8 +68,6 @@
         "updates": "Song Updates",
         "history": "Songs in history",
         "message": {
-            "enabled": "Join/leave alerts enabled",
-            "disabled": "Join/leave alerts disabled",
             "curate": "%1 added %2 - %3",
             "stats": "Stats:   %1 woots -- %2 mehs -- %3 curates",
             "updates": "Now Playing: %1 by %2<br />Played by: %3",
@@ -46,7 +76,9 @@
                 "normal": "%1 just left the room",
                 "fan": "Your fan %1 just left the room",
                 "friend": "Your friend %1 just left the room"
-            }
+            },
+            "history": "Song is in history (%1 of %2)",
+            "historySkipped": "Song is in history (%1 of %2), but was skipped on the last play"
         }
     },
     "info": {
@@ -97,18 +129,14 @@
         "customchatcolors": "Custom Chat Colors",
         "autorespond": "AFK Autorespond",
         "notify": "Notifications",
-        "limitchatlog": "Limit Chat Log",
-        "stream": "Toggle Video/Audio Stream",
-        "emoji": "Emoji",
         "afktimers": "AFK Timers",
-        "roomsettings": "Room Settings",
-        "clear": "Clear Chat"
+        "roomsettings": "Room Settings"
     },
     "status": {
         "available": "Available",
         "afk": "AFK",
         "working": "Working",
-        "sleeping": "Sleeping"
+        "gaming": "Gaming"
     },
     "vote": {
         "meh": "Meh",
@@ -124,12 +152,19 @@
         "registered": "%1 registered to automute on future plays.",
         "unregistered": "%1 removed from automute registry."
     },
+    "tooltip": {
+        "stream": "Toggle Video/Audio Stream",
+        "clear": "Clear Chat",
+        "afk": "AFK Message",
+        "reset": "Reset to default"
+    },
     "error": {
         "userNotFound": "User not found",
         "ignoreSelf": "You can't ignore yourself",
         "unknownModeration": "Unknown moderation",
         "unknownMenuKey": "Unknown menu key: %1",
         "emoji": "Error in reenabling Emoji",
-        "missingReason": "Missing reason"
+        "missingReason": "Missing reason",
+        "notConnected": "Not connected to socket server"
     }
 }
