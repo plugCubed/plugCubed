@@ -184,8 +184,10 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                 waitlistpos = API.getWaitListPosition(user.id),
                 inbooth = API.getDJ().id === user.id,
                 lang = user.language,
-                allLangs = Chat.uiLanguages.concat(Chat.chatLanguages);
-
+                allLangs = Chat.uiLanguages.concat(Chat.chatLanguages),
+                disconnectInfo = getUserData(user.id, 'disconnects', {
+                    count: 0
+                });
 
             for (var i in allLangs) {
                 if (allLangs.value !== lang) continue;
@@ -205,9 +207,9 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             if (inbooth)
                 position = p3Lang.i18n('info.djing');
             else if (waitlistpos > -1)
-                position = p3Lang.i18n('info.inwaitlist', waitlistpos + 1, API.getWaitList().length);
+                position = p3Lang.i18n('info.inWaitlist', waitlistpos + 1, API.getWaitList().length);
             else
-                position = p3Lang.i18n('info.notinlist');
+                position = p3Lang.i18n('info.notInList');
 
             switch (user.status) {
                 default: status = p3Lang.i18n('status.available');
@@ -256,7 +258,13 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                         if (e % 1 === 0) return e + ':' + i;
                     }
                 })(getUserData(user.id, 'wootcount', 0), getUserData(user.id, 'mehcount', 0)) + '</span></td></tr>' +
-                '<tr><td><strong>Disconnects</strong>: <span style="color:#FFFFFF">' + getUserData(user.id, 'disconnects', 0) + '</td></tr></table>');
+                '<tr><td><strong>' + p3Lang.i18n('info.disconnects') + '</strong>: <span style="color:#FFFFFF">' + disconnectInfo.count + '</td></tr>' +
+                (disconnectInfo.count > 0 ?
+                    '<tr><td colspan="2"><strong>' + p3Lang.i18n('info.lastDisconnect') + '</strong></td></tr>' +
+                    '<tr><td colspan="2"><strong>' + p3Lang.i18n('info.lastPosition') + '</strong>: <span style="color:#FFFFFF">' + (disconnectInfo.position < -1 ? 'Wasn\'t in booth nor waitlist' : (disconnectInfo.position < 0 ? 'Was DJing' : 'Was ' + (disconnectInfo.position + 1) + ' in waitlist')) + '</span></td></tr>' +
+                    '<tr><td colspan="2"><strong>' + p3Lang.i18n('info.lastDisconnect') + '</strong>: <span style="color:#FFFFFF">' + plugCubed.getTimestamp(disconnectInfo.time) + '</span></td></tr>' :
+                    ''
+                ) + '</table>');
         }
     }
 
@@ -273,9 +281,8 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
     }
 
     function woot() {
-        if (API.getWaitList().length === 0) return;
-        var dj = API.getWaitList()[0];
-        if (dj === null || dj == API.getUser()) return;
+        var dj = API.getDJ();
+        if (dj === null || dj.id === API.getUser().id) return;
         $('#woot').click();
     }
 
@@ -384,7 +391,8 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             }).mouseout(function() {
                 Context.trigger('tooltip:hide');
             })
-        )
+        );
+        this.changeGUIColor('stream', DB.settings.streamDisabled);
 
         Context.on('chat:receive', onChatReceived);
         Context._events['chat:receive'].unshift(Context._events['chat:receive'].pop());
@@ -405,7 +413,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             minor: 0,
             patch: 0,
             prerelease: 'alpha',
-            build: 30,
+            build: 34,
             minified: false,
             /**
              * @this {version}
@@ -1051,8 +1059,13 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
         onUserLeave: function(data) {
             if ((this.settings.notify & 2) === 2)
                 p3Utils.appendChatMessage(p3Lang.i18n(data.relationship === 0 ? 'notify.message.leave.normal' : (data.relationship > 1 ? 'notify.message.leave.friend' : 'notify.message.leave.fan'), Utils.cleanTypedString(data.username)), this.settings.colors.leave);
-            setUserData(data.id, 'disconnects', getUserData(data.id, 'disconnects', 0) + 1);
-            setUserData(data.id, 'lastDisconnect', Date.now());
+            var disconnects = getUserData(data.id, 'disconnects', {
+                count: 0
+            });
+            disconnects.count++;
+            disconnects.position = API.getDJ().id === data.id ? -1 : (API.getWaitListPosition(data.id) < 0 ? -2 : API.getWaitListPosition(data.id));
+            disconnects.time = Date.now();
+            setUserData(data.id, 'disconnects', disconnects);
         },
         /**
          * @this {plugCubedModel}
@@ -1207,9 +1220,9 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                 else if (spot === 0)
                     API.chatLog(p3Lang.i18n('info.userNextDJ', user.id === API.getUser().id ? p3Lang.i18n('ranks.you') : Utils.cleanTypedString(user.username)));
                 else if (spot > 0)
-                    API.chatLog(p3Lang.i18n('info.inwaitlist', spot + 1, API.getWaitList().length));
+                    API.chatLog(p3Lang.i18n('info.inWaitlist', spot + 1, API.getWaitList().length));
                 else
-                    API.chatLog(p3Lang.i18n('info.notinlist'));
+                    API.chatLog(p3Lang.i18n('info.notInList'));
                 return;
             }
             if (value == '/curate') {

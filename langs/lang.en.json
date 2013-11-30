@@ -107,10 +107,14 @@
         "mehCount": "Meh Count",
         "ratio": "Woot/Meh Ratio",
         "djing": "Currently DJing",
-        "notinlist": "Not in waitlist nor booth",
-        "inwaitlist": "%1/%2 in waitlist",
+        "notInList": "Not in waitlist nor booth",
+        "inWaitlist": "%1/%2 in waitlist",
         "userDjing": "%1 are currently DJing",
-        "userNextDJ": "%1 are DJing next"
+        "userNextDJ": "%1 are DJing next",
+        "disconnects": "Disconnects",
+        "lastDisconnect": "Last Disconnect",
+        "lastPosition": "Position",
+        "time": "Time"
     },
     "ranks": {
         "you": "You",
