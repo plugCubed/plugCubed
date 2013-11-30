@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-if (typeof plugCubed !== 'undefined') plugCubed.close();
+var plugCubed, plugCubedUserData;
 String.prototype.equalsIgnoreCase = function(a) {
     return typeof a !== 'string' ? false : this.toLowerCase() === a.toLowerCase();
 };
@@ -39,7 +39,7 @@ String.prototype.isRGB = function() {
 Math.randomRange = function(a, b) {
     return a + Math.floor(Math.random() * (b - a + 1));
 };
-var plugCubed, plugCubedUserData;
+if (plugCubed !== undefined) plugCubed.close();
 
 define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c224d/ee0fb', 'b0226/c1eca/ba34b', 'b0226/f622d/fe28d', 'b0226/bfb6e/f98b5', 'b0226/b4ecd/e00ab', 'b0226/fefac/afe6c', 'b0226/f44e5/ba46d', 'b0226/f44e5/f58aa', 'b0226/b4ecd/fd183', 'lang/Lang', 'b0226/a4b41/bea4d/d4e53', 'b0226/fefac/b0449', 'b0226/fefac/a2f38', 'plugCubed/StyleManager', 'b0226/a4b41/bea4d/c1b95/c7c6a', 'b0226/a4b41/bea4d/c1b95/ac816', 'plugCubed/RoomUserListRow', 'plugCubed/Lang', 'plugCubed/Utils', 'b0226/f622d/a577e', 'b0226/b4ecd/c3221', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/Commands'], function($, _, Class, Context, Chat, LocalStorage, Utils, Room, MCE, Socket, SIO, TUM, Lang, Audience, RJE, RSE, Styles, RoomUserListView, RoomUserListRow, _RoomUserListRow, p3Lang, p3Utils, DB, PlaybackModel, dialogColors, dialogCommands) {
     SIO.sio.$events.chat = Socket.listener.chat = function(a) {
@@ -150,7 +150,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                 a.substr(0, a.indexOf('\n'));
             if (b)
                 return $.getJSON(a, function(settings) {
-                    p3Utils.appendChatMessage('This room is using special settings</span><br /><span class="chat-text" style="color:#66FFFF">You can disable them in the menu', plugCubed.colors.infoMessage2);
+                    p3Utils.appendChatMessage(p3Lang.i18n('roomSpecificSettingHeader') + '</span><br /><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('roomSpecificSettingDesc'), plugCubed.colors.infoMessage2);
                     runRoomSettings(settings);
                 });
             haveRoomSettings = true;
@@ -286,21 +286,17 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
         $('#woot').click();
     }
 
-    function afkTimerEnable() {
-        $('#dj-booth').append($('<div />').addClass('afkTimer').css('left', 22));
-    }
-
-    function afkTimerDisable() {
-        $('#dj-booth .afkTimer').remove();
-    }
-
     function afkTimerTick() {
-        var a = API.getWaitList(),
-            b = $('#dj-booth .afkTimer');
-        if (a.length < 1) b.text('');
-        else {
-            var c = Date.now() - getUserData(a[0].id, 'lastChat', getUserData(a[0].id, 'joinTime', Date.now()));
-            b.text(plugCubed.getTimestamp(c, c < 36E5 ? 'mm:ss' : 'hh:mm:ss'));
+        if (plugCubed.settings.afkTimers && $('#waitlist-button').hasClass('selected')) {
+            var a = API.getWaitList(),
+                b = $('#waitlist .user');
+            for (var c = 0; c < a.length; c++) {
+                var d = Date.now() - getUserData(a[c].id, 'lastChat', getUserData(a[c].id, 'joinTime', Date.now()));
+                if ($(b[c]).find('.afkTimer').length < 1)
+                    $(b[c]).find('.meta').append($('<div>').addClass('afkTimer').text(plugCubed.getTimestamp(d, d < 36E5 ? 'mm:ss' : 'hh:mm:ss')));
+                else
+                    $(b[c]).find('.afkTimer').text(plugCubed.getTimestamp(d, d < 36E5 ? 'mm:ss' : 'hh:mm:ss'));
+            }
         }
     }
 
@@ -413,7 +409,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             minor: 0,
             patch: 0,
             prerelease: 'alpha',
-            build: 34,
+            build: 41,
             minified: false,
             /**
              * @this {version}
@@ -469,7 +465,6 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
         close: function() {
             if (this.loaded === undefined || this.loaded === false) return;
             clearInterval(afkTimerInterval);
-            afkTimerDisable();
             runRoomSettings({});
             window.removeEventListener('pushState', plugCubed.proxy.onRoomJoin);
             API.off(API.CHAT_COMMAND, this.proxy.onChatCommand);
@@ -488,7 +483,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                 $('#plugcubed-btn-' + i).unbind();
                 delete guiButtons[i];
             }
-            $('#plugcubed-css,#font-awesome,#plugcubed-js-extra,#side-right,#side-left,#notify-dialog,.plugcubed-footer,#plug-cubed,#p3-settings,#p3-settings-custom-colors,.p3-s-stream,.p3-s-clear').remove();
+            $('#plugcubed-css,#font-awesome,#plugcubed-js-extra,#side-right,#side-left,#notify-dialog,.plugcubed-footer,#plug-cubed,#p3-settings,#p3-settings-custom-colors,.p3-s-stream,.p3-s-clear,#waitlist .user .afkTimer').remove();
             $('#room-bar').css('left', 54);
             if (this.customColorsStyle)
                 this.customColorsStyle.remove();
@@ -695,15 +690,18 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                     if (save[i] !== undefined) this.settings[i] = save[i];
                 }
                 this.settings.recent = false;
-                if (this.settings.afkTimers) afkTimerEnable();
                 if (this.settings.autowoot) woot();
                 this.updateCustomColors();
+                if (this.settings.afkTimers) Styles.set('waitListMove', '#waitlist .list .user .name { top: 2px; }');
                 if (this.settings.notify > 63) this.settings.notify = 0;
                 if (this.settings.registeredSongs.length > 0 && this.settings.registeredSongs.indexOf(API.getMedia().id) > -1) {
-                    API.setVolume(0);
+                    setTimeout(function() {
+                        API.setVolume(0);
+                    }, 800);
+                    this.lastVolume = API.getVolume();
                     this.settings.autoMuted = true;
                     API.chatLog(p3Lang.i18n('automuted', API.getMedia().title));
-                }
+                } else this.settings.autoMuted = false;
             } catch (e) {}
         },
         /**
@@ -952,7 +950,12 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                 case 'afktimers':
                     this.settings.afkTimers = !this.settings.afkTimers;
                     this.changeGUIColor('afktimers', this.settings.afkTimers);
-                    (this.settings.afkTimers ? afkTimerEnable : afkTimerDisable)();
+                    if (this.settings.afkTimers)
+                        Styles.set('waitListMove', '#waitlist .list .user .name { top: 2px; }');
+                    else {
+                        Styles.unset('waitListMove');
+                        $('#waitlist .user .afkTimer').remove();
+                    }
                     break;
                 default:
                     return API.chatLog(p3Lang.i18n('error.unknownMenuKey', a));
@@ -1004,7 +1007,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                 }, 800);
                 this.settings.autoMuted = true;
                 this.lastVolume = API.getVolume();
-                API.chatLog(i18n('automuted', data.media.title));
+                API.chatLog(p3Lang.i18n('automuted', data.media.title));
 
             }
             var users = API.getUsers();
@@ -1100,7 +1103,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                         plugCubed.settings.recent = false;
                         plugCubed.saveSettings();
                     }, 18E4);
-                    API.sendChat('@' + data.from + ' ' + this.settings.awaymsg);
+                    API.sendChat('@' + data.from + ' ' + this.settings.awaymsg.split('@').join(''));
                 }
             } else
                 for (var i in this.settings.alertson) {

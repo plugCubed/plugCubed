@@ -6,6 +6,8 @@
     "nextsong": "Your next queued song is %1 by %2",
     "noNextSong": "You have no queued song",
     "isHistory": "Warning: This song is still in the history (%1 of %2)",
+    "roomSpecificSettingsHeader": "This room is using special settings",
+    "roomSpecificSettingsDesc": "You can disable them in the menu",
     "autorespond": {
         "default": "I'm away from keyboard.",
         "disable": "Disable AFK Autorespond to chat",
