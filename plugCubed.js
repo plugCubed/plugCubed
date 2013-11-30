@@ -150,7 +150,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                 a.substr(0, a.indexOf('\n'));
             if (b)
                 return $.getJSON(a, function(settings) {
-                    p3Utils.appendChatMessage(p3Lang.i18n('roomSpecificSettingHeader') + '</span><br /><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('roomSpecificSettingDesc'), plugCubed.colors.infoMessage2);
+                    p3Utils.appendChatMessage(p3Lang.i18n('roomSpecificSettingsHeader') + '</span><br /><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('roomSpecificSettingsDesc'), plugCubed.colors.infoMessage2);
                     runRoomSettings(settings);
                 });
             haveRoomSettings = true;
@@ -409,7 +409,7 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             minor: 0,
             patch: 0,
             prerelease: 'alpha',
-            build: 41,
+            build: 42,
             minified: false,
             /**
              * @this {version}
