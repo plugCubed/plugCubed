@@ -41,7 +41,7 @@ Math.randomRange = function(a, b) {
 };
 if (plugCubed !== undefined) plugCubed.close();
 
-define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c224d/ee0fb', 'b0226/c1eca/ba34b', 'b0226/f622d/fe28d', 'b0226/bfb6e/f98b5', 'b0226/b4ecd/e00ab', 'b0226/fefac/afe6c', 'b0226/f44e5/ba46d', 'b0226/f44e5/f58aa', 'b0226/b4ecd/fd183', 'lang/Lang', 'b0226/a4b41/bea4d/d4e53', 'b0226/fefac/b0449', 'b0226/fefac/a2f38', 'plugCubed/StyleManager', 'b0226/a4b41/bea4d/c1b95/c7c6a', 'b0226/a4b41/bea4d/c1b95/ac816', 'plugCubed/RoomUserListRow', 'plugCubed/Lang', 'plugCubed/Utils', 'b0226/f622d/a577e', 'b0226/b4ecd/c3221', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/Commands'], function($, _, Class, Context, Chat, LocalStorage, Utils, Room, MCE, Socket, SIO, TUM, Lang, Audience, RJE, RSE, Styles, RoomUserListView, RoomUserListRow, _RoomUserListRow, p3Lang, p3Utils, DB, PlaybackModel, dialogColors, dialogCommands) {
+define('plugCubed/Model', ['jquery', 'underscore', 'ac785/bc190/b96e1', 'ac785/bc190/cd0b8', 'ac785/f04be/c8b95', 'ac785/ab6db/a4893', 'ac785/f6dac/d17c3', 'ac785/ca252/c512b', 'ac785/d94e0/a133c', 'ac785/c3562/f9d8b', 'ac785/c3562/b2762', 'ac785/ca252/fae6c', 'lang/Lang', 'ac785/abf10/e9abd/a97ff', 'ac785/d94e0/a045f', 'ac785/d94e0/bc747', 'plugCubed/StyleManager', 'ac785/abf10/e9abd/ea1d8/af50c', 'ac785/abf10/e9abd/ea1d8/a76eb', 'plugCubed/RoomUserListRow', 'plugCubed/Lang', 'plugCubed/Utils', 'ac785/ab6db/ffb2a', 'ac785/ca252/ec425', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/Commands'], function($, _, Class, Context, Chat, LocalStorage, Utils, Room, MCE, Socket, SIO, TUM, Lang, Audience, RJE, RSE, Styles, RoomUserListView, RoomUserListRow, _RoomUserListRow, p3Lang, p3Utils, DB, PlaybackModel, dialogColors, dialogCommands) {
     SIO.sio.$events.chat = Socket.listener.chat = function(a) {
         if (typeof plugCubed !== 'undefined') {
             if (a.fromID) setUserData(a.fromID, 'lastChat', Date.now());
@@ -402,14 +402,29 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
         $('#footer-links').append($('<div />').addClass('footer').addClass('plugcubed-footer').css('top', 12).html(p3Lang.i18n('running', version) + p3Lang.i18n('footer.seperator')).append($('<span />').addClass('plugcubed-status').text(p3Lang.i18n('footer.socket', p3Lang.i18n('footer.unknown')))));
     }
 
-    var guiButtons = {},
-        afkTimerInterval,
+    function GUIButton(setting, id, text) {
+        return $('<div class="item">').addClass('p3-s-' + id + (setting ? ' selected' : '')).append(
+            $('<i class="icon icon-check-blue"></i>')
+        ).append(
+            $('<span>').text(text)
+        ).data('key', id).click(plugCubed.proxy.onMenuButtonClick);
+    }
+
+    function GUIInput(setting, id, text) {
+        return $('<div class="item">').addClass('p3-s-' + id + (setting ? ' selected' : '')).append(
+            $('<i class="icon icon-check-blue"></i>')
+        ).append(
+            $('<span>').text(text)
+        ).data('key', id).click(plugCubed.proxy.onMenuButtonClick);
+    }
+
+    var afkTimerInterval,
         version = {
             major: 3,
             minor: 0,
             patch: 0,
             prerelease: 'alpha',
-            build: 42,
+            build: 47,
             minified: false,
             /**
              * @this {version}
@@ -478,11 +493,6 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             API.off(API.USER_SKIP, this.proxy.onSkip);
             API.off(API.MOD_SKIP, this.proxy.onSkip);
             Context.off('chat:receive', onChatReceived);
-            for (var i in guiButtons) {
-                if (i === undefined || guiButtons[i] === undefined) continue;
-                $('#plugcubed-btn-' + i).unbind();
-                delete guiButtons[i];
-            }
             $('#plugcubed-css,#font-awesome,#plugcubed-js-extra,#side-right,#side-left,#notify-dialog,.plugcubed-footer,#plug-cubed,#p3-settings,#p3-settings-custom-colors,.p3-s-stream,.p3-s-clear,#waitlist .user .afkTimer').remove();
             $('#room-bar').css('left', 54);
             if (this.customColorsStyle)
@@ -768,13 +778,6 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
             API.on(API.USER_SKIP, this.proxy.onSkip);
             API.on(API.MOD_SKIP, this.proxy.onSkip);
         },
-        GUIButton: function(setting, id, text) {
-            return $('<div class="item">').addClass('p3-s-' + id + (setting ? ' selected' : '')).append(
-                $('<i class="icon icon-check-blue"></i>')
-            ).append(
-                $('<span>').text(text)
-            ).data('key', id).click(this.proxy.onMenuButtonClick);
-        },
         changeGUIColor: function(id, value) {
             $('.p3-s-' + id).removeClass('selected');
             if (value) $('.p3-s-' + id).addClass('selected');
@@ -837,9 +840,9 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                 $('<div class="container">').append(
                     $('<div class="section">Features</div>')
                 ).append(
-                    this.GUIButton(this.settings.autowoot, 'woot', p3Lang.i18n('menu.autowoot'))
+                    GUIButton(this.settings.autowoot, 'woot', p3Lang.i18n('menu.autowoot'))
                 ).append(
-                    this.GUIButton(this.settings.autorespond, 'autorespond', p3Lang.i18n('menu.autorespond'))
+                    GUIButton(this.settings.autorespond, 'autorespond', p3Lang.i18n('menu.autorespond'))
                 ).append(
                     $('<div class="item">').addClass('p3-s-autorespond-input').append($('<input>').val(plugCubed.settings.awaymsg === '' ? this.defaultAwayMsg : plugCubed.settings.awaymsg).keyup(function() {
                         $(this).val($(this).val().split('@').join(''));
@@ -853,16 +856,16 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                     })
                 ).append(
                     (API.hasPermission(undefined, API.ROLE.BOUNCER) ?
-                        this.GUIButton(this.settings.afkTimers, 'afktimers', p3Lang.i18n('menu.afktimers')) :
+                        GUIButton(this.settings.afkTimers, 'afktimers', p3Lang.i18n('menu.afktimers')) :
                         ''
                     )
                 ).append(
                     (haveRoomSettings ?
-                        this.GUIButton(this.settings.useRoomSettings[window.location.pathname.split('/')[1]] !== undefined ? this.settings.useRoomSettings[window.location.pathname.split('/')[1]] : true, 'roomsettings', p3Lang.i18n('menu.roomsettings')) :
+                        GUIButton(this.settings.useRoomSettings[window.location.pathname.split('/')[1]] !== undefined ? this.settings.useRoomSettings[window.location.pathname.split('/')[1]] : true, 'roomsettings', p3Lang.i18n('menu.roomsettings')) :
                         ''
                     )
                 ).append(
-                    this.GUIButton(false, 'colors', p3Lang.i18n('menu.customchatcolors') + '...')
+                    GUIButton(false, 'colors', p3Lang.i18n('menu.customchatcolors') + '...')
                 ).append(
                     $('<div class="spacer">').append(
                         $('<div class="divider">')
@@ -870,20 +873,36 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
                 ).append(
                     $('<div class="section">' + p3Lang.i18n('notify.header') + '</div>')
                 ).append(
-                    this.GUIButton((this.settings.notify & 1) === 1, 'notify-join', p3Lang.i18n('notify.join')).data('bit', 1)
+                    GUIButton((this.settings.notify & 1) === 1, 'notify-join', p3Lang.i18n('notify.join')).data('bit', 1)
                 ).append(
-                    this.GUIButton((this.settings.notify & 2) === 2, 'notify-leave', p3Lang.i18n('notify.leave')).data('bit', 2)
+                    GUIButton((this.settings.notify & 2) === 2, 'notify-leave', p3Lang.i18n('notify.leave')).data('bit', 2)
                 ).append(
-                    this.GUIButton((this.settings.notify & 4) === 4, 'notify-curate', p3Lang.i18n('notify.curate')).data('bit', 4)
+                    GUIButton((this.settings.notify & 4) === 4, 'notify-curate', p3Lang.i18n('notify.curate')).data('bit', 4)
                 ).append(
-                    this.GUIButton((this.settings.notify & 8) === 8, 'notify-stats', p3Lang.i18n('notify.stats')).data('bit', 8)
+                    GUIButton((this.settings.notify & 8) === 8, 'notify-stats', p3Lang.i18n('notify.stats')).data('bit', 8)
                 ).append(
-                    this.GUIButton((this.settings.notify & 16) === 16, 'notify-updates', p3Lang.i18n('notify.updates')).data('bit', 16)
+                    GUIButton((this.settings.notify & 16) === 16, 'notify-updates', p3Lang.i18n('notify.updates')).data('bit', 16)
                 ).append(
                     (API.hasPermission(undefined, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper() ?
-                        this.GUIButton((this.settings.notify & 32) === 32, 'notify-history', p3Lang.i18n('notify.history')).data('bit', 32).data('perm', API.ROLE.BOUNCER) :
+                        GUIButton((this.settings.notify & 32) === 32, 'notify-history', p3Lang.i18n('notify.history')).data('bit', 32).data('perm', API.ROLE.BOUNCER) :
                         ''
                     )
+                ).append(
+                    (API.hasPermission(undefined, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper() ?
+                        GUIButton((this.settings.notify & 64) === 64, 'notify-song-length', p3Lang.i18n('notify.songLength')).data('bit', 64).data('perm', API.ROLE.BOUNCER) :
+                        ''
+                    )
+                ).append(
+                    $('<div class="item">').addClass('p3-s-notify-song-length-input').append($('<input>').val(plugCubed.settings.notifySongLength).keyup(function() {
+                        $(this).val(parseInt($(this).val(), 10));
+                        plugCubed.settings.awaymsg = $(this).val().trim();
+                    }))
+                    .mouseover(function() {
+                        Context.trigger('tooltip:show', p3Lang.i18n('tooltip.afk'), $(this), true);
+                    })
+                    .mouseout(function() {
+                        Context.trigger('tooltip:hide');
+                    })
                 )
             ).animate({
                 left: 0
@@ -1330,92 +1349,91 @@ define('plugCubed/Model', ['jquery', 'underscore', 'b0226/c224d/cf743', 'b0226/c
         }
     });
 });
-define('plugCubed/dialogs/CustomChatColors', ['jquery', 'b0226/c224d/cf743', 'lang/Lang', 'b0226/c224d/ee0fb', 'plugCubed/Lang'], function($, b, c, d, p3Lang) {
-    var div;
-    var a = b.extend({
-        GUIInput: function(id, text, defaultColor) {
-            return $('<div class="item">').addClass('p3-s-cc-' + id).append(
-                $('<span>').text(text)
-            ).append(
-                $('<span>').addClass('default').css('display', plugCubed.settings.colors[id] === defaultColor ? 'none' : 'block')
-                .mouseover(function() {
-                    d.trigger('tooltip:show', p3Lang.i18n('tooltip.reset'), $(this), true);
-                })
-                .mouseout(function() {
-                    d.trigger('tooltip:hide');
-                })
-                .click(function() {
-                    $(this).parent().find('input').val(defaultColor);
-                    $(this).parent().find('.example').css('background-color', '#' + defaultColor);
-                    $(this).css('display', 'none');
-                    plugCubed.settings.colors[id] = defaultColor;
+define('plugCubed/dialogs/CustomChatColors', ['jquery', 'ac785/bc190/b96e1', 'lang/Lang', 'ac785/bc190/cd0b8', 'plugCubed/Lang'], function($, b, c, d, p3Lang) {
+    function GUIInput(id, text, defaultColor) {
+        return $('<div class="item">').addClass('p3-s-cc-' + id).append(
+            $('<span>').text(text)
+        ).append(
+            $('<span>').addClass('default').css('display', plugCubed.settings.colors[id] === defaultColor ? 'none' : 'block')
+            .mouseover(function() {
+                d.trigger('tooltip:show', p3Lang.i18n('tooltip.reset'), $(this), true);
+            })
+            .mouseout(function() {
+                d.trigger('tooltip:hide');
+            })
+            .click(function() {
+                $(this).parent().find('input').val(defaultColor);
+                $(this).parent().find('.example').css('background-color', '#' + defaultColor);
+                $(this).css('display', 'none');
+                plugCubed.settings.colors[id] = defaultColor;
+                plugCubed.saveSettings();
+                plugCubed.updateCustomColors();
+            })
+        ).append(
+            $('<span>').addClass('example').css('background-color', '#' + plugCubed.settings.colors[id])
+        ).append(
+            $('<input>').val(plugCubed.settings.colors[id]).keyup(function() {
+                if ($(this).val().isRGB()) {
+                    $(this).parent().find('.example').css('background-color', '#' + $(this).val());
+                    plugCubed.settings.colors[id] = $(this).val();
                     plugCubed.saveSettings();
                     plugCubed.updateCustomColors();
-                })
-            ).append(
-                $('<span>').addClass('example').css('background-color', '#' + plugCubed.settings.colors[id])
-            ).append(
-                $('<input>').val(plugCubed.settings.colors[id]).keyup(function() {
-                    if ($(this).val().isRGB()) {
-                        $(this).parent().find('.example').css('background-color', '#' + $(this).val());
-                        plugCubed.settings.colors[id] = $(this).val();
-                        plugCubed.saveSettings();
-                        plugCubed.updateCustomColors();
-                    }
-                    $(this).parent().find('.default').css('display', $(this).val() === defaultColor ? 'none' : 'block');
-                })
-            );
-        },
-        render: function() {
-            if (div !== undefined) {
-                if (div.css('left') === '-270px')
+                }
+                $(this).parent().find('.default').css('display', $(this).val() === defaultColor ? 'none' : 'block');
+            })
+        );
+    }
+    var div, a = b.extend({
+            render: function() {
+                if (div !== undefined) {
+                    if (div.css('left') === '-270px')
+                        return div.animate({
+                            left: $('#p3-settings').width() + 1
+                        });
                     return div.animate({
-                        left: $('#p3-settings').width() + 1
+                        left: -270
                     });
-                return div.animate({
+                }
+                var container = $('<div class="container">').append(
+                    $('<div class="section">').text('User Ranks')
+                );
+                for (var i in plugCubed.colorInfo.ranks)
+                    container.append(GUIInput(i, p3Lang.i18n(plugCubed.colorInfo.ranks[i].title), plugCubed.colorInfo.ranks[i].color));
+                container.append(
+                    $('<div class="spacer">').append($('<div class="divider">'))
+                ).append(
+                    $('<div class="section">').text(p3Lang.i18n('notify.header'))
+                );
+                for (var i in plugCubed.colorInfo.notifications)
+                    container.append(GUIInput(i, p3Lang.i18n(plugCubed.colorInfo.notifications[i].title), plugCubed.colorInfo.notifications[i].color));
+                div = $('<div id="p3-settings-custom-colors" style="left: -270px;">').append(
+                    $('<div class="header">').append(
+                        $('<div class="back">').append(
+                            $('<i class="icon icon-back"></i>')
+                        ).click(function() {
+                            if (div !== undefined) div.animate({
+                                left: -270
+                            });
+                        })
+                    ).append(
+                        $('<div class="title">').append(
+                            $('<span>').text(p3Lang.i18n('menu.customchatcolors'))
+                        )
+                    )
+                ).append(container).animate({
+                    left: $('#p3-settings').width() + 1
+                });
+                $('body').append(div);
+            },
+            hide: function() {
+                if (div !== undefined) div.animate({
                     left: -270
                 });
             }
-            var container = $('<div class="container">').append(
-                $('<div class="section">').text('User Ranks')
-            );
-            for (var i in plugCubed.colorInfo.ranks)
-                container.append(this.GUIInput(i, p3Lang.i18n(plugCubed.colorInfo.ranks[i].title), plugCubed.colorInfo.ranks[i].color));
-            container.append(
-                $('<div class="spacer">').append($('<div class="divider">'))
-            ).append(
-                $('<div class="section">').text(p3Lang.i18n('notify.header'))
-            );
-            for (var i in plugCubed.colorInfo.notifications)
-                container.append(this.GUIInput(i, p3Lang.i18n(plugCubed.colorInfo.notifications[i].title), plugCubed.colorInfo.notifications[i].color));
-            div = $('<div id="p3-settings-custom-colors" style="left: -270px;">').append(
-                $('<div class="header">').append(
-                    $('<div class="back">').append(
-                        $('<i class="icon icon-back"></i>')
-                    ).click(function() {
-                        if (div !== undefined) div.animate({
-                            left: -270
-                        });
-                    })
-                ).append(
-                    $('<div class="title">').append(
-                        $('<span>').text(p3Lang.i18n('menu.customchatcolors'))
-                    )
-                )
-            ).append(container).animate({
-                left: $('#p3-settings').width() + 1
-            });
-            $('body').append(div);
-        },
-        hide: function() {
-            if (div !== undefined) div.animate({
-                left: -270
-            });
-        }
-    });
+        });
     return new a();
 });
-define('plugCubed/dialogs/Userinfo', ['jquery', 'b0226/a4b41/d8071/b6e3f', 'lang/Lang', 'b0226/c224d/cf743', 'b0226/c224d/ee0fb', 'b0226/fefac/b3715', 'plugCubed/Lang'], function($, b, c, d, e, f, p3Lang) {
+define('plugCubed/dialogs/Userinfo', ['jquery', 'ac785/abf10/d9a0c/fbb95', 'lang/Lang', 'ac785/bc190/b96e1', 'ac785/bc190/cd0b8', 'ac785/d94e0/bd874', 'plugCubed/Lang'], function($, b, c, d, e, f, p3Lang) {
     var a = d.extend({
         init: function(id) {
             e.dispatch(new f(f.SHOW, new b.extend({
@@ -1436,7 +1454,7 @@ define('plugCubed/dialogs/Userinfo', ['jquery', 'b0226/a4b41/d8071/b6e3f', 'lang
     });
     return a;
 });
-define('plugCubed/dialogs/Commands', ['jquery', 'b0226/c224d/cf743', 'lang/Lang', 'plugCubed/Lang', 'plugCubed/Utils'], function($, b, c, p3Lang, p3Utils) {
+define('plugCubed/dialogs/Commands', ['jquery', 'ac785/bc190/b96e1', 'lang/Lang', 'plugCubed/Lang', 'plugCubed/Utils'], function($, b, c, p3Lang, p3Utils) {
     var userCommands = [
         ['/nick', 'commands.descriptions.nick'],
         ['/avail', 'commands.descriptions.avail'],
@@ -1499,7 +1517,7 @@ define('plugCubed/dialogs/Commands', ['jquery', 'b0226/c224d/cf743', 'lang/Lang'
         });
     return new a();
 });
-define('plugCubed/StyleManager', ['jquery', 'b0226/c224d/cf743'], function($, Class) {
+define('plugCubed/StyleManager', ['jquery', 'ac785/bc190/b96e1'], function($, Class) {
     var obj,
         styles = {},
         update = function() {
@@ -1555,7 +1573,7 @@ define('plugCubed/Utils', function() {
         }
     };
 });
-define('plugCubed/RoomUserListRow', ['jquery', 'b0226/a4b41/bea4d/c1b95/aeed0', 'plugCubed/Utils'], function($, RoomUserListRow, p3Utils) {
+define('plugCubed/RoomUserListRow', ['jquery', 'ac785/abf10/e9abd/ea1d8/cc098', 'plugCubed/Utils'], function($, RoomUserListRow, p3Utils) {
     return RoomUserListRow.extend({
         vote: function() {
             if (this.model.get("curated") || this.model.get("vote") !== 0) {
@@ -1575,7 +1593,7 @@ define('plugCubed/RoomUserListRow', ['jquery', 'b0226/a4b41/bea4d/c1b95/aeed0', 
         }
     });
 });
-define('plugCubed/MenuView', ['jquery', 'underscore', 'backbone', 'b0226/c224d/ee0fb'], function($, _, Backbone, Context) {
+define('plugCubed/MenuView', ['jquery', 'underscore', 'backbone', 'ac785/bc190/cd0b8'], function($, _, Backbone, Context) {
     var a = Backbone.View.extend({
         id: 'plug-cubed',
         initialize: function() {
@@ -1632,7 +1650,7 @@ define('plugCubed/MenuView', ['jquery', 'underscore', 'backbone', 'b0226/c224d/e
     });
     return PlugMenuView;
 });
-define('plugCubed/Lang', ['jquery', 'b0226/c224d/cf743'], function($, Class) {
+define('plugCubed/Lang', ['jquery', 'ac785/bc190/b96e1'], function($, Class) {
     var language = {},
         isLoaded = false,
         Lang = Class.extend({
@@ -1683,7 +1701,7 @@ define('plugCubed/Lang', ['jquery', 'b0226/c224d/cf743'], function($, Class) {
         });
     return new Lang;
 });
-define('plugCubed/Loader', ['jquery', 'b0226/c224d/cf743', 'plugCubed/Model', 'b0226/f622d/fe28d', 'b0226/a4b41/d8071/b6e3f', 'plugCubed/Lang', 'plugCubed/Utils'], function($, Class, Model, LocalStorage, ADV, p3Lang, p3Utils) {
+define('plugCubed/Loader', ['jquery', 'ac785/bc190/b96e1', 'plugCubed/Model', 'ac785/ab6db/a4893', 'ac785/abf10/d9a0c/fbb95', 'plugCubed/Lang', 'plugCubed/Utils'], function($, Class, Model, LocalStorage, ADV, p3Lang, p3Utils) {
     var test = LocalStorage.getItem('plugCubedLang');
     if (test !== null && test !== '@@@')
         return Class.extend({
