@@ -1,6 +1,6 @@
 {
     "running": "Plug&#179 draait, versie %1.",
-    "commandsHelp": "Gebruik \'/commands\' om alle chat commando\'s te laten zien.",
+    "commandsHelp": "Gebruik '/commands' om alle chat commando's te laten zien.",
     "newVersion": "Er is een nieuwe versie van plug&#179; beschikbaar. Jouw script zal in een paar seconden verversen.",
     "automuted": "%1 automatisch gedempt.",
     "nextsong": "toon het volgende lied en of hij al in de geschiedenis staat",
@@ -15,9 +15,9 @@
         "commandNotEnabled": "%1 automatisch antwoord is niet ingeschakeld"
     },
     "commands": {
-        "header": "plugCubed Commando\'s",
-        "userCommands": "Gebruiker commando\'s.",
-        "modCommands": "Moderator commando\'s",
+        "header": "plugCubed Commando's",
+        "userCommands": "Gebruiker commando's.",
+        "modCommands": "Moderator commando's",
         "variables": {
             "username": "gebruikersnaam",
             "word": "woord",
@@ -60,7 +60,7 @@
         }
     },
     "notify": {
-        "header": "plugCubed Commando\'s",
+        "header": "plugCubed Commando's",
         "join": "sluit aan bij het podium of de wachtlijst",
         "leave": "verlaat het podium of de wachtlijst",
         "curate": "voeg dit lied toe aan je geselecteerde afspeellijst",
@@ -82,7 +82,7 @@
         }
     },
     "info": {
-        "header": "plugCubed Commando\'s",
+        "header": "plugCubed Commando's",
         "name": "Naam",
         "title": "Titel",
         "specialTitles": {
