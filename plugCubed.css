@@ -472,3 +472,43 @@
     top:70px;
     z-index:-1;
 }
+
+.p3slider, .p3slider .hit, .p3slider .line, .p3slider .circle {
+    position:absolute;
+}
+
+.p3slider {
+    right:64px;
+    top:0;
+    height:25px;
+    width:100px;
+    z-index:5;
+}
+
+.p3slider .hit {
+    top:8px;
+    left:14.5px;
+    height:23px;
+    width:85px;
+    z-index:3;
+    cursor:pointer;
+}
+
+.p3slider .line {
+    left:8px;
+    top:12px;
+    width:85px;
+    height:1px;
+    background:#808691;
+    z-index:1;
+}
+
+.p3slider .circle {
+    left:46px;
+    top:6px;
+    width:13px;
+    height:13px;
+    border-radius:50%;
+    background:#EEE;
+    z-index:2;
+}
