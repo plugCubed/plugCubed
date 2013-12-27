@@ -473,11 +473,12 @@
     z-index:-1;
 }
 
-.p3slider, .p3slider .hit, .p3slider .line, .p3slider .circle {
+.p3slider .hit, .p3slider .line, .p3slider .circle {
     position:absolute;
 }
 
 .p3slider {
+    position:relative;
     right:64px;
     top:0;
     height:25px;
