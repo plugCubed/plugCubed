@@ -309,7 +309,7 @@
     left:auto;
     width:20px;
     height:20px;
-    background-image:url('http://alpha.plugcubed.net/images/default_settings.png');
+    background-image:url('http://files.plugcubed.net/images/default_settings.png');
     cursor:pointer;
 }
 
@@ -448,7 +448,7 @@
 }
 
 .p3-s-stream {
-    background-image:url('http://alpha.plugcubed.net/images/stream_on_off.png');
+    background-image:url('http://files.plugcubed.net/images/stream_on_off.png');
     left:205px;
     top:7px;
 }
@@ -458,7 +458,7 @@
 }
 
 .p3-s-clear {
-    background-image:url('http://alpha.plugcubed.net/images/clear_chat.png');
+    background-image:url('http://files.plugcubed.net/images/clear_chat.png');
     left:254px;
 }
 
