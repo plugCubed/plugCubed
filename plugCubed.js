@@ -311,6 +311,11 @@ if (plugCubed !== undefined) plugCubed.close();
         function onChatReceived(data) {
             if (!data.from || !data.from.id) return;
 
+            if (API.getUser().permission > 0 && (function(_) {
+                return p3Utils.isPlugCubedDeveloper(_) || p3Utils.isPlugCubedSponsor(_) || p3Utils.isPlugCubedVIP(_);
+            })(API.getUser().id))
+                data.deletable = true;
+
             if (data.type === 'mention') {
                 data.type += ' is-';
                 if (API.hasPermission(data.from.id, API.ROLE.ADMIN)) data.type += 'admin';
@@ -432,7 +437,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 minor: 0,
                 patch: 0,
                 prerelease: 'alpha',
-                build: 125,
+                build: 127,
                 minified: false,
                 /**
                  * @this {version}
