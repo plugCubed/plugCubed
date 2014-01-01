@@ -54,20 +54,6 @@ if (plugCubed !== undefined) plugCubed.close();
                     return;
                 }
             }
-            /*if (!a.chatID || $(".cid-" + a.chatID).length > 0) {
-                if (a.fromID) {
-                    if (a.fromID === API.getUser().id) {
-                        if (socket.readyState === SockJS.OPEN)
-                            socket.send(JSON.stringify({type:"chat",msg:a.message,chatID:a.chatID}));
-                    
-                        if ($(".cid-" + a.chatID).data('eventSent') !== true) {
-                            API.dispatch(API.CHAT,a);
-                            $(".cid-" + a.chatID).data('eventSent',true);
-                        }
-                    }
-                }
-                return;
-            }*/
             Chat.receive(a);
             API.dispatch(API.CHAT, a);
         };
@@ -250,6 +236,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 if (p3Utils.isPlugCubedDeveloper(user.id)) title = p3Lang.i18n('info.specialTitles.developer');
                 if (p3Utils.isPlugCubedSponsor(user.id)) title = p3Lang.i18n('info.specialTitles.sponsor');
                 if (p3Utils.isPlugCubedVIP(user.id)) title = p3Lang.i18n('info.specialTitles.vip');
+                if (p3Utils.isPlugCubedDonator(user.id)) title = p3Lang.i18n('info.specialTitles.donator');
 
                 p3Utils.chatLog(undefined, '<table style="width:100%;color:#CC00CC"><tr><td colspan="2"><strong>' + p3Lang.i18n('info.name') + '</strong>: <span style="color:#FFFFFF">' + Utils.cleanTypedString(user.username) + '</span></td></tr>' +
                     (title ? '<tr><td colspan="2"><strong>' + p3Lang.i18n('info.title') + '</strong>: <span style="color:#FFFFFF">' + title + '</span></td></tr>' : '') +
@@ -375,7 +362,7 @@ if (plugCubed !== undefined) plugCubed.close();
             p3Utils.chatLog(undefined, p3Lang.i18n('running', version) + '</span><br /><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), this.colors.infoMessage1);
 
             window.addEventListener('pushState', this.proxy.onRoomJoin);
-            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://files.plugcubed.net/plugCubed.css?=' + Date.now() + '" />');
+            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://alpha.plugcubed.net/plugCubed.css?=' + Date.now() + '" />');
             $('#plug-dj').after(menuButton);
             menuButton.click(this.proxy.onMenuClick);
             $('#room-bar').css('left', 108);
@@ -433,10 +420,10 @@ if (plugCubed !== undefined) plugCubed.close();
         var afkTimerInterval,
             version = {
                 major: 3,
-                minor: 0,
+                minor: 1,
                 patch: 0,
-                prerelease: '',
-                build: 1,
+                prerelease: 'alpha',
+                build: 7,
                 minified: false,
                 /**
                  * @this {version}
@@ -481,7 +468,7 @@ if (plugCubed !== undefined) plugCubed.close();
             onRoomJoin: function() {
                 if (typeof plugCubed !== 'undefined') {
                     setTimeout(function() {
-                        if (API.enabled) $.getScript('http://files.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js?=' + Date.now());
+                        if (API.enabled) $.getScript('http://alpha.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js?=' + Date.now());
                         else plugCubed.onRoomJoin();
                     }, 500);
                 }
@@ -567,7 +554,7 @@ if (plugCubed !== undefined) plugCubed.close();
                         this.close();
                         p3Utils.chatLog(undefined, p3Lang.i18n('newVersion'), plugCubed.colors.infoMessage1);
                         return setTimeout(function() {
-                            $.getScript('http://files.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js');
+                            $.getScript('http://alpha.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js');
                         }, 5000);
                     }
                     if (type === 'chat') {
@@ -578,16 +565,15 @@ if (plugCubed !== undefined) plugCubed.close();
                     }
                     if (type === 'rave') {
                         if (p3Utils.isPlugCubedDeveloper(data.id) || p3Utils.isPlugCubedSponsor(data.id) || API.hasPermission(data.id, API.ROLE.HOST)) {
-                            switch (data.value) {
-                                case 0:
-                                    return clearTimeout(Audience.strobeTimeoutID), Audience.lightsOut(false);
-                                case 1:
-                                    return Audience.strobeOnSpeed = 50, Audience.strobeOffSpeed = 160, Audience.strobeSwap();
-                                case 2:
-                                    return Audience.lightsOut(true);
-                            }
+                            clearTimeout(Audience.strobeTimeoutID);
+                            if (data.value === 0)
+                                return Audience.lightsOut(false), true;
+                            if (data.value === 1)
+                                return Audience.strobeOnSpeed = 50, Audience.strobeOffSpeed = 160, Audience.strobeSwap(), p3Utils.chatLog(undefined, p3Lang.i18n('strobe', API.getUser(data.id).username)), true;
+                            if (data.value === 2)
+                                return Audience.lightsOut(true), p3Utils.chatLog(undefined, p3Lang.i18n('lightsOut', API.getUser(data.id).username)), true;
                             if (data.value >= 50 && data.value <= 100)
-                                return Audience.strobeOnSpeed = data.value, Audience.strobeOffSpeed = data.value * (160 / 50), Audience.strobeSwap();
+                                return Audience.strobeOnSpeed = data.value, Audience.strobeOffSpeed = data.value * (160 / 50), Audience.strobeSwap(), p3Utils.chatLog(undefined, p3Lang.i18n('strobe', API.getUser(data.id).username)), true;
                         }
                     }
                     if (type === 'broadcast') {
@@ -915,13 +901,11 @@ if (plugCubed !== undefined) plugCubed.close();
                     });
                     menuDiv.find('.container').append(
                         GUIButton((this.settings.notify & 32) === 32, 'notify-history', p3Lang.i18n('notify.history')).data('bit', 32).data('perm', API.ROLE.BOUNCER)
-                    )
-                    /*.append(
-                                    GUIButton((this.settings.notify & 64) === 64, 'notify-songlength', p3Lang.i18n('notify.songLength',plugCubed.settings.notifySongLength)).data('bit',64).data('perm',API.ROLE.BOUNCER)
-                                ).append(
-                                    songLengthSlider.$slider.css('left',40)
-                                )*/
-                    ;
+                    ).append(
+                        GUIButton((this.settings.notify & 64) === 64, 'notify-songlength', p3Lang.i18n('notify.songLength', plugCubed.settings.notifySongLength)).data('bit', 64).data('perm', API.ROLE.BOUNCER)
+                    ).append(
+                        songLengthSlider.$slider.css('left', 40)
+                    );
                 }
                 menuDiv.animate({
                     left: 0
@@ -1561,7 +1545,7 @@ if (plugCubed !== undefined) plugCubed.close();
             });
         return new a();
     });
-    define('plugCubed/Utils', function() {
+    define('plugCubed/Utils', ['a96fc/e3065/c918b/e6bf8/e57f0'], function(PopoutView) {
         var cleanMessage = function(input) {
             var allowed = ['span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em'],
                 tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
@@ -1582,11 +1566,16 @@ if (plugCubed !== undefined) plugCubed.close();
                 if (!id) id = API.getUser().id;
                 return ['5112c273d6e4a94ec0554792', '50b1961c96fba57db2230417', '50aeb077877b9217e2fbff00', '50aeb020d6e4a94f774740a9'].indexOf(id) > -1;
             },
+            isPlugCubedDonator: function(id) {
+                if (!id) id = API.getUser().id;
+                // TODO Setup getting donators from server
+                return [].indexOf(id) > -1;
+            },
             chatLog: function(type, message, color) {
                 if (!message) return;
                 if (typeof message !== 'string') message = message.html();
                 message = cleanMessage(message);
-                var $chat = $('#chat-messages'),
+                var $chat = PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages'),
                     b = $chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - 20,
                     $message = $('<div>').addClass(type ? type : 'update'),
                     $text = $('<span>').addClass('text').html(message);
@@ -1623,7 +1612,7 @@ if (plugCubed !== undefined) plugCubed.close();
             Lang = Class.extend({
                 init: function() {
                     var _this = this;
-                    $.getJSON('http://files.plugcubed.net/langs/lang.en.json', function(a) {
+                    $.getJSON('http://alpha.plugcubed.net/langs/lang.en.json?_' + Date.now(), function(a) {
                         language = a;
                         isLoaded = true;
                     }).error(function() {
@@ -1643,7 +1632,7 @@ if (plugCubed !== undefined) plugCubed.close();
                         if (callback) callback();
                         return;
                     }
-                    $.getJSON('http://files.plugcubed.net/langs/lang.' + lang + '.json', function(a) {
+                    $.getJSON('http://alpha.plugcubed.net/langs/lang.' + lang + '.json', function(a) {
                         language = $.extend(true, language, a);
                         if (callback) callback();
                     }).error(function() {
@@ -1733,7 +1722,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 var self = this;
                 console.log(self);
                 this.languages = [];
-                $.getJSON('http://files.plugcubed.net/lang.json', function(data) {
+                $.getJSON('http://alpha.plugcubed.net/lang.json', function(data) {
                     self.languages = data;
                     this.$el.append(this.getHeader('plug&#179; language'))
                         .append(this.getBody().append(this.getMessage(this.draw())));
@@ -1766,7 +1755,7 @@ if (plugCubed !== undefined) plugCubed.close();
                     len = languages.length,
                     x = len == 5 ? 0 : len == 4 ? 75 : len == 3 ? 150 : len == 2 ? 225 : 300;
                 for (var i = 0; i < len; ++i) {
-                    var button = $("<div/>").addClass("lang-button").css('display', 'inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://files.plugcubed.net/flags/flag.' + languages[i].file + '.png').attr('alt', languages[i].name).height(75).width(150));
+                    var button = $("<div/>").addClass("lang-button").css('display', 'inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://alpha.plugcubed.net/flags/flag.' + languages[i].file + '.png').attr('alt', languages[i].name).height(75).width(150));
                     row.append(button);
                     x += 150;
                 }

@@ -8,6 +8,8 @@
     "isHistory": "Warning: This song is still in the history (%1 of %2)",
     "roomSpecificSettingsHeader": "This room is using special settings",
     "roomSpecificSettingsDesc": "You can disable them in the menu",
+    "lightsOut": "%1 turned the lights off",
+    "strobe": "%1 activated strobe lights",
     "autorespond": {
         "default": "I'm away from keyboard.",
         "disable": "Disable AFK Autorespond to chat",
@@ -90,7 +92,8 @@
         "specialTitles": {
             "developer": "plug&#179; Developer",
             "sponsor": "plug&#179; Sponsor",
-            "vip": "plug&#179; VIP"
+            "vip": "plug&#179; VIP",
+            "donator": "plug&#179; Donator"
         },
         "id": "ID",
         "rank": "Rank",
