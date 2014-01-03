@@ -401,6 +401,11 @@ if (plugCubed !== undefined) plugCubed.close();
             else if (data.from.id == API.getUser().id) data.type += 'you';
         }
 
+        function onMediaChange() {
+            if (PlaybackModel.get('mutedOnce') === true)
+                PlaybackModel.set('volume', PlaybackModel.get('lastVolume'));
+        }
+
         function __init() {
             afkTimerInterval = setInterval(afkTimerTick, 1E3);
 
@@ -494,6 +499,8 @@ if (plugCubed !== undefined) plugCubed.close();
             );
             this.changeGUIColor('stream', DB.settings.streamDisabled);
 
+            PlaybackModel.on('change:media', onMediaChange);
+            PlaybackModel._events['change:media'].unshift(PlaybackModel._events['change:media'].pop());
             Context.on('chat:receive', onChatReceived);
             Context._events['chat:receive'].unshift(Context._events['chat:receive'].pop());
 
@@ -528,7 +535,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 minor: 1,
                 patch: 0,
                 prerelease: 'alpha',
-                build: 48,
+                build: 57,
                 minified: false,
                 /**
                  * @this {version}
@@ -1117,8 +1124,6 @@ if (plugCubed !== undefined) plugCubed.close();
              * @param {plugDJAdvanceEvent} data
              */
             onDjAdvance: function(data) {
-                if (PlaybackModel.get('mutedOnce') === true)
-                    PlaybackModel.set('volume', PlaybackModel.get('lastVolume'));
                 if ((this.settings.notify & 8) === 8)
                     p3Utils.chatLog(undefined, p3Lang.i18n('notify.message.stats', data.lastPlay.score.positive, data.lastPlay.score.negative, data.lastPlay.score.curates), this.settings.colors.stats);
                 if ((this.settings.notify & 16) === 16)
@@ -1676,8 +1681,8 @@ if (plugCubed !== undefined) plugCubed.close();
         var cleanMessage = function(input) {
             var allowed = ['span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em'],
                 tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
-            return input.replace(tags, function($0, $1) {
-                return allowed.indexOf($1.toLowerCase()) > -1 ? $0 : '';
+            return input.replace(tags, function(a, b) {
+                return allowed.indexOf(b.toLowerCase()) > -1 ? a : '';
             });
         }
         return {
@@ -1897,15 +1902,48 @@ if (plugCubed !== undefined) plugCubed.close();
         });
     });
 
-    define('plugCubed/VolumeView', ['underscore', 'a96fc/e3065/c918b/d02b2/a18c4', 'a96fc/d1d9f/b83f5', 'hbs!template/room/playback/Volume'], function(e, original, r, s) {
+    /**
+        Modified version of plug.dj's VolumeView
+        VolumeView copyright (C) 2013 by Plug DJ, Inc.
+    */
+    define('plugCubed/VolumeView', ['underscore', 'a96fc/e3065/c918b/d02b2/a18c4', 'a96fc/d1d9f/b83f5', 'hbs!template/room/playback/Volume', 'a96fc/ff0b8/d6979', 'plugCubed/Lang'], function(e, original, r, s, Context, p3Lang) {
         var o = original.extend({
             render: function() {
-                return this.$el.html(s()), this.$icon = this.$(".button i"), this.$hit = this.$(".hit").mousedown(e.bind(this.onStart, this)), this.$slider = this.$(".slider"), this.$circle = this.$(".circle"), this.$span = this.$("span"), this.max = this.$hit.width() - this.$circle.width(), this.$circle.css("left", parseInt(this.$hit.css("left")) + this.max * (r.get("volume") / 100) - this.$circle.width() / 2), this.$(".button").on("click", this.clickBind), r.on("change:volume change:muted", this.onChange, this), this.onChange(), this
+                this.$el.html(s());
+                this.$icon = this.$(".button i");
+                this.$hit = this.$(".hit").mousedown(e.bind(this.onStart, this));
+                this.$slider = this.$(".slider");
+                this.$circle = this.$(".circle");
+                this.$span = this.$("span");
+                this.max = this.$hit.width() - this.$circle.width();
+                this.$circle.css("left", parseInt(this.$hit.css("left")) + this.max * (r.get("volume") / 100) - this.$circle.width() / 2);
+                this.$(".button").on("click", this.clickBind).mouseover(function() {
+                    if (typeof plugCubed !== 'undefined') {
+                        if (r.get('mutedOnce'))
+                            Context.trigger('tooltip:show', p3Lang.i18n('tooltip.mutedOnce'), $(this), true);
+                        if (r.get('muted'))
+                            Context.trigger('tooltip:show', p3Lang.i18n('tooltip.muted'), $(this), true);
+                    }
+                }).mouseout(function() {
+                    if (typeof plugCubed !== 'undefined')
+                        Context.trigger('tooltip:hide');
+                });
+                r.on("change:volume change:muted", this.onChange, this);
+                this.onChange();
+                return this;
             },
             remove: function() {
                 this._super(), this.$(".button").off("click", this.clickBind), r.off("change:volume change:muted", this.onChange, this), this.$el.empty(), this.$el.off(), this.off(), this.$el = undefined, this.el = undefined, this.$icon = this.$hit = this.$slider = this.$circle = undefined
             },
             onClick: function() {
+                if (typeof plugCubed !== 'undefined') {
+                    Context.trigger('tooltip:hide');
+                    if (r.get('mutedOnce'))
+                        Context.trigger('tooltip:show', p3Lang.i18n('tooltip.muted'), this.$(".button"), true);
+                    else if (!r.get('muted'))
+                        Context.trigger('tooltip:show', p3Lang.i18n('tooltip.mutedOnce'), this.$(".button"), true);
+                }
+
                 if (r.get('mutedOnce'))
                     r.onVolumeChange();
                 else {

@@ -165,7 +165,9 @@
         "stream": "Toggle Video/Audio Stream",
         "clear": "Clear Chat",
         "afk": "AFK Message",
-        "reset": "Reset to default"
+        "reset": "Reset to default",
+        "muted": "All songs are muted",
+        "mutedOnce": "Current song is muted"
     },
     "error": {
         "userNotFound": "User not found",
