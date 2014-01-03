@@ -145,16 +145,14 @@ if (plugCubed !== undefined) plugCubed.close();
                         Styles.set('rss-imports', roomImports.join('\n'));
                     }
                     // css.setting
-                    if (settings.css.rule !== undefined && $.isArray(settings.css.rule)) {
+                    if (settings.css.rule !== undefined) {
                         var roomRules = [];
                         for (var i in settings.css.rule) {
-                            if ($.isArray(settings.css.rule[i])) {
-                                var rule = i + ' {';
-                                for (var j in settings.css.rule[i])
-                                    rule += j + ':' + settings.css.rule[i][j];
-                                rule += '}';
-                                roomRules.push(rule);
-                            }
+                            var rule = i + ' {';
+                            for (var j in settings.css.rule[i])
+                                rule += j + ':' + settings.css.rule[i][j];
+                            rule += '}';
+                            roomRules.push(rule);
                         }
                         Styles.set('rss-rules', roomRules.join('\n'));
                     }
@@ -531,7 +529,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 minor: 1,
                 patch: 0,
                 prerelease: 'alpha',
-                build: 42,
+                build: 45,
                 minified: false,
                 /**
                  * @this {version}
