@@ -148,11 +148,10 @@ if (plugCubed !== undefined) plugCubed.close();
                     if (settings.css.rule !== undefined) {
                         var roomRules = [];
                         for (var i in settings.css.rule) {
-                            var rule = i + ' {';
+                            var rule = [];
                             for (var j in settings.css.rule[i])
-                                rule += j + ':' + settings.css.rule[i][j];
-                            rule += '}';
-                            roomRules.push(rule);
+                                rule.push(j + ':' + settings.css.rule[i][j]);
+                            roomRules.push(i + ' {' + rule.join(';') + '}');
                         }
                         Styles.set('rss-rules', roomRules.join('\n'));
                     }
@@ -529,7 +528,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 minor: 1,
                 patch: 0,
                 prerelease: 'alpha',
-                build: 45,
+                build: 48,
                 minified: false,
                 /**
                  * @this {version}
