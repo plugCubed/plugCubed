@@ -36,6 +36,9 @@ String.prototype.isNumber = function() {
 String.prototype.isRGB = function() {
     return /^(#|)(([0-9A-F]{6}$)|([0-9A-F]{3}$))/i.test(this.substr(0, 1) === '#' ? this : '#' + this);
 };
+String.prototype.toRGB = function() {
+    return this.isRGB() ? (this.substr(0, 1) === '#' ? this : '#' + this) : undefined;
+};
 Math.randomRange = function(a, b) {
     return a + Math.floor(Math.random() * (b - a + 1));
 };
@@ -45,7 +48,7 @@ if (plugCubed !== undefined) plugCubed.close();
     if (!requirejs.defined('a96fc/ff0b8/e72a9'))
         return API.chatLog('This version of plug&#179; is not compatible with this version of plug.dj', true), false;
 
-    define('plugCubed/Model', ['jquery', 'underscore', 'a96fc/ff0b8/e72a9', 'a96fc/ff0b8/d6979', 'a96fc/e233f/decae', 'a96fc/ec8af/b8e38', 'a96fc/e1b7a/f9c34', 'a96fc/d1d9f/bc3f0', 'a96fc/de304/f1ee5', 'a96fc/eccd5/bad17', 'a96fc/eccd5/b1bdb', 'a96fc/d1d9f/dbde3', 'lang/Lang', 'a96fc/e3065/c918b/f809a', 'a96fc/de304/c00b4', 'a96fc/de304/ba582', 'plugCubed/StyleManager', 'a96fc/e3065/c918b/ffc65/f6407', 'a96fc/e3065/c918b/ffc65/f8768', 'plugCubed/RoomUserListRow', 'plugCubed/Lang', 'plugCubed/Utils', 'a96fc/ec8af/f41fa', 'a96fc/d1d9f/b83f5', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/Commands', 'plugCubed/Slider'], function($, _, Class, Context, Chat, LocalStorage, Utils, Room, MCE, Socket, SIO, TUM, Lang, Audience, RJE, RSE, Styles, RoomUserListView, RoomUserListRow, _RoomUserListRow, p3Lang, p3Utils, DB, PlaybackModel, dialogColors, dialogCommands, Slider) {
+    define('plugCubed/Model', ['jquery', 'underscore', 'a96fc/ff0b8/e72a9', 'a96fc/ff0b8/d6979', 'a96fc/e233f/decae', 'a96fc/ec8af/b8e38', 'a96fc/e1b7a/f9c34', 'a96fc/d1d9f/bc3f0', 'a96fc/de304/f1ee5', 'a96fc/eccd5/bad17', 'a96fc/eccd5/b1bdb', 'a96fc/d1d9f/dbde3', 'lang/Lang', 'a96fc/e3065/c918b/f809a', 'a96fc/de304/c00b4', 'a96fc/de304/ba582', 'plugCubed/StyleManager', 'a96fc/e3065/c918b/ffc65/f6407', 'a96fc/e3065/c918b/ffc65/f8768', 'plugCubed/RoomUserListRow', 'plugCubed/Lang', 'plugCubed/Utils', 'a96fc/ec8af/f41fa', 'a96fc/d1d9f/b83f5', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/Commands', 'plugCubed/Slider', 'plugCubed/VolumeView'], function($, _, Class, Context, Chat, LocalStorage, Utils, Room, MCE, Socket, SIO, TUM, Lang, Audience, RJE, RSE, Styles, RoomUserListView, RoomUserListRow, _RoomUserListRow, p3Lang, p3Utils, DB, PlaybackModel, dialogColors, dialogCommands, Slider, VolumeView) {
         SIO.sio.$events.chat = Socket.listener.chat = function(a) {
             if (typeof plugCubed !== 'undefined') {
                 if (a.fromID) setUserData(a.fromID, 'lastChat', Date.now());
@@ -78,52 +81,126 @@ if (plugCubed !== undefined) plugCubed.close();
                 haveRoomSettings = true;
                 roomChatColors = {};
                 roomChatIcons = {};
+                $('#p3-dj-booth').remove();
+
+                Styles.unset(['rss-background-color', 'rss-background-image', 'rss-booth', 'rss-fonts', 'rss-imports', 'rss-rules', 'rss-maingui']);
+
+                // colors
                 if (settings.colors !== undefined) {
-                    if (settings.colors.background)
-                        Styles.set('rss-background-color', 'body { background-color: ' + (settings.colors.background.substr(0, 1) !== '#' ? '#' : '') + settings.colors.background + '!important; }');
-                    else
-                        Styles.unset('rss-background-color');
+                    // colors.background
+                    if (settings.colors.background !== undefined && typeof settings.colors.background === 'string' && settings.colors.background.isRGB())
+                        Styles.set('rss-background-color', 'body { background-color: ' + settings.colors.background.toRGB() + '!important; }');
+
+                    // colors.chat
                     if (settings.colors.chat !== undefined) {
                         var b = {};
                         for (var i in settings.colors.chat) {
-                            if (['admin', 'ambassador', 'bouncer', 'cohost', 'residentdj', 'leader', 'host', 'manager', 'volunteer'].indexOf(i) > -1 && settings.colors.chat[i].isRGB())
+                            if (['admin', 'ambassador', 'bouncer', 'cohost', 'residentdj', 'leader', 'host', 'manager', 'volunteer'].indexOf(i) > -1 && typeof settings.colors.chat[i] === 'string' && settings.colors.chat[i].isRGB())
                                 b[i] = settings.colors.chat[i].substr(0, 1) === '#' ? settings.colors.chat[i].substr(1) : settings.colors.chat[i];
                         }
                         roomChatColors = b;
                     }
-                } else Styles.unset('rss-background-color');
+
+                    // colors.header
+                    if (settings.colors.header !== undefined && typeof settings.colors.header === 'string' && settings.colors.header.isRGB())
+                        Styles.set('rss-header', '#header { background-color: ' + settings.colors.header.toRGB() + '!important; }');
+
+                    // colors.footer
+                    if (settings.colors.footer !== undefined && typeof settings.colors.footer === 'string' && settings.colors.footer.isRGB())
+                        Styles.set('rss-footer', '#footer { background-color: ' + settings.colors.footer.toRGB() + '!important; }');
+                }
+
+                // css
+                if (settings.css !== undefined) {
+                    // css.font
+                    if (settings.css.font !== undefined && $.isArray(settings.css.font)) {
+                        var roomFonts = [];
+                        for (var i in settings.css.font) {
+                            var font = settings.css.font[i];
+                            if (font.name !== undefined && font.url !== undefined) {
+                                font.toString = function() {
+                                    var sources = [];
+                                    if (typeof this.url === 'string')
+                                        sources.push('url("' + this.url + '")');
+                                    else {
+                                        for (var j in this.url) {
+                                            if (['woff', 'opentype', 'svg', 'embedded-opentype', 'truetype'])
+                                                sources.push('url("' + this.url[j] + '") format("' + j + '")')
+                                        }
+                                    }
+                                    return '@font-face { font-family: "' + this.name + '"; src: ' + sources.join(',') + '; }';
+                                };
+                                roomFonts.push(font.toString());
+                            }
+                        }
+                        Styles.set('rss-fonts', roomFonts.join('\n'));
+                    }
+                    // css.import
+                    if (settings.css.import !== undefined && $.isArray(settings.css.import)) {
+                        var roomImports = [];
+                        for (var i in settings.css.import) {
+                            if (typeof settings.css.import[i] === 'string')
+                                roomImports.push('@import url("' + settings.css.import[i] + '")');
+                        }
+                        Styles.set('rss-imports', roomImports.join('\n'));
+                    }
+                    // css.setting
+                    if (settings.css.rule !== undefined && $.isArray(settings.css.rule)) {
+                        var roomRules = [];
+                        for (var i in settings.css.rule) {
+                            if ($.isArray(settings.css.rule[i])) {
+                                var rule = i + ' {';
+                                for (var j in settings.css.rule[i])
+                                    rule += j + ':' + settings.css.rule[i][j];
+                                rule += '}';
+                                roomRules.push(rule);
+                            }
+                        }
+                        Styles.set('rss-rules', roomRules.join('\n'));
+                    }
+                }
+
+                // images
                 if (settings.images !== undefined) {
-                    Audience.defaultRoomElements();
-                    if (settings.images.audience !== undefined)
-                        $('#room-wheel').css('display', settings.images.audience.wheel && settings.images.audience.wheel === "false" ? 'none' : '');
-                    else $('#room-wheel').css('display', '');
-                    Context.trigger('audience:redraw');
+                    // images.background
                     if (settings.images.background)
                         Styles.set('rss-background-image', 'body { background-image: url("' + settings.images.background + '")!important; }');
-                    else
-                        Styles.unset('rss-background-image');
+
+                    // images.playback
                     if ($('#playback .background img').data('_o') === undefined)
                         $('#playback .background img').data('_o', $('#playback .background img').attr('src'));
-                    $('#playback .background img').attr('src', settings.images.playback ? settings.images.playback : $('#playback .background img').data('_o'));
-                    $('#p3-dj-booth').remove();
-                    if (settings.images.booth !== undefined)
-                        $('#dj-booth').append($('<div id="p3-dj-booth">').css('background-image', 'url("' + settings.images.booth.booth + '")'));
+                    $('#playback .background img').attr('src', settings.images.playback && typeof settings.images.playback === 'string' ? settings.images.playback : $('#playback .background img').data('_o'));
+
+                    // images.booth
+                    if (settings.images.booth !== undefined && typeof settings.images.booth === 'string')
+                        $('#dj-booth').append($('<div id="p3-dj-booth">').css('background-image', 'url("' + settings.images.booth + '")'));
                     roomChatIcons = settings.images.icons;
-                } else {
-                    Audience.defaultRoomElements();
-                    $('#room-wheel').css('display', '');
-                    Styles.unset('rss-background-image');
-                    Styles.unset('rss-booth');
-                    Context.trigger('audience:redraw');
                 }
-                /*if (settings.text !== undefined) {
+
+                // rules
+                if (settings.rules !== undefined) {
+                    // rules.allowAutowoot
+                    if (settings.rules.allowAutowoot !== undefined && typeof settings.rules.allowAutowoot === 'boolean')
+                        roomRules.allowAutowoot = settings.rules.allowAutowoot;
+
+                    // rules.allowAutorespond
+                    if (settings.rules.allowAutorespond !== undefined && typeof settings.rules.allowAutorespond === 'boolean')
+                        roomRules.allowAutorespond = settings.rules.allowAutorespond;
+                }
+                /*
+                // text
+                if (settings.text !== undefined) {
+                    // text.plugCubed
                     if (settings.text.plugCubed !== undefined) {
 
                     }
+
+                    // text.plugDJ
                     if (settings.text.plugDJ !== undefined) {
 
                     }
-                }*/
+                }
+                */
                 plugCubed.updateCustomColors();
             }
         }
@@ -366,6 +443,37 @@ if (plugCubed !== undefined) plugCubed.close();
             $('#plug-dj').after(menuButton);
             menuButton.click(this.proxy.onMenuClick);
             $('#room-bar').css('left', 108);
+
+            PlaybackModel.off('change:volume', PlaybackModel.onVolumeChange);
+            /** @this = {PlaybackModel} */
+            PlaybackModel.onVolumeChange = function() {
+                if (typeof plugCubed === 'undefined')
+                    this.set('muted', this.get('volume') == 0);
+                else {
+                    if (this.get('mutedOnce') === undefined)
+                        this.set('mutedOnce', false);
+
+                    if (this.get('volume') === 0) {
+                        if (this.get('mutedOnce') === true) {
+                            this.set('mutedOnce', false);
+                            this.set('muted', true);
+                        } else if (this.get('muted') === true)
+                            this.set('muted', false);
+                        else
+                            this.set('mutedOnce', true);
+                    } else {
+                        this.set('mutedOnce', false);
+                        this.set('muted', false);
+                    }
+                }
+            }
+            PlaybackModel.on('change:volume', PlaybackModel.onVolumeChange);
+
+            $('#volume').remove();
+            this.volume = new VolumeView();
+            $('#now-playing-bar').append(this.volume.$el);
+            this.volume.render();
+
             this.loadSettings();
             this.initAPIListeners();
             var users = API.getUsers();
@@ -423,7 +531,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 minor: 1,
                 patch: 0,
                 prerelease: 'alpha',
-                build: 7,
+                build: 42,
                 minified: false,
                 /**
                  * @this {version}
@@ -437,6 +545,7 @@ if (plugCubed !== undefined) plugCubed.close();
             socketReconnecting = false,
             roomChatColors = {},
             roomChatIcons = {},
+            roomRules = {},
             menuButton = $('<div id="plug-cubed"><i class="icon icon-plug-cubed"></i></div>'),
             menuDiv,
             socket,
@@ -513,6 +622,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 requirejs.undef('plugCubed/Slider');
                 requirejs.undef('plugCubed/Loader');
                 requirejs.undef('plugCubed/RoomUserListRow');
+                requirejs.undef('plugCubed/VolumeView');
                 Styles.destroy();
                 requirejs.undef('plugCubed/StyleManager');
                 this.loaded = false;
@@ -685,12 +795,12 @@ if (plugCubed !== undefined) plugCubed.close();
                 colors: {
                     you: 'FFDD6F',
                     regular: 'B0B0B0',
-                    residentdj: 'E90E82',
-                    bouncer: 'E90E82',
-                    manager: 'E90E82',
-                    cohost: 'E90E82',
-                    host: 'E90E82',
-                    ambassador: '9A50FF',
+                    residentdj: 'AC76FF',
+                    bouncer: 'AC76FF',
+                    manager: 'AC76FF',
+                    cohost: 'AC76FF',
+                    host: 'AC76FF',
+                    ambassador: '89BE6C',
                     admin: '42A5DC',
                     join: '3366FF',
                     leave: '3366FF',
@@ -850,20 +960,29 @@ if (plugCubed !== undefined) plugCubed.close();
                     $('<div class="container">').append(
                         $('<div class="section">Features</div>')
                     ).append(
-                        GUIButton(this.settings.autowoot, 'woot', p3Lang.i18n('menu.autowoot'))
+                        (typeof roomRules.allowAutowoot === 'undefined' || roomRules.allowAutowoot !== false ?
+                            GUIButton(this.settings.autowoot, 'woot', p3Lang.i18n('menu.autowoot')) :
+                            ''
+                        )
                     ).append(
-                        GUIButton(this.settings.autorespond, 'autorespond', p3Lang.i18n('menu.autorespond'))
+                        (typeof roomRules.allowAutorespond === 'undefined' || roomRules.allowAutorespond !== false ?
+                            GUIButton(this.settings.autorespond, 'autorespond', p3Lang.i18n('menu.autorespond')) :
+                            ''
+                        )
                     ).append(
-                        $('<div class="item">').addClass('p3-s-autorespond-input').append($('<input>').val(plugCubed.settings.awaymsg === '' ? this.defaultAwayMsg : plugCubed.settings.awaymsg).keyup(function() {
-                            $(this).val($(this).val().split('@').join(''));
-                            plugCubed.settings.awaymsg = $(this).val().trim();
-                        }))
-                        .mouseover(function() {
-                            Context.trigger('tooltip:show', p3Lang.i18n('tooltip.afk'), $(this), false);
-                        })
-                        .mouseout(function() {
-                            Context.trigger('tooltip:hide');
-                        })
+                        (typeof roomRules.allowAutorespond === 'undefined' || roomRules.allowAutorespond !== false ?
+                            $('<div class="item">').addClass('p3-s-autorespond-input').append($('<input>').val(plugCubed.settings.awaymsg === '' ? this.defaultAwayMsg : plugCubed.settings.awaymsg).keyup(function() {
+                                $(this).val($(this).val().split('@').join(''));
+                                plugCubed.settings.awaymsg = $(this).val().trim();
+                            }))
+                            .mouseover(function() {
+                                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.afk'), $(this), false);
+                            })
+                            .mouseout(function() {
+                                Context.trigger('tooltip:hide');
+                            }) :
+                            ''
+                        )
                     ).append(
                         (API.hasPermission(undefined, API.ROLE.BOUNCER) ?
                             GUIButton(this.settings.afkTimers, 'afktimers', p3Lang.i18n('menu.afktimers')) :
@@ -993,7 +1112,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 for (var i in this.settings.colors) {
                     var elem = $('input[name="' + i + '"]');
                     elem.val(elem.data('ph'));
-                    elem.parents('.dialog-input-container').find('.dialog-input-label').css('color', '#' + elem.val());
+                    elem.parents('.dialog-input-container').find('.dialog-input-label').css('color', elem.val().toRGB());
                 }
             },
             /**
@@ -1001,6 +1120,8 @@ if (plugCubed !== undefined) plugCubed.close();
              * @param {plugDJAdvanceEvent} data
              */
             onDjAdvance: function(data) {
+                if (PlaybackModel.get('mutedOnce') === true)
+                    PlaybackModel.set('volume', PlaybackModel.get('lastVolume'));
                 if ((this.settings.notify & 8) === 8)
                     p3Utils.chatLog(undefined, p3Lang.i18n('notify.message.stats', data.lastPlay.score.positive, data.lastPlay.score.negative, data.lastPlay.score.curates), this.settings.colors.stats);
                 if ((this.settings.notify & 16) === 16)
@@ -1360,18 +1481,18 @@ if (plugCubed !== undefined) plugCubed.close();
                 })
                 .click(function() {
                     $(this).parent().find('input').val(defaultColor);
-                    $(this).parent().find('.example').css('background-color', '#' + defaultColor);
+                    $(this).parent().find('.example').css('background-color', defaultColor.toRGB());
                     $(this).css('display', 'none');
                     plugCubed.settings.colors[id] = defaultColor;
                     plugCubed.saveSettings();
                     plugCubed.updateCustomColors();
                 })
             ).append(
-                $('<span>').addClass('example').css('background-color', '#' + plugCubed.settings.colors[id])
+                $('<span>').addClass('example').css('background-color', plugCubed.settings.colors[id].toRGB())
             ).append(
                 $('<input>').val(plugCubed.settings.colors[id]).keyup(function() {
                     if ($(this).val().isRGB()) {
-                        $(this).parent().find('.example').css('background-color', '#' + $(this).val());
+                        $(this).parent().find('.example').css('background-color', $(this).val().toRGB());
                         plugCubed.settings.colors[id] = $(this).val();
                         plugCubed.saveSettings();
                         plugCubed.updateCustomColors();
@@ -1535,7 +1656,16 @@ if (plugCubed !== undefined) plugCubed.close();
                     return styles[key] !== undefined;
                 },
                 unset: function(key) {
-                    if (delete styles[key])
+                    if (typeof key === 'string')
+                        key = [key];
+                    var doUpdate = false;
+                    for (var i in key) {
+                        if (this.has(key[i])) {
+                            delete styles[key[i]];
+                            doUpdate = true;
+                        }
+                    }
+                    if (doUpdate)
                         update();
                 },
                 destroy: function() {
@@ -1580,7 +1710,7 @@ if (plugCubed !== undefined) plugCubed.close();
                     $message = $('<div>').addClass(type ? type : 'update'),
                     $text = $('<span>').addClass('text').html(message);
                 if (type === 'system') $message.append('<i class="icon icon-chat-system"></i>');
-                else $text.css('color', '#' + (color ? color : 'd1d1d1'));
+                else $text.css('color', (color ? color : 'd1d1d1').toRGB());
                 $chat.append($message.append($text));
                 b && $chat.scrollTop($chat[0].scrollHeight);
             }
@@ -1597,7 +1727,7 @@ if (plugCubed !== undefined) plugCubed.close();
                         this.$icon.removeClass().addClass("icon icon-curate");
                     else if (this.model.get("vote") == 1)
                         this.$icon.removeClass().addClass("icon icon-woot");
-                    else if (API.hasPermission(undefined, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper())
+                    else
                         this.$icon.removeClass().addClass("icon icon-meh");
                 } else if (this.$icon) {
                     this.$icon.remove();
@@ -1662,9 +1792,8 @@ if (plugCubed !== undefined) plugCubed.close();
             init: function(min, max, val, callback) {
                 this.min = min ? min : 0;
                 this.max = max ? max : 100;
+                this.value = val ? val : this.min;
                 this.cb = callback;
-
-                val = val ? val : this.min;
 
                 this.startBind = $.proxy(this.onStart, this);
                 this.moveBind = $.proxy(this.onUpdate, this);
@@ -1679,6 +1808,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 this.$hit.mousedown(this.startBind);
 
                 this._max = this.$hit.width() - this.$circle.width();
+                this.onChange();
 
                 return this;
             },
@@ -1689,6 +1819,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 return this.onUpdate(event);
             },
             onUpdate: function(event) {
+                this.value = Math.max(this.min, Math.min(this.max, ~~ ((this.max - this.min) * ((event.pageX - this._min) / this._max)) + this.min));
                 this.onChange();
                 event.preventDefault();
                 event.stopPropagation();
@@ -1701,9 +1832,8 @@ if (plugCubed !== undefined) plugCubed.close();
                 return false;
             },
             onChange: function() {
-                var val = Math.max(this.min, Math.min(this.max, ~~ ((this.max - this.min) * ((event.pageX - this._min) / this._max)) + this.min));
-                this.$circle.css('left', parseInt(this.$hit.css('left')) + this.$line.width() * ((val - this.min) / (this.max - this.min)) - this.$circle.width() / 2);
-                if (typeof this.cb === 'function') this.cb(val);
+                this.$circle.css('left', parseInt(this.$hit.css('left')) + this.$line.width() * ((this.value - this.min) / (this.max - this.min)) - this.$circle.width() / 2);
+                if (typeof this.cb === 'function') this.cb(this.value);
             }
         });
     });
@@ -1768,6 +1898,43 @@ if (plugCubed !== undefined) plugCubed.close();
                 this.close();
             }
         });
+    });
+
+    define('plugCubed/VolumeView', ['underscore', 'a96fc/e3065/c918b/d02b2/a18c4', 'a96fc/d1d9f/b83f5', 'hbs!template/room/playback/Volume'], function(e, original, r, s) {
+        var o = original.extend({
+            render: function() {
+                return this.$el.html(s()), this.$icon = this.$(".button i"), this.$hit = this.$(".hit").mousedown(e.bind(this.onStart, this)), this.$slider = this.$(".slider"), this.$circle = this.$(".circle"), this.$span = this.$("span"), this.max = this.$hit.width() - this.$circle.width(), this.$circle.css("left", parseInt(this.$hit.css("left")) + this.max * (r.get("volume") / 100) - this.$circle.width() / 2), this.$(".button").on("click", this.clickBind), r.on("change:volume change:muted", this.onChange, this), this.onChange(), this
+            },
+            remove: function() {
+                this._super(), this.$(".button").off("click", this.clickBind), r.off("change:volume change:muted", this.onChange, this), this.$el.empty(), this.$el.off(), this.off(), this.$el = undefined, this.el = undefined, this.$icon = this.$hit = this.$slider = this.$circle = undefined
+            },
+            onClick: function() {
+                if (r.get('mutedOnce'))
+                    r.onVolumeChange();
+                else {
+                    r.get('muted') ? r.set('volume', r.get('lastVolume')) : r.set({
+                        lastVolume: r.get('volume'),
+                        volume: 0
+                    });
+                }
+            },
+            onChange: function() {
+                var e = r.get('volume');
+                this.$span.text(e + '%');
+                this.$circle.css('left', parseInt(this.$hit.css('left')) + this.max * (e / 100) - this.$circle.width() / 2);
+                if (e > 60) {
+                    if (!this.$icon.hasClass('icon-volume-on'))
+                        this.$icon.removeClass().addClass('icon icon-volume-on');
+                } else if (e > 0) {
+                    if (!this.$icon.hasClass('icon-volume-half'))
+                        this.$icon.removeClass().addClass('icon icon-volume-half');
+                } else if (r.get('muted') && !this.$icon.hasClass('icon-volume-off'))
+                    this.$icon.removeClass().addClass('icon icon-volume-off');
+                else if (r.get('mutedOnce') && !this.$icon.hasClass('icon-volume-off-once'))
+                    this.$icon.removeClass().addClass('icon icon-volume-off-once');
+            }
+        });
+        return o;
     });
 
     require(['plugCubed/Model', 'plugCubed/Utils'], function(a, b) {

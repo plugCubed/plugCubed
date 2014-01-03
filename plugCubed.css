@@ -176,6 +176,12 @@
     top:-1px;
 }
 
+#volume .icon-volume-off-once {
+    background-repeat: no-repeat;
+    background-position: 9px 6px;
+    background-image:url('http://alpha.plugcubed.net/images/mute_once.png');
+}
+
 #p3-settings,
 #p3-settings-custom-colors {
     position:absolute;
