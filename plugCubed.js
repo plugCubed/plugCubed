@@ -547,10 +547,10 @@ if (plugCubed !== undefined) plugCubed.close();
             antiVideoHidingTimerInterval,
             version = {
                 major: 3,
-                minor: 1,
-                patch: 0,
-                prerelease: 'alpha',
-                build: 82,
+                minor: 0,
+                patch: 1,
+                prerelease: '',
+                build: 83,
                 minified: false,
                 /**
                  * @this {version}
