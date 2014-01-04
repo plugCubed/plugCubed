@@ -375,8 +375,8 @@ if (plugCubed !== undefined) plugCubed.close();
         }
 
         function antiVideoHidingTick() {
-            var a = $('#yt-frame').height() === null || $('#yt-frame').height() === 281,
-                b = $('#yt-frame').width() === null || $('#yt-frame').width() === 502;
+            var a = $('#yt-frame').height() === null || ($('#yt-frame').height() > 230 && $('#yt-frame').height() <= 281),
+                b = $('#yt-frame').width() === null || ($('#yt-frame').width() > 412 && $('#yt-frame').width() <= 502);
             if (a && b) return;
             API.chatLog('plugCubed does not support hiding video', true);
             plugCubed.close();
@@ -455,7 +455,7 @@ if (plugCubed !== undefined) plugCubed.close();
             p3Utils.chatLog(undefined, p3Lang.i18n('running', version) + '</span><br /><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), this.colors.infoMessage1);
 
             window.addEventListener('pushState', this.proxy.onRoomJoin);
-            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://alpha.plugcubed.net/plugCubed.css?=' + Date.now() + '" />');
+            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://files.plugcubed.net/plugCubed.css?=' + Date.now() + '" />');
             $('#plug-dj').after(menuButton);
             menuButton.click(this.proxy.onMenuClick);
             $('#room-bar').css('left', 108);
@@ -548,9 +548,9 @@ if (plugCubed !== undefined) plugCubed.close();
             version = {
                 major: 3,
                 minor: 0,
-                patch: 1,
+                patch: 2,
                 prerelease: '',
-                build: 83,
+                build: 86,
                 minified: false,
                 /**
                  * @this {version}
@@ -596,7 +596,7 @@ if (plugCubed !== undefined) plugCubed.close();
             onRoomJoin: function() {
                 if (typeof plugCubed !== 'undefined') {
                     setTimeout(function() {
-                        if (API.enabled) $.getScript('http://alpha.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js?=' + Date.now());
+                        if (API.enabled) $.getScript('http://files.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js?=' + Date.now());
                         else plugCubed.onRoomJoin();
                     }, 500);
                 }
@@ -684,7 +684,7 @@ if (plugCubed !== undefined) plugCubed.close();
                         this.close();
                         p3Utils.chatLog(undefined, p3Lang.i18n('newVersion'), plugCubed.colors.infoMessage1);
                         return setTimeout(function() {
-                            $.getScript('http://alpha.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js');
+                            $.getScript('http://files.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js');
                         }, 5000);
                     }
                     if (type === 'chat') {
@@ -1775,7 +1775,7 @@ if (plugCubed !== undefined) plugCubed.close();
             Lang = Class.extend({
                 init: function() {
                     var _this = this;
-                    $.getJSON('http://alpha.plugcubed.net/langs/lang.en.json?_' + Date.now(), function(a) {
+                    $.getJSON('http://files.plugcubed.net/langs/lang.en.json?_' + Date.now(), function(a) {
                         language = a;
                         isLoaded = true;
                     }).error(function() {
@@ -1795,7 +1795,7 @@ if (plugCubed !== undefined) plugCubed.close();
                         if (callback) callback();
                         return;
                     }
-                    $.getJSON('http://alpha.plugcubed.net/langs/lang.' + lang + '.json', function(a) {
+                    $.getJSON('http://files.plugcubed.net/langs/lang.' + lang + '.json', function(a) {
                         language = $.extend(true, language, a);
                         if (callback) callback();
                     }).error(function() {
@@ -1885,7 +1885,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 var self = this;
                 console.log(self);
                 this.languages = [];
-                $.getJSON('http://alpha.plugcubed.net/lang.json', function(data) {
+                $.getJSON('http://files.plugcubed.net/lang.json', function(data) {
                     self.languages = data;
                     this.$el.append(this.getHeader('plug&#179; language'))
                         .append(this.getBody().append(this.getMessage(this.draw())));
@@ -1918,7 +1918,7 @@ if (plugCubed !== undefined) plugCubed.close();
                     len = languages.length,
                     x = len == 5 ? 0 : len == 4 ? 75 : len == 3 ? 150 : len == 2 ? 225 : 300;
                 for (var i = 0; i < len; ++i) {
-                    var button = $("<div/>").addClass("lang-button").css('display', 'inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://alpha.plugcubed.net/flags/flag.' + languages[i].file + '.png').attr('alt', languages[i].name).height(75).width(150));
+                    var button = $("<div/>").addClass("lang-button").css('display', 'inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://files.plugcubed.net/flags/flag.' + languages[i].file + '.png').attr('alt', languages[i].name).height(75).width(150));
                     row.append(button);
                     x += 150;
                 }
