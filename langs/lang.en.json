@@ -8,6 +8,8 @@
     "isHistory": "Warning: This song is still in the history (%1 of %2)",
     "roomSpecificSettingsHeader": "This room is using special settings",
     "roomSpecificSettingsDesc": "You can disable them in the menu",
+    "lightsOut": "%1 turned the lights off",
+    "strobe": "%1 activated strobe lights",
     "autorespond": {
         "default": "I'm away from keyboard.",
         "disable": "Disable AFK Autorespond to chat",
@@ -41,7 +43,8 @@
             "nextsong": "display next song in playlist and if it's in history",
             "refresh": "refresh the video",
             "ignore": "ignore all chat messages from user",
-            "alertson": "play mention sound whenever word is written in chat",
+            "alertson": "play sound whenever defined words are written in chat",
+            "alertsoff": "stop playing sound when defined words are written is chat",
             "curate": "add current song to your selected playlist",
             "getpos": "get current waitlist position",
             "version": "displays version number",
@@ -73,7 +76,11 @@
             "curate": "%1 added %2 - %3",
             "stats": "Stats:   %1 woots -- %2 mehs -- %3 curates",
             "updates": "Now Playing: %1 by %2<br />Played by: %3",
-            "join": "%1 just joined the room",
+            "join": {
+                "normal": "%1 just joined the room",
+                "fan": "Your fan %1 just joined the room",
+                "friend": "Your friend %1 just joined the room"
+            },
             "leave": {
                 "normal": "%1 just left the room",
                 "fan": "Your fan %1 just left the room",
@@ -90,7 +97,8 @@
         "specialTitles": {
             "developer": "plug&#179; Developer",
             "sponsor": "plug&#179; Sponsor",
-            "vip": "plug&#179; VIP"
+            "vip": "plug&#179; VIP",
+            "donator": "plug&#179; Donator"
         },
         "id": "ID",
         "rank": "Rank",
@@ -162,7 +170,9 @@
         "stream": "Toggle Video/Audio Stream",
         "clear": "Clear Chat",
         "afk": "AFK Message",
-        "reset": "Reset to default"
+        "reset": "Reset to default",
+        "muted": "All songs are muted",
+        "mutedOnce": "Current song is muted"
     },
     "error": {
         "userNotFound": "User not found",

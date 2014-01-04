@@ -165,18 +165,21 @@
 }
 
 .icon-plug-cubed {
-    left:13px;
-    top:19px;
-    background-image:url('http://plugcubed.net/assets/img/logo.png');
-    background-size:30px 15px;
-    background-position:0px 0px;
-    background-repeat:no-repeat no-repeat;
+    left:15px;
+    top:11px;
+    background-image:url('http://alpha.plugcubed.net/images/menu_logo.png');
 }
 
 #user-lists .list.room .user .icon-meh {
     left:auto;
     right:8px;
     top:-1px;
+}
+
+#volume .icon-volume-off-once {
+    background-repeat: no-repeat;
+    background-position: 9px 6px;
+    background-image:url('http://alpha.plugcubed.net/images/mute_once.png');
 }
 
 #p3-settings,
@@ -309,7 +312,7 @@
     left:auto;
     width:20px;
     height:20px;
-    background-image:url('http://files.plugcubed.net/images/default_settings.png');
+    background-image:url('http://alpha.plugcubed.net/images/default_settings.png');
     cursor:pointer;
 }
 
@@ -448,7 +451,7 @@
 }
 
 .p3-s-stream {
-    background-image:url('http://files.plugcubed.net/images/stream_on_off.png');
+    background-image:url('http://alpha.plugcubed.net/images/stream_on_off.png');
     left:205px;
     top:7px;
 }
@@ -458,7 +461,7 @@
 }
 
 .p3-s-clear {
-    background-image:url('http://files.plugcubed.net/images/clear_chat.png');
+    background-image:url('http://alpha.plugcubed.net/images/clear_chat.png');
     left:254px;
 }
 
