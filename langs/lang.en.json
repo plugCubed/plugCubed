@@ -43,7 +43,8 @@
             "nextsong": "display next song in playlist and if it's in history",
             "refresh": "refresh the video",
             "ignore": "ignore all chat messages from user",
-            "alertson": "play mention sound whenever word is written in chat",
+            "alertson": "play sound whenever defined words are written in chat",
+            "alertsoff": "stop playing sound when defined words are written is chat",
             "curate": "add current song to your selected playlist",
             "getpos": "get current waitlist position",
             "version": "displays version number",
@@ -75,7 +76,11 @@
             "curate": "%1 added %2 - %3",
             "stats": "Stats:   %1 woots -- %2 mehs -- %3 curates",
             "updates": "Now Playing: %1 by %2<br />Played by: %3",
-            "join": "%1 just joined the room",
+            "join": {
+                "normal": "%1 just joined the room",
+                "fan": "Your fan %1 just joined the room",
+                "friend": "Your friend %1 just joined the room"
+            },
             "leave": {
                 "normal": "%1 just left the room",
                 "fan": "Your fan %1 just left the room",
