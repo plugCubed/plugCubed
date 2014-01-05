@@ -374,8 +374,8 @@ if (plugCubed !== undefined) plugCubed.close();
         }
 
         function antiVideoHidingTick() {
-            var a = $('#yt-frame').height() === null || ($('#yt-frame').height() > 230 && $('#yt-frame').height() <= 281),
-                b = $('#yt-frame').width() === null || ($('#yt-frame').width() > 412 && $('#yt-frame').width() <= 502);
+            var a = $('#yt-frame').height() === null || ($('#yt-frame').height() > 230 && $('#yt-frame').height() < 284),
+                b = $('#yt-frame').width() === null || ($('#yt-frame').width() > 412 && $('#yt-frame').width() < 505);
             if (a && b) return;
             API.chatLog('plugCubed does not support hiding video', true);
             plugCubed.close();
@@ -420,7 +420,7 @@ if (plugCubed !== undefined) plugCubed.close();
 
         function __init() {
             afkTimerInterval = setInterval(afkTimerTick, 1E3);
-            antiVideoHidingTimerInterval = setInterval(antiVideoHidingTick, 10E3);
+            antiVideoHidingTimerInterval = setInterval(antiVideoHidingTick, 1E4);
 
             this.colors = {
                 userCommands: '66FFFF',
@@ -549,7 +549,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 minor: 0,
                 patch: 3,
                 prerelease: 'alpha',
-                build: 93,
+                build: 106,
                 minified: false,
                 /**
                  * @this {version}
