@@ -52,10 +52,6 @@ if (plugCubed !== undefined) plugCubed.close();
         SIO.sio.$events.chat = Socket.listener.chat = function(a) {
             if (typeof plugCubed !== 'undefined') {
                 if (a.fromID) setUserData(a.fromID, 'lastChat', Date.now());
-                if (plugCubed.settings.ignore.indexOf(a.fromID) > -1) {
-                    plugCubed.chatDisable(a);
-                    return;
-                }
             }
             Chat.receive(a);
             API.dispatch(API.CHAT, a);
@@ -216,7 +212,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 if (a.indexOf('\n') > -1)
                     a.substr(0, a.indexOf('\n'));
                 if (b)
-                    return $.getJSON(a, function(settings) {
+                    return $.getJSON(a + '?_' + Date.now(), function(settings) {
                         p3Utils.chatLog(undefined, p3Lang.i18n('roomSpecificSettingsHeader') + '</span><br /><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('roomSpecificSettingsDesc'), plugCubed.colors.infoMessage2);
                         runRoomSettings(settings);
                     });
@@ -375,10 +371,22 @@ if (plugCubed !== undefined) plugCubed.close();
 
         function antiVideoHidingTick() {
             var a = $('#yt-frame').height() === null || ($('#yt-frame').height() > 230 && $('#yt-frame').height() < 284),
-                b = $('#yt-frame').width() === null || ($('#yt-frame').width() > 412 && $('#yt-frame').width() < 505);
-            if (a && b) return;
+                b = $('#yt-frame').width() === null || ($('#yt-frame').width() > 412 && $('#yt-frame').width() < 505),
+                c = $('#plug-btn-hidevideo').length === 0;
+            if (a && b && c) return;
             API.chatLog('plugCubed does not support hiding video', true);
             plugCubed.close();
+        }
+
+        function antiDangerousScripts() {
+            var a = Context._events['chat:receive'].concat(API._events(API.CHAT));
+            for (var b in a) {
+                var listener = a[b].callback;
+                if (listener.indexOf('API.djLeave') > -1 || listener.indexOf('API.djJoin') > -1 || listener.indexOf('API.moderateLockWaitList') > -1 || listener.indexOf('API.moderateForceSkip') > -1) {
+                    API.chatLog('plugCubed does not support one or more of the other scripts that are currently running because of potentional dangerous behaviour', true);
+                    return plugCubed.close();
+                }
+            }
         }
 
         function onChatReceived(data) {
@@ -420,7 +428,8 @@ if (plugCubed !== undefined) plugCubed.close();
 
         function __init() {
             afkTimerInterval = setInterval(afkTimerTick, 1E3);
-            antiVideoHidingTimerInterval = setInterval(antiVideoHidingTick, 1E4);
+            antiVideoHidingTimerInterval = setInterval(antiVideoHidingTick, 10E4);
+            antiDangerousScriptsTimerInterval = setInterval(antiDangerousScripts, 10E4);
 
             this.colors = {
                 userCommands: '66FFFF',
@@ -544,12 +553,13 @@ if (plugCubed !== undefined) plugCubed.close();
 
         var afkTimerInterval,
             antiVideoHidingTimerInterval,
+            antiDangerousScriptsTimerInterval,
             version = {
                 major: 3,
                 minor: 0,
                 patch: 3,
                 prerelease: 'alpha',
-                build: 106,
+                build: 131,
                 minified: false,
                 /**
                  * @this {version}
@@ -607,6 +617,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 if (this.loaded === undefined || this.loaded === false) return;
                 clearInterval(afkTimerInterval);
                 clearInterval(antiVideoHidingTimerInterval);
+                clearInterval(antiDangerousScriptsTimerInterval);
                 runRoomSettings({});
                 window.removeEventListener('pushState', plugCubed.proxy.onRoomJoin);
                 API.off(API.CHAT_COMMAND, this.proxy.onChatCommand);
@@ -687,7 +698,7 @@ if (plugCubed !== undefined) plugCubed.close();
                         }, 5000);
                     }
                     if (type === 'chat') {
-                        if (!data.chatID || $(".chat-id-" + data.chatID).length > 0 || plugCubed.settings.ignore.indexOf(data.fromID) > -1)
+                        if (!data.chatID || $(".chat-id-" + data.chatID).length > 0)
                             return;
                         Chat.receive(data);
                         return API.trigger(API.CHAT, data);
@@ -803,7 +814,6 @@ if (plugCubed !== undefined) plugCubed.close();
                 customColors: false,
                 avatarAnimations: true,
                 registeredSongs: [],
-                ignore: [],
                 alertson: [],
                 autoMuted: false,
                 afkTimers: false,
@@ -1397,13 +1407,6 @@ if (plugCubed !== undefined) plugCubed.close();
                     }
                     return;
                 }
-                if (value.indexOf('/ignore ') === 0 || value.indexOf('/unignore ') === 0) {
-                    var user = getUser(value.substr(value.indexOf('/ignore') === 0 ? 8 : 10));
-                    if (user === null) return API.chatLog(p3Lang.i18n('error.userNotFound')), true;
-                    if (user.id === API.getUser().id) return API.chatLog(p3Lang.i18n('error.ignoreSelf')), true;
-                    if (this.settings.ignore.indexOf(user.id) > -1) return this.settings.ignore.splice(this.settings.ignore.indexOf(user.id), 1), this.saveSettings(), API.chatLog(p3Lang.i18n('ignore.disabled', user.username)), true;
-                    return this.settings.ignore.push(user.id), this.saveSettings(), API.chatLog(p3Lang.i18n('ignore.enabled', Utils.cleanTypedString(user.username)));
-                }
                 if (value.indexOf('/alertson ') === 0 && value.trim() !== '/alertson') {
                     this.settings.alertson = value.substr(10).split(' ');
                     this.saveSettings();
@@ -1612,7 +1615,6 @@ if (plugCubed !== undefined) plugCubed.close();
             ['/unmute', 'commands.descriptions.unmute'],
             ['/nextsong', 'commands.descriptions.nextsong'],
             ['/refresh', 'commands.descriptions.refresh'],
-            ['/ignore (commands.variables.username)', 'commands.descriptions.ignore'],
             ['/alertson (commands.variables.word)', 'commands.descriptions.alertson'],
             ['/alertsoff', 'commands.descriptions.alertsoff'],
             ['/curate', 'commands.descriptions.curate'],
