@@ -379,11 +379,16 @@ if (plugCubed !== undefined) plugCubed.close();
         }
 
         function antiDangerousScripts() {
-            var a = Context._events['chat:receive'].concat(API._events(API.CHAT));
+            var a = Context._events['chat:receive'].concat(API._events[API.CHAT]);
             for (var b in a) {
-                var listener = a[b].callback;
-                if (listener.indexOf('API.djLeave') > -1 || listener.indexOf('API.djJoin') > -1 || listener.indexOf('API.moderateLockWaitList') > -1 || listener.indexOf('API.moderateForceSkip') > -1) {
-                    API.chatLog('plugCubed does not support one or more of the other scripts that are currently running because of potentional dangerous behaviour', true);
+                var script = a[b].callback.toString();
+                if ((function(words) {
+                    for (var i in words) {
+                        if (script.indexOf(words[i]) > -1) return true;
+                    }
+                    return false;
+                })(['API.djLeave', 'API.djJoin', 'API.moderateLockWaitList', 'API.moderateForceSkip', '.getScript('])) {
+                    API.chatLog('plugCubed does not support one or more of the other scripts that are currently running because of potential dangerous behaviour', true);
                     return plugCubed.close();
                 }
             }
@@ -559,7 +564,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 minor: 0,
                 patch: 3,
                 prerelease: 'alpha',
-                build: 131,
+                build: 134,
                 minified: false,
                 /**
                  * @this {version}
