@@ -4,6 +4,9 @@ plug&#179; (plugCubed)
 ###Information / Installation###
 Find all information and installation informations at http://plugCubed.net/
 
+###Issues / Feature Requests###
+Please use our [bug tracker](http://issue.plugcubed.net/) to report a bug report / feature request / enhancement.
+
 ###Developers###
 * Thomas "TAT" Andresen
 

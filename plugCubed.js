@@ -45,17 +45,13 @@ Math.randomRange = function(a, b) {
 if (plugCubed !== undefined) plugCubed.close();
 
 (function() {
-    if (!requirejs.defined('e388d/de6ec/ed34d'))
+    if (!requirejs.defined('ee410/c8157/dec16'))
         return API.chatLog('This version of plug&#179; is not compatible with this version of plug.dj', true), false;
 
-    define('plugCubed/Model', ['jquery', 'underscore', 'e388d/de6ec/ed34d', 'e388d/de6ec/aeb58', 'e388d/d1a7d/b2edd', 'e388d/c5c7d/a1b5f', 'e388d/a8df0/fb863', 'e388d/f46a4/e2337', 'e388d/f4646/e9104', 'e388d/c4147/aa770', 'e388d/c4147/f15de', 'e388d/f46a4/ec4b7', 'lang/Lang', 'e388d/c2954/faf6b/d2f6f', 'e388d/f4646/a5646', 'e388d/f4646/b2a58', 'plugCubed/StyleManager', 'e388d/c2954/faf6b/c591d/fa943', 'e388d/c2954/faf6b/c591d/a33a6', 'plugCubed/RoomUserListRow', 'plugCubed/Lang', 'plugCubed/Utils', 'e388d/c5c7d/a1b40', 'e388d/f46a4/f3ed8', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/Commands', 'plugCubed/Slider', 'plugCubed/VolumeView'], function($, _, Class, Context, Chat, LocalStorage, Utils, Room, MCE, Socket, SIO, TUM, Lang, Audience, RJE, RSE, Styles, RoomUserListView, RoomUserListRow, _RoomUserListRow, p3Lang, p3Utils, DB, PlaybackModel, dialogColors, dialogCommands, Slider, VolumeView) {
+    define('plugCubed/Model', ['jquery', 'underscore', 'ee410/c8157/dec16', 'ee410/c8157/c994a', 'ee410/b07c3/f7ddb', 'ee410/ec253/b5c0b', 'ee410/a24b9/d22bc', 'ee410/a894a/e7493', 'ee410/a5253/a9329', 'ee410/ab9df/f46b6', 'ee410/ab9df/b528e', 'ee410/a894a/a0496', 'lang/Lang', 'ee410/fcda3/da134/b5bbd', 'ee410/a5253/ac5c8', 'ee410/a5253/ac4de', 'plugCubed/StyleManager', 'ee410/fcda3/da134/b3edf/dff26', 'ee410/fcda3/da134/b3edf/a0be5', 'plugCubed/RoomUserListRow', 'plugCubed/Lang', 'plugCubed/Utils', 'ee410/ec253/ac472', 'ee410/a894a/acbf0', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/Commands', 'plugCubed/Slider', 'plugCubed/VolumeView'], function($, _, Class, Context, Chat, LocalStorage, Utils, Room, MCE, Socket, SIO, TUM, Lang, Audience, RJE, RSE, Styles, RoomUserListView, RoomUserListRow, _RoomUserListRow, p3Lang, p3Utils, DB, PlaybackModel, dialogColors, dialogCommands, Slider, VolumeView) {
         SIO.sio.$events.chat = Socket.listener.chat = function(a) {
             if (typeof plugCubed !== 'undefined') {
                 if (a.fromID) setUserData(a.fromID, 'lastChat', Date.now());
-                if (plugCubed.settings.ignore.indexOf(a.fromID) > -1) {
-                    plugCubed.chatDisable(a);
-                    return;
-                }
             }
             Chat.receive(a);
             API.dispatch(API.CHAT, a);
@@ -216,12 +212,11 @@ if (plugCubed !== undefined) plugCubed.close();
                 if (a.indexOf('\n') > -1)
                     a.substr(0, a.indexOf('\n'));
                 if (b)
-                    return $.getJSON(a, function(settings) {
+                    return $.getJSON(a + '?_' + Date.now(), function(settings) {
                         p3Utils.chatLog(undefined, p3Lang.i18n('roomSpecificSettingsHeader') + '</span><br /><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('roomSpecificSettingsDesc'), plugCubed.colors.infoMessage2);
                         runRoomSettings(settings);
                     });
                 haveRoomSettings = true;
-                plugCubed.initGUI();
             }
         }
 
@@ -361,7 +356,7 @@ if (plugCubed !== undefined) plugCubed.close();
         }
 
         function afkTimerTick() {
-            if (plugCubed.settings.afkTimers && $('#waitlist-button').hasClass('selected')) {
+            if (plugCubed.settings.afkTimers && (p3Utils.isPlugCubedDeveloper() || API.hasPermission(undefined, API.ROLE.BOUNCER)) && $('#waitlist-button').hasClass('selected')) {
                 var a = API.getWaitList(),
                     b = $('#waitlist .user');
                 for (var c = 0; c < a.length; c++) {
@@ -375,11 +370,32 @@ if (plugCubed !== undefined) plugCubed.close();
         }
 
         function antiVideoHidingTick() {
-            var a = $('#yt-frame').height() === null || ($('#yt-frame').height() > 230 && $('#yt-frame').height() <= 281),
-                b = $('#yt-frame').width() === null || ($('#yt-frame').width() > 412 && $('#yt-frame').width() <= 502);
-            if (a && b) return;
+            var a = $('#yt-frame').height() === null || ($('#yt-frame').height() > 230 && $('#yt-frame').height() < 284),
+                b = $('#yt-frame').width() === null || ($('#yt-frame').width() > 412 && $('#yt-frame').width() < 505),
+                c = $('#plug-btn-hidevideo').length === 0;
+            if (a && b && c) return;
             API.chatLog('plugCubed does not support hiding video', true);
             plugCubed.close();
+        }
+
+        function antiDangerousScripts() {
+            var a = Context._events['chat:receive'].concat(API._events[API.CHAT]),
+                c = function() {
+                    API.chatLog('plugCubed does not support one or more of the other scripts that are currently running because of potential dangerous behaviour', true);
+                    return plugCubed.close();
+                };
+            for (var b in a) {
+                var script = a[b].callback.toString();
+                if ((function(words) {
+                    for (var i in words) {
+                        if (script.indexOf(words[i]) > -1) return true;
+                    }
+                    return false;
+                })(['API.djLeave', 'API.djJoin', 'API.moderateLockWaitList', 'API.moderateForceSkip', '.getScript(']))
+                    return c();
+            }
+            if (typeof startWooting === 'function' && startWooting.toString().indexOf('API.sendChat(') > -1)
+                return c();
         }
 
         function onChatReceived(data) {
@@ -421,7 +437,8 @@ if (plugCubed !== undefined) plugCubed.close();
 
         function __init() {
             afkTimerInterval = setInterval(afkTimerTick, 1E3);
-            antiVideoHidingTimerInterval = setInterval(antiVideoHidingTick, 10E3);
+            antiVideoHidingTimerInterval = setInterval(antiVideoHidingTick, 1E4);
+            antiDangerousScriptsTimerInterval = setInterval(antiDangerousScripts, 1E4);
 
             this.colors = {
                 userCommands: '66FFFF',
@@ -545,12 +562,13 @@ if (plugCubed !== undefined) plugCubed.close();
 
         var afkTimerInterval,
             antiVideoHidingTimerInterval,
+            antiDangerousScriptsTimerInterval,
             version = {
                 major: 3,
                 minor: 0,
-                patch: 2,
+                patch: 3,
                 prerelease: '',
-                build: 86,
+                build: 139,
                 minified: false,
                 /**
                  * @this {version}
@@ -608,6 +626,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 if (this.loaded === undefined || this.loaded === false) return;
                 clearInterval(afkTimerInterval);
                 clearInterval(antiVideoHidingTimerInterval);
+                clearInterval(antiDangerousScriptsTimerInterval);
                 runRoomSettings({});
                 window.removeEventListener('pushState', plugCubed.proxy.onRoomJoin);
                 API.off(API.CHAT_COMMAND, this.proxy.onChatCommand);
@@ -688,7 +707,7 @@ if (plugCubed !== undefined) plugCubed.close();
                         }, 5000);
                     }
                     if (type === 'chat') {
-                        if (!data.chatID || $(".chat-id-" + data.chatID).length > 0 || plugCubed.settings.ignore.indexOf(data.fromID) > -1)
+                        if (!data.chatID || $(".chat-id-" + data.chatID).length > 0)
                             return;
                         Chat.receive(data);
                         return API.trigger(API.CHAT, data);
@@ -697,13 +716,11 @@ if (plugCubed !== undefined) plugCubed.close();
                         if (p3Utils.isPlugCubedDeveloper(data.id) || p3Utils.isPlugCubedSponsor(data.id) || API.hasPermission(data.id, API.ROLE.HOST)) {
                             clearTimeout(Audience.strobeTimeoutID);
                             if (data.value === 0)
-                                return Audience.lightsOut(false), true;
+                                return Audience.onStrobeChange(null, 0), true;
                             if (data.value === 1)
-                                return Audience.strobeOnSpeed = 50, Audience.strobeOffSpeed = 160, Audience.strobeSwap(), p3Utils.chatLog(undefined, p3Lang.i18n('strobe', API.getUser(data.id).username)), true;
+                                return Audience.onStrobeChange(null, 2), p3Utils.chatLog(undefined, p3Lang.i18n('strobe', API.getUser(data.id).username)), true;
                             if (data.value === 2)
-                                return Audience.lightsOut(true), p3Utils.chatLog(undefined, p3Lang.i18n('lightsOut', API.getUser(data.id).username)), true;
-                            if (data.value >= 50 && data.value <= 100)
-                                return Audience.strobeOnSpeed = data.value, Audience.strobeOffSpeed = data.value * (160 / 50), Audience.strobeSwap(), p3Utils.chatLog(undefined, p3Lang.i18n('strobe', API.getUser(data.id).username)), true;
+                                return Audience.onStrobeChange(null, 1), p3Utils.chatLog(undefined, p3Lang.i18n('lightsOut', API.getUser(data.id).username)), true;
                         }
                     }
                     if (type === 'broadcast') {
@@ -806,7 +823,6 @@ if (plugCubed !== undefined) plugCubed.close();
                 customColors: false,
                 avatarAnimations: true,
                 registeredSongs: [],
-                ignore: [],
                 alertson: [],
                 autoMuted: false,
                 afkTimers: false,
@@ -1400,13 +1416,6 @@ if (plugCubed !== undefined) plugCubed.close();
                     }
                     return;
                 }
-                if (value.indexOf('/ignore ') === 0 || value.indexOf('/unignore ') === 0) {
-                    var user = getUser(value.substr(value.indexOf('/ignore') === 0 ? 8 : 10));
-                    if (user === null) return API.chatLog(p3Lang.i18n('error.userNotFound')), true;
-                    if (user.id === API.getUser().id) return API.chatLog(p3Lang.i18n('error.ignoreSelf')), true;
-                    if (this.settings.ignore.indexOf(user.id) > -1) return this.settings.ignore.splice(this.settings.ignore.indexOf(user.id), 1), this.saveSettings(), API.chatLog(p3Lang.i18n('ignore.disabled', user.username)), true;
-                    return this.settings.ignore.push(user.id), this.saveSettings(), API.chatLog(p3Lang.i18n('ignore.enabled', Utils.cleanTypedString(user.username)));
-                }
                 if (value.indexOf('/alertson ') === 0 && value.trim() !== '/alertson') {
                     this.settings.alertson = value.substr(10).split(' ');
                     this.saveSettings();
@@ -1419,22 +1428,18 @@ if (plugCubed !== undefined) plugCubed.close();
                     API.chatLog('No longer playing sound on specific words');
                     return;
                 }
-                if (p3Utils.isPlugCubedDeveloper()) {
+                if (API.hasPermission(undefined, API.ROLE.AMBASSADOR) || p3Utils.isPlugCubedDeveloper()) {
                     if (value.indexOf('/whois ') === 0)
                         return value.toLowerCase() === '/whois all' ? getAllUsers() : getUserInfo(value.substr(7));
                 }
                 if (API.hasPermission(undefined, API.ROLE.AMBASSADOR) || (p3Utils.isPlugCubedDeveloper() && API.hasPermission(undefined, API.ROLE.MANAGER))) {
-                    if (value.indexOf('/whois ') === 0)
-                        return value.toLowerCase() === '/whois all' ? getAllUsers() : getUserInfo(value.substr(7));
                     if (value.indexOf('/banall') === 0) {
-                        if (value.length > 9) {
-                            var me = API.getUser(),
-                                users = API.getUsers();
-                            for (var i in users) {
-                                if (users[i].id !== me.id)
-                                    API.moderateBanUser(users[i].id, value.substr(9).trim());
-                            }
-                        } else API.chatLog(p3Lang.i18n('error.missingReason'));
+                        var me = API.getUser(),
+                            users = API.getUsers();
+                        for (var i in users) {
+                            if (users[i].id !== me.id)
+                                API.moderateBanUser(users[i].id, 0, API.BAN.PERMA);
+                        }
                         return;
                     }
                 }
@@ -1499,7 +1504,7 @@ if (plugCubed !== undefined) plugCubed.close();
             }
         });
     });
-    define('plugCubed/dialogs/CustomChatColors', ['jquery', 'e388d/de6ec/ed34d', 'lang/Lang', 'e388d/de6ec/aeb58', 'plugCubed/Lang'], function($, b, c, d, p3Lang) {
+    define('plugCubed/dialogs/CustomChatColors', ['jquery', 'ee410/c8157/dec16', 'lang/Lang', 'ee410/c8157/c994a', 'plugCubed/Lang'], function($, b, c, d, p3Lang) {
         function GUIInput(id, text, defaultColor) {
             return $('<div class="item">').addClass('p3-s-cc-' + id).append(
                 $('<span>').text(text)
@@ -1583,7 +1588,7 @@ if (plugCubed !== undefined) plugCubed.close();
             });
         return new a();
     });
-    define('plugCubed/dialogs/Userinfo', ['jquery', 'e388d/c2954/b05e7/a4fba', 'lang/Lang', 'e388d/de6ec/ed34d', 'e388d/de6ec/aeb58', 'e388d/f4646/aa466', 'plugCubed/Lang'], function($, b, c, d, e, f, p3Lang) {
+    define('plugCubed/dialogs/Userinfo', ['jquery', 'ee410/fcda3/fd951/b6e59', 'lang/Lang', 'ee410/c8157/dec16', 'ee410/c8157/c994a', 'ee410/a5253/ec91e', 'plugCubed/Lang'], function($, b, c, d, e, f, p3Lang) {
         var a = d.extend({
             init: function(id) {
                 e.dispatch(new f(f.SHOW, new b.extend({
@@ -1604,7 +1609,7 @@ if (plugCubed !== undefined) plugCubed.close();
         });
         return a;
     });
-    define('plugCubed/dialogs/Commands', ['jquery', 'e388d/de6ec/ed34d', 'lang/Lang', 'plugCubed/Lang', 'plugCubed/Utils'], function($, b, c, p3Lang, p3Utils) {
+    define('plugCubed/dialogs/Commands', ['jquery', 'ee410/c8157/dec16', 'lang/Lang', 'plugCubed/Lang', 'plugCubed/Utils'], function($, b, c, p3Lang, p3Utils) {
         var userCommands = [
             ['/nick', 'commands.descriptions.nick'],
             ['/avail', 'commands.descriptions.avail'],
@@ -1619,7 +1624,6 @@ if (plugCubed !== undefined) plugCubed.close();
             ['/unmute', 'commands.descriptions.unmute'],
             ['/nextsong', 'commands.descriptions.nextsong'],
             ['/refresh', 'commands.descriptions.refresh'],
-            ['/ignore (commands.variables.username)', 'commands.descriptions.ignore'],
             ['/alertson (commands.variables.word)', 'commands.descriptions.alertson'],
             ['/alertsoff', 'commands.descriptions.alertsoff'],
             ['/curate', 'commands.descriptions.curate'],
@@ -1668,7 +1672,7 @@ if (plugCubed !== undefined) plugCubed.close();
             });
         return new a();
     });
-    define('plugCubed/StyleManager', ['jquery', 'e388d/de6ec/ed34d'], function($, Class) {
+    define('plugCubed/StyleManager', ['jquery', 'ee410/c8157/dec16'], function($, Class) {
         var obj,
             styles = {},
             update = function() {
@@ -1708,7 +1712,7 @@ if (plugCubed !== undefined) plugCubed.close();
             });
         return new a();
     });
-    define('plugCubed/Utils', ['e388d/c2954/faf6b/cc0b1/a32f2'], function(PopoutView) {
+    define('plugCubed/Utils', ['ee410/fcda3/da134/e44aa/ef2b5'], function(PopoutView) {
         var cleanMessage = function(input) {
             var allowed = ['span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em'],
                 tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
@@ -1749,7 +1753,7 @@ if (plugCubed !== undefined) plugCubed.close();
             }
         };
     });
-    define('plugCubed/RoomUserListRow', ['jquery', 'e388d/c2954/faf6b/c591d/e1d9e', 'plugCubed/Utils'], function($, RoomUserListRow, p3Utils) {
+    define('plugCubed/RoomUserListRow', ['jquery', 'ee410/fcda3/da134/b3edf/f9012', 'plugCubed/Utils'], function($, RoomUserListRow, p3Utils) {
         return RoomUserListRow.extend({
             vote: function() {
                 if (this.model.get("curated") || this.model.get("vote") !== 0) {
@@ -1769,7 +1773,7 @@ if (plugCubed !== undefined) plugCubed.close();
             }
         });
     });
-    define('plugCubed/Lang', ['jquery', 'e388d/de6ec/ed34d'], function($, Class) {
+    define('plugCubed/Lang', ['jquery', 'ee410/c8157/dec16'], function($, Class) {
         var language = {},
             isLoaded = false,
             Lang = Class.extend({
@@ -1820,7 +1824,7 @@ if (plugCubed !== undefined) plugCubed.close();
             });
         return new Lang;
     });
-    define('plugCubed/Slider', ['jquery', 'e388d/de6ec/ed34d'], function($, Class) {
+    define('plugCubed/Slider', ['jquery', 'ee410/c8157/dec16'], function($, Class) {
         return Class.extend({
             init: function(min, max, val, callback) {
                 this.min = min ? min : 0;
@@ -1870,7 +1874,7 @@ if (plugCubed !== undefined) plugCubed.close();
             }
         });
     });
-    define('plugCubed/Loader', ['jquery', 'e388d/de6ec/ed34d', 'plugCubed/Model', 'e388d/c5c7d/a1b5f', 'e388d/c2954/b05e7/a4fba', 'plugCubed/Lang', 'plugCubed/Utils'], function($, Class, Model, LocalStorage, ADV, p3Lang, p3Utils) {
+    define('plugCubed/Loader', ['jquery', 'ee410/c8157/dec16', 'plugCubed/Model', 'ee410/ec253/b5c0b', 'ee410/fcda3/fd951/b6e59', 'plugCubed/Lang', 'plugCubed/Utils'], function($, Class, Model, LocalStorage, ADV, p3Lang, p3Utils) {
         var test = LocalStorage.getItem('plugCubedLang');
         if (test !== null && test !== '@@@')
             return Class.extend({
@@ -1937,7 +1941,7 @@ if (plugCubed !== undefined) plugCubed.close();
         Modified version of plug.dj's VolumeView
         VolumeView copyright (C) 2013 by Plug DJ, Inc.
     */
-    define('plugCubed/VolumeView', ['jquery', 'underscore', 'e388d/c2954/faf6b/af2a0/ea2f5', 'e388d/f46a4/f3ed8', 'hbs!template/room/playback/Volume', 'e388d/de6ec/aeb58', 'plugCubed/Lang'], function($, e, original, r, s, Context, p3Lang) {
+    define('plugCubed/VolumeView', ['jquery', 'underscore', 'ee410/fcda3/da134/f8023/b1e46', 'ee410/a894a/acbf0', 'hbs!template/room/playback/Volume', 'ee410/c8157/c994a', 'plugCubed/Lang'], function($, e, original, r, s, Context, p3Lang) {
         var o = original.extend({
             render: function() {
                 this.$el.html(s());
