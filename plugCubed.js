@@ -472,7 +472,7 @@ if (plugCubed !== undefined) plugCubed.close();
             p3Utils.chatLog(undefined, p3Lang.i18n('running', version) + '</span><br /><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), this.colors.infoMessage1);
 
             window.addEventListener('pushState', this.proxy.onRoomJoin);
-            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="http://files.plugcubed.net/plugCubed.css?=' + Date.now() + '" />');
+            $('body').prepend('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://d1rfegul30378.cloudfront.net/alpha/plugCubed.css?=' + Date.now() + '" />');
             $('#plug-dj').after(menuButton);
             menuButton.click(this.proxy.onMenuClick);
             $('#room-bar').css('left', 108);
@@ -568,7 +568,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 minor: 0,
                 patch: 3,
                 prerelease: '',
-                build: 139,
+                build: 146,
                 minified: false,
                 /**
                  * @this {version}
@@ -614,7 +614,7 @@ if (plugCubed !== undefined) plugCubed.close();
             onRoomJoin: function() {
                 if (typeof plugCubed !== 'undefined') {
                     setTimeout(function() {
-                        if (API.enabled) $.getScript('http://files.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js?=' + Date.now());
+                        if (API.enabled) $.getScript('https://d1rfegul30378.cloudfront.net/alpha/plugCubed.' + (version.minified ? 'min.' : '') + 'js?=' + Date.now());
                         else plugCubed.onRoomJoin();
                     }, 500);
                 }
@@ -703,7 +703,7 @@ if (plugCubed !== undefined) plugCubed.close();
                         this.close();
                         p3Utils.chatLog(undefined, p3Lang.i18n('newVersion'), plugCubed.colors.infoMessage1);
                         return setTimeout(function() {
-                            $.getScript('http://files.plugcubed.net/plugCubed.' + (version.minified ? 'min.' : '') + 'js');
+                            $.getScript('https://d1rfegul30378.cloudfront.net/alpha/plugCubed.' + (version.minified ? 'min.' : '') + 'js');
                         }, 5000);
                     }
                     if (type === 'chat') {
@@ -1330,147 +1330,19 @@ if (plugCubed !== undefined) plugCubed.close();
                 return format.split('hh').join(hours).split('mm').join(minutes).split('ss').join(seconds);
             },
             onChatCommand: function(value) {
-                if (value.indexOf('/commands') === 0) {
-                    dialogCommands.print();
-                    return true;
-                }
-                if (value == '/avail' || value == '/available')
-                    return API.setStatus(0);
-                if (value == '/brb' || value == '/away')
-                    return API.setStatus(1);
-                if (value == '/work' || value == '/working')
-                    return API.setStatus(2);
-                if (value == '/game' || value == '/gaming')
-                    return API.setStatus(3);;
-                if (value == '/join')
-                    return API.djJoin();
-                if (value == '/leave')
-                    return API.djLeave();
-                if (value == '/whoami')
-                    return getUserInfo(API.getUser().id);
-                if (value == '/refresh')
-                    return $('#refresh-button').click();
-                if (value == '/version')
-                    return API.chatLog(p3Lang.i18n('running', version));
-                if (value == '/mute') {
-                    if (API.getVolume() === 0) return;
-                    this.lastVolume = API.getVolume();
-                    return API.setVolume(0);
-                }
-                if (value == '/link')
-                    return API.sendChat('plugCubed : http://plugcubed.net');
-                if (value == '/unmute')
-                    return API.getVolume() > 0 ? API.setVolume(this.lastVolume) : true;
-                if (value == '/nextsong') {
-                    var nextSong = API.getNextMedia(),
-                        found = -1;
-                    if (nextSong === undefined) return API.chatLog(p3Lang.i18n('noNextSong'));
-                    nextSong = nextSong.media;
-                    for (var i in p3history) {
-                        var a = p3history[i];
-                        if (a.id == nextSong.id) {
-                            found = ~~i + 1;
-                            if (!a.wasSkipped)
-                                return API.chatLog(p3Lang.i18n('nextsong', nextSong.title, nextSong.author)), API.chatLog(p3Lang.i18n('isHistory', found, p3history.length), true);
-                        }
-                    }
-                    return API.chatLog(p3Lang.i18n('nextsong', nextSong.title, nextSong.author));
-                }
-                if (value == '/automute') {
-                    var a = API.getMedia();
-                    if (a === undefined) return;
-                    if (this.settings.registeredSongs.indexOf(a.id) < 0) {
-                        this.settings.registeredSongs.push(a.id);
-                        this.settings.autoMuted = true;
-                        this.lastVolume = API.getVolume();
-                        API.setVolume(0);
-                        API.chatLog(p3Lang.i18n('automute.registered', a.title));
-                    } else {
-                        this.settings.registeredSongs.splice(this.settings.registeredSongs.indexOf(API.getMedia().id), 1);
-                        this.settings.autoMuted = false;
-                        API.setVolume(this.lastVolume);
-                        API.chatLog(p3Lang.i18n('automute.unregistered', a.title));
-                    }
-                    return this.saveSettings();
-                }
-                if (value.indexOf('/getpos') === 0) {
-                    var lookup = getUser(value.substr(8)),
-                        user = lookup === null ? API.getUser() : lookup,
-                        spot = API.getWaitListPosition(user.id);
-                    if (API.getDJ().id === user.id)
-                        API.chatLog(p3Lang.i18n('info.userDjing', user.id === API.getUser().id ? p3Lang.i18n('ranks.you') : Utils.cleanTypedString(user.username)));
-                    else if (spot === 0)
-                        API.chatLog(p3Lang.i18n('info.userNextDJ', user.id === API.getUser().id ? p3Lang.i18n('ranks.you') : Utils.cleanTypedString(user.username)));
-                    else if (spot > 0)
-                        API.chatLog(p3Lang.i18n('info.inWaitlist', spot + 1, API.getWaitList().length));
-                    else
-                        API.chatLog(p3Lang.i18n('info.notInList'));
-                    return;
-                }
-                if (value == '/curate') {
-                    var a = JSON.parse(LocalStorage.getItem('playlist')),
-                        b;
-                    for (var b in a) {
-                        if (a[b].selected)
-                            return Context.dispatch(new MCE(MCE.CURATE, a[b].id)), true;
-                    }
-                    return;
-                }
-                if (value.indexOf('/alertson ') === 0 && value.trim() !== '/alertson') {
-                    this.settings.alertson = value.substr(10).split(' ');
-                    this.saveSettings();
-                    API.chatLog('Playing sound on the following words: ' + this.settings.alertson.join(', '));
-                    return;
-                }
-                if (value.trim() === '/alertson' || value.indexOf('/alertsoff') === 0) {
-                    this.settings.alertson = [];
-                    this.saveSettings();
-                    API.chatLog('No longer playing sound on specific words');
-                    return;
-                }
                 if (API.hasPermission(undefined, API.ROLE.AMBASSADOR) || p3Utils.isPlugCubedDeveloper()) {
                     if (value.indexOf('/whois ') === 0)
                         return value.toLowerCase() === '/whois all' ? getAllUsers() : getUserInfo(value.substr(7));
-                }
-                if (API.hasPermission(undefined, API.ROLE.AMBASSADOR) || (p3Utils.isPlugCubedDeveloper() && API.hasPermission(undefined, API.ROLE.MANAGER))) {
-                    if (value.indexOf('/banall') === 0) {
-                        var me = API.getUser(),
-                            users = API.getUsers();
-                        for (var i in users) {
-                            if (users[i].id !== me.id)
-                                API.moderateBanUser(users[i].id, 0, API.BAN.PERMA);
+                    if (API.hasPermission(undefined, API.ROLE.MANAGER)) {
+                        if (value.indexOf('/banall') === 0) {
+                            var me = API.getUser(),
+                                users = API.getUsers();
+                            for (var i in users) {
+                                if (users[i].id !== me.id)
+                                    API.moderateBanUser(users[i].id, 0, API.BAN.PERMA);
+                            }
+                            return;
                         }
-                        return;
-                    }
-                }
-                if (API.hasPermission(undefined, API.ROLE.BOUNCER)) {
-                    if (value.indexOf('/skip') === 0) {
-                        if (API.getDJ() === undefined) return;
-                        if (value.length > 5)
-                            API.sendChat('@' + API.getDJ().username + ' - Reason for skip: ' + value.substr(5).trim());
-                        return API.moderateForceSkip();
-                    }
-                    if (value.indexOf('/whois ') === 0)
-                        return getUserInfo(value.substr(7));
-                    if (value.indexOf('/add ') === 0)
-                        return this.moderation(value.substr(5), 'adddj');
-                    if (value.indexOf('/remove ') === 0)
-                        return this.moderation(value.substr(8), 'removedj');
-                }
-                if (API.hasPermission(undefined, API.ROLE.MANAGER)) {
-                    if (value === '/lock')
-                        return API.moderateLockWaitList(true);
-                    if (value === '/unlock')
-                        return API.moderateLockWaitList(false);
-                    if (value === '/lockskip') {
-                        var a = API.getDJ().id;
-                        API.once(API.DJ_ADVANCE, function() {
-                            API.once(API.WAIT_LIST_UPDATE, function() {
-                                API.moderateMoveDJ(a, 1);
-                            });
-                            API.moderateAddDJ(a);
-                        });
-                        API.moderateForceSkip();
                     }
                 }
                 if (API.hasPermission(undefined, API.ROLE.HOST) || p3Utils.isPlugCubedDeveloper()) {
@@ -1500,6 +1372,137 @@ if (plugCubed !== undefined) plugCubed.close();
                             value: value.indexOf('off') > -1 ? 0 : 2
                         }));
                     }
+                }
+                if (API.hasPermission(undefined, API.ROLE.MANAGER)) {
+                    if (value === '/lock')
+                        return API.moderateLockWaitList(true);
+                    if (value === '/unlock')
+                        return API.moderateLockWaitList(false);
+                    if (value === '/lockskip') {
+                        var a = API.getDJ().id;
+                        API.once(API.DJ_ADVANCE, function() {
+                            API.once(API.WAIT_LIST_UPDATE, function() {
+                                API.moderateMoveDJ(a, 1);
+                            });
+                            API.moderateAddDJ(a);
+                        });
+                        API.moderateForceSkip();
+                    }
+                }
+                if (API.hasPermission(undefined, API.ROLE.BOUNCER)) {
+                    if (value.indexOf('/skip') === 0) {
+                        if (API.getDJ() === undefined) return;
+                        if (value.length > 5)
+                            API.sendChat('@' + API.getDJ().username + ' - Reason for skip: ' + value.substr(5).trim());
+                        return API.moderateForceSkip();
+                    }
+                    if (value.indexOf('/whois ') === 0)
+                        return getUserInfo(value.substr(7));
+                    if (value.indexOf('/add ') === 0)
+                        return this.moderation(value.substr(5), 'adddj');
+                    if (value.indexOf('/remove ') === 0)
+                        return this.moderation(value.substr(8), 'removedj');
+                }
+
+
+
+
+
+                if (value === '/commands')
+                    return dialogCommands.print();
+                if (value === '/avail' || value === '/available')
+                    return API.setStatus(0);
+                if (value === '/brb' || value === '/away')
+                    return API.setStatus(1);
+                if (value === '/work' || value === '/working')
+                    return API.setStatus(2);
+                if (value === '/game' || value === '/gaming')
+                    return API.setStatus(3);;
+                if (value === '/join')
+                    return API.djJoin();
+                if (value === '/leave')
+                    return API.djLeave();
+                if (value === '/whoami')
+                    return getUserInfo(API.getUser().id);
+                if (value === '/refresh')
+                    return $('#refresh-button').click();
+                if (value === '/version')
+                    return API.chatLog(p3Lang.i18n('running', version));
+                if (value === '/mute') {
+                    if (API.getVolume() === 0) return;
+                    this.lastVolume = API.getVolume();
+                    return API.setVolume(0);
+                }
+                if (value === '/link')
+                    return API.sendChat('plugCubed : http://plugcubed.net');
+                if (value === '/unmute')
+                    return API.getVolume() > 0 ? API.setVolume(this.lastVolume) : true;
+                if (value === '/nextsong') {
+                    var nextSong = API.getNextMedia(),
+                        found = -1;
+                    if (nextSong === undefined) return API.chatLog(p3Lang.i18n('noNextSong'));
+                    nextSong = nextSong.media;
+                    for (var i in p3history) {
+                        var a = p3history[i];
+                        if (a.id == nextSong.id) {
+                            found = ~~i + 1;
+                            if (!a.wasSkipped)
+                                return API.chatLog(p3Lang.i18n('nextsong', nextSong.title, nextSong.author)), API.chatLog(p3Lang.i18n('isHistory', found, p3history.length), true);
+                        }
+                    }
+                    return API.chatLog(p3Lang.i18n('nextsong', nextSong.title, nextSong.author));
+                }
+                if (value === '/automute') {
+                    var a = API.getMedia();
+                    if (a === undefined) return;
+                    if (this.settings.registeredSongs.indexOf(a.id) < 0) {
+                        this.settings.registeredSongs.push(a.id);
+                        this.settings.autoMuted = true;
+                        this.lastVolume = API.getVolume();
+                        API.setVolume(0);
+                        API.chatLog(p3Lang.i18n('automute.registered', a.title));
+                    } else {
+                        this.settings.registeredSongs.splice(this.settings.registeredSongs.indexOf(API.getMedia().id), 1);
+                        this.settings.autoMuted = false;
+                        API.setVolume(this.lastVolume);
+                        API.chatLog(p3Lang.i18n('automute.unregistered', a.title));
+                    }
+                    return this.saveSettings();
+                }
+                if (value === '/getpos') {
+                    var lookup = getUser(value.substr(8)),
+                        user = lookup === null ? API.getUser() : lookup,
+                        spot = API.getWaitListPosition(user.id);
+                    if (API.getDJ().id === user.id)
+                        API.chatLog(p3Lang.i18n('info.userDjing', user.id === API.getUser().id ? p3Lang.i18n('ranks.you') : Utils.cleanTypedString(user.username)));
+                    else if (spot === 0)
+                        API.chatLog(p3Lang.i18n('info.userNextDJ', user.id === API.getUser().id ? p3Lang.i18n('ranks.you') : Utils.cleanTypedString(user.username)));
+                    else if (spot > 0)
+                        API.chatLog(p3Lang.i18n('info.inWaitlist', spot + 1, API.getWaitList().length));
+                    else
+                        API.chatLog(p3Lang.i18n('info.notInList'));
+                    return;
+                }
+                if (value === '/curate') {
+                    var a = JSON.parse(LocalStorage.getItem('playlist')),
+                        b;
+                    for (var b in a) {
+                        if (a[b].selected)
+                            return Context.dispatch(new MCE(MCE.CURATE, a[b].id)), true;
+                    }
+                    return;
+                }
+                if (value.indexOf('/alertson ') === 0 && value.trim() !== '/alertson') {
+                    this.settings.alertson = value.substr(10).split(' ');
+                    this.saveSettings();
+                    API.chatLog('Playing sound on the following words: ' + this.settings.alertson.join(', '));
+                    return;
+                }
+                if (value.trim() === '/alertson' || value.indexOf('/alertsoff') === 0) {
+                    this.settings.alertson = [];
+                    this.saveSettings();
+                    API.chatLog('No longer playing sound on specific words');
+                    return;
                 }
             }
         });
@@ -1779,7 +1782,7 @@ if (plugCubed !== undefined) plugCubed.close();
             Lang = Class.extend({
                 init: function() {
                     var _this = this;
-                    $.getJSON('http://files.plugcubed.net/langs/lang.en.json?_' + Date.now(), function(a) {
+                    $.getJSON('http://plug3.s3-external-3.amazonaws.com/alpha/langs/lang.en.json', function(a) {
                         language = a;
                         isLoaded = true;
                     }).error(function() {
@@ -1799,7 +1802,7 @@ if (plugCubed !== undefined) plugCubed.close();
                         if (callback) callback();
                         return;
                     }
-                    $.getJSON('http://files.plugcubed.net/langs/lang.' + lang + '.json', function(a) {
+                    $.getJSON('https://d1rfegul30378.cloudfront.net/alpha/langs/lang.' + lang + '.json', function(a) {
                         language = $.extend(true, language, a);
                         if (callback) callback();
                     }).error(function() {
@@ -1889,7 +1892,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 var self = this;
                 console.log(self);
                 this.languages = [];
-                $.getJSON('http://files.plugcubed.net/lang.json', function(data) {
+                $.getJSON('https://d1rfegul30378.cloudfront.net/alpha/lang.json', function(data) {
                     self.languages = data;
                     this.$el.append(this.getHeader('plug&#179; language'))
                         .append(this.getBody().append(this.getMessage(this.draw())));
@@ -1922,7 +1925,7 @@ if (plugCubed !== undefined) plugCubed.close();
                     len = languages.length,
                     x = len == 5 ? 0 : len == 4 ? 75 : len == 3 ? 150 : len == 2 ? 225 : 300;
                 for (var i = 0; i < len; ++i) {
-                    var button = $("<div/>").addClass("lang-button").css('display', 'inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'http://files.plugcubed.net/flags/flag.' + languages[i].file + '.png').attr('alt', languages[i].name).height(75).width(150));
+                    var button = $("<div/>").addClass("lang-button").css('display', 'inline-block').css("left", x).data("language", languages[i].file).css("cursor", "pointer").append($("<img/>").attr("src", 'https://d1rfegul30378.cloudfront.net/alpha/flags/flag.' + languages[i].file + '.png').attr('alt', languages[i].name).height(75).width(150));
                     row.append(button);
                     x += 150;
                 }
