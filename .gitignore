@@ -1,0 +1,23 @@
+# Building system
+node_modules
+system
+_*
+config.js
+
+# Build
+bin
+
+# Windows
+desktop.ini
+
+# Other directories
+test
+backup
+extensions
+
+# Other files
+.htaccess
+*.sublime*
+notes.txt
+demo.php
+rss.json

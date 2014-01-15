@@ -72,6 +72,7 @@
         "stats": "Song Stats",
         "updates": "Song Updates",
         "history": "Songs in history",
+        "songLength": "Song Length (%1 min)",
         "message": {
             "curate": "%1 added %2 - %3",
             "stats": "Stats:   %1 woots -- %2 mehs -- %3 curates",
@@ -87,7 +88,8 @@
                 "friend": "Your friend %1 just left the room"
             },
             "history": "Song is in history (%1 of %2)",
-            "historySkipped": "Song is in history (%1 of %2), but was skipped on the last play"
+            "historySkipped": "Song is in history (%1 of %2), but was skipped on the last play",
+            "songLength": "Song is longer than %1 minutes"
         }
     },
     "info": {
