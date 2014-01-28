@@ -3,6 +3,7 @@ node_modules
 system
 _*
 config.js
+Gruntfile.js
 
 # Build
 bin
@@ -17,7 +18,6 @@ extensions
 
 # Other files
 .htaccess
-*.sublime*
-notes.txt
 demo.php
+donators.json
 rss.json

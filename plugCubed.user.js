@@ -4,7 +4,8 @@
 // @description    Autorun plugCubed on plug.dj
 // @author         Thomas "TAT" Andresen
 // @include        http://plug.dj/*
-// @version        1.7
+// @version        1.8
+// @grant          none
 // ==/UserScript==
 
 /*
@@ -30,10 +31,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var script = document.createElement('script');
-script.textContent = '(function() { var a = {' +
-    'b: function() { if (typeof API !== \'undefined\' && API.enabled) this.c(); else setTimeout($.proxy(this.b,this),100); },' +
-    'c: function() { console.log(\'plugCubedLoader v.1.7 enabled!\'); $.getScript(\'https://d1rfegul30378.cloudfront.net/files/plugCubed.min.js\'); }' +
-'};' +
-'a.b(); })()';
-document.head.appendChild(script);
+(function() {
+    var a = {
+        b: function() {
+            if (typeof API !== 'undefined' && API.enabled)
+                this.c();
+            else
+                setTimeout(function() { a.b(); }, 100);
+        },
+        c: function() {
+            console.log('plugCubedLoader v.1.8 enabled!');
+            $.getScript('https://d1rfegul30378.cloudfront.net/files/plugCubed.min.js');
+        }
+    };
+    a.b();
+})();

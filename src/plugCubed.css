@@ -167,7 +167,7 @@
 .icon-plug-cubed {
     left:15px;
     top:11px;
-    background-image:url('http://files.plugcubed.net/images/menu_logo.png');
+    background-image:url('https://d1rfegul30378.cloudfront.net/alpha/images/menu_logo.png');
 }
 
 #user-lists .list.room .user .icon-meh {
@@ -179,7 +179,7 @@
 #volume .icon-volume-off-once {
     background-repeat: no-repeat;
     background-position: 9px 6px;
-    background-image:url('http://files.plugcubed.net/images/mute_once.png');
+    background-image:url('https://d1rfegul30378.cloudfront.net/alpha/images/mute_once.png');
 }
 
 #p3-settings,
@@ -312,7 +312,7 @@
     left:auto;
     width:20px;
     height:20px;
-    background-image:url('http://files.plugcubed.net/images/default_settings.png');
+    background-image:url('https://d1rfegul30378.cloudfront.net/alpha/images/default_settings.png');
     cursor:pointer;
 }
 
@@ -451,7 +451,7 @@
 }
 
 .p3-s-stream {
-    background-image:url('http://files.plugcubed.net/images/stream_on_off.png');
+    background-image:url('https://d1rfegul30378.cloudfront.net/alpha/images/stream_on_off.png');
     left:205px;
     top:7px;
 }
@@ -461,7 +461,7 @@
 }
 
 .p3-s-clear {
-    background-image:url('http://files.plugcubed.net/images/clear_chat.png');
+    background-image:url('https://d1rfegul30378.cloudfront.net/alpha/images/clear_chat.png');
     left:254px;
 }
 
@@ -515,4 +515,24 @@
     border-radius:50%;
     background:#EEE;
     z-index:2;
+}
+
+.is-p3developer > .icon, .is-p3sponsor > .icon, .is-p3donator > .icon, .is-p3vip > .icon {
+    background-position: 0 0!important;
+}
+
+.is-p3developer > .icon {
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3developer.png')!important;
+}
+
+.is-p3sponsor > .icon {
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3sponsor.png')!important;
+}
+
+.is-p3donator > .icon {
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3donator.png')!important;
+}
+
+.is-p3vip > .icon {
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3vip.png')!important;
 }

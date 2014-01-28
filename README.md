@@ -31,7 +31,7 @@ Info about how to connect and communicate with the server will be up soon.
 Our socket server is sponsored by [Radiant Music](http://radiantedm.com).
 
 ###License###
-Copyright &copy; 2012-2013 Thomas "TAT" Andresen and other contributors
+Copyright &copy; 2012-2014 Thomas "TAT" Andresen and other contributors
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
