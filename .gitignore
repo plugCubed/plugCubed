@@ -5,6 +5,9 @@ _*
 config.js
 Gruntfile.js
 
+# New Layout
+src/newLayout
+
 # Build
 bin
 
@@ -17,7 +20,8 @@ backup
 extensions
 
 # Other files
+*.txt
 .htaccess
 demo.php
-donators.json
+titles.json
 rss.json

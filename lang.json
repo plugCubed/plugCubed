@@ -1,1 +1,25 @@
-[{"file":"en","name":"English"}]
+[{
+    "file": "en",
+    "name": "English"
+},{
+    "file": "fi",
+    "name": "Finish"
+},{
+    "file": "fr",
+    "name": "French"
+},{
+    "file": "lt",
+    "name": "Lithuanian"
+},{
+    "file": "nl",
+    "name": "Dutch"
+},{
+    "file": "pt-BR",
+    "name": "Portuguese (Brazil)"
+},{
+    "file": "sr",
+    "name": "Serbian"
+},{
+    "file": "tr-TR",
+    "name": "Turkish (Turkey)"
+}]

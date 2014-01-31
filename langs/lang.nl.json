@@ -4,14 +4,18 @@
     "newVersion": "Er is een nieuwe versie van plug&#179; beschikbaar. Jouw script zal in een paar seconden verversen.",
     "automuted": "%1 automatisch gedempt.",
     "nextsong": "toon het volgende lied en of hij al in de geschiedenis staat",
-    "noNextSong": "Je hebt geen liedjes in je playlist.",
+    "noNextSong": "Je hebt geen nummers in je afspeellijst.",
     "isHistory": "Waarschuwing: Dit lied is nog steeds in de geschiedenis. (%1 van %2)",
+    "roomSpecificSettingsHeader": "Deze community gebruikt speciale instellingen.",
+    "roomSpecificSettingsDesc": "Je kan ze uitschakelen in het menu",
+    "lightsOut": "%1 heeft de lichten uit gedaan",
+    "strobe": "schakel de stroboscoop (lichteffect) aan/uit",
     "autorespond": {
         "default": "Ik ben even niet bij mijn computer.",
         "disable": "Schakel automatisch antwoorden bij afwezigheid uit.",
         "nextIn": "Het volgende automatisch antwoord zal verstuurt worden van %1",
-        "next": "Automatisch antwoord bij volgende melding",
-        "commandDisable": "%1 automatisch antwoord uit geschakeld",
+        "next": "Automatisch antwoord bij opmerking",
+        "commandDisable": "%1 automatisch antwoord uitgeschakeld",
         "commandNotEnabled": "%1 automatisch antwoord is niet ingeschakeld"
     },
     "commands": {
@@ -30,8 +34,8 @@
             "afk": "Automatisch antwoord",
             "work": "verander je status naar aan het werken",
             "gaming": "Aan het gamen",
-            "join": "sluit aan bij het podium of de wachtlijst",
-            "leave": "verlaat het podium of de wachtlijst",
+            "join": "Gebruiker online",
+            "leave": "Gebruiker offline.",
             "whoami": "ontvang je eigen informatie",
             "mute": "zet het volume uit",
             "automute": "demp het volume van dit lied zodra hij nog een keer gespeeld word",
@@ -39,8 +43,9 @@
             "nextsong": "toon het volgende lied en of hij al in de geschiedenis staat",
             "refresh": "herlaad de video",
             "ignore": "negeer alle berichten van deze gebruiker",
-            "alertson": "laat een geluid horen als dit woord gezegd word",
-            "curate": "voeg dit lied toe aan je geselecteerde afspeellijst",
+            "alertson": "Speel een geluid af als een bepaald woord word genoemd",
+            "alertsoff": "Speel geen geluid meer af als een bepaald woord word genoemd",
+            "curate": "%1 heeft %2 - %3 toegevoegd",
             "getpos": "haal je plaats in de wachtlijst op",
             "version": "laat versie nummer zien",
             "commands": "laat deze lijst zien",
@@ -61,24 +66,30 @@
     },
     "notify": {
         "header": "plugCubed Commando's",
-        "join": "sluit aan bij het podium of de wachtlijst",
-        "leave": "verlaat het podium of de wachtlijst",
-        "curate": "voeg dit lied toe aan je geselecteerde afspeellijst",
+        "join": "Gebruiker online",
+        "leave": "Gebruiker offline.",
+        "curate": "%1 heeft %2 - %3 toegevoegd",
         "stats": "Statistieken: %1 woots -- %2 mehs -- %3 curates",
         "updates": "Afspelen: %1 door %2<br />Gespeeld door: %3",
         "history": "Dit lied is in de geschiedenis. (%1 van %2)",
+        "songLength": "Nummer is langen dan %1 minuten",
         "message": {
-            "curate": "voeg dit lied toe aan je geselecteerde afspeellijst",
+            "curate": "%1 heeft %2 - %3 toegevoegd",
             "stats": "Statistieken: %1 woots -- %2 mehs -- %3 curates",
             "updates": "Afspelen: %1 door %2<br />Gespeeld door: %3",
-            "join": "sluit aan bij het podium of de wachtlijst",
+            "join": {
+                "normal": "%1 is weggegaan.",
+                "fan": "Jouw fan %1 is weggegaan.",
+                "friend": "Jouw vriend %1 is weggegaan."
+            },
             "leave": {
                 "normal": "%1 is weggegaan.",
                 "fan": "Jouw fan %1 is weggegaan.",
                 "friend": "Jouw vriend %1 is weggegaan."
             },
             "history": "Dit lied is in de geschiedenis. (%1 van %2)",
-            "historySkipped": "Dit lied is in de geschiedenis (%1 van %2), maar is de vorige keer overgeslagen."
+            "historySkipped": "Dit lied is in de geschiedenis (%1 van %2), maar is de vorige keer overgeslagen.",
+            "songLength": "Nummer is langen dan %1 minuten"
         }
     },
     "info": {
@@ -88,7 +99,8 @@
         "specialTitles": {
             "developer": "plugCubed Ontwikkelaar",
             "sponsor": "plug&#179; Sponsor ",
-            "vip": "plugCubed VIP"
+            "vip": "plug&#179; VIP",
+            "donator": "plug&#179; Donateur "
         },
         "id": "ID",
         "rank": "Rang",
@@ -106,15 +118,19 @@
         "wootCount": "Aantal Woots",
         "mehCount": "Aantal mehs",
         "ratio": "Woot/meh verhouding.",
-        "djing": "Nu aan het DJen",
-        "notinlist": "Niet op de wachtlijst of op het podium.",
-        "inwaitlist": "%1/%2 op de wachtlist.",
+        "djing": "Aan het DJen",
+        "notInList": "Niet op de wachtlijst of op het podium.",
+        "inWaitlist": "%1/%2 op de wachtlist.",
         "userDjing": "%1 is aan het DJen.",
-        "userNextDJ": "%1 gaat hierna DJen"
+        "userNextDJ": "%1 gaat hierna DJen",
+        "disconnects": "Verbindingen verbroken",
+        "lastDisconnect": "Laatst verbroken verbinding",
+        "lastPosition": "Positie",
+        "time": "Tijd"
     },
     "ranks": {
         "you": "Jij",
-        "regular": "Normaal",
+        "regular": "Vaste bezoeker",
         "residentdj": "Interne DJ",
         "bouncer": "Uitsmijter",
         "manager": "Manager",
@@ -142,7 +158,7 @@
         "meh": "Meh",
         "woot": "Woot",
         "undecided": "Besluiteloos",
-        "djing": "Nu aan het DJen"
+        "djing": "Aan het DJen"
     },
     "ignore": {
         "enabled": "Je bent nu %1 aan het negeren",
@@ -156,12 +172,14 @@
         "stream": "Stream",
         "clear": "Maak de chat leeg",
         "afk": "Automatisch antwoord",
-        "reset": "Terug naar standaardinstellingen"
+        "reset": "Terug naar standaardinstellingen",
+        "muted": "Alle nummers zijn gedempt",
+        "mutedOnce": "Dit nummer word gedempt "
     },
     "error": {
         "userNotFound": "Gebruiker niet gevonden",
         "ignoreSelf": "Je kan je zelf helaas niet negeren.",
-        "unknownModeration": "Onbekende moderatie",
+        "unknownModeration": "Onbekende maatregel",
         "unknownMenuKey": "Onbekende menu optie",
         "emoji": "Fout tijdens het aanzetten van Emoji",
         "missingReason": "Missende reden",
