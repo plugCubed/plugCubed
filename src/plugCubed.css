@@ -536,3 +536,17 @@
 .is-p3vip > .icon {
     background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3vip.png')!important;
 }
+
+.pm {
+    position: relative;
+    padding-right: 5px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 28px;
+    word-wrap: break-word;
+    width: 90%;
+}
+
+.pm > .icon {
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.pm.png')!important;
+}

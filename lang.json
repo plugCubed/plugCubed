@@ -3,23 +3,23 @@
     "name": "English"
 },{
     "file": "fi",
-    "name": "Finish"
+    "name": "Suomi (Finnish)"
 },{
     "file": "fr",
-    "name": "French"
+    "name": "Français (French)"
 },{
     "file": "lt",
-    "name": "Lithuanian"
+    "name": "Lietuvių Kalba (Lithuanian)"
 },{
     "file": "nl",
-    "name": "Dutch"
+    "name": "Flemish (Dutch)"
 },{
     "file": "pt-BR",
-    "name": "Portuguese (Brazil)"
+    "name": "Português (Portuguese - Brazil)"
 },{
     "file": "sr",
-    "name": "Serbian"
+    "name": "српски (Serbian)"
 },{
     "file": "tr-TR",
-    "name": "Turkish (Turkey)"
+    "name": "Türkçe (Turkish - Turkey)"
 }]

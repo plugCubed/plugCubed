@@ -30,7 +30,7 @@ if (plugCubed !== undefined) plugCubed.close();
     if (!requirejs.defined('app/base/Class'))
         return API.chatLog('This version of plug&#179; is not compatible with this version of plug.dj',true),false;
 
-    define('plugCubed/Model',['jquery','underscore','app/base/Class','app/base/Context','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/events/MediaCurateEvent','app/net/Socket','app/net/SocketIO','app/models/TheUserModel','lang/Lang','app/views/room/AudienceView','app/events/RoomJoinEvent','app/events/RoomStateEvent','plugCubed/StyleManager','app/views/room/user/RoomUserListView','app/views/room/user/RoomStaffListRow','plugCubed/RoomUserListRow','plugCubed/Lang','plugCubed/Utils','app/store/MediaCollection','app/models/PlaybackModel','plugCubed/dialogs/Commands','plugCubed/Slider','plugCubed/VolumeView','plugCubed/dialogs/CustomChatColors'],function($,_,Class,Context,Chat,LocalStorage,Utils,Room,MCE,Socket,SIO,TUM,Lang,Audience,RJE,RSE,Styles,RoomUserListView,RoomUserListRow,_RoomUserListRow,p3Lang,p3Utils,MediaCollection,PlaybackModel,dialogCommands,Slider,VolumeView,dialogColors) {
+    define('plugCubed/Model',['jquery','underscore','app/base/Class','app/base/Context','app/facades/ChatFacade','app/store/LocalStorage','app/utils/Utilities','app/models/RoomModel','app/events/MediaCurateEvent','app/net/Socket','app/net/SocketIO','app/models/TheUserModel','lang/Lang','app/views/room/AudienceView','app/events/RoomJoinEvent','app/events/RoomStateEvent','plugCubed/StyleManager','app/views/room/user/RoomUserListView','app/views/room/user/RoomStaffListRow','plugCubed/RoomUserListRow','plugCubed/Lang','plugCubed/Utils','app/store/Database','app/models/PlaybackModel','plugCubed/dialogs/Commands','plugCubed/Slider','plugCubed/VolumeView','plugCubed/dialogs/CustomChatColors'],function($,_,Class,Context,Chat,LocalStorage,Utils,Room,MCE,Socket,SIO,TUM,Lang,Audience,RJE,RSE,Styles,RoomUserListView,RoomUserListRow,_RoomUserListRow,p3Lang,p3Utils,Database,PlaybackModel,dialogCommands,Slider,VolumeView,dialogColors) {
         SIO.sio.$events.chat = Socket.listener.chat = function(a) {
             if (typeof plugCubed !== 'undefined') {
                 if (a.fromID) setUserData(a.fromID,'lastChat',Date.now());
@@ -412,7 +412,7 @@ if (plugCubed !== undefined) plugCubed.close();
             else if (API.hasPermission(data.from.id,API.ROLE.RESIDENTDJ)) data.type += 'residentdj';
             else if (data.from.id == API.getUser().id)                    data.type += 'you';
 
-            if (data.type === 'mention') {
+            if (data.type.split(' ')[0] === 'mention') {
                 data.type += ' is-';
                      if (API.hasPermission(data.from.id,API.ROLE.ADMIN)) data.type += 'admin';
                 else if (API.hasPermission(data.from.id,API.ROLE.VOLUNTEER)) data.type += 'ambassador';
@@ -420,6 +420,29 @@ if (plugCubed !== undefined) plugCubed.close();
                 else if (API.hasPermission(data.from.id,API.ROLE.DJ)) data.type += 'dj';
                 else data.type += 'you';
                 data.text = data.text.split('@' + API.getUser().username).join('<span class="name">@' + API.getUser().username + '</span>');
+            }
+        }
+
+        function onChatReceivedLate(data) {
+            if (!data.from || !data.from.id) return;
+            
+            var a = p3Utils.isPlugCubedDeveloper(data.from.id),
+                b = p3Utils.isPlugCubedSponsor(data.from.id),
+                c = p3Utils.isPlugCubedDonator(data.from.id),
+                d = p3Utils.isPlugCubedVIP(data.from.id);
+            if (data.type.split(' ')[0] === 'pm') {
+                var icon = $('.cid-' + data.chatID).find('.icon');
+                if (icon.length === 0)
+                    icon = $('<i>').addClass('icon').css({ width: '15px', height: '15px' }).appendTo($('.cid-' + data.chatID));
+            } else if (a || b || c || d) {
+                var icon = $('.cid-' + data.chatID).find('.icon');
+                if (icon.length === 0)
+                    icon = $('<i>').addClass('icon').css({ width: '15px', height: '15px' }).appendTo($('.cid-' + data.chatID));
+                $('.cid-' + data.chatID).find('.icon').mouseover(function() {
+                    Context.trigger('tooltip:show', $('<span>').html(p3Lang.i18n('info.specialTitles.' + (a ? 'developer' : b ? 'sponsor' : c ? 'donator' : 'vip'))).text(), $(this), true);
+                }).mouseout(function() {
+                    Context.trigger('tooltip:hide');
+                });
             }
         }
 
@@ -514,12 +537,13 @@ if (plugCubed !== undefined) plugCubed.close();
             ).append(
                 $('<div>').addClass('chat-header-button p3-s-clear').data('key','clear').click(this.proxy.onMenuButtonClick).mouseover(function() { Context.trigger('tooltip:show',p3Lang.i18n('tooltip.clear'),$(this),true); }).mouseout(function() { Context.trigger('tooltip:hide'); })
             );
-            this.changeGUIColor('stream',MediaCollection.settings.streamDisabled);
+            this.changeGUIColor('stream',Database.settings.streamDisabled);
 
             PlaybackModel.on('change:media',onMediaChange);
             PlaybackModel._events['change:media'].unshift(PlaybackModel._events['change:media'].pop());
             Context.on('chat:receive',onChatReceived);
             Context._events['chat:receive'].unshift(Context._events['chat:receive'].pop());
+            Context.on('chat:receive',onChatReceivedLate);
 
             RoomUserListView.prototype.RowClass = _RoomUserListRow;
 
@@ -574,6 +598,7 @@ if (plugCubed !== undefined) plugCubed.close();
             menuDiv,
             volume,
             socket,
+            lastPMReceiver,
             customChatColorDiv;
 
         return Class.extend({
@@ -630,6 +655,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 API.off(API.USER_SKIP,                  this.proxy.onSkip);
                 API.off(API.MOD_SKIP,                   this.proxy.onSkip);
                 Context.off('chat:receive',onChatReceived);
+                Context.off('chat:receive',onChatReceivedLate);
                 volume.remove();
 
                 $('#plugcubed-css,#font-awesome,#plugcubed-js-extra,#side-right,#side-left,#notify-dialog,.plugcubed-footer,#plug-cubed,#p3-settings,#p3-settings-custom-colors,.p3-s-stream,.p3-s-clear,#waitlist .user .afkTimer').remove();
@@ -700,6 +726,16 @@ if (plugCubed !== undefined) plugCubed.close();
                             return;
                         Chat.receive(data);
                         return API.trigger(API.CHAT,data);
+                    }
+                    if (type === 'pm') {
+                        Chat.receive(data);
+                        return API.trigger(API.CHAT,data);
+                    }
+                    if (type === 'pmUserNotFound') {
+                        var user = API.getUser(data.id);
+                        if (!user)
+                            user = {username:'Receiver'}
+                        return API.chatLog('[p3 Socket] ' + user.username + ' not found',true);
                     }
                     if (type === 'rave') {
                         if (p3Utils.isPlugCubedDeveloper(data.id) || p3Utils.isPlugCubedSponsor(data.id) || API.hasPermission(data.id,API.ROLE.COHOST)) {
@@ -1043,8 +1079,8 @@ if (plugCubed !== undefined) plugCubed.close();
                         }
                         break;
                     case 'stream':
-                        PlaybackModel.set('streamDisabled', !MediaCollection.settings.streamDisabled);
-                        this.changeGUIColor('stream',MediaCollection.settings.streamDisabled);
+                        PlaybackModel.set('streamDisabled', !Database.settings.streamDisabled);
+                        this.changeGUIColor('stream',Database.settings.streamDisabled);
                         return;
                         break;
                     case 'clear':
@@ -1091,7 +1127,7 @@ if (plugCubed !== undefined) plugCubed.close();
                     p3Utils.chatLog(undefined,p3Lang.i18n('notify.message.stats',data.lastPlay.score.positive,data.lastPlay.score.negative,data.lastPlay.score.curates),this.settings.colors.stats);
                 if ((this.settings.notify & 16) === 16)
                     p3Utils.chatLog(undefined,p3Lang.i18n('notify.message.updates',data.media.title,data.media.author,Utils.cleanTypedString(data.dj.username)),this.settings.colors.updates);
-                if ((this.settings.notify & 64) === 64 && data.media.duration >= this.settings.notifySongLength*60) {
+                if ((this.settings.notify & 64) === 64 && data.media.duration > this.settings.notifySongLength*60) {
                     playMentionSound();
                     setTimeout(playMentionSound,50);
                     p3Utils.chatLog('system',p3Lang.i18n('notify.message.songLength',this.settings.notifySongLength) + '<br /><span onclick="if (API.getMedia().id === \'' + id + '\') API.moderateForceSkip()" style="cursor:pointer;">Click here to skip</span>');
@@ -1159,7 +1195,7 @@ if (plugCubed !== undefined) plugCubed.close();
              * @param {plugUserJoinEvent} data
              */
             onUserJoin: function(data) {
-                if ((this.settings.notify & 1) === 1) {
+                if ((this.settings.notify & 1) === 1 && Room.getUserByID(data.id) !== undefined) {
                     var relationship = Room.getUserByID(data.id).get('relationship');
                     p3Utils.chatLog(undefined,p3Lang.i18n('notify.message.join.' + (relationship === 0 || relationship === undefined ? 'normal' : (relationship > 1 ? 'friend' : 'fan')),Utils.cleanTypedString(data.username)),this.settings.colors.join);
                 }
@@ -1171,9 +1207,9 @@ if (plugCubed !== undefined) plugCubed.close();
              * @param {plugUserLeaveEvent} data
              */
             onUserLeave: function(data) {
-                if ((this.settings.notify & 2) === 2)
-                    p3Utils.chatLog(undefined,p3Lang.i18n('notify.message.leave.' + (data.relationship === 0 ? 'normal' : (data.relationship > 1 ? 'friend' : 'fan')),Utils.cleanTypedString(data.username)),this.settings.colors.leave);
                 var disconnects = getUserData(data.id,'disconnects',{count:0});
+                if ((this.settings.notify & 2) === 2 && (disconnects.time === undefined || Date.now() - disconnects.time < 1000))
+                    p3Utils.chatLog(undefined,p3Lang.i18n('notify.message.leave.' + (data.relationship === 0 ? 'normal' : (data.relationship > 1 ? 'friend' : 'fan')),Utils.cleanTypedString(data.username)),this.settings.colors.leave);
                 disconnects.count++;
                 disconnects.position = API.getDJ().id === data.id ? -1 : (API.getWaitListPosition(data.id) < 0 ? -2 : API.getWaitListPosition(data.id));
                 disconnects.time = Date.now();
@@ -1318,7 +1354,23 @@ if (plugCubed !== undefined) plugCubed.close();
                 if (value === '/work' || value === '/working')
                     return API.setStatus(2);
                 if (value === '/game' || value === '/gaming')
-                    return API.setStatus(3);;
+                    return API.setStatus(3);
+                if (value.indexOf('/msg') === 0 || value.indexOf('/pm') === 0) {
+                    var user = getUser(value.split(' ')[1]);
+                    if (user !== null) {
+                        socket.send(JSON.stringify({type:'PM',value:{id:user.id,message:value.substr(value.indexOf(user.username) + user.username.length + 1)}}));
+                        this.lastPMReceiver = user;
+                    } else
+                        API.chatLog('Username not found',true);
+                    return;
+                }
+                if (value.indexOf('/r') === 0) {
+                    if (this.lastPMReceiver !== undefined && API.getUser(this.lastPMReceiver.id) !== undefined)
+                        socket.send(JSON.stringify({type:'PM',value:{id:this.lastPMReceiver.id,message:value.substr(3)}}));
+                    else
+                        API.chatLog('Can not find the last PM receiver'),true;
+                    return;
+                }
                 if (value === '/join')
                     return API.djJoin();
                 if (value === '/leave')
