@@ -1219,10 +1219,18 @@ if (plugCubed !== undefined) plugCubed.close();
              * @this {plugCubedModel}
              */
             chatDisable: function(data) {
-                var a = data.type == 'mention' && API.hasPermission(data.fromID,API.ROLE.BOUNCER),
+                var a = data.message.indexOf('@' + API.getUser().username) > -1 && API.hasPermission(data.fromID,API.ROLE.BOUNCER),
                     b = data.message.indexOf('@') < 0 && (API.hasPermission(data.fromID,API.ROLE.MANAGER) || p3Utils.isPlugCubedDeveloper(data.fromID));
                 if (a || b) {
-                    if (data.message.indexOf('!disable') > -1 && (typeof roomRules.allowAutorespond === 'undefined' || roomRules.allowAutorespond !== false)) {
+                    if (data.message.indexOf('!joindisable') > -1 && (typeof roomRules.allowAutojoin === 'undefined' || roomRules.allowAutojoin !== false)) {
+                        if (this.settings.autojoin) {
+                            this.settings.autojoin = false;
+                            this.changeGUIColor('autojoin',this.settings.autojoin);
+                            this.saveSettings();
+                            API.sendChat(p3Lang.i18n('autojoin.commandDisable','@' + data.from));
+                        } else API.sendChat(p3Lang.i18n('autojoin.commandNotEnabled','@' + data.from));
+                    }
+                    if (data.message.indexOf('!afkdisable') > -1 && (typeof roomRules.allowAutorespond === 'undefined' || roomRules.allowAutorespond !== false)) {
                         if (this.settings.autorespond) {
                             this.settings.autorespond = false;
                             this.changeGUIColor('autorespond',this.settings.autorespond);
@@ -1230,7 +1238,6 @@ if (plugCubed !== undefined) plugCubed.close();
                             API.sendChat(p3Lang.i18n('autorespond.commandDisable','@' + data.from));
                         } else API.sendChat(p3Lang.i18n('autorespond.commandNotEnabled','@' + data.from));
                     }
-                    if (data.message.indexOf('!disable') > 0) return;
                 }
             },
             /**
@@ -1368,7 +1375,7 @@ if (plugCubed !== undefined) plugCubed.close();
                     if (this.lastPMReceiver !== undefined && API.getUser(this.lastPMReceiver.id) !== undefined)
                         socket.send(JSON.stringify({type:'PM',value:{id:this.lastPMReceiver.id,message:value.substr(3)}}));
                     else
-                        API.chatLog('Can not find the last PM receiver'),true;
+                        API.chatLog('Can not find the last PM receiver',true);
                     return;
                 }
                 if (value === '/join')
