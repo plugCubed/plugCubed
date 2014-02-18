@@ -18,6 +18,10 @@
         "commandDisable": "%1 AFK message disabled",
         "commandNotEnabled": "%1 AFK message was not enabled"
     },
+    "autojoin": {
+        "commandDisable": "%1 autojoin disabled",
+        "commandNotEnabled": "%1 autojoin was not enabled"
+    },
     "commands": {
         "header": "plug&#179; Commands",
         "userCommands": "User Commands",

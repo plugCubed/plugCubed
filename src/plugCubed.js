@@ -526,6 +526,7 @@ if (plugCubed !== undefined) plugCubed.close();
             
             this.loadSettings();
             this.initAPIListeners();
+            this.initBody();
             var users = API.getUsers();
             for (var i in users) {
                 if (getUserData(users[i].id,'joinTime',-1) < 0)
@@ -909,6 +910,17 @@ if (plugCubed !== undefined) plugCubed.close();
                 API.on(API.VOTE_SKIP,        this.proxy.onSkip);
                 API.on(API.USER_SKIP,        this.proxy.onSkip);
                 API.on(API.MOD_SKIP,         this.proxy.onSkip);
+            },
+            initBody: function() {
+                var rank = 'regular';
+                if (API.hasPermission(undefined,API.ROLE.ADMIN))           rank = 'admin';
+                else if (API.hasPermission(undefined,API.ROLE.AMBASSADOR)) rank = 'ambassador';
+                else if (API.hasPermission(undefined,API.ROLE.HOST))       rank = 'host';
+                else if (API.hasPermission(undefined,API.ROLE.COHOST))     rank = 'cohost';
+                else if (API.hasPermission(undefined,API.ROLE.MANAGER))    rank = 'manager';
+                else if (API.hasPermission(undefined,API.ROLE.BOUNCER))    rank = 'bouncer';
+                else if (API.hasPermission(undefined,API.ROLE.RESIDENTDJ)) rank = 'residentdj';
+                $('body').addClass('p3-' + rank);
             },
             changeGUIColor: function(id,value) {
                 $('.p3-s-' + id).removeClass('selected');
@@ -1371,7 +1383,7 @@ if (plugCubed !== undefined) plugCubed.close();
                         API.chatLog('Username not found',true);
                     return;
                 }
-                if (value.indexOf('/r') === 0) {
+                if (value.indexOf('/r ') === 0) {
                     if (this.lastPMReceiver !== undefined && API.getUser(this.lastPMReceiver.id) !== undefined)
                         socket.send(JSON.stringify({type:'PM',value:{id:this.lastPMReceiver.id,message:value.substr(3)}}));
                     else
