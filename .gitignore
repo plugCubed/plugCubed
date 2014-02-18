@@ -25,3 +25,6 @@ extensions
 demo.php
 titles.json
 rss.json
+
+# jetbrains
+.idea
