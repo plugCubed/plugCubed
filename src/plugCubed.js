@@ -421,6 +421,26 @@ if (plugCubed !== undefined) plugCubed.close();
                 else data.type += 'you';
                 data.text = data.text.split('@' + API.getUser().username).join('<span class="name">@' + API.getUser().username + '</span>');
             }
+
+            if (plugCubed.settings.inlineimages) {
+                if ((/\.(gif|jpg|jpeg|png)/i).test(data.text)) {
+                    var temp = $('<div/>');
+                    temp.html(data.text).find('a').each(function(){
+                        var url = $(this).html();
+                        if((/\.(gif|jpg|jpeg|png)$/i).test(url)) {
+                            $(this).html(
+                                $('<img/>')
+                                    .attr('src', url)
+                                    .css('display', 'block')
+                                    .css('width', '50%')
+                                    .css('height', 'auto')
+                                    .css('margin', '0 auto')
+                            );
+                        }
+                    });
+                    data.text = temp.html();
+                }
+            }
         }
 
         function onChatReceivedLate(data) {
@@ -801,6 +821,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 autorespond      : false,
                 notify           : 0,
                 customColors     : false,
+                inlineimages     : false,
                 avatarAnimations : true,
                 registeredSongs  : [],
                 alertson         : [],
@@ -1007,6 +1028,8 @@ if (plugCubed !== undefined) plugCubed.close();
                                 ).append(
                                     GUIButton(false,                      'colors',      p3Lang.i18n('menu.customchatcolors') + '...')
                                 ).append(
+                                    GUIButton(this.settings.inlineimages, 'inlineimages', p3Lang.i18n('menu.inlineimages'))
+                                ).append(
                                     $('<div class="spacer">').append(
                                         $('<div class="divider">')
                                     )
@@ -1062,6 +1085,10 @@ if (plugCubed !== undefined) plugCubed.close();
                         break;
                     case 'colors':
                         dialogColors.render();
+                        break;
+                    case 'inlineimages':
+                        this.settings.inlineimages = !this.settings.inlineimages;
+                        this.changeGUIColor('inlineimages', this.settings.inlineimages);
                         break;
                     case 'autorespond':
                         this.settings.autorespond = !this.settings.autorespond;
