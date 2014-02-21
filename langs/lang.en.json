@@ -150,7 +150,8 @@
         "autorespond": "AFK Autorespond",
         "notify": "Notifications",
         "afktimers": "AFK Timers",
-        "roomsettings": "Room Settings"
+        "roomsettings": "Room Settings",
+        "inlineimages": "Inline Images"
     },
     "status": {
         "available": "Available",
