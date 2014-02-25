@@ -48,7 +48,7 @@
             "refresh": "refresh the video",
             "ignore": "ignore all chat messages from user",
             "alertson": "play sound whenever defined words are written in chat",
-            "alertsoff": "stop playing sound when defined words are written is chat",
+            "alertsoff": "stop playing sound when defined words are written in chat",
             "curate": "add current song to your selected playlist",
             "getpos": "get current waitlist position",
             "version": "displays version number",
