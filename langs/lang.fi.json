@@ -78,12 +78,12 @@
             "stats": "Tilastot: %1 woots -- %2 mehs -- %3 curates",
             "updates": "Nyt soi: %1 tekijältä %2<br/>Soittajalta: %3",
             "join": {
-                "normal": "%1 Lähti huoneesta",
-                "fan": "Fanisi %1 on lähtenyt huoneesta",
-                "friend": "Sinun ystäväsi %1 on lähtenyt huoneesta"
+                "normal": "%1 saapui huoneeseen",
+                "fan": "Fanisi %1 on saapunut huoneeseen",
+                "friend": "Sinun ystäväsi %1 on saapunut huoneeseen"
             },
             "leave": {
-                "normal": "%1 Lähti huoneesta",
+                "normal": "%1 lähti huoneesta",
                 "fan": "Fanisi %1 on lähtenyt huoneesta",
                 "friend": "Sinun ystäväsi %1 on lähtenyt huoneesta"
             },
@@ -150,7 +150,7 @@
     },
     "status": {
         "available": "Tavoitettavissa",
-        "afk": "AFK Viesti",
+        "afk": "AFK",
         "working": "Työskentelemässä",
         "gaming": "Pelaamassa"
     },
