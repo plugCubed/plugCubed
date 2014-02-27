@@ -80,7 +80,7 @@
             "join": {
                 "normal": "%1 saapui huoneeseen",
                 "fan": "Fanisi %1 on saapunut huoneeseen",
-                "friend": "Sinun ystäväsi %1 on saapunut huoneesta"
+                "friend": "Sinun ystäväsi %1 on saapunut huoneeseen"
             },
             "leave": {
                 "normal": "%1 lähti huoneesta",
