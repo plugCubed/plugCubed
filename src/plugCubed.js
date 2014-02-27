@@ -421,6 +421,26 @@ if (plugCubed !== undefined) plugCubed.close();
                 else data.type += 'you';
                 data.text = data.text.split('@' + API.getUser().username).join('<span class="name">@' + API.getUser().username + '</span>');
             }
+
+            if (plugCubed.settings.inlineimages) {
+                if ((/\.(gif|jpg|jpeg|png)/i).test(data.text)) {
+                    var temp = $('<div/>');
+                    temp.html(data.text).find('a').each(function(){
+                        var url = $(this).html();
+                        if((/\.(gif|jpg|jpeg|png)$/i).test(url)) {
+                            $(this).html(
+                                $('<img/>')
+                                    .attr('src', url)
+                                    .css('display', 'block')
+                                    .css('width', '50%')
+                                    .css('height', 'auto')
+                                    .css('margin', '0 auto')
+                            );
+                        }
+                    });
+                    data.text = temp.html();
+                }
+            }
         }
 
         function onChatReceivedLate(data) {
@@ -801,6 +821,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 autorespond      : false,
                 notify           : 0,
                 customColors     : false,
+                inlineimages     : false,
                 avatarAnimations : true,
                 registeredSongs  : [],
                 alertson         : [],
@@ -861,38 +882,38 @@ if (plugCubed !== undefined) plugCubed.close();
                     b = this.settings.useRoomSettings[window.location.pathname.split('/')[1]];
                 b = b === undefined || b === true ? true : false;
                 if ((b && roomChatColors.regular) || this.settings.colors.regular !== this.colorInfo.ranks.regular.color)
-                    a.push('.message.from > .from,','.emote.from > .from,','.mention.from > .from { color:#' + (this.settings.colors.regular !== this.colorInfo.ranks.regular.color ? this.settings.colors.regular : roomChatColors.regular) + '!important; }');
+                    a.push('#user-panel:not(.is-none) .user > .name:first-child,', '#user-lists .user > .name:first-child,', '.message.from > .from,','.emote.from > .from,','.mention.from > .from { color:#' + (this.settings.colors.regular !== this.colorInfo.ranks.regular.color ? this.settings.colors.regular : roomChatColors.regular) + '!important; }');
                 if ((b && roomChatColors.residentdj) || this.settings.colors.residentdj !== this.colorInfo.ranks.residentdj.color)
-                    a.push('.message.from-residentdj > .from,','.emote.from-residentdj > .from,','.mention.from-residentdj > .from { color:#' + (this.settings.colors.residentdj !== this.colorInfo.ranks.residentdj.color ? this.settings.colors.residentdj : roomChatColors.residentdj) + '!important; }');
+                    a.push('#user-panel:not(.is-none) .user > .icon-chat-dj + .name,', '#user-lists .user > .icon-chat-dj + .name,', '.message.from-residentdj > .from,','.emote.from-residentdj > .from,','.mention.from-residentdj > .from { color:#' + (this.settings.colors.residentdj !== this.colorInfo.ranks.residentdj.color ? this.settings.colors.residentdj : roomChatColors.residentdj) + '!important; }');
                 if ((b && roomChatColors.bouncer) || this.settings.colors.bouncer !== this.colorInfo.ranks.bouncer.color)
-                    a.push('.message.from-bouncer > .from,','.emote.from-bouncer > .from,','.mention.from-bouncer > .from { color:#' + (this.settings.colors.bouncer !== this.colorInfo.ranks.bouncer.color ? this.settings.colors.bouncer : roomChatColors.bouncer) + '!important; }');
+                    a.push('#user-panel:not(.is-none) .user > .icon-chat-bouncer + .name,', '#user-lists .user > .icon-chat-bouncer + .name,', '.message.from-bouncer > .from,','.emote.from-bouncer > .from,','.mention.from-bouncer > .from { color:#' + (this.settings.colors.bouncer !== this.colorInfo.ranks.bouncer.color ? this.settings.colors.bouncer : roomChatColors.bouncer) + '!important; }');
                 if ((b && roomChatColors.manager) || this.settings.colors.manager !== this.colorInfo.ranks.manager.color)
-                    a.push('.message.from-manager > .from,','.emote.from-manager > .from,','.mention.from-manager > .from { color:#' + (this.settings.colors.manager !== this.colorInfo.ranks.manager.color ? this.settings.colors.manager : roomChatColors.manager) + '!important; }');
+                    a.push('#user-panel:not(.is-none) .user > .icon-chat-manager + .name,', '#user-lists .user > .icon-chat-manager + .name,', '.message.from-manager > .from,','.emote.from-manager > .from,','.mention.from-manager > .from { color:#' + (this.settings.colors.manager !== this.colorInfo.ranks.manager.color ? this.settings.colors.manager : roomChatColors.manager) + '!important; }');
                 if ((b && roomChatColors.cohost) || this.settings.colors.cohost !== this.colorInfo.ranks.cohost.color)
-                    a.push('.message.from-cohost > .from,','.emote.from-cohost > .from,','.mention.from-cohost > .from { color:#' + (this.settings.colors.cohost !== this.colorInfo.ranks.cohost.color ? this.settings.colors.cohost : roomChatColors.cohost) + '!important; }');
+                    a.push('#user-panel:not(.is-none) .user > .icon-chat-cohost + .name,', '#user-lists .user > .icon-chat-cohost + .name,', '.message.from-cohost > .from,','.emote.from-cohost > .from,','.mention.from-cohost > .from { color:#' + (this.settings.colors.cohost !== this.colorInfo.ranks.cohost.color ? this.settings.colors.cohost : roomChatColors.cohost) + '!important; }');
                 if ((b && roomChatColors.host) || this.settings.colors.host !== this.colorInfo.ranks.host.color)
-                    a.push('.message.from-host > .from,','.emote.from-host > .from,','.mention.from-host > .from { color:#' + (this.settings.colors.host !== this.colorInfo.ranks.host.color ? this.settings.colors.host : roomChatColors.host) + '!important; }');
+                    a.push('#user-panel:not(.is-none) .user > .icon-chat-host + .name,', '#user-lists .user > .icon-chat-host + .name,', '.message.from-host > .from,','.emote.from-host > .from,','.mention.from-host > .from { color:#' + (this.settings.colors.host !== this.colorInfo.ranks.host.color ? this.settings.colors.host : roomChatColors.host) + '!important; }');
                 if ((b && roomChatColors.ambassador) || this.settings.colors.ambassador !== this.colorInfo.ranks.ambassador.color)
-                    a.push('.message.from-ambassador > .from,','.emote.from-ambassador > .from,','.mention.from-ambassador > .from { color:#' + (this.settings.colors.ambassador !== this.colorInfo.ranks.ambassador.color ? this.settings.colors.ambassador : roomChatColors.ambassador) + '!important; }');
+                    a.push('#user-panel:not(.is-none) .user > .icon-chat-ambassador + .name,', '#user-lists .user > .icon-chat-ambassador + .name,', '.message.from-ambassador > .from,','.emote.from-ambassador > .from,','.mention.from-ambassador > .from { color:#' + (this.settings.colors.ambassador !== this.colorInfo.ranks.ambassador.color ? this.settings.colors.ambassador : roomChatColors.ambassador) + '!important; }');
                 if ((b && roomChatColors.admin) || this.settings.colors.admin !== this.colorInfo.ranks.admin.color)
-                    a.push('.message.from-admin > .from,','.emote.from-admin > .from,','.mention.from-admin > .from { color:#' + (this.settings.colors.admin !== this.colorInfo.ranks.admin.color ? this.settings.colors.admin : roomChatColors.admin) + '!important; }');
+                    a.push('#user-panel:not(.is-none) .user > .icon-chat-admin + .name,', '#user-lists .user > .icon-chat-admin + .name,', '.message.from-admin > .from,','.emote.from-admin > .from,','.mention.from-admin > .from { color:#' + (this.settings.colors.admin !== this.colorInfo.ranks.admin.color ? this.settings.colors.admin : roomChatColors.admin) + '!important; }');
                 if ((b && roomChatColors.you) || this.settings.colors.you !== this.colorInfo.ranks.you.color)
                     a.push('.message.from-you > .from,','.emote.from-you > .from,','.mention.from-you > .from { color:#' + (this.settings.colors.you !== this.colorInfo.ranks.you.color ? this.settings.colors.you : roomChatColors.you) + '!important; }');
                 if (b) {
                     if (roomChatIcons.admin)
-                        a.push('.message.from-admin > .icon,','.emote.from-admin > .icon,','.mention.from-admin > .icon { background-image: url("' + roomChatIcons.admin + '"); background-position: 0 0; }');
+                        a.push('.icon-chat-admin,','.message.from-admin > .icon,','.emote.from-admin > .icon,','.mention.from-admin > .icon { background-image: url("' + roomChatIcons.admin + '"); background-position: 0 0; }');
                     if (roomChatIcons.ambassador)
-                        a.push('.message.from-ambassador > .icon,','.emote.from-ambassador > .icon,','.mention.from-ambassador > .icon { background-image: url("' + roomChatIcons.ambassador + '"); background-position: 0 0; }');
+                        a.push('.icon-chat-ambassador,','.message.from-ambassador > .icon,','.emote.from-ambassador > .icon,','.mention.from-ambassador > .icon { background-image: url("' + roomChatIcons.ambassador + '"); background-position: 0 0; }');
                     if (roomChatIcons.bouncer)
-                        a.push('.message.from-bouncer > .icon,','.emote.from-bouncer > .icon,','.mention.from-bouncer > .icon { background-image: url("' + roomChatIcons.bouncer + '"); background-position: 0 0; }');
+                        a.push('.icon-chat-bouncer,','.message.from-bouncer > .icon,','.emote.from-bouncer > .icon,','.mention.from-bouncer > .icon { background-image: url("' + roomChatIcons.bouncer + '"); background-position: 0 0; }');
                     if (roomChatIcons.cohost)
-                        a.push('.message.from-cohost > .icon,','.emote.from-cohost > .icon,','.mention.from-cohost > .icon { background-image: url("' + roomChatIcons.cohost + '"); background-position: 0 0; }');
+                        a.push('.icon-chat-cohost,','.message.from-cohost > .icon,','.emote.from-cohost > .icon,','.mention.from-cohost > .icon { background-image: url("' + roomChatIcons.cohost + '"); background-position: 0 0; }');
                     if (roomChatIcons.residentdj)
-                        a.push('.message.from-residentdj > .icon,','.emote.from-residentdj > .icon,','.mention.from-residentdj > .icon { background-image: url("' + roomChatIcons.residentdj + '"); background-position: 0 0; }');
+                        a.push('.icon-chat-dj,','.message.from-residentdj > .icon,','.emote.from-residentdj > .icon,','.mention.from-residentdj > .icon { background-image: url("' + roomChatIcons.residentdj + '"); background-position: 0 0; }');
                     if (roomChatIcons.host)
-                        a.push('.message.from-host > .icon,','.emote.from-host > .icon,','.mention.from-host > .icon { background-image: url("' + roomChatIcons.host + '"); background-position: 0 0; }');
+                        a.push('.icon-chat-host,','.message.from-host > .icon,','.emote.from-host > .icon,','.mention.from-host > .icon { background-image: url("' + roomChatIcons.host + '"); background-position: 0 0; }');
                     if (roomChatIcons.manager)
-                        a.push('.message.from-manager > .icon,','.emote.from-manager > .icon,','.mention.from-manager > .icon { background-image: url("' + roomChatIcons.manager + '"); background-position: 0 0; }');
+                        a.push('.icon-chat-manager,','.message.from-manager > .icon,','.emote.from-manager > .icon,','.mention.from-manager > .icon { background-image: url("' + roomChatIcons.manager + '"); background-position: 0 0; }');
                 }
                 this.customColorsStyle.text(a.join("\n"));
             },
@@ -1007,6 +1028,8 @@ if (plugCubed !== undefined) plugCubed.close();
                                 ).append(
                                     GUIButton(false,                      'colors',      p3Lang.i18n('menu.customchatcolors') + '...')
                                 ).append(
+                                    GUIButton(this.settings.inlineimages, 'inlineimages', p3Lang.i18n('menu.inlineimages'))
+                                ).append(
                                     $('<div class="spacer">').append(
                                         $('<div class="divider">')
                                     )
@@ -1062,6 +1085,10 @@ if (plugCubed !== undefined) plugCubed.close();
                         break;
                     case 'colors':
                         dialogColors.render();
+                        break;
+                    case 'inlineimages':
+                        this.settings.inlineimages = !this.settings.inlineimages;
+                        this.changeGUIColor('inlineimages', this.settings.inlineimages);
                         break;
                     case 'autorespond':
                         this.settings.autorespond = !this.settings.autorespond;
