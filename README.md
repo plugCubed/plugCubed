@@ -1,36 +1,33 @@
 plug&#179; (plugCubed)
 ====================
 
-###Information / Installation###
+### Information / Installation
 Find all information and installation informations at http://plugCubed.net/
 
-###Issues / Feature Requests###
+### Issues / Feature Requests
 Please use our [bug tracker](http://issue.plugcubed.net/) to report a bug report / feature request / enhancement.
 
-###Developers###
+### Developers
 * Thomas "TAT" Andresen
 
-###Original Creators###
+### Original Creators
 * Thomas "TAT" Andresen
 * Jeremy "Colgate" Richardson
 
-###Translators###
-No languages other than English are included yet, but will be in one of the upcoming versions.
+### Translations
+If you want to help out translating plug&#179; to different languages please use [our project at CrowdIn](https://crowdin.net/project/plug3).
 
-###Translations###
-If you want to help out translating plug&#179;, please use [our project at GetLocalization](http://getlocalization.com/plugCubed/).
-
-###Developers###
+### Developers
 plug&#179; invites other script developers on plug.dj to use our socket server.
 By sharing the same socket server, we can all support shared backup chat system, in case of chatsplits.
 Thereby all the users of the scripts that uses this server will still be able to talk to eachother.
 
 Info about how to connect and communicate with the server will be up soon.
 
-###Sponsors###
+### Sponsors
 Our socket server is sponsored by [Radiant Music](http://radiantedm.com).
 
-###License###
+### License
 Copyright &copy; 2012-2014 Thomas "TAT" Andresen and other contributors
 
 This program is free software: you can redistribute it and/or modify
@@ -46,15 +43,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/.
 
-###Disclaimer###
+### Disclaimer
 This script connects to our own socket server.
 This socket server makes it possible to have some of the features that plug&#179; contains.
 
 The userdata sent to the socket server is your userid, username, roomid and version of plug&#179;.
-All chat messages that you send is also sent to the socket server to act as a backup chat server.
+Your IP and userid is logged for security purposes only.
 
-None of the data sent to the socket server is saved.
-As soon as you disconnect all your userdata is no longer existant on the socket server.
+No other data sent to the socket server is saved.
+As soon as you disconnect all your data, except IP and userid, is no longer existant on the socket server.
 
 Every minute the socket server counts number of clients that are connected and saves that number for statistic purpose only.
 
