@@ -7,6 +7,7 @@
     "noNextSong": "You have no queued song",
     "isHistory": "Warning: This song is still in the history (%1 of %2)",
     "roomSpecificSettingsHeader": "This room is using special settings",
+    "roomSpecificSettingsHeaderAuthor": "This room is using special settings by %1",
     "roomSpecificSettingsDesc": "You can disable them in the menu",
     "lightsOut": "%1 turned the lights off",
     "strobe": "%1 activated strobe lights",
@@ -103,8 +104,13 @@
         "specialTitles": {
             "developer": "plug&#179; Developer",
             "sponsor": "plug&#179; Sponsor",
-            "vip": "plug&#179; Ambassador",
-            "donator": "plug&#179; Donator"
+            "ambassador": "plug&#179; Ambassador",
+            "donatorDiamond": "plug&#179; Diamond Donator",
+            "donatorPlatinum": "plug&#179; Platinum Donator",
+            "donatorGold": "plug&#179; Gold Donator",
+            "donatorSilver": "plug&#179; Silver Donator",
+            "donatorBronze": "plug&#179; Bronze Donator",
+            "special": "plug&#179; Special Supporter - %1"
         },
         "id": "ID",
         "rank": "Rank",
@@ -183,11 +189,10 @@
     },
     "error": {
         "userNotFound": "User not found",
-        "ignoreSelf": "You can't ignore yourself",
         "unknownModeration": "Unknown moderation",
         "unknownMenuKey": "Unknown menu key: %1",
-        "emoji": "Error in reenabling Emoji",
         "missingReason": "Missing reason",
-        "notConnected": "Not connected to socket server"
+        "notConnected": "Not connected to socket server",
+        "ignoredUser": "Ignored User"
     }
 }

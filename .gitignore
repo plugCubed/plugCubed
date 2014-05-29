@@ -7,6 +7,7 @@ Gruntfile.js
 
 # New Layout
 src/newLayout
+app.build.js
 
 # Build
 bin
@@ -17,6 +18,8 @@ desktop.ini
 # Other directories
 test
 backup
+images_for_review
+images_old
 extensions
 
 # Other files
