@@ -78,9 +78,9 @@
             "stats": "Tilastot: %1 woots -- %2 mehs -- %3 curates",
             "updates": "Nyt soi: %1 tekijältä %2<br/>Soittajalta: %3",
             "join": {
-                "normal": "%1 Lähti huoneesta",
-                "fan": "Fanisi %1 on lähtenyt huoneesta",
-                "friend": "Sinun ystäväsi %1 on lähtenyt huoneesta"
+                "normal": "%1 liittyi huoneeseen",
+                "fan": "Fanisi %1 liittyi huoneeseen",
+                "friend": "Sinun ystäväsi %1 on liittynyt huoneeseen"
             },
             "leave": {
                 "normal": "%1 Lähti huoneesta",
@@ -104,7 +104,7 @@
         },
         "id": "Tunnus",
         "rank": "Luokitus",
-        "joined": "Aika liittymiseen",
+        "joined": "Liittynyt",
         "status": "Tila",
         "vote": "Äänestä",
         "position": "Sijainti",
@@ -171,7 +171,7 @@
     "tooltip": {
         "stream": "Estä tai salli Video ja ääni",
         "clear": "Tyhjennä chatti",
-        "afk": "AFK Viesti",
+        "afk": "AFK",
         "reset": "Palauta oletus",
         "muted": "Kaikki kappaleet ovat hiljennettyjä",
         "mutedOnce": "Nykyinen kappale on hiljennetty"
