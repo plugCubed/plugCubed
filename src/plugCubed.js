@@ -435,7 +435,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 data.text = data.text.split('@' + API.getUser().username).join('<span class="name">@' + API.getUser().username + '</span>');
             }
 
-            if (plugCubed.settings.inlineimages) {
+            if (plugCubed.settings.chatimages) {
                 if (data.text.toLowerCase().indexOf('nsfw') < 0 && (/\.(gif|jpg|jpeg|png)/i).test(data.text)) {
                     var temp = $('<div/>');
                     temp.html(data.text).find('a').each(function(){
@@ -597,7 +597,7 @@ if (plugCubed !== undefined) plugCubed.close();
             ).append(
                 $('<div>').addClass('chat-header-button p3-s-clear').data('key','clear').click(this.proxy.onMenuButtonClick).mouseover(function() { Context.trigger('tooltip:show',p3Lang.i18n('tooltip.clear'),$(this),true); }).mouseout(function() { Context.trigger('tooltip:hide'); })
             );
-            this.changeGUIColor('stream',Database.settings.streamDisabled);
+            this.setEnabled('stream',Database.settings.streamDisabled);
 
             PlaybackModel.on('change:media',onMediaChange);
             PlaybackModel._events['change:media'].unshift(PlaybackModel._events['change:media'].pop());
@@ -846,7 +846,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 autorespond      : false,
                 notify           : 0,
                 customColors     : false,
-                inlineimages     : false,
+                chatimages     : false,
                 avatarAnimations : true,
                 registeredSongs  : [],
                 alertson         : [],
@@ -969,7 +969,7 @@ if (plugCubed !== undefined) plugCubed.close();
                 else if (API.hasPermission(undefined,API.ROLE.RESIDENTDJ)) rank = 'residentdj';
                 $('body').addClass('p3-' + rank);
             },
-            changeGUIColor: function(id,value) {
+            setEnabled: function(id,value) {
                 $('.p3-s-' + id).removeClass('selected');
                 if (value) $('.p3-s-' + id).addClass('selected');
             },
@@ -1054,7 +1054,7 @@ if (plugCubed !== undefined) plugCubed.close();
                                 ).append(
                                     GUIButton(false,                      'colors',      p3Lang.i18n('menu.customchatcolors') + '...')
                                 ).append(
-                                    GUIButton(this.settings.inlineimages, 'inlineimages', p3Lang.i18n('menu.inlineimages'))
+                                    GUIButton(this.settings.chatimages, 'chatimages', p3Lang.i18n('menu.chatimages'))
                                 ).append(
                                     $('<div class="spacer">').append(
                                         $('<div class="divider">')
@@ -1099,26 +1099,26 @@ if (plugCubed !== undefined) plugCubed.close();
                 switch (a) {
                     case 'woot':
                         this.settings.autowoot = !this.settings.autowoot;
-                        this.changeGUIColor('woot',this.settings.autowoot);
+                        this.setEnabled('woot',this.settings.autowoot);
                         if (this.settings.autowoot)
                             woot();
                         break;
                     case 'join':
                         this.settings.autojoin = !this.settings.autojoin;
-                        this.changeGUIColor('join',this.settings.autojoin);
+                        this.setEnabled('join',this.settings.autojoin);
                         if (this.settings.autojoin)
                             join();
                         break;
                     case 'colors':
                         dialogColors.render();
                         break;
-                    case 'inlineimages':
-                        this.settings.inlineimages = !this.settings.inlineimages;
-                        this.changeGUIColor('inlineimages', this.settings.inlineimages);
+                    case 'chatimages':
+                        this.settings.chatimages = !this.settings.chatimages;
+                        this.setEnabled('chatimages', this.settings.chatimages);
                         break;
                     case 'autorespond':
                         this.settings.autorespond = !this.settings.autorespond;
-                        this.changeGUIColor('autorespond',this.settings.autorespond);
+                        this.setEnabled('autorespond',this.settings.autorespond);
                         if (this.settings.autorespond) {
                             if (this.settings.awaymsg.trim() === "") this.settings.awaymsg = this.defaultAwayMsg;
                             $('#chat-input-field').attr('disabled','disabled').attr('placeholder',p3Lang.i18n('autorespond.disable'));
@@ -1139,13 +1139,13 @@ if (plugCubed !== undefined) plugCubed.close();
                         if (!$('.p3-s-' + a).data('perm') || (API.hasPermission(undefined,$('.p3-s-' + a).data('perm')) || p3Utils.isPlugCubedDeveloper())) {
                             var bit = $('.p3-s-' + a).data('bit');
                             this.settings.notify += (this.settings.notify & bit) === bit ? -bit : bit;
-                            this.changeGUIColor(a,(this.settings.notify & bit) === bit);
+                            this.setEnabled(a,(this.settings.notify & bit) === bit);
                             Context.trigger('notify', 'icon-chat-system', [p3Lang.i18n(a.split('-').join('.')),p3Lang.i18n('notify.header'),(this.settings.notify & bit) === bit ? 'enabled' : 'disabled'].join(' '));
                         }
                         break;
                     case 'stream':
                         PlaybackModel.set('streamDisabled', !Database.settings.streamDisabled);
-                        this.changeGUIColor('stream',Database.settings.streamDisabled);
+                        this.setEnabled('stream',Database.settings.streamDisabled);
                         return;
                         break;
                     case 'clear':
@@ -1157,11 +1157,11 @@ if (plugCubed !== undefined) plugCubed.close();
                         a = a === undefined || a === true ? false : true;
                         this.settings.useRoomSettings[window.location.pathname.split('/')[1]] = a;
                         (a ? loadRoomSettings : runRoomSettings)({});
-                        this.changeGUIColor('roomsettings',a);
+                        this.setEnabled('roomsettings',a);
                         break;
                     case 'afktimers':
                         this.settings.afkTimers = !this.settings.afkTimers;
-                        this.changeGUIColor('afktimers',this.settings.afkTimers);
+                        this.setEnabled('afktimers',this.settings.afkTimers);
                         if (this.settings.afkTimers)
                             Styles.set('waitListMove','#waitlist .list .user .name { top: 2px; }');
                         else {
@@ -1293,7 +1293,7 @@ if (plugCubed !== undefined) plugCubed.close();
                     if (data.message.indexOf('!joindisable') > -1 && (typeof roomRules.allowAutojoin === 'undefined' || roomRules.allowAutojoin !== false)) {
                         if (this.settings.autojoin) {
                             this.settings.autojoin = false;
-                            this.changeGUIColor('autojoin',this.settings.autojoin);
+                            this.setEnabled('autojoin',this.settings.autojoin);
                             this.saveSettings();
                             API.sendChat(p3Lang.i18n('autojoin.commandDisable','@' + data.from));
                         } else API.sendChat(p3Lang.i18n('autojoin.commandNotEnabled','@' + data.from));
@@ -1301,7 +1301,7 @@ if (plugCubed !== undefined) plugCubed.close();
                     if (data.message.indexOf('!afkdisable') > -1 && (typeof roomRules.allowAutorespond === 'undefined' || roomRules.allowAutorespond !== false)) {
                         if (this.settings.autorespond) {
                             this.settings.autorespond = false;
-                            this.changeGUIColor('autorespond',this.settings.autorespond);
+                            this.setEnabled('autorespond',this.settings.autorespond);
                             this.saveSettings();
                             API.sendChat(p3Lang.i18n('autorespond.commandDisable','@' + data.from));
                         } else API.sendChat(p3Lang.i18n('autorespond.commandNotEnabled','@' + data.from));
