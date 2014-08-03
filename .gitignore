@@ -1,9 +1,7 @@
 # Building system
 node_modules
-system
 _*
-config.js
-Gruntfile.js
+version.js
 
 # New Layout
 src/newLayout
@@ -20,11 +18,19 @@ test
 backup
 images_for_review
 images_old
-extensions
 
 # Other files
 *.txt
+.idea
 .htaccess
 demo.php
 titles.json
 rss.json
+extensions/key.pem
+extensions/Maxthon.mxaddon
+extensions/Chrome.zip
+extensions/ChromeOpera.crx
+extensions/Opera.crx
+extensions/Firefox*
+extensions/promotionalSmall.png
+extensions/Opera/plugCubed.js

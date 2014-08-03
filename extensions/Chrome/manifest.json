@@ -1,0 +1,31 @@
+{
+    "manifest_version": 2,
+
+    "name": "plugCubed",
+    "description": "Adding a new dimension to plug.dj",
+    "homepage_url": "http://plugCubed.net",
+    "version": "3.0.5.1000",
+
+    "icons": {
+        "48": "icons/48.png",
+        "64": "icons/64.png",
+        "128": "icons/128.png"
+    },
+
+    "content_scripts": [{
+        "matches": ["http://plug.dj/*"],
+        "exclude_matches": [
+            "http://plug.dj/communities/",
+            "http://plug.dj/about",
+            "http://plug.dj/terms",
+            "http://plug.dj/privacy",
+            "http://plug.dj/logout",
+            "http://plug.dj/"
+        ],
+        "js": ["loader.js"]
+    }],
+
+    "permissions": [
+        "http://plug.dj/*"
+    ]
+}
