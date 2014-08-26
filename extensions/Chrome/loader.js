@@ -8,7 +8,7 @@ var s, loader = function() {
                 }, 100);
         }, c: function() {
             console.log('plugCubed Chrome loader v.1.0 enabled!');
-            $.getScript('http://d1rfegul30378.cloudfront.net/files/plugCubed.js');
+            $.getScript('https://d1rfegul30378.cloudfront.net/files/plugCubed.js');
             $('#chromeP3Loader').remove();
         }
     };

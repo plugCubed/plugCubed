@@ -8,7 +8,7 @@
                 }, 100);
         }, c: function() {
             console.log('plugCubed Maxthon loader v.1.0.1 enabled!');
-            $.getScript('http://d1rfegul30378.cloudfront.net/files/plugCubed.js');
+            $.getScript('https://d1rfegul30378.cloudfront.net/files/plugCubed.js');
             $('#maxthonP3Loader').remove();
         }
     };

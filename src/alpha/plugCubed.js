@@ -440,7 +440,7 @@ if (plugCubed !== undefined) plugCubed.close();
                     var temp = $('<div/>');
                     temp.html(data.text).find('a').each(function(){
                         var url = $(this).html();
-                        if ((/\.(gif|jpg|jpeg|png)$/i).test(url)) {
+                        if ((/\.(gif|jpg|jpeg|png)$/i).test(url) && url.toLowerCase().indexOf('http://plug.dj/') !== 0) {
                             var image = $('<img/>').attr('src', url).css('display', 'block').css('max-width', '100%').css('height', 'auto').css('margin', '0 auto');
                             $(this).html(image);
                             image.on('load',function() {

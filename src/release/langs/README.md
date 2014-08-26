@@ -1,0 +1,1 @@
+If you want to help out translating plugCubed, please use https://crowdin.net/project/plug3

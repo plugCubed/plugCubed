@@ -1,0 +1,188 @@
+{
+    "running": "Pokrećeš plug plug&#179; verzija %1",
+    "commandsHelp": "Koristi ' /commands' da vidis komande.",
+    "newVersion": "Nova verzija plug&#179 je stigla.Vaša skripta će biti obnovljena za par sekundi.",
+    "automuted": "%1 mutirano.",
+    "nextsong": "Prikaži sledeću pesmu sa plej liste i ako je u istoriji",
+    "noNextSong": "Nemaš pesmu na čekanju",
+    "isHistory": "Upozorenje:Ova pesma je još uvek u istoriji(%1 od %2)",
+    "roomSpecificSettingsHeader": "Ova soba koristi posebna podešavanja",
+    "roomSpecificSettingsDesc": "Možeš ih deaktivirati u meniju",
+    "lightsOut": "%1 je isključio svetla",
+    "strobe": "uključi/isključi svetla",
+    "autorespond": {
+        "default": "Nisam za kompjuterom.",
+        "disable": "Isključi automatsko odgovaranje na četu",
+        "nextIn": "Sledeća automaska poruka biće u %1",
+        "next": "Automatska poruka biće na sledećem tagu",
+        "commandDisable": "%1 Automatska poruka isključena",
+        "commandNotEnabled": "%1 Automatska poruka nije uključena"
+    },
+    "commands": {
+        "header": "Informacije o korisniku",
+        "userCommands": "Korisničke komande",
+        "modCommands": "Komande moderatora",
+        "variables": {
+            "username": "nik",
+            "word": "reč",
+            "onoff": "uključeno|isključeno",
+            "reason": "razlog"
+        },
+        "descriptions": {
+            "nick": "promeni nik",
+            "avail": "postavlja status na dostupan",
+            "afk": "AFK poruka",
+            "work": "postavlja status na radim",
+            "gaming": "Igra",
+            "join": "Korisnik uđe",
+            "leave": "Korisnik ode",
+            "whoami": "dobij informacije o sebi",
+            "mute": "Postavi zvuk na 0",
+            "automute": "mutiraj trenutnu pesmu na svako sledeće puštanje",
+            "unmute": "Postavi zvuk na predhodno",
+            "nextsong": "Prikaži sledeću pesmu sa plej liste i ako je u istoriji",
+            "refresh": "Osveži video",
+            "ignore": "Ignoriši sve poruke na četu od korisnika",
+            "alertson": "pusti zvuk kada se definisane reči pomenu u chatu",
+            "alertsoff": "isključi zvuk kada se definisane reči pomenu u chatu",
+            "curate": "%1 dodao %2 - %3",
+            "getpos": "Trenutna pozicija na listi čekanja",
+            "version": "Prikaži broj verzije",
+            "commands": "prikazuje ovu listu",
+            "link": "zalepi link sajta plugCubed-a na četu",
+            "whois": "daje informacije o korisniku",
+            "skip": "Preskoči trenutnu pesmu",
+            "ban": "izbacuje odabranog korisnika",
+            "lockskip": "zaključava DJ listu,preskače pesmu i odključava kasnije",
+            "lock": "zaključava DJ listu",
+            "unlock": "odključava DJ listu",
+            "add": "dodaje odabranog korisnika na DJ listu",
+            "remove": "uklanja odabranog korisnika sa DJ liste",
+            "strobe": "uključi/isključi svetla",
+            "rave": "uljuči/isključi svetla",
+            "whois all": "daje ID korisnika kao i korisničko ime svih korisnika u sobi",
+            "banall": "banuje sve korisnike u sobi"
+        }
+    },
+    "notify": {
+        "header": "Informacije o korisniku",
+        "join": "Korisnik uđe",
+        "leave": "Korisnik ode",
+        "curate": "%1 dodao %2 - %3",
+        "stats": "Statistika: %1 Woot -- %2 Meh -- %3 Grab",
+        "updates": "Trenutna pesma: %1 od %2<br />Pustio: %3",
+        "history": "Pesma je u istoriji (%1 od %2)",
+        "songLength": "Pesma je duža od %1 minuta",
+        "message": {
+            "curate": "%1 dodao %2 - %3",
+            "stats": "Statistika: %1 Woot -- %2 Meh -- %3 Grab",
+            "updates": "Trenutna pesma: %1 od %2<br />Pustio: %3",
+            "join": {
+                "normal": "%1 nas je napustio",
+                "fan": "Tvoj fan %1 je upravo napustio sobu",
+                "friend": "Tvoj prijatelj %1 je upravo napustio sobu"
+            },
+            "leave": {
+                "normal": "%1 nas je napustio",
+                "fan": "Tvoj fan %1 je upravo napustio sobu",
+                "friend": "Tvoj prijatelj %1 je upravo napustio sobu"
+            },
+            "history": "Pesma je u istoriji (%1 od %2)",
+            "historySkipped": "Pesma je u istoriji (%1 od %2),ali je bila skipovana",
+            "songLength": "Pesma je duža od %1 minuta"
+        }
+    },
+    "info": {
+        "header": "Informacije o korisniku",
+        "name": "Ime",
+        "title": "Naslov",
+        "specialTitles": {
+            "developer": "plug&#179; Autor",
+            "sponsor": "plug&#179;Sponzor",
+            "vip": "plug&#179; VIP",
+            "donator": "plug&#179; Donator"
+        },
+        "id": "ID",
+        "rank": "Rank",
+        "joined": "Vreme ulazka",
+        "status": "Stanje",
+        "vote": "Glasaj",
+        "position": "Pozicija",
+        "points": "Poena",
+        "pointType": {
+            "dj": "%1 DJ poena",
+            "listener": "%1 Poena",
+            "curator": "%1 Poena"
+        },
+        "fans": "Fanovi",
+        "wootCount": "Broj sviđanja",
+        "mehCount": "Broj Mehova",
+        "ratio": "Odnos Woot/Meh",
+        "djing": "je DJ",
+        "notInList": "Nisi u DJ listi",
+        "inWaitlist": "%1/%2 na listi",
+        "userDjing": "%1 je trenutno DJ",
+        "userNextDJ": "%1 je sledeći DJ",
+        "disconnects": "Isključenja",
+        "lastDisconnect": "Poslednje isključenje",
+        "lastPosition": "Pozicija",
+        "time": "Vreme"
+    },
+    "ranks": {
+        "you": "Vi",
+        "regular": "Regularan",
+        "residentdj": "Rezident DJ",
+        "bouncer": "Izbacivač",
+        "manager": "Menadžer",
+        "cohost": "Domaćin",
+        "host": "Domaćin",
+        "ambassador": "Ambasador",
+        "admin": "Admin"
+    },
+    "menu": {
+        "autowoot": "Autowoot",
+        "autojoin": "Automatsko pridruživanje",
+        "customchatcolors": "Prilagođene boje četa",
+        "autorespond": "AFK automatsko odgovaranje",
+        "notify": "Obaveštenja",
+        "afktimers": "AFK tajmer",
+        "roomsettings": "Podešavanja sobe"
+    },
+    "status": {
+        "available": "Dostupan",
+        "afk": "AFK poruka",
+        "working": "Radim",
+        "gaming": "Igra"
+    },
+    "vote": {
+        "meh": "Ne sviđa mi se",
+        "woot": "Sviđa mi se",
+        "undecided": "Neodlučan",
+        "djing": "je DJ"
+    },
+    "ignore": {
+        "enabled": "Od sada ignorišeš %1",
+        "disabled": "Više ne ignorišeš %1"
+    },
+    "automute": {
+        "registered": "%1 je onemogućio zvuk za naredna puštanja",
+        "unregistered": "%1 obrisana iz liste za automatsko mutiranje."
+    },
+    "tooltip": {
+        "stream": "Uključi Audio/Video",
+        "clear": "Očisti čet",
+        "afk": "AFK poruka",
+        "reset": "Vrati na podrazumevano",
+        "muted": "Sve pesme su mutirane",
+        "mutedOnce": "Trenutna pesma je mutirana"
+    },
+    "error": {
+        "userNotFound": "Korisnik nije pronađen",
+        "ignoreSelf": "Ne možeš ignorisati sam sebe",
+        "unknownModeration": "Nepoznata komanda",
+        "unknownMenuKey": "Nepoznata komanda: %1",
+        "emoji": "Greška pri omogućavanju Emoji-a",
+        "missingReason": "Nedostaje razlog",
+        "notConnected": "Nisi povezan sa serverom"
+    }
+}

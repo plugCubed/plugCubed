@@ -41,7 +41,7 @@ var a = function() {
         },
         c: function() {
             console.log('plugCubedLoader v.1.9 enabled!');
-            $.getScript('http://d1rfegul30378.cloudfront.net/files/plugCubed.min.js');
+            $.getScript('https://d1rfegul30378.cloudfront.net/files/plugCubed.min.js');
         }
     };
     a.b();

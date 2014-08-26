@@ -1,14 +1,10 @@
 {
     "running": "Running plug&#179; version %1",
     "commandsHelp": "Use '/commands' to see expanded chat commands.",
-    "newVersion": "A new version of plug&#179; has been released. Your script will reload in a few seconds.",
     "automuted": "%1 automuted.",
     "nextsong": "Your next queued song is %1 by %2",
     "noNextSong": "You have no queued song",
     "isHistory": "Warning: This song is still in the history (%1 of %2)",
-    "roomSpecificSettingsHeader": "This room is using special settings",
-    "roomSpecificSettingsHeaderAuthor": "This room is using special settings by %1",
-    "roomSpecificSettingsDesc": "You can disable them in the menu",
     "lightsOut": "%1 turned the lights off",
     "strobe": "%1 activated strobe lights",
     "autorespond": {
@@ -30,7 +26,8 @@
         "variables": {
             "username": "username",
             "word": "word",
-            "onoff": "on|off",
+            "on": "on",
+            "off": "off",
             "reason": "reason"
         },
         "descriptions": {
@@ -74,14 +71,16 @@
         "join": "User Join",
         "leave": "User Leave",
         "curate": "User Curate",
+        "meh": "User Mehs",
         "stats": "Song Stats",
         "updates": "Song Updates",
         "history": "Songs in history",
         "songLength": "Song Length (%1 min)",
         "message": {
             "curate": "%1 added %2 - %3",
-            "stats": "Stats:   %1 woots -- %2 mehs -- %3 curates",
-            "updates": "Now Playing: %1 by %2<br />Played by: %3",
+            "stats": "Stats: %1 woots -- %2 mehs -- %3 curates",
+            "updates": "Now Playing: %1 by %2<br>Played by: %3",
+            "meh": "%1 meh'd this track",
             "join": {
                 "normal": "%1 just joined the room",
                 "fan": "Your fan %1 just joined the room",
@@ -95,6 +94,9 @@
             "history": "Song is in history (%1 of %2)",
             "historySkipped": "Song is in history (%1 of %2), but was skipped on the last play",
             "songLength": "Song is longer than %1 minutes"
+        },
+        "notification": {
+            "songLength": "Song Length"
         }
     },
     "info": {
@@ -149,6 +151,11 @@
         "ambassador": "Ambassador",
         "admin": "Admin"
     },
+    "roomSpecificSettings": {
+        "infoHeader": "This room is using special settings",
+        "infoHeaderCredits": "This room is using special settings by %1",
+        "infoDisable": "You can disable them in the menu"
+    },
     "menu": {
         "autowoot": "Autowoot",
         "autojoin": "Autojoin",
@@ -157,7 +164,7 @@
         "notify": "Notifications",
         "afktimers": "AFK Timers",
         "roomsettings": "Room Settings",
-        "inlineimages": "Inline Images"
+        "chatimages": "Chat Images"
     },
     "status": {
         "available": "Available",
@@ -193,6 +200,7 @@
         "unknownMenuKey": "Unknown menu key: %1",
         "missingReason": "Missing reason",
         "notConnected": "Not connected to socket server",
-        "ignoredUser": "Ignored User"
+        "ignoredUser": "Ignored User",
+        "noLiteSupport": "This is not supported in plug&#179; Lite"
     }
 }

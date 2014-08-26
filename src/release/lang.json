@@ -1,0 +1,25 @@
+[{
+    "file": "en",
+    "name": "English"
+},{
+    "file": "fi",
+    "name": "Suomi (Finnish)"
+},{
+    "file": "fr",
+    "name": "Français (French)"
+},{
+    "file": "lt",
+    "name": "Lietuvių Kalba (Lithuanian)"
+},{
+    "file": "nl",
+    "name": "Flemish (Dutch)"
+},{
+    "file": "pt-BR",
+    "name": "Português (Portuguese - Brazil)"
+},{
+    "file": "sr",
+    "name": "српски (Serbian)"
+},{
+    "file": "tr-TR",
+    "name": "Türkçe (Turkish - Turkey)"
+}]
