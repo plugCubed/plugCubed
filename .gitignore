@@ -3,12 +3,12 @@ node_modules
 _*
 version.js
 
-# New Layout
-src/newLayout
-app.build.js
+# Development
+src/dev
 
 # Build
 bin
+out
 
 # Windows
 desktop.ini

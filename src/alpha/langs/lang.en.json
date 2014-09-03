@@ -44,7 +44,6 @@
             "unmute": "set volume to last volume",
             "nextsong": "display next song in playlist and if it's in history",
             "refresh": "refresh the video",
-            "ignore": "ignore all chat messages from user",
             "alertson": "play sound whenever defined words are written in chat",
             "alertsoff": "stop playing sound when defined words are written in chat",
             "curate": "add current song to your selected playlist",
@@ -164,23 +163,16 @@
         "notify": "Notifications",
         "afktimers": "AFK Timers",
         "roomsettings": "Room Settings",
-        "chatimages": "Chat Images"
-    },
-    "status": {
-        "available": "Available",
-        "afk": "AFK",
-        "working": "Working",
-        "gaming": "Gaming"
+        "chatimages": "Chat Images",
+        "twitchemotes": "Twitch Emotes",
+        "controlpanel": "Control Panel"
     },
     "vote": {
         "meh": "Meh",
         "woot": "Woot",
+        "curate": "Grab",
         "undecided": "Undecided",
         "djing": "DJing"
-    },
-    "ignore": {
-        "enabled": "You are now ignoring %1",
-        "disabled": "You are no longer ignoring %1"
     },
     "automute": {
         "registered": "%1 registered to automute on future plays.",
@@ -200,7 +192,6 @@
         "unknownMenuKey": "Unknown menu key: %1",
         "missingReason": "Missing reason",
         "notConnected": "Not connected to socket server",
-        "ignoredUser": "Ignored User",
         "noLiteSupport": "This is not supported in plug&#179; Lite"
     }
 }
