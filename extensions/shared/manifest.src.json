@@ -13,20 +13,20 @@
     },
 
     "content_scripts": [{
-        "matches": ["http://plug.dj/*"],
+        "matches": ["https://plug.dj/*"],
         "exclude_matches": [
-            "http://plug.dj/communities/",
-            "http://plug.dj/about",
-            "http://plug.dj/terms",
-            "http://plug.dj/privacy",
-            "http://plug.dj/logout",
-            "http://plug.dj/"
+            "https://plug.dj/communities/",
+            "https://plug.dj/about",
+            "https://plug.dj/terms",
+            "https://plug.dj/privacy",
+            "https://plug.dj/logout",
+            "https://plug.dj/"
         ],
         "js": ["loader.js"]
     }],
 
     "permissions": [
-        "http://plug.dj/*"
+        "https://plug.dj/*"
     ],
 
     "web_accessible_resources": [
