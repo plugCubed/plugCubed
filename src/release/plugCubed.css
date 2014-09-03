@@ -56,7 +56,7 @@
 
 .afkTimer {
     position:absolute;
-    left:22px;
+    right:0;
     top:23px;
     font-size:12px;
     color:rgb(150,150,150);
@@ -443,6 +443,10 @@
     display:block;
 }
 
+.chat-header-button {
+    margin-right: 18px;
+}
+
 .p3-s-stream,.p3-s-clear {
     background-position:0px 0px;
     background-repeat:no-repeat;
@@ -450,8 +454,6 @@
 
 .p3-s-stream {
     background-image:url('https://d1rfegul30378.cloudfront.net/files/images/stream_on_off.png');
-    left:205px;
-    top:7px;
 }
 
 .p3-s-stream.selected {
@@ -460,7 +462,6 @@
 
 .p3-s-clear {
     background-image:url('https://d1rfegul30378.cloudfront.net/files/images/clear_chat.png');
-    left:254px;
 }
 
 #p3-dj-booth {
@@ -583,4 +584,24 @@
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/icons.lang.png');
     width: 15px;
     height: 14px;
+}
+
+#user-rollover .meta .specialRole {
+    position: absolute;
+    top: 34px;
+    left: 108px;
+    overflow: hidden;
+    width: 180px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #AC76FF;
+}
+
+#user-rollover .meta.p3special .status {
+    top: 57px;
+}
+
+#user-rollover .meta.p3special .joined {
+    top: 77px;
 }

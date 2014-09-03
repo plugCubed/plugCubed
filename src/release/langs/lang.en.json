@@ -70,15 +70,15 @@
         "header": "Chat Notifications",
         "join": "User Join",
         "leave": "User Leave",
-        "curate": "User Curate",
+        "curate": "User Grab",
         "meh": "User Mehs",
         "stats": "Song Stats",
         "updates": "Song Updates",
         "history": "Songs in history",
         "songLength": "Song Length (%1 min)",
         "message": {
-            "curate": "%1 added %2 - %3",
-            "stats": "Stats: %1 woots -- %2 mehs -- %3 curates",
+            "curate": "%1 grabbed %2 - %3",
+            "stats": "Stats: %1 woots -- %2 mehs -- %3 grabs",
             "updates": "Now Playing: %1 by %2<br>Played by: %3",
             "meh": "%1 meh'd this track",
             "join": {
