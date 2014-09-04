@@ -29,7 +29,6 @@
             "reason": "motivo"
         },
         "descriptions": {
-            "nick": "alterar nome de usuário",
             "avail": "definir o status para disponível",
             "afk": "Mensagem de ausência",
             "work": "definir o status para trabalhando",

@@ -29,7 +29,6 @@
             "reason": "reden"
         },
         "descriptions": {
-            "nick": "verander gebruikersnaam",
             "avail": "verander je status naar beschikbaar",
             "afk": "Automatisch antwoord",
             "work": "verander je status naar aan het werken",

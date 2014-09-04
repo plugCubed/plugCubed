@@ -29,7 +29,6 @@
             "reason": "razlog"
         },
         "descriptions": {
-            "nick": "promeni nik",
             "avail": "postavlja status na dostupan",
             "afk": "AFK poruka",
             "work": "postavlja status na radim",

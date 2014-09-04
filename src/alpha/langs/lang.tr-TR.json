@@ -29,7 +29,6 @@
             "reason": "nedeni"
         },
         "descriptions": {
-            "nick": "kullanıcı adınızı değiştirme",
             "avail": "kullanılabilir için mevcut durum ayarı",
             "afk": "AFK mesaj",
             "work": "çalışma için  durum ayarı",

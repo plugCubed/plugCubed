@@ -123,19 +123,6 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 API.chatLog(p3Lang.i18n('running', Version));
                 return;
             }
-            if (p3Utils.startsWithIgnoreCase(value, '/nick ')) {
-                var nick = value.substr(6).trim();
-                $.ajax({
-                    type: 'POST',
-                    url: 'http://plug.dj/_/gateway/user.change_name_1',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        service: 'user.change_name_1',
-                        body: [nick]
-                    })
-                });
-                return;
-            }
             if (p3Utils.equalsIgnoreCase(value, '/mute')) {
                 if (API.getVolume() === 0) return;
                 PlaybackModel.mute();
