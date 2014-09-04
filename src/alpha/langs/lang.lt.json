@@ -29,7 +29,6 @@
             "reason": "priežastis"
         },
         "descriptions": {
-            "nick": "keisti vardą",
             "avail": "nustatyti statusą į prieinamas",
             "afk": "\"Aš nesu prie klaviatūros\" žinutė",
             "work": "nustatyti statusą į dirbantis",

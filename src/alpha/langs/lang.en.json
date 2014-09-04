@@ -31,7 +31,6 @@
             "reason": "reason"
         },
         "descriptions": {
-            "nick": "change username",
             "avail": "set status to available",
             "afk": "set status to afk",
             "work": "set status to working",

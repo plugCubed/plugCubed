@@ -29,7 +29,6 @@
             "reason": "raison"
         },
         "descriptions": {
-            "nick": "changer de pseudo",
             "avail": "Changer son status à Disponible",
             "afk": "Message d'AFK",
             "work": "Changer son status à Travail",
