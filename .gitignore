@@ -1,7 +1,6 @@
 # Building system
 node_modules
 _*
-version.js
 
 # Development
 src/dev

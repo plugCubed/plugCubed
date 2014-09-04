@@ -516,7 +516,8 @@ if (plugCubed !== undefined) plugCubed.close();
                 userCommands: '66FFFF',
                 modCommands:  'FF0000',
                 infoMessage1: 'FFFF00',
-                infoMessage2: '66FFFF'
+                infoMessage2: '66FFFF',
+                warningMessage: 'DB182E'
             };
             this.defaultAwayMsg = p3Lang.i18n('autorespond.default');
 
@@ -546,8 +547,8 @@ if (plugCubed !== undefined) plugCubed.close();
                 this._showSimple(a,b);
                 var specialIconInfo = p3Utils.getPlugCubedSpecial(a.id);
 
-                if (this.$specialRole) {
-                    this.$specialRole.remove();
+                if (this.$p3Role) {
+                    this.$p3Role.remove();
                     this.$meta.removeClass('p3special');
                     this.$roleIcon.css('background-image', '');
                 }
@@ -560,8 +561,8 @@ if (plugCubed !== undefined) plugCubed.close();
                 }
 
                 if (specialIconInfo !== undefined) {
-                    this.$specialRole = $('<span>').addClass('specialRole').text($('<span>').html(p3Utils.getAllPlugCubedRanks(a.id)).text());
-                    this.$meta.append(this.$specialRole).addClass('p3special');
+                    this.$p3Role = $('<span>').addClass('specialRole').text($('<span>').html(p3Utils.getAllPlugCubedRanks(a.id)).text());
+                    this.$meta.append(this.$p3Role).addClass('p3special');
                     this.$roleIcon.css('background-image', 'url("https://d1rfegul30378.cloudfront.net/files/images/icons.p3special.' + specialIconInfo.icon + '.png")');
                 }
             };
