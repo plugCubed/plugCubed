@@ -636,41 +636,42 @@
     height: 16px;
 }
 
-.is-p3developer > .icon, .icon.icon-is-p3developer {
+.is-p3developer > .icon, .icon.icon-is-p3developer, #user-rollover .meta.has-p3Role.is-p3developer .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3dev.png') !important;
 }
 
-.is-p3sponsor > .icon, .icon.icon-is-p3sponsor {
+.is-p3sponsor > .icon, .icon.icon-is-p3sponsor, #user-rollover .meta.has-p3Role.is-p3sponsor .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3sponsor.png') !important;
 }
 
-.is-p3ambassador > .icon, .icon.icon-is-p3ambassador {
+.is-p3ambassador > .icon, .icon.icon-is-p3ambassador, #user-rollover .meta.has-p3Role.is-p3ambassador .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3ambassador.png') !important;
 }
 
-.is-p3donatorDiamond > .icon, .icon.icon-is-p3donatorDiamond {
+.is-p3donatorDiamond > .icon, .icon.icon-is-p3donatorDiamond, #user-rollover .meta.has-p3Role.is-p3donatorDiamond .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3donator.diamond.png') !important;
 }
 
-.is-p3donatorPlatinum > .icon, .icon.icon-is-p3donatorPlatinum {
+.is-p3donatorPlatinum > .icon, .icon.icon-is-p3donatorPlatinum, #user-rollover .meta.has-p3Role.is-p3donatorPlatinum .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3donator.platinum.png') !important;
 }
 
-.is-p3donatorGold > .icon, .icon.icon-is-p3donatorGold {
+.is-p3donatorGold > .icon, .icon.icon-is-p3donatorGold, #user-rollover .meta.has-p3Role.is-p3donatorGold .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3donator.gold.png') !important;
 }
 
-.is-p3donatorSilver > .icon, .icon.icon-is-p3donatorSilver {
+.is-p3donatorSilver > .icon, .icon.icon-is-p3donatorSilver, #user-rollover .meta.has-p3Role.is-p3donatorSilver .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3donator.silver.png') !important;
 }
 
-.is-p3donatorBronze > .icon, .icon.icon-is-p3donatorBronze {
+.is-p3donatorBronze > .icon, .icon.icon-is-p3donatorBronze, #user-rollover .meta.has-p3Role.is-p3donatorBronze .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3donator.bronze.png') !important;
 }
 
 #chat .is-p3developer > .from,
 #user-lists .user > .icon.icon-is-p3developer + .name,
-#user-panel:not(.is-none) .user > .icon.icon-is-p3developer + .name {
+#user-panel:not(.is-none) .user > .icon.icon-is-p3developer + .name,
+#user-rollover .meta.is-p3developer .p3Role {
     color: #17B7EF !important;
 }
 
@@ -792,4 +793,34 @@
 #p3-control-panel-close i {
     left: 12px;
     top: 13px;
+}
+
+#user-rollover .meta .p3Role {
+    display: none;
+}
+
+#user-rollover .meta.has-p3Role .username {
+    top: 10px;
+}
+
+#user-rollover .meta.has-p3Role .p3Role {
+    display: block;
+    position: absolute;
+    top: 29px;
+    left: 108px;
+    overflow: hidden;
+    width: 180px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    background-repeat: no-repeat;
+    padding-left: 18px;
+}
+
+#user-rollover .meta.has-p3Role .status {
+    top: 54px;
+}
+
+#user-rollover .meta.has-p3Role .joined {
+    top: 75px;
 }

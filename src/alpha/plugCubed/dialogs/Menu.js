@@ -1,4 +1,4 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notifications', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/RSS', 'plugCubed/Slider', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/ControlPanel', 'plugCubed/bridges/Context', 'plugCubed/handlers/ChatHandler', 'lang/Lang'], function($, Class, Version, enumNotifications, Settings, p3Utils, p3Lang, Styles, RSS, Slider, dialogColors, dialogControlPanel, _$context, Chat, Lang) {
+define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notifications', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/RSS', 'plugCubed/Slider', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/ControlPanel', 'plugCubed/bridges/Context', 'plugCubed/handlers/ChatHandler', 'lang/Lang'], function($, Class, Version, enumNotifications, Settings, p3Utils, p3Lang, Styles, RSS, Slider, dialogColors, dialogControlPanel, _$context, ChatHandler, Lang) {
     var $menuDiv, Database, PlaybackModel, menuClass, _this, menuButton, streamButton, clearChatButton, _onClick;
 
     menuButton = $('<div id="plugcubed"><div class="cube-wrap"><div class="cube"><i class="icon icon-plugcubed"></i><i class="icon icon-plugcubed other"></i></div></div></div>');
@@ -113,9 +113,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 case 'twitchemotes':
                     Settings.twitchEmotes = !Settings.twitchEmotes;
                     if (Settings.twitchEmotes) {
-                        Chat.loadTwitchEmotes();
+                        ChatHandler.loadTwitchEmotes();
                     } else {
-                        Chat.unloadTwitchEmotes();
+                        ChatHandler.unloadTwitchEmotes();
                     }
                     this.setEnabled('twitchemotes', Settings.twitchEmotes);
                     break;
@@ -159,7 +159,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     this.setEnabled('stream', Database.settings.streamDisabled);
                     return;
                 case 'clear':
-                    Chat.clear();
+                    _$context.trigger('ChatFacadeEvent:clear');
                     return;
                 case 'roomsettings':
                     var b = Settings.useRoomSettings[window.location.pathname.split('/')[1]];

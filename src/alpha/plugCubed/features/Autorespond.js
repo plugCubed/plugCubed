@@ -1,4 +1,4 @@
-define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/RSS', 'plugCubed/Utils', 'plugCubed/bridges/PlaybackModel', 'plugCubed/dialogs/Menu', 'lang/Lang'], function(TriggerHandler, Settings, RSS, p3Utils, PlaybackModel, Menu, Lang) {
+define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/RSS', 'plugCubed/Utils', 'plugCubed/bridges/PlaybackModel', 'plugCubed/dialogs/Menu', 'lang/Lang'], function(TriggerHandler, p3Lang, Settings, RSS, p3Utils, PlaybackModel, Menu, Lang) {
     var handler = TriggerHandler.extend({
         trigger: API.CHAT,
         handler: function(data) {

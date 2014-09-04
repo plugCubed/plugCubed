@@ -61,7 +61,7 @@ define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'p
                     return;
                 case 'room:rave':
                     if (p3Utils.runLite) return;
-                    if (p3Utils.isPlugCubedDeveloper(data.id) || p3Utils.isPlugCubedSponsor(data.id) || API.hasPermission(data.id, API.ROLE.COHOST)) {
+                    if (p3Utils.isPlugCubedDeveloper(data.id) || p3Utils.isPlugCubedSponsor(data.id) || p3Utils.hasPermission(data.id, API.ROLE.COHOST)) {
                         var Audience = require('app/views/room/AudienceView');
                         clearTimeout(Audience.strobeTimeoutID);
                         if (data.value === 0)

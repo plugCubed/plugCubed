@@ -29,7 +29,9 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/RS
             Settings.autojoin = false;
         },
         onChat: function(data) {
-            var a = data.type == 'mention' && API.hasPermission(data.fromID, API.ROLE.BOUNCER), b = data.message.indexOf('@') < 0 && (API.hasPermission(data.fromID, API.ROLE.MANAGER) || p3Utils.isPlugCubedDeveloper(data.fromID));
+            var a, b;
+            a = data.type == 'mention' && API.hasPermission(data.fromID, API.ROLE.BOUNCER);
+            b = data.message.indexOf('@') < 0 && (API.hasPermission(data.fromID, API.ROLE.MANAGER) || p3Utils.isPlugCubedDeveloper(data.fromID));
             if (a || b) {
                 if (data.message.indexOf('!joindisable') > -1 && (typeof RSS.rules.allowAutorespond === 'undefined' || RSS.rules.allowAutorespond !== false)) {
                     if (Settings.autojoin) {

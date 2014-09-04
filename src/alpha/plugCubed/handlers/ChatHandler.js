@@ -125,21 +125,21 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         if (p3Utils.havePlugCubedRank(data.uid))
             data.type += ' is-p3' + p3Utils.getHighestRank(data.uid);
 
-        if (API.hasPermission(data.uid, API.ROLE.RESIDENTDJ) || data.uid == API.getUser().id) {
+        if (p3Utils.hasPermission(data.uid, API.ROLE.RESIDENTDJ) || p3Utils.hasPermission(data.uid, 1, true) || data.uid == API.getUser().id) {
             data.type += ' from-';
-            if (API.hasPermission(data.uid, API.ROLE.ADMIN)) {
+            if (p3Utils.hasPermission(data.uid, API.ROLE.HOST, true)) {
                 data.type += 'admin';
-            } else if (API.hasPermission(data.uid, API.ROLE.AMBASSADOR)) {
+            } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER, true)) {
                 data.type += 'ambassador';
-            } else if (API.hasPermission(data.uid, API.ROLE.HOST)) {
+            } else if (p3Utils.hasPermission(data.uid, API.ROLE.HOST)) {
                 data.type += 'host';
-            } else if (API.hasPermission(data.uid, API.ROLE.COHOST)) {
+            } else if (p3Utils.hasPermission(data.uid, API.ROLE.COHOST)) {
                 data.type += 'cohost';
-            } else if (API.hasPermission(data.uid, API.ROLE.MANAGER)) {
+            } else if (p3Utils.hasPermission(data.uid, API.ROLE.MANAGER)) {
                 data.type += 'manager';
-            } else if (API.hasPermission(data.uid, API.ROLE.BOUNCER)) {
+            } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER)) {
                 data.type += 'bouncer';
-            } else if (API.hasPermission(data.uid, API.ROLE.RESIDENTDJ)) {
+            } else if (p3Utils.hasPermission(data.uid, API.ROLE.RESIDENTDJ)) {
                 data.type += 'residentdj';
             } else if (data.uid == API.getUser().id) {
                 data.type += 'you';
@@ -148,13 +148,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
         if (data.type.split(' ')[0] === 'mention') {
             data.type += ' is-';
-            if (API.hasPermission(data.uid, API.ROLE.ADMIN)) {
+            if (p3Utils.hasPermission(data.uid, 5, true)) {
                 data.type += 'admin';
-            } else if (API.hasPermission(data.uid, API.ROLE.VOLUNTEER)) {
+            } else if (p3Utils.hasPermission(data.uid, 2, true)) {
                 data.type += 'ambassador';
-            } else if (API.hasPermission(data.uid, API.ROLE.BOUNCER)) {
+            } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER)) {
                 data.type += 'staff';
-            } else if (API.hasPermission(data.uid, API.ROLE.DJ)) {
+            } else if (p3Utils.hasPermission(data.uid, API.ROLE.DJ)) {
                 data.type += 'dj';
             } else {
                 data.type += 'you';
@@ -169,7 +169,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatReceivedLate(data) {
         if (!data.uid) return;
 
-        var $this = $('.cid-' + data.cid), icon;
+        var $this = $('#chat div[data-cid="' + data.cid + '"]'), icon;
 
         if (data.type.split(' ')[0] === 'pm') {
             icon = $this.find('.icon');
@@ -203,7 +203,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             }
         }
 
-        if (API.hasPermission(undefined, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper()) {
+        if (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper()) {
             $this.data('translated', false);
             $this.dblclick(function() {
                 if ($this.data('translated')) {
@@ -225,18 +225,21 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         }
     }
 
-    function onChatDelete(event) {
-        if (!API.hasPermission(undefined, API.ROLE.BOUNCER) && !p3Utils.isPlugCubedDeveloper())
+    function onChatDelete(cid) {
+        if (!p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) && !p3Utils.isPlugCubedDeveloper())
             return;
-        var data = event.data, time = Date.now();
-        $(".cid-" + data.cid).each(function() {
-            $(this).removeClass('deletable cid-' + data.cid).css('opacity', 0.3).off('mouseenter').off('mouseleave').mouseover(function() {
-                _$context.trigger('tooltip:show', 'Deleted by ' + p3Utils.cleanHTML(data.moderator, '*') + ' [' + p3Utils.getTimestamp(time) + ']', $(this));
-            }).mouseout(function() {
-                _$context.trigger('tooltip:hide');
+        console.log(event);
+        var data = event.data, time = Date.now(), $messages = $('#chat div[data-cid="' + data.cid + '"]');
+        if ($messages.length > 0) {
+            $messages.each(function() {
+                $(this).removeClass('deletable').css('opacity', 0.3).off('mouseenter').off('mouseleave').mouseover(function() {
+                    _$context.trigger('tooltip:show', 'Deleted by ' + p3Utils.cleanHTML(data.moderator, '*') + ' [' + p3Utils.getTimestamp(time) + ']', $(this));
+                }).mouseout(function() {
+                    _$context.trigger('tooltip:hide');
+                });
             });
-        });
-        data.cid = '';
+            data.cid = '';
+        }
     }
 
     var handler = Class.extend({
@@ -247,7 +250,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                     if (!data.hasOwnProperty(i)) continue;
                     twitchEmotes.push({
                         emote: i,
-                        url: data[i].url
+                        url: data[i].url.indexOf('http://') === 0 ? 'https://' + data[i].url.substr(7) : data[i].url
                     });
                 }
                 console.log('[plug³]', twitchEmotes.length + ' Twitch.TV emoticons loaded!');
@@ -261,13 +264,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             _$context._events['chat:receive'].unshift(_$context._events['chat:receive'].pop());
             _$context.on('chat:receive', onChatReceivedLate);
 
-            _$context.on('chat:delete', onChatDelete);
-            _$context._events['chat:delete'].unshift(_$context._events['chat:delete'].pop());
+            _$context.on('ModerateEvent:chatdelete', onChatDelete);
+            _$context._events['ModerateEvent:chatdelete'].unshift(_$context._events['ModerateEvent:chatdelete'].pop());
         },
         close: function() {
             _$context.off('chat:receive', onChatReceived);
             _$context.off('chat:receive', onChatReceivedLate);
-            _$context.off('chat:delete', onChatDelete);
+            _$context.off('ModerateEvent:chatdelete', onChatDelete);
         }
     });
     return new handler();

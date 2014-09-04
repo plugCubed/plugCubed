@@ -98,23 +98,23 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
 
             // plug.dj ranks
             if (!onlyP3) {
-                if (API.hasPermission(userID, API.ROLE.ADMIN)) {
+                if (this.hasPermission(userID, 5, true)) {
                     ranks.push(Lang.roles.admin);
-                } else if (API.hasPermission(userID, 9)) {
+                } else if (this.hasPermission(userID, 4, true)) {
                     ranks.push(Lang.roles.leader);
-                } else if (API.hasPermission(userID, API.ROLE.AMBASSADOR)) {
+                } else if (this.hasPermission(userID, 3, true)) {
                     ranks.push(Lang.roles.ambassador);
-                } else if (API.hasPermission(userID, 7)) {
+                } else if (this.hasPermission(userID, 2, true)) {
                     ranks.push(Lang.roles.volunteer);
-                } else if (API.hasPermission(userID, API.ROLE.HOST)) {
+                } else if (this.hasPermission(userID, API.ROLE.HOST)) {
                     ranks.push(Lang.roles.host);
-                } else if (API.hasPermission(userID, API.ROLE.COHOST)) {
+                } else if (this.hasPermission(userID, API.ROLE.COHOST)) {
                     ranks.push(Lang.roles.cohost);
-                } else if (API.hasPermission(userID, API.ROLE.MANAGER)) {
+                } else if (this.hasPermission(userID, API.ROLE.MANAGER)) {
                     ranks.push(Lang.roles.manager);
-                } else if (API.hasPermission(userID, API.ROLE.BOUNCER)) {
+                } else if (this.hasPermission(userID, API.ROLE.BOUNCER)) {
                     ranks.push(Lang.roles.bouncer);
-                } else if (API.hasPermission(userID, API.ROLE.RESIDENTDJ)) {
+                } else if (this.hasPermission(userID, API.ROLE.RESIDENTDJ)) {
                     ranks.push(Lang.roles.dj);
                 }
             }
@@ -217,7 +217,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             for (var i in users) {
                 if (!users.hasOwnProperty(i)) continue;
                 if (method === 'string') {
-                    if (users[i].username.equalsIgnoreCase(data) || users[i].id.toString().equalsIgnoreCase(data))
+                    if (this.equalsIgnoreCase(users[i].username, data) || this.equalsIgnoreCaseTrim(users[i].id.toString(), data))
                         return users[i];
                     continue;
                 }
@@ -243,22 +243,26 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                     count: 0
                 });
 
-                if (API.hasPermission(user.id, API.ROLE.ADMIN)) {
-                    rank = p3Lang.i18n('ranks.admin');
-                } else if (API.hasPermission(user.id, API.ROLE.AMBASSADOR)) {
-                    rank = p3Lang.i18n('ranks.ambassador');
-                } else if (API.hasPermission(user.id, API.ROLE.HOST)) {
-                    rank = p3Lang.i18n('ranks.host');
-                } else if (API.hasPermission(user.id, API.ROLE.COHOST)) {
-                    rank = p3Lang.i18n('ranks.cohost');
-                } else if (API.hasPermission(user.id, API.ROLE.MANAGER)) {
-                    rank = p3Lang.i18n('ranks.manager');
-                } else if (API.hasPermission(user.id, API.ROLE.BOUNCER)) {
-                    rank = p3Lang.i18n('ranks.bouncer');
-                } else if (API.hasPermission(user.id, API.ROLE.RESIDENTDJ)) {
-                    rank = p3Lang.i18n('ranks.residentdj');
+                if (this.hasPermission(user.id, 5, true)) {
+                    rank = Lang.roles.admin;
+                } else if (this.hasPermission(user.id, 4, true)) {
+                    rank = Lang.roles.leader;
+                } else if (this.hasPermission(user.id, 3, true)) {
+                    rank = Lang.roles.ambassador;
+                } else if (this.hasPermission(user.id, 2, true)) {
+                    rank = Lang.roles.volunteer;
+                } else if (this.hasPermission(user.id, API.ROLE.HOST)) {
+                    rank = Lang.roles.host;
+                } else if (this.hasPermission(user.id, API.ROLE.COHOST)) {
+                    rank = Lang.roles.cohost;
+                } else if (this.hasPermission(user.id, API.ROLE.MANAGER)) {
+                    rank = Lang.roles.manager;
+                } else if (this.hasPermission(user.id, API.ROLE.BOUNCER)) {
+                    rank = Lang.roles.bouncer;
+                } else if (this.hasPermission(user.id, API.ROLE.RESIDENTDJ)) {
+                    rank = Lang.roles.dj;
                 } else {
-                    rank = p3Lang.i18n('ranks.regular');
+                    rank = Lang.roles.none;
                 }
 
                 if (inbooth) {
@@ -338,6 +342,14 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
 
                 this.chatLog(undefined, $('<div>').append(message).html());
             }
+        },
+        hasPermission: function(uid, permission, global) {
+            var user = API.getUser(uid);
+            if (user && user.id && user.id === uid) {
+                var role = global ? user.gRole : user.role;
+                return role >= permission;
+            }
+            return false;
         },
         getAllUsers: function() {
             var table = $('<table>').css({

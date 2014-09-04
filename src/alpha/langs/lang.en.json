@@ -1,5 +1,7 @@
 {
     "running": "Running plug&#179; version %1",
+    "runningLite": "Running plug&#179; in Lite!",
+    "runningLiteInfo": "Some features will not work.",
     "commandsHelp": "Use '/commands' to see expanded chat commands.",
     "automuted": "%1 automuted.",
     "nextsong": "Your next queued song is %1 by %2",

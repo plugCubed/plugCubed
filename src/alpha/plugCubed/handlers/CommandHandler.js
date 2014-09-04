@@ -4,7 +4,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
         trigger: API.CHAT_COMMAND,
         handler: function(value) {
             var i;
-            if (API.hasPermission(undefined, API.ROLE.AMBASSADOR) || p3Utils.isPlugCubedDeveloper()) {
+            if (p3Utils.hasPermission(undefined, 2, true) || p3Utils.isPlugCubedDeveloper()) {
                 if (p3Utils.startsWithIgnoreCase(value, '/whois ')) {
                     if (p3Utils.equalsIgnoreCase(value, '/whois all'))
                         p3Utils.getAllUsers(); else

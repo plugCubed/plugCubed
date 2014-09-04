@@ -136,7 +136,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         },
         load: function() {
             try {
-                var save = JSON.parse(localStorage.getItem('plugCubed'));
+                var save = JSON.parse(localStorage.getItem('plugCubed')) || {};
 
                 // Upgrade if needed
                 if (save.version === undefined || save.version !== curVersion) {
@@ -168,7 +168,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 }
 
                 // Update styles if AFK timers are enabled
-                if (this.moderation.afkTimers && (p3Utils.isPlugCubedDeveloper() || API.hasPermission(undefined, API.ROLE.BOUNCER))) {
+                if (this.moderation.afkTimers && (p3Utils.isPlugCubedDeveloper() || p3Utils.hasPermission(undefined, API.ROLE.BOUNCER))) {
                     Styles.set('waitListMove', '#waitlist .list .user .name { top: 2px; }');
                 }
 

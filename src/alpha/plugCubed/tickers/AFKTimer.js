@@ -1,12 +1,12 @@
 define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang'], function($, TickerHandler, Settings, p3Utils, p3Lang) {
-    var UserModel, handler;
+    var IgnoreCollection, handler;
 
     if (p3Utils.runLite) {
-        UserModel = {
-            _iu: {}
+        IgnoreCollection = {
+            _byId: {}
         };
     } else {
-        UserModel = require('app/models/TheUserModel');
+        IgnoreCollection = require('app/collections/IgnoreCollection');
     }
 
     handler = TickerHandler.extend({
@@ -18,7 +18,7 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
                     var d, e, f;
 
                     d = Date.now() - p3Utils.getUserData(a[c].id, 'lastChat', p3Utils.getUserData(a[c].id, 'joinTime', Date.now()));
-                    e = UserModel._iu[a[c].id] === true ? p3Lang.i18n('error.ignoredUser') : p3Utils.getTimestamp(d, d < 36E5 ? 'mm:ss' : 'hh:mm:ss');
+                    e = IgnoreCollection._byId[a[c].id] === true ? p3Lang.i18n('error.ignoredUser') : p3Utils.getTimestamp(d, d < 36E5 ? 'mm:ss' : 'hh:mm:ss');
                     f = $(b[c]).find('.afkTimer');
 
                     if (f.length < 1) {

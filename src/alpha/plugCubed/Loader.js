@@ -17,7 +17,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
     function __init() {
         p3Utils.chatLog(undefined, p3Lang.i18n('running', Version) + '</span><br><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), Settings.colors.infoMessage1);
         if (p3Utils.runLite) {
-
+            p3Utils.chatLog(undefined, p3Lang.i18n('runningLite') + '</span><br><span class="chat-text" style="color:#FFFFFF">' + p3Lang.i18n('runningLiteInfo'), Settings.colors.warningMessage);
         }
 
         window.addEventListener('pushState', onRoomJoin);
@@ -55,19 +55,19 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
 
     function initBody() {
         var rank = 'regular';
-        if (API.hasPermission(undefined, API.ROLE.ADMIN)) {
+        if (p3Utils.hasPermission(undefined, API.ROLE.HOST, true)) {
             rank = 'admin';
-        } else if (API.hasPermission(undefined, API.ROLE.AMBASSADOR)) {
+        } else if (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER, true)) {
             rank = 'ambassador';
-        } else if (API.hasPermission(undefined, API.ROLE.HOST)) {
+        } else if (p3Utils.hasPermission(undefined, API.ROLE.HOST)) {
             rank = 'host';
-        } else if (API.hasPermission(undefined, API.ROLE.COHOST)) {
+        } else if (p3Utils.hasPermission(undefined, API.ROLE.COHOST)) {
             rank = 'cohost';
-        } else if (API.hasPermission(undefined, API.ROLE.MANAGER)) {
+        } else if (p3Utils.hasPermission(undefined, API.ROLE.MANAGER)) {
             rank = 'manager';
-        } else if (API.hasPermission(undefined, API.ROLE.BOUNCER)) {
+        } else if (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER)) {
             rank = 'bouncer';
-        } else if (API.hasPermission(undefined, API.ROLE.RESIDENTDJ)) {
+        } else if (p3Utils.hasPermission(undefined, API.ROLE.RESIDENTDJ)) {
             rank = 'residentdj';
         }
         $('body').addClass('rank-' + rank).addClass('id-' + API.getUser().id);
