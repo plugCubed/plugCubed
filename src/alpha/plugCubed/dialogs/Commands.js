@@ -1,6 +1,5 @@
 define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], function($, Class, p3Lang, p3Utils) {
     var userCommands = [
-        ['/nick', 'commands.descriptions.nick'],
         ['/avail', 'commands.descriptions.avail'],
         ['/afk', 'commands.descriptions.afk'],
         ['/work', 'commands.descriptions.work'],
