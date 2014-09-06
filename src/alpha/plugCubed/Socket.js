@@ -64,19 +64,21 @@ define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'p
                     if (p3Utils.isPlugCubedDeveloper(data.id) || p3Utils.isPlugCubedSponsor(data.id) || p3Utils.hasPermission(data.id, API.ROLE.COHOST)) {
                         var Audience = require('app/views/room/AudienceView');
                         clearTimeout(Audience.strobeTimeoutID);
-                        if (data.value === 0)
-                            Audience.onStrobeChange(null, 0); else if (data.value === 1) {
-                            Audience.onStrobeChange(null, 2);
-                            p3Lang.chatLog(undefined, p3Lang.i18n('strobe', API.getUser(data.id).username));
+                        if (data.value === 0) {
+                            Audience.onFXChange(null, false);
+                        } else if (data.value === 1) {
+                            Audience.onFXChange(null, 'strobe');
+                            p3Utils.chatLog(undefined, p3Lang.i18n('strobe', API.getUser(data.id).username));
                         } else if (data.value === 2) {
-                            Audience.onStrobeChange(null, 1);
+                            Audience.onFXChange(null, 'dim');
                             p3Utils.chatLog(undefined, p3Lang.i18n('lightsOut', API.getUser(data.id).username));
                         }
                     }
                     return;
                 case 'broadcast:message':
-                    if (p3Utils.isPlugCubedDeveloper(data.id) || p3Utils.isPlugCubedSponsor(data.id))
+                    if (p3Utils.isPlugCubedDeveloper(data.id) || p3Utils.isPlugCubedSponsor(data.id)) {
                         p3Utils.chatLog('system', '<strong>' + (data.global ? 'Global' : 'Room') + ' Broadcast from a ' + p3Lang.i18n('info.specialTitles.' + (p3Utils.isPlugCubedDeveloper(data.id) ? 'developer' : 'sponsor')) + '</strong><br><span style="color:#FFFFFF;font-weight:400">' + data.message + '</span>');
+                    }
                     return;
             }
         },

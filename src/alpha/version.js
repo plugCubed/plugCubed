@@ -3,5 +3,5 @@ module.exports = {
     "minor": 0,
     "patch": 0,
     "prerelease": "alpha",
-    "build": 6
+    "build": 7
 }

@@ -200,6 +200,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 if (names.hasOwnProperty(i))
                     settings[names[i]] = this[names[i]];
             }
+            settings.version = curVersion;
             localStorage.setItem('plugCubed', JSON.stringify(settings));
         }
     });

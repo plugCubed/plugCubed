@@ -140,7 +140,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER)) {
                 data.type += 'bouncer';
             } else if (p3Utils.hasPermission(data.uid, API.ROLE.RESIDENTDJ)) {
-                data.type += 'residentdj';
+                data.type += 'dj';
             } else if (data.uid == API.getUser().id) {
                 data.type += 'you';
             }
@@ -148,13 +148,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
         if (data.type.split(' ')[0] === 'mention') {
             data.type += ' is-';
-            if (p3Utils.hasPermission(data.uid, 5, true)) {
+            if (p3Utils.hasPermission(undefined, 5, true)) {
                 data.type += 'admin';
-            } else if (p3Utils.hasPermission(data.uid, 2, true)) {
+            } else if (p3Utils.hasPermission(undefined, 2, true)) {
                 data.type += 'ambassador';
-            } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER)) {
+            } else if (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER)) {
                 data.type += 'staff';
-            } else if (p3Utils.hasPermission(data.uid, API.ROLE.DJ)) {
+            } else if (p3Utils.hasPermission(undefined, API.ROLE.DJ)) {
                 data.type += 'dj';
             } else {
                 data.type += 'you';
@@ -169,7 +169,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatReceivedLate(data) {
         if (!data.uid) return;
 
-        var $this = $('#chat div[data-cid="' + data.cid + '"]'), icon;
+        var $this = $('#chat').find('div[data-cid="' + data.cid + '"]'), icon;
 
         if (data.type.split(' ')[0] === 'pm') {
             icon = $this.find('.icon');
@@ -229,7 +229,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         if (!p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) && !p3Utils.isPlugCubedDeveloper())
             return;
         console.log(event);
-        var data = event.data, time = Date.now(), $messages = $('#chat div[data-cid="' + data.cid + '"]');
+        var data = event.data, time = Date.now(), $messages = $('#chat').find('div[data-cid="' + data.cid + '"]');
         if ($messages.length > 0) {
             $messages.each(function() {
                 $(this).removeClass('deletable').css('opacity', 0.3).off('mouseenter').off('mouseleave').mouseover(function() {

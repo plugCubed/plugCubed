@@ -345,7 +345,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         },
         hasPermission: function(uid, permission, global) {
             var user = API.getUser(uid);
-            if (user && user.id && user.id === uid) {
+            if (user && user.id) {
                 var role = global ? user.gRole : user.role;
                 return role >= permission;
             }

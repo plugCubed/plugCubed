@@ -171,7 +171,7 @@
     "vote": {
         "meh": "Meh",
         "woot": "Woot",
-        "curate": "Grab",
+        "grab": "Grab",
         "undecided": "Undecided",
         "djing": "DJing"
     },

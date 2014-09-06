@@ -2,13 +2,13 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Contex
     var RoomUserListRow = require('app/views/room/user/RoomUserListRow');
     return RoomUserListRow.extend({
         vote: function() {
-            if (this.model.get('curated') || this.model.get('vote') !== 0) {
+            if (this.model.get('grab') || this.model.get('vote') !== 0) {
                 if (!this.$icon) {
                     this.$icon = $('<i>').addClass('icon');
                 }
                 this.$el.append(this.$icon);
-                if (this.model.get('curated')) {
-                    this.$icon.removeClass().addClass('icon icon-curate');
+                if (this.model.get('grab')) {
+                    this.$icon.removeClass().addClass('icon icon-grab');
                 } else if (this.model.get('vote') == 1) {
                     this.$icon.removeClass().addClass('icon icon-woot');
                 } else {
@@ -19,10 +19,10 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Contex
                 this.$icon = undefined;
             }
 
-            var id = this.model.get('id'), $voteIcon = this.$el.find('.icon-woot,.icon-meh,.icon-curate');
+            var id = this.model.get('id'), $voteIcon = this.$el.find('.icon-woot,.icon-meh,.icon-grab');
             
             if (p3Utils.havePlugCubedRank(id) || API.getUser(id).permission > API.ROLE.NONE) {
-                var $icon = this.$el.find('.icon:not(.icon-woot,.icon-meh,.icon-curate)'), specialIconInfo = p3Utils.getPlugCubedSpecial(id);
+                var $icon = this.$el.find('.icon:not(.icon-woot,.icon-meh,.icon-grab)'), specialIconInfo = p3Utils.getPlugCubedSpecial(id);
                 if ($icon.length < 1) {
                     $icon = $('<i>').addClass('icon');
                     this.$el.append($icon);
@@ -45,7 +45,7 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Contex
 
             if ($voteIcon.length > 0) {
                 $voteIcon.mouseover(function() {
-                    _$context.trigger('tooltip:show', $('<span>').html(p3Lang.i18n('vote.' + ($voteIcon.hasClass('icon-curate') ? 'curate' : ($voteIcon.hasClass('icon-woot') ? 'woot' : 'meh')))).text(), $(this), true);
+                    _$context.trigger('tooltip:show', $('<span>').html(p3Lang.i18n('vote.' + ($voteIcon.hasClass('icon-grab') ? 'grab' : ($voteIcon.hasClass('icon-woot') ? 'woot' : 'meh')))).text(), $(this), true);
                 }).mouseout(function() {
                     _$context.trigger('tooltip:hide');
                 });
