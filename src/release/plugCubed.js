@@ -31,13 +31,6 @@ if (plugCubed !== undefined) plugCubed.close();
         return API.chatLog('This version of plug&#179; is not compatible with this version of plug.dj',true),false;
 
     define('plugCubed/Model',['jquery','underscore','app/base/Class','app/base/Context','app/facades/ChatFacade','app/utils/Utilities','app/models/RoomModel','app/events/MediaGrabEvent','app/net/Socket','app/net/SocketListener','app/models/TheUserModel','lang/Lang','app/views/room/AudienceView','plugCubed/StyleManager','app/views/room/user/RoomUserListView','app/views/room/user/RoomStaffListRow','plugCubed/RoomUserListRow','plugCubed/Lang','plugCubed/Utils','app/store/Database','app/models/PlaybackModel','plugCubed/dialogs/Commands','plugCubed/Slider','plugCubed/VolumeView','plugCubed/dialogs/CustomChatColors','app/views/room/popout/PopoutView','app/views/user/UserRolloverView'],function($,_,Class,Context,Chat,Utils,Room,MGE,Socket,SocketListner,TUM,Lang,Audience,Styles,RoomUserListView,RoomUserListRow,_RoomUserListRow,p3Lang,p3Utils,Database,PlaybackModel,dialogCommands,Slider,VolumeView,dialogColors,PopoutView,UserRolloverView) {
-        SocketListner.chat = function(a, b) {
-            if (typeof plugCubed !== 'undefined') {
-                if (a.uid) setUserData(a.uid,'lastChat',Date.now());
-            }
-            Chat.receive(a, b);
-        };
-
         function getUserData(a,b,c) {
             if (plugCubedUserData[a] === undefined || plugCubedUserData[a][b] === undefined)
                 return c;
@@ -479,17 +472,19 @@ if (plugCubed !== undefined) plugCubed.close();
         function onChatReceivedLate(data) {
             if (!data.uid) return;
 
+            var $this = $('#chat').find('div[data-cid="' + data.cid + '"]');
+
             if (data.type.split(' ')[0] === 'pm') {
-                var icon = $('.cid-' + data.cid).find('.icon');
+                var icon = $this.find('.icon');
                 if (icon.length === 0)
-                    icon = $('<i>').addClass('icon').css({ width: '16px', height: '16px' }).appendTo($('.cid-' + data.cid));
+                    icon = $('<i>').addClass('icon').css({ width: '16px', height: '16px' }).appendTo($this);
                 if ($('.icon-chat-sound-on').length > 0)
                     playChatSound();
             } else if (p3Utils.havePlugCubedRank(data.uid)) {
-                var icon = $('.cid-' + data.cid).find('.icon'),
+                var icon = $this.find('.icon'),
                     specialIconInfo = p3Utils.getPlugCubedSpecial(data.uid);
                 if (icon.length === 0)
-                    icon = $('<i>').addClass('icon').css({ width: '16px', height: '16px' }).appendTo($('.cid-' + data.cid));
+                    icon = $('<i>').addClass('icon').css({ width: '16px', height: '16px' }).appendTo($this);
 
                 icon.mouseover(function() {
                     Context.trigger('tooltip:show', $('<span>').html(p3Utils.getAllPlugCubedRanks(data.uid)).text(), $(this), true);
