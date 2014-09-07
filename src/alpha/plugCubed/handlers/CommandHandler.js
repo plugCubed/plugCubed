@@ -3,16 +3,18 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
     commandHandler = TriggerHandler.extend({
         trigger: API.CHAT_COMMAND,
         handler: function(value) {
-            var i;
+            var i, args = value.split(' '), command = args.shift().substr(1);
             if (p3Utils.hasPermission(undefined, 2, true) || p3Utils.isPlugCubedDeveloper()) {
-                if (p3Utils.startsWithIgnoreCase(value, '/whois ')) {
-                    if (p3Utils.equalsIgnoreCase(value, '/whois all'))
-                        p3Utils.getAllUsers(); else
-                        p3Utils.getUserInfo(value.substr(7));
+                if (p3Utils.equalsIgnoreCase(command, 'whois')) {
+                    if (args.length > 0 && p3Utils.equalsIgnoreCase(args[0], 'all')) {
+                        p3Utils.getAllUsers();
+                    } else {
+                        p3Utils.getUserInfo(args.join(' '));
+                    }
                     return;
                 }
                 if (API.hasPermission(undefined, API.ROLE.MANAGER)) {
-                    if (p3Utils.startsWithIgnoreCase(value, '/banall')) {
+                    if (p3Utils.equalsIgnoreCase(command, 'banall')) {
                         var me = API.getUser(), users = API.getUsers();
                         for (i in users) {
                             if (users.hasOwnProperty(i) && users[i].id !== me.id)
@@ -23,17 +25,20 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 }
             }
             if (API.hasPermission(undefined, API.ROLE.COHOST) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedSponsor()) {
-                if (p3Utils.startsWithIgnoreCase(value, '/strobe')) {
-                    if (Socket.getState() !== SockJS.OPEN) return API.chatLog(p3Lang.i18n('error.notConnected'), true);
-                    var args = value.split(' ');
+                if (p3Utils.equalsIgnoreCase(command, 'strobe')) {
+                    if (Socket.getState() !== SockJS.OPEN) {
+                        return API.chatLog(p3Lang.i18n('error.notConnected'), true);
+                    }
                     Socket.send(JSON.stringify({
                         type: 'room:rave',
-                        value: value.indexOf(p3Lang.i18n('commands.variables.off', 'off')) > -1 ? 0 : (args.length > 1 && args[1].isNumber() && ~~args[1] >= 50 && ~~args[1] <= 100 ? ~~args[1] : 1)
+                        value: value.indexOf(p3Lang.i18n('commands.variables.off', 'off')) > -1 ? 0 : (args.length > 0 && p3Utils.isNumber(args[1]) && ~~args[1] >= 50 && ~~args[1] <= 100 ? ~~args[1] : 1)
                     }));
                     return;
                 }
-                if (p3Utils.startsWithIgnoreCase(value, '/rave')) {
-                    if (Socket.getState() !== SockJS.OPEN) return API.chatLog(p3Lang.i18n('error.notConnected'), true);
+                if (p3Utils.equalsIgnoreCase(command, 'rave')) {
+                    if (Socket.getState() !== SockJS.OPEN) {
+                        return API.chatLog(p3Lang.i18n('error.notConnected'), true);
+                    }
                     Socket.send(JSON.stringify({
                         type: 'room:rave',
                         value: value.indexOf(p3Lang.i18n('commands.variables.off', 'off')) > -1 ? 0 : 2
@@ -42,15 +47,15 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 }
             }
             if (API.hasPermission(undefined, API.ROLE.MANAGER)) {
-                if (p3Utils.equalsIgnoreCase(value, '/lock')) {
+                if (p3Utils.equalsIgnoreCase(command, 'lock')) {
                     API.moderateLockWaitList(true, false);
                     return;
                 }
-                if (p3Utils.equalsIgnoreCase(value, '/unlock')) {
+                if (p3Utils.equalsIgnoreCase(command, 'unlock')) {
                     API.moderateLockWaitList(false, false);
                     return;
                 }
-                if (p3Utils.equalsIgnoreCase(value, '/lockskip')) {
+                if (p3Utils.equalsIgnoreCase(command, 'lockskip')) {
                     var userID = API.getDJ().id;
                     API.once(API.ADVANCE, function() {
                         API.once(API.WAIT_LIST_UPDATE, function() {
@@ -63,86 +68,103 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 }
             }
             if (API.hasPermission(undefined, API.ROLE.BOUNCER)) {
-                if (p3Utils.startsWithIgnoreCase(value, '/skip')) {
+                if (p3Utils.equalsIgnoreCase(command, 'skip')) {
                     if (API.getDJ() === undefined) return;
                     if (value.length > 5)
                         API.sendChat('@' + API.getDJ().username + ' - Reason for skip: ' + value.substr(5).trim());
                     API.moderateForceSkip();
                     return;
                 }
-                if (p3Utils.startsWithIgnoreCase(value, '/whois ')) {
-                    p3Utils.getUserInfo(value.substr(7));
+                if (p3Utils.equalsIgnoreCase(command, 'whois')) {
+                    p3Utils.getUserInfo(args.join(' '));
                     return;
                 }
-                if (p3Utils.startsWithIgnoreCase(value, '/add ')) {
-                    this.moderation(value.substr(5), 'adddj');
+                if (p3Utils.equalsIgnoreCase(command, 'add')) {
+                    this.moderation(args.join(' '), 'adddj');
                     return;
                 }
-                if (p3Utils.startsWithIgnoreCase(value, '/remove ')) {
-                    this.moderation(value.substr(8), 'removedj');
+                if (p3Utils.equalsIgnoreCase(command, 'remove')) {
+                    this.moderation(args.join(' '), 'removedj');
                     return;
                 }
             }
-            if (p3Utils.equalsIgnoreCase(value, '/commands')) {
+            if (p3Utils.equalsIgnoreCase(command, 'commands')) {
                 dialogCommands.print();
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/avail') || p3Utils.equalsIgnoreCase(value, '/available')) {
+            if (p3Utils.equalsIgnoreCase(command, 'avail') || p3Utils.equalsIgnoreCase(command, 'available')) {
                 API.setStatus(0);
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/afk') || p3Utils.equalsIgnoreCase(value, '/brb') || p3Utils.equalsIgnoreCase(value, '/away')) {
+            if (p3Utils.equalsIgnoreCase(command, 'afk') || p3Utils.equalsIgnoreCase(command, 'brb') || p3Utils.equalsIgnoreCase(command, 'away')) {
                 API.setStatus(1);
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/work') || p3Utils.equalsIgnoreCase(value, '/working')) {
+            if (p3Utils.equalsIgnoreCase(command, 'work') || p3Utils.equalsIgnoreCase(command, 'working')) {
                 API.setStatus(2);
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/game') || p3Utils.equalsIgnoreCase(value, '/gaming')) {
+            if (p3Utils.equalsIgnoreCase(command, 'game') || p3Utils.equalsIgnoreCase(command, 'gaming')) {
                 API.setStatus(3);
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/join')) {
+            if (p3Utils.equalsIgnoreCase(command, 'join')) {
                 API.djJoin();
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/leave')) {
+            if (p3Utils.equalsIgnoreCase(command, 'leave')) {
                 API.djLeave();
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/whoami')) {
+            if (p3Utils.equalsIgnoreCase(command, 'whoami')) {
                 p3Utils.getUserInfo(API.getUser().id);
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/refresh')) {
+            if (p3Utils.equalsIgnoreCase(command, 'refresh')) {
                 $('#refresh-button').click();
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/version')) {
+            if (p3Utils.equalsIgnoreCase(command, 'volume')) {
+                if (args.length > 0) {
+                    if (p3Utils.isNumber(args[0])) {
+                        console.log('API.setVolume(' + ~~args[0] + ')');
+                        API.setVolume(~~args[0]);
+                    } else if (args[0] == '+') {
+                        console.log('API.setVolume(' + (API.getVolume() + 1) + ')');
+                        API.setVolume(API.getVolume() + 1);
+                    } else if (args[0] == '-') {
+                        console.log('API.setVolume(' + (API.getVolume() - 1) + ')');
+                        API.setVolume(API.getVolume() - 1);
+                    } else {
+                        console.log('Unknown');
+                    }
+                }
+                return;
+            }
+            if (p3Utils.equalsIgnoreCase(command, 'version')) {
                 API.chatLog(p3Lang.i18n('running', Version));
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/mute')) {
+            if (p3Utils.equalsIgnoreCase(command, 'mute')) {
                 if (API.getVolume() === 0) return;
                 PlaybackModel.mute();
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/unmute')) {
+            if (p3Utils.equalsIgnoreCase(command, 'unmute')) {
                 if (API.getVolume() > 0) return;
                 PlaybackModel.unmute();
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/muteonce')) {
+            if (p3Utils.equalsIgnoreCase(command, 'muteonce')) {
                 if (API.getVolume() === 0) return;
                 PlaybackModel.muteOnce();
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/link')) {
+            if (p3Utils.equalsIgnoreCase(command, 'link')) {
                 API.sendChat('plugCubed : http://plugcubed.net');
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/nextsong')) {
+            if (p3Utils.equalsIgnoreCase(command, 'nextsong')) {
                 var nextSong = API.getNextMedia(), found = -1;
                 if (nextSong === undefined) return API.chatLog(p3Lang.i18n('noNextSong'));
                 nextSong = nextSong.media;
@@ -154,7 +176,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 }
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/automute')) {
+            if (p3Utils.equalsIgnoreCase(command, 'automute')) {
                 var media = API.getMedia();
                 if (media === undefined) return;
                 if (Settings.registeredSongs.indexOf(media.id) < 0) {
@@ -169,7 +191,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 Settings.save();
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/getpos')) {
+            if (p3Utils.equalsIgnoreCase(command, 'getpos')) {
                 var lookup = p3Utils.getUser(value.substr(8)), user = lookup === null ? API.getUser() : lookup, spot = API.getWaitListPosition(user.id);
                 if (API.getDJ().id === user.id) {
                     API.chatLog(p3Lang.i18n('info.userDjing', user.id === API.getUser().id ? p3Lang.i18n('ranks.you') : p3Utils.cleanTypedString(user.username)));
@@ -182,7 +204,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 }
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(value, '/curate') || p3Utils.equalsIgnoreCase(value, '/grab')) {
+            if (p3Utils.equalsIgnoreCase(command, 'curate') || p3Utils.equalsIgnoreCase(command, 'grab')) {
                 if (p3Utils.runLite) {
                     return API.chatLog(p3Lang.i18n('error.noLiteSupport'), true);
                 }

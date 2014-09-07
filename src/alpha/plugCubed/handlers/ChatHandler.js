@@ -169,12 +169,12 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatReceivedLate(data) {
         if (!data.uid) return;
 
-        var $this = $('#chat').find('div[data-cid="' + data.cid + '"]'), icon;
+        var $this = $('#chat').find('div[data-cid="' + data.cid + '"]'), $icon;
 
         if (data.type.split(' ')[0] === 'pm') {
-            icon = $this.find('.icon');
-            if (icon.length === 0) {
-                icon = $('<i>').addClass('icon').css({
+            $icon = $this.find('.icon');
+            if ($icon.length === 0) {
+                $('<i>').addClass('icon').css({
                     width: '16px',
                     height: '16px'
                 }).appendTo($this);
@@ -183,23 +183,23 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 p3Utils.playChatSound();
             }
         } else if (p3Utils.havePlugCubedRank(data.uid) || API.getUser(data.uid).permission > API.ROLE.NONE) {
-            icon = $this.find('.icon');
+            $icon = $this.find('.icon');
             var specialIconInfo = p3Utils.getPlugCubedSpecial(data.uid);
-            if (icon.length === 0) {
-                icon = $('<i>').addClass('icon').css({
+            if ($icon.length === 0) {
+                $icon = $('<i>').addClass('icon').css({
                     width: '16px',
                     height: '16px'
                 }).appendTo($this);
             }
 
-            icon.mouseover(function() {
+            $icon.mouseover(function() {
                 _$context.trigger('tooltip:show', $('<span>').html(p3Utils.getAllPlugCubedRanks(data.uid)).text(), $(this), true);
             }).mouseout(function() {
                 _$context.trigger('tooltip:hide');
             });
 
             if (specialIconInfo !== undefined) {
-                icon.css('background-image', 'url("https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3special.' + specialIconInfo.icon + '.png")');
+                $icon.css('background-image', 'url("https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3special.' + specialIconInfo.icon + '.png")');
             }
         }
 
@@ -228,17 +228,12 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatDelete(cid) {
         if (!p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) && !p3Utils.isPlugCubedDeveloper())
             return;
-        console.log(event);
-        var data = event.data, time = Date.now(), $messages = $('#chat').find('div[data-cid="' + data.cid + '"]');
+        var $messages = $('#chat').find('div[data-cid="' + cid + '"]');
         if ($messages.length > 0) {
             $messages.each(function() {
-                $(this).removeClass('deletable').css('opacity', 0.3).off('mouseenter').off('mouseleave').mouseover(function() {
-                    _$context.trigger('tooltip:show', 'Deleted by ' + p3Utils.cleanHTML(data.moderator, '*') + ' [' + p3Utils.getTimestamp(time) + ']', $(this));
-                }).mouseout(function() {
-                    _$context.trigger('tooltip:hide');
-                });
+                $(this).removeClass('deletable').css('opacity', 0.3).off('mouseenter').off('mouseleave');
             });
-            data.cid = '';
+            cid = '';
         }
     }
 
@@ -264,13 +259,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             _$context._events['chat:receive'].unshift(_$context._events['chat:receive'].pop());
             _$context.on('chat:receive', onChatReceivedLate);
 
-            _$context.on('ModerateEvent:chatdelete', onChatDelete);
-            _$context._events['ModerateEvent:chatdelete'].unshift(_$context._events['ModerateEvent:chatdelete'].pop());
+            _$context.on('chat:delete', onChatDelete);
+            _$context._events['chat:delete'].unshift(_$context._events['chat:delete'].pop());
         },
         close: function() {
             _$context.off('chat:receive', onChatReceived);
             _$context.off('chat:receive', onChatReceivedLate);
-            _$context.off('ModerateEvent:chatdelete', onChatDelete);
+            _$context.off('chat:delete', onChatDelete);
         }
     });
     return new handler();

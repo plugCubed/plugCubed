@@ -26,7 +26,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
 
                                     // Closure to capture the file information.
                                     reader.onload = function(e) {
-                                        Styles.set('rss-background-image', 'body { background-image: url(' + e.target.result + ')!important; }');
+                                        Styles.set('rss-background-image', '.room-background { background-image: url(' + e.target.result + ')!important; }');
                                     };
 
                                     // Read in the image file as a data URL.

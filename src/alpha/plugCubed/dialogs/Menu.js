@@ -233,8 +233,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             container.append(GUIButton(Settings.chatImages, 'chatimages', p3Lang.i18n('menu.chatimages')));
             container.append(GUIButton(Settings.twitchEmotes, 'twitchemotes', p3Lang.i18n('menu.twitchemotes')));
             container.append(GUIButton(false, 'colors', p3Lang.i18n('menu.customchatcolors') + '...'));
-            if (p3Utils.isPlugCubedDeveloper())
+            if (p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) {
                 container.append(GUIButton(false, 'controlpanel', p3Lang.i18n('menu.controlpanel') + '...'));
+            }
 
             // Divider
             container.append($('<div class="spacer">').append($('<div class="divider">')));

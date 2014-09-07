@@ -18,7 +18,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
         ['/getpos', 'commands.descriptions.getpos'],
         ['/version', 'commands.descriptions.version'],
         ['/commands', 'commands.descriptions.commands'],
-        ['/link', 'commands.descriptions.link']
+        ['/link', 'commands.descriptions.link'],
+        ['/volume (commands.variables.number/+/-)']
     ], modCommands = [
         ['/whois (commands.variables.username)', 'commands.descriptions.whois', API.ROLE.BOUNCER],
         ['/skip', 'commands.descriptions.skip', API.ROLE.BOUNCER],
@@ -33,25 +34,37 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
         ['/whois all', 'commands.descriptions.whois', API.ROLE.AMBASSADOR],
         ['/banall', 'commands.descriptions.banall', API.ROLE.AMBASSADOR]
     ], a = Class.extend({
-        print: function() {
-            var content = '<strong style="font-size:1.4em;position:relative;left: -20px">' + p3Lang.i18n('commands.header') + '</strong><br />';
-            content += '<strong style="position:relative;left:-20px">=== ' + p3Lang.i18n('commands.userCommands') + ' ===</strong><br />';
+        userCommands: function() {
+            var response = '<strong style="position:relative;left:-20px">=== ' + p3Lang.i18n('commands.userCommands') + ' ===</strong><br>';
             for (var i in userCommands) {
+                if (!userCommands.hasOwnProperty(i)) continue;
                 var command = userCommands[i][0];
-                if (command.split('(').length > 1)
+                if (command.split('(').length > 1) {
                     command = command.split('(')[0] + '(' + p3Lang.i18n(command.split('(')[1].split(')')[0]) + ')';
-                content += '<div style="position:relative;left:-10px">' + command + '<br /><em style="position:relative;left:10px">' + p3Lang.i18n(userCommands[i][1]) + '</em></div>';
-            }
-            if (API.hasPermission(undefined, API.ROLE.BOUNCER)) {
-                content += '<br /><strong style="position:relative;left:-20px">=== ' + p3Lang.i18n('commands.modCommands') + ' ===</strong><br />';
-                for (var i in modCommands) {
-                    if (API.hasPermission(undefined, modCommands[i][2])) {
-                        var command = modCommands[i][0];
-                        if (command.split('(').length > 1)
-                            command = command.split('(')[0] + '(' + p3Lang.i18n(command.split('(')[1].split(')')[0]) + ')';
-                        content += '<div style="position:relative;left:-10px">' + command + '<br /><em style="position:relative;left:10px">' + p3Lang.i18n(modCommands[i][1]) + '</em></div>';
-                    }
                 }
+                response += '<div style="position:relative;left:-10px">' + command + '<br><em style="position:relative;left:10px">' + p3Lang.i18n(userCommands[i][1]) + '</em></div>';
+            }
+            return response;
+        },
+        modCommands: function() {
+            var response = '<br><strong style="position:relative;left:-20px">=== ' + p3Lang.i18n('commands.modCommands') + ' ===</strong><br>';
+            for (var i in modCommands) {
+                if (!modCommands.hasOwnProperty(i)) continue;
+                if (API.hasPermission(undefined, modCommands[i][2])) {
+                    var command = modCommands[i][0];
+                    if (command.split('(').length > 1) {
+                        command = command.split('(')[0] + '(' + p3Lang.i18n(command.split('(')[1].split(')')[0]) + ')';
+                    }
+                    response += '<div style="position:relative;left:-10px">' + command + '<br><em style="position:relative;left:10px">' + p3Lang.i18n(modCommands[i][1]) + '</em></div>';
+                }
+            }
+            return response;
+        },
+        print: function() {
+            var content = '<strong style="font-size:1.4em;position:relative;left: -20px">' + p3Lang.i18n('commands.header') + '</strong><br>';
+            content += this.userCommands();
+            if (API.hasPermission(undefined, API.ROLE.BOUNCER)) {
+                content += this.modCommands();
             }
             p3Utils.chatLog(undefined, content);
         }

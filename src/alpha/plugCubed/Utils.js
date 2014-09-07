@@ -346,7 +346,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         hasPermission: function(uid, permission, global) {
             var user = API.getUser(uid);
             if (user && user.id) {
-                var role = global ? user.gRole : user.role;
+                var role = global ? user.gRole : user.role + (user.gRole > 0 ? 5 + user.gRole : 0);
                 return role >= permission;
             }
             return false;
@@ -407,14 +407,14 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         randomRange: function(min, max) {
             return min + Math.floor(Math.random() * (max - min + 1));
         },
-        isRGB: function(string) {
-            return typeof string === 'string' ? /^(#|)(([0-9A-F]{6}$)|([0-9A-F]{3}$))/i.test(string) : false;
+        isRGB: function(a) {
+            return typeof a === 'string' ? /^(#|)(([0-9A-F]{6}$)|([0-9A-F]{3}$))/i.test(a) : false;
         },
-        toRGB: function(string) {
-            return this.isRGB(string) ? string.substr(0, 1) === '#' ? string : '#' + string : undefined;
+        toRGB: function(a) {
+            return this.isRGB(a) ? a.substr(0, 1) === '#' ? a : '#' + a : undefined;
         },
-        isNumber: function(string) {
-            return typeof string === 'string' ? !isNaN(parseInt(string, 10)) && isFinite(string) : false;
+        isNumber: function(a) {
+            return typeof a === 'string' ? !isNaN(parseInt(a, 10)) && isFinite(a) : false;
         },
         equalsIgnoreCase: function(a, b) {
             return typeof a === 'string' && typeof b === 'string' ? a.toLowerCase() === b.toLowerCase() : false;
