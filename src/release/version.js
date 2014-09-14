@@ -1,7 +1,7 @@
 module.exports = {
     "major": 3,
     "minor": 0,
-    "patch": 8,
+    "patch": 9,
     "prerelease": "",
-    "build": 702
+    "build": 703
 }

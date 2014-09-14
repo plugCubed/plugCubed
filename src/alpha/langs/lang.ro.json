@@ -1,0 +1,206 @@
+{
+  "running":"Folosind plug&#179; versiunea %1",
+  "commandsHelp":"Scrie '\/commands' pentru a vedea in chat o lista cu comenzi.",
+  "automuted":"%1 automuted.",
+  "nextsong":"Melodia următoare din coada de aşteptare este %1 de %2",
+  "noNextSong":"Nu mai aveti melodii iin asteptare",
+  "isHistory":"Avertisment: Acest cântec este încă în istorie (%1 de %2)",
+  "lightsOut":"%1 a stins lumina",
+  "strobe":"%1 a activat reflectoarele",
+  "autorespond":{
+    "default":"Nu sunt la tastatura.",
+    "disable":"Dezactivaţi AFK Autorespond in chat",
+    "nextIn":"Următorul AFK Autorespond va fi trimis de la %1",
+    "next":"AFK Autorespond pe următoarea mentionare",
+    "commandDisable":"%1 AFK mesaj dezactivat",
+    "commandNotEnabled":"Mesajul de AFK %1 nu a fost activat"
+  },
+  "autojoin":{
+    "commandDisable":"%1 autojoin dezactivat",
+    "commandNotEnabled":"%1 autojoin nu a fost activat"
+  },
+  "commands":{
+    "header":"Comenzi plug&#179;",
+    "userCommands":"Comenzi Utilizator",
+    "modCommands":"Comenzi de Moderare",
+    "variables":{
+      "username":"nume de utilizator",
+      "word":"cuvânt",
+      "on":"activat",
+      "off":"dezactivat",
+      "reason":"Motiv"
+    },
+    "descriptions":{
+      "nick":"schimbă numele de utilizator",
+      "avail":"Setaţi starea pe disponibil",
+      "afk":"Setaţi starea ca afk",
+      "work":"setați starea ca ocupat",
+      "gaming":"setați starea ca jucand",
+      "join":"Alatură-te listei de aşteptare",
+      "leave":"paraseste dj booth\/waitlist",
+      "whoami":"obţine informaţii proprii",
+      "mute":"volumul setat la 0",
+      "automute":"inregistreaza melodia care canta pentru mute la eventualele replayuri",
+      "unmute":"Setaţi volumul la volumul initial",
+      "nextsong":"arata melodia in playlist si daca e in istoric",
+      "refresh":"Reîmprospătați videoul",
+      "ignore":"ignora toate mesajele utilizatorului",
+      "alertson":"redă sunet când cuvintele selectate sunt scrise in chat",
+      "alertsoff":"opreşte redarea sunetului când un cuvânt selectat este scris in chat",
+      "curate":"adauga melodia curenta la playlistul tau",
+      "getpos":"obtine informatii despre pozitia in waitlist",
+      "version":"arata versiunea",
+      "commands":"Arată această listă",
+      "link":"lipiţi link-ul de la site-ul plugCubed în chat",
+      "whois":"oferă informaţii generale despre utilizator",
+      "skip":"sariti peste melodia curenta",
+      "ban":"scoate afara utilizatorul",
+      "lockskip":"blocheaza DJ booth, sare peste şi deblochează după",
+      "lock":"blochează Dj booth",
+      "unlock":"deblochează DJ booth",
+      "add":"adauga utilizatorul la dj booth\/waitlist",
+      "remove":"sterge utilizatorul din dj booth\/waitlist",
+      "strobe":"activeaza\/dezactiveaza reflectoarele",
+      "rave":"activeaza\/dezactiveaza luminile",
+      "whois all":"ofera userid si username tuturor utilizatorilor din camera",
+      "banall":"baneaza toti utilizatorii din camera"
+    }
+  },
+  "notify":{
+    "header":"Notificari Chat",
+    "join":"Utilizator Intrat",
+    "leave":"Utilizator Iesit",
+    "curate":"Utilizator preot",
+    "meh":"Meh'uri ale utilizatorilor",
+    "stats":"Statistici Melodii",
+    "updates":"Updateuri Melodii",
+    "history":"Istoric melodii",
+    "songLength":"Lungime melodie (%1 min)",
+    "message":{
+      "curate":"%1 %2 - adăugat %3",
+      "stats":"Statistici: %1 woots--%2 mehs --%3 curates",
+      "updates":"Acum canta: %1 de %2<br \/>Pus de: %3",
+      "meh":"Lui %1 nu îi place această piesă",
+      "join":{
+        "normal":"%1 a intrat in camera",
+        "fan":"Fanul tau %1 a intrat in camera",
+        "friend":"Prietenul tau %1 a intrat in camera"
+      },
+      "leave":{
+        "normal":"%1 a iesit din camera",
+        "fan":"Fanul tau %1 a iesit din camera",
+        "friend":"Prietenul tau %1 a iesit din camera"
+      },
+      "history":"Piesa este în istoric (%1 din %2)",
+      "historySkipped":"Piesa este in istoric (%1 din %2), dar a fost sarita in ultimul play",
+      "songLength":"Piesa are mai mult de %1 minut"
+    },
+    "notification":{
+      "songLength":"Lungimea cântecului"
+    }
+  },
+  "info":{
+    "header":"Informaţii utilizator",
+    "name":"Nume",
+    "title":"Titlu",
+    "specialTitles":{
+      "developer":"plug&#179; Developer",
+      "sponsor":"plug&#179; Sponsor",
+      "ambassador":"plug&#179; Ambassador",
+      "donatorDiamond":"plug&#179; Diamond Donator",
+      "donatorPlatinum":"plug&#179; Platinum Donator",
+      "donatorGold":"plug&#179; Gold Donator",
+      "donatorSilver":"plug&#179; Silver Donator",
+      "donatorBronze":"plug&#179; Bronze Donator",
+      "special":"plug&#179; Special Supporter - %1"
+    },
+    "id":"ID",
+    "rank":"Grad",
+    "joined":"Timp conectare",
+    "status":"Status",
+    "vote":"Vot",
+    "position":"Pozitie",
+    "points":"Puncte",
+    "pointType":{
+      "dj":"%1 puncte Dj",
+      "listener":"%1 puncte de ascultator",
+      "curator":"Puncte de curator %1"
+    },
+    "fans":"Fani",
+    "wootCount":"Woot Cota",
+    "mehCount":"Meh Cota",
+    "ratio":"Raportul Woot\/Meh",
+    "djing":"Dj-ul curent",
+    "notInList":"Nu este in waitlist si nici in booth",
+    "inWaitlist":"%1\/%2 în lista de aşteptare",
+    "userDjing":"In prezent sunt %1 DJ",
+    "userNextDJ":"Mai sunt %1 Dj",
+    "disconnects":"Deconectează",
+    "lastDisconnect":"Ultima Deconectare",
+    "lastPosition":"Poziţia",
+    "time":"Timp"
+  },
+  "ranks":{
+    "you":"Tu",
+    "regular":"Normal",
+    "residentdj":"Dj-ul Rezident",
+    "bouncer":"Bouncer",
+    "manager":"Manager",
+    "cohost":"Co-Host",
+    "host":"Host",
+    "ambassador":"Ambasador",
+    "admin":"Administrator"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"Această cameră foloseşte setări speciale",
+    "infoHeaderCredits":"Această cameră foloseşte setări speciale de %1",
+    "infoDisable":"Le puteţi dezactiva in meniu"
+  },
+  "menu":{
+    "autowoot":"Autowoot",
+    "autojoin":"Autojoin",
+    "customchatcolors":"Culori personalizate Chat",
+    "autorespond":"AFK Autorespond",
+    "notify":"Notificări",
+    "afktimers":"AFK Timers",
+    "roomsettings":"Setari Camera",
+    "chatimages":"Imagini în chat"
+  },
+  "status":{
+    "available":"Disponibil",
+    "afk":"AFK",
+    "working":"Ocupat",
+    "gaming":"Jucand"
+  },
+  "vote":{
+    "meh":"Meh",
+    "woot":"Woot",
+    "undecided":"Indecis",
+    "djing":"DJ"
+  },
+  "ignore":{
+    "enabled":"Il ignori acum pe %1",
+    "disabled":"Nu il mai ignori pe %1"
+  },
+  "automute":{
+    "registered":"%1 inregistrat ca automute in eventualele playuri.",
+    "unregistered":"Melodia %1 a fost stearsa din registrul automute."
+  },
+  "tooltip":{
+    "stream":"Comuta Video\/Audio Stream",
+    "clear":"Curata Chatul",
+    "afk":"Mesaj AFK",
+    "reset":"Resetare la valori implicite",
+    "muted":"Toate melodiile au mute",
+    "mutedOnce":"Melodia curentă este muta"
+  },
+  "error":{
+    "userNotFound":"Utilizator negăsit",
+    "unknownModeration":"Moderare necunoscuta",
+    "unknownMenuKey":"Tasta meniu necunoscuta: %1",
+    "missingReason":"Lipseste motivul",
+    "notConnected":"Nu esti conectat la server",
+    "ignoredUser":"User Ignorat",
+    "noLiteSupport":"Acest lucru nu este acceptat in plug&#179; Lite"
+  }
+}

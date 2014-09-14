@@ -1,0 +1,206 @@
+{
+  "running":"Jookseb plug&#179; versioon %1",
+  "commandsHelp":"Kasuta '\/commands' et näha koode.",
+  "automuted":"%1 automaatne vaigistus.",
+  "nextsong":"display next song in playlist and if it's in history",
+  "noNextSong":"Sul pole järjekorras lugu",
+  "isHistory":"See lugu on ikka ajaloos (%1 of %2)",
+  "lightsOut":"%1 lülitas tuled välja",
+  "strobe":"enable\/disable strobe",
+  "autorespond":{
+    "default":"Ma olen klaviatuurist eemal.",
+    "disable":"Keela AFKis Vastaja, et rääkida",
+    "nextIn":"Next AFK Autorespond will be sent from %1",
+    "next":"AFK Autorespond on next mention",
+    "commandDisable":"%1 autojoin disabled",
+    "commandNotEnabled":"%1 autojoin was not enabled"
+  },
+  "autojoin":{
+    "commandDisable":"%1 autojoin disabled",
+    "commandNotEnabled":"%1 autojoin was not enabled"
+  },
+  "commands":{
+    "header":"plugCubed-i käsklused",
+    "userCommands":"Kasutaja käsklused",
+    "modCommands":"Moderaatsioni käsklused",
+    "variables":{
+      "username":"kasutajanimi",
+      "word":"sõna",
+      "on":"on",
+      "off":"off",
+      "reason":"põhjus"
+    },
+    "descriptions":{
+      "nick":"vaheta kasutajanime",
+      "avail":"set status to available",
+      "afk":"AFK Message",
+      "work":"set status to working",
+      "gaming":"Gaming",
+      "join":"Kasutaja Ühinemine",
+      "leave":"Kasutaja Lahkumine",
+      "whoami":"get your own information",
+      "mute":"set volume to 0",
+      "automute":"register currently playing song to automatically mute on future plays",
+      "unmute":"set volume to last volume",
+      "nextsong":"display next song in playlist and if it's in history",
+      "refresh":"värskenda videot",
+      "ignore":"ignoreeri kõiki kirju kasutajalt",
+      "alertson":"play sound whenever defined words are written in chat",
+      "alertsoff":"stop playing sound when defined words are written in chat",
+      "curate":"%1 lisas %2 - %3",
+      "getpos":"get current waitlist position",
+      "version":"displays version number",
+      "commands":"näitab seda nimekirja",
+      "link":"paste link to plugCubed website in chat",
+      "whois":"gives general information about user",
+      "skip":"skip current song",
+      "ban":"lööb sihitud kasutajat",
+      "lockskip":"locks DJ booth, skip and unlocks afterwards",
+      "lock":"locks DJ booth",
+      "unlock":"unlocks DJ booth",
+      "add":"adds targeted user to dj booth\/waitlist",
+      "remove":"removes targeted user from dj booth\/waitlist",
+      "strobe":"enable\/disable strobe",
+      "rave":"enable\/disable lights out",
+      "whois all":"gives userid and username of all users in the room",
+      "banall":"bans all users in the room"
+    }
+  },
+  "notify":{
+    "header":"plugCubed-i käsklused",
+    "join":"Kasutaja liitumine",
+    "leave":"Kasutaja Lahkumine",
+    "curate":"User Curate",
+    "meh":"User Mehs",
+    "stats":"Song Stats",
+    "updates":"Song Updates",
+    "history":"Songs in history",
+    "songLength":"Song Length (%1 min)",
+    "message":{
+      "curate":"%1 lisas %2 - %3",
+      "stats":"Statsid: %1 meeldimisi -- %2 vihkamisi -- %3 lisamisi",
+      "updates":"Praegu Mängib: %1 - %2<br \/>Mängitud: %3",
+      "meh":"%1 meh'd this track",
+      "join":{
+        "normal":"%1 lahkus just ruumist",
+        "fan":"Su fänn %1 lahkus ruumist",
+        "friend":"Su sõber %1 lahkus ruumist"
+      },
+      "leave":{
+        "normal":"%1 lahkus just ruumist",
+        "fan":"Su fänn %1 lahkus ruumist",
+        "friend":"Su sõber %1 lahkus ruumist"
+      },
+      "history":"Song is in history (%1 of %2)",
+      "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
+      "songLength":"Song is longer than %1 minutes"
+    },
+    "notification":{
+      "songLength":"Loo pikkus"
+    }
+  },
+  "info":{
+    "header":"plugCubed-i käsklused",
+    "name":"Nimi",
+    "title":"Pealkiri",
+    "specialTitles":{
+      "developer":"plugCubed-i Arendaja",
+      "sponsor":"plug&#179; Sponsor",
+      "ambassador":"plug&#179; Ambassador",
+      "donatorDiamond":"plug&#179; Diamond Donator",
+      "donatorPlatinum":"plug&#179; Platinum Donator",
+      "donatorGold":"plug&#179; Gold Donator",
+      "donatorSilver":"plug&#179; Silver Donator",
+      "donatorBronze":"plug&#179; Bronze Donator",
+      "special":"plug&#179; Special Supporter - %1"
+    },
+    "id":"ID",
+    "rank":"Tase",
+    "joined":"Ühines",
+    "status":"Staatus",
+    "vote":"Hääl",
+    "position":"Positsioon",
+    "points":"Punktid",
+    "pointType":{
+      "dj":"DJ Punktid %1",
+      "listener":"Kuulajate Punktid %1",
+      "curator":"Lisajate Punktid %1"
+    },
+    "fans":"Fännid",
+    "wootCount":"Meeldinud",
+    "mehCount":"Vihatud",
+    "ratio":"Meeldimise\/Vihkamise vahekord",
+    "djing":"DJ-imas",
+    "notInList":"Pole ootamas ega laval",
+    "inWaitlist":"%1\/%2 ootavad",
+    "userDjing":"%1 on DJ-imas",
+    "userNextDJ":"%1 on DJ-imas järgmisena",
+    "disconnects":"Disconnects",
+    "lastDisconnect":"Last Disconnect",
+    "lastPosition":"Positsioon",
+    "time":"Time"
+  },
+  "ranks":{
+    "you":"Sina",
+    "regular":"Tavamängijad",
+    "residentdj":"Resident DJ",
+    "bouncer":"Turva",
+    "manager":"Juht",
+    "cohost":"Kaasomanik",
+    "host":"Omanik",
+    "ambassador":"Saadik",
+    "admin":"Administraator"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"This room is using special settings",
+    "infoHeaderCredits":"This room is using special settings by %1",
+    "infoDisable":"You can disable them in the menu"
+  },
+  "menu":{
+    "autowoot":"Autohääletus",
+    "autojoin":"Autoühinemine",
+    "customchatcolors":"Kohandatud Teksti Värvid",
+    "autorespond":"AFK Autorespond",
+    "notify":"Märguanded",
+    "afktimers":"AFK Timers",
+    "roomsettings":"Double seaded http:\/\/www.google.ee\/imgres?imgurl=https%3A%2F%2Flh5.googleusercontent.com%2Fpbu-kdYbtXWHwYcQzLtxSj3eqEiIDkpQ6CvkMs4Gtybx_lWdIYswwqXHZk8YAsS3F9Z97qROvA%253Ds640-h400-e365&imgrefurl=https%3A%2F%2Fchrome.google.com%2Fwebstore%2Fdetail%2Fsuchdj%2Fehkpkeoceljkdkpnknhfehccedmdhieh&h=400&w=640&tbnid=8XpQR_1PZaQ41M%3A&zoom=1&docid=ooWYXwmJfdNPgM&ei=-hrzU4OsOYWqPNW2gdAC&tbm=isch&ved=0CC0QMygQMBA&iact=rc&uact=3&dur=4552&page=2&start=16&ndsp=20 http:\/\/plug.dj\/playingbf3andbf4\/",
+    "chatimages":"Chat Images"
+  },
+  "status":{
+    "available":"Saadaval",
+    "afk":"AFK Message",
+    "working":"Töötamas",
+    "gaming":"Gaming"
+  },
+  "vote":{
+    "meh":"Kehv lugu",
+    "woot":"Hea lugu",
+    "undecided":"Pole otsustanud",
+    "djing":"DJ-imas"
+  },
+  "ignore":{
+    "enabled":"Sa ignoreerid %1",
+    "disabled":"Sa ei ignoreeri enam %1"
+  },
+  "automute":{
+    "registered":"%1 on registreeritud automute-i seadetesse.",
+    "unregistered":"%1 eemaladati automute-i registrist"
+  },
+  "tooltip":{
+    "stream":"Vool",
+    "clear":"Clear Chat",
+    "afk":"AFK Message",
+    "reset":"Reset to default",
+    "muted":"All songs are muted",
+    "mutedOnce":"Current song is muted"
+  },
+  "error":{
+    "userNotFound":"Kasutajat ei leitud",
+    "unknownModeration":"Tundmatu",
+    "unknownMenuKey":"Tundmatu nupp",
+    "missingReason":"Missing reason",
+    "notConnected":"Not connected to socket server",
+    "ignoredUser":"Ignored User",
+    "noLiteSupport":"This is not supported in plug&#179; Lite"
+  }
+}

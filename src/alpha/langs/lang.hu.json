@@ -1,0 +1,206 @@
+{
+  "running":"Jelenleg fut plug&#179; verzió %1",
+  "commandsHelp":"Használd a '\/commands' parancsot hogy lásd a chat parancsokat.",
+  "automuted":"%1 automatikusan lenémítva.",
+  "nextsong":"A következő számnak a címe: %1 készítője: %2",
+  "noNextSong":"Nincsen következő számod a soron",
+  "isHistory":"Figyelem: Ez a szám még mindig szerepel az előzményekben (%1 a %2)",
+  "lightsOut":"%1 lekapcsolta a lámpákat",
+  "strobe":"engedélyezi\/tiltja a stroboszkópot ",
+  "autorespond":{
+    "default":"Nem vagyok a gépnél",
+    "disable":"AFK autómatikus üzenetküldés letiltva",
+    "nextIn":"A következő AFK Autóválasz elküldésre kerül %1",
+    "next":"AFK Autóválasz a következő említés alkalmával",
+    "commandDisable":"%1 Afk üzenet kikapcsolva",
+    "commandNotEnabled":"%1 Afk üzenet nem volt bekapcsolva"
+  },
+  "autojoin":{
+    "commandDisable":"%1 autó-belépés kikapcsolva",
+    "commandNotEnabled":"%1 autó-belépés nem volt bekapcsolva"
+  },
+  "commands":{
+    "header":"plug&#179; parancsok",
+    "userCommands":"Felhasználói Parancsok",
+    "modCommands":"Moderátor Parancsok",
+    "variables":{
+      "username":"felhasználónév",
+      "word":"szó",
+      "on":"be",
+      "off":"ki",
+      "reason":"inditék"
+    },
+    "descriptions":{
+      "nick":"felhasználónév cseréje",
+      "avail":"Állapot állítása elérhető-re",
+      "afk":"AFK Üzenet",
+      "work":"Állapot állítása dolgozik-ra",
+      "gaming":"Játszik",
+      "join":"Felhasználó Csatlakozik",
+      "leave":"Felhasználó Lelépett",
+      "whoami":"Saját adatok megtekintése",
+      "mute":"Hangerő állítása 0-ra",
+      "automute":"Ez a szám máskor is le lesz némítva.",
+      "unmute":"Hangerő állítása az előző értékre",
+      "nextsong":"Következő szám kijelzése a lejátszólistában ha már szerepel az előzményekben",
+      "refresh":"videó újratöltése",
+      "ignore":"Minden üzenet tiltása ettől a felhasználótól",
+      "alertson":"Hang lejátszása ha egy megadott szót írnak a chat-ben",
+      "alertsoff":"Ne játszon le hangot ha egy megadott szót írnak a chat-ben",
+      "curate":"%1 hozzáadta %2 - %3",
+      "getpos":"Sorszám lekérése a váró listán",
+      "version":"Verziószám megjelenítése",
+      "commands":"Lista mutatása",
+      "link":"plugCubed linkét át a chatbe másolni",
+      "whois":"Alapvető információt ad a felhasználóról",
+      "skip":"Jelenlegi szám tovább léptetése",
+      "ban":"Kijelölt felhasználót kirúgja",
+      "lockskip":"Lezárja a DJ Bódét, tovább léptet és kinyitja a DJ Bódét.",
+      "lock":"Lezárja a DJ Bódét",
+      "unlock":"kinyitja a DJ Bódét",
+      "add":"Hozzáadja a kijelölt felhasználót a DJ Bódé\/Várólistához",
+      "remove":"Eltávolítja a kijelölt felhasználót a DJ Bódé\/Várolistából",
+      "strobe":"engedélyezi\/tiltja a stroboszkópot ",
+      "rave":"engedélyezi\/tiltja a lámpák kikapcsolását",
+      "whois all":"Lekéri a szobában tartózkodó összes felhasználó ID-jét és felhasználónevét",
+      "banall":"Kitilt minden felhasználót a szobában"
+    }
+  },
+  "notify":{
+    "header":"Felhasználó Információi",
+    "join":"Felhasználó Csatlakozik",
+    "leave":"Felhasználó Lelépett",
+    "curate":"ember hozzáadta a listájához",
+    "meh":"ember meh-elte",
+    "stats":"a szám statisztikája",
+    "updates":"Dal frissítések",
+    "history":"Számok a történelemben",
+    "songLength":"Dal hossza (%1 perc)",
+    "message":{
+      "curate":"%1 hozzáadta %2 - %3",
+      "stats":"Statisztika: %1 tetszik -- %2 nem tetszik -- %3 hozzáadások",
+      "updates":"Most Következik: %1 %2-tól <br\/> lejátssza: %3",
+      "meh":"%1 mehelte ezt a számot",
+      "join":{
+        "normal":"%1 elhagyta a szobát",
+        "fan":"Rajongód %1 elhagyta a szobát",
+        "friend":"Barátod %1 csatlakozott a szobához"
+      },
+      "leave":{
+        "normal":"%1 elhagyta a szobát",
+        "fan":"Rajongód %1 elhagyta a szobát",
+        "friend":"Barátod %1 csatlakozott a szobához"
+      },
+      "history":"A szám szerepel az előzményekben (%1 közül %2)",
+      "historySkipped":"A szám szerepel az előzményekben (%1 közül %2), de kihagyták az előző lejátszáskor",
+      "songLength":"A szám hosszabb mint %1 perc"
+    },
+    "notification":{
+      "songLength":"A Dal hossza"
+    }
+  },
+  "info":{
+    "header":"Felhasználó Információi",
+    "name":"Név",
+    "title":"Cím",
+    "specialTitles":{
+      "developer":"plug&#179; Fejlesztő\n",
+      "sponsor":"plug&#179; Szponzor",
+      "ambassador":"plug&#179; nagykövet",
+      "donatorDiamond":"plug&#179; gyémánt támogató",
+      "donatorPlatinum":"plug&#179; Platin támogató",
+      "donatorGold":"plug&#179; Arany Donátor",
+      "donatorSilver":"plug&#179; ezüst támogató",
+      "donatorBronze":"plug&#179; Bronz Támogató",
+      "special":"plug&#179; Különleges támogató - %1"
+    },
+    "id":"Azonosító",
+    "rank":"Rang",
+    "joined":"Regisztráció Időpontja",
+    "status":"Státusz",
+    "vote":"Szavaz",
+    "position":"Helyezet",
+    "points":"Pontok",
+    "pointType":{
+      "dj":"%1 DJ Pontok",
+      "listener":"%1 Hallgató Pontok",
+      "curator":"%1 Lelkész Pontok"
+    },
+    "fans":"Rajongók",
+    "wootCount":"Tetszik-ek Száma",
+    "mehCount":"Nem Tetszik-ek Száma",
+    "ratio":"Tetszik\/Nem Tetszik Aránya",
+    "djing":"DJzik",
+    "notInList":"Nincs várólistán vagy bódé-ban",
+    "inWaitlist":"%1\/%2 a várólistán",
+    "userDjing":"%1 a jelenlegi DJ",
+    "userNextDJ":"%1 a következő DJ",
+    "disconnects":"Kilép",
+    "lastDisconnect":"Utolsó Kilépés",
+    "lastPosition":"Pozíció",
+    "time":"Idő"
+  },
+  "ranks":{
+    "you":"Te",
+    "regular":"Szokásos",
+    "residentdj":"Rezidens DJ",
+    "bouncer":"Kidobó",
+    "manager":"Igazgató",
+    "cohost":"Műsorvezető",
+    "host":"Műsorvezető",
+    "ambassador":"Nagykövet",
+    "admin":"Admin"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"Ez a szoba speciális beállításokat használ",
+    "infoHeaderCredits":"Ez a szoba speciális beállításokat használ tőle: %1",
+    "infoDisable":"A menüben kitudod kapcsolni ezt"
+  },
+  "menu":{
+    "autowoot":"Autó-Tetszik",
+    "autojoin":"Autó-belépés",
+    "customchatcolors":"Egyedi Chat Szinek",
+    "autorespond":"AFK Autóválasz ",
+    "notify":"Értesítések ",
+    "afktimers":"AFK Számlálók",
+    "roomsettings":"Szoba beállításai",
+    "chatimages":"Chat-képek"
+  },
+  "status":{
+    "available":"Elérhető",
+    "afk":"AFK Üzenet",
+    "working":"Dolgozik",
+    "gaming":"Játszik"
+  },
+  "vote":{
+    "meh":"Nem Tetszik",
+    "woot":"Tetszik",
+    "undecided":"Eldöntetlen",
+    "djing":"DJzik"
+  },
+  "ignore":{
+    "enabled":"Mostantól ignorálod őt: %1",
+    "disabled":"Mostantól már nem ignorálod őt: %1"
+  },
+  "automute":{
+    "registered":"%1 regisztrálva a autónémítás listára",
+    "unregistered":"%1 törölve lett az autónémítás listárol"
+  },
+  "tooltip":{
+    "stream":"Videó\/Hang Tiltása\/Engedélyezése",
+    "clear":"Chat tisztítása ",
+    "afk":"AFK Üzenet",
+    "reset":"Alapbeállítások visszaállítása",
+    "muted":"Minden szám némítva",
+    "mutedOnce":"Jelenlegi szám némítva"
+  },
+  "error":{
+    "userNotFound":"Felhasználó nem található",
+    "unknownModeration":"Ismeretlen moderáció",
+    "unknownMenuKey":"Ismeretlen menü gomb: %1",
+    "missingReason":"Hiányzó ok",
+    "notConnected":"Nincs csatlakozva a \"socket\" szerverhez",
+    "ignoredUser":"Ember ignorálva",
+    "noLiteSupport":"Ez nincs támogatva a plug&#179; Lite-ban"
+  }
+}

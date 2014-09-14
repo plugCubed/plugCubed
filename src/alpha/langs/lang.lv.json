@@ -1,0 +1,206 @@
+{
+  "running":"Versija : #179 %1",
+  "commandsHelp":"Raksti '\/commands' lai redzētu vairāk čata komandas.",
+  "automuted":"%1 automātiski apklusināts",
+  "nextsong":"parādīt savu nākamo dziesmu un vai viņa nav bijusi pagātnē",
+  "noNextSong":"Tu nēēsi pieteicis dziesmu",
+  "isHistory":"Šī dziesma vēljoprojām ir dj pagātnē",
+  "lightsOut":"izslēdzi gaismas",
+  "strobe":"ieslēgt\/izslēgt  mirgošanu",
+  "autorespond":{
+    "default":"Es esmu prom no klaviatūras",
+    "disable":"Izslēdz AFK auto atbildēšanu lai čatotu",
+    "nextIn":"Nākamo autoatbildēšanas ziņu uzrakstīs %1",
+    "next":"AFK autoatbildēšana kad kāds pasauc tevi.",
+    "commandDisable":"%1 automātiskā pievienošanās DJ sarakstam izslēgta",
+    "commandNotEnabled":"%1 Automātiskā DJ pieslēgšanās nav atļauta"
+  },
+  "autojoin":{
+    "commandDisable":"%1 automātiskā pievienošanās DJ sarakstam izslēgta",
+    "commandNotEnabled":"%1 Automātiskā DJ pieslēgšanās nav atļauta"
+  },
+  "commands":{
+    "header":"Lietotāja informācija",
+    "userCommands":"Lietotāja komandas",
+    "modCommands":"Moderatora komandas",
+    "variables":{
+      "username":"Segvārds",
+      "word":"vārds",
+      "on":"ieslēgts",
+      "off":"izslēgts",
+      "reason":"iemesls"
+    },
+    "descriptions":{
+      "nick":"mainīt lietotājvārdu",
+      "avail":"uzliec statusu uz pieejams",
+      "afk":"iestatīt statusu uz afk",
+      "work":"uzsliec statusu uz strādāju",
+      "gaming":"Spēlēju",
+      "join":"Lietotājs pievienojās",
+      "leave":"Lietotājs aizgāja",
+      "whoami":"saņemt informāciju par sevi",
+      "mute":"uzlikt skaļumu uz 0",
+      "automute":"piefiksēt pašreizējo dziesmu lai nākotnē to automātiski ignorētu",
+      "unmute":"uzlikt skaļumu uz iepriekšējo",
+      "nextsong":"parādīt savu nākamo dziesmu un vai viņa nav bijusi pagātnē",
+      "refresh":"restartēt video",
+      "ignore":"ignorēt visas šī lietotāja čata ziņas",
+      "alertson":"atskaņot signālu kad noteiktais vārds tiek uzrakstīts čatā",
+      "alertsoff":"beigt atskaņot skaņas kad jebkāds vārds tiek uzrakstīts čatā",
+      "curate":"%1 pievienoja %2 - %3",
+      "getpos":"apstīties pašreizējo waitlist pozīciju",
+      "version":"parādīt plug³ versiju",
+      "commands":"parādīt šo sarakstu",
+      "link":"Iekš čata uzrakstīt linku uz plugCubed",
+      "whois":"rāda galveno informāciju par lietotāju",
+      "skip":"izlaist pašreizējo dziesmu",
+      "ban":"izmest izvēlēto lietotāju",
+      "lockskip":"aizlēgt DJ sarakstu, izlaist dziesmu un pēc tam atslēgt",
+      "lock":"aizslēgt DJ sarakstu",
+      "unlock":"atslēgt DJ saraksti",
+      "add":"pievienot izvēlēto lietotāju DJ sarakstam",
+      "remove":"izņemt izvēlēto lietotāju no DJ saraksta",
+      "strobe":"ieslēgt\/izslēgt  mirgošanu",
+      "rave":"ieslēgt\/izslēgt gaismas",
+      "whois all":"parādīt visu lietotāju id un to lietotājvārdus kas atrodas šajā istabā",
+      "banall":"liegt pieeju visiem lietotājiem kas ir šajā istabā"
+    }
+  },
+  "notify":{
+    "header":"Lietotāja informācija",
+    "join":"Lietotājs pievienojās!",
+    "leave":"Lietotājs aizgāja",
+    "curate":"User Curate",
+    "meh":"User Mehs",
+    "stats":"Dziesma sākas",
+    "updates":"Dziesmu atjauninājumi",
+    "history":"Songs in history",
+    "songLength":"Dziesmas garums",
+    "message":{
+      "curate":"%1 pievienoja %2 - %3",
+      "stats":"Stati: %1 Wooti -- %2 Mehi -- %3Pievienoja savam sarakstam",
+      "updates":"Tagat skan: %1  %2<br \/>Dj: %3",
+      "meh":"%1 meh'd this track",
+      "join":{
+        "normal":"%1 Tikko pameta istabu.",
+        "fan":"Tavs fans %1 tikko pameta istabu.",
+        "friend":"Tavs draugs %1 tikko pameta istabu"
+      },
+      "leave":{
+        "normal":"%1 Tikko pameta istabu.",
+        "fan":"Tavs fans %1 tikko pameta istabu.",
+        "friend":"Tavs draugs %1 tikko pameta istabu"
+      },
+      "history":"Mūzika pagātnē (%1 no %2)",
+      "historySkipped":"Mūzika ir pagātnē (%1 no %2), bet tikka izlaista.",
+      "songLength":"Mūzika ir garāka par %1 minūtem"
+    },
+    "notification":{
+      "songLength":"Dziesmas garums"
+    }
+  },
+  "info":{
+    "header":"Lietotāja informācija",
+    "name":"Segvārds",
+    "title":"tituls",
+    "specialTitles":{
+      "developer":"plug&#179; Izstrādātājs",
+      "sponsor":"plug&#179; Sponsors",
+      "ambassador":"plug&#179; Ambassador",
+      "donatorDiamond":"plug&#179; Diamond Donator",
+      "donatorPlatinum":"plug&#179; Platinum Donator",
+      "donatorGold":"plug&#179; Zelta Ziedotājs",
+      "donatorSilver":"plug&#179; Silver Donator",
+      "donatorBronze":"plug&#179; Bronze Donator",
+      "special":"plug&#179; Special Supporter - %1"
+    },
+    "id":"ID",
+    "rank":"Statuss",
+    "joined":"Pievienošanās laiks",
+    "status":"Statuss",
+    "vote":"Balso",
+    "position":"Pozīcija",
+    "points":"Punkti",
+    "pointType":{
+      "dj":"%1 DJ Punkti",
+      "listener":"%1 Klausītāju punkti",
+      "curator":"%1 Aizbildņa punkti"
+    },
+    "fans":"Fani",
+    "wootCount":"Woot skaits",
+    "mehCount":"Meh skaits",
+    "ratio":"Woot\/Meh attiecība",
+    "djing":"Dīdžejo",
+    "notInList":"Nav dj listē.",
+    "inWaitlist":"%1\/%2 iekš gaidīšanas saraksta",
+    "userDjing":"%1 Pašlaik Dīdžejo",
+    "userNextDJ":"%1 Nākaimais Dīdžejs",
+    "disconnects":"Iziet",
+    "lastDisconnect":"Pēdējā iziešana",
+    "lastPosition":"Pozīcija",
+    "time":"Laiks"
+  },
+  "ranks":{
+    "you":"Jūs",
+    "regular":"Parasts",
+    "residentdj":"Pieredzējis DJ",
+    "bouncer":"Uzraugs",
+    "manager":"Menedžeris",
+    "cohost":"Līdzīpašnieks",
+    "host":"Īpašnieks.",
+    "ambassador":"Ambassador",
+    "admin":"Administrators"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"Šī istaba lieto īpašus iestatījumus",
+    "infoHeaderCredits":"This room is using special settings by %1",
+    "infoDisable":"Tu vari izslēgt viņus izvēlnē"
+  },
+  "menu":{
+    "autowoot":"Automātiskā balsošana",
+    "autojoin":"Automātiskā pievienošanās",
+    "customchatcolors":"Mainīt čata krāsas",
+    "autorespond":"AFK auto atbildēšana",
+    "notify":"Paziņojumi",
+    "afktimers":"AFK skaitītājs",
+    "roomsettings":"Istabas iestatījumi",
+    "chatimages":"čata foto"
+  },
+  "status":{
+    "available":"Pieejams",
+    "afk":"Afk ziņa",
+    "working":"Strādā",
+    "gaming":"Spēlēju"
+  },
+  "vote":{
+    "meh":"Meh",
+    "woot":"Woot",
+    "undecided":"Neizlēmis",
+    "djing":"Dīdžejo"
+  },
+  "ignore":{
+    "enabled":"Tu tagad ignorē %1",
+    "disabled":"Tu vairs neignorē %1"
+  },
+  "automute":{
+    "registered":"%1 tiks automātiski apklusināts turpmākajos spēlējumos",
+    "unregistered":"%1 tika noņemts no automātiskā apklusinājuma reģistra"
+  },
+  "tooltip":{
+    "stream":"Ieslēgt Video\/Audio",
+    "clear":"izstīrīt čatu",
+    "afk":"Afk ziņa",
+    "reset":"Atiestatīt uz noklusējumu",
+    "muted":"Visas dziesmas ir apklusinātas",
+    "mutedOnce":"Pašreizējā dziesma ir apklusināta"
+  },
+  "error":{
+    "userNotFound":"Lietotājs netika atrasts",
+    "unknownModeration":"Nezināma moderācija",
+    "unknownMenuKey":"Nezināma izvēlne %1",
+    "missingReason":"Trūkst iemesls",
+    "notConnected":"Nav savienots ar ligzdu serveri",
+    "ignoredUser":"Ignored User",
+    "noLiteSupport":"This is not supported in plug&#179; Lite"
+  }
+}

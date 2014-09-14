@@ -1,0 +1,206 @@
+{
+  "running":"Menjalankan plug&#179; versi %1",
+  "commandsHelp":"Gunakan '\/commands' untuk melihat arahan chat diperluaskan.",
+  "automuted":"%1 automuted.",
+  "nextsong":"memaparkan lagu seterusnya dalam senarai main dan jika ia dalam sejarah",
+  "noNextSong":"Anda tidak mempunyai lagu untuk beratur",
+  "isHistory":"Amaran: Lagu ini masih dalam DJ senarai sejarah (%1 - %2)",
+  "lightsOut":"%1 memadamkan lampu",
+  "strobe":"enable\/disable strob",
+  "autorespond":{
+    "default":"Saya tidak didepan komputer sekarang",
+    "disable":"Hentikan AFK Autorespond untuk berbual",
+    "nextIn":"AFK autorespond yang seterusny akan hantar dari %1",
+    "next":"AFK Autorespond atas mention seterusnya",
+    "commandDisable":"%1 auto menyertai disable",
+    "commandNotEnabled":"%1 auto menyertai tidak enable"
+  },
+  "autojoin":{
+    "commandDisable":"%1 auto menyertai disable",
+    "commandNotEnabled":"%1 auto menyertai tidak enable"
+  },
+  "commands":{
+    "header":"Maklumat pengguna",
+    "userCommands":"Arahan pengguna",
+    "modCommands":"Moderation Commands",
+    "variables":{
+      "username":"nama pengguna",
+      "word":"perkataan",
+      "on":"on",
+      "off":"off",
+      "reason":"sebab"
+    },
+    "descriptions":{
+      "nick":"tukar nama pengguna",
+      "avail":"menetapkan status ke available",
+      "afk":"AFK mesej",
+      "work":"menetapkan status ke tengah kerja",
+      "gaming":"Gaming",
+      "join":"Pengguna menyertai",
+      "leave":"Pengguna meninggalkan",
+      "whoami":"dapatkan maklumat anda sendiri",
+      "mute":"menetapkan volume ke 0",
+      "automute":"daftar lagu yang sedang dimain secara automatik mute di masa depan",
+      "unmute":"menetapkan volume ke volumn dahulu",
+      "nextsong":"memaparkan lagu seterusnya dalam senarai main dan jika ia dalam sejarah",
+      "refresh":"Muat semula video",
+      "ignore":"mengabaikan semua chat mesej dari pengguna",
+      "alertson":"memainkan bunyi setiap kali perkataan yang ditakrifkan muncul dalam chat",
+      "alertsoff":"hentikan bunyi setiap kali perkataan yang ditakrifkan muncul dalam chat",
+      "curate":"%1 menambahkan %2 - %3",
+      "getpos":"mendapatkan kedudukan senarai menunggu semasa",
+      "version":"memaparkan nombor versi",
+      "commands":"menunjukkan senarai ini",
+      "link":"paste link ke laman web PlugCubed dalam chat",
+      "whois":"memberi maklumat umum mengenai pengguna",
+      "skip":"skip lagu semasa",
+      "ban":"tendang target pengguna",
+      "lockskip":"kunci DJ booth, skip dan buka semula lepas itu",
+      "lock":"Kunci DJ booth",
+      "unlock":"buka kunci DJ booth",
+      "add":"menambahkan target pengguna ke dj booth\/senarai menunggu",
+      "remove":"mengeluarkan target pengguna dari dj booth\/senarai menunggu",
+      "strobe":"enable\/disable strob",
+      "rave":"enable\/disable lampu",
+      "whois all":"memberikan id pengguna dan nama pengguna daripada semua pengguna di dalam bilik",
+      "banall":"ban semua pengguna di dalam bilik"
+    }
+  },
+  "notify":{
+    "header":"Maklumat pengguna",
+    "join":"Pengguna menyertai",
+    "leave":"Pengguna meninggalkan",
+    "curate":"User Curate",
+    "meh":"User Mehs",
+    "stats":"Song Stats",
+    "updates":"Song Updates",
+    "history":"Songs in history",
+    "songLength":"Song Length (%1 min)",
+    "message":{
+      "curate":"%1 menambahkan %2 - %3",
+      "stats":"Stats: %1 woots -- %2 mehs -- %3 curates",
+      "updates":"Sekarang Memainkan: %1 - %2<br \/>Main oleh: %3",
+      "meh":"%1 meh'd this track",
+      "join":{
+        "normal":"%1 telah meninggalkan bilik",
+        "fan":"Peminat anda %1 telah meninggalkan bilik",
+        "friend":"Kawan anda %1 telah meninggalkan bilik"
+      },
+      "leave":{
+        "normal":"%1 telah meninggalkan bilik",
+        "fan":"Peminat anda %1 telah meninggalkan bilik",
+        "friend":"Kawan anda %1 telah meninggalkan bilik"
+      },
+      "history":"Lagu adalah dalam senarai sejarah (%1 - %2)",
+      "historySkipped":"Lagu adalah dalam senarai sejarah (%1 - %2), tetapi telah dilangkau pada main yang terakhir",
+      "songLength":"Lagu adalah panjang dari %1 minit"
+    },
+    "notification":{
+      "songLength":"panjang lagu"
+    }
+  },
+  "info":{
+    "header":"Maklumat pengguna",
+    "name":"Nama",
+    "title":"Title",
+    "specialTitles":{
+      "developer":"plug&#179; Pemaju",
+      "sponsor":"plug&#179; Penaja",
+      "ambassador":"plug&#179; Ambassador",
+      "donatorDiamond":"plug&#179; Diamond Donator",
+      "donatorPlatinum":"plug&#179; Platinum Donator",
+      "donatorGold":"plug&#179; Penderma Emas",
+      "donatorSilver":"plug&#179; Silver Donator",
+      "donatorBronze":"plug&#179; Bronze Donator",
+      "special":"plug&#179; Special Supporter - %1"
+    },
+    "id":"ID",
+    "rank":"Pangkat",
+    "joined":"Masa Menyertai",
+    "status":"Status",
+    "vote":"Mengundi",
+    "position":"Kedudukan",
+    "points":"Points",
+    "pointType":{
+      "dj":"%1 DJ Points",
+      "listener":"%1 Points Pendengar",
+      "curator":"%1 Curator Points"
+    },
+    "fans":"Peminat",
+    "wootCount":"Woot Kiraan",
+    "mehCount":"Meh Kiraan",
+    "ratio":"Woot\/Meh nisbah",
+    "djing":"DJing",
+    "notInList":"Tidak berada dalam senarai menunggu atau booth",
+    "inWaitlist":"%1\/%2 dalam senarai menunggu",
+    "userDjing":"%1 adalah DJing pada masa ini ",
+    "userNextDJ":"%1 adalah DJing seterusnya",
+    "disconnects":"Disconnects",
+    "lastDisconnect":"Last Disconnect",
+    "lastPosition":"Kedudukan",
+    "time":"Masa"
+  },
+  "ranks":{
+    "you":"Anda",
+    "regular":"Biasa",
+    "residentdj":"Residen DJ",
+    "bouncer":"Bouncer",
+    "manager":"Pengurus",
+    "cohost":"Co-Hos",
+    "host":"Hos",
+    "ambassador":"Ambassador",
+    "admin":"Admin"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"This room is using special settings",
+    "infoHeaderCredits":"This room is using special settings by %1",
+    "infoDisable":"You can disable them in the menu"
+  },
+  "menu":{
+    "autowoot":"Autowoot",
+    "autojoin":"Auto menyertai",
+    "customchatcolors":"Custom Chat Warna",
+    "autorespond":"AFK Autorespond",
+    "notify":"Pemberitahuan",
+    "afktimers":"AFK Timers",
+    "roomsettings":"Tetapan bilik",
+    "chatimages":"Chat Images"
+  },
+  "status":{
+    "available":"Available",
+    "afk":"AFK mesej",
+    "working":"Tengah Kerja",
+    "gaming":"Gaming"
+  },
+  "vote":{
+    "meh":"Meh",
+    "woot":"Woot",
+    "undecided":"Belum Memutuskan",
+    "djing":"DJing"
+  },
+  "ignore":{
+    "enabled":"Anda sekarang mengabaikan %1",
+    "disabled":"Anda sekarang tidak lagi mengabaikan %1"
+  },
+  "automute":{
+    "registered":"%1 didaftar kepada automute pada masa depan.",
+    "unregistered":"%1 telah dikeluarkan dari automute yang didaftar."
+  },
+  "tooltip":{
+    "stream":"Togol Video\/Audio Stream",
+    "clear":"Clear Chat",
+    "afk":"AFK mesej",
+    "reset":"Tetapkan semula kepada lalai",
+    "muted":"Semua lagu adalah disenyapkan",
+    "mutedOnce":"Lagu semasa adalah disenyapkan"
+  },
+  "error":{
+    "userNotFound":"Pengguna tidak dijumpai",
+    "unknownModeration":"Unknown moderation",
+    "unknownMenuKey":"Unknown menu key: %1",
+    "missingReason":"Hilang sebab",
+    "notConnected":"Tidak bersambung kepada pelayan soket",
+    "ignoredUser":"Ignored User",
+    "noLiteSupport":"This is not supported in plug&#179; Lite"
+  }
+}

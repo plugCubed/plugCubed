@@ -1,0 +1,206 @@
+{
+  "running":"plug&#179; běží na verzi %1",
+  "commandsHelp":"Použijte '\/commands' k zobrazení příkazů",
+  "automuted":"%1 Automaticky ztlumeno.",
+  "nextsong":"zobrazit další skladbu v seznamu skladeb a pokud je v historii",
+  "noNextSong":"Nemáte skladbu ke hraní",
+  "isHistory":"Pozor: Tato skladba je stále v historii (%1 z %2)",
+  "lightsOut":"%1 vypnul světla",
+  "strobe":"zapnout\/vypnout stroboskop",
+  "autorespond":{
+    "default":"Jsem nepřítomný.",
+    "disable":"Vypněte AFK automatickou odpověď, abyste mohli psát do chatu",
+    "nextIn":"Další AFK automatická odpověď bude poslána z %1",
+    "next":"AFK Auto-odpověď na další zmínění",
+    "commandDisable":"%1 Zpráva o nepřítomnosti vypnuta",
+    "commandNotEnabled":"%1 automatické připojování nebylo zapnuto"
+  },
+  "autojoin":{
+    "commandDisable":"%1 automatické připojování vypnuto",
+    "commandNotEnabled":"%1 automatické připojování nebylo zapnuto"
+  },
+  "commands":{
+    "header":"Příkazy",
+    "userCommands":"Uživatelské Příkazy",
+    "modCommands":"Moderátorské příkazy",
+    "variables":{
+      "username":"uživatelské jméno",
+      "word":"slovo",
+      "on":"zapnuto",
+      "off":"vypnuto",
+      "reason":"důvod"
+    },
+    "descriptions":{
+      "nick":"změnit uživatelské jméno",
+      "avail":"nastavit status na dostupný",
+      "afk":"nastavit status na AFK",
+      "work":"nastavit status na pracuji",
+      "gaming":"nastavit status na hraji",
+      "join":"připojil se k DJ pultu",
+      "leave":"odpojil se od DJ pultu",
+      "whoami":"získejte své vlastní informace",
+      "mute":"nastavit hlasitost na 0",
+      "automute":"pamatuj si momentálně hrající písničku, aby byla automaticky ztlumena vždy, když bude hrát",
+      "unmute":"nastavit hlasitost na nejvyšší hlasitost",
+      "nextsong":"zobrazit další skladbu v seznamu skladeb a pokud je v historii",
+      "refresh":"obnovit video",
+      "ignore":"ignorovat všechny zprávy od uživatele",
+      "alertson":"přehraj zvuk vždy, když je definované slovo napsáno do chatu",
+      "alertsoff":"ukonči písničku vždy, když jsou definované slova napsána v chatu",
+      "curate":"přidat aktuální skladbu do vybraného seznamu stop",
+      "getpos":"zjistit současnou pozici ve frontě",
+      "version":"zobrazí číslo verze",
+      "commands":"zobrazí tento seznam",
+      "link":"vloží odkaz na plugCubed webovou stránku do chatu",
+      "whois":"poskytne obecné informace o uživateli",
+      "skip":"přeskočit tuto skladbu",
+      "ban":"vyhodí vybraného uživatele",
+      "lockskip":"zamkne DJ pult, přeskočí a uzamkne později",
+      "lock":"zamkne DJ pult",
+      "unlock":"odemkne DJ pult",
+      "add":"přidá označeného uživatele do DJ pultu",
+      "remove":"odstraní označeného uživatele z DJ pultu",
+      "strobe":"zapnout\/vypnout stroboskop",
+      "rave":"zapne\/vypne světla",
+      "whois all":"nabídne uživatelské ID a jména všech uživatelů v této místnosti",
+      "banall":"zabanuje všechny uživatele v této místnosti"
+    }
+  },
+  "notify":{
+    "header":"Chatové Notifikace",
+    "join":"Uživatel se připojil",
+    "leave":"Uživatel se odpojil",
+    "curate":"Uživatel si přidá písničku",
+    "meh":"Mehy Uživatelů",
+    "stats":"Statistiky Skladby",
+    "updates":"Aktualizace Skladby",
+    "history":"Skladby v historii",
+    "songLength":"Délka Skladby (%1 min)",
+    "message":{
+      "curate":"%1 přidáno %2 - %3",
+      "stats":"Statistiky: %1 Woots -- %2 Mehs -- %3 Přidaných",
+      "updates":"Právě hraje: %1 od %2<br\/> Hráno DJem %3",
+      "meh":"%1 Se nelíbí tato písnička",
+      "join":{
+        "normal":"%1 se právě připojil do místnosti",
+        "fan":"Tvůj fanoušek %1 se právě připojil do místnosti",
+        "friend":"Tvůj přítel %1 se právě připojil do místnosti"
+      },
+      "leave":{
+        "normal":"%1 právě odešel",
+        "fan":"Tvůj fanoušek %1 právě opustil místnost",
+        "friend":"Tvůj přitel %1 právě opustil místnost"
+      },
+      "history":"Skladba je v historii (%1 z %2)",
+      "historySkipped":"Skladba je v historii (%1 z %2), ale byla přeskočena v minulém přehrání",
+      "songLength":"Skladba je delší než %1 minut"
+    },
+    "notification":{
+      "songLength":"Délka Skladby"
+    }
+  },
+  "info":{
+    "header":"Uživatelské informace",
+    "name":"Jméno",
+    "title":"Název",
+    "specialTitles":{
+      "developer":"plug&#179; Vývojář",
+      "sponsor":"plug&#179; Sponzor",
+      "ambassador":"plug&#179; Manažer",
+      "donatorDiamond":"plug&#179; Diamantový sponzor",
+      "donatorPlatinum":"plug&#179; Platinový sponzor",
+      "donatorGold":"plug&#179; Zlatý sponzor",
+      "donatorSilver":"plug&#179; Stříbrný sponzor",
+      "donatorBronze":"plug&#179; Bronzový sponzor",
+      "special":"plug&#179; Speciální Pomocník - %1"
+    },
+    "id":"ID",
+    "rank":"Hodnost",
+    "joined":"Čas připojení",
+    "status":"Stav",
+    "vote":"Hlas",
+    "position":"Pozice",
+    "points":"Body",
+    "pointType":{
+      "dj":"%1 DJ body",
+      "listener":"%1 posluchačských body",
+      "curator":"%1 bodů z přidání"
+    },
+    "fans":"Fanoušků",
+    "wootCount":"Počet Wootů",
+    "mehCount":"Počet Mehů",
+    "ratio":"Poměr Woot\/Meh ",
+    "djing":"Hraje",
+    "notInList":"Není ve frontě nebo za pultem",
+    "inWaitlist":"%1\/%2 ve frontě",
+    "userDjing":"%1 právě hraje",
+    "userNextDJ":"%1 hraje jako další",
+    "disconnects":"Odpojení",
+    "lastDisconnect":"Poslední Odpojení",
+    "lastPosition":"Pozice",
+    "time":"Čas"
+  },
+  "ranks":{
+    "you":"Ty",
+    "regular":"Normální",
+    "residentdj":"Rezidentní DJ",
+    "bouncer":"Vyhazovač",
+    "manager":"Manažer",
+    "cohost":"Spolu zakladatel",
+    "host":"Zakladatel",
+    "ambassador":"Ambasádor",
+    "admin":"Administrátor"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"Tato místnost používá speciální nastavení",
+    "infoHeaderCredits":"Tato místnost používá speciální nastavení od %1",
+    "infoDisable":"Můžete to vypnout v menu"
+  },
+  "menu":{
+    "autowoot":"Autowoot",
+    "autojoin":"Autojoin",
+    "customchatcolors":"Vlastní barvy chatu",
+    "autorespond":"AFK Auto-odpověď",
+    "notify":"Upozornění",
+    "afktimers":"AFK Časovače",
+    "roomsettings":"Nastavení Místnosti",
+    "chatimages":"Chat Obrázky"
+  },
+  "status":{
+    "available":"Dostupný",
+    "afk":"AFK Zpráva",
+    "working":"Pracuji",
+    "gaming":"Hraji hry"
+  },
+  "vote":{
+    "meh":"Meh",
+    "woot":"Woot",
+    "undecided":"Nerozhodnutý",
+    "djing":"Hraje"
+  },
+  "ignore":{
+    "enabled":"Právě ignorujete %1",
+    "disabled":"Již neignorujete %1"
+  },
+  "automute":{
+    "registered":"%1 se registroval k automatickému ztlumení na další hraní.",
+    "unregistered":"%1 zrušil automatické ztlumení."
+  },
+  "tooltip":{
+    "stream":"Stream",
+    "clear":"Vyčistit Chat",
+    "afk":"AFK Zpráva",
+    "reset":"Restartovat do původního stavu",
+    "muted":"Všechny skladby jsou ztlumené",
+    "mutedOnce":"Tato skladba je ztlumená"
+  },
+  "error":{
+    "userNotFound":"Uživatel nenalezen",
+    "unknownModeration":"Neznámá moderace",
+    "unknownMenuKey":"Neznámý menu klíč: %1",
+    "missingReason":"Chybí důvod",
+    "notConnected":"Není připojen k socket server",
+    "ignoredUser":"Ignorovaný Uživatel",
+    "noLiteSupport":"Tato možnost není podporována v plug³ Lite"
+  }
+}

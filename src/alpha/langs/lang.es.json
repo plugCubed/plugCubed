@@ -1,0 +1,206 @@
+{
+  "running":"Corriendo plug&#179; versión %1",
+  "commandsHelp":"Usa '\/commands' para ver todos los comandos",
+  "automuted":"%1 auto-silenciado",
+  "nextsong":"muestra la siguente canción en la lista de reproducción y si esta en el historial",
+  "noNextSong":"No tienes ninguna cancion en la cola.",
+  "isHistory":"Atención: Esta canción aún esta en el historial(%1 de %2)",
+  "lightsOut":"%1 encendió las luces.",
+  "strobe":"Activa\/Desactiva Luz Estroboscópica",
+  "autorespond":{
+    "default":"Estoy Lejos del Teclado.",
+    "disable":"Desactiva la Autorespuesta AFK",
+    "nextIn":"La próxima auto-respuesta sera enviada de %1",
+    "next":"Auto-responder en la próxima mención",
+    "commandDisable":"%1 Mensaje AFK desactivado",
+    "commandNotEnabled":"%1 Mensaje Automático AFK no estaba habilitado"
+  },
+  "autojoin":{
+    "commandDisable":"%1 Auto Unirse desactivado",
+    "commandNotEnabled":"%1 Auto Unirse está deshabilitado"
+  },
+  "commands":{
+    "header":"Comandos plugCubed",
+    "userCommands":"Comandos de usuario",
+    "modCommands":"Comandos de moderación",
+    "variables":{
+      "username":"Nombre de usuario",
+      "word":"palabra",
+      "on":"Encendido",
+      "off":"Apagar",
+      "reason":"razón"
+    },
+    "descriptions":{
+      "nick":"Cambia el nombre de usuario",
+      "avail":"Establecer el estado a disponible",
+      "afk":"Mensage AFK",
+      "work":"Establecer el estado a trabajando",
+      "gaming":"Jugando",
+      "join":"Conexión de usuario",
+      "leave":"Desconexion de usuario",
+      "whoami":"Busca tu propia información",
+      "mute":"Fijar el volumen en cero",
+      "automute":"Registra esta canción para ser automáticamente silenciada en el futuro ",
+      "unmute":"Fijar el volumen igual que la última vez",
+      "nextsong":"muestra la siguente canción en la lista de reproducción y si esta en el historial",
+      "refresh":"recarga el video",
+      "ignore":"ignora todos los mensajes del usuario",
+      "alertson":"reproducir sonido cuando las palabras definidas sean escritas en el chat",
+      "alertsoff":"para la reproducción cuando las palabras definidas aparecen en el chat.",
+      "curate":"%1 añadido %2 - %3",
+      "getpos":"posición actual en la lista de espera",
+      "version":"muestra el numero de versión",
+      "commands":"muestra esta lista",
+      "link":"pegar link a la web de plugCubed en el chat",
+      "whois":"da información general sobre el usuario",
+      "skip":"salta la cancion actual",
+      "ban":"kickea al usuario seleccionado",
+      "lockskip":"bloquea la mesa del DJ, salta, y después desbloquea",
+      "lock":"bloquea la mesa de DJ",
+      "unlock":"desbloquea la mesa de DJ",
+      "add":"agrega el usuario seleccionado a la mesa de dj\/lista de espera",
+      "remove":"elimina el usuario seleccionado a la mesa de dj\/lista de espera",
+      "strobe":"Activa\/Desactiva Luz Estroboscópica",
+      "rave":"activa\/desactiva luces apagadas",
+      "whois all":"da el userid y el username de todos los usuarios en la sala",
+      "banall":"banea todos los usuarios en la sala"
+    }
+  },
+  "notify":{
+    "header":"Comandos plugCubed",
+    "join":"Conexión de usuario",
+    "leave":"Desconexion de usuario",
+    "curate":"User Curate",
+    "meh":"Meh's del usuario",
+    "stats":"Estadísticas de la canción",
+    "updates":"Actualizaciones de la canción",
+    "history":"Canciones en el historial",
+    "songLength":"Longitud de la canción (%1min)",
+    "message":{
+      "curate":"%1 añadido %2 - %3",
+      "stats":"Estadísticas:  %1 ¡Genial! -- %2 Aburrido -- %3 Favoritos",
+      "updates":"Ahora Tocando: %1 por %2<br \/>Canción Tocada por: %3",
+      "meh":"%1 meh's ha conseguido esta canción",
+      "join":{
+        "normal":"%1 acaba de irse",
+        "fan":"Tu fan %1 acaba de irse",
+        "friend":"Tu amigo %1 acaba de irse"
+      },
+      "leave":{
+        "normal":"%1 acaba de irse",
+        "fan":"Tu fan %1 acaba de irse",
+        "friend":"Tu amigo %1 acaba de irse"
+      },
+      "history":"Canción en el historial (%1 de %2)",
+      "historySkipped":"Canción en el historial (%1 de %2), pero se saltó en la ultima reproducción",
+      "songLength":"Canción más larga que %1 minutos"
+    },
+    "notification":{
+      "songLength":"Longitud de la canción"
+    }
+  },
+  "info":{
+    "header":"Comandos plugCubed",
+    "name":"Nombre",
+    "title":"Título",
+    "specialTitles":{
+      "developer":"plug&#179; Desarollador",
+      "sponsor":"plug&#179; Patrocinador",
+      "ambassador":"plug&#179; Embajador",
+      "donatorDiamond":"plug&#179; Donante de Diamante",
+      "donatorPlatinum":"plug&#179; Donante de Platino",
+      "donatorGold":"plug&#179; Donador experto",
+      "donatorSilver":"plug&#179; Donante de Plata",
+      "donatorBronze":"plug&#179; Donante de Bronce",
+      "special":"plug&#179; Ayudante especial - %1"
+    },
+    "id":"ID",
+    "rank":"Rango",
+    "joined":"Tiempo de Unido(a)",
+    "status":"Estado",
+    "vote":"Votar",
+    "position":"Posición",
+    "points":"Puntos",
+    "pointType":{
+      "dj":"%1 Puntos de DJ",
+      "listener":"%1 Puntos de oyente",
+      "curator":"%1 Puntos de Favoritos"
+    },
+    "fans":"Admiradores",
+    "wootCount":"Conteo de Woot",
+    "mehCount":"Conteo de Meh",
+    "ratio":"Índice de Genial\/Aburrido",
+    "djing":"DJing",
+    "notInList":"Ni en la lista de espera ni en el stand",
+    "inWaitlist":"%1\/%2 en lista de espera",
+    "userDjing":"%1 esta de DJ",
+    "userNextDJ":"%1 Es el Proximo DJ",
+    "disconnects":"Desconecta",
+    "lastDisconnect":"Última desconexión",
+    "lastPosition":"Posición",
+    "time":"Tiempo"
+  },
+  "ranks":{
+    "you":"Tú",
+    "regular":"Normal",
+    "residentdj":"Dj Destacado",
+    "bouncer":"Portero",
+    "manager":"Gerente",
+    "cohost":"Co-Anfitrión",
+    "host":"Anfitrión",
+    "ambassador":"Embajador",
+    "admin":"Administrador"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"Esta sala usa configuración personalizada",
+    "infoHeaderCredits":"Esta sala está usando ajustes especiales por %1",
+    "infoDisable":"Las puedes desactivar en el menú"
+  },
+  "menu":{
+    "autowoot":"Autowoot",
+    "autojoin":"Autoentrar",
+    "customchatcolors":"Colores de chat personalizados",
+    "autorespond":"Autorespuesta AFK",
+    "notify":"Notificaciones",
+    "afktimers":"AFK Tiempo",
+    "roomsettings":"Configuracion de la Sala",
+    "chatimages":"Imagenes de chat"
+  },
+  "status":{
+    "available":"Disponible",
+    "afk":"AFK",
+    "working":"Trabajando",
+    "gaming":"Jugando"
+  },
+  "vote":{
+    "meh":"Pesado",
+    "woot":"¡Genial!",
+    "undecided":"Sin decidir",
+    "djing":"Tocando"
+  },
+  "ignore":{
+    "enabled":"Ahora ignoras a  %1",
+    "disabled":"Ya no ingoras a  %1"
+  },
+  "automute":{
+    "registered":"%1 registrada para autosilenciar en el futuro",
+    "unregistered":"%1 eliminada del registro de autosilencio"
+  },
+  "tooltip":{
+    "stream":"Emisión",
+    "clear":"Limpiar Chat",
+    "afk":"Mensage AFK",
+    "reset":"Restablecer valores por defecto",
+    "muted":"Todas las canciones estan silenciadas",
+    "mutedOnce":"La cancion actual esta silenciada"
+  },
+  "error":{
+    "userNotFound":"Usuario no encontrado",
+    "unknownModeration":"Moderación Desconocida",
+    "unknownMenuKey":"Tecla de menú desconocida",
+    "missingReason":"Falta razón",
+    "notConnected":"No conectado al servidor socket",
+    "ignoredUser":"Usuario Ignorado",
+    "noLiteSupport":"Esto no es compatible con plug&#179; Lite"
+  }
+}

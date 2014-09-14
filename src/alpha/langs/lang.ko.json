@@ -1,0 +1,206 @@
+{
+  "running":"Running plug&#179; version %1",
+  "commandsHelp":"대화의 명령어들을 확인하려면 '\/commands'를 사용합니다.",
+  "automuted":"%1 자동음소거",
+  "nextsong":"재생 목록의 다음 노래를 표시하고 이력에 있는지 알아봅니다.",
+  "noNextSong":"당신은 대기열에 가입하기 위한 노래가 없습니다.",
+  "isHistory":"경고: 이 노래는 이력에 존재합니다. (%1 of %2)",
+  "lightsOut":"%1 조명을 끕니다.",
+  "strobe":"조명 활성화 \/ 비활성화",
+  "autorespond":{
+    "default":"자리비움.",
+    "disable":"자리비움 시 자동응답을 사용하지 않습니다.",
+    "nextIn":"다음 자리비움 시 자동 응답을 전송합니다 %1",
+    "next":"자리비움 시 자동응답하게 될 문장",
+    "commandDisable":"%1 autojoin disabled",
+    "commandNotEnabled":"%1 autojoin was not enabled"
+  },
+  "autojoin":{
+    "commandDisable":"%1 autojoin disabled",
+    "commandNotEnabled":"%1 autojoin was not enabled"
+  },
+  "commands":{
+    "header":"사용자 정보",
+    "userCommands":"User Commands",
+    "modCommands":"Moderation Commands",
+    "variables":{
+      "username":"username",
+      "word":"word",
+      "on":"on",
+      "off":"off",
+      "reason":"reason"
+    },
+    "descriptions":{
+      "nick":"사용자명 변경",
+      "avail":"상태를 사용가능으로 설정",
+      "afk":"자리비움 자동응답",
+      "work":"상태를 일 하는 중으로 설정",
+      "gaming":"게임 중",
+      "join":"사용자 입장.",
+      "leave":"사용자 퇴장",
+      "whoami":"자신의 정보를 나타냅니다.",
+      "mute":"볼륨을 0으로 설정합니다.",
+      "automute":"다음 노래에 자동으로 음소거하여 노래를 틉니다.",
+      "unmute":"최근에 설정했던 볼륨으로 설정됩니다.",
+      "nextsong":"재생 목록의 다음 노래를 표시하고 이력에 있는지 알아봅니다.",
+      "refresh":"영상을 새로고침 합니다.",
+      "ignore":"사용자의 모든 채팅 메시지를 차단합니다.",
+      "alertson":"정의 된 단어가 채팅에 기록 될 때마다 알려줍니다.",
+      "alertsoff":"정의 된 단어가 채팅에 기록 될 때마다 노래의 재생을 멈춥니다.",
+      "curate":"%1 added %2 - %3",
+      "getpos":"현재 대기자 명단의 위치를 얻습니다.",
+      "version":"버전 번호를 표시합니다",
+      "commands":"이 목록을 보여줍니다.",
+      "link":"plugCubed의 주소를 채팅에 띄웁니다.",
+      "whois":"사용자에 대한 정보를 제공합니다",
+      "skip":"현재 곡을 건너 띕니다.",
+      "ban":"해당 유저를 내쫓습니다.",
+      "lockskip":"DJ 부스를 잠그고 노래가 넘어간 후 잠금을 해제합니다.",
+      "lock":"DJ 부스를 잠급니다.",
+      "unlock":"DJ 부스를 잠금해제 합니다.",
+      "add":"해당 유저를 DJ 부스 \/ 대기열에 가입 시킵니다.",
+      "remove":"해당 유저를 DJ 부스 \/ 대기열에서 퇴장시킵니다.",
+      "strobe":"조명 활성화 \/ 비활성화",
+      "rave":"조명 활성화 \/ 비활성화를 나타내지 않습니다.",
+      "whois all":"방에 있는 모든 사용자의 ID와 사용자 이름을 제공합니다.",
+      "banall":"방에 있는 모두를 내쫓습니다."
+    }
+  },
+  "notify":{
+    "header":"사용자 정보",
+    "join":"사용자 입장.",
+    "leave":"사용자 퇴장",
+    "curate":"User Curate",
+    "meh":"User Mehs",
+    "stats":"Song Stats",
+    "updates":"Song Updates",
+    "history":"Songs in history",
+    "songLength":"Song Length (%1 min)",
+    "message":{
+      "curate":"%1 added %2 - %3",
+      "stats":"Stats: %1 woots -- %2 mehs -- %3 curates",
+      "updates":"Now Playing: %1 by %2<br>Played by: %3",
+      "meh":"%1 meh'd this track",
+      "join":{
+        "normal":"%1 just left the room",
+        "fan":"Your fan %1 just left the room",
+        "friend":"Your friend %1 just left the room"
+      },
+      "leave":{
+        "normal":"%1 just left the room",
+        "fan":"Your fan %1 just left the room",
+        "friend":"Your friend %1 just left the room"
+      },
+      "history":"Song is in history (%1 of %2)",
+      "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
+      "songLength":"Song is longer than %1 minutes"
+    },
+    "notification":{
+      "songLength":"Song Length"
+    }
+  },
+  "info":{
+    "header":"사용자 정보",
+    "name":"이름",
+    "title":"제목",
+    "specialTitles":{
+      "developer":"plug&#179; Developer",
+      "sponsor":"plug&#179; Sponsor",
+      "ambassador":"plug&#179; Ambassador",
+      "donatorDiamond":"plug&#179; Diamond Donator",
+      "donatorPlatinum":"plug&#179; Platinum Donator",
+      "donatorGold":"plug&#179; Gold Donator",
+      "donatorSilver":"plug&#179; Silver Donator",
+      "donatorBronze":"plug&#179; Bronze Donator",
+      "special":"plug&#179; Special Supporter - %1"
+    },
+    "id":"ID",
+    "rank":"Rank",
+    "joined":"Time Joined",
+    "status":"Status",
+    "vote":"투표",
+    "position":"Position",
+    "points":"Points",
+    "pointType":{
+      "dj":"%1 DJ Points",
+      "listener":"%1 Listener Points",
+      "curator":"%1 Curator Points"
+    },
+    "fans":"팬",
+    "wootCount":"Woot Count",
+    "mehCount":"Meh Count",
+    "ratio":"Woot\/Meh Ratio",
+    "djing":"DJing",
+    "notInList":"Not in waitlist nor booth",
+    "inWaitlist":"%1\/%2 in waitlist",
+    "userDjing":"%1 are currently DJing",
+    "userNextDJ":"%1 are DJing next",
+    "disconnects":"Disconnects",
+    "lastDisconnect":"Last Disconnect",
+    "lastPosition":"Position",
+    "time":"Time"
+  },
+  "ranks":{
+    "you":"You",
+    "regular":"Regular",
+    "residentdj":"견습 DJ",
+    "bouncer":"문지기",
+    "manager":"매니저",
+    "cohost":"부방장",
+    "host":"방장",
+    "ambassador":"사절단(홍보대사)",
+    "admin":"관리자"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"This room is using special settings",
+    "infoHeaderCredits":"This room is using special settings by %1",
+    "infoDisable":"You can disable them in the menu"
+  },
+  "menu":{
+    "autowoot":"자동 좋아요",
+    "autojoin":"자동 대기열 가입",
+    "customchatcolors":"채팅 컬러 바꾸기",
+    "autorespond":"자리비움 시 자동응답",
+    "notify":"Notifications",
+    "afktimers":"AFK Timers",
+    "roomsettings":"Room Settings",
+    "chatimages":"Chat Images"
+  },
+  "status":{
+    "available":"Available",
+    "afk":"자리비움 자동응답",
+    "working":"일하는 중",
+    "gaming":"게임 중"
+  },
+  "vote":{
+    "meh":"싫어요",
+    "woot":"좋아요",
+    "undecided":"Undecided",
+    "djing":"DJing"
+  },
+  "ignore":{
+    "enabled":"You are now ignoring %1",
+    "disabled":"You are no longer ignoring %1"
+  },
+  "automute":{
+    "registered":"%1 registered to automute on future plays.",
+    "unregistered":"%1 removed from automute registry."
+  },
+  "tooltip":{
+    "stream":"Toggle Video\/Audio Stream",
+    "clear":"채팅로그 삭제",
+    "afk":"자리비움 자동응답",
+    "reset":"Reset to default",
+    "muted":"All songs are muted",
+    "mutedOnce":"Current song is muted"
+  },
+  "error":{
+    "userNotFound":"User not found",
+    "unknownModeration":"Unknown moderation",
+    "unknownMenuKey":"Unknown menu key: %1",
+    "missingReason":"Missing reason",
+    "notConnected":"Not connected to socket server",
+    "ignoredUser":"Ignored User",
+    "noLiteSupport":"This is not supported in plug&#179; Lite"
+  }
+}

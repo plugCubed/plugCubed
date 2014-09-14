@@ -1,0 +1,206 @@
+{
+  "running":"Използвате plug&#179; версия %1",
+  "commandsHelp":"Използвай '\/commands' за да видиш всички команди.",
+  "automuted":"%1 заглушени.",
+  "nextsong":"display next song in playlist and if it's in history",
+  "noNextSong":"You have no queued song",
+  "isHistory":"Внимание!: Тази песен е била пускана на скоро (%1 от %2)",
+  "lightsOut":"%1 turned the lights off",
+  "strobe":"enable\/disable strobe",
+  "autorespond":{
+    "default":"Не съм на компютъра.",
+    "disable":"Disable AFK Autorespond to chat",
+    "nextIn":"Next AFK Autorespond will be sent from %1",
+    "next":"AFK Autorespond on next mention",
+    "commandDisable":"%1 autojoin disabled",
+    "commandNotEnabled":"%1 autojoin was not enabled"
+  },
+  "autojoin":{
+    "commandDisable":"%1 autojoin disabled",
+    "commandNotEnabled":"%1 autojoin was not enabled"
+  },
+  "commands":{
+    "header":"plugCubed Команди",
+    "userCommands":"Потребителски Команди",
+    "modCommands":"Модераторски Команди",
+    "variables":{
+      "username":"потребителско име",
+      "word":"word",
+      "on":"on",
+      "off":"off",
+      "reason":"reason"
+    },
+    "descriptions":{
+      "nick":"change username",
+      "avail":"set status to available",
+      "afk":"AFK Message",
+      "work":"set status to working",
+      "gaming":"Gaming",
+      "join":"Потребител Влезе",
+      "leave":"Потребител Излезе",
+      "whoami":"get your own information",
+      "mute":"set volume to 0",
+      "automute":"register currently playing song to automatically mute on future plays",
+      "unmute":"set volume to last volume",
+      "nextsong":"display next song in playlist and if it's in history",
+      "refresh":"refresh the video",
+      "ignore":"ignore all chat messages from user",
+      "alertson":"play sound whenever defined words are written in chat",
+      "alertsoff":"stop playing sound when defined words are written in chat",
+      "curate":"%1 добавено %2 - %3",
+      "getpos":"get current waitlist position",
+      "version":"displays version number",
+      "commands":"shows this list",
+      "link":"paste link to plugCubed website in chat",
+      "whois":"gives general information about user",
+      "skip":"skip current song",
+      "ban":"kicks targeted user",
+      "lockskip":"locks DJ booth, skip and unlocks afterwards",
+      "lock":"locks DJ booth",
+      "unlock":"unlocks DJ booth",
+      "add":"adds targeted user to dj booth\/waitlist",
+      "remove":"removes targeted user from dj booth\/waitlist",
+      "strobe":"enable\/disable strobe",
+      "rave":"enable\/disable lights out",
+      "whois all":"gives userid and username of all users in the room",
+      "banall":"bans all users in the room"
+    }
+  },
+  "notify":{
+    "header":"plugCubed Команди",
+    "join":"Потребител Влезе",
+    "leave":"Потребител Излезе",
+    "curate":"Потребител запази песента",
+    "meh":"User Mehs",
+    "stats":"Статистика на песента",
+    "updates":"Информация за песента",
+    "history":"Songs in history",
+    "songLength":"Song Length (%1 min)",
+    "message":{
+      "curate":"%1 добавено %2 - %3",
+      "stats":"Статус: %1 Харесали -- %2 Нехаресали -- %3 добавили",
+      "updates":"Сега върви: %1 на %2<br \/>Пусната от: %3",
+      "meh":"%1 meh'd this track",
+      "join":{
+        "normal":"%1 Напусна стаята",
+        "fan":"Твоят фен %1 напусна стаята",
+        "friend":"Твоят приятел %1 напусна стаята"
+      },
+      "leave":{
+        "normal":"%1 Напусна стаята",
+        "fan":"Твоят фен %1 напусна стаята",
+        "friend":"Твоят приятел %1 напусна стаята"
+      },
+      "history":"Song is in history (%1 of %2)",
+      "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
+      "songLength":"Song is longer than %1 minutes"
+    },
+    "notification":{
+      "songLength":"Song Length"
+    }
+  },
+  "info":{
+    "header":"plugCubed Команди",
+    "name":"Име",
+    "title":"Заглавие",
+    "specialTitles":{
+      "developer":"plugCubed Developer",
+      "sponsor":"plug&#179; Sponsor",
+      "ambassador":"plug&#179; Ambassador",
+      "donatorDiamond":"plug&#179; Diamond Donator",
+      "donatorPlatinum":"plug&#179; Platinum Donator",
+      "donatorGold":"plug&#179; Gold Donator",
+      "donatorSilver":"plug&#179; Silver Donator",
+      "donatorBronze":"plug&#179; Bronze Donator",
+      "special":"plug&#179; Special Supporter - %1"
+    },
+    "id":"Самоличност",
+    "rank":"Ранг",
+    "joined":"Влезнал на",
+    "status":"Статус",
+    "vote":"Вот",
+    "position":"Позиция",
+    "points":"Точки",
+    "pointType":{
+      "dj":"%1 DJ Точки",
+      "listener":"%1 Точки от слушатели",
+      "curator":"%1 Точки от добавили песента"
+    },
+    "fans":"Фенове",
+    "wootCount":"Брой Харесвания",
+    "mehCount":"Брой Нехаресвания",
+    "ratio":"Съотношение на Харесали\/Нехаресали",
+    "djing":"DJing",
+    "notInList":"Нито в чакащите нито на сцената",
+    "inWaitlist":"%1\/%2 при чакащите",
+    "userDjing":"%1 DJing в момента",
+    "userNextDJ":"%1 чакат за DJing",
+    "disconnects":"Disconnects",
+    "lastDisconnect":"Last Disconnect",
+    "lastPosition":"Позиция",
+    "time":"Time"
+  },
+  "ranks":{
+    "you":"Ти",
+    "regular":"Обикновен",
+    "residentdj":"Resident DJ",
+    "bouncer":"Bouncer",
+    "manager":"Мениджър",
+    "cohost":"Заместник Домакин",
+    "host":"Домакин",
+    "ambassador":"Посланик",
+    "admin":"Админ"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"This room is using special settings",
+    "infoHeaderCredits":"This room is using special settings by %1",
+    "infoDisable":"You can disable them in the menu"
+  },
+  "menu":{
+    "autowoot":"Автоматично харесване",
+    "autojoin":"Автоматично качване на сцената",
+    "customchatcolors":"Собствени Чат Цветове",
+    "autorespond":"AFK Autorespond",
+    "notify":"Известия",
+    "afktimers":"AFK Timers",
+    "roomsettings":"Room Settings",
+    "chatimages":"Chat Images"
+  },
+  "status":{
+    "available":"Достъпен",
+    "afk":"AFK Message",
+    "working":"Работи",
+    "gaming":"Gaming"
+  },
+  "vote":{
+    "meh":"Отрицателни",
+    "woot":"Положителни",
+    "undecided":"Без вот",
+    "djing":"DJing"
+  },
+  "ignore":{
+    "enabled":"Игнорирахте %1",
+    "disabled":"Вече не игнорирате %1"
+  },
+  "automute":{
+    "registered":"%1 ще се заглушава при бъдещи пускания",
+    "unregistered":"%1 е премахната от заглушените."
+  },
+  "tooltip":{
+    "stream":"Видео",
+    "clear":"Clear Chat",
+    "afk":"AFK Message",
+    "reset":"Reset to default",
+    "muted":"All songs are muted",
+    "mutedOnce":"Current song is muted"
+  },
+  "error":{
+    "userNotFound":"Потребителят не е намерен",
+    "unknownModeration":"Неизвестна команда",
+    "unknownMenuKey":"Непознато копче за менюто",
+    "missingReason":"Missing reason",
+    "notConnected":"Not connected to socket server",
+    "ignoredUser":"Ignored User",
+    "noLiteSupport":"This is not supported in plug&#179; Lite"
+  }
+}

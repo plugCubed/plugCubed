@@ -1,7 +1,8 @@
 define(['jquery', 'plugCubed/Class'], function($, Class) {
-    var PopoutView, obj, styles = {}
-    if (!p3Utils.runLite)
-        PopoutView = require('ce221/df202/bd7f7/bc67e/e39c3');
+    var PopoutView, obj, styles = {};
+    if (!p3Utils.runLite) {
+        PopoutView = require('app/views/room/popout/PopoutView');
+    }
     function update() {
         var a = '';
         for (var i in styles) {

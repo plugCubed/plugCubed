@@ -1,187 +1,206 @@
 {
-    "running": "Plug&#179 draait, versie %1.",
-    "commandsHelp": "Gebruik '/commands' om alle chat commando's te laten zien.",
-    "newVersion": "Er is een nieuwe versie van plug&#179; beschikbaar. Jouw script zal in een paar seconden verversen.",
-    "automuted": "%1 automatisch gedempt.",
-    "nextsong": "toon het volgende lied en of hij al in de geschiedenis staat",
-    "noNextSong": "Je hebt geen nummers in je afspeellijst.",
-    "isHistory": "Waarschuwing: Dit lied is nog steeds in de geschiedenis. (%1 van %2)",
-    "roomSpecificSettingsHeader": "Deze community gebruikt speciale instellingen.",
-    "roomSpecificSettingsDesc": "Je kan ze uitschakelen in het menu",
-    "lightsOut": "%1 heeft de lichten uit gedaan",
-    "strobe": "schakel de stroboscoop (lichteffect) aan/uit",
-    "autorespond": {
-        "default": "Ik ben even niet bij mijn computer.",
-        "disable": "Schakel automatisch antwoorden bij afwezigheid uit.",
-        "nextIn": "Het volgende automatisch antwoord zal verstuurt worden van %1",
-        "next": "Automatisch antwoord bij opmerking",
-        "commandDisable": "%1 automatisch antwoord uitgeschakeld",
-        "commandNotEnabled": "%1 automatisch antwoord is niet ingeschakeld"
+  "running":"Je gebruikt plug&#179; versie %1",
+  "commandsHelp":"Gebruik '\/commands' om alle chat commando's te zien",
+  "automuted":"%1 automatisch gedemt\/muted",
+  "nextsong":"Laat volgende nummer zien in de afspeellijst en of het in de geschiedenis staat",
+  "noNextSong":"Je hebt geen songs in je playlist",
+  "isHistory":"Opgepast: Dit liedje is nog steeds in de geschiedenis (%1 van %2)",
+  "lightsOut":"%1 heeft de lichten uitgedaan",
+  "strobe":"Activeer \/ deactiveer strobe",
+  "autorespond":{
+    "default":"Ik ben niet op mijn pc!",
+    "disable":"Zet AFK Automatisch Reageren af om te chatten",
+    "nextIn":"De volgende AFK Automatisch Reageren word verzonden van %1",
+    "next":"AFK autorespond op de volgende vermelding",
+    "commandDisable":"%1 Join automatisch",
+    "commandNotEnabled":"%1 automatisch joinen was niet ingeschakeld"
+  },
+  "autojoin":{
+    "commandDisable":"%1 Join automatisch",
+    "commandNotEnabled":"%1 automatisch joinen was niet ingeschakeld"
+  },
+  "commands":{
+    "header":"Gebruiker informatie",
+    "userCommands":"Gebruiker commando's",
+    "modCommands":"Moderator Commando's",
+    "variables":{
+      "username":"gebruikersnaam",
+      "word":"woord",
+      "on":"aan",
+      "off":"uit",
+      "reason":"reden"
     },
-    "commands": {
-        "header": "plugCubed Commando's",
-        "userCommands": "Gebruiker commando's.",
-        "modCommands": "Moderator commando's",
-        "variables": {
-            "username": "gebruikersnaam",
-            "word": "woord",
-            "onoff": "aan|uit",
-            "reason": "reden"
-        },
-        "descriptions": {
-            "avail": "verander je status naar beschikbaar",
-            "afk": "Automatisch antwoord",
-            "work": "verander je status naar aan het werken",
-            "gaming": "Aan het gamen",
-            "join": "Gebruiker online",
-            "leave": "Gebruiker offline.",
-            "whoami": "ontvang je eigen informatie",
-            "mute": "zet het volume uit",
-            "automute": "demp het volume van dit lied zodra hij nog een keer gespeeld word",
-            "unmute": "zet het volume terug ",
-            "nextsong": "toon het volgende lied en of hij al in de geschiedenis staat",
-            "refresh": "herlaad de video",
-            "ignore": "negeer alle berichten van deze gebruiker",
-            "alertson": "Speel een geluid af als een bepaald woord word genoemd",
-            "alertsoff": "Speel geen geluid meer af als een bepaald woord word genoemd",
-            "curate": "%1 heeft %2 - %3 toegevoegd",
-            "getpos": "haal je plaats in de wachtlijst op",
-            "version": "laat versie nummer zien",
-            "commands": "laat deze lijst zien",
-            "link": "plak de link naar de plugCubed website in de chat",
-            "whois": "geeft informatie over de gebruiker",
-            "skip": "sla dit lied over",
-            "ban": "gooit de beoogde gebruiker uit de community.",
-            "lockskip": "sluit DJ podium, slaat DJ over en opent het podium weer",
-            "lock": "sluit het DJ podium",
-            "unlock": "opent het DJ podium",
-            "add": "voegt beoogde gebruiker toe aan de wachtlijst",
-            "remove": "verwijdert de beoogde gebruiker van de wachtlijst",
-            "strobe": "schakel de stroboscoop (lichteffect) aan/uit",
-            "rave": "schakel de lichten aan/uit",
-            "whois all": "geeft het ID en naam van alle aanwezige gebruikers",
-            "banall": "verbant alle aanwezige gebruikers "
-        }
-    },
-    "notify": {
-        "header": "plugCubed Commando's",
-        "join": "Gebruiker online",
-        "leave": "Gebruiker offline.",
-        "curate": "%1 heeft %2 - %3 toegevoegd",
-        "stats": "Statistieken: %1 woots -- %2 mehs -- %3 curates",
-        "updates": "Afspelen: %1 door %2<br />Gespeeld door: %3",
-        "history": "Dit lied is in de geschiedenis. (%1 van %2)",
-        "songLength": "Nummer is langen dan %1 minuten",
-        "message": {
-            "curate": "%1 heeft %2 - %3 toegevoegd",
-            "stats": "Statistieken: %1 woots -- %2 mehs -- %3 curates",
-            "updates": "Afspelen: %1 door %2<br />Gespeeld door: %3",
-            "join": {
-                "normal": "%1 is weggegaan.",
-                "fan": "Jouw fan %1 is weggegaan.",
-                "friend": "Jouw vriend %1 is weggegaan."
-            },
-            "leave": {
-                "normal": "%1 is weggegaan.",
-                "fan": "Jouw fan %1 is weggegaan.",
-                "friend": "Jouw vriend %1 is weggegaan."
-            },
-            "history": "Dit lied is in de geschiedenis. (%1 van %2)",
-            "historySkipped": "Dit lied is in de geschiedenis (%1 van %2), maar is de vorige keer overgeslagen.",
-            "songLength": "Nummer is langen dan %1 minuten"
-        }
-    },
-    "info": {
-        "header": "plugCubed Commando's",
-        "name": "Naam",
-        "title": "Titel",
-        "specialTitles": {
-            "developer": "plugCubed Ontwikkelaar",
-            "sponsor": "plug&#179; Sponsor ",
-            "vip": "plug&#179; VIP",
-            "donator": "plug&#179; Donateur "
-        },
-        "id": "ID",
-        "rank": "Rang",
-        "joined": "Tijd van login.",
-        "status": "Status",
-        "vote": "Stem",
-        "position": "Positie",
-        "points": "Punten",
-        "pointType": {
-            "dj": "%1 DJ Punten",
-            "listener": "%1 Luisteraar punten.",
-            "curator": "%1 Curator punten"
-        },
-        "fans": "Fans",
-        "wootCount": "Aantal Woots",
-        "mehCount": "Aantal mehs",
-        "ratio": "Woot/meh verhouding.",
-        "djing": "Aan het DJen",
-        "notInList": "Niet op de wachtlijst of op het podium.",
-        "inWaitlist": "%1/%2 op de wachtlist.",
-        "userDjing": "%1 is aan het DJen.",
-        "userNextDJ": "%1 gaat hierna DJen",
-        "disconnects": "Verbindingen verbroken",
-        "lastDisconnect": "Laatst verbroken verbinding",
-        "lastPosition": "Positie",
-        "time": "Tijd"
-    },
-    "ranks": {
-        "you": "Jij",
-        "regular": "Vaste bezoeker",
-        "residentdj": "Interne DJ",
-        "bouncer": "Uitsmijter",
-        "manager": "Manager",
-        "cohost": "Co-Host",
-        "host": "Host",
-        "ambassador": "Ambassadeur.",
-        "admin": "Beheerder"
-    },
-    "menu": {
-        "autowoot": "Autowoot",
-        "autojoin": "Autowachtlijst.",
-        "customchatcolors": "Aangepaste chat kleuren.",
-        "autorespond": "Automatisch antwoorden bij afwezigheid",
-        "notify": "Meldingen",
-        "afktimers": "AFK Timers",
-        "roomsettings": "Community instellingen"
-    },
-    "status": {
-        "available": "Beschikbaar",
-        "afk": "Automatisch antwoord",
-        "working": "Werkend",
-        "gaming": "Aan het gamen"
-    },
-    "vote": {
-        "meh": "Meh",
-        "woot": "Woot",
-        "undecided": "Besluiteloos",
-        "djing": "Aan het DJen"
-    },
-    "ignore": {
-        "enabled": "Je bent nu %1 aan het negeren",
-        "disabled": "Je bent %1 niet meer aan het negeren"
-    },
-    "automute": {
-        "registered": "%1 is geregistreerd om vanaf nu genegeerd te worden.",
-        "unregistered": "%1 is verwijdert van de automute lijst."
-    },
-    "tooltip": {
-        "stream": "Stream",
-        "clear": "Maak de chat leeg",
-        "afk": "Automatisch antwoord",
-        "reset": "Terug naar standaardinstellingen",
-        "muted": "Alle nummers zijn gedempt",
-        "mutedOnce": "Dit nummer word gedempt "
-    },
-    "error": {
-        "userNotFound": "Gebruiker niet gevonden",
-        "ignoreSelf": "Je kan je zelf helaas niet negeren.",
-        "unknownModeration": "Onbekende maatregel",
-        "unknownMenuKey": "Onbekende menu optie",
-        "emoji": "Fout tijdens het aanzetten van Emoji",
-        "missingReason": "Missende reden",
-        "notConnected": "Niet verbonden met server"
+    "descriptions":{
+      "nick":"verander gebruikersnaam",
+      "avail":"zet status op beschikbaar",
+      "afk":"AFK Bericht",
+      "work":"zet status op werken",
+      "gaming":"Gaming",
+      "join":"Gebruiker join",
+      "leave":"Gebruiker gaat weg",
+      "whoami":"Krijg je eigen informatie",
+      "mute":"Zet volume naar 0",
+      "automute":"register huidige nummer aan automatisch demp bij volgende spelen",
+      "unmute":"Zet volume naar laatste volume",
+      "nextsong":"Laat volgende nummer zien in de afspeellijst en of het in de geschiedenis staat",
+      "refresh":"Herlaadt de video ",
+      "ignore":"Negeer alle chat berichten van gebruiker",
+      "alertson":"Maak geluid waneer gedefinieerde woorden zijn geschreven in de chat",
+      "alertsoff":"Stop geluid spelen wanneer gedefinieerde woorden zijn geschreven in de chat",
+      "curate":"%1 toegevoegd %2 - %3",
+      "getpos":"Krijg huidige wachtlijst positie",
+      "version":"Weergeef versienummer",
+      "commands":"Laat deze lijst zien",
+      "link":"Plak de link naar plugCubed website in de chat",
+      "whois":"Geeft algemene informatie over gebruiker",
+      "skip":"Sla huidige lied over ",
+      "ban":"Trapt gerichte gebruiker",
+      "lockskip":"Sluit DJ booth, overslaan en ontgrendelt daarna",
+      "lock":"Sluit DJ booth",
+      "unlock":"Ontgrendel DJ Booth",
+      "add":"Voeg gerichte gebruiker toe aan de dj booth\/wachtlijst",
+      "remove":"Verwijder gerichte gebruiker  van de dj booth\/wachtlijst",
+      "strobe":"Activeer \/ deactiveer strobe",
+      "rave":"Activeer \/ deactiveer lampen uit",
+      "whois all":"Geeft gebruikerid en gebruikernaam van iedere gebruiker in de kamer",
+      "banall":"Verbied alle gebruikers in de kamer"
     }
+  },
+  "notify":{
+    "header":"Gebruiker informatie",
+    "join":"Gebruiker join",
+    "leave":"Gebruiker gaat weg",
+    "curate":"Gebruiker Curate",
+    "meh":"Gebruiker Mehs",
+    "stats":"Nummer Statistieken",
+    "updates":"Nummer Updates",
+    "history":"Nummers in geschiedenis",
+    "songLength":"Lengte van een nummer (1% min)",
+    "message":{
+      "curate":"%1 toegevoegd %2 - %3",
+      "stats":"Status: %1 woots - %2 mehs - %3 grabs",
+      "updates":"Nu aan het spelen: %1 by %2<br\/> Gespeeld door: %3",
+      "meh":"%1 Heeft deze track gemeh'd",
+      "join":{
+        "normal":"%1 is zonet uit de kamer weggegaan",
+        "fan":"Jouw Fan %1 is zonet uit de kamer weggegaan",
+        "friend":"Jouw vriend %1 is zonet uit de kamer weggegaan"
+      },
+      "leave":{
+        "normal":"%1 is zonet uit de kamer weggegaan",
+        "fan":"Jouw Fan %1 is zonet uit de kamer weggegaan",
+        "friend":"Jouw vriend %1 is zonet uit de kamer weggegaan"
+      },
+      "history":"Dit liedje is nog steeds in de geschiedenis (%1 van %2)",
+      "historySkipped":"Liedje in geschiedenis (%1 van %2), maar is overgeslagen bij de vorige keer dat het gedraaid is",
+      "songLength":"Lied is langer dan %1 minuten"
+    },
+    "notification":{
+      "songLength":"Nummer Lengte"
+    }
+  },
+  "info":{
+    "header":"Gebruiker informatie",
+    "name":"Naam",
+    "title":"Titel",
+    "specialTitles":{
+      "developer":"plug&#179; Ontwikkelaar",
+      "sponsor":"plug&#179; Sponsor",
+      "ambassador":"plug&#179; Ambassadeur",
+      "donatorDiamond":"plug&#179; Diamond Donateur",
+      "donatorPlatinum":"plug&#179; Platinum Donateur",
+      "donatorGold":"plug&#179; Gouden Donator",
+      "donatorSilver":"plug&#179; Zilveren Donateur",
+      "donatorBronze":"plug&#179; Bronzen Donateur",
+      "special":"plug&#179; Speciale Supporter -% 1"
+    },
+    "id":"ID",
+    "rank":"Plaats",
+    "joined":"Tijd Toegetreden ",
+    "status":"Status",
+    "vote":"Stem",
+    "position":"Positie",
+    "points":"Punten",
+    "pointType":{
+      "dj":"%1 DJ Punten",
+      "listener":"%1 Luisteraar's Punten",
+      "curator":"%1 Grijp punten"
+    },
+    "fans":"Fans",
+    "wootCount":"Woot tellen",
+    "mehCount":"Meh tellen",
+    "ratio":"Woot\/Meh Verhouding",
+    "djing":"DJing",
+    "notInList":"NIet in wachtlijst noch booth",
+    "inWaitlist":"%1\/%2 in de wachtlijst",
+    "userDjing":"%1 zijn op dit moment DJing",
+    "userNextDJ":"%1 DJing volgende ",
+    "disconnects":"Verbindingen verbroken",
+    "lastDisconnect":"Laatste Disconnect",
+    "lastPosition":"Positie",
+    "time":"Tijd"
+  },
+  "ranks":{
+    "you":"Jij",
+    "regular":"Regelmatig",
+    "residentdj":"Resident DJ",
+    "bouncer":"Uitsmijter",
+    "manager":"Manager",
+    "cohost":"Co-Host",
+    "host":"Host",
+    "ambassador":"Ambassadeur",
+    "admin":"Administrator"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"Deze kamer gebruikt speciale instellingen",
+    "infoHeaderCredits":"Deze kamer gebruikt speciale instellingen door %1",
+    "infoDisable":"U kunt ze uitschakelen in het menu"
+  },
+  "menu":{
+    "autowoot":"Autowoot",
+    "autojoin":"AutoJoin",
+    "customchatcolors":"Custom chat kleuren",
+    "autorespond":"AFK Automatisch Reageren",
+    "notify":"Notificatie's",
+    "afktimers":"AFK Wekkers",
+    "roomsettings":"Kamer instellingen",
+    "chatimages":"Chat Afbeeldingen"
+  },
+  "status":{
+    "available":"Beschikbaar",
+    "afk":"AFK Bericht",
+    "working":"Werken",
+    "gaming":"Gaming"
+  },
+  "vote":{
+    "meh":"Meh",
+    "woot":"Woot",
+    "undecided":"Niet besloten",
+    "djing":"Aan het DJen"
+  },
+  "ignore":{
+    "enabled":"Je negeert nu %1",
+    "disabled":"Je negeert %1 niet meer"
+  },
+  "automute":{
+    "registered":"%1 is geregistreerd om om te automuten de volgende keer dat deze draait",
+    "unregistered":"%1 zal niet meer ge-automute worden"
+  },
+  "tooltip":{
+    "stream":"Video\/Audio Stream Aan\/Uit",
+    "clear":"Maak chat schoon ",
+    "afk":"AFK Bericht",
+    "reset":"Reset naar standaard",
+    "muted":"Alle liedjes zijn gedempt",
+    "mutedOnce":"Huidig lied is gedempt"
+  },
+  "error":{
+    "userNotFound":"Gebruiker niet gevonden",
+    "unknownModeration":"Onbekende matiging",
+    "unknownMenuKey":"Onbekende menu key: %1",
+    "missingReason":"Ontbrekende reden",
+    "notConnected":"Niet verbonden met socket server",
+    "ignoredUser":"Genegeerde gebruiker",
+    "noLiteSupport":"Dit wordt niet ondersteund in plug&#179; Lite"
+  }
 }

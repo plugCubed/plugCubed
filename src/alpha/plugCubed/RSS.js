@@ -70,7 +70,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         },
         update: function() {
             var a;
-            a = p3Utils.cleanHTML($('#room-info').find('.description').find('.value').html(), ['a']);
+            a = p3Utils.cleanHTML($('#room-info').find('.description').find('.value').html().split('<br>').join('\n'), '*');
             if (a.indexOf('@p3=') > -1) {
                 a = a.substr(a.indexOf('@p3=') + 4);
                 if (a.indexOf('\n') > -1)
@@ -130,7 +130,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
                         // colors.footer
                         if (roomSettings.colors.footer !== undefined && typeof roomSettings.colors.footer === 'string' && p3Utils.isRGB(roomSettings.colors.footer))
-                            Styles.set('rss-footer', '#footer { background-color: ' + p3Utils.toRGB(roomSettings.colors.footer) + '!important; }');
+                            Styles.set('rss-footer', '.app-header { background-color: ' + p3Utils.toRGB(roomSettings.colors.footer) + '!important; }');
                     }
 
                     // css

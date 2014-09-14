@@ -250,7 +250,6 @@
     -webkit-box-shadow: inset 0 -2px 0 -1px #0a0a0a;
     box-shadow: inset 0 -2px 0 -1px #0a0a0a;
     border-right: 1px solid #0A0A0A;
-    cursor: pointer;
 }
 
 #plugcubed .icon.icon-plugcubed {
@@ -261,6 +260,10 @@
     -moz-transform: translateZ(19px);
     -ms-transform: translateZ(19px);
     transform: translateZ(19px);
+}
+
+#app-menu.open ~ #plugcubed .icon.icon-plugcubed {
+    display: none;
 }
 
 #plugcubed .icon.icon-plugcubed.other {
@@ -673,6 +676,13 @@
 #user-panel:not(.is-none) .user > .icon.icon-is-p3developer + .name,
 #user-rollover .meta.is-p3developer .p3Role {
     color: #17B7EF !important;
+}
+
+#chat .is-p3ambassador > .from,
+#user-lists .user > .icon.icon-is-p3ambassador + .name,
+#user-panel:not(.is-none) .user > .icon.icon-is-p3ambassador + .name,
+#user-rollover .meta.is-p3ambassador .p3Role {
+    color: #FFC926 !important;
 }
 
 .pm {

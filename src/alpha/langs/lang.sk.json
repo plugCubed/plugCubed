@@ -1,0 +1,206 @@
+{
+  "running":"Plug³ verziu %1",
+  "commandsHelp":"Použi '\/commands' k rozšírenému zobrazeniu rozkazov\n",
+  "automuted":"%1 automuted.",
+  "nextsong":"display next song in playlist and if it's in history",
+  "noNextSong":"Nemáte žiadnu pesničku v rade",
+  "isHistory":"Upozornenie: Táto pesnička je stále v histórii (%1 z %2)",
+  "lightsOut":"%1 zhasol svetlá",
+  "strobe":"enable\/disable strobe",
+  "autorespond":{
+    "default":"Som preč od klávesnice.",
+    "disable":"Zakázať Autorespond AFK na chate",
+    "nextIn":"Ďalší AFK Autorespond bude odoslané %1",
+    "next":"Autorespond AFK na ďalšie zmienky",
+    "commandDisable":"%1 autojoin disabled",
+    "commandNotEnabled":"%1 autojoin was not enabled"
+  },
+  "autojoin":{
+    "commandDisable":"%1 Automatické spojenie vypnuté",
+    "commandNotEnabled":"Automatické spojenie %1 nebolo povolené"
+  },
+  "commands":{
+    "header":"User Information",
+    "userCommands":"Užívateľské príkazy",
+    "modCommands":"Moderovanie príkazy",
+    "variables":{
+      "username":"prezývka ",
+      "word":"slovo",
+      "on":"Zapnuté",
+      "off":"vypnutie",
+      "reason":"dôvod"
+    },
+    "descriptions":{
+      "nick":"zmeniť prezývku",
+      "avail":"zmeniť stav na \"dostupný\"",
+      "afk":"AFK Message",
+      "work":"zmeniť stav na \"pracujem\"",
+      "gaming":"Gaming",
+      "join":"User Join",
+      "leave":"User Leave",
+      "whoami":"získať vlastné informácie",
+      "mute":"nastaviť hlasitosť na 0",
+      "automute":"Registrovať aktuálne prehrávanej skladby sa automaticky stlmí na budúce hrá",
+      "unmute":"Nastavenie hlasitosti na poslednom zväzku",
+      "nextsong":"Zobraziť nasledujúcu skladbu v playlistu a ak je to v histórii",
+      "refresh":"obnoviť video",
+      "ignore":"ignorovať všetky chat správy od používateľa",
+      "alertson":"Prehrať zvuk vždy definované slová sú napísané v chate",
+      "alertsoff":"zastaviť prehrávanie zvuku pri definovaných slová sú napísané v chate",
+      "curate":"%1 added %2 - %3",
+      "getpos":"získať aktuálnu pozíciu waitlist",
+      "version":"zobrazí číslo verzie",
+      "commands":"Tento zoznam sa zobrazuje",
+      "link":"vložiť odkaz na webové stránky plugCubed v chate",
+      "whois":"poskytuje všeobecné informácie o užívateľovi",
+      "skip":"Preskočiť aktuálna skladba",
+      "ban":"kopy cieľových používateľov",
+      "lockskip":"zámky DJ booth, preskočiť a odomkne potom",
+      "lock":"zámky DJ booth",
+      "unlock":"odomkne DJ booth",
+      "add":"pridá cieľových používateľov na dj búdky\/waitlist",
+      "remove":"odstraňuje cieľových používateľov od dj búdky\/waitlist",
+      "strobe":"zapnúť\/vypnúť blesk",
+      "rave":"Zapnutie\/vypnutie svetla von",
+      "whois all":"dáva userid a užívateľské meno všetkých používateľov v miestnosti",
+      "banall":"zákazy všetkých používateľov v miestnosti"
+    }
+  },
+  "notify":{
+    "header":"User Information",
+    "join":"Používateľ pripojiť",
+    "leave":"Nechajte používateľa",
+    "curate":"User Curate",
+    "meh":"Užívateľ Mehs",
+    "stats":"Pieseň štatistiky",
+    "updates":"Pieseň aktualizácie",
+    "history":"Piesní v histórii",
+    "songLength":"Dĺžka piesne (%1 min)",
+    "message":{
+      "curate":"pridá %1 %2 - %3",
+      "stats":"Štatistiky: %1 woots--%2 mehs--%3 curates",
+      "updates":"Prehráva: %1 %2 <br>hrajú: %3",
+      "meh":"%1 meh mal túto trať",
+      "join":{
+        "normal":"%1 just left the room",
+        "fan":"Your fan %1 just left the room",
+        "friend":"Your friend %1 just left the room"
+      },
+      "leave":{
+        "normal":"%1 len opustil miestnosť",
+        "fan":"Váš fanúšik %1 len opustil miestnosť",
+        "friend":"Váš priateľ %1 len opustil miestnosť"
+      },
+      "history":"Skladba je v histórii (%1 z %2)",
+      "historySkipped":"Pesnička je v histórii (%1 z %2), ale bola preskočí pretože dnes hrala",
+      "songLength":"Pesnička je dlhšia ako %1 minúta"
+    },
+    "notification":{
+      "songLength":"Dĺžka Skladby"
+    }
+  },
+  "info":{
+    "header":"Užívateľské informácie",
+    "name":"Meno",
+    "title":"Názov",
+    "specialTitles":{
+      "developer":"plug&#179; Vývojár",
+      "sponsor":"plug&#179; Sponzor",
+      "ambassador":"plug³ Veľvyslanec",
+      "donatorDiamond":"plug³ Diamond donátora",
+      "donatorPlatinum":"plug³ Platinum donátor",
+      "donatorGold":"plug³ Gold donátor",
+      "donatorSilver":"plug³ Silver donátor",
+      "donatorBronze":"plug³ bronz donátor",
+      "special":"plug³ špeciálne patrón - %1"
+    },
+    "id":"ID",
+    "rank":"Hodnosť",
+    "joined":"Čas pripojenia",
+    "status":"Stav",
+    "vote":"Hlasovať",
+    "position":"Pozícia",
+    "points":"Body",
+    "pointType":{
+      "dj":"%1 DJ bodov",
+      "listener":"%1 poslucháč bodov",
+      "curator":"%1 kurátor bodov"
+    },
+    "fans":"Fanúšikovia",
+    "wootCount":"Woot počítať",
+    "mehCount":"Meh počítať",
+    "ratio":"Woot\/Meh premier",
+    "djing":"DJing",
+    "notInList":"Nie v waitlist ani stánku",
+    "inWaitlist":"%1 \/ %2 waitlist",
+    "userDjing":"%1 momentálne DJing",
+    "userNextDJ":"%1 sa DJingu ďalej",
+    "disconnects":"Odpojí",
+    "lastDisconnect":"Naposledy odpojiť",
+    "lastPosition":"Pozícia",
+    "time":"Čas"
+  },
+  "ranks":{
+    "you":"Ste",
+    "regular":"bežná",
+    "residentdj":"Rezident DJ",
+    "bouncer":"Vyhadzovač",
+    "manager":"Správca",
+    "cohost":"Spolu-Hostiteľ",
+    "host":"Hostiteľ",
+    "ambassador":"Veľvyslanec",
+    "admin":"Administrátor"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"Táto miestnosť používa špeciálne nastavenia",
+    "infoHeaderCredits":"Táto miestnosť je pomocou špeciálne nastavenia používateľom %1",
+    "infoDisable":"V menu ich môžeš vypnúť"
+  },
+  "menu":{
+    "autowoot":"Autowoot",
+    "autojoin":"Automatické spojenie",
+    "customchatcolors":"Vlastný Chat farby",
+    "autorespond":"AFK Autorespond",
+    "notify":"Oznámenia",
+    "afktimers":"AFK časovač",
+    "roomsettings":"Nastavenie Miestnosti",
+    "chatimages":"Chat obrázky"
+  },
+  "status":{
+    "available":"K dispozícii",
+    "afk":"AFK Message",
+    "working":"Pracujem",
+    "gaming":"Hrám"
+  },
+  "vote":{
+    "meh":"Meh",
+    "woot":"Woot",
+    "undecided":"Nerozhodný",
+    "djing":"Djing"
+  },
+  "ignore":{
+    "enabled":"Teraz ignorujete %1",
+    "disabled":"Už dále neignorujete %1"
+  },
+  "automute":{
+    "registered":"%1 registrované automute na budúce hrá.",
+    "unregistered":"%1 odstránené z registra auto-stlmenie."
+  },
+  "tooltip":{
+    "stream":"Povoliť Video \/ Audio vysielanie",
+    "clear":"Vymazať Chat",
+    "afk":"AFK správu",
+    "reset":"Obnovené do pôvodného stavu",
+    "muted":"Všetky pesničky sú stlmené",
+    "mutedOnce":"Aktuálne pesnička je stlmená"
+  },
+  "error":{
+    "userNotFound":"Užívateľ nebol nájdený",
+    "unknownModeration":"Neznámy moderovanie",
+    "unknownMenuKey":"Neznámy menu kľúč: %1",
+    "missingReason":"Chýbajúce dôvod",
+    "notConnected":"Nie je pripojený na socket server",
+    "ignoredUser":"ignorovaný užívateľ",
+    "noLiteSupport":"Toto nie je podporované v plug³ Lite"
+  }
+}

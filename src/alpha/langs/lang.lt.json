@@ -1,187 +1,206 @@
 {
-    "running": "Naudojama plug&#179; versija %1",
-    "commandsHelp": "Rašykite \"/commands\" kad pamatytumėt paaiškintas pokalbio kambario komandas.",
-    "newVersion": "Nauja plug&#179; versija išleista. Jūsų skriptas bus perkrautas už kelių sekundžių.  ",
-    "automuted": "%1 užtildytas.",
-    "nextsong": "parodyk kita daina grojaraštyje ir ar ji buvo sugrota praeityje ",
-    "noNextSong": "Jūs neturite jokios dainos eilėje.",
-    "isHistory": "Įspėjimas: Ši daina buvo nesenai sugrota (%1 of %2)",
-    "roomSpecificSettingsHeader": "Šis kambarys naudoja specialius nustatymus",
-    "roomSpecificSettingsDesc": "Jūs galite atjungti juos per menu",
-    "lightsOut": "%1 išjungė šviesas",
-    "strobe": "įjungia/išjungia mirgėjimą",
-    "autorespond": {
-        "default": "Aš nesu prie klaviatūros.",
-        "disable": "Išjunkite \"Aš nesu prie klaviatūros\" Auto-atsiliepiama į pokalbio kambary",
-        "nextIn": "Kitas \"Aš nesu prie klaviatūros\" Auto-atsiliepiamas bus išsiųstas nuo  %1",
-        "next": "\"Aš nesu prie klaviatūros\" Auto-atsiliepiamas artimiausiame paminėjime",
-        "commandDisable": "%1 \"Aš nesu prie klaviatūros\" žinutė išjungta",
-        "commandNotEnabled": "%1 \"Aš nesu prie klaviatūros\" žinutė nebuvo įjungta"
+  "running":"Naudojama plug&#179; versija %1",
+  "commandsHelp":"Rašykite \"\/commands\" kad pamatytumėt paaiškintas pokalbio kambario komandas.",
+  "automuted":"%1 užtildytas.",
+  "nextsong":"parodyk kita daina grojaraštyje ir ar ji buvo sugrota praeityje ",
+  "noNextSong":"Jūs neturite jokios dainos eilėje.",
+  "isHistory":"Įspėjimas: Ši daina buvo nesenai sugrota (%1 of %2)",
+  "lightsOut":"%1 išjungė šviesas",
+  "strobe":"įjungia\/išjungia mirgėjimą",
+  "autorespond":{
+    "default":"Aš nesu prie klaviatūros.",
+    "disable":"Išjunkite AFK Auto-atsiliepiama į pokalbio kambary",
+    "nextIn":"Kitas AFK Auto-atsiliepimas bus išsiųstas nuo %1",
+    "next":"AFK Auto-atsiliepimas artimiausiame paminėjime",
+    "commandDisable":"%1 autojoin disabled",
+    "commandNotEnabled":"%1 autojoin was not enabled"
+  },
+  "autojoin":{
+    "commandDisable":"Auto-priemimas įjunktas",
+    "commandNotEnabled":"Auto-priemimas išjunkas"
+  },
+  "commands":{
+    "header":"Vartotojo info",
+    "userCommands":"Vartotojo Komandos",
+    "modCommands":"Moderatoriaus Komandos",
+    "variables":{
+      "username":"vardas",
+      "word":"žodis",
+      "on":"įjungta",
+      "off":"išjungta",
+      "reason":"priežastis"
     },
-    "commands": {
-        "header": "Vartotojo info",
-        "userCommands": "Naudotojo Komandos",
-        "modCommands": "Moderatoriaus Komandos",
-        "variables": {
-            "username": "vardas",
-            "word": "žodis",
-            "onoff": "įjungti|išjungti",
-            "reason": "priežastis"
-        },
-        "descriptions": {
-            "avail": "nustatyti statusą į prieinamas",
-            "afk": "\"Aš nesu prie klaviatūros\" žinutė",
-            "work": "nustatyti statusą į dirbantis",
-            "gaming": "Žaidime",
-            "join": "Vartotojo Prisijungimas",
-            "leave": "Vartotojo Išėjimas",
-            "whoami": "gauk pačio savęs informacija",
-            "mute": "nustatyk garsą į 0",
-            "automute": "registracija dabar automatiškai užtildys grojančias dainas ateityje",
-            "unmute": "nustatyk garsą į tokį pat kaip buvo paskutini karta ",
-            "nextsong": "parodyk kita daina grojaraštyje ir ar ji buvo sugrota praeityje ",
-            "refresh": "perkrauk video",
-            "ignore": "Ignoruok visas pokalbio kambario žinutes iš vartotojo",
-            "alertson": "sugrok garsą kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
-            "alertsoff": "sustok groti garsus kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
-            "curate": "%1 pridėta %2 - %3",
-            "getpos": "gauk dabartinę pozicija laukimo eilėje",
-            "version": "rodo versijos numeri",
-            "commands": "parodo šį sąrašą",
-            "link": "Įklijuoja plugCubed tinklapio nuoroda į pokalbio kambarį",
-            "whois": "Duoda paprasta informacija apie vartotoja",
-            "skip": "praleisti dabartine daina",
-            "ban": "išspiria pasirinkta vartotoja",
-            "lockskip": "užrakina DJ pulta, praleidžia ir po to atrakina",
-            "lock": "užrakina DJ pulta",
-            "unlock": "atrakina DJ pulta",
-            "add": "prideda nustatytus vartotojus prie dj pulto/laukimo eilės",
-            "remove": "išmeta nustatytus vartotojus iš dj pulto/laukimo eilės",
-            "strobe": "įjungia/išjungia mirgėjimą",
-            "rave": "įjungia/išjungia šviesas",
-            "whois all": "parodo vartotojo ID ir vardą kiekvieno esančio kambaryje",
-            "banall": "užblokuoja visus vartotojus esančius kambaryje"
-        }
-    },
-    "notify": {
-        "header": "Vartotojo info",
-        "join": "Vartotojo Prisijungimas",
-        "leave": "Vartotojo Išėjimas",
-        "curate": "%1 pridėta %2 - %3",
-        "stats": "Statistika: %1 palaikymai -- %2 mehs -- %3 pasiėmimai",
-        "updates": "Dabar Groja: %1 by %2<br />Kas leidžia dainą: %3",
-        "history": "Daina rasta praeityje (%1 of %2)",
-        "songLength": "Daina ilgesnė negu %1 minutės",
-        "message": {
-            "curate": "%1 pridėta %2 - %3",
-            "stats": "Statistika: %1 palaikymai -- %2 mehs -- %3 pasiėmimai",
-            "updates": "Dabar Groja: %1 by %2<br />Kas leidžia dainą: %3",
-            "join": {
-                "normal": "%1 Ką tik paliko kambarį",
-                "fan": "Tavo fanas %1 ką tik paliko kambarį",
-                "friend": "Tavo draugas %1  ką tik paliko kambarį"
-            },
-            "leave": {
-                "normal": "%1 Ką tik paliko kambarį",
-                "fan": "Tavo fanas %1 ką tik paliko kambarį",
-                "friend": "Tavo draugas %1  ką tik paliko kambarį"
-            },
-            "history": "Daina rasta praeityje (%1 of %2)",
-            "historySkipped": "Daina rasta praeityje (%1 of %2), bet buvo praleista",
-            "songLength": "Daina ilgesnė negu %1 minutės"
-        }
-    },
-    "info": {
-        "header": "Vartotojo info",
-        "name": "Vardas",
-        "title": "Pavadinimas",
-        "specialTitles": {
-            "developer": "plug&#179; Kūrėjas",
-            "sponsor": "plug&#179; Rėmėjas",
-            "vip": "plug&#179; VIP",
-            "donator": "plug&#179; Donatorius"
-        },
-        "id": "ID identifikacija",
-        "rank": "Rangas",
-        "joined": "Prisijungimo laikas",
-        "status": "Būsena",
-        "vote": "Balsas",
-        "position": "Vieta",
-        "points": "Taškai",
-        "pointType": {
-            "dj": "%1 DJ Taškai",
-            "listener": "%1 Klausytojo Taškai",
-            "curator": "%1  Griebimo Taškai"
-        },
-        "fans": "Fanai",
-        "wootCount": "Woot Skaičius",
-        "mehCount": "Meh Skaičius",
-        "ratio": "Woot/Meh Santykis",
-        "djing": "DJ'avimas",
-        "notInList": "Ne eilėje ir ne stende",
-        "inWaitlist": "%1/%2 eilėje",
-        "userDjing": "%1 šiuo metu DJ'jauja",
-        "userNextDJ": "%1 sekantis DJ'us",
-        "disconnects": "Atsijungimai",
-        "lastDisconnect": "Paskutinis atsijungimas",
-        "lastPosition": "Pozicija",
-        "time": "Laikas"
-    },
-    "ranks": {
-        "you": "Jūs",
-        "regular": "Reguliarus lankytojas",
-        "residentdj": "Reguliarus DJ",
-        "bouncer": "Apsauginis",
-        "manager": "Vadovas",
-        "cohost": "Bendras savininkas",
-        "host": "Savininkas",
-        "ambassador": "Ambasadorius",
-        "admin": "Administratorius"
-    },
-    "menu": {
-        "autowoot": "AutoWoot",
-        "autojoin": "Auto Prisijungimas",
-        "customchatcolors": "Specialios pokalbio spalvos",
-        "autorespond": "Išjunkite \"Aš nesu prie klaviatūros\" Auto-atsiliepimą",
-        "notify": "Pranešimai",
-        "afktimers": "\"Aš nesu prie klaviatūros\"  Laikai",
-        "roomsettings": "Kambario nustatymai"
-    },
-    "status": {
-        "available": "Pasiekiamas",
-        "afk": "\"Aš nesu prie klaviatūros\" žinutė",
-        "working": "Darbe",
-        "gaming": "Žaidime"
-    },
-    "vote": {
-        "meh": "Meh",
-        "woot": "Woot",
-        "undecided": "Nenuspręsta",
-        "djing": "DJ'avimas"
-    },
-    "ignore": {
-        "enabled": "Jūs dabar ignoruojate %1",
-        "disabled": "Jūs daugiau neignoruojate %1"
-    },
-    "automute": {
-        "registered": "%1 Užregistruota automatiškai uždrausti kalbėt ateityje ",
-        "unregistered": "%1 pašalintas iš automute sąrašo."
-    },
-    "tooltip": {
-        "stream": "Įjungti / Išjungti  Vaizdą/Garsą",
-        "clear": "Valyti pokalbį",
-        "afk": "\"Aš nesu prie klaviatūros\" žinutė",
-        "reset": "Atkurti numatytuosius nustatymus",
-        "muted": "Visos dainos nebylios",
-        "mutedOnce": "Šiuo metu grojanti daina yra be garso"
-    },
-    "error": {
-        "userNotFound": "Vartotojas nerastas",
-        "ignoreSelf": "Jūs negalite savęs ignoruoti",
-        "unknownModeration": "Nežinoma moderacija",
-        "unknownMenuKey": "Nežinomas meniu mygtukas: %1",
-        "emoji": "Rasta klaida bandant dar kartą įjungti Emocijas",
-        "missingReason": "Priežastis nerasta",
-        "notConnected": "Neprisijungta prie serverio lizdo"
+    "descriptions":{
+      "nick":"keisti vardą",
+      "avail":"nustatyti statusą į prieinamas",
+      "afk":"\"Aš nesu prie klaviatūros\" žinutė",
+      "work":"nustatyti statusą į dirbantis",
+      "gaming":"Žaidime",
+      "join":"Vartotojo Prisijungimas",
+      "leave":"Vartotojo Išėjimas",
+      "whoami":"gauk pačio savęs informacija",
+      "mute":"nustatyk garsą į 0",
+      "automute":"registracija dabar automatiškai užtildys grojančias dainas ateityje",
+      "unmute":"nustatyk garsą į tokį pat kaip buvo paskutini karta ",
+      "nextsong":"parodyk kita daina grojaraštyje ir ar ji buvo sugrota praeityje ",
+      "refresh":"perkrauk video",
+      "ignore":"Ignoruok visas pokalbio kambario žinutes iš vartotojo",
+      "alertson":"sugrok garsą kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
+      "alertsoff":"sustok groti garsus kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
+      "curate":"%1 pridėta %2 - %3",
+      "getpos":"gauk dabartinę pozicija laukimo eilėje",
+      "version":"rodo versijos numeri",
+      "commands":"parodo šį sąrašą",
+      "link":"Įklijuoja plugCubed tinklapio nuoroda į pokalbio kambarį",
+      "whois":"Duoda paprasta informacija apie vartotoja",
+      "skip":"praleisti dabartine daina",
+      "ban":"išspiria pasirinkta vartotoja",
+      "lockskip":"užrakina DJ pulta, praleidžia ir po to atrakina",
+      "lock":"užrakina DJ pulta",
+      "unlock":"atrakina DJ pulta",
+      "add":"prideda nustatytus vartotojus prie dj pulto\/laukimo eilės",
+      "remove":"išmeta nustatytus vartotojus iš dj pulto\/laukimo eilės",
+      "strobe":"įjungia\/išjungia mirgėjimą",
+      "rave":"įjungia\/išjungia šviesas",
+      "whois all":"parodo vartotojo ID ir vardą kiekvieno esančio kambaryje",
+      "banall":"užblokuoja visus vartotojus esančius kambaryje"
     }
+  },
+  "notify":{
+    "header":"Vartotojo info",
+    "join":"Vartotojo Prisijungimas",
+    "leave":"Vartotojo Išėjimas",
+    "curate":"Pridėti į Grojaraštį",
+    "meh":"Nepatinka",
+    "stats":"Dainų nustatymai",
+    "updates":"Dainu atnaujinimai",
+    "history":"Dainų istorija",
+    "songLength":"Dainos trukmė minutėmis",
+    "message":{
+      "curate":"%1 pridėta %2 - %3",
+      "stats":"Statistika: %1 palaikymai -- %2 mehs -- %3 pasiėmimai",
+      "updates":"Dabar Groja: %1 by %2<br \/>Kas leidžia dainą: %3",
+      "meh":"%1 nepatinka ši daina",
+      "join":{
+        "normal":"%1 Ką tik paliko kambarį",
+        "fan":"Tavo fanas %1 ką tik paliko kambarį",
+        "friend":"Tavo draugas %1  ką tik paliko kambarį"
+      },
+      "leave":{
+        "normal":"%1 Ką tik paliko kambarį",
+        "fan":"Tavo fanas %1 ką tik paliko kambarį",
+        "friend":"Tavo draugas %1  ką tik paliko kambarį"
+      },
+      "history":"Daina rasta praeityje (%1 of %2)",
+      "historySkipped":"Daina rasta praeityje (%1 of %2), bet buvo praleista",
+      "songLength":"Daina ilgesnė negu %1 minutės"
+    },
+    "notification":{
+      "songLength":"Dainos trukmė"
+    }
+  },
+  "info":{
+    "header":"Vartotojo info",
+    "name":"Vardas",
+    "title":"Pavadinimas",
+    "specialTitles":{
+      "developer":"plug&#179; Kūrėjas",
+      "sponsor":"plug&#179; Rėmėjas",
+      "ambassador":"plug&#179; Ambasadorius",
+      "donatorDiamond":"plug&#179; Deimantinis Remėjas",
+      "donatorPlatinum":"plug&#179; Platininis Remėjas",
+      "donatorGold":"plug&#179; Auksinis Remėjas",
+      "donatorSilver":"plug&#179; Sidabrinis Remėjas",
+      "donatorBronze":"plug&#179; Bronzinis Remėjas",
+      "special":"plug&#179; Ypatingas Remėjas - %1"
+    },
+    "id":"ID identifikacija",
+    "rank":"Rangas",
+    "joined":"Prisijungimo laikas",
+    "status":"Būsena",
+    "vote":"Balsas",
+    "position":"Vieta",
+    "points":"Taškai",
+    "pointType":{
+      "dj":"%1 DJ Taškai",
+      "listener":"%1 Klausytojo Taškai",
+      "curator":"%1  Griebimo Taškai"
+    },
+    "fans":"Fanai",
+    "wootCount":"Woot Skaičius",
+    "mehCount":"Meh Skaičius",
+    "ratio":"Woot\/Meh Santykis",
+    "djing":"DJ'avimas",
+    "notInList":"Ne eilėje ir ne stende",
+    "inWaitlist":"%1\/%2 eilėje",
+    "userDjing":"%1 šiuo metu DJ'jauja",
+    "userNextDJ":"%1 sekantis DJ'us",
+    "disconnects":"Atsijungimai",
+    "lastDisconnect":"Paskutinis atsijungimas",
+    "lastPosition":"Pozicija",
+    "time":"Laikas"
+  },
+  "ranks":{
+    "you":"Jūs",
+    "regular":"Reguliarus lankytojas",
+    "residentdj":"Reguliarus DJ",
+    "bouncer":"Apsauginis",
+    "manager":"Vadovas",
+    "cohost":"Bendras savininkas",
+    "host":"Savininkas",
+    "ambassador":"Ambasadorius",
+    "admin":"Administratorius"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"Šis kambarys naudoja specialius nustatymus",
+    "infoHeaderCredits":"Šis kambarys naudoja specialius nustatymus pagal %1",
+    "infoDisable":"Juos galite juos atjungi meniu"
+  },
+  "menu":{
+    "autowoot":"AutoWoot",
+    "autojoin":"Auto Prisijungimas",
+    "customchatcolors":"Specialios pokalbio spalvos",
+    "autorespond":"Išjunkite \"Aš nesu prie klaviatūros\" Auto-atsiliepimą",
+    "notify":"Pranešimai",
+    "afktimers":"\"Aš nesu prie klaviatūros\"  Laikai",
+    "roomsettings":"Kambario nustatymai",
+    "chatimages":"Pokalbio žinutės"
+  },
+  "status":{
+    "available":"Pasiekiamas",
+    "afk":"\"Aš nesu prie klaviatūros\" žinutė",
+    "working":"Darbe",
+    "gaming":"Žaidime"
+  },
+  "vote":{
+    "meh":"Nepatinka",
+    "woot":"Patinka",
+    "undecided":"Nenuspręsta",
+    "djing":"DJ'avimas"
+  },
+  "ignore":{
+    "enabled":"Jūs dabar ignoruojate %1",
+    "disabled":"Jūs daugiau neignoruojate %1"
+  },
+  "automute":{
+    "registered":"%1 Užregistruota automatiškai uždrausti kalbėt ateityje ",
+    "unregistered":"%1 pašalintas iš automute sąrašo."
+  },
+  "tooltip":{
+    "stream":"Įjungti \/ Išjungti  Vaizdą\/Garsą",
+    "clear":"Valyti pokalbį",
+    "afk":"\"Aš nesu prie klaviatūros\" žinutė",
+    "reset":"Atkurti numatytuosius nustatymus",
+    "muted":"Visos dainos užtildytos",
+    "mutedOnce":"Šiuo metu grojanti daina yra užtildyta"
+  },
+  "error":{
+    "userNotFound":"Vartotojas nerastas",
+    "unknownModeration":"Nežinoma moderacija",
+    "unknownMenuKey":"Nežinomas meniu mygtukas: %1",
+    "missingReason":"Priežastis nerasta",
+    "notConnected":"Neprisijungta prie serverio lizdo",
+    "ignoredUser":"Ignoruotas žmogus",
+    "noLiteSupport":"Tai nėra palaikoma plug&#179; Lengvasis"
+  }
 }

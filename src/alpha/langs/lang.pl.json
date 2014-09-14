@@ -1,0 +1,206 @@
+{
+  "running":"Plug³ wersja %1",
+  "commandsHelp":"Użyj '\/commands' aby zobaczyć rozszerzoną listę komend.",
+  "automuted":"%1 został automatycznie wyciszony.",
+  "nextsong":"Twoja następna piosenka w kolejce to %1 stworzona przez %2",
+  "noNextSong":"Nie masz w kolejce żadnych filmów",
+  "isHistory":"Uwaga: ta piosenka jest wciąż w historii (%1 z %2)",
+  "lightsOut":"%1 wyłączył światła",
+  "strobe":"%1 aktywował światła stroboskopowe",
+  "autorespond":{
+    "default":"Jestem z dala od klawiatury.",
+    "disable":"Wyłącz tryb automatycznej odpowiedzi AFK aby pisać ",
+    "nextIn":"Następna autoodpowiedź AFK będzie wysłana (z\/od) %1",
+    "next":"AFK autoodpowiedzi przy następnych wzmiankach",
+    "commandDisable":"%1 wiadomości AFK wyłączone",
+    "commandNotEnabled":"%1 wiadomości AFK nie były włączone"
+  },
+  "autojoin":{
+    "commandDisable":"%1 autojoin wyłączony",
+    "commandNotEnabled":"%1 automatyczne dołączanie nie jest włączone"
+  },
+  "commands":{
+    "header":"User Information",
+    "userCommands":"Komendy użytkownika",
+    "modCommands":"Komendy moderacji",
+    "variables":{
+      "username":"nazwa użytkownika",
+      "word":"słowo",
+      "on":"on",
+      "off":"off",
+      "reason":"powód"
+    },
+    "descriptions":{
+      "nick":"zmień nazwę użytkownika",
+      "avail":"Ustaw status na dostępny",
+      "afk":"ustaw status na AFK",
+      "work":"ustaw status na zajęty",
+      "gaming":"Ustaw status na \"Gra\"",
+      "join":"Użytkownik dołączył",
+      "leave":"Użytkownik wyszedł",
+      "whoami":"Uzyskaj informacje o sobie",
+      "mute":"wycisz dźwięk",
+      "automute":"Zarejestruj obecnie odtwarzany utwór, by automatycznie go wyciszać w przyszłości",
+      "unmute":"ustaw głośność na wartość przed wyciszeniem",
+      "nextsong":"Wyświetla następny utwór w liście odtwarzania, jeśli ten nie jest w historii",
+      "refresh":"odśwież film",
+      "ignore":"Ignoruj wszystkie wiadomości od użytkownika",
+      "alertson":"Odtwarza dźwięk, gdy wybrane wyrazy będą napisane na czacie",
+      "alertsoff":"wyłącza odtwarzeanie dźwięku gdy dane słowa zostaną napisane na chacie",
+      "curate":"Dodaj bieżący utwór to twojej aktywnej listy utworów",
+      "getpos":"pokazuje aktualną pozycję w liście oczekiwania",
+      "version":"pokazuje numer wersji",
+      "commands":"pokazuje tę listę",
+      "link":"wyślij link do strony internetowej plugCubed",
+      "whois":"zawiera ogólne informacje o użytkowniku",
+      "skip":"pomiń aktualną piosenkę",
+      "ban":"Wyrzuca zaznaczonego użytkownika",
+      "lockskip":"blokuje listę oczekiwania, pomija utwór oraz odblokowuje listę",
+      "lock":"blokuje listę oczekiwania",
+      "unlock":"odblokowuje listę oczekiwania",
+      "add":"dodaje podanego użytkownika do listy oczekiwania",
+      "remove":"usuwa podanego użytkownika z listy oczekiwania",
+      "strobe":"Włącz\/Wyłącz światła stroboskopowe",
+      "rave":"Włącz\/Wyłącz światła",
+      "whois all":"podaje numer identyfikacyjny oraz nazwę użytkownika każdego użytkownika znajdującego się w pokoju",
+      "banall":"zbanuj wszystkich użytkowników w tym pokoju"
+    }
+  },
+  "notify":{
+    "header":"Powiadomienia czatu",
+    "join":"Użytkownik dołączył",
+    "leave":"Użytkownik wyszedł",
+    "curate":"Chwyty użytkownika",
+    "meh":"Meh-y użytkownika",
+    "stats":"Statystyki utworu",
+    "updates":"Aktualizacje utworu",
+    "history":"Piosenki w historii",
+    "songLength":"Długość piosenki (%1 min)",
+    "message":{
+      "curate":"%1 dodał %2 - %3",
+      "stats":"Statystyki: %1 osób lubi -- %2 osób nie lubi -- %3 osób chwyciło utwór",
+      "updates":"Obecnie odtwarzane: %1 przez %2 <br>grał przez: %3",
+      "meh":"%1 nie lubi tego utworu",
+      "join":{
+        "normal":"%1 właśnie wszedł do pokoju",
+        "fan":"Twój fan %1 właśnie wszedł do pokoju",
+        "friend":"Twój znajomy %1 właśnie wszedł do pokoju"
+      },
+      "leave":{
+        "normal":"%1 właśnie wyszedł",
+        "fan":"Twój fan %1 właśnie opuścił pokój",
+        "friend":"Twój znajomy %1 właśnie opuścił pokój"
+      },
+      "history":"Ten utwór jest w historii (%1 z %2)",
+      "historySkipped":"Piosenka jest w historii (%1 z %2), lecz została pominięta przy ostatnim zagraniu",
+      "songLength":"Piosenka jest dłuższa niż %1 minut"
+    },
+    "notification":{
+      "songLength":"Długość piosenki"
+    }
+  },
+  "info":{
+    "header":"Informacje o użytkowniku",
+    "name":"Nazwa",
+    "title":"Tytuł",
+    "specialTitles":{
+      "developer":"Autor plug&#179",
+      "sponsor":"plug&#179; Sponsor",
+      "ambassador":"plug&#179; Ambasador",
+      "donatorDiamond":"plug³ Diamentowy sponsor",
+      "donatorPlatinum":"plug&#179; Platynowy sponsor",
+      "donatorGold":"plug&#179; Złoty sponsor",
+      "donatorSilver":"plug&#179; Srebrny sponsor",
+      "donatorBronze":"plug&#179; Srebrny sponsor",
+      "special":"plug&#179; specjalny pomocnik  - %1"
+    },
+    "id":"ID",
+    "rank":"Ranga",
+    "joined":"Czas dołączenia",
+    "status":"Status",
+    "vote":"Głosuj",
+    "position":"Pozycja",
+    "points":"Punkty",
+    "pointType":{
+      "dj":"%1 Punktów DJa",
+      "listener":"%1 Punktów słuchacza",
+      "curator":"%1 punktów za chwycenia"
+    },
+    "fans":"Fani",
+    "wootCount":"Licznik Wootów",
+    "mehCount":"Licznik Meh-ów",
+    "ratio":"Stosunek Woot\/Meh",
+    "djing":"DJing",
+    "notInList":"Nie na liście oczekujących",
+    "inWaitlist":"%1\/%2 w liście oczekujących",
+    "userDjing":"%1 jest aktualnie DJem",
+    "userNextDJ":"%1 jest następnym Dj-em",
+    "disconnects":"Rozłączenia",
+    "lastDisconnect":"Ostatnie rozłączenie",
+    "lastPosition":"Pozycja",
+    "time":"Czas"
+  },
+  "ranks":{
+    "you":"Ty",
+    "regular":"Zwykły",
+    "residentdj":"Stały DJ",
+    "bouncer":"Wykidajło",
+    "manager":"Menedżer",
+    "cohost":"Współgospodarz",
+    "host":"Gospodarz",
+    "ambassador":"Ambasador",
+    "admin":"Administrator"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"Ten pokój używa specjalnych ustawień",
+    "infoHeaderCredits":"Ten pokój używa specjalnych ustawień napisanych przez %1",
+    "infoDisable":"Możesz je wyłączyć w menu"
+  },
+  "menu":{
+    "autowoot":"Autowooter",
+    "autojoin":"Automatyczne dołączanie",
+    "customchatcolors":"Niestandardowe kolory chatu",
+    "autorespond":"Auto odpowiedź AFK",
+    "notify":"Powiadomienia",
+    "afktimers":"Licznik AFK",
+    "roomsettings":"Ustawienia pokoju",
+    "chatimages":"Pokazuj zdjęcia na czacie"
+  },
+  "status":{
+    "available":"Dostępny",
+    "afk":"Wiadomość AFK",
+    "working":"Pracuje",
+    "gaming":"Gra"
+  },
+  "vote":{
+    "meh":"Meh",
+    "woot":"Woot",
+    "undecided":"Niezdecydowany",
+    "djing":"Dj"
+  },
+  "ignore":{
+    "enabled":"Od teraz ignorujesz %1",
+    "disabled":"Przestałeś ignorować %1"
+  },
+  "automute":{
+    "registered":"%1 zostanie automatycznie wyciszony w przyszłych odtwarzaniach.",
+    "unregistered":"%1 został usunięty z listy auto wyciszania."
+  },
+  "tooltip":{
+    "stream":"Przełącznik nadawania obrazu\/dźwięku",
+    "clear":"Wyczyść chat",
+    "afk":"Wiadomość AFK",
+    "reset":"Zresetuj do domyślnych ustawień",
+    "muted":"Wszystkie utwory są wyciszone",
+    "mutedOnce":"Aktualna piosenka jest wyciszona"
+  },
+  "error":{
+    "userNotFound":"Użytkownik nie znaleziony",
+    "unknownModeration":"Nieznana moderacja",
+    "unknownMenuKey":"Nieznany klawisz menu: %1",
+    "missingReason":"Brak przyczyny",
+    "notConnected":"Nie połączono z serwerem",
+    "ignoredUser":"Ignorowany użytkownik",
+    "noLiteSupport":"Ta funkcja nie jest dostępna w plug&#179; Lite"
+  }
+}

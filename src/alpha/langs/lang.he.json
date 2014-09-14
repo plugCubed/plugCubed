@@ -1,0 +1,206 @@
+{
+  "running":"מריץ plug&#179; גרסא %1",
+  "commandsHelp":"הקלד 'commands\/' לראות רשימת פקודות.",
+  "automuted":"%1 מושתק אוטומטי.",
+  "nextsong":"display next song in playlist and if it's in history",
+  "noNextSong":"אין לך שיר לנגן.",
+  "isHistory":"ההתראה: השיר המנגן נמצא בתוך רשימת ההיסטוריה (%1 מ %2)",
+  "lightsOut":"%1 כיבה את האורות.",
+  "strobe":"enable\/disable strobe",
+  "autorespond":{
+    "default":"אני לא נמצא ליד המחשב כעת. (AFK)",
+    "disable":"בטל פניה אוטומטית של \"AFK\" בצ'אט.",
+    "nextIn":"הפניה האוטומטית הבאה בצ'אט של \"AFK\" יושלך מ%1",
+    "next":"AFK Autorespond on next mention",
+    "commandDisable":"%1 autojoin disabled",
+    "commandNotEnabled":"%1 autojoin was not enabled"
+  },
+  "autojoin":{
+    "commandDisable":"%1 autojoin disabled",
+    "commandNotEnabled":"%1 autojoin was not enabled"
+  },
+  "commands":{
+    "header":"User Information",
+    "userCommands":"User Commands",
+    "modCommands":"Moderation Commands",
+    "variables":{
+      "username":"שם משתמש",
+      "word":"מילה",
+      "on":"on",
+      "off":"off",
+      "reason":"סיבה"
+    },
+    "descriptions":{
+      "nick":"שינוי שם משתמש",
+      "avail":"set status to available",
+      "afk":"AFK Message",
+      "work":"set status to working",
+      "gaming":"Gaming",
+      "join":"משתמש הצטרף",
+      "leave":"משתמש עזב",
+      "whoami":"get your own information",
+      "mute":"set volume to 0",
+      "automute":"register currently playing song to automatically mute on future plays",
+      "unmute":"set volume to last volume",
+      "nextsong":"display next song in playlist and if it's in history",
+      "refresh":"רענון הסרטון",
+      "ignore":"ignore all chat messages from user",
+      "alertson":"play sound whenever defined words are written in chat",
+      "alertsoff":"stop playing sound when defined words are written in chat",
+      "curate":"%1 added %2 - %3",
+      "getpos":"get current waitlist position",
+      "version":"displays version number",
+      "commands":"shows this list",
+      "link":"paste link to plugCubed website in chat",
+      "whois":"gives general information about user",
+      "skip":"skip current song",
+      "ban":"kicks targeted user",
+      "lockskip":"locks DJ booth, skip and unlocks afterwards",
+      "lock":"locks DJ booth",
+      "unlock":"unlocks DJ booth",
+      "add":"adds targeted user to dj booth\/waitlist",
+      "remove":"removes targeted user from dj booth\/waitlist",
+      "strobe":"enable\/disable strobe",
+      "rave":"enable\/disable lights out",
+      "whois all":"gives userid and username of all users in the room",
+      "banall":"bans all users in the room"
+    }
+  },
+  "notify":{
+    "header":"User Information",
+    "join":"משתמש הצטרף",
+    "leave":"משתמש עזב",
+    "curate":"User Curate",
+    "meh":"User Mehs",
+    "stats":"Song Stats",
+    "updates":"Song Updates",
+    "history":"Songs in history",
+    "songLength":"Song Length (%1 min)",
+    "message":{
+      "curate":"%1 added %2 - %3",
+      "stats":"Stats: %1 woots -- %2 mehs -- %3 curates",
+      "updates":"Now Playing: %1 by %2<br>Played by: %3",
+      "meh":"%1 meh'd this track",
+      "join":{
+        "normal":"%1 just left the room",
+        "fan":"Your fan %1 just left the room",
+        "friend":"Your friend %1 just left the room"
+      },
+      "leave":{
+        "normal":"%1 just left the room",
+        "fan":"Your fan %1 just left the room",
+        "friend":"Your friend %1 just left the room"
+      },
+      "history":"Song is in history (%1 of %2)",
+      "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
+      "songLength":"Song is longer than %1 minutes"
+    },
+    "notification":{
+      "songLength":"Song Length"
+    }
+  },
+  "info":{
+    "header":"User Information",
+    "name":"Name",
+    "title":"Title",
+    "specialTitles":{
+      "developer":"plug&#179; Developer",
+      "sponsor":"plug&#179; Sponsor",
+      "ambassador":"plug&#179; Ambassador",
+      "donatorDiamond":"plug&#179; Diamond Donator",
+      "donatorPlatinum":"plug&#179; Platinum Donator",
+      "donatorGold":"plug&#179; Gold Donator",
+      "donatorSilver":"plug&#179; Silver Donator",
+      "donatorBronze":"plug&#179; Bronze Donator",
+      "special":"plug&#179; Special Supporter - %1"
+    },
+    "id":"ID",
+    "rank":"Rank",
+    "joined":"Time Joined",
+    "status":"Status",
+    "vote":"Vote",
+    "position":"Position",
+    "points":"נקודות",
+    "pointType":{
+      "dj":"%1 DJ Points",
+      "listener":"%1 Listener Points",
+      "curator":"%1 Curator Points"
+    },
+    "fans":"Fans",
+    "wootCount":"Woot Count",
+    "mehCount":"Meh Count",
+    "ratio":"Woot\/Meh Ratio",
+    "djing":"DJing",
+    "notInList":"Not in waitlist nor booth",
+    "inWaitlist":"%1\/%2 in waitlist",
+    "userDjing":"%1 are currently DJing",
+    "userNextDJ":"%1 are DJing next",
+    "disconnects":"Disconnects",
+    "lastDisconnect":"Last Disconnect",
+    "lastPosition":"Position",
+    "time":"Time"
+  },
+  "ranks":{
+    "you":"You",
+    "regular":"Regular",
+    "residentdj":"Resident DJ",
+    "bouncer":"Bouncer",
+    "manager":"Manager",
+    "cohost":"Co-Host",
+    "host":"Host",
+    "ambassador":"Ambassador",
+    "admin":"Admin"
+  },
+  "roomSpecificSettings":{
+    "infoHeader":"This room is using special settings",
+    "infoHeaderCredits":"This room is using special settings by %1",
+    "infoDisable":"You can disable them in the menu"
+  },
+  "menu":{
+    "autowoot":"Autowoot",
+    "autojoin":"Autojoin",
+    "customchatcolors":"Custom Chat Colors",
+    "autorespond":"AFK Autorespond",
+    "notify":"Notifications",
+    "afktimers":"AFK Timers",
+    "roomsettings":"Room Settings",
+    "chatimages":"Chat Images"
+  },
+  "status":{
+    "available":"Available",
+    "afk":"AFK Message",
+    "working":"Working",
+    "gaming":"Gaming"
+  },
+  "vote":{
+    "meh":"Meh",
+    "woot":"Woot",
+    "undecided":"Undecided",
+    "djing":"DJing"
+  },
+  "ignore":{
+    "enabled":"You are now ignoring %1",
+    "disabled":"You are no longer ignoring %1"
+  },
+  "automute":{
+    "registered":"%1 registered to automute on future plays.",
+    "unregistered":"%1 removed from automute registry."
+  },
+  "tooltip":{
+    "stream":"Toggle Video\/Audio Stream",
+    "clear":"Clear Chat",
+    "afk":"AFK Message",
+    "reset":"Reset to default",
+    "muted":"All songs are muted",
+    "mutedOnce":"Current song is muted"
+  },
+  "error":{
+    "userNotFound":"User not found",
+    "unknownModeration":"Unknown moderation",
+    "unknownMenuKey":"Unknown menu key: %1",
+    "missingReason":"Missing reason",
+    "notConnected":"Not connected to socket server",
+    "ignoredUser":"Ignored User",
+    "noLiteSupport":"This is not supported in plug&#179; Lite"
+  }
+}

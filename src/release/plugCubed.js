@@ -215,7 +215,7 @@ if (plugCubed !== undefined) plugCubed.close();
                     a.substr(0,a.indexOf('\n'));
                 if (b) {
                     $.getJSON(a + '?_' + Date.now(), function(settings) {
-                        p3Utils.chatLog(undefined, p3Lang.i18n('roomSpecificSettingsHeader') + '</span><br /><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('roomSpecificSettingsDesc'), plugCubed.colors.infoMessage2);
+                        p3Utils.chatLog(undefined, p3Lang.i18n('roomSpecificSettings.infoHeader') + '</span><br /><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('roomSpecificSettings.infoDisable'), plugCubed.colors.infoMessage2);
                         runRoomSettings(settings);
                     }).fail(function() {
                         API.chatLog('Error loading Room Settings', true);
@@ -772,7 +772,7 @@ if (plugCubed !== undefined) plugCubed.close();
              */
             Socket: function() {
                 if (socket !== undefined && socket.readyState === SockJS.OPEN) return;
-                socket = new SockJS('https://socket.plugcubed.net/_/gateway');
+                socket = new SockJS('https://socket.plugcubed.net/_');
                 socket.tries = 0;
                 console.log('[plug³ Socket Server]',socketReconnecting ? 'Reconnecting' : 'Connecting');
                 /**

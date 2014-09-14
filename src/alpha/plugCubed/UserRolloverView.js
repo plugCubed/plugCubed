@@ -12,7 +12,6 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/bridges/Context'], func
                 var specialIconInfo = p3Utils.getPlugCubedSpecial(a.id);
 
                 if (this.$p3Role === undefined) {
-                    console.log('Creating p3Role');
                     this.$p3Role = $('<span>').addClass('p3Role');
                     this.$meta.append(this.$p3Role);
                 }

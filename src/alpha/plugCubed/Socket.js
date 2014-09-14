@@ -3,7 +3,7 @@ define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'p
         connect: function() {
             if (socket !== undefined && socket.readyState === SockJS.OPEN) return;
             _this = this;
-            socket = new SockJS('https://socket.plugcubed.net/_/socket');
+            socket = new SockJS('https://socket.plugcubed.net/_');
             console.log('[plug³] Socket Server', socketReconnecting ? 'Reconnecting' : 'Connecting');
             socket.onopen = _.bind(this.onOpen, this);
             socket.onmessage = _.bind(this.onMessage, this);
@@ -90,6 +90,9 @@ define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'p
             socketReconnecting = true;
 
             switch (info.code) {
+                case 3001:
+                    delay = 60;
+                    break;
                 case 3002:
                     delay = 300;
                     break;
@@ -100,11 +103,11 @@ define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'p
                     return;
                 default:
                     tries++;
-                    if (tries < 5) {
+                    if (tries < 2) {
                         delay = 5;
-                    } else if (tries < 30) {
+                    } else if (tries < 4) {
                         delay = 30;
-                    } else if (tries < 60) {
+                    } else if (tries < 8) {
                         delay = 60;
                     } else return;
                     break;
@@ -112,7 +115,7 @@ define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'p
 
             setTimeout(function() {
                 _this.connect();
-            }, delay * 1E3);
+            }, delay * 1E3 + (Math.ceil(Math.random() * 5000)));
         },
         getState: function() {
             return socket.readyState;

@@ -2,7 +2,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/RS
     var handler = TriggerHandler.extend({
         trigger: API.ADVANCE,
         handler: function(data) {
-            if (data.media && Settings.registeredSongs.indexOf(data.media.id) > -1) {
+            if (data && data.media && Settings.registeredSongs.indexOf(data.media.id) > -1) {
                 setTimeout(function() {
                     PlaybackModel.muteOnce();
                 }, 800);
