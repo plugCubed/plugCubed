@@ -1,4 +1,4 @@
-define(['jquery', 'plugCubed/Class'], function($, Class) {
+define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Utils) {
     var PopoutView, obj, styles = {}
     if (!p3Utils.runLite)
         PopoutView = require('ce221/df202/bd7f7/bc67e/e39c3');
