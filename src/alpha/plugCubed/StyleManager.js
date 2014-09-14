@@ -1,15 +1,21 @@
 define(['jquery', 'plugCubed/Class'], function($, Class) {
-    var obj, styles = {}, update = function() {
+    var PopoutView, obj, styles = {}
+    if (!p3Utils.runLite)
+        PopoutView = require('ce221/df202/bd7f7/bc67e/e39c3');
+    function update() {
         var a = '';
         for (var i in styles) {
             if (styles.hasOwnProperty(i))
                 a += styles[i];
         }
         obj.text(a);
-    }, a = Class.extend({
+        if (PopoutView && PopoutView._window)
+            $(PopoutView._window.document).find('#plugCubedStyles').text(a)
+    }
+    var a = Class.extend({
         init: function() {
-            obj = $('<style type="text/css">');
-            $('head').append(obj);
+            obj = $('<style type="text/css" id="plugCubedStyles">');
+            $('#chat-messages').prepend(obj);
         },
         get: function(key) {
             return styles[key];
