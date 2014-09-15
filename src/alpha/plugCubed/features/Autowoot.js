@@ -8,7 +8,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/RS
     };
 
     handler = TriggerHandler.extend({
-        trigger: API.ADVANCE,
+        trigger: 'advance',
         handler: function(data) {
             if (!data.media || !Settings.autowoot || !RSS.rules.allowAutowoot) return;
             setTimeout(function() {

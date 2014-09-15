@@ -119,6 +119,12 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             })(API.getUser().id)) {
             data.deletable = true;
         }
+    }
+
+    function onChatReceivedLate(data) {
+        if (!data.uid) return;
+
+        var $this = $('#chat').find('div[data-cid="' + data.cid + '"]'), $icon;
 
         data.type += ' fromID-' + data.uid;
 
@@ -164,12 +170,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
         data.message = convertImageLinks(data.message);
         data.message = convertEmotes(data.message);
-    }
-
-    function onChatReceivedLate(data) {
-        if (!data.uid) return;
-
-        var $this = $('#chat').find('div[data-cid="' + data.cid + '"]'), $icon;
 
         if (data.type.split(' ')[0] === 'pm') {
             $icon = $this.find('.icon');
@@ -202,6 +202,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 $icon.css('background-image', 'url("https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3special.' + specialIconInfo.icon + '.png")');
             }
         }
+
+        $this.attr('class', data.type);
+        $this.find('.text').html(p3Utils.cleanHTML(data.message, ['div', 'table', 'tr', 'td']));
 
         if (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper()) {
             $this.data('translated', false);

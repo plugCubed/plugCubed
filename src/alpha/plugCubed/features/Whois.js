@@ -1,10 +1,10 @@
-define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang'], function(TriggerHandler, Settings, p3Utils, p3Lang) {
+define(['jquery','plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang'], function($, TriggerHandler, Settings, p3Utils, p3Lang) {
     var handler = TriggerHandler.extend({
         trigger: {
-            USER_JOIN: this.onUserJoin,
-            USER_LEAVE: this.onUserLeave,
-            VOTE_UPDATE: this.onVoteUpdate,
-            ADVANCE: this.onDjAdvance
+            userJoin: 'onUserJoin',
+            userLeave: 'onUserLeave',
+            voteUpdate: 'onVoteUpdate',
+            advance: 'onDjAdvance'
         },
         onUserJoin: function(data) {
             if (p3Utils.getUserData(data.id, 'joinTime', 0) === 0)

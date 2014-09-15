@@ -7,7 +7,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
     }
 
     handler = TriggerHandler.extend({
-        trigger: API.ADVANCE,
+        trigger: 'advance',
         register: function() {
             this._super();
             this.title = '';
@@ -21,11 +21,12 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
             this._super();
             if (this.intervalID)
                 clearInterval(this.intervalID);
+            document.title = p3Utils.getRoomname();
             if (!p3Utils.runLite)
                 PlaybackModel.off('change:streamDisabled change:volume change:muted', this.onStreamChange, this);
         },
         handler: function(data) {
-            if (/* Settings.songTitle && */data.media && data.media.title) {
+            if (Settings.songTitle && data.media && data.media.title) {
                 this.titlePrefix = (API.getVolume() > 0 && (p3Utils.runLite || (!p3Utils.runLite && !Database.settings.streamDisabled)) ? '▶' : '❚❚') + ' ';
 
                 if (this.titleClean === data.media.author + ' - ' + data.media.title + ' :: ' + p3Utils.getRoomname() + ' :: ') return;

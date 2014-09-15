@@ -4,7 +4,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
     // Misc
     names.push('version');
     // Features
-    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'notify', 'customColors', 'chatimages', 'moderation', 'notifySongLength', 'useRoomSettings', 'twitchEmotes');
+    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'notify', 'customColors', 'chatimages', 'moderation', 'notifySongLength', 'useRoomSettings', 'twitchEmotes', 'songTitle');
     // Registers
     names.push('registeredSongs', 'alertson', 'colors');
 
@@ -39,6 +39,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         customColors: false,
         chatImages: true,
         twitchEmotes: true,
+        songTitle: false,
         registeredSongs: [],
         alertson: [],
         moderation: {

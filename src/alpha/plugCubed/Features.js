@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/features/Alertson', 'plugCubed/features/Autojoin', 'plugCubed/features/Automute', 'plugCubed/features/Autorespond', 'plugCubed/features/Autowoot', 'plugCubed/features/Whois'/*, 'plugCubed/features/WindowTitle'*/], function() {
+define(['plugCubed/Class', 'plugCubed/features/Alertson', 'plugCubed/features/Autojoin', 'plugCubed/features/Automute', 'plugCubed/features/Autorespond', 'plugCubed/features/Autowoot', 'plugCubed/features/Whois', 'plugCubed/features/WindowTitle'], function() {
     var modules, Class, handler;
 
     modules = $.makeArray(arguments);

@@ -1,6 +1,6 @@
 define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/RSS', 'plugCubed/Utils', 'plugCubed/bridges/PlaybackModel', 'plugCubed/dialogs/Menu', 'lang/Lang'], function(TriggerHandler, p3Lang, Settings, RSS, p3Utils, PlaybackModel, Menu, Lang) {
     var handler = TriggerHandler.extend({
-        trigger: API.CHAT,
+        trigger: 'chat',
         handler: function(data) {
             var a = data.type == 'mention' && API.hasPermission(data.fromID, API.ROLE.BOUNCER), b = data.message.indexOf('@') < 0 && (API.hasPermission(data.fromID, API.ROLE.MANAGER) || p3Utils.isPlugCubedDeveloper(data.fromID));
             if (a || b) {
@@ -9,7 +9,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settin
                         Settings.autorespond = false;
                         Menu.setEnabled('autorespond', Settings.autorespond);
                         Settings.save();
-                        API.sendChat(p3Lang.i18n('autorespond.commandDisable', '@' + data.from));
+                        API.sendChat(p3Lang.i18n('autorespond.commandDisable', '@' + data.un));
                     }
                 }
             }
@@ -22,7 +22,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settin
                         Settings.recent = false;
                         Settings.save();
                     }, 18E4);
-                    API.sendChat('[AFK] @' + data.from + ' ' + Settings.awaymsg.split('@').join(''));
+                    API.sendChat('[AFK] @' + data.un + ' ' + Settings.awaymsg.split('@').join(''));
                 }
             }
         },

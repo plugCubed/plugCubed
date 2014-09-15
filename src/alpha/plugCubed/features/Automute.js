@@ -1,6 +1,6 @@
 define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/RSS', 'plugCubed/Utils', 'plugCubed/bridges/PlaybackModel'], function(TriggerHandler, Settings, RSS, p3Utils, PlaybackModel) {
     var handler = TriggerHandler.extend({
-        trigger: API.ADVANCE,
+        trigger: 'advance',
         handler: function(data) {
             if (data && data.media && Settings.registeredSongs.indexOf(data.media.id) > -1) {
                 setTimeout(function() {

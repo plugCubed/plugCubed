@@ -9,9 +9,9 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/RS
 
     handler = TriggerHandler.extend({
         trigger: {
-            ADVANCE: this.onDjAdvance,
-            WAIT_LIST_UPDATE: this.onWaitListUpdate,
-            CHAT: this.onChat
+            advance: 'onDjAdvance',
+            waitListUpdate: 'onWaitListUpdate',
+            chat: 'onChat'
         },
         onDjAdvance: function() {
             if (!Settings.autojoin || !RSS.rules.allowAutojoin) return;
@@ -27,6 +27,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/RS
             if (API.getWaitListPosition() > -1) return;
             // Disable
             Settings.autojoin = false;
+            Menu.setEnabled('autojoin', Settings.autojoin);
         },
         onChat: function(data) {
             var a, b;
@@ -38,7 +39,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/RS
                         Settings.autojoin = false;
                         Menu.setEnabled('autojoin', Settings.autojoin);
                         Settings.save();
-                        API.sendChat(p3Lang.i18n('autojoin.commandDisable', '@' + data.from));
+                        API.sendChat(p3Lang.i18n('autojoin.commandDisable', '@' + data.un));
                     }
                 }
             }
