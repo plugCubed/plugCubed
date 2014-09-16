@@ -4,7 +4,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     if (!p3Utils.runLite)
         PopoutView = require('app/views/room/popout/PopoutView');
 
-    function convertImageLinks(text) {
+    function convertImageLinks(text, $message) {
         if (Settings.chatImages) {
             if (text.toLowerCase().indexOf('nsfw') < 0) {
                 var temp = $('<div/>');
@@ -24,8 +24,50 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                         path = url.split('/');
                         if (path.length > 3) {
                             path = path[3];
-                            if (path.trim().length !== 0)
-                                imageURL = 'https://api.plugCubed.net/redirect/gfycat/' + path;
+                            if (path.trim().length !== 0) {
+                                var $video, identifier = 'video-' + p3Utils.getRandomString(8);
+
+                                $video = $('<video autoplay loop muted="muted">').addClass(identifier).css('display', 'block').css('max-width', '100%').css('height', 'auto').css('margin', '0 auto');
+
+                                $(this).html('').append($video);
+
+                                $video.on('load', function() {
+                                    var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages'), height = this.height;
+                                    if (this.width > $chat.find('.message').width())
+                                        height *= this.width / $chat.find('.message').width();
+                                    $chat.scrollTop($chat[0].scrollHeight + height);
+                                });
+
+                                $.getJSON('https://gfycat.com/cajax/get/' + path, function(videoData) {
+                                    $video = $message.find('.' + identifier);
+
+                                    if (videoData.error) {
+                                        console.log('error', videoData);
+                                        $video.html(videoData.error);
+                                        return;
+                                    }
+
+                                    var webmUrl, mp4Url, imgUrl;
+
+                                    webmUrl = videoData['gfyItem']['webmUrl'];
+                                    mp4Url = videoData['gfyItem']['mp4Url'];
+                                    imgUrl = videoData['gfyItem']['gifUrl'];
+
+                                    if (webmUrl.indexOf('http://') === 0) {
+                                        webmUrl = 'https://' + webmUrl.substr(7);
+                                    }
+                                    if (mp4Url.indexOf('http://') === 0) {
+                                        mp4Url = 'https://' + mp4Url.substr(7);
+                                    }
+                                    if (imgUrl.indexOf('http://') === 0) {
+                                        imgUrl = 'https://' + imgUrl.substr(7);
+                                    }
+
+                                    $video.append($('<source>').attr('type', 'video/webm').attr('src', webmUrl));
+                                    $video.append($('<source>').attr('type', 'video/mp4').attr('src', mp4Url));
+                                    $video.append($('<img>').attr('src', imgUrl));
+                                });
+                            }
                         }
 
                         // Lightshot links
@@ -34,7 +76,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                         if (path.length > 3) {
                             path = path[3];
                             if (path.trim().length !== 0)
-                                imageURL = 'https://prntscr.com/' + path + '/direct';
+                                imageURL = 'https://api.plugCubed.net/redirect/prntscr/' + path;
                         }
 
                         // Imgur links
@@ -168,7 +210,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             data.message = data.message.split('@' + API.getUser().username).join('<span class="name">@' + API.getUser().username + '</span>');
         }
 
-        data.message = convertImageLinks(data.message);
+        data.message = convertImageLinks(data.message, $this);
         data.message = convertEmotes(data.message);
 
         if (data.type.split(' ')[0] === 'pm') {
@@ -204,7 +246,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         }
 
         $this.attr('class', data.type);
-        $this.find('.text').html(p3Utils.cleanHTML(data.message, ['div', 'table', 'tr', 'td']));
+        $this.find('.text').html(p3Utils.cleanHTML(data.message, ['div', 'table', 'tr', 'td'], ['img', 'video', 'source']));
 
         if (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper()) {
             $this.data('translated', false);

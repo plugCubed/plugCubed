@@ -23,6 +23,9 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     save.moderation = {};
                 if (save.afkTimers !== undefined)
                     save.moderation.afkTimers = save.afkTimers;
+                break;
+            default:
+                break;
         }
         console.log('[plug³] Updated save', save.version, '=>', curVersion);
         save.version = curVersion;

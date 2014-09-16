@@ -2,10 +2,11 @@ var plugCubedUserData;
 define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lang, Lang) {
     var cleanHTMLMessage, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, PopoutView, ChatFacade, Database, runLite;
 
-    cleanHTMLMessage = function(input, disallow) {
+    cleanHTMLMessage = function(input, disallow, extra_allow) {
         var allowed, tags, disallowed = [];
         if ($.isArray(disallow)) disallowed = disallow;
-        allowed = $(['span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em', 'a']).not(disallowed).get();
+        if (!extra_allow || !$.isArray(extra_allow)) extra_allow = [];
+        allowed = $(['span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em', 'a'].concat(extra_allow)).not(disallowed).get();
         if (disallow === '*') allowed = [];
         tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
         return input.replace(tags, function(a, b) {
@@ -161,8 +162,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             if (!userID) userID = API.getUser().id;
             return special[userID];
         },
-        cleanHTML: function(msg, disallow) {
-            return cleanHTMLMessage(msg, disallow);
+        cleanHTML: function(msg, disallow, extra_allow) {
+            return cleanHTMLMessage(msg, disallow, extra_allow);
         },
         cleanTypedString: function(msg) {
             return msg.split("<").join("&lt;").split(">").join("&gt;");
@@ -488,6 +489,14 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         },
         getBaseURL: function(url) {
             return url.indexOf('?') < 0 ? url : url.substr(0, url.indexOf('?'));
+        },
+        getRandomString: function(length) {
+            var chars = 'abcdefghijklmnopqrstuvwxyz0123456789_';
+            var i, ret = [];
+            for (i = 0; i < length; i++) {
+                ret.push(chars.substr(Math.floor(Math.random() * chars.length), 1));
+            }
+            return ret.join('');
         },
         logColors: {
             userCommands: '66FFFF',
