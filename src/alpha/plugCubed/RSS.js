@@ -196,19 +196,19 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                             if (playbackBackground.data('_o') === undefined)
                                 playbackBackground.data('_o', playbackBackground.attr('src'));
                             var roomLoader = require('app/views/room/RoomLoader');
-                            if (roomSettings.images.playback && typeof roomSettings.images.playback === 'string') {
+                            if (roomSettings.images.playback && typeof roomSettings.images.playback === 'string' && roomSettings.images.playback.indexOf('http') === 0) {
                                 var playbackFrame = new Image;
                                 playbackFrame.onload = function() {
                                     playbackBackground.attr('src', this.src);
-                                    roomLoader.frameHeight = this.height;
-                                    roomLoader.frameWidth = this.width;
+                                    roomLoader.frameHeight = this.height - 10;
+                                    roomLoader.frameWidth = this.width - 18;
                                     roomLoader.onVideoResize(require('app/utils/Layout').getSize());
                                 };
                                 playbackFrame.src = p3Utils.proxifyImage(roomSettings.images.playback);
                             } else {
                                 playbackBackground.attr('src', playbackBackground.data('_o'));
-                                roomLoader.frameHeight = playbackBackground.height();
-                                roomLoader.frameWidth = playbackBackground.width();
+                                roomLoader.frameHeight = playbackBackground.height() - 10;
+                                roomLoader.frameWidth = playbackBackground.width() - 18;
                                 roomLoader.onVideoResize(require('app/utils/Layout').getSize());
                             }
                         }

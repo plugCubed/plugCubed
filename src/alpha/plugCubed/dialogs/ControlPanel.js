@@ -1,5 +1,22 @@
 define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
-    var $controlPanelDiv, $menuDiv, $currentDiv, $closeDiv, shownHeight, ControlPanelClass, tabs = {}, _this, _onResize, _onTabClick;
+    var $controlPanelDiv, $menuDiv, $currentDiv, $closeDiv, shownHeight, ControlPanelClass, PanelClass, tabs = {}, _this, _onResize, _onTabClick;
+
+    PanelClass = Class.extend({
+        _content: [],
+        name: '',
+        init: function(name) {
+            this.name = name;
+        },
+        addContent: function(content) {
+            if (content instanceof $) {
+                this._content.push(content);
+            }
+        },
+        print: function() {
+            return this._content.join('');
+        }
+    });
+
     ControlPanelClass = Class.extend({
         init: function() {
             _this = this;
@@ -124,50 +141,34 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
         onTabClick: function(e) {
             var $this = $(e.currentTarget);
             var tab = tabs[$this.data('id')];
-            if (tab === undefined) return;
+            if (tab === undefined || !(tab instanceof PanelClass)) return;
             $menuDiv.find('.current').removeClass('current');
             $this.addClass('current');
             $currentDiv.html('');
-            for (var i in tab) {
-                if (tab.hasOwnProperty(i))
-                    $currentDiv.append(tab[i]);
-            }
+            tab.print();
         },
         /**
          * Add a new tab, if it doesn't already exists
          * @param {string} name Name of tab
-         * @returns {ControlPanelClass}
+         * @returns {PanelClass}
          */
-        addTab: function(name) {
+        addPanel: function(name) {
             name = name.trim();
-            if (tabs[name] !== undefined) return this;
-            tabs[name] = [];
+            if (tabs[name] !== undefined) return null;
+            tabs[name] = new PanelClass(name);
             this.createControlPanel(true);
-            return this;
-        },
-        /**
-         * Add content to a tab, if tab exists
-         * @param {string} name Name of tab
-         * @param content Content to be added
-         * @returns {ControlPanelClass}
-         */
-        addToTab: function(name, content) {
-            name = name.trim();
-            if (tabs[name] === undefined) return this;
-            tabs[name].push(content);
-            return this;
+            return tabs[name];
         },
         /**
          * Remove a tab, if tab exists
-         * @param {string} name Name of tab
-         * @returns {ControlPanelClass}
+         * @param {PanelClass} panel Name of tab
+         * @returns {Boolean}
          */
-        removeTab: function(name) {
-            name = name.trim();
-            if (tabs[name] === undefined) return this;
-            delete tabs[name];
+        removePanel: function(panel) {
+            if (!(panel instanceof PanelClass) || tabs[panel.name] === undefined) return false;
+            delete tabs[panel.name];
             this.createControlPanel(true);
-            return this;
+            return true;
         }
     });
     return new ControlPanelClass();

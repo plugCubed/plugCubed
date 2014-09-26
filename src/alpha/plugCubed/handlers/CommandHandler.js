@@ -4,7 +4,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
         trigger: API.CHAT_COMMAND,
         handler: function(value) {
             var i, args = value.split(' '), command = args.shift().substr(1);
-            if (p3Utils.hasPermission(undefined, 2, true) || p3Utils.isPlugCubedDeveloper()) {
+            if (p3Utils.hasPermission(undefined, 2, true) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) {
                 if (p3Utils.equalsIgnoreCase(command, 'whois')) {
                     if (args.length > 0 && p3Utils.equalsIgnoreCase(args[0], 'all')) {
                         p3Utils.getAllUsers();
@@ -204,7 +204,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 }
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(command, 'curate') || p3Utils.equalsIgnoreCase(command, 'grab')) {
+            if (p3Utils.equalsIgnoreCase(command, 'grab')) {
                 if (p3Utils.runLite) {
                     return API.chatLog(p3Lang.i18n('error.noLiteSupport'), true);
                 }
@@ -219,10 +219,13 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                         return;
                     }
                     for (var i in playlists) {
+                        if (!playlists.hasOwnProperty(i)) continue;
                         var playlist = playlists[i];
                         if (playlist.active) {
                             if (playlist.count < 200) {
-                                Context.dispatch(new MCE(MCE.CURATE, playlist.id));
+                                var historyID = require('app/models/PlaybackModel').get('historyID');
+                                var MGE = require('app/events/MediaGrabEvent');
+                                Context.dispatch(new MGE(MGE.GRAB, playlist.id, historyID));
                             } else {
                                 API.chatLog('Your active playlist is full', true);
                             }

@@ -1,13 +1,13 @@
 define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleManager', 'plugCubed/RSS'], function(Class, ControlPanel, Styles, RSS) {
-    var handler, $contentDiv, $formDiv, $localFileInput;
+    var handler, $contentDiv, $formDiv, $localFileInput, panel;
 
     handler = Class.extend({
         register: function() {
-            ControlPanel.addTab('Background');
+            panel = ControlPanel.addPanel('Background');
 
             $contentDiv = $('<div>').append($('<p>').text('Set your own room background.'));
 
-            ControlPanel.addToTab('Background', $contentDiv);
+            panel.addContent($contentDiv);
 
             $formDiv = $('<div>').width(500).css('margin', '25px auto auto auto');
 
@@ -26,7 +26,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
 
                                     // Closure to capture the file information.
                                     reader.onload = function(e) {
-                                        Styles.set('rss-background-image', '.room-background { background-image: url(' + e.target.result + ')!important; }');
+                                        //Styles.set('rss-background-image', '.room-background { background-image: url(' + e.target.result + ')!important; }');
                                     };
 
                                     // Read in the image file as a data URL.
@@ -41,10 +41,10 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
                 $formDiv.append($localFileInput);
             }
 
-            ControlPanel.addToTab('Background', $formDiv);
+            panel.addContent($formDiv);
         },
         close: function() {
-            ControlPanel.removeTab('Background');
+            ControlPanel.removePanel(panel);
         }
     });
     return new handler();

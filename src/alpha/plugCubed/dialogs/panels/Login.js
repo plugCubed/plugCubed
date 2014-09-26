@@ -1,13 +1,13 @@
 define(['plugCubed/Class','plugCubed/dialogs/ControlPanel', 'plugCubed/Socket'], function(Class, ControlPanel, Socket) {
-    var handler, loggedIn, $loginDiv, $selectButton = '', $contentDiv;
+    var handler, loggedIn, $loginDiv, $selectButton = '', $contentDiv, panel;
 
     handler = Class.extend({
         register: function() {
-            ControlPanel.addTab('Login');
+            panel = ControlPanel.addPanel('Login');
 
             $contentDiv = $('<div>').append($('<p>').text('Login to your plugCubed account.')).append($('<p>').text('Using this system, you can validate and lock your userIDs to your plugCubed account.'));
 
-            ControlPanel.addToTab('Login', $contentDiv);
+            panel.addContent($contentDiv);
 
             function checkLoggedIn() {
                 $.getJSON('https://login.plugcubed.net/check', function(data) {
@@ -39,10 +39,10 @@ define(['plugCubed/Class','plugCubed/dialogs/ControlPanel', 'plugCubed/Socket'],
 
             $loginDiv = $('<div>').width(500).css('margin', '25px auto auto auto').append($selectButton);
 
-            ControlPanel.addToTab('Login', $loginDiv);
+            panel.addContent($loginDiv);
         },
         close: function() {
-            ControlPanel.removeTab('Login');
+            ControlPanel.removePanel(panel);
         }
     });
     return new handler();

@@ -4,7 +4,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
     // Misc
     names.push('version');
     // Features
-    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'notify', 'customColors', 'chatimages', 'moderation', 'notifySongLength', 'useRoomSettings', 'twitchEmotes', 'songTitle');
+    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle');
     // Registers
     names.push('registeredSongs', 'alertson', 'colors');
 

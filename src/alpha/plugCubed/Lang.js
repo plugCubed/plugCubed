@@ -69,7 +69,7 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
          */
         i18n: function(selector) {
             var a = language, i;
-            if (a === undefined) {
+            if (a === undefined || selector === undefined) {
                 return '{' + $.makeArray(arguments).join(', ') + '}';
             }
             var key = selector.split('.');

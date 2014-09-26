@@ -15,8 +15,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Ut
     }
     var a = Class.extend({
         init: function() {
-            obj = $('<style type="text/css" id="plugCubedStyles">');
-            $('#chat-messages').prepend(obj);
+            obj = $('<style type="text/css">');
+            $('body').prepend(obj);
         },
         get: function(key) {
             return styles[key];

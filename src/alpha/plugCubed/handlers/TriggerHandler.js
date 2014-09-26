@@ -34,6 +34,8 @@ define(['jquery', 'plugCubed/Class'], function($, Class) {
                 if (!this.triggerHandlers.hasOwnProperty(i)) continue;
                 if (typeof this.triggerHandlers[i] === 'function') {
                     API.on(i, this.triggerHandlers[i], this);
+                } else if (typeof this[this.triggerHandlers[i]] === 'function') {
+                    API.on(i, this[this.triggerHandlers[i]], this);
                 }
             }
             this.registered = true;

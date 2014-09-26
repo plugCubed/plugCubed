@@ -47,7 +47,6 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         Socket.connect();
         Settings.load();
 
-        require('plugCubed/dialogs/ControlPanel').addTab("Test Tab").addToTab("Test Tab", $('<div>').text('This is my testing content, how does it work?!'));
         Panels.register();
 
         loaded = true;
@@ -67,7 +66,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
             rank = 'manager';
         } else if (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER)) {
             rank = 'bouncer';
-        } else if (p3Utils.hasPermission(undefined, API.ROLE.RESIDENTDJ)) {
+        } else if (p3Utils.hasPermission(undefined, API.ROLE.DJ)) {
             rank = 'residentdj';
         }
         $('body').addClass('rank-' + rank).addClass('id-' + API.getUser().id);

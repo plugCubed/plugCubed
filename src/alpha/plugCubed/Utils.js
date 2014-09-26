@@ -50,6 +50,12 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             }
             return url;
         },
+        httpsifyURL: function(url) {
+            if (this.startsWithIgnoreCase(url, 'http://')) {
+                return 'https://' + url.substr(7);
+            }
+            return url;
+        },
         getHighestRank: function(userID) {
             if (this.isPlugCubedDeveloper(userID)) return 'developer';
             if (this.isPlugCubedSponsor(userID)) return 'sponsor';
@@ -115,7 +121,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                     ranks.push(Lang.roles.manager);
                 } else if (this.hasPermission(userID, API.ROLE.BOUNCER)) {
                     ranks.push(Lang.roles.bouncer);
-                } else if (this.hasPermission(userID, API.ROLE.RESIDENTDJ)) {
+                } else if (this.hasPermission(userID, API.ROLE.DJ)) {
                     ranks.push(Lang.roles.dj);
                 }
             }
@@ -210,7 +216,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             if (typeof data === 'string') {
                 method = 'string';
                 data = data.trim();
-                if (data.substr(0,1) === '@')
+                if (data.substr(0, 1) === '@')
                     data = data.substr(1);
             }
 
@@ -260,7 +266,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                     rank = Lang.roles.manager;
                 } else if (this.hasPermission(user.id, API.ROLE.BOUNCER)) {
                     rank = Lang.roles.bouncer;
-                } else if (this.hasPermission(user.id, API.ROLE.RESIDENTDJ)) {
+                } else if (this.hasPermission(user.id, API.ROLE.DJ)) {
                     rank = Lang.roles.dj;
                 } else {
                     rank = Lang.roles.none;
@@ -369,12 +375,18 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         },
         playChatSound: function() {
             if (runLite || Database.settings.chatSound) {
-                document.getElementById('chat-sound').playChatSound();
+                try {
+                    document.getElementById('chat-sound').playChatSound();
+                } catch (e) {
+                }
             }
         },
         playMentionSound: function() {
             if (runLite || Database.settings.chatSound) {
-                document.getElementById('chat-sound').playMentionSound();
+                try {
+                    document.getElementById('chat-sound').playMentionSound();
+                } catch (e) {
+                }
             }
         },
         getTimestamp: function(t, format) {

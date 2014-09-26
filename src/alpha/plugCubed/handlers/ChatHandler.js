@@ -49,19 +49,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
                                     var webmUrl, mp4Url, imgUrl;
 
-                                    webmUrl = videoData['gfyItem']['webmUrl'];
-                                    mp4Url = videoData['gfyItem']['mp4Url'];
-                                    imgUrl = videoData['gfyItem']['gifUrl'];
-
-                                    if (webmUrl.indexOf('http://') === 0) {
-                                        webmUrl = 'https://' + webmUrl.substr(7);
-                                    }
-                                    if (mp4Url.indexOf('http://') === 0) {
-                                        mp4Url = 'https://' + mp4Url.substr(7);
-                                    }
-                                    if (imgUrl.indexOf('http://') === 0) {
-                                        imgUrl = 'https://' + imgUrl.substr(7);
-                                    }
+                                    webmUrl = p3Utils.httpsifyURL(videoData['gfyItem']['webmUrl']);
+                                    mp4Url = p3Utils.httpsifyURL(videoData['gfyItem']['mp4Url']);
+                                    imgUrl = p3Utils.httpsifyURL(videoData['gfyItem']['gifUrl']);
 
                                     $video.append($('<source>').attr('type', 'video/webm').attr('src', webmUrl));
                                     $video.append($('<source>').attr('type', 'video/mp4').attr('src', mp4Url));
@@ -156,7 +146,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatReceived(data) {
         if (!data.uid) return;
 
-        if (API.getUser().permission > API.ROLE.RESIDENTDJ && (function(_) {
+        if (API.getUser().permission > API.ROLE.DJ && (function(_) {
                 return p3Utils.isPlugCubedDeveloper(_) || p3Utils.isPlugCubedSponsor(_) || p3Utils.isPlugCubedAmbassador(_);
             })(API.getUser().id)) {
             data.deletable = true;
@@ -166,15 +156,17 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatReceivedLate(data) {
         if (!data.uid) return;
 
-        var $this = $('#chat').find('div[data-cid="' + data.cid + '"]'), $icon;
+        var $this = $('#chat').find('[data-cid="' + data.cid + '"]'), $icon;
 
-        data.type += ' fromID-' + data.uid;
+        data.type = $this.attr('class') + ' fromID-' + data.uid;
 
-        if (p3Utils.havePlugCubedRank(data.uid))
+        if (p3Utils.havePlugCubedRank(data.uid)) {
             data.type += ' is-p3' + p3Utils.getHighestRank(data.uid);
+        }
 
-        if (p3Utils.hasPermission(data.uid, API.ROLE.RESIDENTDJ) || p3Utils.hasPermission(data.uid, 1, true) || data.uid == API.getUser().id) {
-            data.type += ' from-';
+        data.type += ' from';
+        if (p3Utils.hasPermission(data.uid, API.ROLE.DJ) || data.uid == API.getUser().id) {
+            data.type += '-';
             if (p3Utils.hasPermission(data.uid, API.ROLE.HOST, true)) {
                 data.type += 'admin';
             } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER, true)) {
@@ -187,7 +179,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 data.type += 'manager';
             } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER)) {
                 data.type += 'bouncer';
-            } else if (p3Utils.hasPermission(data.uid, API.ROLE.RESIDENTDJ)) {
+            } else if (p3Utils.hasPermission(data.uid, API.ROLE.DJ)) {
                 data.type += 'dj';
             } else if (data.uid == API.getUser().id) {
                 data.type += 'you';
@@ -273,7 +265,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatDelete(cid) {
         if (!p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) && !p3Utils.isPlugCubedDeveloper())
             return;
-        var $messages = $('#chat').find('div[data-cid="' + cid + '"]');
+        var $messages = $('#chat').find('[data-cid="' + cid + '"]');
         if ($messages.length > 0) {
             $messages.each(function() {
                 $(this).removeClass('deletable').css('opacity', 0.3).off('mouseenter').off('mouseleave');
