@@ -3,8 +3,8 @@
 // @namespace      net.plugCubed
 // @description    Autorun plugCubed on plug.dj
 // @author         Thomas "TAT" Andresen
-// @include        http://plug.dj/*
-// @version        1.9
+// @include        https://plug.dj/*
+// @version        1.10
 // @grant          none
 // ==/UserScript==
 
@@ -40,7 +40,7 @@ var a = function() {
                 setTimeout(function() { a.b(); }, 100);
         },
         c: function() {
-            console.log('plugCubedLoader v.1.9 enabled!');
+            console.log('plugCubedLoader v.1.10 enabled!');
             $.getScript('https://d1rfegul30378.cloudfront.net/files/plugCubed.min.js');
         }
     };
