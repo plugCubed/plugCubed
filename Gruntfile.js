@@ -112,26 +112,6 @@ module.exports = function(grunt) {
                 src: ['_extension.js']
             }
         },
-        compress: {
-            packChromeZIP: {
-                options: {
-                    archive: 'extensions/Chrome.zip',
-                    mode: 'zip',
-                    pretty: true
-                },
-                files: [{
-                    src: ['**'],
-                    dest: '/',
-                    expand: true,
-                    cwd: 'extensions/Chrome'
-                }, {
-                    src: ['key.pem'],
-                    dest: '/',
-                    expand: true,
-                    cwd: 'extensions'
-                }]
-            }
-        },
         replace: {
             linksRelease: {
                 src: ['src/release/**/*.js', 'src/release/*.js', 'src/release/**/*.css', 'src/release/*.css'],
@@ -539,7 +519,6 @@ module.exports = function(grunt) {
 
     // Load tasks
     grunt.loadNpmTasks('grunt-aws');
-    grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-exec');
@@ -548,13 +527,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-text-replace');
 
     // Extensions
-    grunt.registerTask('extension:packChrome', ['compress:packChromeZIP']);
     grunt.registerTask('extension:packOpera', ['exec:packCRX']);
     grunt.registerTask('extension:packMaxthon', ['exec:packMXADDON']);
     grunt.registerTask('extension', ['execute:extension', 'replace:versionExtension', 'extension:packChrome', 'extension:packOpera', 'extension:packMaxthon']);
 
     grunt.registerTask('build:release', ['replace:linksRelease', 'concat:release', 'replace:versionRelease', 'execute:reobfuscateRelease', 'replace:enableMinifyRelease', 'requirejs_obfuscate:release', 'execute:closureCompilerRelease', 'extension']);
-    //grunt.registerTask('build:alpha', ['replace:linksAlpha', 'concat:alpha', 'replace:versionAlpha', 'execute:reobfuscateAlpha', 'replace:enableMinifyAlpha', 'requirejs_obfuscate:alpha', 'execute:closureCompilerAlpha']);
     grunt.registerTask('build:alpha', ['replace:linksAlpha', 'requirejs:alpha', 'replace:versionAlpha', 'execute:reobfuscateAlpha', 'replace:enableMinifyAlpha', 'execute:closureCompilerAlpha']);
     grunt.registerTask('build:dev', ['replace:linksDev', 'requirejs:dev', 'replace:versionDev', 'execute:reobfuscateDev', 'replace:enableMinifyDev', 'execute:closureCompilerDev']);
     grunt.registerTask('build', ['execute:cleanLang', 'build:release', 'build:alpha', 'build:dev']);
