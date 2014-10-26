@@ -1,0 +1,18 @@
+{
+    "name": "plugCubed",
+    "version": "0.0.1",
+    "author": "The plugCubed Team",
+    "description": "Grunt build setup for plugCubed",
+    "devDependencies": {
+        "closurecompiler": "*",
+        "yuicompressor": "*",
+        "grunt-aws": "*",
+        "grunt-contrib-concat": "*",
+        "grunt-contrib-requirejs": "*",
+        "grunt-exec": "*",
+        "grunt-execute": "*",
+        "grunt-requirejs-obfuscate": "*",
+        "grunt-text-replace": "*"
+    },
+    "private": true
+}
