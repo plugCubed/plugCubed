@@ -23,8 +23,8 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
          * Load default language (English) from server.
          */
         loadDefault: function() {
-            $.getJSON('https://d1rfegul30378.cloudfront.net/alpha/langs/lang.en.json?_' + Date.now(), function(b) {
-                defaultLanguage = b;
+            $.getJSON('https://d1rfegul30378.cloudfront.net/alpha/langs/lang.en.json?_' + Date.now(), function(languageData) {
+                defaultLanguage = languageData;
                 isLoaded = true;
             }).error(function() {
                 setTimeout(function() {
@@ -44,16 +44,16 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
                 return;
             }
             var lang = API.getUser().language;
-            if (!lang || lang === 'en') {
+            if (!lang || lang === 'en' || this.allLangs.indexOf(lang) < 0) {
                 language = {};
                 $.extend(true, language, defaultLanguage);
                 this.curLang = 'en';
                 if (typeof callback === 'function') callback();
                 return;
             }
-            $.getJSON('https://d1rfegul30378.cloudfront.net/alpha/langs/lang.' + lang + '.json?_' + Date.now(), function(a) {
+            $.getJSON('https://d1rfegul30378.cloudfront.net/alpha/langs/lang.' + lang + '.json?_' + Date.now(), function(languageData) {
                 language = {};
-                $.extend(true, language, defaultLanguage, a);
+                $.extend(true, language, defaultLanguage, languageData);
                 _this.curLang = lang;
                 if (typeof callback === 'function') callback();
             }).error(function() {

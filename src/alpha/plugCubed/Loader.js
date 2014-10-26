@@ -20,7 +20,6 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
             p3Utils.chatLog(undefined, p3Lang.i18n('runningLite') + '</span><br><span class="chat-text" style="color:#FFFFFF">' + p3Lang.i18n('runningLiteInfo'), Settings.colors.warningMessage);
         }
 
-        window.addEventListener('pushState', onRoomJoin);
         $('head').append('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://d1rfegul30378.cloudfront.net/alpha/plugCubed.css" />');
 
         var users = API.getUsers();
@@ -72,18 +71,6 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         $('body').addClass('rank-' + rank).addClass('id-' + API.getUser().id);
     }
 
-    function onRoomJoin() {
-        if (typeof plugCubed !== 'undefined') {
-            setTimeout(function() {
-                if (API.enabled) {
-                    $.getScript('https://d1rfegul30378.cloudfront.net/alpha/plugCubed.' + (version.minified ? 'min.' : '') + 'js');
-                } else {
-                    plugCubed.onRoomJoin();
-                }
-            }, 500);
-        }
-    }
-
     Loader = Class.extend({
         init: function() {
             if (loaded) return;
@@ -120,7 +107,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
                     requirejs.undef(i);
             }
 
-            $('#plugcubed-css,#plugcubed-tracker').remove();
+            $('#plugcubed-css,#p3-settings-wrapper').remove();
 
             delete plugCubed;
         }

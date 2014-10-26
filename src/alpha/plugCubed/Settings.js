@@ -8,7 +8,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
     // Registers
     names.push('registeredSongs', 'alertson', 'colors');
 
-    curVersion = 2;
+    curVersion = 3;
 
     function upgradeVersion(save) {
         switch (save.version) {
@@ -23,6 +23,13 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     save.moderation = {};
                 if (save.afkTimers !== undefined)
                     save.moderation.afkTimers = save.afkTimers;
+                break;
+            case 2:
+                // Curate => Grab
+                if (save.colors !== undefined)
+                    save.colors = {};
+                if (save.colors.curate !== undefined)
+                    save.colors.grab = save.colors.curate;
                 break;
             default:
                 break;
@@ -99,8 +106,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     title: 'notify.leave',
                     color: '3366FF'
                 },
-                curate: {
-                    title: 'notify.curate',
+                grab: {
+                    title: 'notify.grab',
                     color: '00FF00'
                 },
                 meh: {
@@ -133,7 +140,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
             admin: '42A5DC',
             join: '3366FF',
             leave: '3366FF',
-            curate: '00FF00',
+            grab: '00FF00',
             stats: '66FFFF',
             updates: 'FFFF00',
             songLength: '66FFFF'
@@ -151,8 +158,18 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 // Get the settings
                 for (var i in names) {
                     if (!names.hasOwnProperty(i)) continue;
-                    if (save[names[i]] !== undefined && typeof this[names[i]] == typeof save[names[i]])
-                        this[names[i]] = save[names[i]];
+                    if (save[names[i]] !== undefined && typeof this[names[i]] == typeof save[names[i]]) {
+                        if ($.isPlainObject(this[names[i]])) {
+                            for (var j in this[names[i]]) {
+                                if (!this[names[i]].hasOwnProperty(j)) continue;
+                                if (save[names[i]][j] !== undefined) {
+                                    this[names[i]][j] = save[names[i]][j];
+                                }
+                            }
+                        } else {
+                            this[names[i]] = save[names[i]];
+                        }
+                    }
                 }
 
                 if (this.autowoot) {

@@ -1,5 +1,6 @@
 define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/bridges/VolumeView'], function(Class, p3Utils, p3Lang, VolumeView) {
-    var handler;
+    var handler, that;
+
     if (p3Utils.runLite) {
         handler = Class.extend({
             init: function() {
@@ -19,6 +20,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/bridg
                         return API.getVolume();
                     case 'muted':
                         return this.get('volume') === 0;
+                    default:
+                        break;
                 }
                 return this[key];
             },
@@ -30,6 +33,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/bridg
                     case 'muted':
                         this.set('volume', value ? 0 : this.get('lastVolume'));
                         return;
+                    default:
+                        break;
                 }
                 this[key] = value;
             },
@@ -55,7 +60,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/bridg
         }
 
         handler = Class.extend({
-            initialize: function() {
+            init: function() {
+                that = this;
                 PlaybackModel.off('change:volume', PlaybackModel.onVolumeChange);
                 PlaybackModel.onVolumeChange = function() {
                     if (typeof plugCubed === 'undefined')
@@ -78,15 +84,24 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/bridg
                 };
                 PlaybackModel.on('change:volume', PlaybackModel.onVolumeChange);
 
-                $('#volume').remove();
-                console.log(1);
-                volume = new VolumeView(this);
-                $('#now-playing-bar').append(volume.$el);
-                volume.render();
-                console.log(2);
-
                 PlaybackModel.on('change:media', onMediaChange);
                 PlaybackModel._events['change:media'].unshift(PlaybackModel._events['change:media'].pop());
+
+                setTimeout(function() {
+                    $('#volume').remove();
+                    volume = new VolumeView(that);
+                    $('#now-playing-bar').append(volume.$el);
+                    volume.render();
+                }, 1);
+            },
+            onVolumeChange: function() {
+                PlaybackModel.onVolumeChange();
+            },
+            get: function(key) {
+                return PlaybackModel.get(key);
+            },
+            set: function(key, value) {
+                PlaybackModel.set(key, value);
             },
             mute: function() {
                 while (!PlaybackModel.get('muted') || PlaybackModel.get('mutedOnce'))

@@ -9,6 +9,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         allowed = $(['span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em', 'a'].concat(extra_allow)).not(disallowed).get();
         if (disallow === '*') allowed = [];
         tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+        input = input.split('&#8237;').join('&amp;#8237;').split('&#8238;').join('&amp;#8238;');
         return input.replace(tags, function(a, b) {
             return allowed.indexOf(b.toLowerCase()) > -1 ? a : '';
         });
@@ -374,19 +375,12 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             this.chatLog(undefined, $('<div>').append(table).html());
         },
         playChatSound: function() {
-            if (runLite || Database.settings.chatSound) {
-                try {
-                    document.getElementById('chat-sound').playChatSound();
-                } catch (e) {
-                }
-            }
+            // Should get another sound, until then - use mention sound
+            this.playMentionSound();
         },
         playMentionSound: function() {
-            if (runLite || Database.settings.chatSound) {
-                try {
-                    document.getElementById('chat-sound').playMentionSound();
-                } catch (e) {
-                }
+            if (!runLite && Database.settings.chatSound) {
+                (new Audio(require('app/utils/UI'))).play();
             }
         },
         getTimestamp: function(t, format) {

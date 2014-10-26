@@ -28,14 +28,14 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
         render: function() {
             var i, $settings = $('#p3-settings');
             if (div !== undefined) {
-                if (div.css('left') === '-271px') {
+                if (div.css('left') === '-500px') {
                     div.animate({
                         left: $settings.width() + 1
                     });
                     return;
                 }
                 div.animate({
-                    left: -271
+                    left: -500
                 });
                 return;
             }
@@ -49,18 +49,18 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
                 if (Settings.colorInfo.notifications.hasOwnProperty(i))
                     container.append(GUIInput(i, p3Lang.i18n(Settings.colorInfo.notifications[i].title), Settings.colorInfo.notifications[i].color));
             }
-            div = $('<div id="p3-settings-custom-colors" style="left: -271px;">').append($('<div class="header">').append($('<div class="back">').append($('<i class="icon icon-arrow-left"></i>')).click(function() {
+            div = $('<div id="p3-settings-custom-colors" style="left: -500px;">').append($('<div class="header">').append($('<div class="back">').append($('<i class="icon icon-arrow-left"></i>')).click(function() {
                     if (div !== undefined) div.animate({
-                        left: -271
+                        left: -500
                     });
                 })).append($('<div class="title">').append($('<span>').text(p3Lang.i18n('menu.customchatcolors'))))).append(container).animate({
                 left: $settings.width() + 1
             });
-            $('body').append(div);
+            $('#p3-settings-wrapper').append(div);
         },
         hide: function() {
             if (div !== undefined) div.animate({
-                left: -271
+                left: -500
             });
         }
     });

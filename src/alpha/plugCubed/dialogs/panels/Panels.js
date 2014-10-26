@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/dialogs/panels/Background', 'plugCubed/dialogs/panels/Login'], function() {
+define(['plugCubed/Class', 'plugCubed/dialogs/panels/Background', 'plugCubed/dialogs/panels/Notifications', 'plugCubed/dialogs/panels/Login'], function() {
     var modules, Class, handler;
 
     modules = $.makeArray(arguments);

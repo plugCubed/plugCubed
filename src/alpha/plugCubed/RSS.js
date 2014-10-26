@@ -1,5 +1,5 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/Settings', 'lang/Lang'], function($, Class, p3Utils, p3Lang, Styles, Settings, Lang) {
-    var RoomModel, handler, showMessage, _this, oriLang, langKeys, ranks;
+define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/bridges/Context', 'lang/Lang'], function($, Class, p3Utils, p3Lang, Styles, Settings, Context, Lang) {
+    var RoomModel, handler, showMessage, oriLang, langKeys, ranks;
 
     /**
      * @property {{ background: String, chat: { admin: String, ambassador: String, bouncer: String, cohost: String, residentdj: String, host: String, manager: String }, footer: String, header: String }} colors
@@ -14,11 +14,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     showMessage = false;
     oriLang = $.extend(true, {}, Lang);
     langKeys = $.map(oriLang, function(v, i) {
-        if (typeof v === 'string')
-            return i; else
+        if (typeof v === 'string') {
+            return i;
+        } else {
             return $.map(v, function(v2, i2) {
                 return i + '.' + i2;
             });
+        }
     });
     ranks = ['admin', 'ambassador', 'bouncer', 'cohost', 'residentdj', 'leader', 'host', 'manager', 'volunteer'];
 
@@ -65,8 +67,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         chatIcons: {},
         init: function() {
             _this = this;
-            if (!p3Utils.runLite)
-                RoomModel.on('change:description', this.update, this);
+            if (!p3Utils.runLite) {
+                Context.on('room:joining', this.clear, this);
+                Context.on('room:joined', this.update, this);
+            }
         },
         update: function() {
             var a;
@@ -91,20 +95,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             var i, a, loadEverything;
             loadEverything = Settings.useRoomSettings[document.location.pathname.split('/')[1]] !== undefined ? Settings.useRoomSettings[document.location.pathname.split('/')[1]] : true;
             if (roomSettings !== undefined) {
-                this.chatColors = {};
-                this.chatIcons = {};
-
-                for (i in langKeys) {
-                    if (!langKeys.hasOwnProperty(i)) continue;
-                    var key = langKeys[i];
-                    setPlugDJLang(key, getPlugDJLang(key, true));
-                }
-
-                $('#p3-dj-booth').remove();
-
-                Styles.unset([
-                    'rss-background-color', 'rss-background-image', 'rss-booth', 'rss-fonts', 'rss-imports', 'rss-rules', 'rss-maingui'
-                ]);
+                this.clear();
 
                 if (loadEverything) {
                     // colors
@@ -287,14 +278,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 require('plugCubed/dialogs/Menu').createMenu();
             }
         },
-        close: function() {
-            if (!p3Utils.runLite)
-                RoomModel.off('change:description', this.update, this);
-
+        clear: function() {
             this.chatColors = {};
             this.chatIcons = {};
 
-            for (var i in langKeys) {
+            for (i in langKeys) {
                 if (!langKeys.hasOwnProperty(i)) continue;
                 var key = langKeys[i];
                 setPlugDJLang(key, getPlugDJLang(key, true));
@@ -302,9 +290,15 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
             $('#p3-dj-booth').remove();
 
-            Styles.unset([
-                'rss-background-color', 'rss-background-image', 'rss-booth', 'rss-fonts', 'rss-imports', 'rss-rules', 'rss-maingui'
-            ]);
+            Styles.unset(['rss-background-color', 'rss-background-image', 'rss-booth', 'rss-fonts', 'rss-imports', 'rss-rules', 'rss-maingui']);
+        },
+        close: function() {
+            if (!p3Utils.runLite) {
+                Context.off('room:joining', this.clear, this);
+                Context.off('room:joined', this.update, this);
+            }
+
+            this.clear();
         }
     });
     return new handler();

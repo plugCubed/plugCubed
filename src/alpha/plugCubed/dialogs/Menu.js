@@ -1,5 +1,5 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notifications', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/RSS', 'plugCubed/Slider', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/ControlPanel', 'plugCubed/bridges/Context', 'plugCubed/handlers/ChatHandler', 'lang/Lang'], function($, Class, Version, enumNotifications, Settings, p3Utils, p3Lang, Styles, RSS, Slider, dialogColors, dialogControlPanel, _$context, ChatHandler, Lang) {
-    var $menuDiv, Database, PlaybackModel, menuClass, _this, menuButton, streamButton, clearChatButton, _onClick;
+define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notifications', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/RSS', 'plugCubed/Slider', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/ControlPanel', 'plugCubed/bridges/Context', 'plugCubed/handlers/ChatHandler', 'lang/Lang'], function($, Class, Version, enumNotifications, Settings, p3Utils, p3Lang, Styles, RSS, Slider, dialogColors, dialogControlPanel, Context, ChatHandler, Lang) {
+    var $wrapper, $menuDiv, Database, PlaybackModel, menuClass, _this, menuButton, streamButton, clearChatButton, _onClick;
 
     menuButton = $('<div id="plugcubed"><div class="cube-wrap"><div class="cube"><i class="icon icon-plugcubed"></i><i class="icon icon-plugcubed other"></i></div></div></div>');
     streamButton = $('<div>').addClass('chat-header-button p3-s-stream').data('key', 'stream');
@@ -46,25 +46,32 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
 
             if (!p3Utils.runLite) {
                 $('#chat-header').append(streamButton.click($.proxy(this.onClick, this)).mouseover(function() {
-                    _$context.trigger('tooltip:show', p3Lang.i18n('tooltip.stream'), $(this), true);
+                    Context.trigger('tooltip:show', p3Lang.i18n('tooltip.stream'), $(this), true);
                 }).mouseout(function() {
-                    _$context.trigger('tooltip:hide');
+                    Context.trigger('tooltip:hide');
                 })).append(clearChatButton.click($.proxy(this.onClick, this)).mouseover(function() {
-                    _$context.trigger('tooltip:show', p3Lang.i18n('tooltip.clear'), $(this), true);
+                    Context.trigger('tooltip:show', p3Lang.i18n('tooltip.clear'), $(this), true);
                 }).mouseout(function() {
-                    _$context.trigger('tooltip:hide');
+                    Context.trigger('tooltip:hide');
                 }));
-                this.setEnabled('stream', Database.settings.streamDisabled);
+                this.onRoomJoin();
+
+                Context.on('room:joined', this.onRoomJoin, this);
             }
+        },
+        onRoomJoin: function() {
+            this.setEnabled('stream', Database.settings.streamDisabled);
         },
         close: function() {
             menuButton.remove();
-            if ($menuDiv !== undefined)
-                $menuDiv.remove();
+            if ($wrapper !== undefined)
+                $wrapper.remove();
             $('#room-bar').css('left', 54).find('.favorite').css('right', 0);
             if (!p3Utils.runLite) {
                 streamButton.remove();
                 clearChatButton.remove();
+
+                Context.off('room:joined', this.onRoomJoin, this);
             }
             dialogControlPanel.close();
         },
@@ -141,7 +148,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     break;
                 case 'notify-join':
                 case 'notify-leave':
-                case 'notify-curate':
+                case 'notify-grab':
                 case 'notify-meh':
                 case 'notify-stats':
                 case 'notify-updates':
@@ -159,7 +166,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     this.setEnabled('stream', Database.settings.streamDisabled);
                     return;
                 case 'clear':
-                    _$context.trigger('ChatFacadeEvent:clear');
+                    Context.trigger('ChatFacadeEvent:clear');
                     return;
                 case 'roomsettings':
                     var b = Settings.useRoomSettings[window.location.pathname.split('/')[1]];
@@ -194,7 +201,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
         createMenu: function() {
             if ($menuDiv !== undefined)
                 $menuDiv.remove();
-            $menuDiv = $('<div>').css('left', this.shown ? 0 : -271).attr('id', 'p3-settings');
+            $menuDiv = $('<div>').css('left', this.shown ? 0 : -500).attr('id', 'p3-settings');
             var header = $('<div>').addClass('header'), container = $('<div>').addClass('container');
 
             // Header
@@ -218,11 +225,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     Settings.save();
                 })).mouseover(function() {
                     if (!p3Utils.runLite) {
-                        _$context.trigger('tooltip:show', p3Lang.i18n('tooltip.afk'), $(this), false);
+                        Context.trigger('tooltip:show', p3Lang.i18n('tooltip.afk'), $(this), false);
                     }
                 }).mouseout(function() {
                     if (!p3Utils.runLite) {
-                        _$context.trigger('tooltip:hide');
+                        Context.trigger('tooltip:hide');
                     }
                 }));
             }
@@ -244,7 +251,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             container.append($('<div class="section">' + p3Lang.i18n('notify.header') + '</div>'));
             container.append(GUIButton((Settings.notify & enumNotifications.USER_JOIN) === enumNotifications.USER_JOIN, 'notify-join', p3Lang.i18n('notify.join')).data('bit', enumNotifications.USER_JOIN));
             container.append(GUIButton((Settings.notify & enumNotifications.USER_LEAVE) === enumNotifications.USER_LEAVE, 'notify-leave', p3Lang.i18n('notify.leave')).data('bit', enumNotifications.USER_LEAVE));
-            container.append(GUIButton((Settings.notify & enumNotifications.USER_CURATE) === enumNotifications.USER_CURATE, 'notify-curate', p3Lang.i18n('notify.curate')).data('bit', enumNotifications.USER_CURATE));
+            container.append(GUIButton((Settings.notify & enumNotifications.USER_GRAB) === enumNotifications.USER_GRAB, 'notify-grab', p3Lang.i18n('notify.grab')).data('bit', enumNotifications.USER_GRAB));
             container.append(GUIButton((Settings.notify & enumNotifications.USER_MEH) === enumNotifications.USER_MEH, 'notify-meh', p3Lang.i18n('notify.meh')).data('bit', enumNotifications.USER_MEH));
             container.append(GUIButton((Settings.notify & enumNotifications.SONG_STATS) === enumNotifications.SONG_STATS, 'notify-stats', p3Lang.i18n('notify.stats')).data('bit', enumNotifications.SONG_STATS));
             container.append(GUIButton((Settings.notify & enumNotifications.SONG_UPDATE) === enumNotifications.SONG_UPDATE, 'notify-updates', p3Lang.i18n('notify.updates')).data('bit', enumNotifications.SONG_UPDATE));
@@ -259,7 +266,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 container.append(songLengthSlider.$slider.css('left', 40));
             }
 
-            $('body').append($menuDiv.append(header).append(container));
+            $wrapper = $('<div>').attr('id', 'p3-settings-wrapper');
+
+            $('body').append($wrapper.append($menuDiv.append(header).append(container)));
             if (songLengthSlider !== undefined) songLengthSlider.onChange();
         },
         /**
@@ -274,7 +283,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             if (!this.shown)
                 dialogColors.hide();
             $menuDiv.animate({
-                left: this.shown ? 0 : -271
+                left: this.shown ? 0 : -500
             }, {
                 complete: function() {
                     if (!_this.shown) {

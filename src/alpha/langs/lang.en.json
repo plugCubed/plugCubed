@@ -121,11 +121,6 @@
         "vote": "Vote",
         "position": "Position",
         "points": "Points",
-        "pointType": {
-            "dj": "%1 DJ Points",
-            "listener": "%1 Listener Points",
-            "curator": "%1 Curator Points"
-        },
         "fans": "Fans",
         "wootCount": "Woot Count",
         "mehCount": "Meh Count",

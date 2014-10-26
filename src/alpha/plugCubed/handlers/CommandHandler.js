@@ -160,6 +160,28 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 PlaybackModel.muteOnce();
                 return;
             }
+            // Worst hidden easter egg ever, but you can test this fullscreen feature so....
+            // please test it now you found the command xD
+            if (p3Utils.equalsIgnoreCase(command, 'easteregg')) {
+                (function() {
+                    var $docWidth = $(document).width(),
+                        $docHeight = $(document).height(),
+                        $chat = $('#chat'),
+                        $playbackControls = $('#playback-controls');
+
+                    $('#playback-container')
+                        .width($docWidth - $chat.width())
+                        .height($docHeight - $('.app-header').height() - $('#footer').height());
+
+                    $playbackControls.css('left', ($docWidth - $chat.width() - $playbackControls.width()) / 2 + 'px');
+
+                    $('#playback').css({
+                        left: 9,
+                        'z-index': 6
+                    });
+                })();
+                return;
+            }
             if (p3Utils.equalsIgnoreCase(command, 'link')) {
                 API.sendChat('plugCubed : http://plugcubed.net');
                 return;

@@ -70,12 +70,42 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                         }
 
                         // Imgur links
-                    } else if (p3Utils.startsWithIgnoreCase(url, ['http://imgur.com/gallery/', 'https://imgur.com/gallery/'])) {
+                    } else if (p3Utils.startsWithIgnoreCase(url, ['http://imgur.com/gallery/', 'https://imgur.com/gallery/','http://imgur.com/', 'https://imgur.com/'])) {
                         path = url.split('/');
                         if (path.length > 4) {
                             path = path[4];
-                            if (path.trim().length !== 0)
-                                imageURL = 'https://api.plugCubed.net/redirect/imgur/' + path;
+                            if (path.trim().length !== 0) {
+                                var $video, identifier = 'video-' + p3Utils.getRandomString(8);
+
+                                $video = $('<video autoplay loop muted="muted">').addClass(identifier).css('display', 'block').css('max-width', '100%').css('height', 'auto').css('margin', '0 auto');
+
+                                $(this).html('').append($video);
+
+                                $video.on('load', function() {
+                                    var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages'), height = this.height;
+                                    if (this.width > $chat.find('.message').width())
+                                        height *= this.width / $chat.find('.message').width();
+                                    $chat.scrollTop($chat[0].scrollHeight + height);
+                                });
+
+                                $.getJSON('https://api.plugcubed.net/redirect/imgurraw/' + path, function(imgurData) {
+                                    $video = $message.find('.' + identifier);
+
+                                    if (imgurData.error) {
+                                        console.log('error', imgurData);
+                                        $video.html(imgurData.error);
+                                        return;
+                                    }
+
+                                    if (imgurData['webm'] !== undefined)
+                                        $video.append($('<source>').attr('type', 'video/webm').attr('src', p3Utils.httpsifyURL(imgurData['webm'])));
+
+                                    if (imgurData['webm'] !== undefined)
+                                        $video.append($('<source>').attr('type', 'video/mp4').attr('src', p3Utils.httpsifyURL(imgurData['mp4'])));
+
+                                    $video.append($('<img>').attr('src', p3Utils.httpsifyURL(imgurData['link'])));
+                                });
+                            }
                         }
 
                         // Gyazo links
@@ -151,6 +181,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             })(API.getUser().id)) {
             data.deletable = true;
         }
+
+        data.un = p3Utils.cleanHTML(data.un, '*');
+        data.message = p3Utils.cleanHTML(data.message, ['div', 'table', 'tr', 'td']);
     }
 
     function onChatReceivedLate(data) {
@@ -184,22 +217,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             } else if (data.uid == API.getUser().id) {
                 data.type += 'you';
             }
-        }
-
-        if (data.type.split(' ')[0] === 'mention') {
-            data.type += ' is-';
-            if (p3Utils.hasPermission(undefined, 5, true)) {
-                data.type += 'admin';
-            } else if (p3Utils.hasPermission(undefined, 2, true)) {
-                data.type += 'ambassador';
-            } else if (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER)) {
-                data.type += 'staff';
-            } else if (p3Utils.hasPermission(undefined, API.ROLE.DJ)) {
-                data.type += 'dj';
-            } else {
-                data.type += 'you';
-            }
-            data.message = data.message.split('@' + API.getUser().username).join('<span class="name">@' + API.getUser().username + '</span>');
         }
 
         data.message = convertImageLinks(data.message, $this);

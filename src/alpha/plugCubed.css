@@ -171,7 +171,7 @@
 
 @-webkit-keyframes spin {
     from {
-        -webkit-transform: rotateY(0);
+        -webkit-transform: rotateY(0deg);
     }
     to {
         -webkit-transform: rotateY(-90deg);
@@ -180,7 +180,7 @@
 
 @-ms-keyframes spin {
     from {
-        ms-transform: rotateY(0);
+        ms-transform: rotateY(0deg);
     }
     to {
         ms-transform: rotateY(-90deg);
@@ -189,7 +189,7 @@
 
 @keyframes spin {
     from {
-        transform: rotateY(0);
+        transform: rotateY(0deg);
     }
     to {
         transform: rotateY(-90deg);
@@ -201,7 +201,7 @@
         -webkit-transform: rotateY(-90deg);
     }
     to {
-        -webkit-transform: rotateY(0);
+        -webkit-transform: rotateY(0deg);
     }
 }
 
@@ -210,7 +210,7 @@
         -ms-transform: rotateY(-90deg);
     }
     to {
-        -ms-transform: rotateY(0);
+        -ms-transform: rotateY(0deg);
     }
 }
 
@@ -219,7 +219,7 @@
         transform: rotateY(-90deg);
     }
     to {
-        transform: rotateY(0);
+        transform: rotateY(0deg);
     }
 }
 
@@ -290,13 +290,22 @@
     background: url('https://d1rfegul30378.cloudfront.net/alpha/images/mute_once.png') no-repeat 9px 6px;
 }
 
+#p3-settings-wrapper {
+    position: absolute;
+    top: 54px;
+    bottom: 54px;
+    height: auto;
+    width: 2px;
+}
+
 #p3-settings,
 #p3-settings-custom-colors {
     position: absolute;
     left: -270px;
-    top: 54px;
+    max-height: 100%;
+    min-height: 535px; /*below this height, plug stops resizing (vertically)*/
+    overflow-y: auto;
     background: #0a0a0a;
-    width: 270px;
     border-right: 1px solid #0a0a0a;
     border-bottom: 1px solid #0a0a0a;
     z-index: 1500;
@@ -308,11 +317,9 @@
 
 #p3-settings .header,
 #p3-settings-custom-colors .header {
-    position: relative;
     background: #1c1f25;
-    width: 100%;
     height: 59px;
-    float: left;
+    padding-right: 60px;
 }
 
 #p3-settings .header .back,
@@ -334,38 +341,37 @@
 
 #p3-settings .header .title,
 #p3-settings-custom-colors .header .title {
-    position: absolute;
-    top: 9px;
-    left: 7px;
+    padding-top: 5px;
+    padding-left: 6px;
 }
 
 #p3-settings .header .title i,
 #p3-settings-custom-colors .header .title i {
-    left: 4px;
-    top: 6px;
+    top: 14px;
 }
 
 #p3-settings .header .title span,
 #p3-settings-custom-colors .header .title span {
-    position: absolute;
     font-size: 23px;
-    top: -4px;
-    left: 45px;
     font-weight: 300;
+    margin-top: -4px;
+    margin-left: 45px;
 }
 
 #p3-settings-custom-colors .header .title span {
+    display: block;
     width: 190px;
     font-size: 18px;
-    left: 5px;
-    top: 8px;
+    margin-left: 0;
+    margin-top: 10px;
 }
 
 #p3-settings .header .title span.version {
+    display: block;
     font-size: 12px;
     color: gray;
-    width: 150px;
-    top: 30px;
+    padding-top: 5px;
+    margin-right: 5px;
 }
 
 #p3-settings .container,
@@ -391,8 +397,15 @@
     margin-top: 6px;
 }
 
+#p3-settings-custom-colors .container .item {
+    padding-right: 130px;
+    margin-left: 0;
+    text-align: right;
+}
+
 #p3-settings .container .item {
     cursor: pointer;
+    width: auto;
 }
 
 #p3-settings .container .item i,
@@ -403,17 +416,22 @@
 }
 
 #p3-settings .container .item span,
+#p3-settings .container .item input,
 #p3-settings-custom-colors .container .item span,
 #p3-settings-custom-colors .container .item input {
-    position: absolute;
-    left: 35px;
     color: #808691;
     font-weight: 300;
-    margin-left: 10px;
+    margin-left: 45px;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+#p3-settings .container .item input {
+    width: 200px;
 }
 
 #p3-settings-custom-colors .container .item span {
-    left: 0;
+    margin-left: 10px;
 }
 
 #p3-settings-custom-colors .container .item span.default {
@@ -426,25 +444,21 @@
 }
 
 #p3-settings-custom-colors .container .item span.example {
-    right: 130px;
+    position: absolute;
+    right: 102px;
     left: auto;
     width: 5px;
     height: 20px;
 }
 
 #p3-settings-custom-colors .container .item input {
-    right: 28px;
+    position: absolute;
+    right: 0;
     left: auto;
     width: 100px;
     text-align: center;
     color: #000000;
     border-left: none;
-}
-
-#p3-settings .container .item input {
-    position: absolute;
-    left: 44px;
-    width: 200px;
 }
 
 #p3-settings .container .cap,
