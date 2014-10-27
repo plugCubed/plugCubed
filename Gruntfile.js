@@ -3,7 +3,7 @@ fs = require('fs');
 path = require('path');
 
 var config;
-config = require(path.resolve(process.env.USERPROFILE, 'p3.config.js'));
+config = require(path.resolve((process.env.USERPROFILE || process.env.HOME), 'p3.config.js'));
 
 var deleteFolderRecursive = function(path) {
     if (fs.existsSync(path)) {
