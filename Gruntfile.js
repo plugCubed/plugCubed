@@ -309,15 +309,21 @@ module.exports = function(grunt) {
                                                     done(err);
                                                     return;
                                                 }
-                                                fs.rename('./out/plugCubed/combined.js', './bin/alpha/plugCubed.src.js', function(err) {
-                                                    if (err) {
+                                                fs.mkdir('./bin/alpha', function(err) {
+                                                    if (err && err.code !== 'EEXIST') {
                                                         done(err);
                                                         return;
                                                     }
+                                                    fs.rename('./out/plugCubed/combined.js', './bin/alpha/plugCubed.src.js', function(err) {
+                                                        if (err) {
+                                                            done(err);
+                                                            return;
+                                                        }
 
-                                                    deleteFolderRecursive('./out/');
+                                                        deleteFolderRecursive('./out/');
 
-                                                    done();
+                                                        done();
+                                                    });
                                                 });
                                             });
                                         });
@@ -376,15 +382,21 @@ module.exports = function(grunt) {
                                                     done(err);
                                                     return;
                                                 }
-                                                fs.rename('./out/plugCubed/combined.js', './bin/dev/plugCubed.src.js', function(err) {
-                                                    if (err) {
+                                                fs.mkdir('./bin/dev', function(err) {
+                                                    if (err && err.code !== 'EEXIST') {
                                                         done(err);
                                                         return;
                                                     }
+                                                    fs.rename('./out/plugCubed/combined.js', './bin/dev/plugCubed.src.js', function(err) {
+                                                        if (err) {
+                                                            done(err);
+                                                            return;
+                                                        }
 
-                                                    deleteFolderRecursive('./out/');
+                                                        deleteFolderRecursive('./out/');
 
-                                                    done();
+                                                        done();
+                                                    });
                                                 });
                                             });
                                         });
