@@ -3,7 +3,7 @@ fs = require('fs');
 path = require('path');
 
 var config;
-config = require(path.resolve(process.env.USERPROFILE, 'p3.config.js'));
+config = require(path.resolve((process.env.USERPROFILE || process.env.HOME), 'p3.config.js'));
 
 var deleteFolderRecursive = function(path) {
     if (fs.existsSync(path)) {
@@ -284,7 +284,7 @@ module.exports = function(grunt) {
                                 done(err);
                                 return;
                             }
-                            fs.readFile('./out/plugCubed/loader.js', function(err, p3Data) {
+                            fs.readFile('./out/plugCubed/Loader.js', function(err, p3Data) {
                                 if (err) {
                                     done(err);
                                     return;
@@ -309,15 +309,21 @@ module.exports = function(grunt) {
                                                     done(err);
                                                     return;
                                                 }
-                                                fs.rename('./out/plugCubed/combined.js', './bin/alpha/plugCubed.src.js', function(err) {
-                                                    if (err) {
+                                                fs.mkdir('./bin/alpha', function(err) {
+                                                    if (err && err.code !== 'EEXIST') {
                                                         done(err);
                                                         return;
                                                     }
+                                                    fs.rename('./out/plugCubed/combined.js', './bin/alpha/plugCubed.src.js', function(err) {
+                                                        if (err) {
+                                                            done(err);
+                                                            return;
+                                                        }
 
-                                                    deleteFolderRecursive('./out/');
+                                                        deleteFolderRecursive('./out/');
 
-                                                    done();
+                                                        done();
+                                                    });
                                                 });
                                             });
                                         });
@@ -351,7 +357,7 @@ module.exports = function(grunt) {
                                 done(err);
                                 return;
                             }
-                            fs.readFile('./out/plugCubed/loader.js', function(err, p3Data) {
+                            fs.readFile('./out/plugCubed/Loader.js', function(err, p3Data) {
                                 if (err) {
                                     done(err);
                                     return;
@@ -376,15 +382,21 @@ module.exports = function(grunt) {
                                                     done(err);
                                                     return;
                                                 }
-                                                fs.rename('./out/plugCubed/combined.js', './bin/dev/plugCubed.src.js', function(err) {
-                                                    if (err) {
+                                                fs.mkdir('./bin/dev', function(err) {
+                                                    if (err && err.code !== 'EEXIST') {
                                                         done(err);
                                                         return;
                                                     }
+                                                    fs.rename('./out/plugCubed/combined.js', './bin/dev/plugCubed.src.js', function(err) {
+                                                        if (err) {
+                                                            done(err);
+                                                            return;
+                                                        }
 
-                                                    deleteFolderRecursive('./out/');
+                                                        deleteFolderRecursive('./out/');
 
-                                                    done();
+                                                        done();
+                                                    });
                                                 });
                                             });
                                         });
