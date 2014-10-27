@@ -1,6 +1,8 @@
 # Building system
 node_modules
 _*
+!_postfix.js
+!_prefix.js
 
 # Development
 src/dev
