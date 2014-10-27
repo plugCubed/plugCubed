@@ -284,7 +284,7 @@ module.exports = function(grunt) {
                                 done(err);
                                 return;
                             }
-                            fs.readFile('./out/plugCubed/loader.js', function(err, p3Data) {
+                            fs.readFile('./out/plugCubed/Loader.js', function(err, p3Data) {
                                 if (err) {
                                     done(err);
                                     return;
@@ -351,7 +351,7 @@ module.exports = function(grunt) {
                                 done(err);
                                 return;
                             }
-                            fs.readFile('./out/plugCubed/loader.js', function(err, p3Data) {
+                            fs.readFile('./out/plugCubed/Loader.js', function(err, p3Data) {
                                 if (err) {
                                     done(err);
                                     return;
