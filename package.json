@@ -12,7 +12,8 @@
         "grunt-exec": "*",
         "grunt-execute": "*",
         "grunt-requirejs-obfuscate": "*",
-        "grunt-text-replace": "*"
+        "grunt-text-replace": "*",
+        "time-grunt": "*"
     },
     "private": true
 }
