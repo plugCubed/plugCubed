@@ -19,6 +19,7 @@ test
 backup
 images_for_review
 images_old
+tmp
 
 # Other files
 *.txt
@@ -29,8 +30,7 @@ titles.json
 rss.json
 extensions/key.pem
 extensions/Maxthon.mxaddon
-extensions/Chrome.zip
-extensions/ChromeOpera.crx
+extensions/Firefox-release
 extensions/Opera.crx
 extensions/promotionalSmall.png
 extensions/Opera/plugCubed.js

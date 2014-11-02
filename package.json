@@ -1,19 +1,20 @@
 {
     "name": "plugCubed",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "author": "The plugCubed Team",
     "description": "Grunt build setup for plugCubed",
     "devDependencies": {
-        "closurecompiler": "*",
-        "yuicompressor": "*",
-        "grunt-aws": "*",
-        "grunt-contrib-concat": "*",
-        "grunt-contrib-requirejs": "*",
-        "grunt-exec": "*",
-        "grunt-execute": "*",
-        "grunt-requirejs-obfuscate": "*",
-        "grunt-text-replace": "*",
-        "time-grunt": "*"
+        "closurecompiler": "^1.3.2",
+        "grunt-aws": "^0.4.0",
+        "grunt-contrib-concat": "^0.5.0",
+        "grunt-contrib-requirejs": "^0.4.4",
+        "grunt-exec": "^0.4.6",
+        "grunt-execute": "^0.2.2",
+        "grunt-mozilla-addon-sdk": "^0.3.2",
+        "grunt-requirejs-obfuscate": "^0.1.3",
+        "grunt-text-replace": "^0.3.12",
+        "time-grunt": "^1.0.0",
+        "yuicompressor": "^2.4.8"
     },
     "private": true
 }

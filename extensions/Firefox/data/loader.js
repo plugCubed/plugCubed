@@ -6,12 +6,13 @@ var s, loader = function() {
                 setTimeout(function() {
                     a.b();
                 }, 100);
-        }, c: function() {
+        },
+        c: function() {
             console.log('plugCubed Firefox Loader v.0.1 enabled!');
             var plug = document.createElement('script');
             plug.type = 'text/javascript';
             plug.src = 'https://d1rfegul30378.cloudfront.net/files/plugCubed.js';
-            document.head.appendChild(plug)
+            document.head.appendChild(plug);
             var load = document.getElementById('firefoxP3Loader');
             load.parentNode.removeChild(load);
         }

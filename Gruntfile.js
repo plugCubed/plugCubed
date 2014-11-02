@@ -215,9 +215,29 @@ module.exports = function(grunt) {
                     to: versionDev.build.toString()
                 }]
             },
-            versionExtension: {
+            operaVersionExtension: {
                 src: ['extensions/shared/manifest.src.json'],
                 dest: 'extensions/Opera/manifest.json',
+                replacements: [{
+                    from: 'VERSION.MAJOR',
+                    to: versionRelease.major.toString()
+                }, {
+                    from: 'VERSION.MINOR',
+                    to: versionRelease.minor.toString()
+                }, {
+                    from: 'VERSION.PATCH',
+                    to: versionRelease.patch.toString()
+                }, {
+                    from: 'VERSION.PRERELEASE',
+                    to: versionRelease.prerelease
+                }, {
+                    from: 'VERSION.BUILD',
+                    to: versionRelease.build.toString()
+                }]
+            },
+            firefoxVersionExtension: {
+                src: ['extensions/shared/package.src.json'],
+                dest: 'extensions/Firefox/package.json',
                 replacements: [{
                     from: 'VERSION.MAJOR',
                     to: versionRelease.major.toString()
@@ -408,6 +428,22 @@ module.exports = function(grunt) {
                 }
             }
         },
+        "mozilla-addon-sdk": {
+            latest: {
+                options: {
+                    revision: "1.17"
+                }
+            }
+        },
+        "mozilla-cfx-xpi": {
+            release: {
+                options: {
+                    "mozilla-addon-sdk": "latest",
+                    extension_dir: path.resolve(__dirname, 'extensions', 'Firefox'),
+                    dist_dir: "extensions/Firefox-release"
+                }
+            }
+        },
         requirejs_obfuscate: {
             options: {
                 root: 'plugCubed',
@@ -535,13 +571,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-execute');
+    grunt.loadNpmTasks('grunt-mozilla-addon-sdk');
     grunt.loadNpmTasks('grunt-requirejs-obfuscate');
     grunt.loadNpmTasks('grunt-text-replace');
 
     // Extensions
-    grunt.registerTask('extension:packOpera', ['exec:packCRX']);
+    grunt.registerTask('extension:packOpera', ['replace:operaVersionExtension', 'exec:packCRX']);
     grunt.registerTask('extension:packMaxthon', ['exec:packMXADDON']);
-    grunt.registerTask('extension', ['execute:extension', 'replace:versionExtension', 'extension:packChrome', 'extension:packOpera', 'extension:packMaxthon']);
+    grunt.registerTask('extension:packFirefox', ['replace:firefoxVersionExtension', 'mozilla-addon-sdk', 'mozilla-cfx-xpi']);
+    grunt.registerTask('extension', ['execute:extension', 'extension:packFirefox', 'extension:packOpera', 'extension:packMaxthon']);
 
     grunt.registerTask('build:release', ['replace:linksRelease', 'concat:release', 'replace:versionRelease', 'execute:reobfuscateRelease', 'replace:enableMinifyRelease', 'requirejs_obfuscate:release', 'execute:closureCompilerRelease', 'extension']);
     grunt.registerTask('build:alpha', ['replace:linksAlpha', 'requirejs:alpha', 'replace:versionAlpha', 'execute:reobfuscateAlpha', 'replace:enableMinifyAlpha', 'execute:closureCompilerAlpha']);
