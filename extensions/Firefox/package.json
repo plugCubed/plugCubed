@@ -1,0 +1,13 @@
+{
+  "name": "plug3",
+  "title": "plugCubed",
+  "description": "Adding a new dimension to plug.dj",
+  "author": "plug³ Team",
+  "homepage": "https://plugcubed.net",
+  "license": "MIT",
+  "version": "0.1",
+  
+  "id": "jid1-kMZAbqAgzIAbDQ",
+  "icon": "icons/48.png",
+  "icon64": "icons/64.png"
+}
