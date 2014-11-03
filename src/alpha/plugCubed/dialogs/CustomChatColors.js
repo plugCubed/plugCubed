@@ -2,7 +2,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
     function GUIInput(id, text, defaultColor) {
         if (!Settings.colors[id])
             Settings.colors[id] = defaultColor;
-        return $('<div class="item">').addClass('p3-s-cc-' + id).append($('<span>').text(text)).append($('<span>').addClass('default').css('display', Settings.colors[id] === defaultColor ? 'none' : 'block').mouseover(function() {
+        return $('<div class="item">').addClass('p3-s-cc-' + id).append($('<span>').text(text)).append($('<span>').addClass('default').css('display', Settings.colors[id] === defaultColor ? 'none' : 'inline-block').mouseover(function() {
                 _$context.trigger('tooltip:show', p3Lang.i18n('tooltip.reset'), $(this), false);
             }).mouseout(function() {
                 _$context.trigger('tooltip:hide');
@@ -20,7 +20,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
                     Settings.save();
                     CCC.update();
                 }
-                $(this).parent().find('.default').css('display', $(this).val() === defaultColor ? 'none' : 'block');
+                $(this).parent().find('.default').css('display', $(this).val() === defaultColor ? 'none' : 'inline-block');
             }));
     }
 
