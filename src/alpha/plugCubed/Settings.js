@@ -159,9 +159,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 for (var i in names) {
                     if (!names.hasOwnProperty(i)) continue;
                     if (save[names[i]] !== undefined && typeof this[names[i]] == typeof save[names[i]]) {
-                        if ($.isPlainObject(this[names[i]])) {
+                        if ($.isPlainObject(save[names[i]])) {
                             for (var j in this[names[i]]) {
-                                if (!this[names[i]].hasOwnProperty(j)) continue;
                                 if (save[names[i]][j] !== undefined) {
                                     this[names[i]][j] = save[names[i]][j];
                                 }
