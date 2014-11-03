@@ -10,5 +10,9 @@ pageMod.PageMod({
         'https://plug.dj/privacy',
         'https://plug.dj/logout',
         'https://plug.dj/'],
-    contentScriptFile: self.data.url('loader.js')
+    attachTo: 'top',
+    contentScriptFile: self.data.url('loader.js'),
+    contentScriptOptions: {
+        main_js: self.data.url('plugCubed.js'),
+    }
 });
