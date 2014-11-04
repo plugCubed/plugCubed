@@ -582,7 +582,7 @@ module.exports = function(grunt) {
     grunt.registerTask('extension', ['execute:extension', 'extension:packFirefox', 'extension:packOpera', 'extension:packMaxthon']);
 
     grunt.registerTask('build:release', ['replace:linksRelease', 'concat:release', 'replace:versionRelease', 'execute:reobfuscateRelease', 'replace:enableMinifyRelease', 'requirejs_obfuscate:release', 'execute:closureCompilerRelease', 'extension']);
-    grunt.registerTask('build:alpha', ['replace:linksAlpha', 'requirejs:alpha', 'replace:versionAlpha', 'execute:reobfuscateAlpha', 'replace:enableMinifyAlpha', 'execute:closureCompilerAlpha']);
+    grunt.registerTask('build:alpha', ['replace:linksAlpha', 'requirejs:alpha', 'replace:versionAlpha', 'execute:reobfuscateAlpha', 'replace:enableMinifyAlpha', 'requirejs_obfuscate:alpha', 'execute:closureCompilerAlpha']);
     grunt.registerTask('build:dev', ['replace:linksDev', 'requirejs:dev', 'replace:versionDev', 'execute:reobfuscateDev', 'replace:enableMinifyDev', 'execute:closureCompilerDev']);
     grunt.registerTask('build', ['execute:cleanLang', 'build:release', 'build:alpha', 'build:dev']);
 
