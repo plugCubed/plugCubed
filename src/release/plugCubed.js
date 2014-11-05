@@ -409,41 +409,42 @@ if (plugCubed !== undefined) plugCubed.close();
         function onChatReceived(data) {
             if (!data.uid) return;
 
-            data.type += ' from-' + data.uid;
+            data.plugType = data.type;
+            data.plugType += ' from-' + data.uid;
 
             if (p3Utils.havePlugCubedRank(data.uid))
-                data.type += ' is-p3' + p3Utils.getHighestRank(data.uid);
+                data.plugType += ' is-p3' + p3Utils.getHighestRank(data.uid);
 
-            data.type += ' from';
+            data.plugType += ' from';
             if (API.hasPermission(data.uid,API.ROLE.DJ) || data.uid == API.getUser().id) {
-                data.type += '-';
+                data.plugType += '-';
 
                 if (API.hasPermission(data.uid, API.ROLE.ADMIN)) {
-                    data.type += 'admin';
+                    data.plugType += 'admin';
                 } else if (API.hasPermission(data.uid, API.ROLE.AMBASSADOR)) {
-                    data.type += 'ambassador';
+                    data.plugType += 'ambassador';
                 } else if (API.hasPermission(data.uid, API.ROLE.HOST)) {
-                    data.type += 'host';
+                    data.plugType += 'host';
                 } else if (API.hasPermission(data.uid, API.ROLE.COHOST)) {
-                    data.type += 'cohost';
+                    data.plugType += 'cohost';
                 } else if (API.hasPermission(data.uid, API.ROLE.MANAGER)) {
-                    data.type += 'manager';
+                    data.plugType += 'manager';
                 } else if (API.hasPermission(data.uid, API.ROLE.BOUNCER)) {
-                    data.type += 'bouncer';
+                    data.plugType += 'bouncer';
                 } else if (API.hasPermission(data.uid, API.ROLE.DJ)) {
-                    data.type += 'residentdj';
+                    data.plugType += 'residentdj';
                 } else if (data.uid == API.getUser().id) {
-                    data.type += 'you';
+                    data.plugType += 'you';
                 }
             }
 
-            if (data.type.split(' ')[0] === 'mention') {
-                data.type += ' is-';
-                     if (API.hasPermission(data.uid,API.ROLE.ADMIN))     data.type += 'admin';
-                else if (API.hasPermission(data.uid,API.ROLE.VOLUNTEER)) data.type += 'ambassador';
-                else if (API.hasPermission(data.uid,API.ROLE.BOUNCER))   data.type += 'staff';
-                else if (API.hasPermission(data.uid,API.ROLE.DJ))        data.type += 'dj';
-                else if (data.uid == API.getUser().id)                   data.type += 'you';
+            if (data.plugType.split(' ')[0] === 'mention') {
+                data.plugType += ' is-';
+                     if (API.hasPermission(data.uid,API.ROLE.ADMIN))     data.plugType += 'admin';
+                else if (API.hasPermission(data.uid,API.ROLE.VOLUNTEER)) data.plugType += 'ambassador';
+                else if (API.hasPermission(data.uid,API.ROLE.BOUNCER))   data.plugType += 'staff';
+                else if (API.hasPermission(data.uid,API.ROLE.DJ))        data.plugType += 'dj';
+                else if (data.uid == API.getUser().id)                   data.plugType += 'you';
                 data.message = data.message.split('@' + API.getUser().username).join('<span class="name">@' + API.getUser().username + '</span>');
             }
 
@@ -474,7 +475,7 @@ if (plugCubed !== undefined) plugCubed.close();
 
             var $this = $('#chat').find('div[data-cid="' + data.cid + '"]');
 
-            if (data.type.split(' ')[0] === 'pm') {
+            if (data.plugType.split(' ')[0] === 'pm') {
                 var icon = $this.find('.icon');
                 if (icon.length === 0)
                     icon = $('<i>').addClass('icon').css({ width: '16px', height: '16px' }).appendTo($this);
