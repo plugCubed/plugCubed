@@ -28,10 +28,11 @@ tmp
 demo.php
 titles.json
 rss.json
-extensions/key.pem
-extensions/Maxthon.mxaddon
+extensions/*.pem
+extensions/*.crx
+extensions/*.zip
+extensions/*.mxaddon
 extensions/Firefox-release
-extensions/Opera.crx
 extensions/promotionalSmall.png
 extensions/Opera/plugCubed.js
 extensions/Firefox/plugCubed.js

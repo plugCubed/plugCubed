@@ -2,6 +2,7 @@ define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'p
     var _this, Chat, socket, tries = 0, socketReconnecting, socketHandler = Class.extend({
         connect: function() {
             if (socket !== undefined && socket.readyState === SockJS.OPEN) return;
+            return;
             _this = this;
             socket = new SockJS('https://socket.plugcubed.net/_');
             console.log('[plug³] Socket Server', socketReconnecting ? 'Reconnecting' : 'Connecting');

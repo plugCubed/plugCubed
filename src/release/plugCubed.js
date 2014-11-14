@@ -771,6 +771,7 @@ if (plugCubed !== undefined) plugCubed.close();
              * @this {plugCubedModel}
              */
             Socket: function() {
+                return;
                 if (socket !== undefined && socket.readyState === SockJS.OPEN) return;
                 socket = new SockJS('https://socket.plugcubed.net/_');
                 socket.tries = 0;
