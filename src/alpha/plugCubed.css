@@ -398,9 +398,10 @@
 }
 
 #p3-settings-custom-colors .container .item {
-    padding-right: 130px;
+    padding-right: 150px;
     margin-left: 0;
     text-align: right;
+    height: 20px;
 }
 
 #p3-settings .container .item {
@@ -435,30 +436,34 @@
 }
 
 #p3-settings-custom-colors .container .item span.default {
+    position: absolute;
     right: 5px;
     left: auto;
     width: 20px;
     height: 20px;
     background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/default_settings.png');
     cursor: pointer;
+    top: 0;
 }
 
 #p3-settings-custom-colors .container .item span.example {
     position: absolute;
-    right: 102px;
+    right: 132px;
     left: auto;
     width: 5px;
     height: 20px;
+    top: 0;
 }
 
 #p3-settings-custom-colors .container .item input {
     position: absolute;
-    right: 0;
+    right: 30px;
     left: auto;
     width: 100px;
     text-align: center;
     color: #000000;
     border-left: none;
+    top: 0;
 }
 
 #p3-settings .container .cap,
