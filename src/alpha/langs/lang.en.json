@@ -66,6 +66,12 @@
             "banall": "bans all users in the room"
         }
     },
+    "eta": {
+        "boothAvailable": "If you join the waitlist now, you would be DJing!",
+        "alreadyDJ": "You are already DJing!",
+        "waitListTime": "You are in the waitlist %1 of %2, you will be DJing in about %3!",
+        "joinTime": "If you join the waitlist now, you would be DJing in about %1!"
+    },
     "notify": {
         "header": "Chat Notifications",
         "join": "User Join",
@@ -77,17 +83,17 @@
         "history": "Songs in history",
         "songLength": "Song Length (%1 min)",
         "message": {
-            "grab": "%1 grabbed %2 - %3",
+            "grab": "grabbed %1 - %2",
             "stats": "Stats: %1 woots -- %2 mehs -- %3 grabs",
             "updates": "Now Playing: %1 by %2<br>Played by: %3",
-            "meh": "%1 meh'd this track",
+            "meh": "meh'd this track",
             "join": {
-                "normal": "%1 just joined the room",
+                "normal": "just joined the room",
                 "fan": "Your fan %1 just joined the room",
                 "friend": "Your friend %1 just joined the room"
             },
             "leave": {
-                "normal": "%1 just left the room",
+                "normal": "just left the room",
                 "fan": "Your fan %1 just left the room",
                 "friend": "Your friend %1 just left the room"
             },

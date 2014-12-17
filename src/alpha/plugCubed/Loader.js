@@ -1,23 +1,12 @@
-define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Socket', 'plugCubed/RSS', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels'], function(module, Class, Notifications, Version, Styles, Settings, p3Utils, p3Lang, Socket, RSS, Menu, CustomChatColors, ChatHandler, CommandHandler, Features, Tickers, Panels) {
-    var RoomUserListView, Loader, loaded = false;
+define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Socket', 'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/overrides/RoomUserListRow', 'plugCubed/overrides/UserRolloverView', 'plugCubed/overrides/WaitListRow'], function(module, Class, Notifications, Version, Styles, Settings, p3Utils, p3Lang, Socket, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, Features, Tickers, Panels, p3RoomUserListRow, p3UserRolloverView, p3WaitListRow) {
+    var Loader, loaded = false;
 
-    var p3RoomUserListRow, p3UserRolloverView;
-
-    if (!p3Utils.runLite) {
-        RoomUserListView = require('app/views/room/user/RoomUserListView');
-        require(['plugCubed/RoomUserListRow', 'plugCubed/UserRolloverView'], function(a, b) {
-            p3RoomUserListRow = a;
-            p3UserRolloverView = b;
-        });
-    } else {
-        RoomUserListView = function() {
-        };
-    }
+    var RoomUserListView;
 
     function __init() {
-        p3Utils.chatLog(undefined, p3Lang.i18n('running', Version) + '</span><br><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), Settings.colors.infoMessage1);
+        p3Utils.chatLog(undefined, p3Lang.i18n('running', Version) + '</span><br><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), Settings.colors.infoMessage1, -1, 'plug&#179;');
         if (p3Utils.runLite) {
-            p3Utils.chatLog(undefined, p3Lang.i18n('runningLite') + '</span><br><span class="chat-text" style="color:#FFFFFF">' + p3Lang.i18n('runningLiteInfo'), Settings.colors.warningMessage);
+            p3Utils.chatLog(undefined, p3Lang.i18n('runningLite') + '</span><br><span class="chat-text" style="color:#FFFFFF">' + p3Lang.i18n('runningLiteInfo'), Settings.colors.warningMessage, -1, 'plug&#179;');
         }
 
         $('head').append('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://d1rfegul30378.cloudfront.net/alpha/plugCubed.css" />');
@@ -29,8 +18,10 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         }
 
         if (!p3Utils.runLite) {
+            RoomUserListView = require('app/views/room/user/RoomUserListView');
             RoomUserListView.prototype.RowClass = p3RoomUserListRow;
             p3UserRolloverView.override();
+            p3WaitListRow.override();
         }
 
         initBody();
@@ -41,7 +32,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         CommandHandler.register();
         ChatHandler.register();
 
-        RSS.update();
+        RoomSettings.update();
 
         Socket.connect();
         Settings.load();
@@ -76,7 +67,10 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
             if (loaded) return;
 
             // Define UserData in case it's not already defined (reloaded p3 without refresh)
-            if (typeof plugCubedUserData === 'undefined') plugCubedUserData = {};
+            if (typeof plugCubedUserData === 'undefined') {
+                //noinspection JSUndeclaredVariable
+                plugCubedUserData = {};
+            }
 
             // Load language and begin script after language loaded
             p3Lang.load($.proxy(__init, this));
@@ -85,7 +79,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
             if (!loaded) return;
 
             Menu.close();
-            RSS.close();
+            RoomSettings.close();
             Socket.disconnect();
             Features.unregister();
             Notifications.unregister();
@@ -98,6 +92,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
             if (!p3Utils.runLite) {
                 RoomUserListView.prototype.RowClass = require('app/views/room/user/RoomUserListRow');
                 p3UserRolloverView.revert();
+                p3WaitListRow.revert();
             }
 
             var mainClass = module.id.split('/')[0], modules = require.s.contexts._.defined;

@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         concat: {
             release: {
                 src: ['src/release/plugCubed.js'],
-                dest: 'bin/release/plugCubed.combined.js'
+                dest: 'bin/release/plugCubed.src.js'
             }
         },
         exec: {
@@ -43,6 +43,9 @@ module.exports = function(grunt) {
             },
             packMXADDON: {
                 command: '"' + config.paths.mxPackerPath + '" "' + path.resolve(__dirname, 'extensions', 'Maxthon') + '"'
+            },
+            alphaToRelease: {
+                command: 'xcopy "src/alpha" "src/release" /S /Y'
             },
             devToAlpha: {
                 command: 'xcopy "src/dev" "src/alpha" /S /Y'
@@ -71,7 +74,7 @@ module.exports = function(grunt) {
             },
             reobfuscateRelease: {
                 options: {
-                    args: ('-r -f bin/release/plugCubed.combined.js -o bin/release/plugCubed.js' + (verboseEnabled ? ' -v' : '')).split(' ')
+                    args: ('-r -f bin/release/plugCubed.src.js -o bin/release/plugCubed.js' + (verboseEnabled ? ' -v' : '')).split(' ')
                 },
                 src: [config.paths.plugDeobfuscation + '/main.js']
             },
@@ -156,7 +159,7 @@ module.exports = function(grunt) {
                 }]
             },
             versionRelease: {
-                src: ['bin/release/plugCubed.combined.js'],
+                src: ['bin/release/plugCubed.src.js'],
                 overwrite: true,
                 replacements: [{
                     from: 'VERSION.MAJOR',
@@ -256,7 +259,7 @@ module.exports = function(grunt) {
                 }]
             },
             enableMinifyRelease: {
-                src: ['bin/release/plugCubed.combined.js'],
+                src: ['bin/release/plugCubed.src.js'],
                 overwrite: true,
                 replacements: [{
                     from: 'minified: false',
@@ -264,7 +267,7 @@ module.exports = function(grunt) {
                 }]
             },
             enableMinifyAlpha: {
-                src: ['bin/alpha/plugCubed.combined.js'],
+                src: ['bin/alpha/plugCubed.src.js'],
                 overwrite: true,
                 replacements: [{
                     from: 'minified: false',
@@ -281,6 +284,79 @@ module.exports = function(grunt) {
             }
         },
         requirejs: {
+            release: {
+                options: {
+                    appDir: './src/release',
+                    baseUrl: '.',
+                    dir: './out',
+                    optimize: 'none',
+                    keepBuildDir: false,
+                    removeCombined: false,
+                    paths: {
+                        jquery: 'empty:',
+                        underscore: 'empty:',
+                        'lang/Lang': 'empty:'
+                    },
+                    modules: [{
+                        name: 'plugCubed/Loader',
+                        include: []
+                    }],
+                    done: function(done) {
+                        fs.readFile('./src/release/plugCubed/_postfix.js', function(err, postfixData) {
+                            if (err) {
+                                done(err);
+                                return;
+                            }
+                            fs.readFile('./out/plugCubed/Loader.js', function(err, p3Data) {
+                                if (err) {
+                                    done(err);
+                                    return;
+                                }
+                                fs.readFile('./src/release/plugCubed/_prefix.js', function(err, prefixData) {
+                                    if (err) {
+                                        done(err);
+                                        return;
+                                    }
+                                    fs.writeFile('./out/plugCubed/combined.js', prefixData, function(err) {
+                                        if (err) {
+                                            done(err);
+                                            return;
+                                        }
+                                        fs.appendFile('./out/plugCubed/combined.js', p3Data, function(err) {
+                                            if (err) {
+                                                done(err);
+                                                return;
+                                            }
+                                            fs.appendFile('./out/plugCubed/combined.js', postfixData, function(err) {
+                                                if (err) {
+                                                    done(err);
+                                                    return;
+                                                }
+                                                fs.mkdir('./bin/alpha', function(err) {
+                                                    if (err && err.code !== 'EEXIST') {
+                                                        done(err);
+                                                        return;
+                                                    }
+                                                    fs.rename('./out/plugCubed/combined.js', './bin/release/plugCubed.src.js', function(err) {
+                                                        if (err) {
+                                                            done(err);
+                                                            return;
+                                                        }
+
+                                                        deleteFolderRecursive('./out/');
+
+                                                        done();
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    }
+                }
+            },
             alpha: {
                 options: {
                     appDir: './src/alpha',
@@ -296,7 +372,7 @@ module.exports = function(grunt) {
                     },
                     modules: [{
                         name: 'plugCubed/Loader',
-                        include: ['plugCubed/RoomUserListRow', 'plugCubed/UserRolloverView']
+                        include: []
                     }],
                     done: function(done) {
                         fs.readFile('./src/alpha/plugCubed/_postfix.js', function(err, postfixData) {
@@ -369,7 +445,7 @@ module.exports = function(grunt) {
                     },
                     modules: [{
                         name: 'plugCubed/Loader',
-                        include: ['plugCubed/RoomUserListRow', 'plugCubed/UserRolloverView']
+                        include: []
                     }],
                     done: function(done) {
                         fs.readFile('./src/dev/plugCubed/_postfix.js', function(err, postfixData) {
@@ -581,7 +657,7 @@ module.exports = function(grunt) {
     grunt.registerTask('extension:packFirefox', ['replace:firefoxVersionExtension', 'mozilla-addon-sdk', 'mozilla-cfx-xpi']);
     grunt.registerTask('extension', ['execute:extension', 'extension:packFirefox', 'extension:packOpera', 'extension:packMaxthon']);
 
-    grunt.registerTask('build:release', ['replace:linksRelease', 'concat:release', 'replace:versionRelease', 'execute:reobfuscateRelease', 'replace:enableMinifyRelease', 'requirejs_obfuscate:release', 'execute:closureCompilerRelease', 'extension']);
+    grunt.registerTask('build:release', ['replace:linksRelease', 'requirejs:release', 'replace:versionRelease', 'execute:reobfuscateRelease', 'replace:enableMinifyRelease', 'requirejs_obfuscate:release', 'execute:closureCompilerRelease', 'extension']);
     grunt.registerTask('build:alpha', ['replace:linksAlpha', 'requirejs:alpha', 'replace:versionAlpha', 'execute:reobfuscateAlpha', 'replace:enableMinifyAlpha', 'requirejs_obfuscate:alpha', 'execute:closureCompilerAlpha']);
     grunt.registerTask('build:dev', ['replace:linksDev', 'requirejs:dev', 'replace:versionDev', 'execute:reobfuscateDev', 'replace:enableMinifyDev', 'execute:closureCompilerDev']);
     grunt.registerTask('build', ['execute:cleanLang', 'build:release', 'build:alpha', 'build:dev']);

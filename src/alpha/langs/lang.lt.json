@@ -1,5 +1,7 @@
 {
   "running":"Naudojama plug&#179; versija %1",
+  "runningLite":"Running plug&#179; in Lite!",
+  "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"Rašykite \"\/commands\" kad pamatytumėt paaiškintas pokalbio kambario komandas.",
   "automuted":"%1 užtildytas.",
   "nextsong":"parodyk kita daina grojaraštyje ir ar ji buvo sugrota praeityje ",
@@ -31,7 +33,6 @@
       "reason":"priežastis"
     },
     "descriptions":{
-      "nick":"keisti vardą",
       "avail":"nustatyti statusą į prieinamas",
       "afk":"\"Aš nesu prie klaviatūros\" žinutė",
       "work":"nustatyti statusą į dirbantis",
@@ -44,10 +45,9 @@
       "unmute":"nustatyk garsą į tokį pat kaip buvo paskutini karta ",
       "nextsong":"parodyk kita daina grojaraštyje ir ar ji buvo sugrota praeityje ",
       "refresh":"perkrauk video",
-      "ignore":"Ignoruok visas pokalbio kambario žinutes iš vartotojo",
       "alertson":"sugrok garsą kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
       "alertsoff":"sustok groti garsus kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
-      "curate":"%1 pridėta %2 - %3",
+      "grab":"add current song to your selected playlist",
       "getpos":"gauk dabartinę pozicija laukimo eilėje",
       "version":"rodo versijos numeri",
       "commands":"parodo šį sąrašą",
@@ -70,14 +70,14 @@
     "header":"Vartotojo info",
     "join":"Vartotojo Prisijungimas",
     "leave":"Vartotojo Išėjimas",
-    "curate":"Pridėti į Grojaraštį",
+    "grab":"User Grab",
     "meh":"Nepatinka",
     "stats":"Dainų nustatymai",
     "updates":"Dainu atnaujinimai",
     "history":"Dainų istorija",
     "songLength":"Dainos trukmė minutėmis",
     "message":{
-      "curate":"%1 pridėta %2 - %3",
+      "grab":"%1 grabbed %2 - %3",
       "stats":"Statistika: %1 palaikymai -- %2 mehs -- %3 pasiėmimai",
       "updates":"Dabar Groja: %1 by %2<br \/>Kas leidžia dainą: %3",
       "meh":"%1 nepatinka ši daina",
@@ -121,11 +121,6 @@
     "vote":"Balsas",
     "position":"Vieta",
     "points":"Taškai",
-    "pointType":{
-      "dj":"%1 DJ Taškai",
-      "listener":"%1 Klausytojo Taškai",
-      "curator":"%1  Griebimo Taškai"
-    },
     "fans":"Fanai",
     "wootCount":"Woot Skaičius",
     "mehCount":"Meh Skaičius",
@@ -164,23 +159,16 @@
     "notify":"Pranešimai",
     "afktimers":"\"Aš nesu prie klaviatūros\"  Laikai",
     "roomsettings":"Kambario nustatymai",
-    "chatimages":"Pokalbio žinutės"
-  },
-  "status":{
-    "available":"Pasiekiamas",
-    "afk":"\"Aš nesu prie klaviatūros\" žinutė",
-    "working":"Darbe",
-    "gaming":"Žaidime"
+    "chatimages":"Pokalbio žinutės",
+    "twitchemotes":"Twitch Emotes",
+    "controlpanel":"Control Panel"
   },
   "vote":{
     "meh":"Nepatinka",
     "woot":"Patinka",
+    "grab":"Grab",
     "undecided":"Nenuspręsta",
     "djing":"DJ'avimas"
-  },
-  "ignore":{
-    "enabled":"Jūs dabar ignoruojate %1",
-    "disabled":"Jūs daugiau neignoruojate %1"
   },
   "automute":{
     "registered":"%1 Užregistruota automatiškai uždrausti kalbėt ateityje ",
@@ -200,7 +188,6 @@
     "unknownMenuKey":"Nežinomas meniu mygtukas: %1",
     "missingReason":"Priežastis nerasta",
     "notConnected":"Neprisijungta prie serverio lizdo",
-    "ignoredUser":"Ignoruotas žmogus",
     "noLiteSupport":"Tai nėra palaikoma plug&#179; Lengvasis"
   }
 }

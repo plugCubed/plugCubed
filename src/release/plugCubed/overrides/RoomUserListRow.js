@@ -1,12 +1,15 @@
 define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Context'], function($, p3Lang, p3Utils, _$context) {
+    if (p3Utils.runLite) return null;
+
     var RoomUserListRow = require('app/views/room/user/RoomUserListRow');
+
     return RoomUserListRow.extend({
         vote: function() {
             if (this.model.get('grab') || this.model.get('vote') !== 0) {
                 if (!this.$icon) {
                     this.$icon = $('<i>').addClass('icon');
+                    this.$el.append(this.$icon);
                 }
-                this.$el.append(this.$icon);
                 if (this.model.get('grab')) {
                     this.$icon.removeClass().addClass('icon icon-grab');
                 } else if (this.model.get('vote') == 1) {
@@ -21,8 +24,9 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Contex
 
             var id = this.model.get('id'), $voteIcon = this.$el.find('.icon-woot,.icon-meh,.icon-grab');
             
-            if (p3Utils.havePlugCubedRank(id) || API.getUser(id).permission > API.ROLE.NONE) {
+            if (p3Utils.havePlugCubedRank(id) || p3Utils.hasPermission(id, API.ROLE.DJ)) {
                 var $icon = this.$el.find('.icon:not(.icon-woot,.icon-meh,.icon-grab)'), specialIconInfo = p3Utils.getPlugCubedSpecial(id);
+                
                 if ($icon.length < 1) {
                     $icon = $('<i>').addClass('icon');
                     this.$el.append($icon);
@@ -39,7 +43,7 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Contex
                 });
 
                 if (specialIconInfo !== undefined) {
-                    $icon.css('background-image', 'url("https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3special.' + specialIconInfo.icon + '.png")');
+                    $icon.css('background-image', 'url("https://d1rfegul30378.cloudfront.net/files/images/icons.p3special.' + specialIconInfo.icon + '.png")');
                 }
             }
 

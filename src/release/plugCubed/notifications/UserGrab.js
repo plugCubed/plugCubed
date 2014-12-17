@@ -3,8 +3,8 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
         trigger: API.GRAB_UPDATE,
         handler: function(data) {
             var media = API.getMedia();
-            if ((Settings.notify & enumNotifications.USER_CURATE) === enumNotifications.USER_CURATE)
-                p3Utils.chatLog(undefined, p3Lang.i18n('notify.message.curate', p3Utils.cleanTypedString(data.user.username), media.author, media.title), Settings.colors.curate);
+            if ((Settings.notify & enumNotifications.USER_GRAB) === enumNotifications.USER_GRAB)
+                p3Utils.chatLog(undefined, p3Lang.i18n('notify.message.grab', media.author, media.title), Settings.colors.grab || Settings.colorInfo.notifications.grab.color, data.user.id);
         }
     });
     return new handler();

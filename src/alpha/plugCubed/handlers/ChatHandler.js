@@ -152,12 +152,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             for (var i in twitchEmotes) {
                 if (!twitchEmotes.hasOwnProperty(i)) continue;
                 var twitchEmote = twitchEmotes[i];
-                if (text.indexOf(' ' + twitchEmote.emote + ' ') > -1) {
-                    var temp = $('<div>'), image = $('<img>').attr('src', twitchEmote.url).data('emote', $('<span>').html(twitchEmote.emote).text()).mouseover(function() {
-                        _$context.trigger('tooltip:show', $(this).data('emote'), $(this), true);
-                    }).mouseout(function() {
-                        _$context.trigger('tooltip:hide');
-                    });
+                if (text.indexOf(' ' + twitchEmote.emote + ' ') > -1 || text.indexOf(':' + twitchEmote.emote + ':') > -1) {
+                    var temp = $('<div>'), image = $('<img>').addClass('twitch-emote').attr('src', twitchEmote.url).data('emote', $('<span>').html(twitchEmote.emote).text());
                     image.on('load', function() {
                         var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages'), height = this.height;
                         if (this.width > $chat.find('.message').width())
@@ -166,6 +162,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                     });
                     temp.append(image);
                     text = text.split(' ' + twitchEmote.emote + ' ').join(' ' + temp.html() + ' ');
+                    text = text.split(':' + twitchEmote.emote + ':').join(temp.html());
                 }
             }
             return (nbspStart ? '&nbsp;' : '') + text.substr(1, text.length - 2);
@@ -176,7 +173,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatReceived(data) {
         if (!data.uid) return;
 
-        if (API.getUser().permission > API.ROLE.DJ && (function(_) {
+        p3Utils.setUserData(data.uid, 'lastChat', Date.now());
+
+        if (p3Utils.hasPermission(undefined, API.ROLE.DJ) && (function(_) {
                 return p3Utils.isPlugCubedDeveloper(_) || p3Utils.isPlugCubedSponsor(_) || p3Utils.isPlugCubedAmbassador(_);
             })(API.getUser().id)) {
             data.deletable = true;
@@ -222,25 +221,20 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         data.message = convertImageLinks(data.message, $this);
         data.message = convertEmotes(data.message);
 
-        if (data.type.split(' ')[0] === 'pm') {
-            $icon = $this.find('.icon');
-            if ($icon.length === 0) {
-                $('<i>').addClass('icon').css({
-                    width: '16px',
-                    height: '16px'
-                }).appendTo($this);
-            }
-            if ($('.icon-chat-sound-on').length > 0) {
-                p3Utils.playChatSound();
-            }
-        } else if (p3Utils.havePlugCubedRank(data.uid) || API.getUser(data.uid).permission > API.ROLE.NONE) {
-            $icon = $this.find('.icon');
+        $(data.message).find('.twitch-emote').mouseover(function() {
+            _$context.trigger('tooltip:show', $(this).data('emote'), $(this), true);
+        }).mouseout(function() {
+            _$context.trigger('tooltip:hide');
+        });
+
+        if (p3Utils.havePlugCubedRank(data.uid) || p3Utils.hasPermission(data.uid, API.ROLE.DJ)) {
+            $icon = $this.find('.from .icon');
             var specialIconInfo = p3Utils.getPlugCubedSpecial(data.uid);
             if ($icon.length === 0) {
                 $icon = $('<i>').addClass('icon').css({
                     width: '16px',
                     height: '16px'
-                }).appendTo($this);
+                }).prependTo($this.find('.from'));
             }
 
             $icon.mouseover(function() {
@@ -259,7 +253,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
         if (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper()) {
             $this.data('translated', false);
-            $this.dblclick(function() {
+            $this.dblclick(function(e) {
+                if (!e.ctrlKey) return true;
                 if ($this.data('translated')) {
                     $this.find('.text').html(convertEmotes(convertImageLinks(data.message)));
                     $this.data('translated', false);
@@ -275,6 +270,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                         }
                     }, 'json');
                 }
+                return false;
             });
         }
     }

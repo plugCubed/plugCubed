@@ -1,5 +1,7 @@
 {
   "running":"Pokrećeš plug plug&#179; verzija %1",
+  "runningLite":"Running plug&#179; in Lite!",
+  "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"Koristi ' \/commands' da vidis komande.",
   "automuted":"%1 mutirano.",
   "nextsong":"Prikaži sledeću pesmu sa plej liste i ako je u istoriji",
@@ -31,7 +33,6 @@
       "reason":"razlog"
     },
     "descriptions":{
-      "nick":"promeni nik",
       "avail":"postavlja status na dostupan",
       "afk":"AFK poruka",
       "work":"postavlja status na radim",
@@ -44,10 +45,9 @@
       "unmute":"Postavi zvuk na predhodno",
       "nextsong":"Prikaži sledeću pesmu sa plej liste i ako je u istoriji",
       "refresh":"Osveži video",
-      "ignore":"Ignoriši sve poruke na četu od korisnika",
       "alertson":"pusti zvuk kada se definisane reči pomenu u chatu",
       "alertsoff":"isključi zvuk kada se definisane reči pomenu u chatu",
-      "curate":"%1 dodao %2 - %3",
+      "grab":"add current song to your selected playlist",
       "getpos":"Trenutna pozicija na listi čekanja",
       "version":"Prikaži broj verzije",
       "commands":"prikazuje ovu listu",
@@ -70,14 +70,14 @@
     "header":"Informacije o korisniku",
     "join":"Korisnik uđe",
     "leave":"Korisnik ode",
-    "curate":"User Curate",
+    "grab":"User Grab",
     "meh":"User Mehs",
     "stats":"Song Stats",
     "updates":"Song Updates",
     "history":"Songs in history",
     "songLength":"Song Length (%1 min)",
     "message":{
-      "curate":"%1 dodao %2 - %3",
+      "grab":"%1 grabbed %2 - %3",
       "stats":"Statistika: %1 Woot -- %2 Meh -- %3 Grab",
       "updates":"Trenutna pesma: %1 od %2<br \/>Pustio: %3",
       "meh":"%1 meh'd this track",
@@ -121,11 +121,6 @@
     "vote":"Glasaj",
     "position":"Pozicija",
     "points":"Poena",
-    "pointType":{
-      "dj":"%1 DJ poena",
-      "listener":"%1 Poena",
-      "curator":"%1 Poena"
-    },
     "fans":"Fanovi",
     "wootCount":"Broj sviđanja",
     "mehCount":"Broj Mehova",
@@ -164,23 +159,16 @@
     "notify":"Obaveštenja",
     "afktimers":"AFK tajmer",
     "roomsettings":"Podešavanja sobe",
-    "chatimages":"Chat Images"
-  },
-  "status":{
-    "available":"Dostupan",
-    "afk":"AFK poruka",
-    "working":"Radim",
-    "gaming":"Igra"
+    "chatimages":"Chat Images",
+    "twitchemotes":"Twitch Emotes",
+    "controlpanel":"Control Panel"
   },
   "vote":{
     "meh":"Ne sviđa mi se",
     "woot":"Sviđa mi se",
+    "grab":"Grab",
     "undecided":"Neodlučan",
     "djing":"je DJ"
-  },
-  "ignore":{
-    "enabled":"Od sada ignorišeš %1",
-    "disabled":"Više ne ignorišeš %1"
   },
   "automute":{
     "registered":"%1 je onemogućio zvuk za naredna puštanja",
@@ -200,7 +188,6 @@
     "unknownMenuKey":"Nepoznata komanda: %1",
     "missingReason":"Nedostaje razlog",
     "notConnected":"Nisi povezan sa serverom",
-    "ignoredUser":"Ignored User",
     "noLiteSupport":"This is not supported in plug&#179; Lite"
   }
 }

@@ -1,5 +1,7 @@
 {
     "running": "Running plug&#179; version %1",
+    "runningLite": "Running plug&#179; in Lite!",
+    "runningLiteInfo": "Some features will not work.",
     "commandsHelp": "Use '/commands' to see expanded chat commands.",
     "automuted": "%1 automuted.",
     "nextsong": "Your next queued song is %1 by %2",
@@ -31,7 +33,6 @@
             "reason": "reason"
         },
         "descriptions": {
-            "nick": "change username",
             "avail": "set status to available",
             "afk": "set status to afk",
             "work": "set status to working",
@@ -44,10 +45,9 @@
             "unmute": "set volume to last volume",
             "nextsong": "display next song in playlist and if it's in history",
             "refresh": "refresh the video",
-            "ignore": "ignore all chat messages from user",
             "alertson": "play sound whenever defined words are written in chat",
             "alertsoff": "stop playing sound when defined words are written in chat",
-            "curate": "add current song to your selected playlist",
+            "grab": "add current song to your selected playlist",
             "getpos": "get current waitlist position",
             "version": "displays version number",
             "commands": "shows this list",
@@ -66,28 +66,34 @@
             "banall": "bans all users in the room"
         }
     },
+    "eta": {
+        "boothAvailable": "If you join the waitlist now, you would be DJing!",
+        "alreadyDJ": "You are already DJing!",
+        "waitListTime": "You are in the waitlist %1 of %2, you will be DJing in about %3!",
+        "joinTime": "If you join the waitlist now, you would be DJing in about %1!"
+    },
     "notify": {
         "header": "Chat Notifications",
         "join": "User Join",
         "leave": "User Leave",
-        "curate": "User Grab",
+        "grab": "User Grab",
         "meh": "User Mehs",
         "stats": "Song Stats",
         "updates": "Song Updates",
         "history": "Songs in history",
         "songLength": "Song Length (%1 min)",
         "message": {
-            "curate": "%1 grabbed %2 - %3",
+            "grab": "grabbed %1 - %2",
             "stats": "Stats: %1 woots -- %2 mehs -- %3 grabs",
             "updates": "Now Playing: %1 by %2<br>Played by: %3",
-            "meh": "%1 meh'd this track",
+            "meh": "meh'd this track",
             "join": {
-                "normal": "%1 just joined the room",
+                "normal": "just joined the room",
                 "fan": "Your fan %1 just joined the room",
                 "friend": "Your friend %1 just joined the room"
             },
             "leave": {
-                "normal": "%1 just left the room",
+                "normal": "just left the room",
                 "fan": "Your fan %1 just left the room",
                 "friend": "Your friend %1 just left the room"
             },
@@ -121,11 +127,6 @@
         "vote": "Vote",
         "position": "Position",
         "points": "Points",
-        "pointType": {
-            "dj": "%1 DJ Points",
-            "listener": "%1 Listener Points",
-            "curator": "%1 Curator Points"
-        },
         "fans": "Fans",
         "wootCount": "Woot Count",
         "mehCount": "Meh Count",
@@ -164,23 +165,16 @@
         "notify": "Notifications",
         "afktimers": "AFK Timers",
         "roomsettings": "Room Settings",
-        "chatimages": "Chat Images"
-    },
-    "status": {
-        "available": "Available",
-        "afk": "AFK",
-        "working": "Working",
-        "gaming": "Gaming"
+        "chatimages": "Chat Images",
+        "twitchemotes": "Twitch Emotes",
+        "controlpanel": "Control Panel"
     },
     "vote": {
         "meh": "Meh",
         "woot": "Woot",
+        "grab": "Grab",
         "undecided": "Undecided",
         "djing": "DJing"
-    },
-    "ignore": {
-        "enabled": "You are now ignoring %1",
-        "disabled": "You are no longer ignoring %1"
     },
     "automute": {
         "registered": "%1 registered to automute on future plays.",
@@ -200,7 +194,6 @@
         "unknownMenuKey": "Unknown menu key: %1",
         "missingReason": "Missing reason",
         "notConnected": "Not connected to socket server",
-        "ignoredUser": "Ignored User",
         "noLiteSupport": "This is not supported in plug&#179; Lite"
     }
 }

@@ -1,5 +1,7 @@
 {
   "running":"Je gebruikt plug&#179; versie %1",
+  "runningLite":"Running plug&#179; in Lite!",
+  "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"Gebruik '\/commands' om alle chat commando's te zien",
   "automuted":"%1 automatisch gedemt\/muted",
   "nextsong":"Laat volgende nummer zien in de afspeellijst en of het in de geschiedenis staat",
@@ -31,7 +33,6 @@
       "reason":"reden"
     },
     "descriptions":{
-      "nick":"verander gebruikersnaam",
       "avail":"zet status op beschikbaar",
       "afk":"AFK Bericht",
       "work":"zet status op werken",
@@ -44,10 +45,9 @@
       "unmute":"Zet volume naar laatste volume",
       "nextsong":"Laat volgende nummer zien in de afspeellijst en of het in de geschiedenis staat",
       "refresh":"Herlaadt de video ",
-      "ignore":"Negeer alle chat berichten van gebruiker",
       "alertson":"Maak geluid waneer gedefinieerde woorden zijn geschreven in de chat",
       "alertsoff":"Stop geluid spelen wanneer gedefinieerde woorden zijn geschreven in de chat",
-      "curate":"%1 toegevoegd %2 - %3",
+      "grab":"add current song to your selected playlist",
       "getpos":"Krijg huidige wachtlijst positie",
       "version":"Weergeef versienummer",
       "commands":"Laat deze lijst zien",
@@ -70,14 +70,14 @@
     "header":"Gebruiker informatie",
     "join":"Gebruiker join",
     "leave":"Gebruiker gaat weg",
-    "curate":"Gebruiker Curate",
+    "grab":"User Grab",
     "meh":"Gebruiker Mehs",
     "stats":"Nummer Statistieken",
     "updates":"Nummer Updates",
     "history":"Nummers in geschiedenis",
     "songLength":"Lengte van een nummer (1% min)",
     "message":{
-      "curate":"%1 toegevoegd %2 - %3",
+      "grab":"%1 grabbed %2 - %3",
       "stats":"Status: %1 woots - %2 mehs - %3 grabs",
       "updates":"Nu aan het spelen: %1 by %2<br\/> Gespeeld door: %3",
       "meh":"%1 Heeft deze track gemeh'd",
@@ -121,11 +121,6 @@
     "vote":"Stem",
     "position":"Positie",
     "points":"Punten",
-    "pointType":{
-      "dj":"%1 DJ Punten",
-      "listener":"%1 Luisteraar's Punten",
-      "curator":"%1 Grijp punten"
-    },
     "fans":"Fans",
     "wootCount":"Woot tellen",
     "mehCount":"Meh tellen",
@@ -135,7 +130,7 @@
     "inWaitlist":"%1\/%2 in de wachtlijst",
     "userDjing":"%1 zijn op dit moment DJing",
     "userNextDJ":"%1 DJing volgende ",
-    "disconnects":"Verbindingen verbroken",
+    "disconnects":"Aantal verbroken verbindingen",
     "lastDisconnect":"Laatste Disconnect",
     "lastPosition":"Positie",
     "time":"Tijd"
@@ -164,23 +159,16 @@
     "notify":"Notificatie's",
     "afktimers":"AFK Wekkers",
     "roomsettings":"Kamer instellingen",
-    "chatimages":"Chat Afbeeldingen"
-  },
-  "status":{
-    "available":"Beschikbaar",
-    "afk":"AFK Bericht",
-    "working":"Werken",
-    "gaming":"Gaming"
+    "chatimages":"Chat Afbeeldingen",
+    "twitchemotes":"Twitch Emotes",
+    "controlpanel":"Control Panel"
   },
   "vote":{
     "meh":"Meh",
     "woot":"Woot",
+    "grab":"Grab",
     "undecided":"Niet besloten",
     "djing":"Aan het DJen"
-  },
-  "ignore":{
-    "enabled":"Je negeert nu %1",
-    "disabled":"Je negeert %1 niet meer"
   },
   "automute":{
     "registered":"%1 is geregistreerd om om te automuten de volgende keer dat deze draait",
@@ -200,7 +188,6 @@
     "unknownMenuKey":"Onbekende menu key: %1",
     "missingReason":"Ontbrekende reden",
     "notConnected":"Niet verbonden met socket server",
-    "ignoredUser":"Genegeerde gebruiker",
     "noLiteSupport":"Dit wordt niet ondersteund in plug&#179; Lite"
   }
 }

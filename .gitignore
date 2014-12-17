@@ -35,4 +35,4 @@ extensions/*.mxaddon
 extensions/Firefox-release
 extensions/promotionalSmall.png
 extensions/Opera/plugCubed.js
-extensions/Firefox/plugCubed.js
+extensions/Firefox/data/plugCubed.js

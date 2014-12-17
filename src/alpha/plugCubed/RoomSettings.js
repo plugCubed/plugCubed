@@ -94,15 +94,16 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         execute: function() {
             var i, a, loadEverything;
             loadEverything = Settings.useRoomSettings[document.location.pathname.split('/')[1]] !== undefined ? Settings.useRoomSettings[document.location.pathname.split('/')[1]] : true;
-            if (roomSettings !== undefined) {
-                this.clear();
 
+            this.clear();
+
+            if (roomSettings !== undefined) {
                 if (loadEverything) {
                     // colors
                     if (roomSettings.colors !== undefined) {
                         // colors.background
                         if (roomSettings.colors.background !== undefined && typeof roomSettings.colors.background === 'string' && p3Utils.isRGB(roomSettings.colors.background))
-                            Styles.set('rss-background-color', 'body { background-color: ' + p3Utils.toRGB(roomSettings.colors.background) + '!important; }');
+                            Styles.set('room-settings-background-color', 'body { background-color: ' + p3Utils.toRGB(roomSettings.colors.background) + '!important; }');
 
                         // colors.chat
                         if (roomSettings.colors.chat !== undefined) {
@@ -117,11 +118,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
                         // colors.header
                         if (roomSettings.colors.header !== undefined && typeof roomSettings.colors.header === 'string' && p3Utils.isRGB(roomSettings.colors.header))
-                            Styles.set('rss-header', '#header { background-color: ' + p3Utils.toRGB(roomSettings.colors.header) + '!important; }');
+                            Styles.set('room-settings-header', '#header { background-color: ' + p3Utils.toRGB(roomSettings.colors.header) + '!important; }');
 
                         // colors.footer
                         if (roomSettings.colors.footer !== undefined && typeof roomSettings.colors.footer === 'string' && p3Utils.isRGB(roomSettings.colors.footer))
-                            Styles.set('rss-footer', '.app-header { background-color: ' + p3Utils.toRGB(roomSettings.colors.footer) + '!important; }');
+                            Styles.set('room-settings-footer', '.app-header { background-color: ' + p3Utils.toRGB(roomSettings.colors.footer) + '!important; }');
                     }
 
                     // css
@@ -148,16 +149,14 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                                     roomFonts.push(font.toString());
                                 }
                             }
-                            Styles.set('rss-fonts', roomFonts.join('\n'));
+                            Styles.set('room-settings-fonts', roomFonts.join('\n'));
                         }
                         // css.import
                         if (roomSettings.css.import !== undefined && $.isArray(roomSettings.css.import)) {
-                            var roomImports = [];
                             for (i in roomSettings.css.import) {
                                 if (roomSettings.css.import.hasOwnProperty(i) && typeof roomSettings.css.import[i] === 'string')
-                                    roomImports.push('@import url("' + roomSettings.css.import[i] + '")');
+                                    Styles.addImport(roomSettings.css.import[i]);
                             }
-                            Styles.set('rss-imports', roomImports.join('\n'));
                         }
                         // css.setting
                         if (roomSettings.css.rule !== undefined) {
@@ -171,7 +170,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                                 }
                                 roomCSSRules.push(i + ' {' + rule.join(';') + '}');
                             }
-                            Styles.set('rss-rules', roomCSSRules.join('\n'));
+                            Styles.set('room-settings-rules', roomCSSRules.join('\n'));
                         }
                     }
 
@@ -179,7 +178,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                     if (roomSettings.images !== undefined) {
                         // images.background
                         if (roomSettings.images.background)
-                            Styles.set('rss-background-image', '.room-background { background-image: url("' + p3Utils.proxifyImage(roomSettings.images.background) + '")!important; }');
+                            Styles.set('room-settings-background-image', '.room-background { background-image: url("' + p3Utils.proxifyImage(roomSettings.images.background) + '")!important; }');
 
                         // images.playback
                         if (!p3Utils.runLite) {
@@ -268,7 +267,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 }
 
                 if (showMessage) {
-                    p3Utils.chatLog(undefined, (typeof roomSettings.author === 'string' ? p3Lang.i18n('roomSpecificSettings.infoHeaderCredits', p3Utils.cleanHTML(roomSettings.author, '*')) : p3Lang.i18n('roomSpecificSettings.infoHeader')) + '<br>' + p3Lang.i18n('roomSpecificSettings.infoDisable'), p3Utils.logColors.infoMessage2);
+                    p3Utils.chatLog(undefined, (typeof roomSettings.author === 'string' ? p3Lang.i18n('roomSpecificSettings.infoHeaderCredits', p3Utils.cleanHTML(roomSettings.author, '*')) : p3Lang.i18n('roomSpecificSettings.infoHeader')) + '<br>' + p3Lang.i18n('roomSpecificSettings.infoDisable'), p3Utils.logColors.infoMessage2, -1);
                     showMessage = false;
                 }
 
@@ -282,7 +281,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             this.chatColors = {};
             this.chatIcons = {};
 
-            for (i in langKeys) {
+            for (var i in langKeys) {
                 if (!langKeys.hasOwnProperty(i)) continue;
                 var key = langKeys[i];
                 setPlugDJLang(key, getPlugDJLang(key, true));
@@ -290,7 +289,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
             $('#p3-dj-booth').remove();
 
-            Styles.unset(['rss-background-color', 'rss-background-image', 'rss-booth', 'rss-fonts', 'rss-imports', 'rss-rules', 'rss-maingui']);
+            Styles.unset(['rss-background-color', 'rss-background-image', 'rss-booth', 'rss-fonts', 'rss-rules', 'rss-maingui']);
+            Styles.clearImports();
         },
         close: function() {
             if (!p3Utils.runLite) {

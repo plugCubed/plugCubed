@@ -1,5 +1,7 @@
 {
   "running":"Käynnissä plug&#179; versio %1 ",
+  "runningLite":"Käynnissä plug&#179; Lite!",
+  "runningLiteInfo":"Jotkin ominaisuudet eivät välttämättä toimi.",
   "commandsHelp":"Sano '\/commands' nähdäksesi Chat komentosi",
   "automuted":"%1 Automaattisesti hiljennetty",
   "nextsong":"Näytä seuraava kappale soittolistassa ja jos se on historiassa",
@@ -31,7 +33,6 @@
       "reason":"Syy"
     },
     "descriptions":{
-      "nick":"Vaihda käyttäjänimesi",
       "avail":"Aseta tila tavoitettavissa",
       "afk":"AFK Viesti",
       "work":"Aseta tila Työskentelemässä",
@@ -44,10 +45,9 @@
       "unmute":"Aseta äänenvoimakkkuus viimeisimpään",
       "nextsong":"Näytä seuraava kappale soittolistassa ja jos se on historiassa",
       "refresh":"Päivitä video",
-      "ignore":"Estä kaikki chat viestit käyttäjältä",
       "alertson":"Antaa äänimerkin, kun määritetyt sanat kirjoitetaan chatissa",
       "alertsoff":"Pysäyttää soitettavan äänen, kun määritetyt sanat on kirjoitettu chatissa.",
-      "curate":"%1 lisäsi %2- %3",
+      "grab":"Lisää nykyinen kappale valitulle soittolistallesi",
       "getpos":"Saa jonotuslista sijoitus",
       "version":"Näytä versio numero",
       "commands":"Näytä tämä lista",
@@ -70,19 +70,19 @@
     "header":"Käyttäjä informaatio",
     "join":"Käyttäjä Liittyi",
     "leave":"Käyttäjä lähti",
-    "curate":"Käyttäjä Lisää",
+    "grab":"Grabit",
     "meh":"Käyttäjä mehit",
     "stats":"Kappale päivitykset",
     "updates":"Kappalepäivitykset",
     "history":"Kappaleet historiassa",
     "songLength":"Kappaleen pituus (%1 min)",
     "message":{
-      "curate":"%1 lisäsi %2- %3",
+      "grab":"%1 grabbasi %2 - %3",
       "stats":"Tilastot: %1 woots -- %2 mehs -- %3 curates",
       "updates":"Nyt soi: %1 tekijältä %2<br\/>Soittajalta: %3",
       "meh":"%1 mehiä tällä kappaleella",
       "join":{
-        "normal":"%1 Lähti huoneesta",
+        "normal":"%1 liittyi huoneeseen",
         "fan":"Fanisi %1 on lähtenyt huoneesta",
         "friend":"Sinun ystäväsi %1 on lähtenyt huoneesta"
       },
@@ -121,11 +121,6 @@
     "vote":"Äänestä",
     "position":"Sijainti",
     "points":"Pisteet",
-    "pointType":{
-      "dj":"%1 DJ Pisteet",
-      "listener":"%1 Kuuntelija Pisteet",
-      "curator":"%1 Lisääjä Pisteet"
-    },
     "fans":"Fanit",
     "wootCount":"Woot määrä",
     "mehCount":"Meh määrä",
@@ -164,23 +159,16 @@
     "notify":"Ilmoitukset",
     "afktimers":"AFK Ajat",
     "roomsettings":"Huone Asetukset",
-    "chatimages":"Keskustelun Kuvat"
-  },
-  "status":{
-    "available":"Tavoitettavissa",
-    "afk":"AFK Viesti",
-    "working":"Työskentelemässä",
-    "gaming":"Pelaamassa"
+    "chatimages":"Keskustelun Kuvat",
+    "twitchemotes":"Twich Emojit",
+    "controlpanel":"Ohjauspaneeli"
   },
   "vote":{
     "meh":"En pidä",
     "woot":"Pidän",
+    "grab":"Grab",
     "undecided":"Epävarma",
     "djing":"DJing"
-  },
-  "ignore":{
-    "enabled":"Sinä olet nyt estetty %1",
-    "disabled":"Et enää estä käyttäjää %1"
   },
   "automute":{
     "registered":"%1 rekisteröity automaattiiseen hiljennykseen tuleville soitoille.",
@@ -200,7 +188,6 @@
     "unknownMenuKey":"Tuntematon valikko avain: %1",
     "missingReason":"Puuttuva syy",
     "notConnected":"Ei ole yhteydessä palvelimeen",
-    "ignoredUser":"Estetty käyttäjä",
     "noLiteSupport":"Tätä ei tueta plug&#179; Lite"
   }
 }

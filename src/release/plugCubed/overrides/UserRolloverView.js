@@ -1,8 +1,10 @@
-define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/bridges/Context'], function(Class, p3Utils, _$context) {
+define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], function($, OverrideHandler, p3Utils) {
+    if (p3Utils.runLite) return null;
+
     var UserRolloverView = require('app/views/user/UserRolloverView');
 
-    var handler = Class.extend({
-        override: function() {
+    var handler = OverrideHandler.extend({
+        doOverride: function() {
             if (typeof UserRolloverView._showSimple !== 'function')
                 UserRolloverView._showSimple = UserRolloverView.showSimple;
             if (typeof UserRolloverView._clear !== 'function')
@@ -20,7 +22,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/bridges/Context'], func
                     this.$meta.addClass('has-p3Role is-p3' + p3Utils.getHighestRank(a.id));
                     if (specialIconInfo !== undefined) {
                         this.$p3Role.text($('<span>').html(specialIconInfo.title).text()).css({
-                            'background-image': 'url("https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3special.' + specialIconInfo.icon + '.png")'
+                            'background-image': 'url("https://d1rfegul30378.cloudfront.net/files/images/icons.p3special.' + specialIconInfo.icon + '.png")'
                         });
                     } else {
                         this.$p3Role.text($('<span>').html(p3Utils.getAllPlugCubedRanks(a.id, true)).text());
@@ -32,7 +34,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/bridges/Context'], func
                 this.$meta.removeClass('has-p3Role is-p3developer is-p3sponsor is-p3special is-p3ambassador is-p3donatorDiamond is-p3donatorPlatinum is-p3donatorGold is-p3donatorSilver is-p3donatorBronze');
             };
         },
-        revert: function() {
+        doRevert: function() {
             if (typeof UserRolloverView._showSimple === 'function')
                 UserRolloverView.showSimple = UserRolloverView._showSimple;
             if (typeof UserRolloverView._clear === 'function')
