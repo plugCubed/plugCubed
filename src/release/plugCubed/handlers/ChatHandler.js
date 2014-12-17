@@ -4,6 +4,12 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     if (!p3Utils.runLite)
         PopoutView = require('app/views/room/popout/PopoutView');
 
+    $("#chat-messages").on('mouseover', '.twitch-emote', function() {
+        _$context.trigger('tooltip:show', $(this).data('emote'), $(this), true);
+    }).on('mouseout', '.twitch-emote', function() {
+        _$context.trigger('tooltip:hide');
+    });
+
     function convertImageLinks(text, $message) {
         if (Settings.chatImages) {
             if (text.toLowerCase().indexOf('nsfw') < 0) {
@@ -221,11 +227,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         data.message = convertImageLinks(data.message, $this);
         data.message = convertEmotes(data.message);
 
-        $(data.message).find('.twitch-emote').mouseover(function() {
-            _$context.trigger('tooltip:show', $(this).data('emote'), $(this), true);
-        }).mouseout(function() {
-            _$context.trigger('tooltip:hide');
-        });
 
         if (p3Utils.havePlugCubedRank(data.uid) || p3Utils.hasPermission(data.uid, API.ROLE.DJ)) {
             $icon = $this.find('.from .icon');
