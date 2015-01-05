@@ -93,6 +93,24 @@ module.exports = function(grunt) {
             cleanLang: {
                 src: ['_cleanLang.js']
             },
+            incrementBuildRelease: {
+                options: {
+                    args: '--dir release'
+                },
+                src: ['_incrementBuild.js']
+            },
+            incrementBuildAlpha: {
+                options: {
+                    args: '--dir alpha'
+                },
+                src: ['_incrementBuild.js']
+            },
+            incrementBuildDev: {
+                options: {
+                    args: '--dir dev'
+                },
+                src: ['_incrementBuild.js']
+            },
             closureCompilerRelease: {
                 options: {
                     args: '--dir release'
@@ -172,7 +190,7 @@ module.exports = function(grunt) {
                     to: versionRelease.patch.toString()
                 }, {
                     from: 'VERSION.PRERELEASE',
-                    to: versionRelease.prerelease
+                    to: ''
                 }, {
                     from: 'VERSION.BUILD',
                     to: versionRelease.build.toString()
@@ -192,7 +210,7 @@ module.exports = function(grunt) {
                     to: versionAlpha.patch.toString()
                 }, {
                     from: 'VERSION.PRERELEASE',
-                    to: versionAlpha.prerelease
+                    to: 'alpha'
                 }, {
                     from: 'VERSION.BUILD',
                     to: versionAlpha.build.toString()
@@ -212,7 +230,7 @@ module.exports = function(grunt) {
                     to: versionDev.patch.toString()
                 }, {
                     from: 'VERSION.PRERELEASE',
-                    to: versionDev.prerelease
+                    to: 'dev'
                 }, {
                     from: 'VERSION.BUILD',
                     to: versionDev.build.toString()
@@ -665,8 +683,8 @@ module.exports = function(grunt) {
     grunt.registerTask('update', ['execute:getRoom', 'execute:createConfig', 'execute:deobfuscate', 'build']);
     grunt.registerTask('default', 'build');
 
-    grunt.registerTask('publish:release', ['build:release', 's3:release']);
-    grunt.registerTask('publish:alpha', ['build:alpha', 's3:alpha']);
-    grunt.registerTask('publish:dev', ['build:dev', 's3:dev']);
+    grunt.registerTask('publish:release', ['execute:incrementBuildRelease', 'build:release', 's3:release']);
+    grunt.registerTask('publish:alpha', ['execute:incrementBuildAlpha', 'build:alpha', 's3:alpha']);
+    grunt.registerTask('publish:dev', ['execute:incrementBuildDev', 'build:dev', 's3:dev']);
     grunt.registerTask('publish', ['publish:release', 'publish:alpha', 'publish:dev']);
 };

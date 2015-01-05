@@ -55,7 +55,11 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         etaTimer: true,
         moderation: {
             afkTimers: false,
+<<<<<<< Updated upstream
             showDeletesMessages: false
+=======
+            showDeletedMessages: false
+>>>>>>> Stashed changes
         },
         notifySongLength: 10,
         useRoomSettings: {},

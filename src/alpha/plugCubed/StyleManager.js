@@ -25,6 +25,12 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Ut
             obj = $('<style type="text/css">');
             $('body').prepend(obj);
         },
+        getList: function() {
+            for (var key in styles) {
+                if (!styles.hasOwnProperty(key)) continue;
+                console.log(key, styles[key]);
+            }
+        },
         get: function(key) {
             return styles[key];
         },

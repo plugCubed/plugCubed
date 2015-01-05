@@ -4,13 +4,13 @@
 // @description    Autorun plugCubed on plug.dj
 // @author         Thomas "TAT" Andresen
 // @include        https://plug.dj/*
-// @version        1.10
+// @version        2.1
 // @grant          none
 // ==/UserScript==
 
 /*
  The MIT License (MIT)
- Copyright (c) 2012-2013 Thomas "TAT" Andresen
+ Copyright (c) 2012-2015 The plugCubed Team
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal

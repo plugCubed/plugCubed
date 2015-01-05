@@ -651,15 +651,15 @@
     z-index: 2;
 }
 
-.is-p3developer > .icon, .icon.icon-is-p3developer,
-.is-p3sponsor > .icon, .icon.icon-is-p3sponsor,
-.is-p3special > .icon, .icon.icon-is-p3special,
-.is-p3ambassador > .icon, .icon.icon-is-p3ambassador,
-.is-p3donatorDiamond > .icon, .icon.icon-is-p3donatorDiamond,
-.is-p3donatorPlatinum > .icon, .icon.icon-is-p3donatorPlatinum,
-.is-p3donatorGold > .icon, .icon.icon-is-p3donatorGold,
-.is-p3donatorSilver > .icon, .icon.icon-is-p3donatorSilver,
-.is-p3donatorBronze > .icon, .icon.icon-is-p3donatorBronze {
+.is-p3developer .from .icon, .icon.icon-is-p3developer,
+.is-p3sponsor .from .icon, .icon.icon-is-p3sponsor,
+.is-p3special .from .icon, .icon.icon-is-p3special,
+.is-p3ambassador .from .icon, .icon.icon-is-p3ambassador,
+.is-p3donatorDiamond .from .icon, .icon.icon-is-p3donatorDiamond,
+.is-p3donatorPlatinum .from .icon, .icon.icon-is-p3donatorPlatinum,
+.is-p3donatorGold .from .icon, .icon.icon-is-p3donatorGold,
+.is-p3donatorSilver .from .icon, .icon.icon-is-p3donatorSilver,
+.is-p3donatorBronze .from .icon, .icon.icon-is-p3donatorBronze {
     background-position: 0 0 !important;
     width: 16px;
     height: 16px;

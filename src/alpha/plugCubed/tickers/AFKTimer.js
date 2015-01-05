@@ -1,13 +1,5 @@
-define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang'], function($, TickerHandler, Settings, p3Utils, p3Lang) {
-    var IgnoreCollection, handler;
-
-    if (p3Utils.runLite) {
-        IgnoreCollection = {
-            _byId: {}
-        };
-    } else {
-        IgnoreCollection = require('app/collections/IgnoreCollection');
-    }
+define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/bridges/IgnoreCollection', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang'], function($, TickerHandler, IgnoreCollection, Settings, p3Utils, p3Lang) {
+    var handler;
 
     handler = TickerHandler.extend({
         tickTime: 1E3,
@@ -35,5 +27,6 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
             $('#waitlist').find('.user .afkTimer').remove();
         }
     });
+
     return handler;
 });

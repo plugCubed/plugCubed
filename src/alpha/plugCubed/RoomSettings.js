@@ -140,7 +140,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                                             sources.push('url("' + this.url + '")'); else {
                                             for (var j in this.url) {
                                                 if (!this.url.hasOwnProperty(j)) continue;
-                                                if (['woff', 'opentype', 'svg', 'embedded-opentype', 'truetype'].indexOf(j) > -1)
+                                                if (['woff', 'woff2', 'opentype', 'svg', 'svgz', 'embedded-opentype', 'truetype'].indexOf(j) > -1)
                                                     sources.push('url("' + this.url[j] + '") format("' + j + '")')
                                             }
                                         }
@@ -289,7 +289,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
             $('#p3-dj-booth').remove();
 
-            Styles.unset(['rss-background-color', 'rss-background-image', 'rss-booth', 'rss-fonts', 'rss-rules', 'rss-maingui']);
+            Styles.unset(['room-settings-background-color', 'room-settings-background-image', 'room-settings-booth', 'room-settings-fonts', 'room-settings-rules', 'room-settings-maingui']);
             Styles.clearImports();
         },
         close: function() {

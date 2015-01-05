@@ -1,6 +1,8 @@
 # Building system
 node_modules
-_*
+_htaccess
+_*bat
+_*tmp.js
 !_postfix.js
 !_prefix.js
 

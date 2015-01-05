@@ -30,7 +30,10 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         };
     }
 
-    $.getJSON('https://d1rfegul30378.cloudfront.net/titles.json', function(data) {
+    $.getJSON('https://d1rfegul30378.cloudfront.net/titles.json', /**
+     * @param {{developer: Array, sponsor: Array, special: Array, ambassador: Array, donator: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}, patreon: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}}} data
+     */
+    function(data) {
         developer = data.developer ? data.developer : [];
         sponsor = data.sponsor ? data.sponsor : [];
         special = data.special ? data.special : {};
@@ -209,6 +212,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 if (from != null && from.username != null) {
                     if (lastSender == from.id) {
                         lastMessageContainer.find('.text').append('<br>').append($msgSpan);
+                        if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height())
+                            $chat.scrollTop($chat[0].scrollHeight);
                         return;
                     }
 
@@ -245,6 +250,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                     $from.find('.un').html('plug&#179;');
                     if (lastSender == fromID) {
                         lastMessageContainer.find('.text').append('<br>').append($msgSpan);
+                        if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height())
+                            $chat.scrollTop($chat[0].scrollHeight);
                         return;
                     }
                 } else {
@@ -255,7 +262,9 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             }
 
             $chat.append($message.append($box).append($msg.append($text)));
-            b && $chat.scrollTop($chat[0].scrollHeight);
+            if (b) {
+                $chat.scrollTop($chat[0].scrollHeight);
+            }
         },
         getRoomID: function() {
             return document.location.pathname.split('/')[1];
@@ -299,16 +308,25 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             }
             return null;
         },
+        getLastMessageTime: function(uid) {
+            var time = Date.now() - this.getUserData(uid, 'lastChat', this.getUserData(uid, 'joinTime', Date.now()));
+            var IgnoreCollection = require('plugCubed/bridges/IgnoreCollection');
+
+            if (IgnoreCollection._byId[uid] === true)
+                return p3Lang.i18n('error.ignoredUser');
+            return this.getRoundedTimestamp(time, true);
+        },
         getUserInfo: function(data) {
             var user = this.getUser(data);
             if (user === null) {
                 API.chatLog(p3Lang.i18n('error.userNotFound'));
             } else {
-                var rank, status, voted, position, waitlistpos, inbooth, lang, disconnectInfo;
+                var rank, status, voted, position, waitlistpos, inbooth, lang, lastMessage, disconnectInfo;
 
                 waitlistpos = API.getWaitListPosition(user.id);
                 inbooth = API.getDJ() !== undefined && API.getDJ().id === user.id;
                 lang = Lang.languages[user.language];
+                lastMessage = this.getLastMessageTime(user.id);
                 disconnectInfo = this.getUserData(user.id, 'disconnects', {
                     count: 0
                 });
@@ -389,6 +407,10 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 message.append($('<tr>').append($('<td>').append($('<strong>').text(p3Lang.i18n('info.status') + ' ')).append($('<span>').css('color', '#FFFFFF').text(status))).append($('<td>').append($('<strong>').text(p3Lang.i18n('info.vote') + ' ')).append($('<span>').css('color', '#FFFFFF').text(voted))));
                 // Position
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.position') + ' ')).append($('<span>').css('color', '#FFFFFF').text(position))));
+                // Language
+                message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(Lang.languages.label + ' ')).append($('<span>').css('color', '#FFFFFF').text(lang))));
+                // Last Message
+                message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.lastMessage') + ' ')).append($('<span>').css('color', '#FFFFFF').text(lastMessage))));
                 // Woot / Meh
                 message.append($('<tr>').append($('<td>').append($('<strong>').text(p3Lang.i18n('info.wootCount') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getUserData(user.id, 'wootcount', 0)))).append($('<td>').append($('<strong>').text(p3Lang.i18n('info.mehCount') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getUserData(user.id, 'mehcount', 0)))));
                 // Ratio
@@ -470,6 +492,28 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             seconds = (seconds < 10 ? '0' : '') + seconds;
 
             return format.split('hh').join(hours).split('mm').join(minutes).split('ss').join(seconds) + postfix;
+        },
+        getRoundedTimestamp: function(t, milliseconds) {
+            if (milliseconds)
+                t = Math.floor(t / 1000);
+
+            var units = {
+                week: 604800,
+                day: 86400,
+                hour: 3600,
+                minute: 60,
+                second: 1
+            };
+
+            for (var i in units) {
+                if (!units.hasOwnProperty(i)) continue;
+                var unit = units[i];
+                if (t < unit) continue;
+                var numberOfUnit = Math.floor(t / unit);
+                return numberOfUnit + ' ' + i + (numberOfUnit > 1 ? 's' : '') + ' ago';
+            }
+
+            return 'Unknown';
         },
         formatTime: function(seconds) {
             var hours, minutes;
@@ -568,7 +612,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             return false;
         },
         getBaseURL: function(url) {
-            return url.indexOf('?') < 0 ? url : url.substr(0, url.indexOf('?'));
+            return url.indexOf('#') > -1 ? url.substr(0, url.indexOf('#')) : (url.indexOf('?') > -1 ? url.substr(0, url.indexOf('?')) : url);
         },
         getRandomString: function(length) {
             var chars = 'abcdefghijklmnopqrstuvwxyz0123456789_';
@@ -583,6 +627,21 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             modCommands: 'FF0000',
             infoMessage1: 'FFFF00',
             infoMessage2: '66FFFF'
+        },
+        objectSelector: function(obj, selector, defaultValue) {
+            var a = obj;
+
+            var key = selector.split('.');
+
+            for (var i in key) {
+                if (!key.hasOwnProperty(i)) continue;
+                if (a[key[i]] == null) {
+                    return defaultValue;
+                }
+                a = a[key[i]];
+            }
+
+            return a;
         }
     });
     return new handler();

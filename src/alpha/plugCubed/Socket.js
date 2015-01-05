@@ -69,10 +69,10 @@ define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'p
                             Audience.onFXChange(null, false);
                         } else if (data.value === 1) {
                             Audience.onFXChange(null, 'strobe');
-                            p3Utils.chatLog(undefined, p3Lang.i18n('strobe', API.getUser(data.id).username));
+                            p3Utils.chatLog(undefined, p3Lang.i18n('commands.responses.strobe', API.getUser(data.id).username));
                         } else if (data.value === 2) {
                             Audience.onFXChange(null, 'dim');
-                            p3Utils.chatLog(undefined, p3Lang.i18n('lightsOut', API.getUser(data.id).username));
+                            p3Utils.chatLog(undefined, p3Lang.i18n('commands.responses.lightsOut', API.getUser(data.id).username));
                         }
                     }
                     return;

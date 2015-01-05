@@ -216,11 +216,12 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             container.append($('<div>').addClass('section').text('Features'));
             if (RoomSettings.rules.allowAutowoot !== false)
                 container.append(GUIButton(Settings.autowoot, 'woot', p3Lang.i18n('menu.autowoot')));
+
             if (RoomSettings.rules.allowAutojoin !== false)
                 container.append(GUIButton(Settings.autojoin, 'join', p3Lang.i18n('menu.autojoin')));
-            if (RoomSettings.rules.allowAutorespond !== false)
-                container.append(GUIButton(Settings.autorespond, 'autorespond', p3Lang.i18n('menu.autorespond')));
+
             if (RoomSettings.rules.allowAutorespond !== false) {
+                container.append(GUIButton(Settings.autorespond, 'autorespond', p3Lang.i18n('menu.autorespond')));
                 container.append($('<div class="item">').addClass('p3-s-autorespond-input').append($('<input>').val(Settings.awaymsg === '' ? p3Lang.i18n('autorespond.default') : Settings.awaymsg).keyup(function() {
                     $(this).val($(this).val().split('@').join(''));
                     Settings.awaymsg = $(this).val().trim();
@@ -245,7 +246,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             }
 
             container.append(GUIButton(Settings.etaTimer, 'etatimer', p3Lang.i18n('menu.etatimer')));
-
             container.append(GUIButton(Settings.chatImages, 'chatimages', p3Lang.i18n('menu.chatimages')));
             container.append(GUIButton(Settings.twitchEmotes, 'twitchemotes', p3Lang.i18n('menu.twitchemotes')));
             container.append(GUIButton(false, 'colors', p3Lang.i18n('menu.customchatcolors') + '...'));
@@ -259,12 +259,14 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
 
             // Notification
             container.append($('<div class="section">' + p3Lang.i18n('notify.header') + '</div>'));
+
             container.append(GUIButton((Settings.notify & enumNotifications.USER_JOIN) === enumNotifications.USER_JOIN, 'notify-join', p3Lang.i18n('notify.join')).data('bit', enumNotifications.USER_JOIN));
             container.append(GUIButton((Settings.notify & enumNotifications.USER_LEAVE) === enumNotifications.USER_LEAVE, 'notify-leave', p3Lang.i18n('notify.leave')).data('bit', enumNotifications.USER_LEAVE));
             container.append(GUIButton((Settings.notify & enumNotifications.USER_GRAB) === enumNotifications.USER_GRAB, 'notify-grab', p3Lang.i18n('notify.grab')).data('bit', enumNotifications.USER_GRAB));
             container.append(GUIButton((Settings.notify & enumNotifications.USER_MEH) === enumNotifications.USER_MEH, 'notify-meh', p3Lang.i18n('notify.meh')).data('bit', enumNotifications.USER_MEH));
             container.append(GUIButton((Settings.notify & enumNotifications.SONG_STATS) === enumNotifications.SONG_STATS, 'notify-stats', p3Lang.i18n('notify.stats')).data('bit', enumNotifications.SONG_STATS));
             container.append(GUIButton((Settings.notify & enumNotifications.SONG_UPDATE) === enumNotifications.SONG_UPDATE, 'notify-updates', p3Lang.i18n('notify.updates')).data('bit', enumNotifications.SONG_UPDATE));
+
             if (API.hasPermission(undefined, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper()) {
                 var songLengthSlider = new Slider(5, 30, Settings.notifySongLength, function(v) {
                     Settings.notifySongLength = v;

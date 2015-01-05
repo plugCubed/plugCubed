@@ -38,9 +38,9 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
                 if (!historyData.skipped) {
                     p3Utils.playMentionSound();
                     setTimeout(p3Utils.playMentionSound, 50);
-                    p3Utils.chatLog('system', p3Lang.i18n('notify.message.history', historyData.pos, historyData.length) + '<br><span onclick="if (API.getMedia().cid === \'' + cid + '\') API.moderateForceSkip()" style="cursor:pointer;">Click here to skip</span>', -1);
+                    p3Utils.chatLog('system', p3Lang.i18n('notify.message.history', historyData.pos, historyData.length) + '<br><span onclick="if (API.getMedia().cid === \'' + cid + '\') API.moderateForceSkip()" style="cursor:pointer;">Click here to skip</span>', undefined, -1);
                 } else {
-                    API.chatLog(p3Lang.i18n('notify.message.historySkipped', historyData.pos, historyData.length), true);
+                    p3Utils.chatLog('system', p3Lang.i18n('notify.message.historySkipped', historyData.pos, historyData.length), undefined, -1);
                 }
             }
         },

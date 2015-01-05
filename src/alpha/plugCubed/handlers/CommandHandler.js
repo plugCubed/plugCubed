@@ -1,4 +1,4 @@
-define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/dialogs/Commands', 'plugCubed/Settings', 'plugCubed/Socket', 'plugCubed/Version', 'plugCubed/bridges/Context', 'plugCubed/bridges/PlaybackModel'], function(TriggerHandler, p3Utils, p3Lang, dialogCommands, Settings, Socket, Version, Context, PlaybackModel) {
+define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/dialogs/Commands', 'plugCubed/Settings', 'plugCubed/Socket', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/bridges/Context', 'plugCubed/bridges/PlaybackModel'], function(TriggerHandler, p3Utils, p3Lang, dialogCommands, Settings, Socket, Version, StyleManager, Context, PlaybackModel) {
     var lastPMReceiver, commandHandler;
     commandHandler = TriggerHandler.extend({
         trigger: API.CHAT_COMMAND,
@@ -31,7 +31,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                     }
                     Socket.send(JSON.stringify({
                         type: 'room:rave',
-                        value: value.indexOf(p3Lang.i18n('commands.variables.off', 'off')) > -1 ? 0 : (args.length > 0 && p3Utils.isNumber(args[1]) && ~~args[1] >= 50 && ~~args[1] <= 100 ? ~~args[1] : 1)
+                        value: value.indexOf(p3Lang.i18n('commands.variables.off')) > -1 ? 0 : (args.length > 0 && p3Utils.isNumber(args[1]) && ~~args[1] >= 50 && ~~args[1] <= 100 ? ~~args[1] : 1)
                     }));
                     return;
                 }
@@ -41,7 +41,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                     }
                     Socket.send(JSON.stringify({
                         type: 'room:rave',
-                        value: value.indexOf(p3Lang.i18n('commands.variables.off', 'off')) > -1 ? 0 : 2
+                        value: value.indexOf(p3Lang.i18n('commands.variables.off')) > -1 ? 0 : 2
                     }));
                     return;
                 }
@@ -92,6 +92,14 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 dialogCommands.print();
                 return;
             }
+            if (p3Utils.equalsIgnoreCase(command, 'badges')) {
+                StyleManager.unset('hide-badges');
+                if (args.length > 0 && p3Utils.equalsIgnoreCase(args[0], p3Lang.i18n('commands.variables.off'))) {
+                    // TODO: Add setting for this
+                    StyleManager.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { display: none; }');
+                }
+                return;
+            }
             if (p3Utils.equalsIgnoreCase(command, 'avail') || p3Utils.equalsIgnoreCase(command, 'available')) {
                 API.setStatus(0);
                 return;
@@ -127,16 +135,11 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             if (p3Utils.equalsIgnoreCase(command, 'volume')) {
                 if (args.length > 0) {
                     if (p3Utils.isNumber(args[0])) {
-                        console.log('API.setVolume(' + ~~args[0] + ')');
                         API.setVolume(~~args[0]);
                     } else if (args[0] == '+') {
-                        console.log('API.setVolume(' + (API.getVolume() + 1) + ')');
                         API.setVolume(API.getVolume() + 1);
                     } else if (args[0] == '-') {
-                        console.log('API.setVolume(' + (API.getVolume() - 1) + ')');
                         API.setVolume(API.getVolume() - 1);
-                    } else {
-                        console.log('Unknown');
                     }
                 }
                 return;
@@ -187,14 +190,16 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 return;
             }
             if (p3Utils.equalsIgnoreCase(command, 'nextsong')) {
-                var nextSong = API.getNextMedia(), found = -1;
-                if (nextSong === undefined) return API.chatLog(p3Lang.i18n('noNextSong'));
+                var nextSong = API.getNextMedia();
+                if (nextSong === undefined) {
+                    return API.chatLog(p3Lang.i18n('error.noNextSong'));
+                }
                 nextSong = nextSong.media;
                 var p3history = require('plugCubed/notifications/History');
                 var historyInfo = p3history.isInHistory(nextSong.id);
-                API.chatLog(p3Lang.i18n('nextsong', nextSong.title, nextSong.author));
+                API.chatLog(p3Lang.i18n('commands.responses.nextsong', nextSong.title, nextSong.author));
                 if (historyInfo.pos > -1 && !historyInfo.skipped) {
-                    API.chatLog(p3Lang.i18n('isHistory', historyInfo.pos, historyInfo.length), true);
+                    API.chatLog(p3Lang.i18n('commands.responses.isHistory', historyInfo.pos, historyInfo.length), true);
                 }
                 return;
             }
@@ -204,11 +209,11 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 if (Settings.registeredSongs.indexOf(media.id) < 0) {
                     Settings.registeredSongs.push(media.id);
                     PlaybackModel.muteOnce();
-                    API.chatLog(p3Lang.i18n('automute.registered', media.title));
+                    API.chatLog(p3Lang.i18n('commands.responses.automute.registered', media.title));
                 } else {
                     Settings.registeredSongs.splice(Settings.registeredSongs.indexOf(media.id), 1);
                     PlaybackModel.unmute();
-                    API.chatLog(p3Lang.i18n('automute.unregistered', media.title));
+                    API.chatLog(p3Lang.i18n('commands.responses.automute.unregistered', media.title));
                 }
                 Settings.save();
                 return;
@@ -232,12 +237,12 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 }
                 $.getJSON('https://plug.dj/_/playlists', function(response) {
                     if (response.status !== 'ok') {
-                        API.chatLog('Error getting playlist info', true);
+                        API.chatLog(p3Lang.i18n('error.errorGettingPlaylistInfo'), true);
                         return;
                     }
                     var playlists = response.data;
                     if (playlists.length < 1) {
-                        API.chatLog('No playlists found', true);
+                        API.chatLog(p3Lang.i18n('error.noPlaylistsFound'), true);
                         return;
                     }
                     for (var i in playlists) {
@@ -249,27 +254,27 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                                 var MGE = require('app/events/MediaGrabEvent');
                                 Context.dispatch(new MGE(MGE.GRAB, playlist.id, historyID));
                             } else {
-                                API.chatLog('Your active playlist is full', true);
+                                API.chatLog(p3Lang.i18n('error.yourActivePlaylistIsFull'), true);
                             }
                             return;
                         }
                     }
-                    API.chatLog('No playlists found', true);
+                    API.chatLog(p3Lang.i18n('error.noPlaylistsFound'), true);
                 }).fail(function() {
-                    API.chatLog('Error getting playlist info', true);
+                    API.chatLog(p3Lang.i18n('error.errorGettingPlaylistInfo'), true);
                 });
                 return;
             }
             if (p3Utils.startsWithIgnoreCase(value, '/alertson ') && !p3Utils.equalsIgnoreCaseTrim(value, '/alertson')) {
                 Settings.alertson = value.substr(10).split(' ');
                 Settings.save();
-                API.chatLog('Playing sound on the following words: ' + Settings.alertson.join(', '));
+                API.chatLog(p3Lang.i18n('commands.responses.alertsom', Settings.alertson.join(', ')));
                 return;
             }
             if (p3Utils.equalsIgnoreCaseTrim(value, '/alertson') || p3Utils.startsWithIgnoreCase(value, '/alertsoff')) {
                 Settings.alertson = [];
                 Settings.save();
-                API.chatLog('No longer playing sound on specific words');
+                API.chatLog(p3Lang.i18n('commands.responses.alertsoff'));
                 return;
             }
             if (p3Utils.startsWithIgnoreCase(value, '/msg ') || p3Utils.startsWithIgnoreCase(value, '/pm ')) {
@@ -287,7 +292,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                     }));
                     lastPMReceiver = user;
                 } else {
-                    API.chatLog('Username not found', true);
+                    API.chatLog(p3Lang.i18n('error.usernameNotFound'), true);
                 }
                 return;
             }
@@ -304,7 +309,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                         }
                     }));
                 } else
-                    API.chatLog('Can not find the last PM receiver', true);
+                    API.chatLog(p3Lang.i18n('error.canNotFindTheLastPMReceiver'), true);
             }
         }
     });

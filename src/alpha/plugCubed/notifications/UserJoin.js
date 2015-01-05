@@ -4,7 +4,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
         handler: function(data) {
             if ((Settings.notify & enumNotifications.USER_JOIN) === enumNotifications.USER_JOIN && (lastJoin[data.id] === undefined || lastJoin[data.id] < Date.now() - 5e3)) {
                 var relationship = 0;
-                p3Utils.chatLog(undefined, p3Lang.i18n('notify.message.join.' + (relationship === 0 || relationship === undefined ? 'normal' : (relationship > 1 ? 'friend' : 'fan'))), Settings.colors.join || Settings.colorInfo.notifications.join.color, data.id, data.username);
+                p3Utils.chatLog(undefined, p3Lang.i18n('notify.message.join'), Settings.colors.join || Settings.colorInfo.notifications.join.color, data.id, data.username);
             }
             lastJoin[data.id] = Date.now();
             if (p3Utils.getUserData(data.id, 'joinTime', 0) === 0)

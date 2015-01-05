@@ -6,7 +6,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/La
                 setTimeout(function() {
                     PlaybackModel.muteOnce();
                 }, 800);
-                API.chatLog(p3Lang.i18n('automuted', data.media.title));
+                API.chatLog(p3Lang.i18n('commands.responses.automute.automuted', data.media.title));
             }
         }
     });
