@@ -1,0 +1,28 @@
+[{
+    "type": "extension",
+    "frameworkVersion": "1.0.6",
+    "guid": "{AE633E9F-045E-40E5-9B53-A4C3DE51DDEC}",
+    "name": "plugCubed",
+    "author": {
+        "name": "Thomas Andresen",
+        "email": "TAT@plugCubed.net"
+    },
+    "version": "VERSION.MAJOR.VERSION.MINOR.VERSION.PATCH.VERSION.BUILD",
+    "title": {
+        "en": "plugCubed"
+    },
+    "description": "Adding a new dimension to plug.dj",
+    "actions": [{
+        "type": "script",
+        "name": "plugCubed",
+        "entryPoints": [
+            "doc_end"
+        ],
+        "include": [
+            "plug.dj"
+        ],
+        "js": [
+            "loader.js"
+        ]
+    }]
+}]

@@ -162,7 +162,7 @@
     transform-style: preserve-3d;
 }
 
-#plugcubed:hover > .cube-wrap .cube {
+#plugcubed .cube-wrap .cube.spin {
     -webkit-animation: spin 1s;
     -moz-animation: spin 1s;
     -ms-animation: spin 1s;
@@ -294,7 +294,7 @@
 }
 
 #volume .icon-volume-off-once {
-    background: url('https://d1rfegul30378.cloudfront.net/alpha/images/mute_once.png') no-repeat 9px 6px;
+    background: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons/mute_once.png') no-repeat 9px 6px;
 }
 
 #p3-settings-wrapper {
@@ -448,7 +448,7 @@
     left: auto;
     width: 20px;
     height: 20px;
-    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/default_settings.png');
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons/default_settings.png');
     cursor: pointer;
     top: 0;
 }
@@ -589,7 +589,7 @@
 }
 
 .p3-s-stream {
-    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/stream_on_off.png');
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons/stream_on_off.png');
 }
 
 .p3-s-stream.selected {
@@ -597,7 +597,7 @@
 }
 
 .p3-s-clear {
-    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/clear_chat.png');
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons/clear_chat.png');
 }
 
 #p3-dj-booth {
@@ -666,35 +666,52 @@
 }
 
 .is-p3developer .from .icon, .icon.icon-is-p3developer, #user-rollover .meta.has-p3Role.is-p3developer .p3Role {
-    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3dev.png') !important;
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/ranks/p3dev.png') !important;
 }
 
 .is-p3sponsor .from .icon, .icon.icon-is-p3sponsor, #user-rollover .meta.has-p3Role.is-p3sponsor .p3Role {
-    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3sponsor.png') !important;
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/ranks/p3sponsor.png') !important;
 }
 
 .is-p3ambassador .from .icon, .icon.icon-is-p3ambassador, #user-rollover .meta.has-p3Role.is-p3ambassador .p3Role {
-    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3ambassador.png') !important;
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/ranks/p3ambassador.png') !important;
 }
 
 .is-p3donatorDiamond .from .icon, .icon.icon-is-p3donatorDiamond, #user-rollover .meta.has-p3Role.is-p3donatorDiamond .p3Role {
-    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3donator.diamond.png') !important;
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/ranks/p3donator.diamond.png') !important;
 }
 
 .is-p3donatorPlatinum .from .icon, .icon.icon-is-p3donatorPlatinum, #user-rollover .meta.has-p3Role.is-p3donatorPlatinum .p3Role {
-    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3donator.platinum.png') !important;
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/ranks/p3donator.platinum.png') !important;
 }
 
 .is-p3donatorGold .from .icon, .icon.icon-is-p3donatorGold, #user-rollover .meta.has-p3Role.is-p3donatorGold .p3Role {
-    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3donator.gold.png') !important;
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/ranks/p3donator.gold.png') !important;
 }
 
 .is-p3donatorSilver .from .icon, .icon.icon-is-p3donatorSilver, #user-rollover .meta.has-p3Role.is-p3donatorSilver .p3Role {
-    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3donator.silver.png') !important;
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/ranks/p3donator.silver.png') !important;
 }
 
 .is-p3donatorBronze .from .icon, .icon.icon-is-p3donatorBronze, #user-rollover .meta.has-p3Role.is-p3donatorBronze .p3Role {
-    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3donator.bronze.png') !important;
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/ranks/p3donator.bronze.png') !important;
+}
+
+.is-p3developer .bdg,
+.is-p3ambassador .bdg {
+    background-position: 0 0;
+    top: 2px;
+    left: 3px;
+    height: 26px;
+    width: 26px;
+}
+
+.is-p3developer .bdg {
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/badges/p3dev.png') !important;
+}
+
+.is-p3ambassador .bdg {
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/badges/p3ambassador.png') !important;
 }
 
 #chat-header, #user-lists .header, #waitlist .header {
@@ -723,11 +740,11 @@
 }
 
 .pm > .icon {
-    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.pm.png') !important;
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons/pm.png') !important;
 }
 
 .icon.icon-p3-lang {
-    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons.lang.png');
+    background-image: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons/lang.png');
     width: 15px;
     height: 14px;
 }
@@ -863,10 +880,10 @@
 #user-rollover .meta.has-p3Role .p3Role {
     display: block;
     position: absolute;
-    top: 29px;
+    top: 33px;
     left: 108px;
     overflow: hidden;
-    width: 180px;
+    width: 170px;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 13px;
@@ -880,4 +897,8 @@
 
 #user-rollover .meta.has-p3Role .joined {
     top: 75px;
+}
+
+#your-next-media .song {
+    top: 8px;
 }

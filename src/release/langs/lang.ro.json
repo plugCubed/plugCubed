@@ -1,14 +1,8 @@
 {
   "running":"Folosind plug&#179; versiunea %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLite":"Rulând plug&#179; Lite!",
+  "runningLiteInfo":"Unele caracteristici nu vor funcţiona.",
   "commandsHelp":"Scrie '\/commands' pentru a vedea in chat o lista cu comenzi.",
-  "automuted":"%1 automuted.",
-  "nextsong":"Melodia următoare din coada de aşteptare este %1 de %2",
-  "noNextSong":"Nu mai aveti melodii iin asteptare",
-  "isHistory":"Avertisment: Acest cântec este încă în istorie (%1 de %2)",
-  "lightsOut":"%1 a stins lumina",
-  "strobe":"%1 a activat reflectoarele",
   "autorespond":{
     "default":"Nu sunt la tastatura.",
     "disable":"Dezactivaţi AFK Autorespond in chat",
@@ -47,7 +41,7 @@
       "refresh":"Reîmprospătați videoul",
       "alertson":"redă sunet când cuvintele selectate sunt scrise in chat",
       "alertsoff":"opreşte redarea sunetului când un cuvânt selectat este scris in chat",
-      "grab":"add current song to your selected playlist",
+      "grab":"adaugă melodia curentă la playlist-ul tău",
       "getpos":"obtine informatii despre pozitia in waitlist",
       "version":"arata versiunea",
       "commands":"Arată această listă",
@@ -64,33 +58,44 @@
       "rave":"activeaza\/dezactiveaza luminile",
       "whois all":"ofera userid si username tuturor utilizatorilor din camera",
       "banall":"baneaza toti utilizatorii din camera"
+    },
+    "responses":{
+      "alertson":"Playing sound on the following words: %1",
+      "alertsoff":"No longer playing sound on specific words",
+      "nextsong":"Your next queued song is %1 by %2",
+      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "lightsOut":"%1 turned the lights off",
+      "strobe":"%1 activated strobe lights",
+      "automute":{
+        "automuted":"%1 automuted.",
+        "registered":"%1 registered to automute on future plays.",
+        "unregistered":"%1 removed from automute registry."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "alreadyDJ":"You are already DJing!",
+    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
     "header":"Notificari Chat",
     "join":"Utilizator Intrat",
     "leave":"Utilizator Iesit",
-    "grab":"User Grab",
+    "grab":"Apucare de Utilizator",
     "meh":"Meh'uri ale utilizatorilor",
     "stats":"Statistici Melodii",
     "updates":"Updateuri Melodii",
     "history":"Istoric melodii",
     "songLength":"Lungime melodie (%1 min)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"%1 a apucat %2 - %3",
       "stats":"Statistici: %1 woots--%2 mehs --%3 curates",
       "updates":"Acum canta: %1 de %2<br \/>Pus de: %3",
       "meh":"Lui %1 nu îi place această piesă",
-      "join":{
-        "normal":"%1 a intrat in camera",
-        "fan":"Fanul tau %1 a intrat in camera",
-        "friend":"Prietenul tau %1 a intrat in camera"
-      },
-      "leave":{
-        "normal":"%1 a iesit din camera",
-        "fan":"Fanul tau %1 a iesit din camera",
-        "friend":"Prietenul tau %1 a iesit din camera"
-      },
+      "join":"joined the room",
+      "leave":"left the room",
       "history":"Piesa este în istoric (%1 din %2)",
       "historySkipped":"Piesa este in istoric (%1 din %2), dar a fost sarita in ultimul play",
       "songLength":"Piesa are mai mult de %1 minut"
@@ -160,19 +165,15 @@
     "afktimers":"AFK Timers",
     "roomsettings":"Setari Camera",
     "chatimages":"Imagini în chat",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "twitchemotes":"Emote-uri de pe Twitch",
+    "controlpanel":"Panou de Control"
   },
   "vote":{
     "meh":"Meh",
     "woot":"Woot",
-    "grab":"Grab",
+    "grab":"Apucă",
     "undecided":"Indecis",
     "djing":"DJ"
-  },
-  "automute":{
-    "registered":"%1 inregistrat ca automute in eventualele playuri.",
-    "unregistered":"Melodia %1 a fost stearsa din registrul automute."
   },
   "tooltip":{
     "stream":"Comuta Video\/Audio Stream",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Utilizator negăsit",
+    "usernameNotFound":"Username not found",
     "unknownModeration":"Moderare necunoscuta",
     "unknownMenuKey":"Tasta meniu necunoscuta: %1",
     "missingReason":"Lipseste motivul",
     "notConnected":"Nu esti conectat la server",
-    "noLiteSupport":"Acest lucru nu este acceptat in plug&#179; Lite"
+    "noLiteSupport":"Acest lucru nu este acceptat in plug&#179; Lite",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"No playlists found",
+    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
+    "noNextSong":"You have no queued song"
   }
 }

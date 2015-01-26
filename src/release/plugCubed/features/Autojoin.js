@@ -1,9 +1,9 @@
-define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/RoomSettings', 'plugCubed/Utils', 'plugCubed/dialogs/Menu'], function(TriggerHandler, Settings, RoomSettings, p3Utils, Menu) {
+define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/RoomSettings', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/dialogs/Menu'], function(TriggerHandler, Settings, RoomSettings, p3Lang, p3Utils, Menu) {
     var join, handler;
 
     join = function() {
         var dj = API.getDJ();
-        if (dj === null || dj.id === API.getUser().id || API.getWaitListPosition() > -1) return;
+        if ((dj !== null && dj.id == API.getUser().id) || API.getWaitListPosition() > -1 || API.getWaitList().length == 50) return;
         $('#dj-button').click();
     };
 
@@ -13,7 +13,8 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
             waitListUpdate: 'onWaitListUpdate',
             chat: 'onChat'
         },
-        onDjAdvance: function() {
+        onDjAdvance: function(data) {
+            this.lastDJ = data.lastPlay.dj != null ? data.lastPlay.dj.id : null;
             if (!Settings.autojoin || !RoomSettings.rules.allowAutojoin) return;
             join();
         },
@@ -27,25 +28,29 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
             if (API.getWaitListPosition() > -1) return;
             // If waitlist is full, don't try to disable
             if (API.getWaitList().length == 50) return;
+            // If user was last DJ (DJ Cycle Disabled)
+            if (this.lastDJ == API.getUser().id) return;
             // Disable
             Settings.autojoin = false;
-            Menu.setEnabled('autojoin', Settings.autojoin);
+            Menu.setEnabled('join', Settings.autojoin);
         },
         onChat: function(data) {
+            if (!(RoomSettings.rules.allowAutojoin !== false && Settings.autojoin))
+                return;
+
             var a, b;
             a = data.type == 'mention' && API.hasPermission(data.fromID, API.ROLE.BOUNCER);
             b = data.message.indexOf('@') < 0 && (API.hasPermission(data.fromID, API.ROLE.MANAGER) || p3Utils.isPlugCubedDeveloper(data.fromID));
             if (a || b) {
-                if (data.message.indexOf('!joindisable') > -1 && (typeof RoomSettings.rules.allowAutorespond === 'undefined' || RoomSettings.rules.allowAutorespond !== false)) {
-                    if (Settings.autojoin) {
-                        Settings.autojoin = false;
-                        Menu.setEnabled('autojoin', Settings.autojoin);
-                        Settings.save();
-                        API.sendChat(p3Lang.i18n('autojoin.commandDisable', '@' + data.un));
-                    }
+                if (data.message.indexOf('!joindisable') > -1) {
+                    Settings.autojoin = false;
+                    Menu.setEnabled('join', Settings.autojoin);
+                    Settings.save();
+                    API.sendChat(p3Lang.i18n('autojoin.commandDisable', '@' + data.un));
                 }
             }
         }
     });
+
     return new handler();
 });

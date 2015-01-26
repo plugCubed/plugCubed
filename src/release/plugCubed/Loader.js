@@ -1,4 +1,4 @@
-define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Socket', 'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/overrides/RoomUserListRow', 'plugCubed/overrides/UserRolloverView', 'plugCubed/overrides/WaitListRow'], function(module, Class, Notifications, Version, Styles, Settings, p3Utils, p3Lang, Socket, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, Features, Tickers, Panels, p3RoomUserListRow, p3UserRolloverView, p3WaitListRow) {
+define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Socket', 'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/Overrides/RoomUserListRow', 'plugCubed/Overrides'], function(module, Class, Notifications, Version, Styles, Settings, p3Utils, p3Lang, Socket, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, Features, Tickers, Panels, p3RoomUserListRow, Overrides) {
     var Loader, loaded = false;
 
     var RoomUserListView;
@@ -20,8 +20,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         if (!p3Utils.runLite) {
             RoomUserListView = require('app/views/room/user/RoomUserListView');
             RoomUserListView.prototype.RowClass = p3RoomUserListRow;
-            p3UserRolloverView.override();
-            p3WaitListRow.override();
+            Overrides.override();
         }
 
         initBody();
@@ -91,8 +90,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
 
             if (!p3Utils.runLite) {
                 RoomUserListView.prototype.RowClass = require('app/views/room/user/RoomUserListRow');
-                p3UserRolloverView.revert();
-                p3WaitListRow.revert();
+                Overrides.revert();
             }
 
             var mainClass = module.id.split('/')[0], modules = require.s.contexts._.defined;

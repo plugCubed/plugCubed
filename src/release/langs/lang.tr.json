@@ -3,12 +3,6 @@
   "runningLite":"Running plug&#179; in Lite!",
   "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"genişletilmiş sohbet komutları görmek için '\/commands' yazın sobet'e",
-  "automuted":"%1 otomatik susturuldu.",
-  "nextsong":"Sonraki sıraya şarkı, %1 ile %2",
-  "noNextSong":"Kuyruğa atılmış bir şarkı var",
-  "isHistory":"Uyarı: Bu şarkı önceden vardı. Tarih (%1 of %2)",
-  "lightsOut":"%1 ışıkları kapalı",
-  "strobe":"%1 activated strobe lights",
   "autorespond":{
     "default":"Ben klavye başında degilim",
     "disable":"AFK-konuşmaya çalışmamasının devre dışı bırakma",
@@ -64,7 +58,26 @@
       "rave":"Işıklar söner etkinleştir\/devre dışı bırak",
       "whois all":"kullanıcı kimliği ve odadaki tüm kullanıcıların kullanıcı adınızı verir",
       "banall":"Odadaki tüm kullanıcılar yasakları"
+    },
+    "responses":{
+      "alertson":"Playing sound on the following words: %1",
+      "alertsoff":"No longer playing sound on specific words",
+      "nextsong":"Your next queued song is %1 by %2",
+      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "lightsOut":"%1 turned the lights off",
+      "strobe":"%1 activated strobe lights",
+      "automute":{
+        "automuted":"%1 automuted.",
+        "registered":"%1 registered to automute on future plays.",
+        "unregistered":"%1 removed from automute registry."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "alreadyDJ":"You are already DJing!",
+    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
     "header":"Kullanıcı bilgileri",
@@ -77,20 +90,12 @@
     "history":"Oynatılan şarkılar",
     "songLength":"Şarkı %1 dakikadan daha uzun",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"grabbed %1 - %2",
       "stats":"İstatistikler: %1 Begenilme -- %2 Beğenilmeme --%3 listeye eklenme",
       "updates":"Şimdi Yürütülüyor: %1 by %2 < br \/ > şarkıyı acan: %3",
       "meh":"%1 meh bu parçada vardı",
-      "join":{
-        "normal":"%1 odayı terk etti",
-        "fan":"Senin hayranın %1 sadece odayı terk etti",
-        "friend":"Arkadaşın %1 odayı terk etti"
-      },
-      "leave":{
-        "normal":"%1 odayı terk etti",
-        "fan":"Senin hayranın %1 sadece odayı terk etti",
-        "friend":"Arkadaşın %1 odayı terk etti"
-      },
+      "join":"joined the room",
+      "leave":"left the room",
       "history":"Şarkı geçmiş (%1 of %2) ",
       "historySkipped":"Şarkı tarihinin (%1 of %2), ama son şarkıda atlandı",
       "songLength":"Şarkı %1 dakikadan daha uzun"
@@ -170,10 +175,6 @@
     "undecided":"Kararsız",
     "djing":"DJlik"
   },
-  "automute":{
-    "registered":"otomatik sustur %1 üzerinde kayıtlı",
-    "unregistered":"%1 otomatik sustur kayıt defterinden kaldırdı."
-  },
   "tooltip":{
     "stream":"Toggle Video\/ses akışı",
     "clear":"sohbet temizle",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Kullanıcı bulunamadı",
+    "usernameNotFound":"Username not found",
     "unknownModeration":"Bilinmeyen moderatör",
     "unknownMenuKey":"Bilinmeyen menü tuşu: %1",
     "missingReason":"Kayıp bir neden",
     "notConnected":"Soket sunucusuna bağlı değil",
-    "noLiteSupport":"Burada plug³ Lite desteklenmiyor"
+    "noLiteSupport":"Burada plug³ Lite desteklenmiyor",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"No playlists found",
+    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
+    "noNextSong":"You have no queued song"
   }
 }

@@ -15,20 +15,20 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
             case void 0:
             case 1:
                 // Inline Images => Chat Images
-                if (save['inlineimages'] !== undefined)
+                if (save['inlineimages'] != null)
                     save.chatImages = save['inlineimages'];
 
                 // Moderation
-                if (save.moderation === undefined)
+                if (save.moderation == null)
                     save.moderation = {};
-                if (save.afkTimers !== undefined)
+                if (save.afkTimers != null)
                     save.moderation.afkTimers = save.afkTimers;
                 break;
             case 2:
                 // Curate => Grab
-                if (save.colors !== undefined)
+                if (save.colors != null)
                     save.colors = {};
-                if (save.colors.curate !== undefined)
+                if (save.colors.curate != null)
                     save.colors.grab = save.colors.curate;
                 break;
             default:
@@ -55,11 +55,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         etaTimer: true,
         moderation: {
             afkTimers: false,
-<<<<<<< Updated upstream
-            showDeletesMessages: false
-=======
             showDeletedMessages: false
->>>>>>> Stashed changes
         },
         notifySongLength: 10,
         useRoomSettings: {},
@@ -167,7 +163,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                         if ($.isPlainObject(this[names[i]])) {
                             for (var j in this[names[i]]) {
                                 if (!this[names[i]].hasOwnProperty(j)) continue;
-                                if (save[names[i]][j] !== undefined) {
+                                if (save[names[i]][j] != null) {
                                     this[names[i]][j] = save[names[i]][j];
                                 }
                             }

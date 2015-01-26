@@ -1,14 +1,8 @@
 {
   "running":"Jelenleg fut plug&#179; verzió %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLite":"Plug&#179; lite futtatása!",
+  "runningLiteInfo":"Egy pár funkcíók nem fognak menni.",
   "commandsHelp":"Használd a '\/commands' parancsot hogy lásd a chat parancsokat.",
-  "automuted":"%1 automatikusan lenémítva.",
-  "nextsong":"A következő számnak a címe: %1 készítője: %2",
-  "noNextSong":"Nincsen következő számod a soron",
-  "isHistory":"Figyelem: Ez a szám még mindig szerepel az előzményekben (%1 a %2)",
-  "lightsOut":"%1 lekapcsolta a lámpákat",
-  "strobe":"engedélyezi\/tiltja a stroboszkópot ",
   "autorespond":{
     "default":"Nem vagyok a gépnél",
     "disable":"AFK autómatikus üzenetküldés letiltva",
@@ -47,7 +41,7 @@
       "refresh":"videó újratöltése",
       "alertson":"Hang lejátszása ha egy megadott szót írnak a chat-ben",
       "alertsoff":"Ne játszon le hangot ha egy megadott szót írnak a chat-ben",
-      "grab":"add current song to your selected playlist",
+      "grab":"Most jätszott szám hozzáadni a jelenleg kiválasztott listádba",
       "getpos":"Sorszám lekérése a váró listán",
       "version":"Verziószám megjelenítése",
       "commands":"Lista mutatása",
@@ -64,33 +58,44 @@
       "rave":"engedélyezi\/tiltja a lámpák kikapcsolását",
       "whois all":"Lekéri a szobában tartózkodó összes felhasználó ID-jét és felhasználónevét",
       "banall":"Kitilt minden felhasználót a szobában"
+    },
+    "responses":{
+      "alertson":"Playing sound on the following words: %1",
+      "alertsoff":"No longer playing sound on specific words",
+      "nextsong":"Your next queued song is %1 by %2",
+      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "lightsOut":"%1 turned the lights off",
+      "strobe":"%1 activated strobe lights",
+      "automute":{
+        "automuted":"%1 automuted.",
+        "registered":"%1 registered to automute on future plays.",
+        "unregistered":"%1 removed from automute registry."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "alreadyDJ":"You are already DJing!",
+    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
     "header":"Felhasználó Információi",
     "join":"Felhasználó Csatlakozik",
     "leave":"Felhasználó Lelépett",
-    "grab":"User Grab",
+    "grab":"Vki. felszed",
     "meh":"ember meh-elte",
     "stats":"a szám statisztikája",
     "updates":"Dal frissítések",
     "history":"Számok a történelemben",
     "songLength":"Dal hossza (%1 perc)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
-      "stats":"Statisztika: %1 tetszik -- %2 nem tetszik -- %3 hozzáadások",
+      "grab":"%1 felszedte ezt: %2 - %3",
+      "stats":"Statisztika: %1 tetszik -- %2 nem tetszik -- %3 hozzáadás",
       "updates":"Most Következik: %1 %2-tól <br\/> lejátssza: %3",
       "meh":"%1 mehelte ezt a számot",
-      "join":{
-        "normal":"%1 elhagyta a szobát",
-        "fan":"Rajongód %1 elhagyta a szobát",
-        "friend":"Barátod %1 csatlakozott a szobához"
-      },
-      "leave":{
-        "normal":"%1 elhagyta a szobát",
-        "fan":"Rajongód %1 elhagyta a szobát",
-        "friend":"Barátod %1 csatlakozott a szobához"
-      },
+      "join":"joined the room",
+      "leave":"left the room",
       "history":"A szám szerepel az előzményekben (%1 közül %2)",
       "historySkipped":"A szám szerepel az előzményekben (%1 közül %2), de kihagyták az előző lejátszáskor",
       "songLength":"A szám hosszabb mint %1 perc"
@@ -160,19 +165,15 @@
     "afktimers":"AFK Számlálók",
     "roomsettings":"Szoba beállításai",
     "chatimages":"Chat-képek",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "twitchemotes":"Twitch smiley-k",
+    "controlpanel":"Irányítópult"
   },
   "vote":{
     "meh":"Nem Tetszik",
     "woot":"Tetszik",
-    "grab":"Grab",
+    "grab":"felszedni",
     "undecided":"Eldöntetlen",
     "djing":"DJzik"
-  },
-  "automute":{
-    "registered":"%1 regisztrálva a autónémítás listára",
-    "unregistered":"%1 törölve lett az autónémítás listárol"
   },
   "tooltip":{
     "stream":"Videó\/Hang Tiltása\/Engedélyezése",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Felhasználó nem található",
+    "usernameNotFound":"Username not found",
     "unknownModeration":"Ismeretlen moderáció",
     "unknownMenuKey":"Ismeretlen menü gomb: %1",
     "missingReason":"Hiányzó ok",
     "notConnected":"Nincs csatlakozva a \"socket\" szerverhez",
-    "noLiteSupport":"Ez nincs támogatva a plug&#179; Lite-ban"
+    "noLiteSupport":"Ez nincs támogatva a plug&#179; Lite-ban",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"No playlists found",
+    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
+    "noNextSong":"You have no queued song"
   }
 }

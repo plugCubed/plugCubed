@@ -1,14 +1,8 @@
 {
   "running":"En cours d’exécution: plug&#179; version %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLite":"En cours d’exécution: plug&#179; en version Lite!",
+  "runningLiteInfo":"Certaines fonctionnalités peuvent ne pas fonctionner.",
   "commandsHelp":"Utilisez '\/commands' pour voir les commandes de chat avancées.",
-  "automuted":"%1 est mis en silencieux automatiquement.",
-  "nextsong":"Votre prochaine musique est %1 de %2",
-  "noNextSong":"Vous n'avez aucune musique en attente",
-  "isHistory":"Attention: Cette musique est déjà dans l'historique (%1 de %2)",
-  "lightsOut":"%1 a éteint les lumières.",
-  "strobe":"%1 a activé les stroboscopes",
   "autorespond":{
     "default":"Je suis absent.",
     "disable":"Désactivez la réponse automatique d'absence pour pouvoir discuter",
@@ -47,7 +41,7 @@
       "refresh":"Rafraîchir la vidéo",
       "alertson":"Émettre un son lorsque les mots définis sont écrits dans le chat",
       "alertsoff":"Arrêter de jouer les sons quand les mots définis sont écrits dans le chat",
-      "grab":"add current song to your selected playlist",
+      "grab":"Ajouter la musique actuelle à une de vos playlist",
       "getpos":"Afficher votre position actuelle dans la file d'attente",
       "version":"Affiche la version actuelle de Plug³",
       "commands":"Montrer cette liste",
@@ -64,33 +58,44 @@
       "rave":"Activer ou désactiver les projecteurs.",
       "whois all":"Donne l'ID et le pseudonyme de tous les utilisateurs présents dans la communauté.",
       "banall":"Banni tous les membres dans la communauté"
+    },
+    "responses":{
+      "alertson":"Émet un son sur les mots suivants: %1",
+      "alertsoff":"N'émet plus de sons sur des mots spécifiques",
+      "nextsong":"Votre prochaine musique est %1 de %2",
+      "isHistory":"Attention: Cette musique est déjà dans l'historique (%1 de %2)",
+      "lightsOut":"%1 a éteint les lumières",
+      "strobe":"%1 a activé les stroboscopes",
+      "automute":{
+        "automuted":"%1 est mis en silencieux automatiquement.",
+        "registered":"%1 enregistré dans la liste noire pour les prochaines fois.",
+        "unregistered":"%1 a été retiré de la liste noire."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"SI vous rejoignez la liste d'attente maintenant, vous accéderez aux platines tout de suite!",
+    "alreadyDJ":"Vous êtes déjà aux platines!",
+    "waitListTime":"Vous êtes en position %1 sur %2 de la liste d'attente, vous allez accéder aux platines dans environ %3!",
+    "joinTime":"Si vous joignez la liste d'attente, vous accéderez aux platines dans environ %1!"
   },
   "notify":{
     "header":"Notifications de Chat",
     "join":"Un utilisateur rejoint la communauté",
     "leave":"Un utilisateur part de la communauté",
-    "grab":"User Grab",
+    "grab":"Un utilisateur à ajouter votre musique à une de ses playlist",
     "meh":"Un utilisateur a meh",
     "stats":"Statistiques de la musique",
     "updates":"Changements de musique",
     "history":"Musiques dans l'historique des DJs",
     "songLength":"Durée de la chanson (%1 min)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"ajouté %1 - %2",
       "stats":"Statistiques: %1 Woot(s) -- %2 Meh(s) -- %3 ajout(s)",
       "updates":"Actuellement en train d'être joué: %1 de %2<br>Joué par: %3",
       "meh":"%1 a Meh cette musique\/vidéo",
-      "join":{
-        "normal":"%1 vient de rejoindre la communauté",
-        "fan":"Votre fan %1 vient de rejoindre la communauté",
-        "friend":"Votre ami %1 vient de rejoindre la communauté"
-      },
-      "leave":{
-        "normal":"%1 vient de quitter la communauté",
-        "fan":"Votre fan %1 vient de quitter la communauté",
-        "friend":"Votre ami %1 vient de quitter la communauté"
-      },
+      "join":"a rejoint la salle",
+      "leave":"a quitté la salle",
       "history":"Musique dans l'historique des DJs (%1 de %2)",
       "historySkipped":"La musique est dans l'historique des DJs (%1 sur %2) mais a été sautée la dernière fois qu'elle a été jouée",
       "songLength":"La musique est plus longue que %1 minutes"
@@ -160,19 +165,15 @@
     "afktimers":"Minuteurs d'absence.",
     "roomsettings":"Paramètres de la communauté",
     "chatimages":"Images du chat",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "twitchemotes":"Emoticones de Twitch",
+    "controlpanel":"Panneau de Configuration"
   },
   "vote":{
     "meh":"Meh",
     "woot":"Woot",
-    "grab":"Grab",
+    "grab":"Ajouter",
     "undecided":"Non décidé",
     "djing":"En train de jouer"
-  },
-  "automute":{
-    "registered":"%1 enregistré dans la liste noire pour les prochaines fois.",
-    "unregistered":"%1 retiré de la liste de noire."
   },
   "tooltip":{
     "stream":"Activer\/Désactiver le stream Audio ou Vidéo",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Utilisateur non trouvé",
+    "usernameNotFound":"Cet utilisateur n'a pas été trouvé",
     "unknownModeration":"Modération inconnue.",
     "unknownMenuKey":"Touche de menu inconnue : %1",
     "missingReason":"Raison manquante",
     "notConnected":"N'est pas connecté au serveur socket",
-    "noLiteSupport":"Ceci n'est sur supporté dans plug³ Lite"
+    "noLiteSupport":"Ceci n'est sur supporté dans plug³ Lite",
+    "errorGettingPlaylistInfo":"Erreur lors de l'obtention des informations de la playlist",
+    "noPlaylistsFound":"Aucune playlist trouvée",
+    "yourActivePlaylistIsFull":"Votre playlist active est pleine",
+    "canNotFindTheLastPMReceiver":"impossible de trouver le dernier récepteur de PM",
+    "noNextSong":"Vous n'avez aucune musique en attente"
   }
 }

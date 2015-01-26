@@ -1,14 +1,8 @@
 {
   "running":"Naudojama plug&#179; versija %1",
   "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLiteInfo":"Gali neveikti kelios funkcijos.",
   "commandsHelp":"Rašykite \"\/commands\" kad pamatytumėt paaiškintas pokalbio kambario komandas.",
-  "automuted":"%1 užtildytas.",
-  "nextsong":"parodyk kita daina grojaraštyje ir ar ji buvo sugrota praeityje ",
-  "noNextSong":"Jūs neturite jokios dainos eilėje.",
-  "isHistory":"Įspėjimas: Ši daina buvo nesenai sugrota (%1 of %2)",
-  "lightsOut":"%1 išjungė šviesas",
-  "strobe":"įjungia\/išjungia mirgėjimą",
   "autorespond":{
     "default":"Aš nesu prie klaviatūros.",
     "disable":"Išjunkite AFK Auto-atsiliepiama į pokalbio kambary",
@@ -18,8 +12,8 @@
     "commandNotEnabled":"%1 autojoin was not enabled"
   },
   "autojoin":{
-    "commandDisable":"Auto-priemimas įjunktas",
-    "commandNotEnabled":"Auto-priemimas išjunkas"
+    "commandDisable":"&1 Auto-priemimas išjungtas",
+    "commandNotEnabled":"%1 Auto-priemimas nebuvo įjungtas"
   },
   "commands":{
     "header":"Vartotojo info",
@@ -36,18 +30,18 @@
       "avail":"nustatyti statusą į prieinamas",
       "afk":"\"Aš nesu prie klaviatūros\" žinutė",
       "work":"nustatyti statusą į dirbantis",
-      "gaming":"Žaidime",
+      "gaming":"nustatyti statusą žaidžiantis",
       "join":"Vartotojo Prisijungimas",
       "leave":"Vartotojo Išėjimas",
       "whoami":"gauk pačio savęs informacija",
-      "mute":"nustatyk garsą į 0",
+      "mute":"nustatyti garsą į 0",
       "automute":"registracija dabar automatiškai užtildys grojančias dainas ateityje",
       "unmute":"nustatyk garsą į tokį pat kaip buvo paskutini karta ",
       "nextsong":"parodyk kita daina grojaraštyje ir ar ji buvo sugrota praeityje ",
       "refresh":"perkrauk video",
       "alertson":"sugrok garsą kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
       "alertsoff":"sustok groti garsus kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
-      "grab":"add current song to your selected playlist",
+      "grab":"pridėti esamą dainą į jūsų pasirinktą grojaraštį",
       "getpos":"gauk dabartinę pozicija laukimo eilėje",
       "version":"rodo versijos numeri",
       "commands":"parodo šį sąrašą",
@@ -64,7 +58,26 @@
       "rave":"įjungia\/išjungia šviesas",
       "whois all":"parodo vartotojo ID ir vardą kiekvieno esančio kambaryje",
       "banall":"užblokuoja visus vartotojus esančius kambaryje"
+    },
+    "responses":{
+      "alertson":"Playing sound on the following words: %1",
+      "alertsoff":"No longer playing sound on specific words",
+      "nextsong":"Your next queued song is %1 by %2",
+      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "lightsOut":"%1 turned the lights off",
+      "strobe":"%1 activated strobe lights",
+      "automute":{
+        "automuted":"%1 automuted.",
+        "registered":"%1 registered to automute on future plays.",
+        "unregistered":"%1 removed from automute registry."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "alreadyDJ":"You are already DJing!",
+    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
     "header":"Vartotojo info",
@@ -77,20 +90,12 @@
     "history":"Dainų istorija",
     "songLength":"Dainos trukmė minutėmis",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"grabbed %1 - %2",
       "stats":"Statistika: %1 palaikymai -- %2 mehs -- %3 pasiėmimai",
       "updates":"Dabar Groja: %1 by %2<br \/>Kas leidžia dainą: %3",
       "meh":"%1 nepatinka ši daina",
-      "join":{
-        "normal":"%1 Ką tik paliko kambarį",
-        "fan":"Tavo fanas %1 ką tik paliko kambarį",
-        "friend":"Tavo draugas %1  ką tik paliko kambarį"
-      },
-      "leave":{
-        "normal":"%1 Ką tik paliko kambarį",
-        "fan":"Tavo fanas %1 ką tik paliko kambarį",
-        "friend":"Tavo draugas %1  ką tik paliko kambarį"
-      },
+      "join":"joined the room",
+      "leave":"left the room",
       "history":"Daina rasta praeityje (%1 of %2)",
       "historySkipped":"Daina rasta praeityje (%1 of %2), bet buvo praleista",
       "songLength":"Daina ilgesnė negu %1 minutės"
@@ -170,10 +175,6 @@
     "undecided":"Nenuspręsta",
     "djing":"DJ'avimas"
   },
-  "automute":{
-    "registered":"%1 Užregistruota automatiškai uždrausti kalbėt ateityje ",
-    "unregistered":"%1 pašalintas iš automute sąrašo."
-  },
   "tooltip":{
     "stream":"Įjungti \/ Išjungti  Vaizdą\/Garsą",
     "clear":"Valyti pokalbį",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Vartotojas nerastas",
+    "usernameNotFound":"Username not found",
     "unknownModeration":"Nežinoma moderacija",
     "unknownMenuKey":"Nežinomas meniu mygtukas: %1",
     "missingReason":"Priežastis nerasta",
     "notConnected":"Neprisijungta prie serverio lizdo",
-    "noLiteSupport":"Tai nėra palaikoma plug&#179; Lengvasis"
+    "noLiteSupport":"Tai nėra palaikoma plug&#179; Lengvasis",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"No playlists found",
+    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
+    "noNextSong":"You have no queued song"
   }
 }

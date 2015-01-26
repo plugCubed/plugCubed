@@ -75,13 +75,13 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
          */
         i18n: function(selector) {
             var a = language, i;
-            if (a === undefined || selector === undefined) {
+            if (a == null || selector == null) {
                 return '{' + $.makeArray(arguments).join(', ') + '}';
             }
             var key = selector.split('.');
             for (i in key) {
                 if (!key.hasOwnProperty(i)) continue;
-                if (a[key[i]] === undefined) {
+                if (a[key[i]] == null) {
                     return '{' + $.makeArray(arguments).join(', ') + '}';
                 }
                 a = a[key[i]];

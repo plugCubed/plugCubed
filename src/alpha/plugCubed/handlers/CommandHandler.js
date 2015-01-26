@@ -69,7 +69,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             }
             if (API.hasPermission(undefined, API.ROLE.BOUNCER)) {
                 if (p3Utils.equalsIgnoreCase(command, 'skip')) {
-                    if (API.getDJ() === undefined) return;
+                    if (API.getDJ() == null) return;
                     if (value.length > 5)
                         API.sendChat('@' + API.getDJ().username + ' - Reason for skip: ' + value.substr(5).trim());
                     API.moderateForceSkip();
@@ -191,7 +191,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             }
             if (p3Utils.equalsIgnoreCase(command, 'nextsong')) {
                 var nextSong = API.getNextMedia();
-                if (nextSong === undefined) {
+                if (nextSong == null) {
                     return API.chatLog(p3Lang.i18n('error.noNextSong'));
                 }
                 nextSong = nextSong.media;
@@ -205,7 +205,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             }
             if (p3Utils.equalsIgnoreCase(command, 'automute')) {
                 var media = API.getMedia();
-                if (media === undefined) return;
+                if (media == null) return;
                 if (Settings.registeredSongs.indexOf(media.id) < 0) {
                     Settings.registeredSongs.push(media.id);
                     PlaybackModel.muteOnce();
@@ -300,7 +300,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 if (Socket.getState() !== SockJS.OPEN) {
                     return API.chatLog(p3Lang.i18n('error.notConnected'), true);
                 }
-                if (lastPMReceiver !== undefined && API.getUser(lastPMReceiver.id) !== undefined) {
+                if (lastPMReceiver != null && API.getUser(lastPMReceiver.id) != null) {
                     Socket.send(JSON.stringify({
                         type: 'chat:private',
                         value: {

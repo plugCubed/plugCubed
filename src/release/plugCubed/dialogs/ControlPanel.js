@@ -215,7 +215,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
         openTab: function(id) {
             this.toggleControlPanel(true);
             var tab = tabs[id];
-            if (tab === undefined || !(tab instanceof PanelClass)) return;
+            if (tab == null || !(tab instanceof PanelClass)) return;
 
             $menuDiv.find('.current').removeClass('current');
             $('.p3-control-panel-menu-tab.tab-' + id).addClass('current');

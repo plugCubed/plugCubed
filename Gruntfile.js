@@ -256,6 +256,26 @@ module.exports = function(grunt) {
                     to: versionRelease.build.toString()
                 }]
             },
+            maxthonVersionExtension: {
+                src: ['extensions/shared/def.src.json'],
+                dest: 'extensions/Maxthon/def.json',
+                replacements: [{
+                    from: 'VERSION.MAJOR',
+                    to: versionRelease.major.toString()
+                }, {
+                    from: 'VERSION.MINOR',
+                    to: versionRelease.minor.toString()
+                }, {
+                    from: 'VERSION.PATCH',
+                    to: versionRelease.patch.toString()
+                }, {
+                    from: 'VERSION.PRERELEASE',
+                    to: versionRelease.prerelease
+                }, {
+                    from: 'VERSION.BUILD',
+                    to: versionRelease.build.toString()
+                }]
+            },
             firefoxVersionExtension: {
                 src: ['extensions/shared/package.src.json'],
                 dest: 'extensions/Firefox/package.json',
@@ -310,6 +330,7 @@ module.exports = function(grunt) {
                     optimize: 'none',
                     keepBuildDir: false,
                     removeCombined: false,
+                    findNestedDependencies: true,
                     paths: {
                         jquery: 'empty:',
                         underscore: 'empty:',
@@ -383,6 +404,7 @@ module.exports = function(grunt) {
                     optimize: 'none',
                     keepBuildDir: false,
                     removeCombined: false,
+                    findNestedDependencies: true,
                     paths: {
                         jquery: 'empty:',
                         underscore: 'empty:',
@@ -456,6 +478,7 @@ module.exports = function(grunt) {
                     optimize: 'none',
                     keepBuildDir: false,
                     removeCombined: false,
+                    findNestedDependencies: true,
                     paths: {
                         jquery: 'empty:',
                         underscore: 'empty:',
@@ -523,7 +546,7 @@ module.exports = function(grunt) {
             }
         },
         "mozilla-addon-sdk": {
-            latest: {
+            '1_17': {
                 options: {
                     revision: "1.17"
                 }
@@ -532,7 +555,7 @@ module.exports = function(grunt) {
         "mozilla-cfx-xpi": {
             release: {
                 options: {
-                    "mozilla-addon-sdk": "latest",
+                    "mozilla-addon-sdk": "1_17",
                     extension_dir: path.resolve(__dirname, 'extensions', 'Firefox'),
                     dist_dir: "extensions/Firefox-release"
                 }
@@ -645,6 +668,18 @@ module.exports = function(grunt) {
                     src: '**.png',
                     dest: 'dev/images/'
                 }, {
+                    cwd: 'src/dev/images/badges',
+                    src: '**.png',
+                    dest: 'dev/images/badges/'
+                }, {
+                    cwd: 'src/dev/images/icons',
+                    src: '**.png',
+                    dest: 'dev/images/icons/'
+                }, {
+                    cwd: 'src/dev/images/ranks',
+                    src: '**.png',
+                    dest: 'dev/images/ranks/'
+                }, {
                     cwd: 'src/dev/langs',
                     src: '**.json',
                     dest: 'dev/langs/'
@@ -671,7 +706,7 @@ module.exports = function(grunt) {
 
     // Extensions
     grunt.registerTask('extension:packOpera', ['replace:operaVersionExtension', 'exec:packCRX']);
-    grunt.registerTask('extension:packMaxthon', ['exec:packMXADDON']);
+    grunt.registerTask('extension:packMaxthon', ['replace:maxthonVersionExtension', 'exec:packMXADDON']);
     grunt.registerTask('extension:packFirefox', ['replace:firefoxVersionExtension', 'mozilla-addon-sdk', 'mozilla-cfx-xpi']);
     grunt.registerTask('extension', ['execute:extension', 'extension:packFirefox', 'extension:packOpera', 'extension:packMaxthon']);
 

@@ -1,7 +1,7 @@
 define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Version'], function(_, Class, p3Utils, p3Lang, Version) {
     var _this, Chat, socket, tries = 0, socketReconnecting, socketHandler = Class.extend({
         connect: function() {
-            if (socket !== undefined && socket.readyState === SockJS.OPEN) return;
+            if (socket != null && socket.readyState === SockJS.OPEN) return;
             return;
             _this = this;
             socket = new SockJS('https://socket.plugcubed.net/_');
@@ -11,14 +11,14 @@ define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'p
             socket.onclose = _.bind(this.onClose, this);
         },
         reconnect: function() {
-            if (socket === undefined || socket.readyState !== SockJS.OPEN) {
+            if (socket == null || socket.readyState !== SockJS.OPEN) {
                 this.connect();
             } else {
                 socket.close();
             }
         },
         disconnect: function() {
-            if (socket === undefined || socket.readyState !== SockJS.OPEN) return;
+            if (socket == null || socket.readyState !== SockJS.OPEN) return;
             socket.onclose = function() {
                 console.log('[plug³] Socket Server', 'Closed');
             };

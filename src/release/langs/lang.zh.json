@@ -1,14 +1,8 @@
 {
   "running":"執行 plug&#179; 版本 %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLite":"執行 plug&#179; 精簡版!",
+  "runningLiteInfo":"某些功能將無法運作.",
   "commandsHelp":"使用 '\/commands' 擴大去看聊天指令.",
-  "automuted":"%1 自動靜音.",
-  "nextsong":"在播放清單中顯示下一首歌曲如果它是在歷史紀錄裡",
-  "noNextSong":"你沒有歌曲排隊",
-  "isHistory":"警告: 這首歌仍在歷史記錄裡 (%1 - %2)",
-  "lightsOut":"%1 轉向燈關閉",
-  "strobe":"啟用\/禁用 頻閃燈",
   "autorespond":{
     "default":"我正在暫離電腦中.",
     "disable":"請先禁用AFK自動回應才能聊天",
@@ -47,7 +41,7 @@
       "refresh":"刷新視頻",
       "alertson":"播放音效當任何設定字詞出現在聊天中",
       "alertsoff":"停止播放音效當任何設定字詞出現在聊天中",
-      "grab":"add current song to your selected playlist",
+      "grab":"添加當前歌曲到你指定的播放清單",
       "getpos":"獲取目前等候清單位置",
       "version":"顯示版本號碼",
       "commands":"展示此清單",
@@ -64,33 +58,44 @@
       "rave":"啟用\/禁用 燈光",
       "whois all":"提供 整個房間裡所有用戶的 用戶id 與 用戶名 ",
       "banall":"禁止所有在房間裡的用戶"
+    },
+    "responses":{
+      "alertson":"對下列詞語播放聲音: %1",
+      "alertsoff":"不再對特定詞語播放聲音",
+      "nextsong":"你下一首排隊的歌曲是 %1 來自 %2",
+      "isHistory":"警告: 這首歌仍在播放歷史紀錄裡 (%1 - %2)",
+      "lightsOut":"%1 關閉了轉向燈",
+      "strobe":"%1 啟動了頻閃燈",
+      "automute":{
+        "automuted":"%1 已自動靜音.",
+        "registered":"%1 已註冊到未來播放自動靜音.",
+        "unregistered":"%1 已從自動靜音註冊表中刪除."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"如果你現在加入等候列表, 你將會當Dj播放!",
+    "alreadyDJ":"你已經正在播放!",
+    "waitListTime":"你正在等候列表裡的 %1 \/ %2, 你將會在大概 %3 後播放!",
+    "joinTime":"如果你現在加入等候列表, 你將會在大概 %1 後播放!"
   },
   "notify":{
     "header":"聊天通知",
     "join":"用戶加入",
     "leave":"用戶離開",
-    "grab":"User Grab",
+    "grab":"用戶收藏",
     "meh":"用戶負評",
     "stats":"歌曲統計",
     "updates":"歌曲更新",
     "history":"在歷史裡的歌曲",
     "songLength":"歌曲長度 (%1 分鐘)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"收藏了 %1 - %2",
       "stats":"統計:   %1 正評 -- %2 負評 -- %3 收藏",
       "updates":"正在播放: %1 - %2<br \/>播放者: %3",
-      "meh":"%1 負評了此曲目",
-      "join":{
-        "normal":"%1 剛剛加入了房間",
-        "fan":"你的粉絲 %1 剛剛加入了房間",
-        "friend":"你的朋友 %1 剛剛加入了房間"
-      },
-      "leave":{
-        "normal":"%1 剛剛離開了房間",
-        "fan":"你的粉絲 %1 剛剛離開了房間",
-        "friend":"你的朋友 %1 剛剛離開了房間"
-      },
+      "meh":"負評了此曲目",
+      "join":"加入了房間",
+      "leave":"離開了房間",
       "history":"歌曲在歷史紀錄裡 (%1 - %2)",
       "historySkipped":"歌曲在歷史紀錄裡 (%1 - %2), 但在最後一次播放已被跳過",
       "songLength":"歌曲長過 %1 分鐘"
@@ -160,19 +165,15 @@
     "afktimers":"AFK 計時",
     "roomsettings":"房間設定",
     "chatimages":"聊天圖像",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "twitchemotes":"搞怪表情",
+    "controlpanel":"控制面板"
   },
   "vote":{
     "meh":"負評",
     "woot":"正評",
-    "grab":"Grab",
+    "grab":"收藏",
     "undecided":"未定",
     "djing":"DJ 中"
-  },
-  "automute":{
-    "registered":"%1 已註冊到未來播放自動靜音.",
-    "unregistered":"%1 已從自動靜音註冊中移除."
   },
   "tooltip":{
     "stream":"切換 視頻\/音頻 流",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"找不到此用戶",
+    "usernameNotFound":"用戶名不存在",
     "unknownModeration":"未知管理動作",
     "unknownMenuKey":"未知菜單匙碼: %1",
     "missingReason":"遺失原因",
     "notConnected":"未連接到服務器插座",
-    "noLiteSupport":"這並不被 plug&#179; Lite 所支援"
+    "noLiteSupport":"這並不被 plug&#179; Lite 所支援",
+    "errorGettingPlaylistInfo":"獲取播放清單資訊時出錯",
+    "noPlaylistsFound":"無法找到播放清單",
+    "yourActivePlaylistIsFull":"你的活躍播放清單已滿",
+    "canNotFindTheLastPMReceiver":"無法找到最後私聊的接收器",
+    "noNextSong":"你沒有歌曲能排隊"
   }
 }

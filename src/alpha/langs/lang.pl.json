@@ -1,14 +1,8 @@
 {
   "running":"Plug³ wersja %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLite":"Uruchomiono plug&#179; w wersji Lite!",
+  "runningLiteInfo":"Niektóre funkcje nie będą działać.",
   "commandsHelp":"Użyj '\/commands' aby zobaczyć rozszerzoną listę komend.",
-  "automuted":"%1 został automatycznie wyciszony.",
-  "nextsong":"Twoja następna piosenka w kolejce to %1 stworzona przez %2",
-  "noNextSong":"Nie masz w kolejce żadnych filmów",
-  "isHistory":"Uwaga: ta piosenka jest wciąż w historii (%1 z %2)",
-  "lightsOut":"%1 wyłączył światła",
-  "strobe":"%1 aktywował światła stroboskopowe",
   "autorespond":{
     "default":"Jestem z dala od klawiatury.",
     "disable":"Wyłącz tryb automatycznej odpowiedzi AFK aby pisać ",
@@ -37,8 +31,8 @@
       "afk":"ustaw status na AFK",
       "work":"ustaw status na zajęty",
       "gaming":"Ustaw status na \"Gra\"",
-      "join":"Użytkownik dołączył",
-      "leave":"Użytkownik wyszedł",
+      "join":"dołącz do listy oczekiwania",
+      "leave":"wyjdź z listy oczekiwania",
       "whoami":"Uzyskaj informacje o sobie",
       "mute":"wycisz dźwięk",
       "automute":"Zarejestruj obecnie odtwarzany utwór, by automatycznie go wyciszać w przyszłości",
@@ -47,7 +41,7 @@
       "refresh":"odśwież film",
       "alertson":"Odtwarza dźwięk, gdy wybrane wyrazy będą napisane na czacie",
       "alertsoff":"wyłącza odtwarzeanie dźwięku gdy dane słowa zostaną napisane na chacie",
-      "grab":"add current song to your selected playlist",
+      "grab":"dodaj bieżący utwór do wybranej listy utworów",
       "getpos":"pokazuje aktualną pozycję w liście oczekiwania",
       "version":"pokazuje numer wersji",
       "commands":"pokazuje tę listę",
@@ -64,33 +58,44 @@
       "rave":"Włącz\/Wyłącz światła",
       "whois all":"podaje numer identyfikacyjny oraz nazwę użytkownika każdego użytkownika znajdującego się w pokoju",
       "banall":"zbanuj wszystkich użytkowników w tym pokoju"
+    },
+    "responses":{
+      "alertson":"Odtwarzanie dźwięku na następujące słowa: %1",
+      "alertsoff":"Dźwięk nie będzie już odtwarzany przy wcześniej podanych słowach",
+      "nextsong":"Twoja następna piosenka w kolejce to %1 stworzona przez %2",
+      "isHistory":"Uwaga: ta piosenka jest wciąż w historii (%1 z %2)",
+      "lightsOut":"%1 wyłączył światła",
+      "strobe":"%1 aktywował światła stroboskopowe",
+      "automute":{
+        "automuted":"%1 został automatycznie wyciszony.",
+        "registered":"%1 zostanie automatycznie wyciszony podczas przyszłych odtworzeń.",
+        "unregistered":"%1 został usunięty z listy automatycnego wyciszania."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"Dołącz do listy oczekujących, by być DJ'em!",
+    "alreadyDJ":"Jesteś już DJ'em!",
+    "waitListTime":"Zajmujesz pozycję %1 z %2 na liście oczekiwania, będziesz DJ'em za około %3!",
+    "joinTime":"Jeśli dołączysz teraz do listy oczekiwania, będziesz DJ'em za około %1!"
   },
   "notify":{
     "header":"Powiadomienia czatu",
-    "join":"Użytkownik dołączył",
-    "leave":"Użytkownik wyszedł",
-    "grab":"User Grab",
-    "meh":"Meh-y użytkownika",
-    "stats":"Statystyki utworu",
-    "updates":"Aktualizacje utworu",
+    "join":"Wejścia użytkowników",
+    "leave":"Wyjścia użytkowników",
+    "grab":"Chwycenia użytkowników",
+    "meh":"Meh-y użytkownikowników",
+    "stats":"Statystyki utworów",
+    "updates":"Aktualizacje utworów",
     "history":"Piosenki w historii",
     "songLength":"Długość piosenki (%1 min)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"%1 chwycił %2 - %3",
       "stats":"Statystyki: %1 osób lubi -- %2 osób nie lubi -- %3 osób chwyciło utwór",
       "updates":"Obecnie odtwarzane: %1 przez %2 <br>grał przez: %3",
       "meh":"%1 nie lubi tego utworu",
-      "join":{
-        "normal":"%1 właśnie wszedł do pokoju",
-        "fan":"Twój fan %1 właśnie wszedł do pokoju",
-        "friend":"Twój znajomy %1 właśnie wszedł do pokoju"
-      },
-      "leave":{
-        "normal":"%1 właśnie wyszedł",
-        "fan":"Twój fan %1 właśnie opuścił pokój",
-        "friend":"Twój znajomy %1 właśnie opuścił pokój"
-      },
+      "join":"dołączył do pokoju",
+      "leave":"wyszedł z pokoju",
       "history":"Ten utwór jest w historii (%1 z %2)",
       "historySkipped":"Piosenka jest w historii (%1 z %2), lecz została pominięta przy ostatnim zagraniu",
       "songLength":"Piosenka jest dłuższa niż %1 minut"
@@ -160,19 +165,15 @@
     "afktimers":"Licznik AFK",
     "roomsettings":"Ustawienia pokoju",
     "chatimages":"Pokazuj zdjęcia na czacie",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "twitchemotes":"Emotikony Twitcha",
+    "controlpanel":"Panel sterowania"
   },
   "vote":{
     "meh":"Meh",
     "woot":"Woot",
-    "grab":"Grab",
+    "grab":"Chwyć",
     "undecided":"Niezdecydowany",
     "djing":"Dj"
-  },
-  "automute":{
-    "registered":"%1 zostanie automatycznie wyciszony w przyszłych odtwarzaniach.",
-    "unregistered":"%1 został usunięty z listy auto wyciszania."
   },
   "tooltip":{
     "stream":"Przełącznik nadawania obrazu\/dźwięku",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Użytkownik nie znaleziony",
+    "usernameNotFound":"Nazwa użytkownika nie została znaleziona",
     "unknownModeration":"Nieznana moderacja",
     "unknownMenuKey":"Nieznany klawisz menu: %1",
     "missingReason":"Brak przyczyny",
     "notConnected":"Nie połączono z serwerem",
-    "noLiteSupport":"Ta funkcja nie jest dostępna w plug&#179; Lite"
+    "noLiteSupport":"Ta funkcja nie jest dostępna w plug&#179; Lite",
+    "errorGettingPlaylistInfo":"Wystąpił błąd podczas uzyskiwania informacji na temat listy odtwarzania",
+    "noPlaylistsFound":"Nie znaleziono żadnej listy utworów",
+    "yourActivePlaylistIsFull":"Twoja aktywna lista odtwarzania jest pełna",
+    "canNotFindTheLastPMReceiver":"Nie można znaleźć ostatniego odbiorcy prywatnej wiadomości",
+    "noNextSong":"Nie masz w kolejce żadnych utworów"
   }
 }

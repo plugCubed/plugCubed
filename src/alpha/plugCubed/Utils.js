@@ -61,117 +61,129 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             }
             return url;
         },
-        getHighestRank: function(userID) {
-            if (this.isPlugCubedDeveloper(userID)) return 'developer';
-            if (this.isPlugCubedSponsor(userID)) return 'sponsor';
-            if (this.isPlugCubedSpecial(userID)) return 'special';
-            if (this.isPlugCubedAmbassador(userID)) return 'ambassador';
-            if (this.isPlugCubedDonatorDiamond(userID)) return 'donatorDiamond';
-            if (this.isPlugCubedDonatorPlatinum(userID)) return 'donatorPlatinum';
-            if (this.isPlugCubedDonatorGold(userID)) return 'donatorGold';
-            if (this.isPlugCubedDonatorSilver(userID)) return 'donatorSilver';
-            if (this.isPlugCubedDonatorBronze(userID)) return 'donatorBronze';
-            return undefined;
+        getHighestRank: function(uid) {
+            if (!uid) uid = API.getUser().id;
+
+            if (this.isPlugCubedDeveloper(uid)) return 'developer';
+            if (this.isPlugCubedSponsor(uid)) return 'sponsor';
+            if (this.isPlugCubedSpecial(uid)) return 'special';
+            if (this.isPlugCubedAmbassador(uid)) return 'ambassador';
+            if (this.isPlugCubedDonatorDiamond(uid)) return 'donatorDiamond';
+            if (this.isPlugCubedDonatorPlatinum(uid)) return 'donatorPlatinum';
+            if (this.isPlugCubedDonatorGold(uid)) return 'donatorGold';
+            if (this.isPlugCubedDonatorSilver(uid)) return 'donatorSilver';
+            if (this.isPlugCubedDonatorBronze(uid)) return 'donatorBronze';
+            return null;
         },
-        havePlugCubedRank: function(userID) {
-            return this.isPlugCubedDeveloper(userID) || this.isPlugCubedSponsor(userID) || this.isPlugCubedSpecial(userID) || this.isPlugCubedAmbassador(userID) || this.isPlugCubedDonatorDiamond(userID) || this.isPlugCubedDonatorPlatinum(userID) || this.isPlugCubedDonatorGold(userID) || this.isPlugCubedDonatorSilver(userID) || this.isPlugCubedDonatorBronze(userID);
+        getHighestRankString: function(uid) {
+            var highestRank = this.getHighestRank(uid);
+            if (highestRank != null) {
+                if (this.isPlugCubedSpecial(uid)) {
+                    return p3Lang.i18n('info.specialTitles.special', this.getPlugCubedSpecial(uid).title);
+                }
+                return p3Lang.i18n('info.specialTitles.' + highestRank);
+            }
+            return '';
         },
-        getAllPlugCubedRanks: function(userID, onlyP3) {
+        havePlugCubedRank: function(uid) {
+            return this.isPlugCubedDeveloper(uid) || this.isPlugCubedSponsor(uid) || this.isPlugCubedSpecial(uid) || this.isPlugCubedAmbassador(uid) || this.isPlugCubedDonatorDiamond(uid) || this.isPlugCubedDonatorPlatinum(uid) || this.isPlugCubedDonatorGold(uid) || this.isPlugCubedDonatorSilver(uid) || this.isPlugCubedDonatorBronze(uid);
+        },
+        getAllPlugCubedRanks: function(uid, onlyP3) {
             var ranks = [];
 
             // plugCubed ranks
-            if (this.isPlugCubedDeveloper(userID)) {
+            if (this.isPlugCubedDeveloper(uid)) {
                 ranks.push(p3Lang.i18n('info.specialTitles.developer'));
             }
-            if (this.isPlugCubedSponsor(userID)) {
+            if (this.isPlugCubedSponsor(uid)) {
                 ranks.push(p3Lang.i18n('info.specialTitles.sponsor'));
             }
-            if (this.isPlugCubedSpecial(userID)) {
-                ranks.push(p3Lang.i18n('info.specialTitles.special', this.getPlugCubedSpecial(userID).title));
+            if (this.isPlugCubedSpecial(uid)) {
+                ranks.push(p3Lang.i18n('info.specialTitles.special', this.getPlugCubedSpecial(uid).title));
             }
-            if (this.isPlugCubedAmbassador(userID)) {
+            if (this.isPlugCubedAmbassador(uid)) {
                 ranks.push(p3Lang.i18n('info.specialTitles.ambassador'));
             }
-            if (this.isPlugCubedDonatorDiamond(userID)) {
+            if (this.isPlugCubedDonatorDiamond(uid)) {
                 ranks.push(p3Lang.i18n('info.specialTitles.donatorDiamond'));
             }
-            if (this.isPlugCubedDonatorPlatinum(userID)) {
+            if (this.isPlugCubedDonatorPlatinum(uid)) {
                 ranks.push(p3Lang.i18n('info.specialTitles.donatorPlatinum'));
             }
-            if (this.isPlugCubedDonatorGold(userID)) {
+            if (this.isPlugCubedDonatorGold(uid)) {
                 ranks.push(p3Lang.i18n('info.specialTitles.donatorGold'));
             }
-            if (this.isPlugCubedDonatorSilver(userID)) {
+            if (this.isPlugCubedDonatorSilver(uid)) {
                 ranks.push(p3Lang.i18n('info.specialTitles.donatorSilver'));
             }
-            if (this.isPlugCubedDonatorBronze(userID)) {
+            if (this.isPlugCubedDonatorBronze(uid)) {
                 ranks.push(p3Lang.i18n('info.specialTitles.donatorBronze'));
             }
 
             // plug.dj ranks
             if (!onlyP3) {
-                if (this.hasPermission(userID, 5, true)) {
+                if (this.hasPermission(uid, 5, true)) {
                     ranks.push(Lang.roles.admin);
-                } else if (this.hasPermission(userID, 4, true)) {
+                } else if (this.hasPermission(uid, 4, true)) {
                     ranks.push(Lang.roles.leader);
-                } else if (this.hasPermission(userID, 3, true)) {
+                } else if (this.hasPermission(uid, 3, true)) {
                     ranks.push(Lang.roles.ambassador);
-                } else if (this.hasPermission(userID, 2, true)) {
+                } else if (this.hasPermission(uid, 2, true)) {
                     ranks.push(Lang.roles.volunteer);
-                } else if (this.hasPermission(userID, API.ROLE.HOST)) {
+                } else if (this.hasPermission(uid, API.ROLE.HOST)) {
                     ranks.push(Lang.roles.host);
-                } else if (this.hasPermission(userID, API.ROLE.COHOST)) {
+                } else if (this.hasPermission(uid, API.ROLE.COHOST)) {
                     ranks.push(Lang.roles.cohost);
-                } else if (this.hasPermission(userID, API.ROLE.MANAGER)) {
+                } else if (this.hasPermission(uid, API.ROLE.MANAGER)) {
                     ranks.push(Lang.roles.manager);
-                } else if (this.hasPermission(userID, API.ROLE.BOUNCER)) {
+                } else if (this.hasPermission(uid, API.ROLE.BOUNCER)) {
                     ranks.push(Lang.roles.bouncer);
-                } else if (this.hasPermission(userID, API.ROLE.DJ)) {
+                } else if (this.hasPermission(uid, API.ROLE.DJ)) {
                     ranks.push(Lang.roles.dj);
                 }
             }
 
             return ranks.join(' / ');
         },
-        isPlugCubedDeveloper: function(userID) {
-            if (!userID) userID = API.getUser().id;
-            return developer.indexOf(userID) > -1;
+        isPlugCubedDeveloper: function(uid) {
+            if (!uid) uid = API.getUser().id;
+            return developer.indexOf(uid) > -1;
         },
-        isPlugCubedSponsor: function(userID) {
-            if (!userID) userID = API.getUser().id;
-            return sponsor.indexOf(userID) > -1;
+        isPlugCubedSponsor: function(uid) {
+            if (!uid) uid = API.getUser().id;
+            return sponsor.indexOf(uid) > -1;
         },
-        isPlugCubedSpecial: function(userID) {
-            if (!userID) userID = API.getUser().id;
-            return this.getPlugCubedSpecial(userID) !== undefined;
+        isPlugCubedSpecial: function(uid) {
+            if (!uid) uid = API.getUser().id;
+            return this.getPlugCubedSpecial(uid) != null;
         },
-        isPlugCubedAmbassador: function(userID) {
-            if (!userID) userID = API.getUser().id;
-            return ambassador.indexOf(userID) > -1;
+        isPlugCubedAmbassador: function(uid) {
+            if (!uid) uid = API.getUser().id;
+            return ambassador.indexOf(uid) > -1;
         },
-        isPlugCubedDonatorDiamond: function(userID) {
-            if (!userID) userID = API.getUser().id;
-            return donatorDiamond.indexOf(userID) > -1;
+        isPlugCubedDonatorDiamond: function(uid) {
+            if (!uid) uid = API.getUser().id;
+            return donatorDiamond.indexOf(uid) > -1;
         },
-        isPlugCubedDonatorPlatinum: function(userID) {
-            if (!userID) userID = API.getUser().id;
-            return donatorPlatinum.indexOf(userID) > -1;
+        isPlugCubedDonatorPlatinum: function(uid) {
+            if (!uid) uid = API.getUser().id;
+            return donatorPlatinum.indexOf(uid) > -1;
         },
-        isPlugCubedDonatorGold: function(userID) {
-            if (!userID) userID = API.getUser().id;
-            return donatorGold.indexOf(userID) > -1;
+        isPlugCubedDonatorGold: function(uid) {
+            if (!uid) uid = API.getUser().id;
+            return donatorGold.indexOf(uid) > -1;
         },
-        isPlugCubedDonatorSilver: function(userID) {
-            if (!userID) userID = API.getUser().id;
-            return donatorSilver.indexOf(userID) > -1;
+        isPlugCubedDonatorSilver: function(uid) {
+            if (!uid) uid = API.getUser().id;
+            return donatorSilver.indexOf(uid) > -1;
         },
-        isPlugCubedDonatorBronze: function(userID) {
-            if (!userID) userID = API.getUser().id;
-            return donatorBronze.indexOf(userID) > -1;
+        isPlugCubedDonatorBronze: function(uid) {
+            if (!uid) uid = API.getUser().id;
+            return donatorBronze.indexOf(uid) > -1;
         },
-        getPlugCubedSpecial: function(userID) {
-            if (!userID) userID = API.getUser().id;
-            return special[userID];
+        getPlugCubedSpecial: function(uid) {
+            if (!uid) uid = API.getUser().id;
+            return special[uid];
         },
         cleanHTML: function(msg, disallow, extra_allow) {
             return cleanHTMLMessage(msg, disallow, extra_allow);
@@ -191,7 +203,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             $chat = !runLite && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages');
             b = $chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - 20;
 
-            $message = $('<div>').addClass('cm').addClass(type ? type : 'message');
+            $message = $('<div>').addClass(type ? type : 'message');
             $box = $('<div>').addClass('badge-box').data('uid', fromID ? fromID : 'p3');
             $from = $('<div>').addClass('from').append($('<span>').addClass('un'));
             $msg = $('<div>').addClass('msg').append($from);
@@ -206,7 +218,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
 
             if (fromID) {
                 from = API.getUser(fromID);
-                var lastMessageContainer = $('#chat-messages').find('.cm').last();
+                var lastMessageContainer = $('#chat-messages').find('.message').last();
                 var lastSender = lastMessageContainer.children('.badge-box').data('uid');
 
                 if (from != null && from.username != null) {
@@ -272,17 +284,17 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         getRoomName: function() {
             return $('#room-name').text().trim();
         },
-        getUserData: function(userID, key, defaultValue) {
-            if (plugCubedUserData[userID] === undefined || plugCubedUserData[userID][key] === undefined) {
+        getUserData: function(uid, key, defaultValue) {
+            if (plugCubedUserData[uid] == null || plugCubedUserData[uid][key] == null) {
                 return defaultValue;
             }
-            return plugCubedUserData[userID][key];
+            return plugCubedUserData[uid][key];
         },
-        setUserData: function(userID, key, value) {
-            if (plugCubedUserData[userID] === undefined) {
-                plugCubedUserData[userID] = {};
+        setUserData: function(uid, key, value) {
+            if (plugCubedUserData[uid] == null) {
+                plugCubedUserData[uid] = {};
             }
-            plugCubedUserData[userID][key] = value;
+            plugCubedUserData[uid][key] = value;
         },
         getUser: function(data) {
             var method = 'number';
@@ -324,7 +336,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 var rank, status, voted, position, waitlistpos, inbooth, lang, lastMessage, disconnectInfo;
 
                 waitlistpos = API.getWaitListPosition(user.id);
-                inbooth = API.getDJ() !== undefined && API.getDJ().id === user.id;
+                inbooth = API.getDJ() != null && API.getDJ().id === user.id;
                 lang = Lang.languages[user.language];
                 lastMessage = this.getLastMessageTime(user.id);
                 disconnectInfo = this.getUserData(user.id, 'disconnects', {
@@ -532,14 +544,14 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         randomRange: function(min, max) {
             return min + Math.floor(Math.random() * (max - min + 1));
         },
-        isRGB: function(a) {
-            return typeof a === 'string' ? /^(#|)(([0-9A-F]{6}$)|([0-9A-F]{3}$))/i.test(a) : false;
+        isRGB: function(text) {
+            return typeof text === 'string' ? /^(#|)(([0-9A-F]{6}$)|([0-9A-F]{3}$))/i.test(text) : false;
         },
-        toRGB: function(a) {
-            return this.isRGB(a) ? a.substr(0, 1) === '#' ? a : '#' + a : undefined;
+        toRGB: function(text) {
+            return this.isRGB(text) ? text.substr(0, 1) === '#' ? text : '#' + text : undefined;
         },
-        isNumber: function(a) {
-            return typeof a === 'string' ? !isNaN(parseInt(a, 10)) && isFinite(a) : false;
+        isNumber: function(text) {
+            return typeof text === 'string' ? !isNaN(parseInt(text, 10)) && isFinite(text) : false;
         },
         equalsIgnoreCase: function(a, b) {
             return typeof a === 'string' && typeof b === 'string' ? a.toLowerCase() === b.toLowerCase() : false;

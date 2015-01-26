@@ -42,7 +42,7 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Contex
                     _$context.trigger('tooltip:hide');
                 });
 
-                if (specialIconInfo !== undefined) {
+                if (specialIconInfo != null) {
                     $icon.css('background-image', 'url("https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3special.' + specialIconInfo.icon + '.png")');
                 }
             }

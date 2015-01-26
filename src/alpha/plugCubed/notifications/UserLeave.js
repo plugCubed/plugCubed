@@ -5,8 +5,8 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
             var disconnects = p3Utils.getUserData(data.id, 'disconnects', {
                 count: 0
             });
-            if ((Settings.notify & enumNotifications.USER_LEAVE) === enumNotifications.USER_LEAVE && (disconnects.time === undefined || Date.now() - disconnects.time < 1000) && (lastLeave[data.id] === undefined || lastLeave[data.id] < Date.now() - 5e3)) {
-                var relationship = 0;
+            if ((Settings.notify & enumNotifications.USER_LEAVE) === enumNotifications.USER_LEAVE && (disconnects.time == null || Date.now() - disconnects.time < 1000) && (lastLeave[data.id] == null || lastLeave[data.id] < Date.now() - 5e3)) {
+                // TODO: Add check if friend
                 p3Utils.chatLog(undefined, p3Lang.i18n('notify.message.leave'), Settings.colors.leave || Settings.colorInfo.notifications.leave.color, data.id, data.username);
             }
             lastLeave[data.id] = Date.now();

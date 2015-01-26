@@ -3,12 +3,6 @@
   "runningLite":"Running plug&#179; in Lite!",
   "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"Gebruik '\/commands' om alle chat commando's te zien",
-  "automuted":"%1 automatisch gedemt\/muted",
-  "nextsong":"Laat volgende nummer zien in de afspeellijst en of het in de geschiedenis staat",
-  "noNextSong":"Je hebt geen songs in je playlist",
-  "isHistory":"Opgepast: Dit liedje is nog steeds in de geschiedenis (%1 van %2)",
-  "lightsOut":"%1 heeft de lichten uitgedaan",
-  "strobe":"Activeer \/ deactiveer strobe",
   "autorespond":{
     "default":"Ik ben niet op mijn pc!",
     "disable":"Zet AFK Automatisch Reageren af om te chatten",
@@ -34,7 +28,7 @@
     },
     "descriptions":{
       "avail":"zet status op beschikbaar",
-      "afk":"AFK Bericht",
+      "afk":"zet status op weg",
       "work":"zet status op werken",
       "gaming":"Gaming",
       "join":"Gebruiker join",
@@ -64,7 +58,26 @@
       "rave":"Activeer \/ deactiveer lampen uit",
       "whois all":"Geeft gebruikerid en gebruikernaam van iedere gebruiker in de kamer",
       "banall":"Verbied alle gebruikers in de kamer"
+    },
+    "responses":{
+      "alertson":"Playing sound on the following words: %1",
+      "alertsoff":"No longer playing sound on specific words",
+      "nextsong":"Your next queued song is %1 by %2",
+      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "lightsOut":"%1 turned the lights off",
+      "strobe":"%1 activated strobe lights",
+      "automute":{
+        "automuted":"%1 automuted.",
+        "registered":"%1 registered to automute on future plays.",
+        "unregistered":"%1 removed from automute registry."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "alreadyDJ":"You are already DJing!",
+    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
     "header":"Gebruiker informatie",
@@ -77,20 +90,12 @@
     "history":"Nummers in geschiedenis",
     "songLength":"Lengte van een nummer (1% min)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"grabbed %1 - %2",
       "stats":"Status: %1 woots - %2 mehs - %3 grabs",
       "updates":"Nu aan het spelen: %1 by %2<br\/> Gespeeld door: %3",
       "meh":"%1 Heeft deze track gemeh'd",
-      "join":{
-        "normal":"%1 is zonet uit de kamer weggegaan",
-        "fan":"Jouw Fan %1 is zonet uit de kamer weggegaan",
-        "friend":"Jouw vriend %1 is zonet uit de kamer weggegaan"
-      },
-      "leave":{
-        "normal":"%1 is zonet uit de kamer weggegaan",
-        "fan":"Jouw Fan %1 is zonet uit de kamer weggegaan",
-        "friend":"Jouw vriend %1 is zonet uit de kamer weggegaan"
-      },
+      "join":"joined the room",
+      "leave":"left the room",
       "history":"Dit liedje is nog steeds in de geschiedenis (%1 van %2)",
       "historySkipped":"Liedje in geschiedenis (%1 van %2), maar is overgeslagen bij de vorige keer dat het gedraaid is",
       "songLength":"Lied is langer dan %1 minuten"
@@ -160,19 +165,15 @@
     "afktimers":"AFK Wekkers",
     "roomsettings":"Kamer instellingen",
     "chatimages":"Chat Afbeeldingen",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "twitchemotes":"Twitch emoticons",
+    "controlpanel":"Configuratiescherm"
   },
   "vote":{
     "meh":"Meh",
     "woot":"Woot",
-    "grab":"Grab",
+    "grab":"Neem",
     "undecided":"Niet besloten",
     "djing":"Aan het DJen"
-  },
-  "automute":{
-    "registered":"%1 is geregistreerd om om te automuten de volgende keer dat deze draait",
-    "unregistered":"%1 zal niet meer ge-automute worden"
   },
   "tooltip":{
     "stream":"Video\/Audio Stream Aan\/Uit",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Gebruiker niet gevonden",
+    "usernameNotFound":"Gebruikersnaam niet gevonden",
     "unknownModeration":"Onbekende matiging",
     "unknownMenuKey":"Onbekende menu key: %1",
     "missingReason":"Ontbrekende reden",
     "notConnected":"Niet verbonden met socket server",
-    "noLiteSupport":"Dit wordt niet ondersteund in plug&#179; Lite"
+    "noLiteSupport":"Dit wordt niet ondersteund in plug&#179; Lite",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"Geen afspeellijsten gevonden",
+    "yourActivePlaylistIsFull":"Uw actieve afspeellijst is vol",
+    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
+    "noNextSong":"You have no queued song"
   }
 }

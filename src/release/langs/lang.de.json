@@ -3,12 +3,6 @@
   "runningLite":"Running plug&#179; in Lite!",
   "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"Gib '\/commands' ein, um alle Chat Befehle zu sehen.",
-  "automuted":"%1 automatisch stumm geschaltet",
-  "nextsong":"Dein nächstes Lied ist %1 von %2",
-  "noNextSong":"Du hast kein Lied in der Warteschlange",
-  "isHistory":"Warnung: Dieser Song ist noch im Verlauf (%1 von %2)",
-  "lightsOut":"%1 hat das Licht ausgeschaltet",
-  "strobe":"%1 hat die Blitzlichter aktiviert",
   "autorespond":{
     "default":"Bin mal weg.",
     "disable":"Schalte die AFK Autoantwort ab um zu Chatten",
@@ -64,7 +58,26 @@
       "rave":"Schalte die \"Lichter aus\"-Funktion ein-\/aus",
       "whois all":"Zeigt die Benutzer-ID und Benutzernamen von allen Benutzern im Raum an",
       "banall":"Bannt alle Benutzer im Raum"
+    },
+    "responses":{
+      "alertson":"Playing sound on the following words: %1",
+      "alertsoff":"No longer playing sound on specific words",
+      "nextsong":"Your next queued song is %1 by %2",
+      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "lightsOut":"%1 turned the lights off",
+      "strobe":"%1 activated strobe lights",
+      "automute":{
+        "automuted":"%1 automuted.",
+        "registered":"%1 registered to automute on future plays.",
+        "unregistered":"%1 removed from automute registry."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "alreadyDJ":"You are already DJing!",
+    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
     "header":"Chat Benachrichtigungen",
@@ -77,20 +90,12 @@
     "history":"Songs im Verlauf",
     "songLength":"Song Länge (%1 min)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"grabbed %1 - %2",
       "stats":"Statistiken: %1 woots -- %2 mehs -- %3 grabs",
       "updates":"Jetzt läuft: %1 von %2<br\/>Gespielt von: %3",
       "meh":"%1 meh-te diesen Song",
-      "join":{
-        "normal":"%1 betrat gerade eben den Raum",
-        "fan":"Dein Fan %1 betrat den Raum",
-        "friend":"Dein Freund %1 betrat den Raum"
-      },
-      "leave":{
-        "normal":"%1 verließ den Raum",
-        "fan":"Dein Fan %1 verließ den Raum",
-        "friend":"Dein Freund %1 verließ den Raum"
-      },
+      "join":"joined the room",
+      "leave":"left the room",
       "history":"Song ist im Verlauf (%1 von %2)",
       "historySkipped":"Song ist im Verlauf (%1 von %2), aber wurde beim letzten Mal übersprungen",
       "songLength":"Song ist länger als %1 Minuten "
@@ -170,10 +175,6 @@
     "undecided":"Unentschieden",
     "djing":"spielt gerade"
   },
-  "automute":{
-    "registered":"%1 für automatisches Stummstellen bei zukünftigen DJ's registriert",
-    "unregistered":"%1 wurde von der Automatisch-Stummstellen Liste entfernt."
-  },
   "tooltip":{
     "stream":"Video\/Audio Stream ein-\/ausschalten",
     "clear":"Chat leeren",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Benutzer konnte nicht gefunden werden.",
+    "usernameNotFound":"Username not found",
     "unknownModeration":"Unbekannte Moderation",
     "unknownMenuKey":"Unbekannte Menü-Taste: %1",
     "missingReason":"Fehlender Grund",
     "notConnected":"Nicht mit dem Socket Server verbunden",
-    "noLiteSupport":"Das ist in plug&#179; Lite nicht unterstützt"
+    "noLiteSupport":"Das ist in plug&#179; Lite nicht unterstützt",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"No playlists found",
+    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
+    "noNextSong":"You have no queued song"
   }
 }

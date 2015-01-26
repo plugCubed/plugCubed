@@ -3,12 +3,6 @@
   "runningLite":"Running plug&#179; in Lite!",
   "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"Použi '\/commands' k rozšírenému zobrazeniu rozkazov\n",
-  "automuted":"%1 automuted.",
-  "nextsong":"display next song in playlist and if it's in history",
-  "noNextSong":"Nemáte žiadnu pesničku v rade",
-  "isHistory":"Upozornenie: Táto pesnička je stále v histórii (%1 z %2)",
-  "lightsOut":"%1 zhasol svetlá",
-  "strobe":"enable\/disable strobe",
   "autorespond":{
     "default":"Som preč od klávesnice.",
     "disable":"Zakázať Autorespond AFK na chate",
@@ -64,7 +58,26 @@
       "rave":"Zapnutie\/vypnutie svetla von",
       "whois all":"dáva userid a užívateľské meno všetkých používateľov v miestnosti",
       "banall":"zákazy všetkých používateľov v miestnosti"
+    },
+    "responses":{
+      "alertson":"Playing sound on the following words: %1",
+      "alertsoff":"No longer playing sound on specific words",
+      "nextsong":"Your next queued song is %1 by %2",
+      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "lightsOut":"%1 turned the lights off",
+      "strobe":"%1 activated strobe lights",
+      "automute":{
+        "automuted":"%1 automuted.",
+        "registered":"%1 registered to automute on future plays.",
+        "unregistered":"%1 removed from automute registry."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "alreadyDJ":"You are already DJing!",
+    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
     "header":"User Information",
@@ -77,20 +90,12 @@
     "history":"Piesní v histórii",
     "songLength":"Dĺžka piesne (%1 min)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"grabbed %1 - %2",
       "stats":"Štatistiky: %1 woots--%2 mehs--%3 curates",
       "updates":"Prehráva: %1 %2 <br>hrajú: %3",
       "meh":"%1 meh mal túto trať",
-      "join":{
-        "normal":"%1 just left the room",
-        "fan":"Your fan %1 just left the room",
-        "friend":"Your friend %1 just left the room"
-      },
-      "leave":{
-        "normal":"%1 len opustil miestnosť",
-        "fan":"Váš fanúšik %1 len opustil miestnosť",
-        "friend":"Váš priateľ %1 len opustil miestnosť"
-      },
+      "join":"joined the room",
+      "leave":"left the room",
       "history":"Skladba je v histórii (%1 z %2)",
       "historySkipped":"Pesnička je v histórii (%1 z %2), ale bola preskočí pretože dnes hrala",
       "songLength":"Pesnička je dlhšia ako %1 minúta"
@@ -170,10 +175,6 @@
     "undecided":"Nerozhodný",
     "djing":"Djing"
   },
-  "automute":{
-    "registered":"%1 registrované automute na budúce hrá.",
-    "unregistered":"%1 odstránené z registra auto-stlmenie."
-  },
   "tooltip":{
     "stream":"Povoliť Video \/ Audio vysielanie",
     "clear":"Vymazať Chat",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Užívateľ nebol nájdený",
+    "usernameNotFound":"Username not found",
     "unknownModeration":"Neznámy moderovanie",
     "unknownMenuKey":"Neznámy menu kľúč: %1",
     "missingReason":"Chýbajúce dôvod",
     "notConnected":"Nie je pripojený na socket server",
-    "noLiteSupport":"Toto nie je podporované v plug³ Lite"
+    "noLiteSupport":"Toto nie je podporované v plug³ Lite",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"No playlists found",
+    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
+    "noNextSong":"You have no queued song"
   }
 }

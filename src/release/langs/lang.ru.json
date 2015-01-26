@@ -3,12 +3,6 @@
   "runningLite":"Running plug&#179; in Lite!",
   "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"Для просмотра доступных команд чата используйте '\/commands' ",
-  "automuted":"%1 автоматически заглушен.",
-  "nextsong":"Your next queued song is %1 by %2",
-  "noNextSong":"У вас отсутствуют песни для воспроизведения",
-  "isHistory":"Предупреждение: Эту песню недавно играли (%1 из %2)",
-  "lightsOut":"%1 выключил свет",
-  "strobe":"%1 включил стробоскопы",
   "autorespond":{
     "default":"Я отошёл от клавиатуры.",
     "disable":"Отключить автоматическое оповещение об отсутствии в чате",
@@ -18,11 +12,11 @@
     "commandNotEnabled":"%1 оповещение о вашем отсутствии не работает"
   },
   "autojoin":{
-    "commandDisable":"%1 автоматическое добавление отключено",
-    "commandNotEnabled":"%1 автоматическое добавление недоступно"
+    "commandDisable":"%1 автодобавление отключено",
+    "commandNotEnabled":"%1 автодобавление недоступно"
   },
   "commands":{
-    "header":"Команды plugCubed",
+    "header":"Команды plug&#179;",
     "userCommands":"Пользовательские команды",
     "modCommands":"Команды модераторов",
     "variables":{
@@ -48,7 +42,7 @@
       "alertson":"воспроизводить звук, когда указанные слова будут написаны в чате",
       "alertsoff":"останавливать воспроизведение звука, когда определённые слова пишутся в чате",
       "grab":"add current song to your selected playlist",
-      "getpos":"получить позицию в списке ожидания",
+      "getpos":"узнать свою положение в очереди",
       "version":"отобразить номер текущей версии",
       "commands":"показать этот список",
       "link":"вставить ссылку на plugCubed в чат",
@@ -64,39 +58,50 @@
       "rave":"включить\/выключить свет",
       "whois all":"предоставить идентификатор пользователя, или имя пользователя, или всех пользователей в комнате",
       "banall":"забанить всех пользователей в этой комнате"
+    },
+    "responses":{
+      "alertson":"Playing sound on the following words: %1",
+      "alertsoff":"No longer playing sound on specific words",
+      "nextsong":"Your next queued song is %1 by %2",
+      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "lightsOut":"%1 turned the lights off",
+      "strobe":"%1 activated strobe lights",
+      "automute":{
+        "automuted":"%1 automuted.",
+        "registered":"%1 registered to automute on future plays.",
+        "unregistered":"%1 removed from automute registry."
+      }
     }
   },
+  "eta":{
+    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "alreadyDJ":"You are already DJing!",
+    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+  },
   "notify":{
-    "header":"Команды plugCubed",
-    "join":"Пользователь присоединился",
+    "header":"уведомления в чате",
+    "join":"Пользователь вошел",
     "leave":"Пользователь вышел",
     "grab":"User Grab",
     "meh":"не понравившееся пользователю",
-    "stats":"Статистика песни",
+    "stats":"Статистика трека",
     "updates":"Обновления песен",
-    "history":"Песни в истории",
+    "history":"Треки в истории",
     "songLength":"Продолжительность песни (%1 мин)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
-      "stats":"Статистика: %1 woot'ов -- %2 meh'ов -- %3 curate'ов",
+      "grab":"grabbed %1 - %2",
+      "stats":"Статистика: %1 вутов -- %2 мехов -- %3 грабов",
       "updates":"Сейчас играет: %1 - %2<br \/> Поставил: %3",
       "meh":"%1 людям не понравился этот трек",
-      "join":{
-        "normal":"%1 покинул комнату",
-        "fan":"Ваш фанат %1 покинул комнату",
-        "friend":"Ваш друг %1 покинул комнату"
-      },
-      "leave":{
-        "normal":"%1 покинул комнату",
-        "fan":"Ваш фанат %1 покинул комнату",
-        "friend":"Ваш друг %1 покинул комнату"
-      },
+      "join":"joined the room",
+      "leave":"left the room",
       "history":"Песня в истории (%1 из %2)",
       "historySkipped":"Песня в истории (%1 из %2), но была пропущена в последнем проигрывании",
       "songLength":"Песня длиннее, чем %1 минут"
     },
     "notification":{
-      "songLength":"Длительность песни"
+      "songLength":"Длительность трека"
     }
   },
   "info":{
@@ -170,10 +175,6 @@
     "undecided":"Нерешенные",
     "djing":"Играет"
   },
-  "automute":{
-    "registered":"%1 в будущем будет автоматически зашлушен.",
-    "unregistered":"%1 больше не будет автоматически зашлушен."
-  },
   "tooltip":{
     "stream":"Видео",
     "clear":"Очистить чат",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Пользователь не найден",
+    "usernameNotFound":"Username not found",
     "unknownModeration":"Неизвестная команда",
     "unknownMenuKey":"Неизвестный элемент меню",
     "missingReason":"Отсутствует причина",
     "notConnected":"Не подключен к сокет-серверу",
-    "noLiteSupport":"Это не поддерживается в plug³ Lite"
+    "noLiteSupport":"Это не поддерживается в plug³ Lite",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"No playlists found",
+    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
+    "noNextSong":"You have no queued song"
   }
 }

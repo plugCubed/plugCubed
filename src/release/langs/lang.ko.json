@@ -3,12 +3,6 @@
   "runningLite":"Running plug&#179; in Lite!",
   "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"대화의 명령어들을 확인하려면 '\/commands'를 사용합니다.",
-  "automuted":"%1 자동음소거",
-  "nextsong":"재생 목록의 다음 노래를 표시하고 이력에 있는지 알아봅니다.",
-  "noNextSong":"당신은 대기열에 가입하기 위한 노래가 없습니다.",
-  "isHistory":"경고: 이 노래는 이력에 존재합니다. (%1 of %2)",
-  "lightsOut":"%1 조명을 끕니다.",
-  "strobe":"조명 활성화 \/ 비활성화",
   "autorespond":{
     "default":"자리비움.",
     "disable":"자리비움 시 자동응답을 사용하지 않습니다.",
@@ -64,7 +58,26 @@
       "rave":"조명 활성화 \/ 비활성화를 나타내지 않습니다.",
       "whois all":"방에 있는 모든 사용자의 ID와 사용자 이름을 제공합니다.",
       "banall":"방에 있는 모두를 내쫓습니다."
+    },
+    "responses":{
+      "alertson":"Playing sound on the following words: %1",
+      "alertsoff":"No longer playing sound on specific words",
+      "nextsong":"Your next queued song is %1 by %2",
+      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "lightsOut":"%1 turned the lights off",
+      "strobe":"%1 activated strobe lights",
+      "automute":{
+        "automuted":"%1 automuted.",
+        "registered":"%1 registered to automute on future plays.",
+        "unregistered":"%1 removed from automute registry."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "alreadyDJ":"You are already DJing!",
+    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
     "header":"사용자 정보",
@@ -77,20 +90,12 @@
     "history":"Songs in history",
     "songLength":"Song Length (%1 min)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"grabbed %1 - %2",
       "stats":"Stats: %1 woots -- %2 mehs -- %3 grabs",
       "updates":"Now Playing: %1 by %2<br>Played by: %3",
-      "meh":"%1 meh'd this track",
-      "join":{
-        "normal":"%1 just left the room",
-        "fan":"Your fan %1 just left the room",
-        "friend":"Your friend %1 just left the room"
-      },
-      "leave":{
-        "normal":"%1 just left the room",
-        "fan":"Your fan %1 just left the room",
-        "friend":"Your friend %1 just left the room"
-      },
+      "meh":"meh'd this track",
+      "join":"joined the room",
+      "leave":"left the room",
       "history":"Song is in history (%1 of %2)",
       "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
       "songLength":"Song is longer than %1 minutes"
@@ -170,10 +175,6 @@
     "undecided":"Undecided",
     "djing":"DJing"
   },
-  "automute":{
-    "registered":"%1 registered to automute on future plays.",
-    "unregistered":"%1 removed from automute registry."
-  },
   "tooltip":{
     "stream":"Toggle Video\/Audio Stream",
     "clear":"채팅로그 삭제",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"User not found",
+    "usernameNotFound":"Username not found",
     "unknownModeration":"Unknown moderation",
     "unknownMenuKey":"Unknown menu key: %1",
     "missingReason":"Missing reason",
     "notConnected":"Not connected to socket server",
-    "noLiteSupport":"This is not supported in plug&#179; Lite"
+    "noLiteSupport":"This is not supported in plug&#179; Lite",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"No playlists found",
+    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
+    "noNextSong":"You have no queued song"
   }
 }

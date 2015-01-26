@@ -1,14 +1,8 @@
 {
   "running":"Usando plug&#179; versão %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLite":"Rodando plug&#179 no Leve!",
+  "runningLiteInfo":"Algumas funções não irão funcionar.",
   "commandsHelp":"Use '\/commands' para ver os comandos.",
-  "automuted":"%1 auto-mutado.",
-  "nextsong":"Sua próxima música na fila é %1 by %2",
-  "noNextSong":"Você não tem música para tocar",
-  "isHistory":"Aviso: Esta música ainda está no histórico (%1 de %2)",
-  "lightsOut":"%1 apagou as luzes",
-  "strobe":"%1 luzes strobe ativada",
   "autorespond":{
     "default":"Estou ausente",
     "disable":"Desativar resposta automática de AFK  no chat",
@@ -47,7 +41,7 @@
       "refresh":"atualizar vídeo",
       "alertson":"alertar sempre que palavras definidas aparecerem no chat",
       "alertsoff":"parar de alertar quando palavras definidas aparecerem no chat",
-      "grab":"add current song to your selected playlist",
+      "grab":"adicionar som atual à sua playlist selecionada",
       "getpos":"mostrar minha posição na lista",
       "version":"exibe o número de versão",
       "commands":"mostra esta lista",
@@ -64,33 +58,44 @@
       "rave":"ativar\/desativar luzes",
       "whois all":"fornece id e usuário de todos na sala",
       "banall":"bane todos da sala"
+    },
+    "responses":{
+      "alertson":"Tocando o som das seguintes palavras: %1",
+      "alertsoff":"Não está mais tocando o som em palavras específicas",
+      "nextsong":"Sua proxima música será %1 por %2",
+      "isHistory":"Aviso: Está música ainda está no historico (%1 de %2)",
+      "lightsOut":"%1 apagou as luzes",
+      "strobe":"%1 ativou as luzes strobe",
+      "automute":{
+        "automuted":"%1 calado automaticamente.",
+        "registered":"%1 colocado no calar automaticamente nas futuras reproduções",
+        "unregistered":"%1 removeu o calar automaticamente do registro"
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"Se você se juntar a lista de espera agora, você poderia ser dj!",
+    "alreadyDJ":"Você já está tocando!",
+    "waitListTime":"Você está em %1 de %2 na lista de espera, você será dj em cerca de %3!",
+    "joinTime":"Se você se juntar a lista de dj agora, você seria dj em %1!"
   },
   "notify":{
     "header":"Notificações do chat",
     "join":"Usuário entrou",
     "leave":"Saída de Usuário",
-    "grab":"User Grab",
+    "grab":"Adição de Usuário",
     "meh":"Chatos do usuário ",
     "stats":"Estatísticas da música",
     "updates":"Atualizações da música",
     "history":"Músicas no Histórico",
     "songLength":"Duração da Música (%1 min)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"%1 adicionado %2 - %3",
       "stats":"Estatística: %1 legais -- %2 chatos -- %3 adds",
       "updates":"Tocando agora: %1 de %2<br\/>Tocado por: %3",
-      "meh":"%1 pessoa deu chato nessa musica",
-      "join":{
-        "normal":"%1 acaba de entrar na sala",
-        "fan":"Seu fã %1 entrou na sala",
-        "friend":"Seu amigo %1 entrou na sala"
-      },
-      "leave":{
-        "normal":"%1 saiu da sala",
-        "fan":"Seu fã %1 saiu da sala",
-        "friend":"Seu amigo %1 saiu da sala"
-      },
+      "meh":"%1 pessoa Meh essa musica",
+      "join":"entrou na sala!",
+      "leave":"saiu da sala",
       "history":"A música está no histórico (%1 of %2)",
       "historySkipped":"A música está no histórico (%1 of %2), mas foi pulada na última vez",
       "songLength":"A música tem mais de %1 minutos"
@@ -160,19 +165,15 @@
     "afktimers":"Tempo de inatividade",
     "roomsettings":"Configurações de sala",
     "chatimages":"Imagens no chat",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "twitchemotes":"Emoticons do Twitch",
+    "controlpanel":"Painel de Controle"
   },
   "vote":{
     "meh":"Chato",
     "woot":"Legal!",
-    "grab":"Grab",
+    "grab":"Adicionar",
     "undecided":"Indeciso",
     "djing":"Tocando Agora"
-  },
-  "automute":{
-    "registered":"%1 colocou o auto-mute nas próximas reproduções.",
-    "unregistered":"%1 removido do registro automute."
   },
   "tooltip":{
     "stream":"Ativar Video\/Audio",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Usuário não encontrado",
+    "usernameNotFound":"Nome de usuário não encontrado",
     "unknownModeration":"Moderação desconhecida",
     "unknownMenuKey":"Atalho desconhecido: %1",
     "missingReason":"Sem motivo",
     "notConnected":"Não está conectado ao servidor",
-    "noLiteSupport":"Isto não é suportado em plug³ Lite"
+    "noLiteSupport":"Isto não é suportado em plug³ Lite",
+    "errorGettingPlaylistInfo":"Erro ao obter informações da lista de reprodução",
+    "noPlaylistsFound":"Não há lista de reproduções encontrada",
+    "yourActivePlaylistIsFull":"Sua lista de reproduções ativa está cheia",
+    "canNotFindTheLastPMReceiver":"Não consigo encontrar a última pessoa que enviou o PM",
+    "noNextSong":"Você não tem música para tocar"
   }
 }

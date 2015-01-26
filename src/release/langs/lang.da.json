@@ -1,14 +1,8 @@
 {
   "running":"Kører plug&#179; version %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLite":"Kører plug&#179; i Lite!",
+  "runningLiteInfo":"Nogle funktioner vil ikke fungere.",
   "commandsHelp":"Brug '\/commands' for at se en udvidet liste over chat kommandoer.",
-  "automuted":"%1 auto-dæmpet.",
-  "nextsong":"Din næste sang i køen er %1 af %2",
-  "noNextSong":"Du har ingen sange i kø",
-  "isHistory":"Advarsel! Denne sang er stadigvæk i historikken (%1 af %2)",
-  "lightsOut":"%1 slukkede lyset",
-  "strobe":"%1 aktiverede stroboskoplys",
   "autorespond":{
     "default":"Jeg er væk fra tastaturet.",
     "disable":"Slå AFK autosvar fra for at chatte",
@@ -47,7 +41,7 @@
       "refresh":"opdater videoen",
       "alertson":"afspil lyd når valgte ord bliver skrevet i chat",
       "alertsoff":"stop med at spille lyd når valgte ord bliver skrevet i chat",
-      "grab":"add current song to your selected playlist",
+      "grab":"Tilføj nuværende sang til din valgte afspilningsliste",
       "getpos":"få nuværende position i ventelisten",
       "version":"viser versionsnummer",
       "commands":"viser denne liste",
@@ -64,7 +58,26 @@
       "rave":"tænder\/slukker lyset",
       "whois all":"giver bruger-id og brugernavn for alle brugere i rummet",
       "banall":"banner alle brugere i rummet"
+    },
+    "responses":{
+      "alertson":"Afspiller lyd ved følgende ord: %1",
+      "alertsoff":"Afspiller ikke længere lyd ved specifikke ord",
+      "nextsong":"Din næste sang i køen er %1 af %2",
+      "isHistory":"Advarsel! Denne sang er stadigvæk i historikken (%1 af %2)",
+      "lightsOut":"%1 slukkede lyset",
+      "strobe":"%1 aktiverede stroboskoplys",
+      "automute":{
+        "automuted":"%1 auto-dæmpet.",
+        "registered":"%1 registeret til at blive automatisk muted fremover.",
+        "unregistered":"%1 fjernet fra automatisk at blive muted fremover."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"Hvis du tilslutter dig ventelisten nu ville du være DJ!",
+    "alreadyDJ":"Du er allerede DJ!",
+    "waitListTime":"Du befinder dig i venteliste %1 af %2 og vil være DJ om %3!",
+    "joinTime":"Hvis du tilslutter dig ventelisten nu, vil du være DJ om omkring %1!"
   },
   "notify":{
     "header":"Chat notifikationer",
@@ -77,20 +90,12 @@
     "history":"Sange i historik",
     "songLength":"Sang længde (%1 min)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"grabbed %1 - %2",
       "stats":"Statistik: %1 kan lide -- %2 kan ikke lide -- %3 tilføjelser",
-      "updates":"Afspiller nu: %1 af %2<br \/>Afspillet af: %3",
+      "updates":"Afspiller nu: %1 af %2<br>Afspillet af: %3",
       "meh":"%1 kunne ikke lide denne sang",
-      "join":{
-        "normal":"%1 tilsluttede sig til rummet",
-        "fan":"Din fan %1 tilsluttede sig til rummet",
-        "friend":"Din ven %1 tilsluttede sig til rummet"
-      },
-      "leave":{
-        "normal":"%1 forlod rummet",
-        "fan":"Din fan %1 forlod rummet",
-        "friend":"Din ven %1 har forladt rummet"
-      },
+      "join":"tilsluttede sig rummet",
+      "leave":"forlod rummet",
       "history":"Denne sang er i historikken (%1 af %2)",
       "historySkipped":"Denne sang er i historikken (%1 af %2), men blev sprunget over ved sidste afspilning",
       "songLength":"Sang er længere end %1 minutter"
@@ -160,8 +165,8 @@
     "afktimers":"AFK Timere",
     "roomsettings":"Rum-indstillinger",
     "chatimages":"Chat billeder",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "twitchemotes":"Twitch Smileys",
+    "controlpanel":"Kontrolpanel"
   },
   "vote":{
     "meh":"Kan ikke lide",
@@ -169,10 +174,6 @@
     "grab":"Grab",
     "undecided":"Uafklaret",
     "djing":"DJ'er"
-  },
-  "automute":{
-    "registered":"%1 registeret til at blive automatisk muted fremover.",
-    "unregistered":"%1 fjernet fra automatisk at blive muted fremover."
   },
   "tooltip":{
     "stream":"Skift mellem Video\/Lyd streaming",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Bruger ikke fundet",
+    "usernameNotFound":"Brugernavn ikke fundet",
     "unknownModeration":"Ukendt moderation",
     "unknownMenuKey":"Ukendt menu knap: %1",
     "missingReason":"Mangler begrundelse",
     "notConnected":"Ikke forbundet til hoved server",
-    "noLiteSupport":"Dette understøttes ikke i plug&#179; Lite"
+    "noLiteSupport":"Dette understøttes ikke i plug&#179; Lite",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"Ingen afspilningslister fundet",
+    "yourActivePlaylistIsFull":"Din aktive afspilningsliste er fuld",
+    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
+    "noNextSong":"Du har ingen sange i kø"
   }
 }

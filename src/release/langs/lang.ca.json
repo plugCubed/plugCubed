@@ -3,12 +3,6 @@
   "runningLite":"Running plug&#179; in Lite!",
   "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"Fes servir '\/commands' per veure les comades de chat",
-  "automuted":"%1 auto-silenciat",
-  "nextsong":"display next song in playlist and if it's in history",
-  "noNextSong":"No tens cap cançó a la cua",
-  "isHistory":"Atenció: Aquesta cançó encara està en l'históric (%1 de %2)",
-  "lightsOut":"%1 ha apagat les llums",
-  "strobe":"enable\/disable strobe",
   "autorespond":{
     "default":"Estic lluny del teclat",
     "disable":"Disable AFK Autorespond to chat",
@@ -64,7 +58,26 @@
       "rave":"activa\/desactiva apagar llums",
       "whois all":"gives userid and username of all users in the room",
       "banall":"bans all users in the room"
+    },
+    "responses":{
+      "alertson":"Playing sound on the following words: %1",
+      "alertsoff":"No longer playing sound on specific words",
+      "nextsong":"Your next queued song is %1 by %2",
+      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "lightsOut":"%1 turned the lights off",
+      "strobe":"%1 activated strobe lights",
+      "automute":{
+        "automuted":"%1 automuted.",
+        "registered":"%1 registered to automute on future plays.",
+        "unregistered":"%1 removed from automute registry."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "alreadyDJ":"You are already DJing!",
+    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
     "header":"Comandes plugCubed",
@@ -77,20 +90,12 @@
     "history":"Cançons a l'historial",
     "songLength":"Longitud de la cançó (%1 min)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"grabbed %1 - %2",
       "stats":"Estadístiques:   %1 woots -- %2 mehs -- %3 curates",
       "updates":"Ara Reproduint: %1 per %2<br \/>Reproduit per: %3",
-      "meh":"%1 meh'd this track",
-      "join":{
-        "normal":"%1 acaba de marxar",
-        "fan":"El teu fan %1 acaba de marxar",
-        "friend":"El teu amic %1 acaba de marxar"
-      },
-      "leave":{
-        "normal":"%1 acaba de marxar",
-        "fan":"El teu fan %1 acaba de marxar",
-        "friend":"El teu amic %1 acaba de marxar"
-      },
+      "meh":"meh'd this track",
+      "join":"joined the room",
+      "leave":"left the room",
       "history":"Cançó a l'istóric (%1 de %2)",
       "historySkipped":"Cançó a l'istóric (%1 de %2), però es va saltar la útlima vegada",
       "songLength":"La cançó és més llarga que %1 minuts"
@@ -170,10 +175,6 @@
     "undecided":"No decidit",
     "djing":"Ara fent de DJ"
   },
-  "automute":{
-    "registered":"%1 registrat per autosilenciar en el futur",
-    "unregistered":"%1 eliminat del registre d'autosilenciament"
-  },
   "tooltip":{
     "stream":"Toggle Video\/Audio Stream",
     "clear":"Neteja el Chat",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Usuari no trobat",
+    "usernameNotFound":"Username not found",
     "unknownModeration":"Moderació desconeguda",
     "unknownMenuKey":"Tecla de menú desconeguda",
     "missingReason":"Falta la raó",
     "notConnected":"No conectat al servidor socket",
-    "noLiteSupport":"This is not supported in plug&#179; Lite"
+    "noLiteSupport":"This is not supported in plug&#179; Lite",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"No playlists found",
+    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
+    "noNextSong":"You have no queued song"
   }
 }

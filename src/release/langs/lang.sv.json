@@ -1,14 +1,8 @@
 {
   "running":"Kör plug&179; version %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLite":"Kör plug&#179; i Lite!",
+  "runningLiteInfo":"Vissa funktioner fungerar inte.",
   "commandsHelp":"Använd '\/commands' för att se extra chatt kommandon.",
-  "automuted":"%1 automutad.",
-  "nextsong":"Din nästa köade sång är %1 av %2",
-  "noNextSong":"Du har inga köade låtar",
-  "isHistory":"Varning: Denna låten är fortfarande i historiken (%1 av %2)",
-  "lightsOut":"%1 stängde av lamporna",
-  "strobe":"%1 aktiverade strålkastare",
   "autorespond":{
     "default":"Jag är borta från tangentbordet.",
     "disable":"Stäng av AFK Autosvar för att chatta",
@@ -47,7 +41,7 @@
       "refresh":"ladda om videon",
       "alertson":"spela upp ett ljud när de definierade orden skrivs i chatten",
       "alertsoff":"sluta spela upp ljud när de definierade orden skrivs i chatten",
-      "grab":"add current song to your selected playlist",
+      "grab":"Lägg till nuvarande låt till din valda spellista",
       "getpos":"få din nuvarande position i väntelistan",
       "version":"visar versionsnummer",
       "commands":"visar denna lista",
@@ -64,7 +58,26 @@
       "rave":"aktivera\/inaktivera mörker",
       "whois all":"ger användarid och användarnamn av alla användare i rummet",
       "banall":"banna alla användare i rummet"
+    },
+    "responses":{
+      "alertson":"Spelar låtar på de följande orden: %1",
+      "alertsoff":"No longer playing sound on specific words",
+      "nextsong":"Your next queued song is %1 by %2",
+      "isHistory":"Varning: Den här låten finns fortfarande i historiken (%1 av %2)",
+      "lightsOut":"%1 turned the lights off",
+      "strobe":"%1 activated strobe lights",
+      "automute":{
+        "automuted":"%1 automuted.",
+        "registered":"%1 registered to automute on future plays.",
+        "unregistered":"%1 removed from automute registry."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "alreadyDJ":"You are already DJing!",
+    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
     "header":"Chat Notifieringar",
@@ -77,20 +90,12 @@
     "history":"Låtar i historia",
     "songLength":"Låt Längd (%1 min)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"grabbed %1 - %2",
       "stats":"Stats: %1 woots -- %2 mehs -- %3 Grabs",
       "updates":"Spelas Nu: %1 av %2<br \/>Spelad av: %3",
       "meh":"%1 meh'ade detta spår",
-      "join":{
-        "normal":"%1 Anslöt sig just till rummet",
-        "fan":"Ditt fan %1 anslöt sig just till rummet",
-        "friend":"Din vän %1 anslöt sig just till rummet"
-      },
-      "leave":{
-        "normal":"%1 Lämnade just rummet",
-        "fan":"Ditt fan %1 lämnade just rummet",
-        "friend":"Din vän %1 lämnade just rummet"
-      },
+      "join":"gick med i rummet",
+      "leave":"lämnade rummet",
       "history":"Låten ligger i historiken (%1 av %2)",
       "historySkipped":"Låten ligger i historiken (%1 av %2) men skippades förra gången den blev blev uppspelad",
       "songLength":"Låten är längre än %1 minuter"
@@ -161,18 +166,14 @@
     "roomsettings":"Rums inställningar",
     "chatimages":"Chatt bilder",
     "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "controlpanel":"Kontrollpanel"
   },
   "vote":{
     "meh":"Meh",
     "woot":"Woot",
-    "grab":"Grab",
+    "grab":"Lägg till",
     "undecided":"Inte bestämd",
     "djing":"DJ'ar"
-  },
-  "automute":{
-    "registered":"%1 registrerade en automute på framtida spelningar.",
-    "unregistered":"%1 togs bort från automute registret."
   },
   "tooltip":{
     "stream":"Växla Video\/Ljud Ström",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Avändare ej funnen",
+    "usernameNotFound":"Användarnamnet hittades inte",
     "unknownModeration":"Okänd moderation",
     "unknownMenuKey":"Okänd menyknapp: %1",
     "missingReason":"Saknad anledning",
     "notConnected":"Inte ansluten till socket server",
-    "noLiteSupport":"Detta stöds inte i plug&#179; Lite"
+    "noLiteSupport":"Detta stöds inte i plug&#179; Lite",
+    "errorGettingPlaylistInfo":"Fel när spellistan hämtades",
+    "noPlaylistsFound":"Inga spellistor hittade",
+    "yourActivePlaylistIsFull":"Din aktiva spellista är full",
+    "canNotFindTheLastPMReceiver":"Kan inte hitta sista PM-mottageren",
+    "noNextSong":"Du har ingen köad låt"
   }
 }

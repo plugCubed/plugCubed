@@ -1,5 +1,5 @@
 define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/bridges/Context'], function($, Class, p3Utils, p3Lang, Settings, _$context) {
-    var PopoutView, twitchEmotes = [];
+    var PopoutView, twitchEmoteTemplate = '', twitchEmotes = [];
 
     if (!p3Utils.runLite)
         PopoutView = require('app/views/room/popout/PopoutView');
@@ -15,7 +15,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             if (text.toLowerCase().indexOf('nsfw') < 0) {
                 var temp = $('<div/>');
                 temp.html(text).find('a').each(function() {
-                    var url = $(this).attr('href'), path, imageURL = null;
+                    var url = $(this).attr('href'), path, imageURL = null, $video, identifier;
 
                     // Prevent plug.dj exploits
                     if (p3Utils.startsWithIgnoreCase(url, ['http://plug.dj', 'https://plug.dj'])) {
@@ -31,7 +31,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                         if (path.length > 3) {
                             path = path[3];
                             if (path.trim().length !== 0) {
-                                var $video, identifier = 'video-' + p3Utils.getRandomString(8);
+                                identifier = 'video-' + p3Utils.getRandomString(8);
 
                                 $video = $('<video autoplay loop muted="muted">').addClass(identifier).css('display', 'block').css('max-width', '100%').css('height', 'auto').css('margin', '0 auto');
 
@@ -76,12 +76,12 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                         }
 
                         // Imgur links
-                    } else if (p3Utils.startsWithIgnoreCase(url, ['http://imgur.com/gallery/', 'https://imgur.com/gallery/','http://imgur.com/', 'https://imgur.com/'])) {
+                    } else if (p3Utils.startsWithIgnoreCase(url, ['http://imgur.com/gallery/', 'https://imgur.com/gallery/', 'http://imgur.com/', 'https://imgur.com/'])) {
                         path = url.split('/');
                         if (path.length > 4) {
                             path = path[4];
                             if (path.trim().length !== 0) {
-                                var $video, identifier = 'video-' + p3Utils.getRandomString(8);
+                                identifier = 'video-' + p3Utils.getRandomString(8);
 
                                 $video = $('<video autoplay loop muted="muted">').addClass(identifier).css('display', 'block').css('max-width', '100%').css('height', 'auto').css('margin', '0 auto');
 
@@ -103,12 +103,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                                         return;
                                     }
 
-                                    if (imgurData['webm'] !== undefined)
+                                    if (imgurData['webm'] != null)
                                         $video.append($('<source>').attr('type', 'video/webm').attr('src', p3Utils.httpsifyURL(imgurData['webm'])));
 
-                                    if (imgurData['webm'] !== undefined)
+                                    if (imgurData['webm'] != null)
                                         $video.append($('<source>').attr('type', 'video/mp4').attr('src', p3Utils.httpsifyURL(imgurData['mp4'])));
 
+                                    $video.attr('poster', p3Utils.httpsifyURL(imgurData['link']));
                                     $video.append($('<img>').attr('src', p3Utils.httpsifyURL(imgurData['link'])));
                                 });
                             }
@@ -159,7 +160,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 if (!twitchEmotes.hasOwnProperty(i)) continue;
                 var twitchEmote = twitchEmotes[i];
                 if (text.indexOf(' ' + twitchEmote.emote + ' ') > -1 || text.indexOf(':' + twitchEmote.emote + ':') > -1) {
-                    var temp = $('<div>'), image = $('<img>').addClass('twitch-emote').attr('src', twitchEmote.url).data('emote', $('<span>').html(twitchEmote.emote).text());
+                    var temp = $('<div>'), image = $('<img>').addClass('twitch-emote').attr('src', twitchEmoteTemplate.split('{image_id}').join(twitchEmote.image_id)).data('emote', $('<span>').html(twitchEmote.emote).text());
                     image.on('load', function() {
                         var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages'), height = this.height;
                         if (this.width > $chat.find('.message').width())
@@ -179,6 +180,16 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatReceived(data) {
         if (!data.uid) return;
 
+        if (data.uid == API.getUser().id) {
+            var latestInputs = p3Utils.getUserData(-1, 'latestInputs', []);
+            latestInputs.push(data.message);
+            if (latestInputs.length > 10) {
+                latestInputs.splice(0, 1);
+            }
+            p3Utils.setUserData(-1, 'latestInputs', latestInputs);
+            p3Utils.setUserData(-1, 'tmpInput', null);
+        }
+
         p3Utils.setUserData(data.uid, 'lastChat', Date.now());
 
         if (p3Utils.hasPermission(undefined, API.ROLE.DJ) && (function(_) {
@@ -194,44 +205,52 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatReceivedLate(data) {
         if (!data.uid) return;
 
-        var $this = $('#chat').find('[data-cid="' + data.cid + '"]'), $icon;
+        var $this = $('.text.cid-' + data.cid).closest('.cm'), $icon;
 
-        data.type = $this.attr('class') + ' fromID-' + data.uid;
-
-        if (p3Utils.havePlugCubedRank(data.uid)) {
-            data.type += ' is-p3' + p3Utils.getHighestRank(data.uid);
+        var previousMessages = '', innerHTML = $this.find('.text').html();
+        if (innerHTML != null && innerHTML.indexOf('<br>') > -1) {
+            previousMessages = innerHTML.substr(0, innerHTML.lastIndexOf('<br>') + 4);
         }
 
-        data.type += ' from';
-        if (p3Utils.hasPermission(data.uid, API.ROLE.DJ) || data.uid == API.getUser().id) {
-            data.type += '-';
+        var msgClass = $this.attr('class');
+
+        msgClass += ' fromID-' + data.uid;
+
+        if (p3Utils.havePlugCubedRank(data.uid)) {
+            msgClass += ' is-p3' + p3Utils.getHighestRank(data.uid);
+        }
+
+        msgClass += ' from';
+        if (p3Utils.hasPermission(data.uid, API.ROLE.DJ)) {
+            msgClass += '-';
             if (p3Utils.hasPermission(data.uid, API.ROLE.HOST, true)) {
-                data.type += 'admin';
+                msgClass += 'admin';
             } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER, true)) {
-                data.type += 'ambassador';
+                msgClass += 'ambassador';
             } else if (p3Utils.hasPermission(data.uid, API.ROLE.HOST)) {
-                data.type += 'host';
+                msgClass += 'host';
             } else if (p3Utils.hasPermission(data.uid, API.ROLE.COHOST)) {
-                data.type += 'cohost';
+                msgClass += 'cohost';
             } else if (p3Utils.hasPermission(data.uid, API.ROLE.MANAGER)) {
-                data.type += 'manager';
+                msgClass += 'manager';
             } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER)) {
-                data.type += 'bouncer';
+                msgClass += 'bouncer';
             } else if (p3Utils.hasPermission(data.uid, API.ROLE.DJ)) {
-                data.type += 'dj';
-            } else if (data.uid == API.getUser().id) {
-                data.type += 'you';
+                msgClass += 'dj';
             }
+        }
+
+        if (data.uid == API.getUser().id) {
+            msgClass += ' from-you';
         }
 
         data.message = convertImageLinks(data.message, $this);
         data.message = convertEmotes(data.message);
 
-
         if (p3Utils.havePlugCubedRank(data.uid) || p3Utils.hasPermission(data.uid, API.ROLE.DJ)) {
             $icon = $this.find('.from .icon');
             var specialIconInfo = p3Utils.getPlugCubedSpecial(data.uid);
-            if ($icon.length === 0) {
+            if ($icon.length === 0 && specialIconInfo != null) {
                 $icon = $('<i>').addClass('icon').css({
                     width: '16px',
                     height: '16px'
@@ -244,61 +263,92 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 _$context.trigger('tooltip:hide');
             });
 
-            if (specialIconInfo !== undefined) {
+            if (specialIconInfo != null) {
                 $icon.css('background-image', 'url("https://d1rfegul30378.cloudfront.net/files/images/icons.p3special.' + specialIconInfo.icon + '.png")');
             }
         }
 
-        $this.attr('class', data.type);
-        $this.find('.text').html(p3Utils.cleanHTML(data.message, ['div', 'table', 'tr', 'td'], ['img', 'video', 'source']));
+        $this.attr('class', msgClass);
+        $this.find('.text').html(previousMessages + p3Utils.cleanHTML(data.message, ['div', 'table', 'tr', 'td'], ['img', 'video', 'source']));
 
-        if (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper()) {
-            $this.data('translated', false);
-            $this.dblclick(function(e) {
-                if (!e.ctrlKey) return true;
-                if ($this.data('translated')) {
-                    $this.find('.text').html(convertEmotes(convertImageLinks(data.message)));
-                    $this.data('translated', false);
-                } else {
-                    $this.find('.text').html('<em>Translating...</em>');
-                    $.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Ftranslate.google.com%2Ftranslate_a%2Ft%3Fclient%3Dp3%26sl%3Dauto%26tl%3D' + API.getUser().language + '%26ie%3DUTF-8%26oe%3DUTF-8%26q%3D' + encodeURIComponent(encodeURIComponent(data.message.replace('&nbsp;', ' '))) + '%22&format=json', function(a) {
-                        if (a.error) {
-                            $this.find('.text').html(convertEmotes(convertImageLinks(data.message)));
-                            $this.data('translated', false);
-                        } else {
-                            $this.find('.text').html(convertEmotes(convertImageLinks('&nbsp;' + a.query.results.json.sentences.trans)));
-                            $this.data('translated', true);
-                        }
-                    }, 'json');
-                }
-                return false;
+        $this.data('translated', false);
+        $this.dblclick(function(e) {
+            if (!e.ctrlKey) return;
+            if ($this.data('translated')) {
+                $this.find('.text').html(convertEmotes(convertImageLinks(data.message)));
+                $this.data('translated', false);
+            } else {
+                $this.find('.text').html('<em>Translating...</em>');
+                $.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Ftranslate.google.com%2Ftranslate_a%2Ft%3Fclient%3Dp3%26sl%3Dauto%26tl%3D' + API.getUser().language + '%26ie%3DUTF-8%26oe%3DUTF-8%26q%3D' + encodeURIComponent(encodeURIComponent(data.message.replace('&nbsp;', ' '))) + '%22&format=json', function(a) {
+                    if (a.error) {
+                        $this.find('.text').html(convertEmotes(convertImageLinks(data.message)));
+                        $this.data('translated', false);
+                    } else {
+                        $this.find('.text').html(convertEmotes(convertImageLinks(p3Utils.objectSelector(a, 'query.results.json.sentences.trans', data.message))));
+                        $this.data('translated', true);
+                    }
+                }, 'json');
+            }
+            e.stopPropagation();
+        });
+    }
+
+    function onChatDelete(cid) {
+        if ((!p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) && !p3Utils.isPlugCubedDeveloper()) || !Settings.moderation.showDeletedMessages)
+            return;
+
+        var $messages = $('.text.cid-' + cid);
+
+        if ($messages.length > 0) {
+            $messages.each(function() {
+                $(this).removeClass('cid-' + cid).closest('.cm').removeClass('deletable').css('opacity', 0.3).off('mouseenter').off('mouseleave');
             });
         }
     }
 
-    function onChatDelete(cid) {
-        if (!p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) && !p3Utils.isPlugCubedDeveloper())
-            return;
-        var $messages = $('#chat').find('[data-cid="' + cid + '"]');
-        if ($messages.length > 0) {
-            $messages.each(function() {
-                $(this).removeClass('deletable').css('opacity', 0.3).off('mouseenter').off('mouseleave');
-            });
-            cid = '';
+    function onInputKeyUp(e) {
+        if (e.keyCode == 38) {
+            onInputMove(true, $(this));
+        } else if (e.keyCode == 40) {
+            onInputMove(false, $(this));
         }
+    }
+
+    function onInputMove(up, $this) {
+        var latestInputs = p3Utils.getUserData(-1, 'latestInputs', []);
+        if (latestInputs.length === 0) return;
+
+        var curPos = p3Utils.getUserData(-1, 'curInputPos', 0);
+        var tmpInput = p3Utils.getUserData(-1, 'tmpInput', null);
+
+        if ((tmpInput == null && up) || curPos === 0) {
+            tmpInput = $this.val();
+        } else if (tmpInput == null) {
+            return;
+        }
+
+        curPos = Math.max(0, Math.min(curPos + (up ? 1 : -1), latestInputs.length));
+
+        p3Utils.setUserData(-1, 'curInputPos', curPos);
+        p3Utils.setUserData(-1, 'tmpInput', tmpInput);
+
+        $this.val(curPos === 0 ? tmpInput : latestInputs[latestInputs.length - curPos]);
     }
 
     var handler = Class.extend({
         loadTwitchEmotes: function() {
-            $.getJSON('https://api.plugcubed.net/proxy/http://twitchemotes.com/global.json', function(data) {
+            $.getJSON('https://api.plugcubed.net/twitchemotes', function(data) {
+                twitchEmoteTemplate = data['template']['small'];
+
                 twitchEmotes = [];
-                for (var i in data) {
-                    if (!data.hasOwnProperty(i)) continue;
+                for (var i in data['emotes']) {
+                    if (!data['emotes'].hasOwnProperty(i)) continue;
                     twitchEmotes.push({
                         emote: i,
-                        url: data[i].url.indexOf('http://') === 0 ? 'https://' + data[i].url.substr(7) : data[i].url
+                        image_id: data['emotes'][i].image_id
                     });
                 }
+                
                 console.log('[plug³]', twitchEmotes.length + ' Twitch.TV emoticons loaded!');
             });
         },
@@ -312,11 +362,15 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
             _$context.on('chat:delete', onChatDelete);
             _$context._events['chat:delete'].unshift(_$context._events['chat:delete'].pop());
+
+            $('#chat-input-field').on('keyup', onInputKeyUp);
         },
         close: function() {
             _$context.off('chat:receive', onChatReceived);
             _$context.off('chat:receive', onChatReceivedLate);
             _$context.off('chat:delete', onChatDelete);
+
+            $('#chat-input-field').off('keyup', onInputKeyUp);
         }
     });
     return new handler();

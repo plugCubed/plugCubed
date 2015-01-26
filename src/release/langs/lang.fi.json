@@ -3,26 +3,20 @@
   "runningLite":"Käynnissä plug&#179; Lite!",
   "runningLiteInfo":"Jotkin ominaisuudet eivät välttämättä toimi.",
   "commandsHelp":"Sano '\/commands' nähdäksesi Chat komentosi",
-  "automuted":"%1 Automaattisesti hiljennetty",
-  "nextsong":"Näytä seuraava kappale soittolistassa ja jos se on historiassa",
-  "noNextSong":"Sinulle ei ole valittua kappaletta",
-  "isHistory":"Varoitus: Tämä kappale on historiassa. (%1 - %2)",
-  "lightsOut":"%1 otti välkkyvalot pois päältä",
-  "strobe":"aktivoi\/deaktivoi välkkyvalot",
   "autorespond":{
     "default":"Olen poissa näppäimistöltä",
     "disable":"Deaktivoi AFK Automaattinen vastaus",
     "nextIn":"Seuraava AFK Automaattinen vastaus lähetetetään %1",
     "next":"AFK Automaattinen vastaus seuraavassa mentionissa",
     "commandDisable":"%1 Automaattinen liittyminen jonoon deaktivoitu",
-    "commandNotEnabled":"%1 Automaattinen liittyminen jonoon ei ole käytössä"
+    "commandNotEnabled":"%1 AFK viesti ei ole käytössä"
   },
   "autojoin":{
     "commandDisable":"%1 Automaattinen liittyminen jonoon deaktivoitu",
     "commandNotEnabled":"%1 Automaattinen liittyminen jonoon ei ole käytössä"
   },
   "commands":{
-    "header":"Käyttäjä informaatio",
+    "header":"plug&#179; Komennot",
     "userCommands":"Käyttäjä komennot",
     "modCommands":"Moderointi komennnot",
     "variables":{
@@ -33,12 +27,12 @@
       "reason":"Syy"
     },
     "descriptions":{
-      "avail":"Aseta tila tavoitettavissa",
-      "afk":"AFK Viesti",
+      "avail":"Aseta tila saatavilla",
+      "afk":"Aseta tila afk",
       "work":"Aseta tila Työskentelemässä",
-      "gaming":"Pelaamassa",
-      "join":"Käyttäjä Liittyi",
-      "leave":"Käyttäjä lähti",
+      "gaming":"Aseta tila Pelaamassa",
+      "join":"liity dj boothiin\/jonotuslistalle",
+      "leave":"lähde dj boothilta\/odotuslistalta",
       "whoami":"Saa oma informaatio",
       "mute":"Aseta ääni 0",
       "automute":"parhaillaan toistettava kappale rekisteröity automaattisesti mykistettäviin kappaleisiin seuraavissa soitoissa.",
@@ -48,7 +42,7 @@
       "alertson":"Antaa äänimerkin, kun määritetyt sanat kirjoitetaan chatissa",
       "alertsoff":"Pysäyttää soitettavan äänen, kun määritetyt sanat on kirjoitettu chatissa.",
       "grab":"Lisää nykyinen kappale valitulle soittolistallesi",
-      "getpos":"Saa jonotuslista sijoitus",
+      "getpos":"Saa nykyinen jonotuslista sijoitus",
       "version":"Näytä versio numero",
       "commands":"Näytä tämä lista",
       "link":"Liitä linkki plugCubedin sivulle chattiin",
@@ -64,7 +58,26 @@
       "rave":"aktivoi\/deaktivoi välkkyvalot pois",
       "whois all":"antaa Käyttäjien id ja käyttäjänimet kaikista käyttäjistä huoneesssa",
       "banall":"Porttikielto kaikille käyttäjille huoneessa"
+    },
+    "responses":{
+      "alertson":"Soitetaan ääni seuraavissa sanoissa: %1",
+      "alertsoff":"Ei enää soiteta ääntä asetetuissa sanoissa",
+      "nextsong":"Seuraava kappaleesi jonossa on %1 tekijältä %2",
+      "isHistory":"Varoitus: Tämä kappale on historiassa. (%1 - %2)",
+      "lightsOut":"%1 otti välkkyvalot pois päältä",
+      "strobe":"%1 aktivoi\/deaktivoi välkkyvalot",
+      "automute":{
+        "automuted":"%1 Automaattisesti hiljennetty.",
+        "registered":"%1 rekisteröity automaattiiseen hiljennykseen tuleville soitoille.",
+        "unregistered":"%1 Poistettu automaattisen hiljennyksen rekisteristä."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"Jos liityt jonotuslistaan nyt, olisit DJ!",
+    "alreadyDJ":"Olet jo DJ!",
+    "waitListTime":"Olet jonotuslistalla %1 - %2, olet DJ noin %3!",
+    "joinTime":"Jos liityt jonotuslistaan nyt, olet DJ noin %1!"
   },
   "notify":{
     "header":"Käyttäjä informaatio",
@@ -72,25 +85,17 @@
     "leave":"Käyttäjä lähti",
     "grab":"Grabit",
     "meh":"Käyttäjä mehit",
-    "stats":"Kappale päivitykset",
-    "updates":"Kappalepäivitykset",
+    "stats":"Kappale Tilastot",
+    "updates":"Kappale päivitykset",
     "history":"Kappaleet historiassa",
     "songLength":"Kappaleen pituus (%1 min)",
     "message":{
-      "grab":"%1 grabbasi %2 - %3",
+      "grab":"%1 lisäsi %2 - %3",
       "stats":"Tilastot: %1 woots -- %2 mehs -- %3 curates",
       "updates":"Nyt soi: %1 tekijältä %2<br\/>Soittajalta: %3",
-      "meh":"%1 mehiä tällä kappaleella",
-      "join":{
-        "normal":"%1 liittyi huoneeseen",
-        "fan":"Fanisi %1 on lähtenyt huoneesta",
-        "friend":"Sinun ystäväsi %1 on lähtenyt huoneesta"
-      },
-      "leave":{
-        "normal":"%1 Lähti huoneesta",
-        "fan":"Fanisi %1 on lähtenyt huoneesta",
-        "friend":"Sinun ystäväsi %1 on lähtenyt huoneesta"
-      },
+      "meh":"mehasi tätä kappaletta",
+      "join":"liittyi huoneeseen",
+      "leave":"lähti huoneesta",
       "history":"Kappale on historiassa(%1 - %2)",
       "historySkipped":"Kappale on historiassa(%1 - %2),mutta ohitettiin viime soitossa",
       "songLength":"Kappale on pidempi kuin %1 minuuttia"
@@ -106,7 +111,7 @@
     "specialTitles":{
       "developer":"plug&#179; Kehittäjä",
       "sponsor":"plug&#179; Sponsori",
-      "ambassador":"plug&#179; Ambassadori",
+      "ambassador":"plug&#179; Suurlähettiläs",
       "donatorDiamond":"plug&#179; Timantti Lahjoittaja",
       "donatorPlatinum":"plug&#179; Platina Lahjoittaja",
       "donatorGold":"plug&#179; Kultainen Lahjoittaja",
@@ -114,18 +119,18 @@
       "donatorBronze":"plug&#179; Pronssinen Lahjoittaja",
       "special":"plug&#179; erityinen kannattaja - %1"
     },
-    "id":"Tunnus",
+    "id":"ID",
     "rank":"Luokitus",
     "joined":"Liittymisen aika",
     "status":"Tila",
-    "vote":"Äänestä",
+    "vote":"Äänestys",
     "position":"Sijainti",
     "points":"Pisteet",
     "fans":"Fanit",
     "wootCount":"Woot määrä",
     "mehCount":"Meh määrä",
     "ratio":"Woot\/meh suhde",
-    "djing":"DJing",
+    "djing":"Tällä hetkellä DJing",
     "notInList":"Ei jonotuslistalla tai alustallla",
     "inWaitlist":"%1%2 jonossa",
     "userDjing":"%1 on tällä hetkellä DJing",
@@ -138,13 +143,13 @@
   "ranks":{
     "you":"Sinä",
     "regular":"Tavallinen",
-    "residentdj":"Resident DJ",
-    "bouncer":"Bounceri",
-    "manager":"Manageri",
-    "cohost":"Co-Hosti",
-    "host":"Hosti",
-    "ambassador":"Ambassadori",
-    "admin":"Admini"
+    "residentdj":"Vakituinen DJ",
+    "bouncer":"Portsari",
+    "manager":"Päällikkö",
+    "cohost":"Apulais-Omistaja",
+    "host":"Omistaja",
+    "ambassador":"Suurlähettiläs",
+    "admin":"Ylläpitäjä"
   },
   "roomSpecificSettings":{
     "infoHeader":"Tämä huone käyttää erityisasetuksia",
@@ -153,8 +158,8 @@
   },
   "menu":{
     "autowoot":"Automaattinenwoot",
-    "autojoin":"Automaattinen liittyminen jonoon",
-    "customchatcolors":"Chatin Värit",
+    "autojoin":"Automaattisesti jonoon",
+    "customchatcolors":"Mukautetut Chatin Värit",
     "autorespond":"AFK Automaattinen vastaus",
     "notify":"Ilmoitukset",
     "afktimers":"AFK Ajat",
@@ -164,15 +169,11 @@
     "controlpanel":"Ohjauspaneeli"
   },
   "vote":{
-    "meh":"En pidä",
-    "woot":"Pidän",
+    "meh":"Meh",
+    "woot":"Woot",
     "grab":"Grab",
     "undecided":"Epävarma",
     "djing":"DJing"
-  },
-  "automute":{
-    "registered":"%1 rekisteröity automaattiiseen hiljennykseen tuleville soitoille.",
-    "unregistered":"%1 Poistettu automaattisen hiljennyksen rekisteristä."
   },
   "tooltip":{
     "stream":"Estä tai salli Video ja ääni",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Käyttäjää ei löydy",
+    "usernameNotFound":"Käyttäjänime ei löytynyt",
     "unknownModeration":"Tuntematon moderaatio",
     "unknownMenuKey":"Tuntematon valikko avain: %1",
     "missingReason":"Puuttuva syy",
     "notConnected":"Ei ole yhteydessä palvelimeen",
-    "noLiteSupport":"Tätä ei tueta plug&#179; Lite"
+    "noLiteSupport":"Tätä ei tueta plug&#179; Lite",
+    "errorGettingPlaylistInfo":"Virhe haetaessa soittolistan infoa",
+    "noPlaylistsFound":"Soittolistoja ei löytynyt",
+    "yourActivePlaylistIsFull":"Aktiivinen soittolistasi on täynnä",
+    "canNotFindTheLastPMReceiver":"Ei voitu löytää viimeisintä PM vastaanottajaa",
+    "noNextSong":"Sinulle ei ole valittua kappaletta"
   }
 }

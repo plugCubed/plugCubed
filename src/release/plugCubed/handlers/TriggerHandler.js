@@ -8,7 +8,7 @@ define(['jquery', 'plugCubed/Class'], function($, Class) {
             if (this.triggerHandlers.length > 0)
                 this.close();
             this.triggerHandlers = [];
-            if (this.trigger === undefined)
+            if (this.trigger == null)
                 throw new Error('Missing TriggerHandler trigger!');
             if (typeof this.trigger === 'string') {
                 this.triggerHandlers[this.trigger] = this.handler;
@@ -47,6 +47,9 @@ define(['jquery', 'plugCubed/Class'], function($, Class) {
                 if (typeof this.triggerHandlers[i] === 'function') {
                     API.off(i, this.triggerHandlers[i], this);
                     delete this.triggerHandlers[i];
+                } else if (typeof this[this.triggerHandlers[i]] === 'function') {
+                    API.off(i, this[this.triggerHandlers[i]], this);
+                    delete this[this.triggerHandlers[i]];
                 }
             }
             this.registered = false;

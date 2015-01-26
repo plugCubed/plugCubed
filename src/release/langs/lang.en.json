@@ -3,12 +3,6 @@
     "runningLite": "Running plug&#179; in Lite!",
     "runningLiteInfo": "Some features will not work.",
     "commandsHelp": "Use '/commands' to see expanded chat commands.",
-    "automuted": "%1 automuted.",
-    "nextsong": "Your next queued song is %1 by %2",
-    "noNextSong": "You have no queued song",
-    "isHistory": "Warning: This song is still in the history (%1 of %2)",
-    "lightsOut": "%1 turned the lights off",
-    "strobe": "%1 activated strobe lights",
     "autorespond": {
         "default": "I'm away from keyboard.",
         "disable": "Disable AFK Autorespond to chat",
@@ -30,7 +24,8 @@
             "word": "word",
             "on": "on",
             "off": "off",
-            "reason": "reason"
+            "reason": "reason",
+            "number": "number"
         },
         "descriptions": {
             "avail": "set status to available",
@@ -64,6 +59,19 @@
             "rave": "enable/disable lights out",
             "whois all": "gives userid and username of all users in the room",
             "banall": "bans all users in the room"
+        },
+        "responses": {
+            "alertson": "Playing sound on the following words: %1",
+            "alertsoff": "No longer playing sound on specific words",
+            "nextsong": "Your next queued song is %1 by %2",
+            "isHistory": "Warning: This song is still in the history (%1 of %2)",
+            "lightsOut": "%1 turned the lights off",
+            "strobe": "%1 activated strobe lights",
+            "automute": {
+                "automuted": "%1 automuted.",
+                "registered": "%1 registered to automute on future plays.",
+                "unregistered": "%1 removed from automute registry."
+            }
         }
     },
     "eta": {
@@ -87,16 +95,8 @@
             "stats": "Stats: %1 woots -- %2 mehs -- %3 grabs",
             "updates": "Now Playing: %1 by %2<br>Played by: %3",
             "meh": "meh'd this track",
-            "join": {
-                "normal": "just joined the room",
-                "fan": "Your fan %1 just joined the room",
-                "friend": "Your friend %1 just joined the room"
-            },
-            "leave": {
-                "normal": "just left the room",
-                "fan": "Your fan %1 just left the room",
-                "friend": "Your friend %1 just left the room"
-            },
+            "join": "joined the room",
+            "leave": "left the room",
             "history": "Song is in history (%1 of %2)",
             "historySkipped": "Song is in history (%1 of %2), but was skipped on the last play",
             "songLength": "Song is longer than %1 minutes"
@@ -139,7 +139,8 @@
         "disconnects": "Disconnects",
         "lastDisconnect": "Last Disconnect",
         "lastPosition": "Position",
-        "time": "Time"
+        "time": "Time",
+        "lastMessage": "Last Message"
     },
     "ranks": {
         "you": "You",
@@ -176,10 +177,6 @@
         "undecided": "Undecided",
         "djing": "DJing"
     },
-    "automute": {
-        "registered": "%1 registered to automute on future plays.",
-        "unregistered": "%1 removed from automute registry."
-    },
     "tooltip": {
         "stream": "Toggle Video/Audio Stream",
         "clear": "Clear Chat",
@@ -190,10 +187,16 @@
     },
     "error": {
         "userNotFound": "User not found",
+        "usernameNotFound": "Username not found",
         "unknownModeration": "Unknown moderation",
         "unknownMenuKey": "Unknown menu key: %1",
         "missingReason": "Missing reason",
         "notConnected": "Not connected to socket server",
-        "noLiteSupport": "This is not supported in plug&#179; Lite"
+        "noLiteSupport": "This is not supported in plug&#179; Lite",
+        "errorGettingPlaylistInfo": "Error getting playlist info",
+        "noPlaylistsFound": "No playlists found",
+        "yourActivePlaylistIsFull": "Your active playlist is full",
+        "canNotFindTheLastPMReceiver": "Can not find the last PM receiver",
+        "noNextSong": "You have no queued song"
     }
 }

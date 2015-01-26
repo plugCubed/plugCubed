@@ -4,6 +4,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
         ['/afk', 'commands.descriptions.afk'],
         ['/work', 'commands.descriptions.work'],
         ['/gaming', 'commands.descriptions.gaming'],
+        ['/badges (commands.variables.on/commands.variables.off)', 'commands.descriptions.badges'],
         ['/join', 'commands.descriptions.join'],
         ['/leave', 'commands.descriptions.leave'],
         ['/whoami', 'commands.descriptions.whoami'],
@@ -29,8 +30,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
         ['/unlock', 'commands.descriptions.unlock', API.ROLE.MANAGER],
         ['/add (commands.variables.username)', 'commands.descriptions.add', API.ROLE.BOUNCER],
         ['/remove (commands.variables.username)', 'commands.descriptions.remove', API.ROLE.BOUNCER],
-        ['/strobe (commands.variables.onoff)', 'commands.descriptions.strobe', API.ROLE.COHOST],
-        ['/rave (commands.variables.onoff)', 'commands.descriptions.rave', API.ROLE.COHOST],
+        ['/strobe (commands.variables.on/commands.variables.off)', 'commands.descriptions.strobe', API.ROLE.COHOST],
+        ['/rave (commands.variables.on/commands.variables.off)', 'commands.descriptions.rave', API.ROLE.COHOST],
         ['/whois all', 'commands.descriptions.whois', API.ROLE.AMBASSADOR],
         ['/banall', 'commands.descriptions.banall', API.ROLE.AMBASSADOR]
     ], a = Class.extend({
@@ -39,8 +40,21 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
             for (var i in userCommands) {
                 if (!userCommands.hasOwnProperty(i)) continue;
                 var command = userCommands[i][0];
-                if (command.split('(').length > 1) {
-                    command = command.split('(')[0] + '(' + p3Lang.i18n(command.split('(')[1].split(')')[0]) + ')';
+                if (command.split('(').length > 1 && command.split(')').length > 1) {
+                    var argumentTranslationParts = command.split('(')[1].split(')')[0].split('/');
+
+                    command = command.split('(')[0] + '<em>';
+
+                    for (var j in argumentTranslationParts) {
+                        if (!argumentTranslationParts.hasOwnProperty(j)) continue;
+                        if (argumentTranslationParts[j] == '+' || argumentTranslationParts[j] == '-') {
+                            command += argumentTranslationParts[j];
+                        } else {
+                            command += p3Lang.i18n(argumentTranslationParts[j]);
+                        }
+                    }
+
+                    command += '</em>';
                 }
                 response += '<div style="position:relative;left:-10px">' + command + '<br><em style="position:relative;left:10px">' + p3Lang.i18n(userCommands[i][1]) + '</em></div>';
             }
@@ -53,7 +67,20 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
                 if (API.hasPermission(undefined, modCommands[i][2])) {
                     var command = modCommands[i][0];
                     if (command.split('(').length > 1) {
-                        command = command.split('(')[0] + '(' + p3Lang.i18n(command.split('(')[1].split(')')[0]) + ')';
+                        var argumentTranslationParts = command.split('(')[1].split(')')[0].split('/');
+
+                        command = command.split('(')[0] + '<em>';
+
+                        for (var j in argumentTranslationParts) {
+                            if (!argumentTranslationParts.hasOwnProperty(j)) continue;
+                            if (argumentTranslationParts[j] == '+' || argumentTranslationParts[j] == '-') {
+                                command += argumentTranslationParts[j];
+                            } else {
+                                command += p3Lang.i18n(argumentTranslationParts[j]);
+                            }
+                        }
+
+                        command += '</em>';
                     }
                     response += '<div style="position:relative;left:-10px">' + command + '<br><em style="position:relative;left:10px">' + p3Lang.i18n(modCommands[i][1]) + '</em></div>';
                 }
@@ -66,7 +93,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
             if (API.hasPermission(undefined, API.ROLE.BOUNCER)) {
                 content += this.modCommands();
             }
-            p3Utils.chatLog(undefined, content);
+            p3Utils.chatLog(undefined, content, undefined, -1);
         }
     });
     return new a();

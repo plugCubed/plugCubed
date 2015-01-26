@@ -3,12 +3,6 @@
   "runningLite":"Running plug&#179; in Lite!",
   "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"Koristi ' \/commands' da vidis komande.",
-  "automuted":"%1 mutirano.",
-  "nextsong":"Prikaži sledeću pesmu sa plej liste i ako je u istoriji",
-  "noNextSong":"Nemaš pesmu na čekanju",
-  "isHistory":"Upozorenje:Ova pesma je još uvek u istoriji(%1 od %2)",
-  "lightsOut":"%1 je isključio svetla",
-  "strobe":"uključi\/isključi svetla",
   "autorespond":{
     "default":"Nisam za kompjuterom.",
     "disable":"Isključi automatsko odgovaranje na četu",
@@ -64,7 +58,26 @@
       "rave":"uljuči\/isključi svetla",
       "whois all":"daje ID korisnika kao i korisničko ime svih korisnika u sobi",
       "banall":"banuje sve korisnike u sobi"
+    },
+    "responses":{
+      "alertson":"Playing sound on the following words: %1",
+      "alertsoff":"No longer playing sound on specific words",
+      "nextsong":"Your next queued song is %1 by %2",
+      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "lightsOut":"%1 turned the lights off",
+      "strobe":"%1 activated strobe lights",
+      "automute":{
+        "automuted":"%1 automuted.",
+        "registered":"%1 registered to automute on future plays.",
+        "unregistered":"%1 removed from automute registry."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "alreadyDJ":"You are already DJing!",
+    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
     "header":"Informacije o korisniku",
@@ -77,20 +90,12 @@
     "history":"Songs in history",
     "songLength":"Song Length (%1 min)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"grabbed %1 - %2",
       "stats":"Statistika: %1 Woot -- %2 Meh -- %3 Grab",
       "updates":"Trenutna pesma: %1 od %2<br \/>Pustio: %3",
-      "meh":"%1 meh'd this track",
-      "join":{
-        "normal":"%1 nas je napustio",
-        "fan":"Tvoj fan %1 je upravo napustio sobu",
-        "friend":"Tvoj prijatelj %1 je upravo napustio sobu"
-      },
-      "leave":{
-        "normal":"%1 nas je napustio",
-        "fan":"Tvoj fan %1 je upravo napustio sobu",
-        "friend":"Tvoj prijatelj %1 je upravo napustio sobu"
-      },
+      "meh":"meh'd this track",
+      "join":"joined the room",
+      "leave":"left the room",
       "history":"Pesma je u istoriji (%1 od %2)",
       "historySkipped":"Pesma je u istoriji (%1 od %2),ali je bila skipovana",
       "songLength":"Pesma je duža od %1 minuta"
@@ -170,10 +175,6 @@
     "undecided":"Neodlučan",
     "djing":"je DJ"
   },
-  "automute":{
-    "registered":"%1 je onemogućio zvuk za naredna puštanja",
-    "unregistered":"%1 obrisana iz liste za automatsko mutiranje."
-  },
   "tooltip":{
     "stream":"Uključi Audio\/Video",
     "clear":"Očisti čet",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Korisnik nije pronađen",
+    "usernameNotFound":"Username not found",
     "unknownModeration":"Nepoznata komanda",
     "unknownMenuKey":"Nepoznata komanda: %1",
     "missingReason":"Nedostaje razlog",
     "notConnected":"Nisi povezan sa serverom",
-    "noLiteSupport":"This is not supported in plug&#179; Lite"
+    "noLiteSupport":"This is not supported in plug&#179; Lite",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"No playlists found",
+    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
+    "noNextSong":"You have no queued song"
   }
 }

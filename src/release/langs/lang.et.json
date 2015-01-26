@@ -1,14 +1,8 @@
 {
   "running":"Jookseb plug&#179; versioon %1",
-  "runningLite":"Running plug&#179; in Lite!",
+  "runningLite":"Töötab plug³ Lite!&#179;",
   "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"Kasuta '\/commands' et näha koode.",
-  "automuted":"%1 automaatne vaigistus.",
-  "nextsong":"display next song in playlist and if it's in history",
-  "noNextSong":"Sul pole järjekorras lugu",
-  "isHistory":"See lugu on ikka ajaloos (%1 of %2)",
-  "lightsOut":"%1 lülitas tuled välja",
-  "strobe":"enable\/disable strobe",
   "autorespond":{
     "default":"Ma olen klaviatuurist eemal.",
     "disable":"Keela AFKis Vastaja, et rääkida",
@@ -64,7 +58,26 @@
       "rave":"enable\/disable lights out",
       "whois all":"gives userid and username of all users in the room",
       "banall":"bans all users in the room"
+    },
+    "responses":{
+      "alertson":"Playing sound on the following words: %1",
+      "alertsoff":"No longer playing sound on specific words",
+      "nextsong":"Your next queued song is %1 by %2",
+      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "lightsOut":"%1 turned the lights off",
+      "strobe":"%1 activated strobe lights",
+      "automute":{
+        "automuted":"%1 automuted.",
+        "registered":"%1 registered to automute on future plays.",
+        "unregistered":"%1 removed from automute registry."
+      }
     }
+  },
+  "eta":{
+    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "alreadyDJ":"You are already DJing!",
+    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
     "header":"plugCubed-i käsklused",
@@ -77,20 +90,12 @@
     "history":"Songs in history",
     "songLength":"Song Length (%1 min)",
     "message":{
-      "grab":"%1 grabbed %2 - %3",
+      "grab":"grabbed %1 - %2",
       "stats":"Statsid: %1 meeldimisi -- %2 vihkamisi -- %3 lisamisi",
       "updates":"Praegu Mängib: %1 - %2<br \/>Mängitud: %3",
-      "meh":"%1 meh'd this track",
-      "join":{
-        "normal":"%1 lahkus just ruumist",
-        "fan":"Su fänn %1 lahkus ruumist",
-        "friend":"Su sõber %1 lahkus ruumist"
-      },
-      "leave":{
-        "normal":"%1 lahkus just ruumist",
-        "fan":"Su fänn %1 lahkus ruumist",
-        "friend":"Su sõber %1 lahkus ruumist"
-      },
+      "meh":"meh'd this track",
+      "join":"joined the room",
+      "leave":"left the room",
       "history":"Song is in history (%1 of %2)",
       "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
       "songLength":"Song is longer than %1 minutes"
@@ -106,13 +111,13 @@
     "specialTitles":{
       "developer":"plugCubed-i Arendaja",
       "sponsor":"plug&#179; Sponsor",
-      "ambassador":"plug&#179; Ambassador",
+      "ambassador":"&#179;",
       "donatorDiamond":"plug&#179; Diamond Donator",
       "donatorPlatinum":"plug&#179; Platinum Donator",
       "donatorGold":"plug&#179; Gold Donator",
       "donatorSilver":"plug&#179; Silver Donator",
-      "donatorBronze":"plug&#179; Bronze Donator",
-      "special":"plug&#179; Special Supporter - %1"
+      "donatorBronze":"&#179;",
+      "special":"%1&#179;"
     },
     "id":"ID",
     "rank":"Tase",
@@ -148,7 +153,7 @@
   },
   "roomSpecificSettings":{
     "infoHeader":"This room is using special settings",
-    "infoHeaderCredits":"This room is using special settings by %1",
+    "infoHeaderCredits":"%1",
     "infoDisable":"You can disable them in the menu"
   },
   "menu":{
@@ -170,10 +175,6 @@
     "undecided":"Pole otsustanud",
     "djing":"DJ-imas"
   },
-  "automute":{
-    "registered":"%1 on registreeritud automute-i seadetesse.",
-    "unregistered":"%1 eemaladati automute-i registrist"
-  },
   "tooltip":{
     "stream":"Vool",
     "clear":"Clear Chat",
@@ -184,10 +185,16 @@
   },
   "error":{
     "userNotFound":"Kasutajat ei leitud",
+    "usernameNotFound":"Username not found",
     "unknownModeration":"Tundmatu",
     "unknownMenuKey":"Tundmatu nupp",
     "missingReason":"Missing reason",
     "notConnected":"Not connected to socket server",
-    "noLiteSupport":"This is not supported in plug&#179; Lite"
+    "noLiteSupport":"This is not supported in plug&#179; Lite",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"No playlists found",
+    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
+    "noNextSong":"You have no queued song"
   }
 }

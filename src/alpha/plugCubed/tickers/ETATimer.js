@@ -41,7 +41,7 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
 
                     for (var i in history) {
                         if (history.hasOwnProperty(i))
-                            timePerSong += history[i].info === undefined || history[i].info.duration === 0 ? 240 : history[i].info.duration;
+                            timePerSong += history[i].info == null || history[i].info.duration === 0 ? 240 : history[i].info.duration;
                     }
 
                     timePerSong = Math.round(timePerSong / history.length);
