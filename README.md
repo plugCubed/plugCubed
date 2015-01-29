@@ -9,6 +9,7 @@ Please use our [bug tracker](http://issue.plugcubed.net/) to report a bug report
 
 ### Developers
 * Thomas "TAT" Andresen
+* "Unnoen"
 
 ### Translations
 If you want to help out translating plug&#179; to different languages please use [our project at CrowdIn](https://crowdin.net/project/plug3).

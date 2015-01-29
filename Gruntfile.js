@@ -628,6 +628,18 @@ module.exports = function(grunt) {
                     src: '**.png',
                     dest: 'files/images/'
                 }, {
+                    cwd: 'src/release/images/badges',
+                    src: '**.png',
+                    dest: 'files/images/badges/'
+                }, {
+                    cwd: 'src/release/images/icons',
+                    src: '**.png',
+                    dest: 'files/images/icons/'
+                }, {
+                    cwd: 'src/release/images/ranks',
+                    src: '**.png',
+                    dest: 'files/images/ranks/'
+                }, {
                     cwd: 'src/release/langs',
                     src: '**.json',
                     dest: 'files/langs/'
@@ -650,6 +662,18 @@ module.exports = function(grunt) {
                     cwd: 'src/alpha/images',
                     src: '**.png',
                     dest: 'alpha/images/'
+                }, {
+                    cwd: 'src/alpha/images/badges',
+                    src: '**.png',
+                    dest: 'alpha/images/badges/'
+                }, {
+                    cwd: 'src/alpha/images/icons',
+                    src: '**.png',
+                    dest: 'alpha/images/icons/'
+                }, {
+                    cwd: 'src/alpha/images/ranks',
+                    src: '**.png',
+                    dest: 'alpha/images/ranks/'
                 }, {
                     cwd: 'src/alpha/langs',
                     src: '**.json',
