@@ -205,7 +205,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatReceivedLate(data) {
         if (!data.uid) return;
 
-        var $this = $('.text.cid-' + data.cid).closest('.cm'), $icon;
+        var $this = $('.msg.cid-' + data.cid).closest('.cm'), $icon;
 
         var previousMessages = '', innerHTML = $this.find('.text').html();
         if (innerHTML != null && innerHTML.indexOf('<br>') > -1) {
@@ -250,7 +250,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         if (p3Utils.havePlugCubedRank(data.uid) || p3Utils.hasPermission(data.uid, API.ROLE.DJ)) {
             $icon = $this.find('.from .icon');
             var specialIconInfo = p3Utils.getPlugCubedSpecial(data.uid);
-            if ($icon.length === 0 && specialIconInfo != null) {
+            if ($icon.length === 0) {
                 $icon = $('<i>').addClass('icon').css({
                     width: '16px',
                     height: '16px'
