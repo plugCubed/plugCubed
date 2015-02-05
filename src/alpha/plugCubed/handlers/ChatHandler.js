@@ -205,7 +205,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatReceivedLate(data) {
         if (!data.uid) return;
 
-        var $this = $('.text.cid-' + data.cid).closest('.cm'), $icon;
+        var $this = $('.cid-' + data.cid).closest('.cm'), $icon;
 
         var previousMessages = '', innerHTML = $this.find('.text').html();
         if (innerHTML != null && innerHTML.indexOf('<br>') > -1) {
