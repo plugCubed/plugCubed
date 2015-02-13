@@ -268,7 +268,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             if (p3Utils.startsWithIgnoreCase(value, '/alertson ') && !p3Utils.equalsIgnoreCaseTrim(value, '/alertson')) {
                 Settings.alertson = value.substr(10).split(' ');
                 Settings.save();
-                API.chatLog(p3Lang.i18n('commands.responses.alertsom', Settings.alertson.join(', ')));
+                API.chatLog(p3Lang.i18n('commands.responses.alertson', Settings.alertson.join(', ')));
                 return;
             }
             if (p3Utils.equalsIgnoreCaseTrim(value, '/alertson') || p3Utils.startsWithIgnoreCase(value, '/alertsoff')) {
