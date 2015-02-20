@@ -17,7 +17,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
         onDjAdvance: function(data) {
             this.lastDJ = data.lastPlay.dj != null ? data.lastPlay.dj.id : null;
             if (!Settings.autojoin || !RoomSettings.rules.allowAutojoin) return;
-            join();
+            join.call(this);
         },
         onChat: function(data) {
             if (!(RoomSettings.rules.allowAutojoin !== false && Settings.autojoin))
