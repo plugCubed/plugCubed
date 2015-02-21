@@ -19,20 +19,25 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
             join();
         },
         onWaitListUpdate: function() {
+            var oldPosition = this.lastPosition;
+            this.lastPosition = API.getWaitListPosition();
             // If autojoin is not enabled, don't try to disable
             if (!Settings.autojoin) return;
             // If user is DJing, don't try to disable
             var dj = API.getDJ();
             if (dj !== null && dj.id === API.getUser().id) return;
             // If user is in waitlist, don't try to disable
-            if (API.getWaitListPosition() > -1) return;
+            if (this.lastPosition > -1) return;
             // If waitlist is full, don't try to disable
             if (API.getWaitList().length == 50) return;
             // If user was last DJ (DJ Cycle Disabled)
             if (this.lastDJ == API.getUser().id) return;
-            // Disable
-            Settings.autojoin = false;
-            Menu.setEnabled('join', Settings.autojoin);
+            // If the user was in the waitlist but is no longer, disable autojoin
+            if (oldPosition > -1) {
+                // Disable
+                Settings.autojoin = false;
+                Menu.setEnabled('join', Settings.autojoin);
+            }
         },
         onChat: function(data) {
             if (!(RoomSettings.rules.allowAutojoin !== false && Settings.autojoin))
