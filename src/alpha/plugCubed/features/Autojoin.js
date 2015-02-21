@@ -8,6 +8,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
     };
 
     handler = TriggerHandler.extend({
+        lastPosition: API.getWaitListPosition(),
         trigger: {
             advance: 'onDjAdvance',
             waitListUpdate: 'onWaitListUpdate',
