@@ -654,6 +654,46 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             }
 
             return a;
+        },
+        statusREST: function(call) {
+            var time;
+            $.ajax({
+                url: 'https://plug.dj/_/rooms',
+                type: 'HEAD',
+                cache: false,
+                crossDomain: true,
+                timeout: 10000,
+                beforeSend: function() {
+                    time = Date.now();
+                },
+                complete: function(req) {
+                    call(req.status, req.statusText, Date.now() - time);
+                }
+            });
+        },
+        statusSocket: function(call) {
+            var SockJS = require('sockjs'),
+                att = 0,
+                time = Date.now(),
+                conn;
+
+            function connect() {
+                conn = new SockJS('https://shalamar.plug.dj:443/socket');
+                conn.onopen = function() {
+                    conn.close();
+                };
+                conn.onclose = function(req) {
+                    if (req.code !== 1000) {
+                        if (att < 3) setTimeout(connect, 500);
+                        if (att === 3) call(req.code, req.reason, Date.now() - time);
+                        att++;
+                        return;
+                    }
+                    call(req.code, req.reason, Date.now() - time);
+                }
+            }
+
+            connect();
         }
     });
     return new handler();

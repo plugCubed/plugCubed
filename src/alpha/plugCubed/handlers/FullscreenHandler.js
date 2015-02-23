@@ -1,8 +1,9 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/StyleManager'], function($, Class, Styles) {
+define(['jquery', 'plugCubed/Class', 'plugCubed/StyleManager', 'plugCubed/Lang'], function($, Class, Styles, p3Lang) {
     var fullScreen = false, fullScreenButton;
 
     function fullScreenResizer() {
         if (fullScreen) {
+            Styles.unset('Fullscreen');
             var $appRightHeight = $('.app-right').height(),
                 $djButtonHeight = $('#dj-button').height(),
                 $voteHeight = $('#vote').height(),
@@ -28,9 +29,14 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/StyleManager'], function($, Clas
 
             $('#playback-controls').append(fullScreenButton)
                 .find('.button').width('25%')
-                .parent().find('.button .box .icon').remove();
+                .parent().find('.button .box .icon').hide();
 
             fullScreenButton.click($.proxy(this.onClick, this));
+            var delayedRun;
+            $(window).resize(function(){
+                clearTimeout(delayedRun);
+                var delayedRun = setTimeout(fullScreenResizer, 100);
+            });
         },
         onClick: function() {
             this.toggleFullScreen();
@@ -38,18 +44,17 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/StyleManager'], function($, Clas
         toggleFullScreen: function() {
             fullScreen = !fullScreen;
             if (fullScreen) {
-                fullScreenButton.find('.box').text('Shrink');
+                fullScreenButton.find('.box').text(p3Lang.i18n('fullscreen.shrink'));
                 fullScreenResizer();
             } else {
-                fullScreenButton.find('.box').text('Enlarge');
+                fullScreenButton.find('.box').text(p3Lang.i18n('fullscreen.enlarge'));
                 Styles.unset('Fullscreen');
             }
         },
-        register: function() {
-            $(window).resize(fullScreenResizer);
-        },
         close: function() {
             fullScreenButton.remove();
+            $('#playback-controls').find('.button').removeAttr('style')
+                .parent().find('.button .box .icon').show();
             $(window).off('resize', fullScreenResizer);
             Styles.unset('Fullscreen');
         }

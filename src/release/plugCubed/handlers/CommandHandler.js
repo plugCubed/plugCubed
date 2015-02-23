@@ -189,6 +189,15 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 API.sendChat('plugCubed : http://plugcubed.net');
                 return;
             }
+            if (p3Utils.equalsIgnoreCase(command, 'status')) {
+                p3Utils.statusREST(function(status, text, time) {
+                    p3Utils.chatLog(undefined, p3Lang.i18n('commands.responses.status.rest', status, text, time), status == 200 ? '00FF00' : 'FF0000', -1);
+                });
+                p3Utils.statusSocket(function(status, text, time) {
+                    p3Utils.chatLog(undefined, p3Lang.i18n('commands.responses.status.socket', status, text, time), status == 1000 ? '00FF00' : 'FF0000', -1);
+                });
+                return;
+            }
             if (p3Utils.equalsIgnoreCase(command, 'nextsong')) {
                 var nextSong = API.getNextMedia();
                 if (nextSong == null) {

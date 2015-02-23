@@ -15,6 +15,10 @@
         "commandDisable": "%1 autojoin disabled",
         "commandNotEnabled": "%1 autojoin was not enabled"
     },
+    "fullscreen": {
+        "shrink": "Shrink",
+        "enlarge": "Enlarge"
+    },
     "commands": {
         "header": "plug&#179; Commands",
         "userCommands": "User Commands",
@@ -43,6 +47,7 @@
             "alertson": "play sound whenever defined words are written in chat",
             "alertsoff": "stop playing sound when defined words are written in chat",
             "grab": "add current song to your selected playlist",
+            "badges": "show/hide the user badges in chat",
             "getpos": "get current waitlist position",
             "version": "displays version number",
             "commands": "shows this list",
@@ -58,7 +63,8 @@
             "strobe": "enable/disable strobe",
             "rave": "enable/disable lights out",
             "whois all": "gives userid and username of all users in the room",
-            "banall": "bans all users in the room"
+            "banall": "bans all users in the room",
+            "status": "shows status of plug servers"
         },
         "responses": {
             "alertson": "Playing sound on the following words: %1",
@@ -71,6 +77,10 @@
                 "automuted": "%1 automuted.",
                 "registered": "%1 registered to automute on future plays.",
                 "unregistered": "%1 removed from automute registry."
+            },
+            "status": {
+                "rest": "REST: %1 %2 [%3ms]",
+                "socket": "Socket: %1 %2 [%3ms]"
             }
         }
     },
@@ -89,6 +99,7 @@
         "stats": "Song Stats",
         "updates": "Song Updates",
         "history": "Songs in history",
+        "songUnavailable": "Song Unavailable",
         "songLength": "Song Length (%1 min)",
         "message": {
             "grab": "grabbed %1 - %2",
@@ -99,7 +110,11 @@
             "leave": "left the room",
             "history": "Song is in history (%1 of %2)",
             "historySkipped": "Song is in history (%1 of %2), but was skipped on the last play",
-            "songLength": "Song is longer than %1 minutes"
+            "songLength": "Song is longer than %1 minutes",
+            "songPrivate": "Song is private",
+            "songNotFound": "Song not found",
+            "songEmbed": "Song has embedding disabled",
+            "songStreamable": "Song doesn't support streaming"
         },
         "notification": {
             "songLength": "Song Length"
@@ -165,6 +180,7 @@
         "autorespond": "AFK Autorespond",
         "notify": "Notifications",
         "afktimers": "AFK Timers",
+        "etatimer": "ETA Timer",
         "roomsettings": "Room Settings",
         "chatimages": "Chat Images",
         "twitchemotes": "Twitch Emotes",
