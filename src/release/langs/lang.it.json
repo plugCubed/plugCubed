@@ -16,14 +16,14 @@
     "commandNotEnabled":"%1 autojoin was not enabled"
   },
   "commands":{
-    "header":"User Information",
+    "header":"Informazioni dell'utente",
     "userCommands":"Controlli dell'utente",
     "modCommands":"Commandi di moderazione",
     "variables":{
       "username":"Nome Utente",
       "word":"parola",
-      "on":"on",
-      "off":"off",
+      "on":"attivato",
+      "off":"disattivato",
       "reason":"Motivo"
     },
     "descriptions":{
@@ -32,22 +32,22 @@
       "work":"Imposta lo stato su \"Al lavoro\"",
       "gaming":"Giocando",
       "join":"User Join",
-      "leave":"User Leave",
+      "leave":"Uscita di un giocatore",
       "whoami":"Ottieni le tue informazioni",
       "mute":"Imposta il volume a 0",
-      "automute":"register currently playing song to automatically mute on future plays",
+      "automute":"Registra la canzone corrente per mutarla automaticamente la prossima volta che viene eseguita",
       "unmute":"Reimposta il volume al livello precedente",
       "nextsong":"Visualizza la prossima canzone nella playlist e se è presente nella cronologia",
       "refresh":"Ricarica il video",
-      "alertson":"play sound whenever defined words are written in chat",
-      "alertsoff":"stop playing sound when defined words are written in chat",
-      "grab":"add current song to your selected playlist",
+      "alertson":"Avvia un suono quando una certa parola è scritta in chat",
+      "alertsoff":"Interrompe il suono quando una certa parola è scritta in chat",
+      "grab":"Aggiungi la canzone attuale alla tua playlist attiva",
       "getpos":"Mostra la posizione attuale nella lista d'attesa",
       "version":"Mostra il numero di versione",
       "commands":"Mostra questa lista.",
       "link":"paste link to plugCubed website in chat",
-      "whois":"da informazioni generali riguardo l'utente",
-      "skip":"salta la canzone corrente",
+      "whois":"Da informazioni generali riguardo l'utente",
+      "skip":"Salta la canzone corrente",
       "ban":"Caccia l'utente selezionato",
       "lockskip":"locks DJ booth, skip and unlocks afterwards",
       "lock":"locks DJ booth",
@@ -57,18 +57,18 @@
       "strobe":"enable\/disable strobe",
       "rave":"enable\/disable lights out",
       "whois all":"gives userid and username of all users in the room",
-      "banall":"bans all users in the room"
+      "banall":"Banna tutti gli utenti della sala"
     },
     "responses":{
-      "alertson":"Playing sound on the following words: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
+      "alertson":"Avvio un suono alla seguente parola: %1",
+      "alertsoff":"Interrompo il suono alle seguenti parole",
+      "nextsong":"La tua prossima canzone è %1 di %2",
+      "isHistory":"Attenzione: This song is still in the history (%1 of %2)",
+      "lightsOut":"%1 disattivate le luci",
+      "strobe":"%1 attivate lusi strobosferiche",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
+        "automuted":"%1 automutata.",
+        "registered":"%1 registrata per mutarla automaticamente la prossima volta che viene riprodotta.",
         "unregistered":"%1 removed from automute registry."
       }
     }
@@ -152,13 +152,13 @@
     "admin":"Amministratore\n"
   },
   "roomSpecificSettings":{
-    "infoHeader":"This room is using special settings",
-    "infoHeaderCredits":"This room is using special settings by %1",
-    "infoDisable":"You can disable them in the menu"
+    "infoHeader":"Questa stanza una impostazioni speciali",
+    "infoHeaderCredits":"Questa stanza una impostazioni speciali di %1",
+    "infoDisable":"Puoi disattivarle nel menù"
   },
   "menu":{
     "autowoot":"Autowoot",
-    "autojoin":"Join Automatico",
+    "autojoin":"Autojoin",
     "customchatcolors":"Colori personalizzati chat",
     "autorespond":"AFK Autorespond",
     "notify":"Notifiche",
@@ -166,18 +166,18 @@
     "roomsettings":"Immagini tridimensionali",
     "chatimages":"Chat Images",
     "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "controlpanel":"Pannello di controllo"
   },
   "vote":{
-    "meh":"Meh",
-    "woot":"Woot",
-    "grab":"Grab",
+    "meh":"Non mi piace!",
+    "woot":"Mi piace!",
+    "grab":"Salva",
     "undecided":"Indeciso",
     "djing":"DJing"
   },
   "tooltip":{
-    "stream":"Toggle Video\/Audio Stream",
-    "clear":"Pulire la conversazione",
+    "stream":"Mostra\/Nasconde Video\/Audio Stream",
+    "clear":"Pulisce la conversazione",
     "afk":"AFK Message",
     "reset":"Ripristinare le impostazioni",
     "muted":"All songs are muted",
@@ -185,16 +185,16 @@
   },
   "error":{
     "userNotFound":"Utente non trovato",
-    "usernameNotFound":"Username not found",
+    "usernameNotFound":"Username non trovato",
     "unknownModeration":"Unknown moderation",
     "unknownMenuKey":"Unknown menu key: %1",
     "missingReason":"Ragione dell'assenza",
     "notConnected":"Not connected to socket server",
     "noLiteSupport":"This is not supported in plug&#179; Lite",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
-    "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "errorGettingPlaylistInfo":"Si è riscontrato un errore nel recupero delle informazioni della playlist",
+    "noPlaylistsFound":"Non ho trovato playlist",
+    "yourActivePlaylistIsFull":"La tua playlist attiva è piena",
     "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
-    "noNextSong":"You have no queued song"
+    "noNextSong":"Non hai canzoni in coda"
   }
 }
