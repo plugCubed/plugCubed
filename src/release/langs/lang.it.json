@@ -1,6 +1,6 @@
 {
-  "running":"Eseguire plug&#179; version%1",
-  "runningLite":"Running plug&#179; in Lite!",
+  "running":"Eseguendo plug&#179; version%1",
+  "runningLite":"Eseguendo plug&#179; in modalità Lite!",
   "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"Usa \"\/commands\" per estendere la lista dei comandi eseguibili in chat.",
   "autorespond":{
@@ -8,12 +8,12 @@
     "disable":"Disattiva la Risposta automatica in chat durante l'assenza",
     "nextIn":"La prossima Risposta automatica per assenza sarà inviata tra %1",
     "next":"Risposta automatica per assenza nella prossima menzione",
-    "commandDisable":"%1 autojoin disabled",
-    "commandNotEnabled":"%1 autojoin was not enabled"
+    "commandDisable":"%1 autojoin disabilitato",
+    "commandNotEnabled":"%1 autojoin non era abilitato"
   },
   "autojoin":{
-    "commandDisable":"%1 autojoin disabled",
-    "commandNotEnabled":"%1 autojoin was not enabled"
+    "commandDisable":"%1 autojoin disabilitato",
+    "commandNotEnabled":"%1 autojoin non era abilitato"
   },
   "commands":{
     "header":"Informazioni dell'utente",
@@ -56,7 +56,7 @@
       "remove":"removes targeted user from dj booth\/waitlist",
       "strobe":"enable\/disable strobe",
       "rave":"enable\/disable lights out",
-      "whois all":"gives userid and username of all users in the room",
+      "whois all":"Dice userid e username di tutti gli utenti presenti nella sala",
       "banall":"Banna tutti gli utenti della sala"
     },
     "responses":{
@@ -65,22 +65,22 @@
       "nextsong":"La tua prossima canzone è %1 di %2",
       "isHistory":"Attenzione: This song is still in the history (%1 of %2)",
       "lightsOut":"%1 disattivate le luci",
-      "strobe":"%1 attivate lusi strobosferiche",
+      "strobe":"%1 attivate luci strobosferiche",
       "automute":{
         "automuted":"%1 automutata.",
         "registered":"%1 registrata per mutarla automaticamente la prossima volta che viene riprodotta.",
-        "unregistered":"%1 removed from automute registry."
+        "unregistered":"%1 rimossa dall'archivio delle canzoni da mutare."
       }
     }
   },
   "eta":{
     "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
+    "alreadyDJ":"Sei già DJing!",
     "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
     "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
-    "header":"User Information",
+    "header":"Informazioni utente",
     "join":"User Join",
     "leave":"User Leave",
     "grab":"User Grab",
@@ -90,7 +90,7 @@
     "history":"Songs in history",
     "songLength":"Song Length (%1 min)",
     "message":{
-      "grab":"grabbed %1 - %2",
+      "grab":"Salvata %1 - %2",
       "stats":"Stats: %1 woots -- %2 mehs -- %3 grabs",
       "updates":"Now Playing: %1 by %2<br>Played by: %3",
       "meh":"meh'd this track",
