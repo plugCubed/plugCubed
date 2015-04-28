@@ -5,11 +5,12 @@ plug&#179; (plugCubed)
 Find all information and installation informations at http://plugCubed.net/
 
 ### Issues / Feature Requests
-Please use our [bug tracker](http://issue.plugcubed.net/) to report a bug report / feature request / enhancement.
+Please use our this repository's Github issues to report a bug report / feature request / enhancement.
 
 ### Developers
 * Thomas "TAT" Andresen
-* "Unnoen"
+* Sam "Henchman" Mills
+* Alex "Thedark1337" Pham
 
 ### Translations
 If you want to help out translating plug&#179; to different languages please use [our project at CrowdIn](https://crowdin.net/project/plug3).
@@ -22,7 +23,7 @@ Feel free to contribute to the code.
 * Clone the forked repository to an empty folder.
 * Run `npm install` to set up the environment.
 * Make your changes.
-* Test your changes by putting your changes into an already build plug&#179;.
+* Test your changes by putting your changes into an already built plug&#179;.
 * Submit your changes as a Pull Request to the main repo.
 
 ### Contribute (Future)
