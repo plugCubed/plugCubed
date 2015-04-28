@@ -61,36 +61,36 @@
     },
     "responses":{
       "alertson":"Spelar låtar på de följande orden: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "nextsong":"Your next queued song is %1 by %2",
+      "alertsoff":"Spelar inte längre ljud på specifika ord",
+      "nextsong":"Din nästa köade sång är %1 av %2",
       "isHistory":"Varning: Den här låten finns fortfarande i historiken (%1 av %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
+      "lightsOut":"%1 släckte ljusen",
+      "strobe":"%1 Aktiverade strålkastarna",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "automuted":"%1 automutad.",
+        "registered":"%1 registrerad till automute på framtida spelningar.",
+        "unregistered":"%1 togs bort från automute registret."
       }
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "boothAvailable":"Om du går med i väntelistan nu, Så kommer du vara DJ!",
+    "alreadyDJ":"Du är redan DJ!",
+    "waitListTime":"Du är i väntelistan %1 av %2, Du kommer vara DJ om %3!",
+    "joinTime":"Om du går med i väntelistan nu, Kommer du vara DJ om %1!"
   },
   "notify":{
     "header":"Chat Notifieringar",
     "join":"Användare Anslut*",
     "leave":"Användare Lämna",
-    "grab":"User Grab",
+    "grab":"Användaren Tog",
     "meh":"Användare Mehs",
     "stats":"Låt Stats",
     "updates":"Låt uppdateringar",
     "history":"Låtar i historia",
     "songLength":"Låt Längd (%1 min)",
     "message":{
-      "grab":"grabbed %1 - %2",
+      "grab":"Lagde Till %1 - %2",
       "stats":"Stats: %1 woots -- %2 mehs -- %3 Grabs",
       "updates":"Spelas Nu: %1 av %2<br \/>Spelad av: %3",
       "meh":"%1 meh'ade detta spår",

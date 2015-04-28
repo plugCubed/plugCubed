@@ -86,7 +86,7 @@
     "grab":"User Grab",
     "meh":"не понравившееся пользователю",
     "stats":"Статистика трека",
-    "updates":"Обновления песен",
+    "updates":"Обновления треков",
     "history":"Треки в истории",
     "songLength":"Продолжительность песни (%1 мин)",
     "message":{
@@ -171,7 +171,7 @@
   "vote":{
     "meh":"Не нравится",
     "woot":"Нравится",
-    "grab":"Grab",
+    "grab":"Сохранить",
     "undecided":"Нерешенные",
     "djing":"Играет"
   },
@@ -187,7 +187,7 @@
     "userNotFound":"Пользователь не найден",
     "usernameNotFound":"Username not found",
     "unknownModeration":"Неизвестная команда",
-    "unknownMenuKey":"Неизвестный элемент меню",
+    "unknownMenuKey":"Неизвестный элемент меню: %1",
     "missingReason":"Отсутствует причина",
     "notConnected":"Не подключен к сокет-серверу",
     "noLiteSupport":"Это не поддерживается в plug³ Lite",

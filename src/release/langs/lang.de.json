@@ -1,7 +1,7 @@
 {
   "running":"Es läuft die Version plug&#179 %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLite":"Plug&#179; wird im Lite-Modus ausgeführt!",
+  "runningLiteInfo":"Ein paar Features werden nicht funktionieren.",
   "commandsHelp":"Gib '\/commands' ein, um alle Chat Befehle zu sehen.",
   "autorespond":{
     "default":"Bin mal weg.",
@@ -41,7 +41,7 @@
       "refresh":"Lädt das Video neu",
       "alertson":"Spiele einen Ton, sobald bestimmte Worte im Chat geschrieben werden",
       "alertsoff":"Kein Signalton bei einem im Chat erwähntem Wort  ",
-      "grab":"add current song to your selected playlist",
+      "grab":"Füge den aktuellen Song zu deiner ausgewählten Playlist hinzu",
       "getpos":"Zeigt deine Position in der Warteliste an",
       "version":"Zeigt die Versionsnummer an",
       "commands":"Zeigt diese Liste",
@@ -60,24 +60,24 @@
       "banall":"Bannt alle Benutzer im Raum"
     },
     "responses":{
-      "alertson":"Playing sound on the following words: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
+      "alertson":"Mache ein Geräusch bei folgenden Wörtern: %1",
+      "alertsoff":"Mache kein Gerüsch bei spezifischen Wörten mehr",
+      "nextsong":"Dein nächstes Lied ist %1 von %2",
+      "isHistory":"Warnung: Dieser Song ist noch im Verlauf (%1 von %2)",
+      "lightsOut":"%1 hat das Licht ausgeschaltet",
+      "strobe":"%1 hat die Blitzlichter aktiviert",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "automuted":"%1 automatisch stumm geschaltet.",
+        "registered":"%1 für automatisches Stummstellen bei zukünftigen DJ's registriert.",
+        "unregistered":"%1 wurde von der Automatisch-Stummstellen Liste entfernt."
       }
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "boothAvailable":"Wenn du jetzt in die Warteliste eintrittst, würdest du gleich DJing!",
+    "alreadyDJ":"Du stehst schon am Mischpult!",
+    "waitListTime":"Du bist in der Warteliste %1 von %2, du wirst in etwa %3 DJing!",
+    "joinTime":"Wenn du der Warteliste jetzt beitrittst. würdest du in ungefähr %1 DJing!"
   },
   "notify":{
     "header":"Chat Benachrichtigungen",
@@ -94,8 +94,8 @@
       "stats":"Statistiken: %1 woots -- %2 mehs -- %3 grabs",
       "updates":"Jetzt läuft: %1 von %2<br\/>Gespielt von: %3",
       "meh":"%1 meh-te diesen Song",
-      "join":"joined the room",
-      "leave":"left the room",
+      "join":"Ist der Community beigetreten",
+      "leave":"Hat die Community verlassen",
       "history":"Song ist im Verlauf (%1 von %2)",
       "historySkipped":"Song ist im Verlauf (%1 von %2), aber wurde beim letzten Mal übersprungen",
       "songLength":"Song ist länger als %1 Minuten "
@@ -166,7 +166,7 @@
     "roomsettings":"Raum Einstellungen",
     "chatimages":"Chat-Bilder",
     "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "controlpanel":"Einstellungen"
   },
   "vote":{
     "meh":"Meh",
@@ -185,16 +185,16 @@
   },
   "error":{
     "userNotFound":"Benutzer konnte nicht gefunden werden.",
-    "usernameNotFound":"Username not found",
+    "usernameNotFound":"Benutzername nicht gefunden",
     "unknownModeration":"Unbekannte Moderation",
     "unknownMenuKey":"Unbekannte Menü-Taste: %1",
     "missingReason":"Fehlender Grund",
     "notConnected":"Nicht mit dem Socket Server verbunden",
     "noLiteSupport":"Das ist in plug&#179; Lite nicht unterstützt",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
-    "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
-    "noNextSong":"You have no queued song"
+    "errorGettingPlaylistInfo":"Error beim Laden der Playlist Informationen",
+    "noPlaylistsFound":"Keine Playlist gefunden",
+    "yourActivePlaylistIsFull":"Deine aktive Playlist ist voll",
+    "canNotFindTheLastPMReceiver":"Letzter PM-Empfänger kann nicht gefunden werden",
+    "noNextSong":"Du hast kein Lied in der Warteschlange"
   }
 }

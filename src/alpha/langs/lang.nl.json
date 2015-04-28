@@ -1,7 +1,7 @@
 {
   "running":"Je gebruikt plug&#179; versie %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLite":"Plug&#179; draait nu in Lite modus!",
+  "runningLiteInfo":"Sommige functies zullen niet werken.",
   "commandsHelp":"Gebruik '\/commands' om alle chat commando's te zien",
   "autorespond":{
     "default":"Ik ben niet op mijn pc!",
@@ -41,7 +41,7 @@
       "refresh":"Herlaadt de video ",
       "alertson":"Maak geluid waneer gedefinieerde woorden zijn geschreven in de chat",
       "alertsoff":"Stop geluid spelen wanneer gedefinieerde woorden zijn geschreven in de chat",
-      "grab":"add current song to your selected playlist",
+      "grab":"Voeg de huidige track toe aan je geselecteerde afspeellijst",
       "getpos":"Krijg huidige wachtlijst positie",
       "version":"Weergeef versienummer",
       "commands":"Laat deze lijst zien",
@@ -60,14 +60,14 @@
       "banall":"Verbied alle gebruikers in de kamer"
     },
     "responses":{
-      "alertson":"Playing sound on the following words: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
+      "alertson":"Geluid afspelen bij de volgende woorden: %1",
+      "alertsoff":"Niet langer geluid afspelen op specifieke woorden",
+      "nextsong":"Je volgende track in de wachtlijst is %1 van %2",
+      "isHistory":"Waarschuwing: Deze track bevindt zich nog in de geschiedenis (%1 van %2)",
+      "lightsOut":"%1 deed het licht uit",
+      "strobe":"%1 activeerde de stroboscooplampen",
       "automute":{
-        "automuted":"%1 automuted.",
+        "automuted":"%1 automatisch gedempt.",
         "registered":"%1 registered to automute on future plays.",
         "unregistered":"%1 removed from automute registry."
       }

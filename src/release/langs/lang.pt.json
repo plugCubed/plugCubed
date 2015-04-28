@@ -41,7 +41,7 @@
       "refresh":"atualizar vídeo",
       "alertson":"alertar sempre que palavras definidas aparecerem no chat",
       "alertsoff":"parar de alertar quando palavras definidas aparecerem no chat",
-      "grab":"adicionar som atual à sua playlist selecionada",
+      "grab":"adicionar música atual à sua playlist selecionada",
       "getpos":"mostrar minha posição na lista",
       "version":"exibe o número de versão",
       "commands":"mostra esta lista",
@@ -62,22 +62,22 @@
     "responses":{
       "alertson":"Tocando o som das seguintes palavras: %1",
       "alertsoff":"Não está mais tocando o som em palavras específicas",
-      "nextsong":"Sua proxima música será %1 por %2",
-      "isHistory":"Aviso: Está música ainda está no historico (%1 de %2)",
+      "nextsong":"Sua próxima música em espera será %1 por %2",
+      "isHistory":"Aviso: Está música ainda está no histórico (%1 de %2)",
       "lightsOut":"%1 apagou as luzes",
       "strobe":"%1 ativou as luzes strobe",
       "automute":{
-        "automuted":"%1 calado automaticamente.",
-        "registered":"%1 colocado no calar automaticamente nas futuras reproduções",
-        "unregistered":"%1 removeu o calar automaticamente do registro"
+        "automuted":"%1 mutado automaticamente.",
+        "registered":"%1 registrado para mutado automaticamente nas próximas reproduções",
+        "unregistered":"%1 removido do histórico de auto mutado"
       }
     }
   },
   "eta":{
-    "boothAvailable":"Se você se juntar a lista de espera agora, você poderia ser dj!",
+    "boothAvailable":"Se você se juntar a lista de espera agora, você pode ser dj!",
     "alreadyDJ":"Você já está tocando!",
     "waitListTime":"Você está em %1 de %2 na lista de espera, você será dj em cerca de %3!",
-    "joinTime":"Se você se juntar a lista de dj agora, você seria dj em %1!"
+    "joinTime":"Se você se juntar a lista de espera agora, você seria dj em %1!"
   },
   "notify":{
     "header":"Notificações do chat",
@@ -93,7 +93,7 @@
       "grab":"%1 adicionado %2 - %3",
       "stats":"Estatística: %1 legais -- %2 chatos -- %3 adds",
       "updates":"Tocando agora: %1 de %2<br\/>Tocado por: %3",
-      "meh":"%1 pessoa Meh essa musica",
+      "meh":"%1 deu chato nesta música",
       "join":"entrou na sala!",
       "leave":"saiu da sala",
       "history":"A música está no histórico (%1 of %2)",
@@ -194,7 +194,7 @@
     "errorGettingPlaylistInfo":"Erro ao obter informações da lista de reprodução",
     "noPlaylistsFound":"Não há lista de reproduções encontrada",
     "yourActivePlaylistIsFull":"Sua lista de reproduções ativa está cheia",
-    "canNotFindTheLastPMReceiver":"Não consigo encontrar a última pessoa que enviou o PM",
+    "canNotFindTheLastPMReceiver":"Não consigo encontrar o último recebidor de PM",
     "noNextSong":"Você não tem música para tocar"
   }
 }

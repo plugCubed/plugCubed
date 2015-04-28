@@ -76,11 +76,11 @@
   "eta":{
     "boothAvailable":"Jos liityt jonotuslistaan nyt, olisit DJ!",
     "alreadyDJ":"Olet jo DJ!",
-    "waitListTime":"Olet jonotuslistalla %1 - %2, olet DJ noin %3!",
+    "waitListTime":"Olet jonotuslistalla %1\/%2, olet DJ noin %3!",
     "joinTime":"Jos liityt jonotuslistaan nyt, olet DJ noin %1!"
   },
   "notify":{
-    "header":"Käyttäjä informaatio",
+    "header":"Keskustelu Ilmoitukset",
     "join":"Käyttäjä Liittyi",
     "leave":"Käyttäjä lähti",
     "grab":"Grabit",
@@ -90,8 +90,8 @@
     "history":"Kappaleet historiassa",
     "songLength":"Kappaleen pituus (%1 min)",
     "message":{
-      "grab":"%1 lisäsi %2 - %3",
-      "stats":"Tilastot: %1 woots -- %2 mehs -- %3 curates",
+      "grab":"lisäsi %1 - %2",
+      "stats":"Tilastot: %1 woottia -- %2 mehiä -- %3 lisäystä",
       "updates":"Nyt soi: %1 tekijältä %2<br\/>Soittajalta: %3",
       "meh":"mehasi tätä kappaletta",
       "join":"liittyi huoneeseen",
@@ -157,13 +157,13 @@
     "infoDisable":"Voit poistaa ne käytöstä valikosta"
   },
   "menu":{
-    "autowoot":"Automaattinenwoot",
+    "autowoot":"Automaattinen woot",
     "autojoin":"Automaattisesti jonoon",
     "customchatcolors":"Mukautetut Chatin Värit",
     "autorespond":"AFK Automaattinen vastaus",
     "notify":"Ilmoitukset",
     "afktimers":"AFK Ajat",
-    "roomsettings":"Huone Asetukset",
+    "roomsettings":"Huoneen Asetukset",
     "chatimages":"Keskustelun Kuvat",
     "twitchemotes":"Twich Emojit",
     "controlpanel":"Ohjauspaneeli"
@@ -185,16 +185,16 @@
   },
   "error":{
     "userNotFound":"Käyttäjää ei löydy",
-    "usernameNotFound":"Käyttäjänime ei löytynyt",
+    "usernameNotFound":"Käyttäjänimeä ei löytynyt",
     "unknownModeration":"Tuntematon moderaatio",
     "unknownMenuKey":"Tuntematon valikko avain: %1",
     "missingReason":"Puuttuva syy",
-    "notConnected":"Ei ole yhteydessä palvelimeen",
+    "notConnected":"Et ole yhteydessä palvelimeen",
     "noLiteSupport":"Tätä ei tueta plug&#179; Lite",
-    "errorGettingPlaylistInfo":"Virhe haetaessa soittolistan infoa",
+    "errorGettingPlaylistInfo":"Virhe soittolistan infoa haettaessa",
     "noPlaylistsFound":"Soittolistoja ei löytynyt",
     "yourActivePlaylistIsFull":"Aktiivinen soittolistasi on täynnä",
     "canNotFindTheLastPMReceiver":"Ei voitu löytää viimeisintä PM vastaanottajaa",
-    "noNextSong":"Sinulle ei ole valittua kappaletta"
+    "noNextSong":"Sinulla ei ole valittua kappaletta"
   }
 }
