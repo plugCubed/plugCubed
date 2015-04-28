@@ -39,7 +39,6 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settin
             this._super();
             if (Settings.autorespond) {
                 $('#chat-input-field').removeAttr('disabled').attr('placeholder', Lang.chat.placeholder);
-                API.setStatus(API.STATUS.AVAILABLE);
             }
         }
     });

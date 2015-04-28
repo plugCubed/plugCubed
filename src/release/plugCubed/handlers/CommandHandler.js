@@ -100,22 +100,6 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 }
                 return;
             }
-            if (p3Utils.equalsIgnoreCase(command, 'avail') || p3Utils.equalsIgnoreCase(command, 'available')) {
-                API.setStatus(0);
-                return;
-            }
-            if (p3Utils.equalsIgnoreCase(command, 'afk') || p3Utils.equalsIgnoreCase(command, 'brb') || p3Utils.equalsIgnoreCase(command, 'away')) {
-                API.setStatus(1);
-                return;
-            }
-            if (p3Utils.equalsIgnoreCase(command, 'work') || p3Utils.equalsIgnoreCase(command, 'working')) {
-                API.setStatus(2);
-                return;
-            }
-            if (p3Utils.equalsIgnoreCase(command, 'game') || p3Utils.equalsIgnoreCase(command, 'gaming')) {
-                API.setStatus(3);
-                return;
-            }
             if (p3Utils.equalsIgnoreCase(command, 'join')) {
                 API.djJoin();
                 return;

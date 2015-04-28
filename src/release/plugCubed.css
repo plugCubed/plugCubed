@@ -665,35 +665,35 @@
     height: 16px;
 }
 
-.is-p3developer .from .icon, .icon.icon-is-p3developer, #user-rollover .meta.has-p3Role.is-p3developer .p3Role {
+.is-p3developer .from .icon:not(.icon-chat-subscriber), .icon.icon-is-p3developer, #user-rollover .meta.has-p3Role.is-p3developer .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3dev.png') !important;
 }
 
-.is-p3sponsor .from .icon, .icon.icon-is-p3sponsor, #user-rollover .meta.has-p3Role.is-p3sponsor .p3Role {
+.is-p3sponsor .from .icon:not(.icon-chat-subscriber), .icon.icon-is-p3sponsor, #user-rollover .meta.has-p3Role.is-p3sponsor .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3sponsor.png') !important;
 }
 
-.is-p3ambassador .from .icon, .icon.icon-is-p3ambassador, #user-rollover .meta.has-p3Role.is-p3ambassador .p3Role {
+.is-p3ambassador .from .icon:not(.icon-chat-subscriber), .icon.icon-is-p3ambassador, #user-rollover .meta.has-p3Role.is-p3ambassador .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3ambassador.png') !important;
 }
 
-.is-p3donatorDiamond .from .icon, .icon.icon-is-p3donatorDiamond, #user-rollover .meta.has-p3Role.is-p3donatorDiamond .p3Role {
+.is-p3donatorDiamond .from .icon:not(.icon-chat-subscriber), .icon.icon-is-p3donatorDiamond, #user-rollover .meta.has-p3Role.is-p3donatorDiamond .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3donator.diamond.png') !important;
 }
 
-.is-p3donatorPlatinum .from .icon, .icon.icon-is-p3donatorPlatinum, #user-rollover .meta.has-p3Role.is-p3donatorPlatinum .p3Role {
+.is-p3donatorPlatinum .from .icon:not(.icon-chat-subscriber), .icon.icon-is-p3donatorPlatinum, #user-rollover .meta.has-p3Role.is-p3donatorPlatinum .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3donator.platinum.png') !important;
 }
 
-.is-p3donatorGold .from .icon, .icon.icon-is-p3donatorGold, #user-rollover .meta.has-p3Role.is-p3donatorGold .p3Role {
+.is-p3donatorGold .from .icon:not(.icon-chat-subscriber), .icon.icon-is-p3donatorGold, #user-rollover .meta.has-p3Role.is-p3donatorGold .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3donator.gold.png') !important;
 }
 
-.is-p3donatorSilver .from .icon, .icon.icon-is-p3donatorSilver, #user-rollover .meta.has-p3Role.is-p3donatorSilver .p3Role {
+.is-p3donatorSilver .from .icon:not(.icon-chat-subscriber), .icon.icon-is-p3donatorSilver, #user-rollover .meta.has-p3Role.is-p3donatorSilver .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3donator.silver.png') !important;
 }
 
-.is-p3donatorBronze .from .icon, .icon.icon-is-p3donatorBronze, #user-rollover .meta.has-p3Role.is-p3donatorBronze .p3Role {
+.is-p3donatorBronze .from .icon:not(.icon-chat-subscriber), .icon.icon-is-p3donatorBronze, #user-rollover .meta.has-p3Role.is-p3donatorBronze .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3donator.bronze.png') !important;
 }
 
@@ -901,4 +901,8 @@
 
 #your-next-media .song {
     top: 8px;
+}
+
+.cm.promo {
+    display:none;
 }

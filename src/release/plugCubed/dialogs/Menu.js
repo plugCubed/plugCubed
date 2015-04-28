@@ -132,11 +132,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     if (Settings.autorespond) {
                         if (Settings.awaymsg.trim() === "") Settings.awaymsg = p3Lang.i18n('autorespond.default');
                         $('#chat-input-field').attr('disabled', 'disabled').attr('placeholder', p3Lang.i18n('autorespond.disable'));
-                        if (API.getUser().status <= 0)
-                            API.setStatus(API.STATUS.AFK);
                     } else {
                         $('#chat-input-field').removeAttr('disabled').attr('placeholder', Lang.chat.placeholder);
-                        API.setStatus(API.STATUS.AVAILABLE);
                     }
                     break;
                 case 'notify-join':
@@ -155,7 +152,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     }
                     break;
                 case 'stream':
-                    PlaybackModel.set('streamDisabled', !Database.settings.streamDisabled);
+                    Database.settings.streamDisabled = !Database.settings.streamDisabled;
+                    Context.trigger('change:streamDisabled');
                     this.setEnabled('stream', Database.settings.streamDisabled);
                     return;
                 case 'clear':

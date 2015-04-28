@@ -268,11 +268,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 if (Settings.autorespond) {
                     if (this.rules.allowAutorespond) {
                         $('#chat-input-field').attr('disabled', 'disabled').attr('placeholder', p3Lang.i18n('autorespond.disable'));
-                        if (API.getUser().status <= 0)
-                            API.setStatus(API.STATUS.AFK);
                     } else {
                         $('#chat-input-field').removeAttr('disabled').attr('placeholder', Lang.chat.placeholder);
-                        API.setStatus(API.STATUS.AVAILABLE);
                     }
                 }
 

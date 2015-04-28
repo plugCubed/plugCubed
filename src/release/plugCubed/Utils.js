@@ -373,20 +373,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                     position = p3Lang.i18n('info.notInList');
                 }
 
-                switch (user.status) {
-                    default:
-                        status = Lang.userStatus.available;
-                        break;
-                    case API.STATUS.AFK:
-                        status = Lang.userStatus.away;
-                        break;
-                    case API.STATUS.WORKING:
-                        status = Lang.userStatus.working;
-                        break;
-                    case API.STATUS.GAMING:
-                        status = Lang.userStatus.gaming;
-                        break;
-                }
+                status = Lang.userStatus.online;
 
                 switch (user.vote) {
                     case -1:
@@ -672,13 +659,12 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             });
         },
         statusSocket: function(call) {
-            var SockJS = require('sockjs'),
-                att = 0,
+            var att = 0,
                 time = Date.now(),
                 conn;
 
             function connect() {
-                conn = new SockJS('https://shalamar.plug.dj:443/socket');
+                conn = new WebSocket('wss://godj.plug.dj:443/socket');
                 conn.onopen = function() {
                     conn.close();
                 };
@@ -692,7 +678,6 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                     call(req.code, req.reason, Date.now() - time);
                 }
             }
-
             connect();
         }
     });
