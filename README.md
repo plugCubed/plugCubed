@@ -1,57 +1,46 @@
-plug&#179; (plugCubed)
-====================
+#plug&#179; (plugCubed)
 
 ### Information / Installation
-Find all information and installation informations at http://plugCubed.net/
+Find all information and installation information [here](http://plugCubed.net/)
 
 ### Issues / Feature Requests
-Please use our this repository's Github issues to report a bug report / feature request / enhancement.
+Please use this repository's Github [issues](https://github.com/plugCubed/plugCubed/issues) to report a bug report, feature request or enhancement.
 
 ### Developers
-* Thomas "TAT" Andresen
-* Sam "Henchman" Mills
-* Alex "Thedark1337" Pham
+* [Thomas "TAT" Andresen](https://github.com/TATDK)
+* [Sam "Henchman" Mills](https://github.com/Hunchmun)
+* [Alex "Thedark1337" Pham](https://github.com/thedark1337)
 
 ### Translations
-If you want to help out translating plug&#179; to different languages please use [our project at CrowdIn](https://crowdin.net/project/plug3).
+
+If you want to help out translating plug&#179; to different languages please use [our project at CrowdIn](https://crowdin.net/project/plug3) and contact [thedark1337](https://github.com/thedark1337) with your username and language.  Please don't submit a pull request for translations.
+
 
 ### Contribute
-Feel free to contribute to the code.
-**Note:** All contributions should be applied to alpha version of plug&#179;.
 
-* Make a fork of this repository.
-* Clone the forked repository to an empty folder.
-* Run `npm install` to set up the environment.
-* Make your changes.
-* Test your changes by putting your changes into an already built plug&#179;.
-* Submit your changes as a Pull Request to the main repo.
+We welcome all contributions to this project.
 
-### Contribute (Future)
-We are working on making it possible to build the code and be able to test it.
-Below is the upcoming contribute message.
-
-Feel free to contribute to the code.
 **Dependencies:**
 
 * [Node.JS](http://nodejs.org/download/).
-* [Python 2.7](https://www.python.org/downloads/).
 
-**Note:** All contributions should be applied to alpha version of plug&#179;.
+**Note:** All contributions should be applied to the alpha version of plug&#179;.
 
 * Make a fork of this repository.
 * Clone the forked repository to an empty folder.
+* Cd to the folder through command prompt or bash
 * Run `npm install` to set up the environment.
-* Make your changes.
-* If you haven't, set up the p3.config.js file in your home/user folder. (There is a sample file in the repository)
-* Run `grunt` to compile the code and test. (If `grunt` doesn't work, please install it by typing `npm install -g grunt-cli` in commandline)
-* Submit your changes as a Pull Request to the main repo.
+* Make your changes in the src/alpha folder and please make sure you follow our [Code Style](https://github.com/plugCubed/Code-Style).
+* If you haven't, set up the p3.config.js file in your home/user folder. (A sample can be found [here](https://github.com/plugCubed/plugCubed/blob/master/p3.config.sample.js))
+* Run `grunt build:alpha` to compile the code and test. (If `grunt` doesn't work, please install it by typing `npm install -g grunt-cli` in commandline)
+* Submit your changes as a Pull Requests [here](https://github.com/plugCubed/plugCubed/pulls).
 
 ### Credits
 We would like to thank the following people
 
 * All our lovely supporters
-* Nicole "Colgate" Richardson - for being one of the creators
-* plug.DJ - for creating an awesome website
+* [Nicole "Colgate" Richardson](https://github.com/colgate) - for being one of the creators
+* [plug.dj](https://plug.dj) - for creating an awesome website
 
 ### License
 Copyright &copy; 2012-2015 The plug&#179; Team and other contributors
