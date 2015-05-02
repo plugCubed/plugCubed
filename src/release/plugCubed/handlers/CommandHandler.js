@@ -27,7 +27,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             if (API.hasPermission(undefined, API.ROLE.COHOST) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedSponsor()) {
                 if (p3Utils.equalsIgnoreCase(command, 'strobe')) {
                     if (Socket.getState() !== SockJS.OPEN) {
-                        return API.chatLog(p3Lang.i18n('error.notConnected'), true);
+                        return API.chatLog(p3Lang.i18n('error.notConnected'));
                     }
                     Socket.send(JSON.stringify({
                         type: 'room:rave',
@@ -37,7 +37,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 }
                 if (p3Utils.equalsIgnoreCase(command, 'rave')) {
                     if (Socket.getState() !== SockJS.OPEN) {
-                        return API.chatLog(p3Lang.i18n('error.notConnected'), true);
+                        return API.chatLog(p3Lang.i18n('error.notConnected'));
                     }
                     Socket.send(JSON.stringify({
                         type: 'room:rave',
@@ -192,7 +192,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 var historyInfo = p3history.isInHistory(nextSong.id);
                 API.chatLog(p3Lang.i18n('commands.responses.nextsong', nextSong.title, nextSong.author));
                 if (historyInfo.pos > -1 && !historyInfo.skipped) {
-                    API.chatLog(p3Lang.i18n('commands.responses.isHistory', historyInfo.pos, historyInfo.length), true);
+                    API.chatLog(p3Lang.i18n('commands.responses.isHistory', historyInfo.pos, historyInfo.length));
                 }
                 return;
             }
@@ -226,16 +226,16 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             }
             if (p3Utils.equalsIgnoreCase(command, 'grab')) {
                 if (p3Utils.runLite) {
-                    return API.chatLog(p3Lang.i18n('error.noLiteSupport'), true);
+                    return API.chatLog(p3Lang.i18n('error.noLiteSupport'));
                 }
                 $.getJSON('https://plug.dj/_/playlists', function(response) {
                     if (response.status !== 'ok') {
-                        API.chatLog(p3Lang.i18n('error.errorGettingPlaylistInfo'), true);
+                        API.chatLog(p3Lang.i18n('error.errorGettingPlaylistInfo'));
                         return;
                     }
                     var playlists = response.data;
                     if (playlists.length < 1) {
-                        API.chatLog(p3Lang.i18n('error.noPlaylistsFound'), true);
+                        API.chatLog(p3Lang.i18n('error.noPlaylistsFound'));
                         return;
                     }
                     for (var i in playlists) {
@@ -247,14 +247,14 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                                 var MGE = require('app/events/MediaGrabEvent');
                                 Context.dispatch(new MGE(MGE.GRAB, playlist.id, historyID));
                             } else {
-                                API.chatLog(p3Lang.i18n('error.yourActivePlaylistIsFull'), true);
+                                API.chatLog(p3Lang.i18n('error.yourActivePlaylistIsFull'));
                             }
                             return;
                         }
                     }
-                    API.chatLog(p3Lang.i18n('error.noPlaylistsFound'), true);
+                    API.chatLog(p3Lang.i18n('error.noPlaylistsFound'));
                 }).fail(function() {
-                    API.chatLog(p3Lang.i18n('error.errorGettingPlaylistInfo'), true);
+                    API.chatLog(p3Lang.i18n('error.errorGettingPlaylistInfo'));
                 });
                 return;
             }
@@ -272,7 +272,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             }
             if (p3Utils.startsWithIgnoreCase(value, '/msg ') || p3Utils.startsWithIgnoreCase(value, '/pm ')) {
                 if (Socket.getState() !== SockJS.OPEN) {
-                    return API.chatLog(p3Lang.i18n('error.notConnected'), true);
+                    return API.chatLog(p3Lang.i18n('error.notConnected'));
                 }
                 var user = p3Utils.getUser(value.split(' ')[1]);
                 if (user !== null) {
@@ -285,13 +285,13 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                     }));
                     lastPMReceiver = user;
                 } else {
-                    API.chatLog(p3Lang.i18n('error.usernameNotFound'), true);
+                    API.chatLog(p3Lang.i18n('error.usernameNotFound'));
                 }
                 return;
             }
             if (p3Utils.startsWithIgnoreCase(value, '/r ')) {
                 if (Socket.getState() !== SockJS.OPEN) {
-                    return API.chatLog(p3Lang.i18n('error.notConnected'), true);
+                    return API.chatLog(p3Lang.i18n('error.notConnected'));
                 }
                 if (lastPMReceiver != null && API.getUser(lastPMReceiver.id) != null) {
                     Socket.send(JSON.stringify({
@@ -302,7 +302,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                         }
                     }));
                 } else
-                    API.chatLog(p3Lang.i18n('error.canNotFindTheLastPMReceiver'), true);
+                    API.chatLog(p3Lang.i18n('error.canNotFindTheLastPMReceiver'));
             }
         }
     });

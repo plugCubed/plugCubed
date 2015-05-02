@@ -23,6 +23,7 @@ We welcome all contributions to this project.
 **Dependencies:**
 
 * [Node.JS](http://nodejs.org/download/).
+* [Python 2.7](https://www.python.org/downloads/release)
 
 **Note:** All contributions should be applied to the alpha version of plug&#179;.
 

@@ -66,7 +66,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 showMessage = true;
                 _this.execute();
             }).fail(function() {
-                API.chatLog('Error loading Room Settings', true);
+                API.chatLog('Error loading Room Settings');
             });
             _this.haveRoomSettings = true;
         }
@@ -96,7 +96,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                     if (msg.status == 'ok') {
                         parseDescription(msg.data[0].meta.description);
                     } else {
-                        API.chatLog('Error loading Room Description', true);
+                        API.chatLog('Error loading Room Description');
                     }
                 });
             }

@@ -58,7 +58,7 @@ define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'p
                     var user = API.getUser(data.id) ? API.getUser(data.id) : {
                         username: 'Receiver'
                     };
-                    API.chatLog('[plug³ Socket] ' + user.username + ' not found', true);
+                    API.chatLog('[plug³ Socket] ' + user.username + ' not found');
                     return;
                 case 'room:rave':
                     if (p3Utils.runLite) return;

@@ -16,7 +16,7 @@ define(['jquery', 'plugCubed/handlers/TickerHandler'], function($, TickerHandler
                 return;
             }
 
-            API.chatLog('plugCubed does not support hiding video or scripts supporting hiding of the video', true);
+            API.chatLog('plug³ does not support hiding video or scripts supporting hiding the video');
             plugCubed.close();
         }
     });

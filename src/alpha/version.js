@@ -2,5 +2,5 @@ module.exports = {
     "major": 4,
     "minor": 0,
     "patch": 4,
-    "build": 24
+    "build": 25
 };
