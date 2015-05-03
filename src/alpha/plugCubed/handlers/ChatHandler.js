@@ -257,6 +257,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 }).prependTo($this.find('.from'));
             }
 
+            if ($icon.hasClass('icon-chat-subscriber') && API.getUser().role === 0){
+                $icon.removeClass('icon-chat-subscriber');
+            }
+
             $icon.mouseover(function() {
                 _$context.trigger('tooltip:show', $('<span>').html(p3Utils.getAllPlugCubedRanks(data.uid)).text(), $(this), true);
             }).mouseout(function() {
@@ -348,7 +352,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                         image_id: data['emotes'][i].image_id
                     });
                 }
-                
+
                 console.log('[plug³]', twitchEmotes.length + ' Twitch.TV emoticons loaded!');
             });
         },

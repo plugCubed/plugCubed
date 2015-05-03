@@ -76,8 +76,7 @@
     height: 540px;
 }
 
-#dialog-custom-colors input[type="text"],
-#dialog-chat-limit input[type="text"] {
+#dialog-custom-colors input[type="text"], #dialog-chat-limit input[type="text"] {
     width: 60px;
 }
 
@@ -155,7 +154,6 @@
     position: relative;
     width: 30px;
     margin: 0 auto;
-
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
     -ms-transform-style: preserve-3d;
@@ -226,13 +224,10 @@
 .cube-wrap {
     -webkit-perspective: none;
     -webkit-perspective-origin: 0 0;
-
     -moz-perspective: none;
     -moz-perspective-origin: 0 0;
-
     -ms-perspective: none;
     -ms-perspective-origin: 0 0;
-
     perspective: none;
     perspective-origin: 0 0;
 }
@@ -276,13 +271,10 @@
 #plugcubed .icon.icon-plugcubed.other {
     -webkit-transform: rotateY(-270deg) translateX(19px);
     -webkit-transform-origin: top right;
-
     -moz-transform: rotateY(-270deg) translateX(19px);
     -moz-transform-origin: top right;
-
     -ms-transform: rotateY(-270deg) translateX(19px);
     -ms-transform-origin: top right;
-
     transform: rotateY(-270deg) translateX(19px);
     transform-origin: top right;
 }
@@ -305,12 +297,13 @@
     width: 2px;
 }
 
-#p3-settings,
-#p3-settings-custom-colors {
+#p3-settings, #p3-settings-custom-colors {
     position: absolute;
     left: -270px;
     max-height: 100%;
-    min-height: 535px; /*below this height, plug stops resizing (vertically)*/
+    min-height: 535px;
+    /*below this height, plug stops resizing (vertically)*/
+
     overflow-y: auto;
     background: #0a0a0a;
     border-right: 1px solid #0a0a0a;
@@ -322,15 +315,13 @@
     z-index: 1499;
 }
 
-#p3-settings .header,
-#p3-settings-custom-colors .header {
+#p3-settings .header, #p3-settings-custom-colors .header {
     background: #1c1f25;
     height: 59px;
     padding-right: 60px;
 }
 
-#p3-settings .header .back,
-#p3-settings-custom-colors .header .back {
+#p3-settings .header .back, #p3-settings-custom-colors .header .back {
     position: absolute;
     right: 0;
     top: 0;
@@ -340,25 +331,21 @@
     cursor: pointer;
 }
 
-#p3-settings .header .back i,
-#p3-settings-custom-colors .header .back i {
+#p3-settings .header .back i, #p3-settings-custom-colors .header .back i {
     left: 15px;
     top: 15px;
 }
 
-#p3-settings .header .title,
-#p3-settings-custom-colors .header .title {
+#p3-settings .header .title, #p3-settings-custom-colors .header .title {
     padding-top: 5px;
     padding-left: 6px;
 }
 
-#p3-settings .header .title i,
-#p3-settings-custom-colors .header .title i {
+#p3-settings .header .title i, #p3-settings-custom-colors .header .title i {
     top: 14px;
 }
 
-#p3-settings .header .title span,
-#p3-settings-custom-colors .header .title span {
+#p3-settings .header .title span, #p3-settings-custom-colors .header .title span {
     font-size: 23px;
     font-weight: 300;
     margin-top: -4px;
@@ -381,24 +368,21 @@
     margin-right: 5px;
 }
 
-#p3-settings .container,
-#p3-settings-custom-colors .container {
+#p3-settings .container, #p3-settings-custom-colors .container {
     position: relative;
     float: left;
     width: 100%;
     margin-bottom: 10px;
 }
 
-#p3-settings .container .section,
-#p3-settings-custom-colors .container .section {
+#p3-settings .container .section, #p3-settings-custom-colors .container .section {
     position: relative;
     font-size: 18px;
     margin-left: 18px;
     margin-top: 10px;
 }
 
-#p3-settings .container .item,
-#p3-settings-custom-colors .container .item {
+#p3-settings .container .item, #p3-settings-custom-colors .container .item {
     position: relative;
     height: 25px;
     margin-top: 6px;
@@ -416,17 +400,13 @@
     width: auto;
 }
 
-#p3-settings .container .item i,
-#p3-settings-custom-colors .container .item i {
+#p3-settings .container .item i, #p3-settings-custom-colors .container .item i {
     left: 18px;
     top: 2px;
     display: none;
 }
 
-#p3-settings .container .item span,
-#p3-settings .container .item input,
-#p3-settings-custom-colors .container .item span,
-#p3-settings-custom-colors .container .item input {
+#p3-settings .container .item span, #p3-settings .container .item input, #p3-settings-custom-colors .container .item span, #p3-settings-custom-colors .container .item input {
     color: #808691;
     font-weight: 300;
     margin-left: 45px;
@@ -473,23 +453,20 @@
     top: 0;
 }
 
-#p3-settings .container .cap,
-#p3-settings-custom-colors .container .cap {
+#p3-settings .container .cap, #p3-settings-custom-colors .container .cap {
     position: relative;
     height: 68px;
     margin-left: 45px;
     margin-top: 8px;
 }
 
-#p3-settings .container .cap .title,
-#p3-settings-custom-colors .container .cap .title {
+#p3-settings .container .cap .title, #p3-settings-custom-colors .container .cap .title {
     position: relative;
     color: #808691;
     font-weight: 300;
 }
 
-#p3-settings .container .cap .counts,
-#p3-settings-custom-colors .container .cap .counts {
+#p3-settings .container .cap .counts, #p3-settings-custom-colors .container .cap .counts {
     position: relative;
     margin-top: 5px;
     margin-left: 3px;
@@ -500,8 +477,7 @@
     text-justify: distribute-all-lines;
 }
 
-#p3-settings .container .cap .counts .count,
-#p3-settings-custom-colors .container .cap .counts .count {
+#p3-settings .container .cap .counts .count, #p3-settings-custom-colors .container .cap .counts .count {
     width: 23px;
     height: 15px;
     font-size: 14px;
@@ -510,23 +486,20 @@
     display: inline;
 }
 
-#p3-settings .container .cap .counts .stretch,
-#p3-settings-custom-colors .container .cap .counts .stretch {
+#p3-settings .container .cap .counts .stretch, #p3-settings-custom-colors .container .cap .counts .stretch {
     width: 135px;
     display: inline-block;
     font-size: 0;
     line-height: 0;
 }
 
-#p3-settings .container .cap .slider,
-#p3-settings-custom-colors .container .cap .slider {
+#p3-settings .container .cap .slider, #p3-settings-custom-colors .container .cap .slider {
     position: relative;
     width: 150px;
     height: 18px;
 }
 
-#p3-settings .container .cap .slider .bar,
-#p3-settings-custom-colors .container .cap .slider .bar {
+#p3-settings .container .cap .slider .bar, #p3-settings-custom-colors .container .cap .slider .bar {
     position: absolute;
     top: 5px;
     left: 0;
@@ -536,8 +509,7 @@
     border-radius: 10px;
 }
 
-#p3-settings .container .cap .slider .circle,
-#p3-settings-custom-colors .container .cap .slider .circle {
+#p3-settings .container .cap .slider .circle, #p3-settings-custom-colors .container .cap .slider .circle {
     position: absolute;
     top: 0;
     left: 115px;
@@ -547,8 +519,7 @@
     background: #808691;
 }
 
-#p3-settings .container .cap .slider .hit,
-#p3-settings-custom-colors .container .cap .slider .hit {
+#p3-settings .container .cap .slider .hit, #p3-settings-custom-colors .container .cap .slider .hit {
     position: absolute;
     top: 0;
     left: 8px;
@@ -557,16 +528,14 @@
     cursor: pointer;
 }
 
-#p3-settings .container .spacer,
-#p3-settings-custom-colors .container .spacer {
+#p3-settings .container .spacer, #p3-settings-custom-colors .container .spacer {
     position: relative;
     float: left;
     width: 100%;
     height: 19px;
 }
 
-#p3-settings .container .divider,
-#p3-settings-custom-colors .container .divider {
+#p3-settings .container .divider, #p3-settings-custom-colors .container .divider {
     position: absolute;
     left: 0;
     top: 8px;
@@ -575,8 +544,7 @@
     background: #1c1f25;
 }
 
-#p3-settings .container .item.selected i,
-#p3-settings-custom-colors .container .item.selected i {
+#p3-settings .container .item.selected i, #p3-settings-custom-colors .container .item.selected i {
     display: block;
 }
 
@@ -651,18 +619,14 @@
     z-index: 2;
 }
 
-.is-p3developer .from .icon, .icon.icon-is-p3developer,
-.is-p3sponsor .from .icon, .icon.icon-is-p3sponsor,
-.is-p3special .from .icon, .icon.icon-is-p3special,
-.is-p3ambassador .from .icon, .icon.icon-is-p3ambassador,
-.is-p3donatorDiamond .from .icon, .icon.icon-is-p3donatorDiamond,
-.is-p3donatorPlatinum .from .icon, .icon.icon-is-p3donatorPlatinum,
-.is-p3donatorGold .from .icon, .icon.icon-is-p3donatorGold,
-.is-p3donatorSilver .from .icon, .icon.icon-is-p3donatorSilver,
-.is-p3donatorBronze .from .icon, .icon.icon-is-p3donatorBronze {
+.is-p3developer .from .icon, .icon.icon-is-p3developer, .is-p3sponsor .from .icon, .icon.icon-is-p3sponsor, .is-p3special .from .icon, .icon.icon-is-p3special, .is-p3ambassador .from .icon, .icon.icon-is-p3ambassador, .is-p3donatorDiamond .from .icon, .icon.icon-is-p3donatorDiamond, .is-p3donatorPlatinum .from .icon, .icon.icon-is-p3donatorPlatinum, .is-p3donatorGold .from .icon, .icon.icon-is-p3donatorGold, .is-p3donatorSilver .from .icon, .icon.icon-is-p3donatorSilver, .is-p3donatorBronze .from .icon, .icon.icon-is-p3donatorBronze {
     background-position: 0 0 !important;
     width: 16px;
     height: 16px;
+}
+
+.is-p3developer .from.has-sub .icon-chat-subscriber, .is-p3sponsor .from.has-sub .icon-chat-subscriber .is-p3special .from.has-sub .icon-chat-subscriber, .is-p3ambassador .from.has-sub .icon-chat-subscriber, .is-p3donatorDiamond .from.has-sub .icon-chat-subscriber, .is-p3donatorPlatinum .from.has-sub .icon-chat-subscriber, .is-p3donatorGold .from.has-sub .icon-chat-subscriber, .is-p3donatorSilver .from.has-sub .icon-chat-subscriber, .is-p3donatorBronze .from.has-sub .icon-chat-subscriber {
+    display: none;
 }
 
 .is-p3developer .from .icon:not(.icon-chat-subscriber), .icon.icon-is-p3developer, #user-rollover .meta.has-p3Role.is-p3developer .p3Role {
@@ -697,8 +661,7 @@
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3donator.bronze.png') !important;
 }
 
-.is-p3developer .bdg,
-.is-p3ambassador .bdg {
+.is-p3developer .bdg, .is-p3ambassador .bdg {
     background-position: 0 0;
     top: 2px;
     left: 3px;
@@ -718,17 +681,11 @@
     background-color: #0A0A0A;
 }
 
-#chat .is-p3developer .un,
-#user-lists .user > .icon.icon-is-p3developer + .name,
-#user-panel:not(.is-none) .user > .icon.icon-is-p3developer + .name,
-#user-rollover .meta.is-p3developer .p3Role {
+#chat .is-p3developer .un, #user-lists .user > .icon.icon-is-p3developer + .name, #user-panel:not(.is-none) .user > .icon.icon-is-p3developer + .name, #user-rollover .meta.is-p3developer .p3Role {
     color: #17B7EF !important;
 }
 
-#chat .is-p3ambassador .un,
-#user-lists .user > .icon.icon-is-p3ambassador + .name,
-#user-panel:not(.is-none) .user > .icon.icon-is-p3ambassador + .name,
-#user-rollover .meta.is-p3ambassador .p3Role {
+#chat .is-p3ambassador .un, #user-lists .user > .icon.icon-is-p3ambassador + .name, #user-panel:not(.is-none) .user > .icon.icon-is-p3ambassador + .name, #user-rollover .meta.is-p3ambassador .p3Role {
     color: #FFC926 !important;
 }
 
@@ -861,7 +818,7 @@
     background: -o-linear-gradient(top, #FF5CDE 0, #5700FF 100%);
     background: -ms-linear-gradient(top, #FF5CDE 0, #5700FF 100%);
     background: linear-gradient(to bottom, #FF5CDE 0, #5700FF 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$purple2', endColorstr='$purple1', GradientType=0);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='$purple2', endColorstr='$purple1', GradientType=0);
 }
 
 #p3-control-panel-close i {
@@ -904,5 +861,5 @@
 }
 
 .cm.promo {
-    display:none;
+    display: none;
 }

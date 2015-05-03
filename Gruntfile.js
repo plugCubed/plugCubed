@@ -598,12 +598,6 @@ module.exports = function(grunt) {
                 dryRun: false,
                 cacheTTL: 5 * 60 * 1000
             },
-            updateCode: {
-                files: [{
-                    src: config.paths.plugDeobfuscation + '/updatecode.txt',
-                    dest: 'updatecode.txt'
-                }]
-            },
             donations: {
                 files: [{
                     src: 'titles.json',

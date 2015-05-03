@@ -1,6 +1,6 @@
 var ClosureCompiler, compressor, fs;
 
-ClosureCompiler = require("closurecompiler");
+ClosureCompiler = require('closurecompiler');
 compressor = require('yuicompressor');
 fs = require('fs');
 
@@ -12,7 +12,7 @@ function compileJS(input, output) {
         language_in: 'ECMASCRIPT5'
     }, function(error, result) {
         if (error)
-            console.log(error);
+            console.log('[JS] Error', error);
         if (result) {
             fs.writeFile(output, result, function(err) {
                 if (err) {
@@ -32,7 +32,7 @@ function compileCSS(input, output) {
         'line-break': 1
     }, function(err, data) {
         if (err) {
-            console.log('[CSS] Could not save to file', err);
+            console.log('[CSS] Error', err);
             return;
         }
         fs.writeFile(output, data, function(err) {
