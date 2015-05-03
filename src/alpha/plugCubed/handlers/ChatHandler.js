@@ -257,7 +257,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 }).prependTo($this.find('.from'));
             }
 
-            if ($icon.hasClass('icon-chat-subscriber') && API.getUser().role === 0){
+            if ($icon.hasClass('icon-chat-subscriber') && API.getUser(data.uid).role === 0){
                 $icon.removeClass('icon-chat-subscriber');
             }
 
