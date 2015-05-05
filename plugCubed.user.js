@@ -30,16 +30,19 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  */
-
-var a = function() {
+var a = function () {
+    "use strict";
     var a = {
-        b: function() {
-            if (typeof API !== 'undefined' && API.enabled)
+        b: function () {
+            if (typeof API !== 'undefined' && API.enabled) {
                 this.c();
-            else
-                setTimeout(function() { a.b(); }, 100);
+            } else {
+                setTimeout(function () {
+                    a.b();
+                }, 100);
+            }
         },
-        c: function() {
+        c: function () {
             console.log('plugCubedLoader v.1.10 enabled!');
             $.getScript('https://d1rfegul30378.cloudfront.net/files/plugCubed.min.js');
         }

@@ -5,9 +5,10 @@ path = require('path');
 var config;
 config = require(path.resolve((process.env.USERPROFILE || process.env.HOME), 'p3.config.js'));
 
-var deleteFolderRecursive = function(path) {
+var deleteFolderRecursive = function (path) {
+    "use strict";
     if (fs.existsSync(path)) {
-        fs.readdirSync(path).forEach(function(file) {
+        fs.readdirSync(path).forEach(function (file) {
             var curPath = path + "/" + file;
             if (fs.lstatSync(curPath).isDirectory()) {
                 deleteFolderRecursive(curPath);
@@ -25,7 +26,8 @@ versionRelease = require('./src/release/version.js');
 versionAlpha = require('./src/alpha/version.js');
 versionDev = require('./src/dev/version.js');
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
+    "use strict";
     require('time-grunt')(grunt);
 
     var verboseEnabled = grunt.option('verbose');
@@ -340,43 +342,43 @@ module.exports = function(grunt) {
                         name: 'plugCubed/Loader',
                         include: []
                     }],
-                    done: function(done) {
-                        fs.readFile('./src/release/plugCubed/_postfix.js', function(err, postfixData) {
+                    done: function (done) {
+                        fs.readFile('./src/release/plugCubed/_postfix.js', function (err, postfixData) {
                             if (err) {
                                 done(err);
                                 return;
                             }
-                            fs.readFile('./out/plugCubed/Loader.js', function(err, p3Data) {
+                            fs.readFile('./out/plugCubed/Loader.js', function (err, p3Data) {
                                 if (err) {
                                     done(err);
                                     return;
                                 }
-                                fs.readFile('./src/release/plugCubed/_prefix.js', function(err, prefixData) {
+                                fs.readFile('./src/release/plugCubed/_prefix.js', function (err, prefixData) {
                                     if (err) {
                                         done(err);
                                         return;
                                     }
-                                    fs.writeFile('./out/plugCubed/combined.js', prefixData, function(err) {
+                                    fs.writeFile('./out/plugCubed/combined.js', prefixData, function (err) {
                                         if (err) {
                                             done(err);
                                             return;
                                         }
-                                        fs.appendFile('./out/plugCubed/combined.js', p3Data, function(err) {
+                                        fs.appendFile('./out/plugCubed/combined.js', p3Data, function (err) {
                                             if (err) {
                                                 done(err);
                                                 return;
                                             }
-                                            fs.appendFile('./out/plugCubed/combined.js', postfixData, function(err) {
+                                            fs.appendFile('./out/plugCubed/combined.js', postfixData, function (err) {
                                                 if (err) {
                                                     done(err);
                                                     return;
                                                 }
-                                                fs.mkdir('./bin/alpha', function(err) {
+                                                fs.mkdir('./bin/alpha', function (err) {
                                                     if (err && err.code !== 'EEXIST') {
                                                         done(err);
                                                         return;
                                                     }
-                                                    fs.rename('./out/plugCubed/combined.js', './bin/release/plugCubed.src.js', function(err) {
+                                                    fs.rename('./out/plugCubed/combined.js', './bin/release/plugCubed.src.js', function (err) {
                                                         if (err) {
                                                             done(err);
                                                             return;
@@ -414,43 +416,43 @@ module.exports = function(grunt) {
                         name: 'plugCubed/Loader',
                         include: []
                     }],
-                    done: function(done) {
-                        fs.readFile('./src/alpha/plugCubed/_postfix.js', function(err, postfixData) {
+                    done: function (done) {
+                        fs.readFile('./src/alpha/plugCubed/_postfix.js', function (err, postfixData) {
                             if (err) {
                                 done(err);
                                 return;
                             }
-                            fs.readFile('./out/plugCubed/Loader.js', function(err, p3Data) {
+                            fs.readFile('./out/plugCubed/Loader.js', function (err, p3Data) {
                                 if (err) {
                                     done(err);
                                     return;
                                 }
-                                fs.readFile('./src/alpha/plugCubed/_prefix.js', function(err, prefixData) {
+                                fs.readFile('./src/alpha/plugCubed/_prefix.js', function (err, prefixData) {
                                     if (err) {
                                         done(err);
                                         return;
                                     }
-                                    fs.writeFile('./out/plugCubed/combined.js', prefixData, function(err) {
+                                    fs.writeFile('./out/plugCubed/combined.js', prefixData, function (err) {
                                         if (err) {
                                             done(err);
                                             return;
                                         }
-                                        fs.appendFile('./out/plugCubed/combined.js', p3Data, function(err) {
+                                        fs.appendFile('./out/plugCubed/combined.js', p3Data, function (err) {
                                             if (err) {
                                                 done(err);
                                                 return;
                                             }
-                                            fs.appendFile('./out/plugCubed/combined.js', postfixData, function(err) {
+                                            fs.appendFile('./out/plugCubed/combined.js', postfixData, function (err) {
                                                 if (err) {
                                                     done(err);
                                                     return;
                                                 }
-                                                fs.mkdir('./bin/alpha', function(err) {
+                                                fs.mkdir('./bin/alpha', function (err) {
                                                     if (err && err.code !== 'EEXIST') {
                                                         done(err);
                                                         return;
                                                     }
-                                                    fs.rename('./out/plugCubed/combined.js', './bin/alpha/plugCubed.src.js', function(err) {
+                                                    fs.rename('./out/plugCubed/combined.js', './bin/alpha/plugCubed.src.js', function (err) {
                                                         if (err) {
                                                             done(err);
                                                             return;
@@ -488,43 +490,43 @@ module.exports = function(grunt) {
                         name: 'plugCubed/Loader',
                         include: []
                     }],
-                    done: function(done) {
-                        fs.readFile('./src/dev/plugCubed/_postfix.js', function(err, postfixData) {
+                    done: function (done) {
+                        fs.readFile('./src/dev/plugCubed/_postfix.js', function (err, postfixData) {
                             if (err) {
                                 done(err);
                                 return;
                             }
-                            fs.readFile('./out/plugCubed/Loader.js', function(err, p3Data) {
+                            fs.readFile('./out/plugCubed/Loader.js', function (err, p3Data) {
                                 if (err) {
                                     done(err);
                                     return;
                                 }
-                                fs.readFile('./src/dev/plugCubed/_prefix.js', function(err, prefixData) {
+                                fs.readFile('./src/dev/plugCubed/_prefix.js', function (err, prefixData) {
                                     if (err) {
                                         done(err);
                                         return;
                                     }
-                                    fs.writeFile('./out/plugCubed/combined.js', prefixData, function(err) {
+                                    fs.writeFile('./out/plugCubed/combined.js', prefixData, function (err) {
                                         if (err) {
                                             done(err);
                                             return;
                                         }
-                                        fs.appendFile('./out/plugCubed/combined.js', p3Data, function(err) {
+                                        fs.appendFile('./out/plugCubed/combined.js', p3Data, function (err) {
                                             if (err) {
                                                 done(err);
                                                 return;
                                             }
-                                            fs.appendFile('./out/plugCubed/combined.js', postfixData, function(err) {
+                                            fs.appendFile('./out/plugCubed/combined.js', postfixData, function (err) {
                                                 if (err) {
                                                     done(err);
                                                     return;
                                                 }
-                                                fs.mkdir('./bin/dev', function(err) {
+                                                fs.mkdir('./bin/dev', function (err) {
                                                     if (err && err.code !== 'EEXIST') {
                                                         done(err);
                                                         return;
                                                     }
-                                                    fs.rename('./out/plugCubed/combined.js', './bin/dev/plugCubed.src.js', function(err) {
+                                                    fs.rename('./out/plugCubed/combined.js', './bin/dev/plugCubed.src.js', function (err) {
                                                         if (err) {
                                                             done(err);
                                                             return;

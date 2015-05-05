@@ -103,10 +103,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                                         return;
                                     }
 
-                                    if (imgurData['webm'] != null)
+                                    if (imgurData['webm'] !== null)
                                         $video.append($('<source>').attr('type', 'video/webm').attr('src', p3Utils.httpsifyURL(imgurData['webm'])));
 
-                                    if (imgurData['webm'] != null)
+                                    if (imgurData['webm'] !== null)
                                         $video.append($('<source>').attr('type', 'video/mp4').attr('src', p3Utils.httpsifyURL(imgurData['mp4'])));
 
                                     $video.attr('poster', p3Utils.httpsifyURL(imgurData['link']));
@@ -208,7 +208,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         var $this = $('.msg.cid-' + data.cid).closest('.cm'), $icon;
 
         var previousMessages = '', innerHTML = $this.find('.text').html();
-        if (innerHTML != null && innerHTML.indexOf('<br>') > -1) {
+        if (innerHTML !== null && innerHTML.indexOf('<br>') > -1) {
             previousMessages = innerHTML.substr(0, innerHTML.lastIndexOf('<br>') + 4);
         }
 
@@ -263,7 +263,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 _$context.trigger('tooltip:hide');
             });
 
-            if (specialIconInfo != null) {
+            if (specialIconInfo !== null) {
                 $icon.css('background-image', 'url("https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3special.' + specialIconInfo.icon + '.png")');
             }
         }
@@ -321,9 +321,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         var curPos = p3Utils.getUserData(-1, 'curInputPos', 0);
         var tmpInput = p3Utils.getUserData(-1, 'tmpInput', null);
 
-        if ((tmpInput == null && up) || curPos === 0) {
+        if ((tmpInput === null && up) || curPos === 0) {
             tmpInput = $this.val();
-        } else if (tmpInput == null) {
+        } else if (tmpInput === null) {
             return;
         }
 

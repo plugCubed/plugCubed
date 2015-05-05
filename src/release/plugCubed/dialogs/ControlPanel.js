@@ -108,11 +108,11 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
         },
         close: function() {
             $(window).off('resize', _onResize);
-            if ($controlPanelDiv != null)
+            if ($controlPanelDiv !== null)
                 $controlPanelDiv.remove();
         },
         createControlPanel: function(onlyRecreate) {
-            if ($controlPanelDiv != null) {
+            if ($controlPanelDiv !== null) {
                 $controlPanelDiv.remove();
             } else if (onlyRecreate) return;
             $controlPanelDiv = $('<div>').attr('id', 'p3-control-panel');
@@ -169,7 +169,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
             return newButton;
         },
         onResize: function() {
-            if ($controlPanelDiv == null) return;
+            if ($controlPanelDiv === null) return;
             var $panel = $('#playlist-panel'), shownHeight = $(window).height() - 150;
 
             $controlPanelDiv.css({
@@ -188,11 +188,11 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
             }
         },
         toggleControlPanel: function(shown) {
-            if ($controlPanelDiv == null) {
-                if (shown != null && !shown) return;
+            if ($controlPanelDiv === null) {
+                if (shown !== null && !shown) return;
                 this.createControlPanel();
             }
-            this.shown = shown != null ? shown : !this.shown;
+            this.shown = shown !== null ? shown : !this.shown;
             shownHeight = $(window).height() - 150;
             $controlPanelDiv.animate({
                 height: this.shown ? shownHeight : 0
@@ -215,12 +215,12 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
         openTab: function(id) {
             this.toggleControlPanel(true);
             var tab = tabs[id];
-            if (tab == null || !(tab instanceof PanelClass)) return;
+            if (tab === null || !(tab instanceof PanelClass)) return;
 
             $menuDiv.find('.current').removeClass('current');
             $('.p3-control-panel-menu-tab.tab-' + id).addClass('current');
 
-            if (scrollPane == null) {
+            if (scrollPane === null) {
                 $currentDiv.jScrollPane({
                     showArrows: true
                 });
@@ -239,7 +239,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
          */
         addPanel: function(name) {
             name = name.trim();
-            if (tabs[name] != null) return null;
+            if (tabs[name] !== null) return null;
             tabs[name] = new PanelClass(name);
             this.createControlPanel(true);
             return tabs[name];
@@ -250,7 +250,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
          * @returns {Boolean}
          */
         removePanel: function(panel) {
-            if (!(panel instanceof PanelClass) || tabs[panel.name] == null) return false;
+            if (!(panel instanceof PanelClass) || tabs[panel.name] === null) return false;
             delete tabs[panel.name];
             this.createControlPanel(true);
             return true;

@@ -2,7 +2,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/RoomSettings', 'plugCubed/StyleM
     var handler = Class.extend({
         update: function() {
             var useRoomSettings = Settings.useRoomSettings[document.location.pathname.split('/')[1]];
-            useRoomSettings = !!(useRoomSettings == null || useRoomSettings === true);
+            useRoomSettings = !!(useRoomSettings === null || useRoomSettings === true);
 
             Styles.unset(['CCC-text-admin', 'CCC-text-ambassador', 'CCC-text-host', 'CCC-text-cohost', 'CCC-text-manager', 'CCC-text-bouncer', 'CCC-text-residentdj', 'CCC-text-regular', 'CCC-text-you', 'CCC-image-admin', 'CCC-image-ambassador', 'CCC-image-host', 'CCC-image-cohost', 'CCC-image-manager', 'CCC-image-bouncer', 'CCC-image-residentdj']);
 

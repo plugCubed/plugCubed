@@ -49,7 +49,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Ut
             update();
         },
         has: function(key) {
-            return styles[key] != null;
+            return styles[key] !== null;
         },
         unset: function(key) {
             if (typeof key === 'string') {

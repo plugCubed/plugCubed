@@ -27,7 +27,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
     var div, a = Class.extend({
         render: function() {
             var i, $settings = $('#p3-settings');
-            if (div != null) {
+            if (div !== null) {
                 if (div.css('left') === '-500px') {
                     div.animate({
                         left: $settings.width() + 1
@@ -50,7 +50,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
                     container.append(GUIInput(i, p3Lang.i18n(Settings.colorInfo.notifications[i].title), Settings.colorInfo.notifications[i].color));
             }
             div = $('<div id="p3-settings-custom-colors" style="left: -500px;">').append($('<div class="header">').append($('<div class="back">').append($('<i class="icon icon-arrow-left"></i>')).click(function() {
-                    if (div != null) div.animate({
+                    if (div !== null) div.animate({
                         left: -500
                     });
                 })).append($('<div class="title">').append($('<span>').text(p3Lang.i18n('menu.customchatcolors'))))).append(container).animate({
@@ -59,7 +59,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
             $('#p3-settings-wrapper').append(div);
         },
         hide: function() {
-            if (div != null) div.animate({
+            if (div !== null) div.animate({
                 left: -500
             });
         }

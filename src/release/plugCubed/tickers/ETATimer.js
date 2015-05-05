@@ -19,21 +19,21 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
             },
             tick: function() {
                 if (Settings.etaTimer) {
-                    if (this.$span == null) {
+                    if (this.$span === null) {
                         this.createElement();
                     }
 
-                    if (API.getDJ() == null) {
+                    if (API.getDJ() === null) {
                         this.$span.text(p3Lang.i18n('eta.boothAvailable'));
                         return;
                     }
 
-                    if (API.getHistory() == null)
+                    if (API.getHistory() === null)
                         return;
 
                     var isDJ, waitListPos, timePerSong, history, time, $djButton;
 
-                    isDJ = API.getDJ() != null && API.getDJ().id == this.myID;
+                    isDJ = API.getDJ() !== null && API.getDJ().id == this.myID;
                     waitListPos = API.getWaitListPosition();
                     timePerSong = 0;
                     history = API.getHistory();
@@ -41,7 +41,7 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
 
                     for (var i in history) {
                         if (history.hasOwnProperty(i))
-                            timePerSong += history[i].info == null || history[i].info.duration === 0 ? 240 : history[i].info.duration;
+                            timePerSong += history[i].info === null || history[i].info.duration === 0 ? 240 : history[i].info.duration;
                     }
 
                     timePerSong = Math.round(timePerSong / history.length);
@@ -61,13 +61,13 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
                     time = p3Utils.formatTime(waitListPos * timePerSong + API.getTimeRemaining());
                     this.$span.text(p3Lang.i18n('eta.waitListTime', waitListPos + 1, API.getWaitList().length, time), 10);
                     $djButton.html(Lang.dj.waitLeave + '<br><small class="dark-label">' + (waitListPos + 1) + '/' + API.getWaitList().length + ' (' + time + ')</small>');
-                } else if (this.$span != null) {
+                } else if (this.$span !== null) {
                     this.$span.remove();
                     this.$span = null;
                 }
             },
             close: function() {
-                if (this.$span != null) {
+                if (this.$span !== null) {
                     this.$span.remove();
                     this.$span = null;
                 }

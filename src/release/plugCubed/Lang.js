@@ -1,4 +1,4 @@
-define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
+define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function ($, Class) {
     var language, defaultLanguage, _this, Lang;
 
     language = {};
@@ -8,14 +8,14 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
         curLang: 'en',
         defaultLoaded: false,
         loaded: false,
-        init: function() {
+        init: function () {
             _this = this;
-            $.getJSON('https://d1rfegul30378.cloudfront.net/files/lang.json?_' + Date.now(), function(a) {
+            $.getJSON('https://d1rfegul30378.cloudfront.net/files/lang.json?_' + Date.now(), function (a) {
                 _this.allLangs = a;
-            }).done(function() {
+            }).done(function () {
                 if (_this.allLangs.length === 1) API.chatLog('Error loading language informations for plugCubed', true);
                 _this.loadDefault();
-            }).fail(function() {
+            }).fail(function () {
                 API.chatLog('Error loading language informations for plugCubed', true);
                 _this.loadDefault();
             });
@@ -23,12 +23,12 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
         /**
          * Load default language (English) from server.
          */
-        loadDefault: function() {
-            $.getJSON('https://d1rfegul30378.cloudfront.net/files/langs/lang.en.json?_' + Date.now(), function(languageData) {
+        loadDefault: function () {
+            $.getJSON('https://d1rfegul30378.cloudfront.net/files/langs/lang.en.json?_' + Date.now(), function (languageData) {
                 defaultLanguage = languageData;
                 _this.defaultLoaded = true;
-            }).error(function() {
-                setTimeout(function() {
+            }).error(function () {
+                setTimeout(function () {
                     _this.loadDefault();
                 }, 500);
             });
@@ -37,9 +37,9 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
          * Load language file from server.
          * @param {Function} [callback] Optional callback that will be called on success and failure.
          */
-        load: function(callback) {
+        load: function (callback) {
             if (!this.defaultLoaded) {
-                setTimeout(function() {
+                setTimeout(function () {
                     _this.load(callback);
                 }, 500);
                 return;
@@ -53,13 +53,13 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
                 if (typeof callback === 'function') callback();
                 return;
             }
-            $.getJSON('https://d1rfegul30378.cloudfront.net/files/langs/lang.' + lang + '.json?_' + Date.now(), function(languageData) {
+            $.getJSON('https://d1rfegul30378.cloudfront.net/files/langs/lang.' + lang + '.json?_' + Date.now(), function (languageData) {
                 language = {};
                 $.extend(true, language, defaultLanguage, languageData);
                 _this.curLang = lang;
                 _this.loaded = true;
                 if (typeof callback === 'function') callback();
-            }).error(function() {
+            }).error(function () {
                 console.log('[plug³] Couldn\'t load language file for ' + lang);
                 language = {};
                 $.extend(true, language, defaultLanguage);
@@ -73,15 +73,16 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
          * @param {String} selector Selector key
          * @returns {*} String from language file, if not found returns selector and additional arguments.
          */
-        i18n: function(selector) {
-            var a = language, i;
-            if (a == null || selector == null) {
+        i18n: function (selector) {
+            var a = language,
+                i;
+            if (a === null || selector === null) {
                 return '{' + $.makeArray(arguments).join(', ') + '}';
             }
             var key = selector.split('.');
             for (i in key) {
                 if (!key.hasOwnProperty(i)) continue;
-                if (a[key[i]] == null) {
+                if (a[key[i]] === null) {
                     return '{' + $.makeArray(arguments).join(', ') + '}';
                 }
                 a = a[key[i]];

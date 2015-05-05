@@ -1,12 +1,14 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Utils) {
-    var PopoutView, obj, styles = {}, imports = [];
+define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function ($, Class, p3Utils) {
+    var PopoutView, obj, styles = {},
+        imports = [];
 
     if (!p3Utils.runLite) {
         PopoutView = require('app/views/room/popout/PopoutView');
     }
 
     function update() {
-        var a = '', i;
+        var a = '',
+            i;
         for (i in imports) {
             if (imports.hasOwnProperty(i))
                 a += '@import url("' + imports[i] + '");\n';
@@ -21,37 +23,37 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Ut
     }
 
     var a = Class.extend({
-        init: function() {
+        init: function () {
             obj = $('<style type="text/css">');
             $('body').prepend(obj);
         },
-        getList: function() {
+        getList: function () {
             for (var key in styles) {
                 if (!styles.hasOwnProperty(key)) continue;
                 console.log(key, styles[key]);
             }
         },
-        get: function(key) {
+        get: function (key) {
             return styles[key];
         },
-        addImport: function(url) {
+        addImport: function (url) {
             if (imports.indexOf(url) > -1) return;
             imports.push(url);
             update();
         },
-        clearImports: function() {
-            if (imports.length == 0) return;
+        clearImports: function () {
+            if (imports.length === 0) return;
             imports = [];
             update();
         },
-        set: function(key, style) {
+        set: function (key, style) {
             styles[key] = style;
             update();
         },
-        has: function(key) {
-            return styles[key] != null;
+        has: function (key) {
+            return styles[key] !== null;
         },
-        unset: function(key) {
+        unset: function (key) {
             if (typeof key === 'string') {
                 key = [key];
             }
@@ -68,7 +70,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Ut
             if (doUpdate)
                 update();
         },
-        destroy: function() {
+        destroy: function () {
             styles = {};
             obj.remove();
         }

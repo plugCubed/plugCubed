@@ -155,17 +155,13 @@
     position: relative;
     width: 30px;
     margin: 0 auto;
-
     -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
     -ms-transform-style: preserve-3d;
     transform-style: preserve-3d;
 }
 
 #plugcubed .cube-wrap .cube.spin {
     -webkit-animation: spin 1s;
-    -moz-animation: spin 1s;
-    -ms-animation: spin 1s;
     animation: spin 1s;
 }
 
@@ -178,20 +174,13 @@
     }
 }
 
-@-ms-keyframes spin {
-    from {
-        ms-transform: rotateY(0deg);
-    }
-    to {
-        ms-transform: rotateY(-90deg);
-    }
-}
-
 @keyframes spin {
     from {
+        -webkit-transform: rotateY(0deg);
         transform: rotateY(0deg);
     }
     to {
+        -webkit-transform: rotateY(-90deg);
         transform: rotateY(-90deg);
     }
 }
@@ -205,20 +194,13 @@
     }
 }
 
-@-ms-keyframes spin-back {
-    from {
-        -ms-transform: rotateY(-90deg);
-    }
-    to {
-        -ms-transform: rotateY(0deg);
-    }
-}
-
 @keyframes spin-back {
     from {
+        -webkit-transform: rotateY(-90deg);
         transform: rotateY(-90deg);
     }
     to {
+        -webkit-transform: rotateY(0deg);
         transform: rotateY(0deg);
     }
 }
@@ -226,14 +208,13 @@
 .cube-wrap {
     -webkit-perspective: none;
     -webkit-perspective-origin: 0 0;
-
     -moz-perspective: none;
     -moz-perspective-origin: 0 0;
-
     -ms-perspective: none;
     -ms-perspective-origin: 0 0;
-
+    -webkit-perspective: none;
     perspective: none;
+    -webkit-perspective-origin: 0 0;
     perspective-origin: 0 0;
 }
 
@@ -246,8 +227,6 @@
     height: 54px;
     cursor: pointer;
     background: #282C35;
-    -moz-box-shadow: inset 0 -2px 0 -1px #0a0a0a;
-    -webkit-box-shadow: inset 0 -2px 0 -1px #0a0a0a;
     box-shadow: inset 0 -2px 0 -1px #0a0a0a;
     border-right: 1px solid #0A0A0A;
 }
@@ -257,7 +236,6 @@
     top: 11px;
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/menu_logo.png');
     -webkit-transform: translateZ(19px);
-    -moz-transform: translateZ(19px);
     -ms-transform: translateZ(19px);
     transform: translateZ(19px);
 }
@@ -276,14 +254,14 @@
 #plugcubed .icon.icon-plugcubed.other {
     -webkit-transform: rotateY(-270deg) translateX(19px);
     -webkit-transform-origin: top right;
-
     -moz-transform: rotateY(-270deg) translateX(19px);
     -moz-transform-origin: top right;
-
     -ms-transform: rotateY(-270deg) translateX(19px);
     -ms-transform-origin: top right;
-
+    -webkit-transform: rotateY(-270deg) translateX(19px);
     transform: rotateY(-270deg) translateX(19px);
+    -webkit-transform-origin: top right;
+    -ms-transform-origin: top right;
     transform-origin: top right;
 }
 
@@ -310,7 +288,9 @@
     position: absolute;
     left: -270px;
     max-height: 100%;
-    min-height: 535px; /*below this height, plug stops resizing (vertically)*/
+    min-height: 535px;
+    /*below this height, plug stops resizing (vertically)*/
+    
     overflow-y: auto;
     background: #0a0a0a;
     border-right: 1px solid #0a0a0a;
@@ -584,7 +564,8 @@
     margin-right: 18px;
 }
 
-.p3-s-stream, .p3-s-clear {
+.p3-s-stream,
+.p3-s-clear {
     background: no-repeat 0 0;
 }
 
@@ -610,7 +591,9 @@
     z-index: -1;
 }
 
-.p3slider .hit, .p3slider .line, .p3slider .circle {
+.p3slider .hit,
+.p3slider .line,
+.p3slider .circle {
     position: absolute;
 }
 
@@ -651,49 +634,74 @@
     z-index: 2;
 }
 
-.is-p3developer .from .icon, .icon.icon-is-p3developer,
-.is-p3sponsor .from .icon, .icon.icon-is-p3sponsor,
-.is-p3special .from .icon, .icon.icon-is-p3special,
-.is-p3ambassador .from .icon, .icon.icon-is-p3ambassador,
-.is-p3donatorDiamond .from .icon, .icon.icon-is-p3donatorDiamond,
-.is-p3donatorPlatinum .from .icon, .icon.icon-is-p3donatorPlatinum,
-.is-p3donatorGold .from .icon, .icon.icon-is-p3donatorGold,
-.is-p3donatorSilver .from .icon, .icon.icon-is-p3donatorSilver,
-.is-p3donatorBronze .from .icon, .icon.icon-is-p3donatorBronze {
+.is-p3developer .from .icon,
+.icon.icon-is-p3developer,
+.is-p3sponsor .from .icon,
+.icon.icon-is-p3sponsor,
+.is-p3special .from .icon,
+.icon.icon-is-p3special,
+.is-p3ambassador .from .icon,
+.icon.icon-is-p3ambassador,
+.is-p3donatorDiamond .from .icon,
+.icon.icon-is-p3donatorDiamond,
+.is-p3donatorPlatinum .from .icon,
+.icon.icon-is-p3donatorPlatinum,
+.is-p3donatorGold .from .icon,
+.icon.icon-is-p3donatorGold,
+.is-p3donatorSilver .from .icon,
+.icon.icon-is-p3donatorSilver,
+.is-p3donatorBronze .from .icon,
+.icon.icon-is-p3donatorBronze {
     background-position: 0 0 !important;
     width: 16px;
     height: 16px;
 }
 
-.is-p3developer .from .icon, .icon.icon-is-p3developer, #user-rollover .meta.has-p3Role.is-p3developer .p3Role {
+.is-p3developer .from .icon,
+.icon.icon-is-p3developer,
+#user-rollover .meta.has-p3Role.is-p3developer .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3dev.png') !important;
 }
 
-.is-p3sponsor .from .icon, .icon.icon-is-p3sponsor, #user-rollover .meta.has-p3Role.is-p3sponsor .p3Role {
+.is-p3sponsor .from .icon,
+.icon.icon-is-p3sponsor,
+#user-rollover .meta.has-p3Role.is-p3sponsor .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3sponsor.png') !important;
 }
 
-.is-p3ambassador .from .icon, .icon.icon-is-p3ambassador, #user-rollover .meta.has-p3Role.is-p3ambassador .p3Role {
+.is-p3ambassador .from .icon,
+.icon.icon-is-p3ambassador,
+#user-rollover .meta.has-p3Role.is-p3ambassador .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3ambassador.png') !important;
 }
 
-.is-p3donatorDiamond .from .icon, .icon.icon-is-p3donatorDiamond, #user-rollover .meta.has-p3Role.is-p3donatorDiamond .p3Role {
+.is-p3donatorDiamond .from .icon,
+.icon.icon-is-p3donatorDiamond,
+#user-rollover .meta.has-p3Role.is-p3donatorDiamond .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3donator.diamond.png') !important;
 }
 
-.is-p3donatorPlatinum .from .icon, .icon.icon-is-p3donatorPlatinum, #user-rollover .meta.has-p3Role.is-p3donatorPlatinum .p3Role {
+.is-p3donatorPlatinum .from .icon,
+.icon.icon-is-p3donatorPlatinum,
+#user-rollover .meta.has-p3Role.is-p3donatorPlatinum .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3donator.platinum.png') !important;
 }
 
-.is-p3donatorGold .from .icon, .icon.icon-is-p3donatorGold, #user-rollover .meta.has-p3Role.is-p3donatorGold .p3Role {
+.is-p3donatorGold .from .icon,
+.icon.icon-is-p3donatorGold,
+#user-rollover .meta.has-p3Role.is-p3donatorGold .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3donator.gold.png') !important;
 }
 
-.is-p3donatorSilver .from .icon, .icon.icon-is-p3donatorSilver, #user-rollover .meta.has-p3Role.is-p3donatorSilver .p3Role {
+.is-p3donatorSilver .from .icon,
+.icon.icon-is-p3donatorSilver,
+#user-rollover .meta.has-p3Role.is-p3donatorSilver .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3donator.silver.png') !important;
 }
 
-.is-p3donatorBronze .from .icon, .icon.icon-is-p3donatorBronze, #user-rollover .meta.has-p3Role.is-p3donatorBronze .p3Role {
+.is-p3donatorBronze .from .icon,
+.icon.icon-is-p3donatorBronze,
+#user-rollover .meta.has-p3Role.is-p3donatorBronze .p3Role {
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/ranks/p3donator.bronze.png') !important;
 }
 
@@ -714,7 +722,9 @@
     background-image: url('https://d1rfegul30378.cloudfront.net/files/images/badges/p3ambassador.png') !important;
 }
 
-#chat-header, #user-lists .header, #waitlist .header {
+#chat-header,
+#user-lists .header,
+#waitlist .header {
     background-color: #0A0A0A;
 }
 
@@ -855,13 +865,10 @@
     z-index: 100;
     cursor: pointer;
     background: #FF5CDE;
-    background: -moz-linear-gradient(top, #FF5CDE 0, #5700FF 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FF5CDE), color-stop(100%, #5700FF));
     background: -webkit-linear-gradient(top, #FF5CDE 0, #5700FF 100%);
-    background: -o-linear-gradient(top, #FF5CDE 0, #5700FF 100%);
-    background: -ms-linear-gradient(top, #FF5CDE 0, #5700FF 100%);
     background: linear-gradient(to bottom, #FF5CDE 0, #5700FF 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$purple2', endColorstr='$purple1', GradientType=0);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='$purple2', endColorstr='$purple1', GradientType=0);
 }
 
 #p3-control-panel-close i {

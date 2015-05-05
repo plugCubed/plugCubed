@@ -56,7 +56,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
         },
         close: function() {
             menuButton.remove();
-            if ($wrapper != null)
+            if ($wrapper !== null)
                 $wrapper.remove();
             $('#room-bar').css('left', 54).find('.favorite').css('right', 0);
             if (!p3Utils.runLite) {
@@ -101,7 +101,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     if (Settings.autojoin) {
                         (function() {
                             var dj = API.getDJ();
-                            if (dj == null || dj.id == API.getUser().id || API.getWaitListPosition() > -1) return;
+                            if (dj === null || dj.id == API.getUser().id || API.getWaitListPosition() > -1) return;
                             $('#dj-button').click();
                         })();
                     }
@@ -163,7 +163,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     return;
                 case 'roomsettings':
                     var b = Settings.useRoomSettings[window.location.pathname.split('/')[1]];
-                    b = !(b == null || b === true);
+                    b = !(b === null || b === true);
                     Settings.useRoomSettings[window.location.pathname.split('/')[1]] = b;
                     RoomSettings.execute(b);
                     this.setEnabled('roomsettings', b);
@@ -210,7 +210,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
          * If the menu already exist, recreates it.
          */
         createMenu: function() {
-            if ($menuDiv != null)
+            if ($menuDiv !== null)
                 $menuDiv.remove();
             $menuDiv = $('<div>').css('left', this.shown ? 0 : -500).attr('id', 'p3-settings');
             var header = $('<div>').addClass('header'), container = $('<div>').addClass('container');
@@ -251,7 +251,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             }
 
             if (RoomSettings.haveRoomSettings) {
-                container.append(GUIButton(Settings.useRoomSettings[window.location.pathname.split('/')[1]] != null ? Settings.useRoomSettings[window.location.pathname.split('/')[1]] : true, 'roomsettings', p3Lang.i18n('menu.roomsettings')));
+                container.append(GUIButton(Settings.useRoomSettings[window.location.pathname.split('/')[1]] !== null ? Settings.useRoomSettings[window.location.pathname.split('/')[1]] : true, 'roomsettings', p3Lang.i18n('menu.roomsettings')));
             }
 
             container.append(GUIButton(Settings.etaTimer, 'etatimer', p3Lang.i18n('menu.etatimer')));
@@ -290,17 +290,17 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             $wrapper = $('<div>').attr('id', 'p3-settings-wrapper');
 
             $('body').append($wrapper.append($menuDiv.append(header).append(container)));
-            if (songLengthSlider != null) songLengthSlider.onChange();
+            if (songLengthSlider !== null) songLengthSlider.onChange();
         },
         /**
          * Toggle the visibility of the menu
          * @param {Boolean} [shown] Force it to be shown or hidden.
          */
         toggleMenu: function(shown) {
-            if ($menuDiv == null) {
+            if ($menuDiv === null) {
                 this.createMenu();
             }
-            this.shown = shown == null ? !this.shown : shown;
+            this.shown = shown === null ? !this.shown : shown;
             if (!this.shown)
                 dialogColors.hide();
             $menuDiv.animate({

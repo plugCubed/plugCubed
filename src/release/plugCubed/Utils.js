@@ -1,9 +1,9 @@
 var plugCubedUserData;
-define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lang, Lang) {
+define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function (Class, p3Lang, Lang) {
     var cleanHTMLMessage, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, PopoutView, ChatFacade, Database, runLite;
 
-    cleanHTMLMessage = function(input, disallow, extra_allow) {
-        if (input == null) return '';
+    cleanHTMLMessage = function (input, disallow, extra_allow) {
+        if (input === null) return '';
         var allowed, tags, disallowed = [];
         if ($.isArray(disallow)) disallowed = disallow;
         if (!extra_allow || !$.isArray(extra_allow)) extra_allow = [];
@@ -11,7 +11,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         if (disallow === '*') allowed = [];
         tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
         input = input.split('&#8237;').join('&amp;#8237;').split('&#8238;').join('&amp;#8238;');
-        return input.replace(tags, function(a, b) {
+        return input.replace(tags, function (a, b) {
             return allowed.indexOf(b.toLowerCase()) > -1 ? a : '';
         });
     };
@@ -30,38 +30,39 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         };
     }
 
-    $.getJSON('https://d1rfegul30378.cloudfront.net/titles.json', /**
-     * @param {{developer: Array, sponsor: Array, special: Array, ambassador: Array, donator: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}, patreon: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}}} data
-     */
-    function(data) {
-        developer = data.developer ? data.developer : [];
-        sponsor = data.sponsor ? data.sponsor : [];
-        special = data.special ? data.special : {};
-        ambassador = data.ambassador ? data.ambassador : [];
-        if (data.donator) {
-            donatorDiamond = data.donator.diamond ? data.donator.diamond : [];
-            donatorPlatinum = data.donator.platinum ? data.donator.platinum : [];
-            donatorGold = data.donator.gold ? data.donator.gold : [];
-            donatorSilver = data.donator.silver ? data.donator.silver : [];
-            donatorBronze = data.donator.bronze ? data.donator.bronze : [];
-        }
-    });
+    $.getJSON('https://d1rfegul30378.cloudfront.net/titles.json',
+        /**
+         * @param {{developer: Array, sponsor: Array, special: Array, ambassador: Array, donator: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}, patreon: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}}} data
+         */
+        function (data) {
+            developer = data.developer ? data.developer : [];
+            sponsor = data.sponsor ? data.sponsor : [];
+            special = data.special ? data.special : {};
+            ambassador = data.ambassador ? data.ambassador : [];
+            if (data.donator) {
+                donatorDiamond = data.donator.diamond ? data.donator.diamond : [];
+                donatorPlatinum = data.donator.platinum ? data.donator.platinum : [];
+                donatorGold = data.donator.gold ? data.donator.gold : [];
+                donatorSilver = data.donator.silver ? data.donator.silver : [];
+                donatorBronze = data.donator.bronze ? data.donator.bronze : [];
+            }
+        });
 
     var handler = Class.extend({
         runLite: runLite,
-        proxifyImage: function(url) {
+        proxifyImage: function (url) {
             if (this.startsWithIgnoreCase(url, 'http://')) {
                 return 'https://api.plugCubed.net/proxy/' + url;
             }
             return url;
         },
-        httpsifyURL: function(url) {
+        httpsifyURL: function (url) {
             if (this.startsWithIgnoreCase(url, 'http://')) {
                 return 'https://' + url.substr(7);
             }
             return url;
         },
-        getHighestRank: function(uid) {
+        getHighestRank: function (uid) {
             if (!uid) uid = API.getUser().id;
 
             if (this.isPlugCubedDeveloper(uid)) return 'developer';
@@ -75,9 +76,9 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             if (this.isPlugCubedDonatorBronze(uid)) return 'donatorBronze';
             return null;
         },
-        getHighestRankString: function(uid) {
+        getHighestRankString: function (uid) {
             var highestRank = this.getHighestRank(uid);
-            if (highestRank != null) {
+            if (highestRank !== null) {
                 if (this.isPlugCubedSpecial(uid)) {
                     return p3Lang.i18n('info.specialTitles.special', this.getPlugCubedSpecial(uid).title);
                 }
@@ -85,10 +86,10 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             }
             return '';
         },
-        havePlugCubedRank: function(uid) {
+        havePlugCubedRank: function (uid) {
             return this.isPlugCubedDeveloper(uid) || this.isPlugCubedSponsor(uid) || this.isPlugCubedSpecial(uid) || this.isPlugCubedAmbassador(uid) || this.isPlugCubedDonatorDiamond(uid) || this.isPlugCubedDonatorPlatinum(uid) || this.isPlugCubedDonatorGold(uid) || this.isPlugCubedDonatorSilver(uid) || this.isPlugCubedDonatorBronze(uid);
         },
-        getAllPlugCubedRanks: function(uid, onlyP3) {
+        getAllPlugCubedRanks: function (uid, onlyP3) {
             var ranks = [];
 
             // plugCubed ranks
@@ -145,53 +146,53 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
 
             return ranks.join(' / ');
         },
-        isPlugCubedDeveloper: function(uid) {
+        isPlugCubedDeveloper: function (uid) {
             if (!uid) uid = API.getUser().id;
             return developer.indexOf(uid) > -1;
         },
-        isPlugCubedSponsor: function(uid) {
+        isPlugCubedSponsor: function (uid) {
             if (!uid) uid = API.getUser().id;
             return sponsor.indexOf(uid) > -1;
         },
-        isPlugCubedSpecial: function(uid) {
+        isPlugCubedSpecial: function (uid) {
             if (!uid) uid = API.getUser().id;
-            return this.getPlugCubedSpecial(uid) != null;
+            return this.getPlugCubedSpecial(uid) !== null;
         },
-        isPlugCubedAmbassador: function(uid) {
+        isPlugCubedAmbassador: function (uid) {
             if (!uid) uid = API.getUser().id;
             return ambassador.indexOf(uid) > -1;
         },
-        isPlugCubedDonatorDiamond: function(uid) {
+        isPlugCubedDonatorDiamond: function (uid) {
             if (!uid) uid = API.getUser().id;
             return donatorDiamond.indexOf(uid) > -1;
         },
-        isPlugCubedDonatorPlatinum: function(uid) {
+        isPlugCubedDonatorPlatinum: function (uid) {
             if (!uid) uid = API.getUser().id;
             return donatorPlatinum.indexOf(uid) > -1;
         },
-        isPlugCubedDonatorGold: function(uid) {
+        isPlugCubedDonatorGold: function (uid) {
             if (!uid) uid = API.getUser().id;
             return donatorGold.indexOf(uid) > -1;
         },
-        isPlugCubedDonatorSilver: function(uid) {
+        isPlugCubedDonatorSilver: function (uid) {
             if (!uid) uid = API.getUser().id;
             return donatorSilver.indexOf(uid) > -1;
         },
-        isPlugCubedDonatorBronze: function(uid) {
+        isPlugCubedDonatorBronze: function (uid) {
             if (!uid) uid = API.getUser().id;
             return donatorBronze.indexOf(uid) > -1;
         },
-        getPlugCubedSpecial: function(uid) {
+        getPlugCubedSpecial: function (uid) {
             if (!uid) uid = API.getUser().id;
             return special[uid];
         },
-        cleanHTML: function(msg, disallow, extra_allow) {
+        cleanHTML: function (msg, disallow, extra_allow) {
             return cleanHTMLMessage(msg, disallow, extra_allow);
         },
-        cleanTypedString: function(msg) {
+        cleanTypedString: function (msg) {
             return msg.split("<").join("&lt;").split(">").join("&gt;");
         },
-        chatLog: function(type, message, color, fromID, fromName) {
+        chatLog: function (type, message, color, fromID, fromName) {
             var $chat, b, $message, $box, $msg, $text, $msgSpan, $from, from;
 
             if (!message) return;
@@ -221,7 +222,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 var lastMessageContainer = $('#chat-messages').find('.message').last();
                 var lastSender = lastMessageContainer.children('.badge-box').data('uid');
 
-                if (from != null && from.username != null) {
+                if (from !== null && from.username !== null) {
                     if (lastSender == from.id) {
                         lastMessageContainer.find('.text').append('<br>').append($msgSpan);
                         if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height())
@@ -278,25 +279,25 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 $chat.scrollTop($chat[0].scrollHeight);
             }
         },
-        getRoomID: function() {
+        getRoomID: function () {
             return document.location.pathname.split('/')[1];
         },
-        getRoomName: function() {
+        getRoomName: function () {
             return $('#room-name').text().trim();
         },
-        getUserData: function(uid, key, defaultValue) {
-            if (plugCubedUserData[uid] == null || plugCubedUserData[uid][key] == null) {
+        getUserData: function (uid, key, defaultValue) {
+            if (plugCubedUserData[uid] === null || plugCubedUserData[uid][key] === null) {
                 return defaultValue;
             }
             return plugCubedUserData[uid][key];
         },
-        setUserData: function(uid, key, value) {
-            if (plugCubedUserData[uid] == null) {
+        setUserData: function (uid, key, value) {
+            if (plugCubedUserData[uid] === null) {
                 plugCubedUserData[uid] = {};
             }
             plugCubedUserData[uid][key] = value;
         },
-        getUser: function(data) {
+        getUser: function (data) {
             var method = 'number';
             if (typeof data === 'string') {
                 method = 'string';
@@ -320,7 +321,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             }
             return null;
         },
-        getLastMessageTime: function(uid) {
+        getLastMessageTime: function (uid) {
             var time = Date.now() - this.getUserData(uid, 'lastChat', this.getUserData(uid, 'joinTime', Date.now()));
             var IgnoreCollection = require('plugCubed/bridges/IgnoreCollection');
 
@@ -328,7 +329,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 return p3Lang.i18n('error.ignoredUser');
             return this.getRoundedTimestamp(time, true);
         },
-        getUserInfo: function(data) {
+        getUserInfo: function (data) {
             var user = this.getUser(data);
             if (user === null) {
                 API.chatLog(p3Lang.i18n('error.userNotFound'));
@@ -336,7 +337,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 var rank, status, voted, position, waitlistpos, inbooth, lang, lastMessage, disconnectInfo;
 
                 waitlistpos = API.getWaitListPosition(user.id);
-                inbooth = API.getDJ() != null && API.getDJ().id === user.id;
+                inbooth = API.getDJ() !== null && API.getDJ().id === user.id;
                 lang = Lang.languages[user.language];
                 lastMessage = this.getLastMessageTime(user.id);
                 disconnectInfo = this.getUserData(user.id, 'disconnects', {
@@ -374,37 +375,37 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 }
 
                 switch (user.status) {
-                    default:
-                        status = Lang.userStatus.available;
-                        break;
-                    case API.STATUS.AFK:
+                    default: status = Lang.userStatus.available;
+                    break;
+                case API.STATUS.AFK:
                         status = Lang.userStatus.away;
-                        break;
-                    case API.STATUS.WORKING:
+                    break;
+                case API.STATUS.WORKING:
                         status = Lang.userStatus.working;
-                        break;
-                    case API.STATUS.GAMING:
+                    break;
+                case API.STATUS.GAMING:
                         status = Lang.userStatus.gaming;
-                        break;
+                    break;
                 }
 
                 switch (user.vote) {
-                    case -1:
-                        voted = p3Lang.i18n('vote.meh');
-                        break;
-                    default:
-                        voted = p3Lang.i18n('vote.undecided');
-                        break;
-                    case 1:
-                        voted = p3Lang.i18n('vote.woot');
-                        break;
+                case -1:
+                    voted = p3Lang.i18n('vote.meh');
+                    break;
+                default:
+                    voted = p3Lang.i18n('vote.undecided');
+                    break;
+                case 1:
+                    voted = p3Lang.i18n('vote.woot');
+                    break;
                 }
                 if (inbooth) voted = p3Lang.i18n('vote.djing');
 
-                var title = this.getAllPlugCubedRanks(user.id, true), message = $('<table>').css({
-                    width: '100%',
-                    color: '#CC00CC'
-                });
+                var title = this.getAllPlugCubedRanks(user.id, true),
+                    message = $('<table>').css({
+                        width: '100%',
+                        color: '#CC00CC'
+                    });
 
                 // Username
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.name') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.cleanTypedString(user.username)))));
@@ -426,7 +427,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 // Woot / Meh
                 message.append($('<tr>').append($('<td>').append($('<strong>').text(p3Lang.i18n('info.wootCount') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getUserData(user.id, 'wootcount', 0)))).append($('<td>').append($('<strong>').text(p3Lang.i18n('info.mehCount') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getUserData(user.id, 'mehcount', 0)))));
                 // Ratio
-                message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.ratio') + ' ')).append($('<span>').css('color', '#FFFFFF').text((function(a, b) {
+                message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.ratio') + ' ')).append($('<span>').css('color', '#FFFFFF').text((function (a, b) {
                     if (b === 0) return a === 0 ? '0:0' : '1:0';
                     for (var i = 1; i <= b; i++) {
                         var e = i * (a / b);
@@ -445,7 +446,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 this.chatLog(undefined, $('<div>').append(message).html());
             }
         },
-        hasPermission: function(uid, permission, global) {
+        hasPermission: function (uid, permission, global) {
             var user = API.getUser(uid);
             if (user && user.id) {
                 var role = global ? user.gRole : user.role + (user.gRole > 0 ? 5 + user.gRole : 0);
@@ -453,13 +454,14 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             }
             return false;
         },
-        getAllUsers: function() {
+        getAllUsers: function () {
             var table = $('<table>').css({
-                width: '100%',
-                color: '#CC00CC',
-                position: 'relative',
-                left: '-25px'
-            }), users = API.getUsers();
+                    width: '100%',
+                    color: '#CC00CC',
+                    position: 'relative',
+                    left: '-25px'
+                }),
+                users = API.getUsers();
             for (var i in users) {
                 if (users.hasOwnProperty(i)) {
                     var user = users[i];
@@ -468,16 +470,16 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             }
             this.chatLog(undefined, $('<div>').append(table).html());
         },
-        playChatSound: function() {
+        playChatSound: function () {
             // Should get another sound, until then - use mention sound
             this.playMentionSound();
         },
-        playMentionSound: function() {
+        playMentionSound: function () {
             if (!runLite && Database.settings.chatSound) {
                 (new Audio(require('app/utils/UI').sfx)).play();
             }
         },
-        getTimestamp: function(t, format) {
+        getTimestamp: function (t, format) {
             var time, hours, minutes, seconds, postfix = '';
             if (!format) format = 'hh:mm';
 
@@ -505,7 +507,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
 
             return format.split('hh').join(hours).split('mm').join(minutes).split('ss').join(seconds) + postfix;
         },
-        getRoundedTimestamp: function(t, milliseconds) {
+        getRoundedTimestamp: function (t, milliseconds) {
             if (milliseconds)
                 t = Math.floor(t / 1000);
 
@@ -527,7 +529,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
 
             return 'Unknown';
         },
-        formatTime: function(seconds) {
+        formatTime: function (seconds) {
             var hours, minutes;
 
             minutes = Math.floor(seconds / 60);
@@ -541,25 +543,25 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
 
             return (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
         },
-        randomRange: function(min, max) {
+        randomRange: function (min, max) {
             return min + Math.floor(Math.random() * (max - min + 1));
         },
-        isRGB: function(text) {
+        isRGB: function (text) {
             return typeof text === 'string' ? /^(#|)(([0-9A-F]{6}$)|([0-9A-F]{3}$))/i.test(text) : false;
         },
-        toRGB: function(text) {
+        toRGB: function (text) {
             return this.isRGB(text) ? text.substr(0, 1) === '#' ? text : '#' + text : undefined;
         },
-        isNumber: function(text) {
+        isNumber: function (text) {
             return typeof text === 'string' ? !isNaN(parseInt(text, 10)) && isFinite(text) : false;
         },
-        equalsIgnoreCase: function(a, b) {
+        equalsIgnoreCase: function (a, b) {
             return typeof a === 'string' && typeof b === 'string' ? a.toLowerCase() === b.toLowerCase() : false;
         },
-        equalsIgnoreCaseTrim: function(a, b) {
+        equalsIgnoreCaseTrim: function (a, b) {
             return typeof a === 'string' && typeof b === 'string' ? a.trim().toLowerCase() === b.trim().toLowerCase() : false;
         },
-        startsWith: function(a, b) {
+        startsWith: function (a, b) {
             if (typeof a === 'string') {
                 if (typeof b === 'string' && a.length >= b.length) {
                     return a.indexOf(b) === 0;
@@ -575,7 +577,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             }
             return false;
         },
-        endsWith: function(a, b) {
+        endsWith: function (a, b) {
             if (typeof a === 'string') {
                 if (typeof b === 'string' && a.length >= b.length) {
                     return a.lastIndexOf(b) === a.length - b.length;
@@ -591,7 +593,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             }
             return false;
         },
-        startsWithIgnoreCase: function(a, b) {
+        startsWithIgnoreCase: function (a, b) {
             if (typeof a === 'string') {
                 if (typeof b === 'string' && a.length >= b.length) {
                     return this.startsWith(a.toLowerCase(), b.toLowerCase());
@@ -607,7 +609,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             }
             return false;
         },
-        endsWithIgnoreCase: function(a, b) {
+        endsWithIgnoreCase: function (a, b) {
             if (typeof a === 'string') {
                 if (typeof b === 'string' && a.length >= b.length) {
                     return this.endsWith(a.toLowerCase(), b.toLowerCase());
@@ -623,10 +625,10 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             }
             return false;
         },
-        getBaseURL: function(url) {
+        getBaseURL: function (url) {
             return url.indexOf('#') > -1 ? url.substr(0, url.indexOf('#')) : (url.indexOf('?') > -1 ? url.substr(0, url.indexOf('?')) : url);
         },
-        getRandomString: function(length) {
+        getRandomString: function (length) {
             var chars = 'abcdefghijklmnopqrstuvwxyz0123456789_';
             var i, ret = [];
             for (i = 0; i < length; i++) {
@@ -640,14 +642,14 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             infoMessage1: 'FFFF00',
             infoMessage2: '66FFFF'
         },
-        objectSelector: function(obj, selector, defaultValue) {
+        objectSelector: function (obj, selector, defaultValue) {
             var a = obj;
 
             var key = selector.split('.');
 
             for (var i in key) {
                 if (!key.hasOwnProperty(i)) continue;
-                if (a[key[i]] == null) {
+                if (a[key[i]] === null) {
                     return defaultValue;
                 }
                 a = a[key[i]];
@@ -655,7 +657,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
 
             return a;
         },
-        statusREST: function(call) {
+        statusREST: function (call) {
             var time;
             $.ajax({
                 url: 'https://plug.dj/_/rooms',
@@ -663,15 +665,15 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 cache: false,
                 crossDomain: true,
                 timeout: 10000,
-                beforeSend: function() {
+                beforeSend: function () {
                     time = Date.now();
                 },
-                complete: function(req) {
+                complete: function (req) {
                     call(req.status, req.statusText, Date.now() - time);
                 }
             });
         },
-        statusSocket: function(call) {
+        statusSocket: function (call) {
             var SockJS = require('sockjs'),
                 att = 0,
                 time = Date.now(),
@@ -679,10 +681,10 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
 
             function connect() {
                 conn = new SockJS('https://shalamar.plug.dj:443/socket');
-                conn.onopen = function() {
+                conn.onopen = function () {
                     conn.close();
                 };
-                conn.onclose = function(req) {
+                conn.onclose = function (req) {
                     if (req.code !== 1000) {
                         if (att < 3) setTimeout(connect, 500);
                         if (att === 3) call(req.code, req.reason, Date.now() - time);
@@ -690,7 +692,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                         return;
                     }
                     call(req.code, req.reason, Date.now() - time);
-                }
+                };
             }
 
             connect();

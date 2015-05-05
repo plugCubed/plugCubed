@@ -3,7 +3,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
     var cleanHTMLMessage, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, PopoutView, ChatFacade, Database, runLite;
 
     cleanHTMLMessage = function(input, disallow, extra_allow) {
-        if (input == null) return '';
+        if (input === null) return '';
         var allowed, tags, disallowed = [];
         if ($.isArray(disallow)) disallowed = disallow;
         if (!extra_allow || !$.isArray(extra_allow)) extra_allow = [];
@@ -77,7 +77,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         },
         getHighestRankString: function(uid) {
             var highestRank = this.getHighestRank(uid);
-            if (highestRank != null) {
+            if (highestRank !== null) {
                 if (this.isPlugCubedSpecial(uid)) {
                     return p3Lang.i18n('info.specialTitles.special', this.getPlugCubedSpecial(uid).title);
                 }
@@ -155,7 +155,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         },
         isPlugCubedSpecial: function(uid) {
             if (!uid) uid = API.getUser().id;
-            return this.getPlugCubedSpecial(uid) != null;
+            return this.getPlugCubedSpecial(uid) !== null;
         },
         isPlugCubedAmbassador: function(uid) {
             if (!uid) uid = API.getUser().id;
@@ -221,7 +221,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 var lastMessageContainer = $('#chat-messages').find('.message').last();
                 var lastSender = lastMessageContainer.children('.badge-box').data('uid');
 
-                if (from != null && from.username != null) {
+                if (from !== null && from.username !== null) {
                     if (lastSender == from.id) {
                         lastMessageContainer.find('.text').append('<br>').append($msgSpan);
                         if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height())
@@ -285,13 +285,13 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             return $('#room-name').text().trim();
         },
         getUserData: function(uid, key, defaultValue) {
-            if (plugCubedUserData[uid] == null || plugCubedUserData[uid][key] == null) {
+            if (plugCubedUserData[uid] === null || plugCubedUserData[uid][key] === null) {
                 return defaultValue;
             }
             return plugCubedUserData[uid][key];
         },
         setUserData: function(uid, key, value) {
-            if (plugCubedUserData[uid] == null) {
+            if (plugCubedUserData[uid] === null) {
                 plugCubedUserData[uid] = {};
             }
             plugCubedUserData[uid][key] = value;
@@ -336,7 +336,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 var rank, status, voted, position, waitlistpos, inbooth, lang, lastMessage, disconnectInfo;
 
                 waitlistpos = API.getWaitListPosition(user.id);
-                inbooth = API.getDJ() != null && API.getDJ().id === user.id;
+                inbooth = API.getDJ() !== null && API.getDJ().id === user.id;
                 lang = Lang.languages[user.language];
                 lastMessage = this.getLastMessageTime(user.id);
                 disconnectInfo = this.getUserData(user.id, 'disconnects', {
@@ -647,7 +647,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
 
             for (var i in key) {
                 if (!key.hasOwnProperty(i)) continue;
-                if (a[key[i]] == null) {
+                if (a[key[i]] === null) {
                     return defaultValue;
                 }
                 a = a[key[i]];

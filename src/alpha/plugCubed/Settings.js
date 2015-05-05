@@ -15,20 +15,20 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
             case void 0:
             case 1:
                 // Inline Images => Chat Images
-                if (save['inlineimages'] != null)
+                if (save['inlineimages'] !== null)
                     save.chatImages = save['inlineimages'];
 
                 // Moderation
-                if (save.moderation == null)
+                if (save.moderation === null)
                     save.moderation = {};
-                if (save.afkTimers != null)
+                if (save.afkTimers !== null)
                     save.moderation.afkTimers = save.afkTimers;
                 break;
             case 2:
                 // Curate => Grab
-                if (save.colors != null)
+                if (save.colors !== null)
                     save.colors = {};
-                if (save.colors.curate != null)
+                if (save.colors.curate !== null)
                     save.colors.grab = save.colors.curate;
                 break;
             default:
@@ -151,7 +151,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 var save = JSON.parse(localStorage.getItem('plugCubed')) || {};
 
                 // Upgrade if needed
-                if (save.version == null || save.version !== curVersion) {
+                if (save.version === null || save.version !== curVersion) {
                     save = upgradeVersion(save);
                     this.save();
                 }
@@ -159,11 +159,11 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 // Get the settings
                 for (var i in names) {
                     if (!names.hasOwnProperty(i)) continue;
-                    if (save[names[i]] != null && typeof this[names[i]] == typeof save[names[i]]) {
+                    if (save[names[i]] !== null && typeof this[names[i]] == typeof save[names[i]]) {
                         if ($.isPlainObject(this[names[i]])) {
                             for (var j in this[names[i]]) {
                                 if (!this[names[i]].hasOwnProperty(j)) continue;
-                                if (save[names[i]][j] != null) {
+                                if (save[names[i]][j] !== null) {
                                     this[names[i]][j] = save[names[i]][j];
                                 }
                             }
@@ -176,7 +176,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 if (this.autowoot) {
                     (function() {
                         var dj = API.getDJ();
-                        if (dj == null || dj.id === API.getUser().id) return;
+                        if (dj === null || dj.id === API.getUser().id) return;
                         $('#woot').click();
                     })();
                 }
@@ -184,7 +184,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 if (this.autojoin) {
                     (function() {
                         var dj = API.getDJ();
-                        if (dj == null || dj.id === API.getUser().id || API.getWaitListPosition() > -1) return;
+                        if (dj === null || dj.id === API.getUser().id || API.getWaitListPosition() > -1) return;
                         $('#dj-button').click();
                     })();
                 }
@@ -200,7 +200,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     require('plugCubed/handlers/ChatHandler').loadTwitchEmotes();
                 }
 
-                if (this.registeredSongs.length > 0 && API.getMedia() != null && this.registeredSongs.indexOf(API.getMedia().id) > -1) {
+                if (this.registeredSongs.length > 0 && API.getMedia() !== null && this.registeredSongs.indexOf(API.getMedia().id) > -1) {
                     if (!p3Utils.runLite) {
                         PlaybackModel.muteOnce();
                     }

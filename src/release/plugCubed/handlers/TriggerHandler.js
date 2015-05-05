@@ -8,7 +8,7 @@ define(['jquery', 'plugCubed/Class'], function($, Class) {
             if (this.triggerHandlers.length > 0)
                 this.close();
             this.triggerHandlers = [];
-            if (this.trigger == null)
+            if (this.trigger === null)
                 throw new Error('Missing TriggerHandler trigger!');
             if (typeof this.trigger === 'string') {
                 this.triggerHandlers[this.trigger] = this.handler;

@@ -1,46 +1,49 @@
-define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Version'], function(_, Class, p3Utils, p3Lang, Version) {
-    var _this, Chat, socket, tries = 0, socketReconnecting, socketHandler = Class.extend({
-        connect: function() {
-            if (socket != null && socket.readyState === SockJS.OPEN) return;
-            return;
-            _this = this;
-            socket = new SockJS('https://socket.plugcubed.net/_');
-            console.log('[plug³] Socket Server', socketReconnecting ? 'Reconnecting' : 'Connecting');
-            socket.onopen = _.bind(this.onOpen, this);
-            socket.onmessage = _.bind(this.onMessage, this);
-            socket.onclose = _.bind(this.onClose, this);
-        },
-        reconnect: function() {
-            if (socket == null || socket.readyState !== SockJS.OPEN) {
-                this.connect();
-            } else {
+define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Version'], function (_, Class, p3Utils, p3Lang, Version) {
+    var _this, Chat, socket, tries = 0,
+        socketReconnecting, socketHandler = Class.extend({
+            connect: function () {
+                if (socket !== null && socket.readyState === SockJS.OPEN) return;
+                return;
+                _this = this;
+                socket = new SockJS('https://socket.plugcubed.net/_');
+                console.log('[plug³] Socket Server', socketReconnecting ? 'Reconnecting' : 'Connecting');
+                socket.onopen = _.bind(this.onOpen, this);
+                socket.onmessage = _.bind(this.onMessage, this);
+                socket.onclose = _.bind(this.onClose, this);
+            },
+            reconnect: function () {
+                if (socket === null || socket.readyState !== SockJS.OPEN) {
+                    this.connect();
+                } else {
+                    socket.close();
+                }
+            },
+            disconnect: function () {
+                if (socket === null || socket.readyState !== SockJS.OPEN) return;
+                socket.onclose = function () {
+                    console.log('[plug³] Socket Server', 'Closed');
+                };
                 socket.close();
-            }
-        },
-        disconnect: function() {
-            if (socket == null || socket.readyState !== SockJS.OPEN) return;
-            socket.onclose = function() {
-                console.log('[plug³] Socket Server', 'Closed');
-            };
-            socket.close();
-        },
-        onOpen: function() {
-            tries = 0;
-            console.log('[plug³] Socket Server', socketReconnecting ? 'Reconnected' : 'Connected');
-            var userData = API.getUser();
-            this.send(JSON.stringify({
-                type: 'user:validate',
-                id: userData.id,
-                username: userData.username,
-                room: p3Utils.getRoomID(),
-                version: Version.toString()
-            }));
-            $('.plugcubed-status').text(p3Lang.i18n('footer.socket', p3Lang.i18n('footer.online')));
-        },
-        onMessage: function(msg) {
-            var obj = JSON.parse(msg.data), type = obj.type, data = obj.data;
+            },
+            onOpen: function () {
+                tries = 0;
+                console.log('[plug³] Socket Server', socketReconnecting ? 'Reconnected' : 'Connected');
+                var userData = API.getUser();
+                this.send(JSON.stringify({
+                    type: 'user:validate',
+                    id: userData.id,
+                    username: userData.username,
+                    room: p3Utils.getRoomID(),
+                    version: Version.toString()
+                }));
+                $('.plugcubed-status').text(p3Lang.i18n('footer.socket', p3Lang.i18n('footer.online')));
+            },
+            onMessage: function (msg) {
+                var obj = JSON.parse(msg.data),
+                    type = obj.type,
+                    data = obj.data;
 
-            switch (type) {
+                switch (type) {
                 case 'user:validate':
                     if (data.status === 1) {
                         console.log('[plug³] Socket Server', 'User validated');
@@ -81,16 +84,16 @@ define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'p
                         p3Utils.chatLog('system', '<strong>' + (data.global ? 'Global' : 'Room') + ' Broadcast from a ' + p3Lang.i18n('info.specialTitles.' + (p3Utils.isPlugCubedDeveloper(data.id) ? 'developer' : 'sponsor')) + '</strong><br><span style="color:#FFFFFF;font-weight:400">' + data.message + '</span>');
                     }
                     return;
-            }
-        },
-        onClose: function(info) {
-            console.log('[plug³] Socket Server', 'Closed', info);
-            $('.plugcubed-status').text(p3Lang.i18n('footer.socket', p3Lang.i18n('footer.offline')));
+                }
+            },
+            onClose: function (info) {
+                console.log('[plug³] Socket Server', 'Closed', info);
+                $('.plugcubed-status').text(p3Lang.i18n('footer.socket', p3Lang.i18n('footer.offline')));
 
-            var delay;
-            socketReconnecting = true;
+                var delay;
+                socketReconnecting = true;
 
-            switch (info.code) {
+                switch (info.code) {
                 case 3001:
                     delay = 60;
                     break;
@@ -112,20 +115,20 @@ define(['underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'p
                         delay = 60;
                     } else return;
                     break;
-            }
+                }
 
-            setTimeout(function() {
-                _this.connect();
-            }, delay * 1E3 + (Math.ceil(Math.random() * 5000)));
-        },
-        getState: function() {
-            return socket.readyState;
-        },
-        send: function(msg) {
-            if (typeof msg === 'string')
-                socket.send(msg);
-        }
-    });
+                setTimeout(function () {
+                    _this.connect();
+                }, delay * 1E3 + (Math.ceil(Math.random() * 5000)));
+            },
+            getState: function () {
+                return socket.readyState;
+            },
+            send: function (msg) {
+                if (typeof msg === 'string')
+                    socket.send(msg);
+            }
+        });
     if (!p3Utils.runLite)
         Chat = require('app/facades/ChatFacade');
     return new socketHandler();

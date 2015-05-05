@@ -32,12 +32,12 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         var parts = key.split('.'), last = parts.pop(), partsLen = parts.length, cur = original ? oriLang : Lang;
         for (var i = 0; i < partsLen; i++) {
             var part = parts[i];
-            if (cur[part] != null) {
+            if (cur[part] !== null) {
                 cur = cur[part];
             } else {
                 return '';
             }
-            if (cur[last] != null) {
+            if (cur[last] !== null) {
                 return cur[last];
             }
         }
@@ -49,10 +49,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         var parts = key.split('.'), last = parts.pop(), partsLen = parts.length, cur = Lang;
         for (var i = 0; i < partsLen; i++) {
             var part = parts[i];
-            if (cur[part] != null)
+            if (cur[part] !== null)
                 cur = cur[part]; else return;
         }
-        if (cur[last] != null)
+        if (cur[last] !== null)
             cur[last] = value;
     }
 
@@ -103,20 +103,20 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         },
         execute: function() {
             var i, a, loadEverything;
-            loadEverything = Settings.useRoomSettings[document.location.pathname.split('/')[1]] != null ? Settings.useRoomSettings[document.location.pathname.split('/')[1]] : true;
+            loadEverything = Settings.useRoomSettings[document.location.pathname.split('/')[1]] !== null ? Settings.useRoomSettings[document.location.pathname.split('/')[1]] : true;
 
             this.clear();
 
-            if (roomSettings != null) {
+            if (roomSettings !== null) {
                 if (loadEverything) {
                     // colors
-                    if (roomSettings.colors != null) {
+                    if (roomSettings.colors !== null) {
                         // colors.background
-                        if (roomSettings.colors.background != null && typeof roomSettings.colors.background === 'string' && p3Utils.isRGB(roomSettings.colors.background))
+                        if (roomSettings.colors.background !== null && typeof roomSettings.colors.background === 'string' && p3Utils.isRGB(roomSettings.colors.background))
                             Styles.set('room-settings-background-color', 'body { background-color: ' + p3Utils.toRGB(roomSettings.colors.background) + '!important; }');
 
                         // colors.chat
-                        if (roomSettings.colors.chat != null) {
+                        if (roomSettings.colors.chat !== null) {
                             a = {};
                             for (i in roomSettings.colors.chat) {
                                 if (!roomSettings.colors.chat.hasOwnProperty(i)) continue;
@@ -127,23 +127,23 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                         }
 
                         // colors.header
-                        if (roomSettings.colors.header != null && typeof roomSettings.colors.header === 'string' && p3Utils.isRGB(roomSettings.colors.header))
+                        if (roomSettings.colors.header !== null && typeof roomSettings.colors.header === 'string' && p3Utils.isRGB(roomSettings.colors.header))
                             Styles.set('room-settings-header', '#header { background-color: ' + p3Utils.toRGB(roomSettings.colors.header) + '!important; }');
 
                         // colors.footer
-                        if (roomSettings.colors.footer != null && typeof roomSettings.colors.footer === 'string' && p3Utils.isRGB(roomSettings.colors.footer))
+                        if (roomSettings.colors.footer !== null && typeof roomSettings.colors.footer === 'string' && p3Utils.isRGB(roomSettings.colors.footer))
                             Styles.set('room-settings-footer', '.app-header { background-color: ' + p3Utils.toRGB(roomSettings.colors.footer) + '!important; }');
                     }
 
                     // css
-                    if (roomSettings.css != null) {
+                    if (roomSettings.css !== null) {
                         // css.font
-                        if (roomSettings.css.font != null && $.isArray(roomSettings.css.font)) {
+                        if (roomSettings.css.font !== null && $.isArray(roomSettings.css.font)) {
                             var roomFonts = [];
                             for (i in roomSettings.css.font) {
                                 if (!roomSettings.css.font.hasOwnProperty(i)) continue;
                                 var font = roomSettings.css.font[i];
-                                if (font.name != null && font.url != null) {
+                                if (font.name !== null && font.url !== null) {
                                     font.toString = function() {
                                         var sources = [];
                                         if (typeof this.url === 'string')
@@ -162,14 +162,14 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                             Styles.set('room-settings-fonts', roomFonts.join('\n'));
                         }
                         // css.import
-                        if (roomSettings.css.import != null && $.isArray(roomSettings.css.import)) {
+                        if (roomSettings.css.import !== null && $.isArray(roomSettings.css.import)) {
                             for (i in roomSettings.css.import) {
                                 if (roomSettings.css.import.hasOwnProperty(i) && typeof roomSettings.css.import[i] === 'string')
                                     Styles.addImport(roomSettings.css.import[i]);
                             }
                         }
                         // css.setting
-                        if (roomSettings.css.rule != null) {
+                        if (roomSettings.css.rule !== null) {
                             var roomCSSRules = [];
                             for (i in roomSettings.css.rule) {
                                 if (!roomSettings.css.rule.hasOwnProperty(i)) continue;
@@ -185,7 +185,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                     }
 
                     // images
-                    if (roomSettings.images != null) {
+                    if (roomSettings.images !== null) {
                         // images.background
                         if (roomSettings.images.background)
                             Styles.set('room-settings-background-image', '.room-background { background-image: url("' + p3Utils.proxifyImage(roomSettings.images.background) + '")!important; }');
@@ -193,7 +193,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                         // images.playback
                         if (!p3Utils.runLite) {
                             var playbackBackground = $('#playback').find('.background img');
-                            if (playbackBackground.data('_o') == null)
+                            if (playbackBackground.data('_o') === null)
                                 playbackBackground.data('_o', playbackBackground.attr('src'));
                             var roomLoader = require('app/views/room/RoomLoader');
                             if (roomSettings.images.playback && typeof roomSettings.images.playback === 'string' && roomSettings.images.playback.indexOf('http') === 0) {
@@ -214,11 +214,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                         }
 
                         // images.booth
-                        if (roomSettings.images.booth != null && typeof roomSettings.images.booth === 'string')
+                        if (roomSettings.images.booth !== null && typeof roomSettings.images.booth === 'string')
                             $('#dj-booth').append($('<div id="p3-dj-booth">').css('background-image', 'url("' + p3Utils.proxifyImage(roomSettings.images.booth) + '")'));
 
                         // images.icons
-                        if (roomSettings.images.icons != null) {
+                        if (roomSettings.images.icons !== null) {
                             a = {};
                             for (i in roomSettings.images.icons) {
                                 if (!roomSettings.images.icons.hasOwnProperty(i)) continue;
@@ -230,14 +230,14 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                     }
 
                     // text
-                    if (roomSettings.text != null) {
+                    if (roomSettings.text !== null) {
                         // text.plugCubed
-                        if (roomSettings.text.plugCubed != null) {
+                        if (roomSettings.text.plugCubed !== null) {
 
                         }
 
                         // text.plugDJ
-                        if (roomSettings.text.plugDJ != null) {
+                        if (roomSettings.text.plugDJ !== null) {
                             for (i in roomSettings.text.plugDJ) {
                                 if (!roomSettings.text.plugDJ.hasOwnProperty(i)) continue;
                                 var value = roomSettings.text.plugDJ[i];
@@ -249,10 +249,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 }
 
                 // rules
-                if (roomSettings.rules != null) {
-                    this.rules.allowAutowoot = roomSettings.rules.allowAutowoot == null || roomSettings.rules.allowAutowoot === 'true' || roomSettings.rules.allowAutowoot === true;
-                    this.rules.allowAutojoin = roomSettings.rules.allowAutojoin == null || roomSettings.rules.allowAutojoin === 'true' || roomSettings.rules.allowAutojoin === true;
-                    this.rules.allowAutorespond = roomSettings.rules.allowAutorespond == null || roomSettings.rules.allowAutorespond === 'true' || roomSettings.rules.allowAutorespond === true;
+                if (roomSettings.rules !== null) {
+                    this.rules.allowAutowoot = roomSettings.rules.allowAutowoot === null || roomSettings.rules.allowAutowoot === 'true' || roomSettings.rules.allowAutowoot === true;
+                    this.rules.allowAutojoin = roomSettings.rules.allowAutojoin === null || roomSettings.rules.allowAutojoin === 'true' || roomSettings.rules.allowAutojoin === true;
+                    this.rules.allowAutorespond = roomSettings.rules.allowAutorespond === null || roomSettings.rules.allowAutorespond === 'true' || roomSettings.rules.allowAutorespond === true;
                 } else {
                     this.rules.allowAutowoot = true;
                     this.rules.allowAutojoin = true;
@@ -260,7 +260,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 }
 
                 // roomscript
-                if (roomSettings.roomscript != null) {
+                if (roomSettings.roomscript !== null) {
                     // TODO: Make this
                 }
 
@@ -304,7 +304,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
             if (!p3Utils.runLite) {
                 var playbackBackground = $('#playback').find('.background img');
-                if (playbackBackground.data('_o') == null)
+                if (playbackBackground.data('_o') === null)
                     playbackBackground.data('_o', playbackBackground.attr('src'));
                 playbackBackground.attr('src', playbackBackground.data('_o'));
                 var roomLoader = require('app/views/room/RoomLoader');

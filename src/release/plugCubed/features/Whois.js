@@ -78,7 +78,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/handlers/TriggerHandler', 'plugC
             p3Utils.setUserData(data.user.id, 'curVote', data.vote);
         },
         onDjAdvance: function(data) {
-            if (data.media != null) {
+            if (data.media !== null) {
                 watcher.setDJ(data.dj);
             }
             var users = API.getUsers();

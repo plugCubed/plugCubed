@@ -1,5 +1,6 @@
-define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/bridges/PlaybackModel'], function(Class, p3Utils, p3Lang, Styles, PlaybackModel) {
-    var names = [], curVersion;
+define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/bridges/PlaybackModel'], function (Class, p3Utils, p3Lang, Styles, PlaybackModel) {
+    var names = [],
+        curVersion;
 
     // Misc
     names.push('version');
@@ -12,27 +13,27 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
 
     function upgradeVersion(save) {
         switch (save.version) {
-            case void 0:
-            case 1:
-                // Inline Images => Chat Images
-                if (save['inlineimages'] != null)
-                    save.chatImages = save['inlineimages'];
+        case void 0:
+        case 1:
+            // Inline Images => Chat Images
+            if (save.inlineimages !== null)
+                save.chatImages = save.inlineimages;
 
-                // Moderation
-                if (save.moderation == null)
-                    save.moderation = {};
-                if (save.afkTimers != null)
-                    save.moderation.afkTimers = save.afkTimers;
-                break;
-            case 2:
-                // Curate => Grab
-                if (save.colors != null)
-                    save.colors = {};
-                if (save.colors.curate != null)
-                    save.colors.grab = save.colors.curate;
-                break;
-            default:
-                break;
+            // Moderation
+            if (save.moderation === null)
+                save.moderation = {};
+            if (save.afkTimers !== null)
+                save.moderation.afkTimers = save.afkTimers;
+            break;
+        case 2:
+            // Curate => Grab
+            if (save.colors !== null)
+                save.colors = {};
+            if (save.colors.curate !== null)
+                save.colors.grab = save.colors.curate;
+            break;
+        default:
+            break;
         }
         console.log('[plug³] Updated save', save.version, '=>', curVersion);
         save.version = curVersion;
@@ -146,12 +147,12 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
             updates: 'FFFF00',
             songLength: '66FFFF'
         },
-        load: function() {
+        load: function () {
             try {
                 var save = JSON.parse(localStorage.getItem('plugCubed')) || {};
 
                 // Upgrade if needed
-                if (save.version == null || save.version !== curVersion) {
+                if (save.version === null || save.version !== curVersion) {
                     save = upgradeVersion(save);
                     this.save();
                 }
@@ -159,11 +160,11 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 // Get the settings
                 for (var i in names) {
                     if (!names.hasOwnProperty(i)) continue;
-                    if (save[names[i]] != null && typeof this[names[i]] == typeof save[names[i]]) {
+                    if (save[names[i]] !== null && typeof this[names[i]] == typeof save[names[i]]) {
                         if ($.isPlainObject(this[names[i]])) {
                             for (var j in this[names[i]]) {
                                 if (!this[names[i]].hasOwnProperty(j)) continue;
-                                if (save[names[i]][j] != null) {
+                                if (save[names[i]][j] !== null) {
                                     this[names[i]][j] = save[names[i]][j];
                                 }
                             }
@@ -174,17 +175,17 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 }
 
                 if (this.autowoot) {
-                    (function() {
+                    (function () {
                         var dj = API.getDJ();
-                        if (dj == null || dj.id === API.getUser().id) return;
+                        if (dj === null || dj.id === API.getUser().id) return;
                         $('#woot').click();
                     })();
                 }
 
                 if (this.autojoin) {
-                    (function() {
+                    (function () {
                         var dj = API.getDJ();
-                        if (dj == null || dj.id === API.getUser().id || API.getWaitListPosition() > -1) return;
+                        if (dj === null || dj.id === API.getUser().id || API.getWaitListPosition() > -1) return;
                         $('#dj-button').click();
                     })();
                 }
@@ -200,7 +201,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     require('plugCubed/handlers/ChatHandler').loadTwitchEmotes();
                 }
 
-                if (this.registeredSongs.length > 0 && API.getMedia() != null && this.registeredSongs.indexOf(API.getMedia().id) > -1) {
+                if (this.registeredSongs.length > 0 && API.getMedia() !== null && this.registeredSongs.indexOf(API.getMedia().id) > -1) {
                     if (!p3Utils.runLite) {
                         PlaybackModel.muteOnce();
                     }
@@ -215,7 +216,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 p3Utils.chatLog('system', 'Error loading settings');
             }
         },
-        save: function() {
+        save: function () {
             var settings = {};
             for (var i in names) {
                 if (names.hasOwnProperty(i))

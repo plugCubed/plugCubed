@@ -9,7 +9,7 @@ module.exports = {
         "plugDeobfuscation": ""
     },
     "requirejs": {
-        "salt": function(type) {
+        "salt": function (type) {
             return type;
         }
     }

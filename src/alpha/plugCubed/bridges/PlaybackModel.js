@@ -66,7 +66,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/bridg
                 PlaybackModel.onVolumeChange = function() {
                     if (typeof plugCubed === 'undefined')
                         this.set('muted', this.get('volume') == 0); else {
-                        if (this.get('mutedOnce') == null)
+                        if (this.get('mutedOnce') === null)
                             this.set('mutedOnce', false);
 
                         if (this.get('volume') === 0) {

@@ -1,4 +1,4 @@
-define(function() {
+define(function () {
     return {
         major: VERSION.MAJOR,
         minor: VERSION.MINOR,
@@ -9,8 +9,8 @@ define(function() {
         /**
          * @this {version}
          */
-        toString: function() {
-            return this.major + '.' + this.minor + '.' + this.patch + (this.prerelease != null && this.prerelease !== '' ? '-' + this.prerelease : '') + (this.minified ? '_min' : '') + ' (Build ' + this.build + ')';
+        toString: function () {
+            return this.major + '.' + this.minor + '.' + this.patch + (this.prerelease !== null && this.prerelease !== '' ? '-' + this.prerelease : '') + (this.minified ? '_min' : '') + ' (Build ' + this.build + ')';
         }
-    }
+    };
 });

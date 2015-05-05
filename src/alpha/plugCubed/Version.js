@@ -10,7 +10,7 @@ define(function() {
          * @this {version}
          */
         toString: function() {
-            return this.major + '.' + this.minor + '.' + this.patch + (this.prerelease != null && this.prerelease !== '' ? '-' + this.prerelease : '') + (this.minified ? '_min' : '') + ' (Build ' + this.build + ')';
+            return this.major + '.' + this.minor + '.' + this.patch + (this.prerelease !== null && this.prerelease !== '' ? '-' + this.prerelease : '') + (this.minified ? '_min' : '') + ' (Build ' + this.build + ')';
         }
     }
 });

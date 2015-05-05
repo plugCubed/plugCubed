@@ -69,7 +69,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             }
             if (API.hasPermission(undefined, API.ROLE.BOUNCER)) {
                 if (p3Utils.equalsIgnoreCase(command, 'skip')) {
-                    if (API.getDJ() == null) return;
+                    if (API.getDJ() === null) return;
                     if (value.length > 5)
                         API.sendChat('@' + API.getDJ().username + ' - Reason for skip: ' + value.substr(5).trim());
                     API.moderateForceSkip();
@@ -200,7 +200,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             }
             if (p3Utils.equalsIgnoreCase(command, 'nextsong')) {
                 var nextSong = API.getNextMedia();
-                if (nextSong == null) {
+                if (nextSong === null) {
                     return API.chatLog(p3Lang.i18n('error.noNextSong'));
                 }
                 nextSong = nextSong.media;
@@ -214,7 +214,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             }
             if (p3Utils.equalsIgnoreCase(command, 'automute')) {
                 var media = API.getMedia();
-                if (media == null) return;
+                if (media === null) return;
                 if (Settings.registeredSongs.indexOf(media.id) < 0) {
                     Settings.registeredSongs.push(media.id);
                     PlaybackModel.muteOnce();
@@ -309,7 +309,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 if (Socket.getState() !== SockJS.OPEN) {
                     return API.chatLog(p3Lang.i18n('error.notConnected'), true);
                 }
-                if (lastPMReceiver != null && API.getUser(lastPMReceiver.id) != null) {
+                if (lastPMReceiver !== null && API.getUser(lastPMReceiver.id) !== null) {
                     Socket.send(JSON.stringify({
                         type: 'chat:private',
                         value: {

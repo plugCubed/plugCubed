@@ -1,8 +1,8 @@
-define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Socket'], function(Class, ControlPanel, Socket) {
+define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Socket'], function (Class, ControlPanel, Socket) {
     var handler, loggedIn, $loginDiv, $selectButton, $contentDiv, panel;
 
     handler = Class.extend({
-        register: function() {
+        register: function () {
             panel = ControlPanel.addPanel('Login');
 
             $contentDiv = $('<div>').append($('<p>').text('Login to your plugCubed account.')).append($('<p>').text('Using this system, you can validate and lock your userIDs to your plugCubed account.'));
@@ -16,33 +16,33 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Socket']
                     xhrFields: {
                         withCredentials: true
                     }
-                }).done(function(data) {
-                    loggedIn = data['loggedIn'];
+                }).done(function (data) {
+                    loggedIn = data.loggedIn;
                     $selectButton.changeLabel(loggedIn ? 'Already logged in' : 'Login');
                     $selectButton.changeSubmit(!loggedIn);
-                }).error(function() {
+                }).error(function () {
                     loggedIn = false;
                     $selectButton.changeLabel('Login');
                     $selectButton.changeSubmit(true);
                 });
             }
 
-            $selectButton = ControlPanel.button(loggedIn ? 'Already logged in' : 'Login', !loggedIn, function() {
+            $selectButton = ControlPanel.button(loggedIn ? 'Already logged in' : 'Login', !loggedIn, function () {
                 if (loggedIn)
                     return;
                 $selectButton.changeLabel('Please wait');
                 var loginWindow = window.open('https://login.plugcubed.net', 'p3Login_' + Date.now(), 'height=200,width=520,toolbar=0,scrollbars=0,status=0,resizable=0,location=1,menubar=0');
-                (function() {
-                    var check = function() {
+                (function () {
+                    var check = function () {
                         if (loginWindow.closed) {
                             checkLoggedIn();
                             return;
                         }
-                        setTimeout(function() {
+                        setTimeout(function () {
                             check();
                         }, 500);
                     };
-                    setTimeout(function() {
+                    setTimeout(function () {
                         check();
                     }, 1000);
                 })();
@@ -54,7 +54,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Socket']
 
             panel.addContent($loginDiv);
         },
-        close: function() {
+        close: function () {
             ControlPanel.removePanel(panel);
         }
     });

@@ -45,7 +45,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
             }
         },
         onDjAdvance: function(data) {
-            if (data.media == null) return;
+            if (data.media === null) return;
             this.onHistoryCheck(data.media.cid);
             var obj = {
                 id: data.media.cid,

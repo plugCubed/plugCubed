@@ -15,14 +15,14 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
                 this._showSimple(a, b);
                 var specialIconInfo = p3Utils.getPlugCubedSpecial(a.id);
 
-                if (this.$p3Role == null) {
+                if (this.$p3Role === null) {
                     this.$p3Role = $('<span>').addClass('p3Role');
                     this.$meta.append(this.$p3Role);
                 }
 
                 if (p3Utils.havePlugCubedRank(a.id)) {
                     this.$meta.addClass('has-p3Role is-p3' + p3Utils.getHighestRank(a.id));
-                    if (specialIconInfo != null) {
+                    if (specialIconInfo !== null) {
                         this.$p3Role.text($('<span>').html(specialIconInfo.title).text()).css({
                             'background-image': 'url("https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3special.' + specialIconInfo.icon + '.png")'
                         });

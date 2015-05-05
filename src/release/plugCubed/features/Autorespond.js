@@ -15,7 +15,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settin
                     Settings.save();
                     API.sendChat(p3Lang.i18n('autorespond.commandDisable', '@' + data.un));
                     $('#chat-input-field').removeAttr('disabled').attr('placeholder', Lang.chat.placeholder);
-                    if (this.timeoutId != null)
+                    if (this.timeoutId !== null)
                         clearTimeout(this.timeoutId);
                     return;
                 }

@@ -15,7 +15,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
             chat: 'onChat'
         },
         onDjAdvance: function(data) {
-            this.lastDJ = data.lastPlay.dj != null ? data.lastPlay.dj.id : null;
+            this.lastDJ = data.lastPlay.dj !== null ? data.lastPlay.dj.id : null;
             if (!Settings.autojoin || !RoomSettings.rules.allowAutojoin) return;
             join();
         },
