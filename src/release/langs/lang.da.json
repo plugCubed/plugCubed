@@ -15,6 +15,10 @@
     "commandDisable":"%1 autojoin deaktiveret",
     "commandNotEnabled":"%1 autojoin var ikke aktiveret"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"plugCubed Kommandoer",
     "userCommands":"Bruger Kommandoer",
@@ -24,13 +28,10 @@
       "word":"ord",
       "on":"til",
       "off":"fra",
-      "reason":"begrundelse"
+      "reason":"begrundelse",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"sæt status til tilgængelig",
-      "afk":"sæt status til afk",
-      "work":"sæt status til arbejder",
-      "gaming":"sæt status til spiller",
       "join":"tilslut dj boden\/ventelisten",
       "leave":"forlad dj boden\/ventelisten",
       "whoami":"få din egne informationer",
@@ -42,6 +43,7 @@
       "alertson":"afspil lyd når valgte ord bliver skrevet i chat",
       "alertsoff":"stop med at spille lyd når valgte ord bliver skrevet i chat",
       "grab":"Tilføj nuværende sang til din valgte afspilningsliste",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"få nuværende position i ventelisten",
       "version":"viser versionsnummer",
       "commands":"viser denne liste",
@@ -54,22 +56,23 @@
       "unlock":"låser DJ bod op",
       "add":"tilføjer valgte bruger til DJ bod\/venteliste",
       "remove":"fjerner valgte bruger fra DJ bod\/venteliste",
-      "strobe":"tænder\/slukker stroboskoplys",
-      "rave":"tænder\/slukker lyset",
       "whois all":"giver bruger-id og brugernavn for alle brugere i rummet",
-      "banall":"banner alle brugere i rummet"
+      "banall":"banner alle brugere i rummet",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Afspiller lyd ved følgende ord: %1",
       "alertsoff":"Afspiller ikke længere lyd ved specifikke ord",
       "nextsong":"Din næste sang i køen er %1 af %2",
       "isHistory":"Advarsel! Denne sang er stadigvæk i historikken (%1 af %2)",
-      "lightsOut":"%1 slukkede lyset",
-      "strobe":"%1 aktiverede stroboskoplys",
       "automute":{
         "automuted":"%1 auto-dæmpet.",
         "registered":"%1 registeret til at blive automatisk muted fremover.",
         "unregistered":"%1 fjernet fra automatisk at blive muted fremover."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Sang statistik",
     "updates":"Sang opdateringer",
     "history":"Sange i historik",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Sang længde (%1 min)",
     "message":{
       "grab":"grabbed %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"forlod rummet",
       "history":"Denne sang er i historikken (%1 af %2)",
       "historySkipped":"Denne sang er i historikken (%1 af %2), men blev sprunget over ved sidste afspilning",
-      "songLength":"Sang er længere end %1 minutter"
-    },
-    "notification":{
-      "songLength":"Sang længde"
+      "songLength":"Sang er længere end %1 minutter",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Stemme",
     "position":"Position",
     "points":"Point",
-    "fans":"Fans",
     "wootCount":"Antal som kan lide",
     "mehCount":"Antal som ikke lan lide",
     "ratio":"Forholdet mellem Kan lide\/Kan ikke lide",
@@ -163,6 +167,7 @@
     "autorespond":"AFK Autosvar",
     "notify":"Notifikationer",
     "afktimers":"AFK Timere",
+    "etatimer":"ETA Timer",
     "roomsettings":"Rum-indstillinger",
     "chatimages":"Chat billeder",
     "twitchemotes":"Twitch Smileys",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Bruger ikke fundet",
-    "usernameNotFound":"Brugernavn ikke fundet",
     "unknownModeration":"Ukendt moderation",
     "unknownMenuKey":"Ukendt menu knap: %1",
     "missingReason":"Mangler begrundelse",
-    "notConnected":"Ikke forbundet til hoved server",
     "noLiteSupport":"Dette understøttes ikke i plug&#179; Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"Ingen afspilningslister fundet",
     "yourActivePlaylistIsFull":"Din aktive afspilningsliste er fuld",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
     "noNextSong":"Du har ingen sange i kø"
   }
 }

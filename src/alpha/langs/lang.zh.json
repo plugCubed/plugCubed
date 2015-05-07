@@ -15,6 +15,10 @@
     "commandDisable":"%1 禁止自動加入排隊",
     "commandNotEnabled":"%1 自動加入排隊沒被啓用"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"plug&#179; 指令",
     "userCommands":"用戶指令",
@@ -24,13 +28,10 @@
       "word":"字",
       "on":"開啟",
       "off":"關閉",
-      "reason":"原因"
+      "reason":"原因",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"設置狀態為在線",
-      "afk":"設置狀態為AFK掛機閒置",
-      "work":"設置狀態為工作中",
-      "gaming":"設置狀態為遊戲中",
       "join":"加入dj展台\/等候列表",
       "leave":"離開dj展台\/等候列表",
       "whoami":"得到你自己的資訊",
@@ -42,6 +43,7 @@
       "alertson":"播放音效當任何設定字詞出現在聊天中",
       "alertsoff":"停止播放音效當任何設定字詞出現在聊天中",
       "grab":"添加當前歌曲到你指定的播放清單",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"獲取目前等候清單位置",
       "version":"顯示版本號碼",
       "commands":"展示此清單",
@@ -54,22 +56,23 @@
       "unlock":"解鎖 DJ 展台",
       "add":"增加目標用戶到 dj 展台\/等候清單",
       "remove":"從 dj 展台\/等候清單 移除目標用戶",
-      "strobe":"啟用\/禁用 頻閃燈",
-      "rave":"啟用\/禁用 燈光",
       "whois all":"提供 整個房間裡所有用戶的 用戶id 與 用戶名 ",
-      "banall":"禁止所有在房間裡的用戶"
+      "banall":"禁止所有在房間裡的用戶",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"對下列詞語播放聲音: %1",
       "alertsoff":"不再對特定詞語播放聲音",
       "nextsong":"你下一首排隊的歌曲是 %1 來自 %2",
       "isHistory":"警告: 這首歌仍在播放歷史紀錄裡 (%1 - %2)",
-      "lightsOut":"%1 關閉了轉向燈",
-      "strobe":"%1 啟動了頻閃燈",
       "automute":{
         "automuted":"%1 已自動靜音.",
         "registered":"%1 已註冊到未來播放自動靜音.",
         "unregistered":"%1 已從自動靜音註冊表中刪除."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"歌曲統計",
     "updates":"歌曲更新",
     "history":"在歷史裡的歌曲",
+    "songUnavailable":"Song Unavailable",
     "songLength":"歌曲長度 (%1 分鐘)",
     "message":{
       "grab":"收藏了 %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"離開了房間",
       "history":"歌曲在歷史紀錄裡 (%1 - %2)",
       "historySkipped":"歌曲在歷史紀錄裡 (%1 - %2), 但在最後一次播放已被跳過",
-      "songLength":"歌曲長過 %1 分鐘"
-    },
-    "notification":{
-      "songLength":"歌曲長度"
+      "songLength":"歌曲長過 %1 分鐘",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"投票",
     "position":"位置",
     "points":"分",
-    "fans":"粉絲",
     "wootCount":"正評計算",
     "mehCount":"負評計算",
     "ratio":"正評\/負評 比率",
@@ -163,6 +167,7 @@
     "autorespond":"AFK 自動回應",
     "notify":"通知",
     "afktimers":"AFK 計時",
+    "etatimer":"ETA Timer",
     "roomsettings":"房間設定",
     "chatimages":"聊天圖像",
     "twitchemotes":"搞怪表情",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"找不到此用戶",
-    "usernameNotFound":"用戶名不存在",
     "unknownModeration":"未知管理動作",
     "unknownMenuKey":"未知菜單匙碼: %1",
     "missingReason":"遺失原因",
-    "notConnected":"未連接到服務器插座",
     "noLiteSupport":"這並不被 plug&#179; Lite 所支援",
     "errorGettingPlaylistInfo":"獲取播放清單資訊時出錯",
     "noPlaylistsFound":"無法找到播放清單",
     "yourActivePlaylistIsFull":"你的活躍播放清單已滿",
-    "canNotFindTheLastPMReceiver":"無法找到最後私聊的接收器",
     "noNextSong":"你沒有歌曲能排隊"
   }
 }

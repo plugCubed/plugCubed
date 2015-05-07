@@ -15,6 +15,10 @@
     "commandDisable":"%1 autojoin disabled",
     "commandNotEnabled":"%1 autojoin was not enabled"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"plug&#179; naredbe",
     "userCommands":"Korisničke naredbe",
@@ -24,13 +28,10 @@
       "word":"riječ",
       "on":"uklj.",
       "off":"isklj.",
-      "reason":"razlog"
+      "reason":"razlog",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"postavljanje statusa na \"dostupan\"",
-      "afk":"postavljanje statusa za \"afk\"",
-      "work":"postavljanje statusa na \"zaposlen\"",
-      "gaming":"postavljanje statusa na \"igranje igara\"",
       "join":"pridruživanje stolu za DJ-anje\/popisu čekanja",
       "leave":"napuštanje stola za dj-anje\/popisa čekanja",
       "whoami":"dobivanje svojih informacija",
@@ -42,6 +43,7 @@
       "alertson":"reprodukcija zvuka kad god su određene riječi napisane u čavrljanju",
       "alertsoff":"prestanak reprodukcije zvuka kada su određene riječi napisane u čavrljanju",
       "grab":"dodavanje trenutne pjesme na vaš odabrani popis za reprodukciju",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"dobivanje trenutnog mjesta na popisu čekanja",
       "version":"prikaz broja inačice",
       "commands":"prikaz ovog popisa",
@@ -54,22 +56,23 @@
       "unlock":"otključavanje stola za DJ-anje",
       "add":"dodavanje ciljanog korisnika na stol za DJ-anje\/popis čekanja",
       "remove":"uklanjanje ciljanog korisnika sa stola za DJ-anje\/popisa čekanja",
-      "strobe":"omogućavanje\/onemogućavanje disko svjetla",
-      "rave":"enable\/disable lights out",
       "whois all":"davanje ID-a korisnika i korisničkog imena svih korisnika ju sobi",
-      "banall":"zabranjivanje pristupa svim korisnicima u sobi"
+      "banall":"zabranjivanje pristupa svim korisnicima u sobi",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Reprodukcija zvuka sljedećih riječi: %1",
       "alertsoff":"Više se ne reproducira zvuk određenih riječi",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"Korisnik %1 je ugasio svjetla",
-      "strobe":"%1 activated strobe lights",
       "automute":{
         "automuted":"%1 automuted.",
         "registered":"%1 registered to automute on future plays.",
         "unregistered":"%1 removed from automute registry."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Statistika o pjesmi",
     "updates":"Ažuriranja pjesama",
     "history":"Pjesme u povijesti",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Duljina pjesme (%1 min)",
     "message":{
       "grab":"grabbed %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"napustio je sobu",
       "history":"Song is in history (%1 of %2)",
       "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
-      "songLength":"Pjesma je dulja od %1 minute\/a"
-    },
-    "notification":{
-      "songLength":"Duljina pjesme"
+      "songLength":"Pjesma je dulja od %1 minute\/a",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Glas",
     "position":"Položaj",
     "points":"Bodovi",
-    "fans":"Obožavatelji",
     "wootCount":"Broj Woot-ova",
     "mehCount":"Broj Meh-ova",
     "ratio":"Omjer Woot-ova\/Meh-ova",
@@ -163,6 +167,7 @@
     "autorespond":"AFK auto. odgovor",
     "notify":"Obavijesti",
     "afktimers":"AFK brojači vremena",
+    "etatimer":"ETA Timer",
     "roomsettings":"Postavke zajednice",
     "chatimages":"Slike razgovora",
     "twitchemotes":"Twitch Emotes",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"User not found",
-    "usernameNotFound":"Username not found",
     "unknownModeration":"Unknown moderation",
     "unknownMenuKey":"Unknown menu key: %1",
     "missingReason":"Missing reason",
-    "notConnected":"Not connected to socket server",
     "noLiteSupport":"This is not supported in plug&#179; Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
     "noNextSong":"You have no queued song"
   }
 }

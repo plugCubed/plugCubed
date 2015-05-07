@@ -16,6 +16,7 @@ out
 
 # Windows
 desktop.ini
+thumbs.db
 
 # Other directories
 test
@@ -39,3 +40,4 @@ extensions/Firefox-release
 extensions/promotionalSmall.png
 extensions/Opera/plugCubed.js
 extensions/Firefox/data/plugCubed.js
+p3.config.js

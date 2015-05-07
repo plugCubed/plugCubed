@@ -32,10 +32,6 @@
             "number": "number"
         },
         "descriptions": {
-            "avail": "set status to available",
-            "afk": "set status to afk",
-            "work": "set status to working",
-            "gaming": "set status to gaming",
             "join": "join dj booth/waitlist",
             "leave": "leaves dj booth/waitlist",
             "whoami": "get your own information",
@@ -60,8 +56,6 @@
             "unlock": "unlocks DJ booth",
             "add": "adds targeted user to dj booth/waitlist",
             "remove": "removes targeted user from dj booth/waitlist",
-            "strobe": "enable/disable strobe",
-            "rave": "enable/disable lights out",
             "whois all": "gives userid and username of all users in the room",
             "banall": "bans all users in the room",
             "status": "shows status of plug servers"
@@ -71,8 +65,6 @@
             "alertsoff": "No longer playing sound on specific words",
             "nextsong": "Your next queued song is %1 by %2",
             "isHistory": "Warning: This song is still in the history (%1 of %2)",
-            "lightsOut": "%1 turned the lights off",
-            "strobe": "%1 activated strobe lights",
             "automute": {
                 "automuted": "%1 automuted.",
                 "registered": "%1 registered to automute on future plays.",
@@ -115,9 +107,6 @@
             "songNotFound": "Song not found",
             "songEmbed": "Song has embedding disabled",
             "songStreamable": "Song doesn't support streaming"
-        },
-        "notification": {
-            "songLength": "Song Length"
         }
     },
     "info": {
@@ -142,7 +131,6 @@
         "vote": "Vote",
         "position": "Position",
         "points": "Points",
-        "fans": "Fans",
         "wootCount": "Woot Count",
         "mehCount": "Meh Count",
         "ratio": "Woot/Meh Ratio",
@@ -154,8 +142,7 @@
         "disconnects": "Disconnects",
         "lastDisconnect": "Last Disconnect",
         "lastPosition": "Position",
-        "time": "Time",
-        "lastMessage": "Last Message"
+        "time": "Time"
     },
     "ranks": {
         "you": "You",
@@ -203,16 +190,13 @@
     },
     "error": {
         "userNotFound": "User not found",
-        "usernameNotFound": "Username not found",
         "unknownModeration": "Unknown moderation",
         "unknownMenuKey": "Unknown menu key: %1",
         "missingReason": "Missing reason",
-        "notConnected": "Not connected to socket server",
         "noLiteSupport": "This is not supported in plug&#179; Lite",
         "errorGettingPlaylistInfo": "Error getting playlist info",
         "noPlaylistsFound": "No playlists found",
         "yourActivePlaylistIsFull": "Your active playlist is full",
-        "canNotFindTheLastPMReceiver": "Can not find the last PM receiver",
         "noNextSong": "You have no queued song"
     }
 }

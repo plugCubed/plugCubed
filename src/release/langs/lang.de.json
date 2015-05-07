@@ -15,6 +15,10 @@
     "commandDisable":"%1 Automatisch Beitreten deaktiviert",
     "commandNotEnabled":"%1 Automatisches Beitreten war nicht aktiviert"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"plug&#179; Befehle",
     "userCommands":"Benutzerbefehle",
@@ -24,13 +28,10 @@
       "word":"Wort",
       "on":"an",
       "off":"aus",
-      "reason":"Grund"
+      "reason":"Grund",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"Setze den Status auf verfügbar",
-      "afk":"Setze  den Status auf AFK",
-      "work":"Setze den Status auf arbeitend",
-      "gaming":"spielend",
       "join":"Nutzer beigetreten",
       "leave":"Verlässt den DJ-Booth\/die Warteliste",
       "whoami":"Siehe deine eigenen Informationen ein",
@@ -42,6 +43,7 @@
       "alertson":"Spiele einen Ton, sobald bestimmte Worte im Chat geschrieben werden",
       "alertsoff":"Kein Signalton bei einem im Chat erwähntem Wort  ",
       "grab":"Füge den aktuellen Song zu deiner ausgewählten Playlist hinzu",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"Zeigt deine Position in der Warteliste an",
       "version":"Zeigt die Versionsnummer an",
       "commands":"Zeigt diese Liste",
@@ -54,22 +56,23 @@
       "unlock":"Entsperrt die DJ Warteliste",
       "add":"Fügt den markierten Benutzer zur DJ Warteliste hinzu",
       "remove":"Entfernt den markierten Benutzer von der DJ Warteliste",
-      "strobe":"Ein-\/Ausschalten des Stroboskops",
-      "rave":"Schalte die \"Lichter aus\"-Funktion ein-\/aus",
       "whois all":"Zeigt die Benutzer-ID und Benutzernamen von allen Benutzern im Raum an",
-      "banall":"Bannt alle Benutzer im Raum"
+      "banall":"Bannt alle Benutzer im Raum",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Mache ein Geräusch bei folgenden Wörtern: %1",
       "alertsoff":"Mache kein Gerüsch bei spezifischen Wörten mehr",
       "nextsong":"Dein nächstes Lied ist %1 von %2",
       "isHistory":"Warnung: Dieser Song ist noch im Verlauf (%1 von %2)",
-      "lightsOut":"%1 hat das Licht ausgeschaltet",
-      "strobe":"%1 hat die Blitzlichter aktiviert",
       "automute":{
         "automuted":"%1 automatisch stumm geschaltet.",
         "registered":"%1 für automatisches Stummstellen bei zukünftigen DJ's registriert.",
         "unregistered":"%1 wurde von der Automatisch-Stummstellen Liste entfernt."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Song-Statistik",
     "updates":"Song-Updates",
     "history":"Songs im Verlauf",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Song Länge (%1 min)",
     "message":{
       "grab":"grabbed %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"Hat die Community verlassen",
       "history":"Song ist im Verlauf (%1 von %2)",
       "historySkipped":"Song ist im Verlauf (%1 von %2), aber wurde beim letzten Mal übersprungen",
-      "songLength":"Song ist länger als %1 Minuten "
-    },
-    "notification":{
-      "songLength":"Song Länge"
+      "songLength":"Song ist länger als %1 Minuten ",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Abstimmen",
     "position":"Position",
     "points":"Punkte",
-    "fans":"Anhänger",
     "wootCount":"Woot Anzahl",
     "mehCount":"Meh Anzahl",
     "ratio":"Woot\/Meh Verhältnis",
@@ -163,6 +167,7 @@
     "autorespond":"AFK Autoantwort",
     "notify":"Benachrichtigungen",
     "afktimers":"AFK Timer",
+    "etatimer":"ETA Timer",
     "roomsettings":"Raum Einstellungen",
     "chatimages":"Chat-Bilder",
     "twitchemotes":"Twitch Emotes",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Benutzer konnte nicht gefunden werden.",
-    "usernameNotFound":"Benutzername nicht gefunden",
     "unknownModeration":"Unbekannte Moderation",
     "unknownMenuKey":"Unbekannte Menü-Taste: %1",
     "missingReason":"Fehlender Grund",
-    "notConnected":"Nicht mit dem Socket Server verbunden",
     "noLiteSupport":"Das ist in plug&#179; Lite nicht unterstützt",
     "errorGettingPlaylistInfo":"Error beim Laden der Playlist Informationen",
     "noPlaylistsFound":"Keine Playlist gefunden",
     "yourActivePlaylistIsFull":"Deine aktive Playlist ist voll",
-    "canNotFindTheLastPMReceiver":"Letzter PM-Empfänger kann nicht gefunden werden",
     "noNextSong":"Du hast kein Lied in der Warteschlange"
   }
 }

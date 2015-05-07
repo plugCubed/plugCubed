@@ -101,7 +101,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     if (Settings.autojoin) {
                         (function() {
                             var dj = API.getDJ();
-                            if (dj == null || dj.id == API.getUser().id || API.getWaitListPosition() > -1) return;
+                            if (dj != null && dj.id == API.getUser().id || API.getWaitListPosition() > -1) return;
                             $('#dj-button').click();
                         })();
                     }
@@ -144,6 +144,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 case 'notify-updates':
                 case 'notify-history':
                 case 'notify-songLength':
+                case 'notify-unavailable':
                     var elem = $('.p3-s-' + a);
                     if (!elem.data('perm') || (API.hasPermission(undefined, elem.data('perm')) || p3Utils.isPlugCubedDeveloper())) {
                         var bit = elem.data('bit');
@@ -281,6 +282,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     $('.p3-s-notify-songLength').find('span').text(p3Lang.i18n('notify.songLength', v))
                 });
                 container.append(GUIButton((Settings.notify & enumNotifications.SONG_HISTORY) === enumNotifications.SONG_HISTORY, 'notify-history', p3Lang.i18n('notify.history')).data('bit', enumNotifications.SONG_HISTORY).data('perm', API.ROLE.BOUNCER));
+                container.append(GUIButton((Settings.notify & enumNotifications.SONG_UNAVAILABLE) === enumNotifications.SONG_UNAVAILABLE, 'notify-unavailable', p3Lang.i18n('notify.songUnavailable')).data('bit', enumNotifications.SONG_UNAVAILABLE).data('perm', API.ROLE.BOUNCER));
                 container.append(GUIButton((Settings.notify & enumNotifications.SONG_LENGTH) === enumNotifications.SONG_LENGTH, 'notify-songLength', p3Lang.i18n('notify.songLength', Settings.notifySongLength)).data('bit', enumNotifications.SONG_LENGTH).data('perm', API.ROLE.BOUNCER));
                 container.append(songLengthSlider.$slider.css('left', 40));
             }

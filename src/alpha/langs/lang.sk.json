@@ -15,6 +15,10 @@
     "commandDisable":"%1 Automatické spojenie vypnuté",
     "commandNotEnabled":"Automatické spojenie %1 nebolo povolené"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"User Information",
     "userCommands":"Užívateľské príkazy",
@@ -24,13 +28,10 @@
       "word":"slovo",
       "on":"Zapnuté",
       "off":"vypnutie",
-      "reason":"dôvod"
+      "reason":"dôvod",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"zmeniť stav na \"dostupný\"",
-      "afk":"AFK Message",
-      "work":"zmeniť stav na \"pracujem\"",
-      "gaming":"Gaming",
       "join":"User Join",
       "leave":"User Leave",
       "whoami":"získať vlastné informácie",
@@ -42,6 +43,7 @@
       "alertson":"Prehrať zvuk vždy definované slová sú napísané v chate",
       "alertsoff":"zastaviť prehrávanie zvuku pri definovaných slová sú napísané v chate",
       "grab":"add current song to your selected playlist",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"získať aktuálnu pozíciu waitlist",
       "version":"zobrazí číslo verzie",
       "commands":"Tento zoznam sa zobrazuje",
@@ -54,22 +56,23 @@
       "unlock":"odomkne DJ booth",
       "add":"pridá cieľových používateľov na dj búdky\/waitlist",
       "remove":"odstraňuje cieľových používateľov od dj búdky\/waitlist",
-      "strobe":"zapnúť\/vypnúť blesk",
-      "rave":"Zapnutie\/vypnutie svetla von",
       "whois all":"dáva userid a užívateľské meno všetkých používateľov v miestnosti",
-      "banall":"zákazy všetkých používateľov v miestnosti"
+      "banall":"zákazy všetkých používateľov v miestnosti",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
       "alertsoff":"No longer playing sound on specific words",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
       "automute":{
         "automuted":"%1 automuted.",
         "registered":"%1 registered to automute on future plays.",
         "unregistered":"%1 removed from automute registry."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Pieseň štatistiky",
     "updates":"Pieseň aktualizácie",
     "history":"Piesní v histórii",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Dĺžka piesne (%1 min)",
     "message":{
       "grab":"grabbed %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"left the room",
       "history":"Skladba je v histórii (%1 z %2)",
       "historySkipped":"Pesnička je v histórii (%1 z %2), ale bola preskočí pretože dnes hrala",
-      "songLength":"Pesnička je dlhšia ako %1 minúta"
-    },
-    "notification":{
-      "songLength":"Dĺžka Skladby"
+      "songLength":"Pesnička je dlhšia ako %1 minúta",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Hlasovať",
     "position":"Pozícia",
     "points":"Body",
-    "fans":"Fanúšikovia",
     "wootCount":"Woot počítať",
     "mehCount":"Meh počítať",
     "ratio":"Woot\/Meh premier",
@@ -163,6 +167,7 @@
     "autorespond":"AFK Autorespond",
     "notify":"Oznámenia",
     "afktimers":"AFK časovač",
+    "etatimer":"ETA Timer",
     "roomsettings":"Nastavenie Miestnosti",
     "chatimages":"Chat obrázky",
     "twitchemotes":"Twitch Emotes",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Užívateľ nebol nájdený",
-    "usernameNotFound":"Username not found",
     "unknownModeration":"Neznámy moderovanie",
     "unknownMenuKey":"Neznámy menu kľúč: %1",
     "missingReason":"Chýbajúce dôvod",
-    "notConnected":"Nie je pripojený na socket server",
     "noLiteSupport":"Toto nie je podporované v plug³ Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
     "noNextSong":"You have no queued song"
   }
 }

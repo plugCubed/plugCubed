@@ -15,6 +15,10 @@
     "commandDisable":"%1 autojoin disabled",
     "commandNotEnabled":"%1 autojoin was not enabled"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"사용자 정보",
     "userCommands":"User Commands",
@@ -24,13 +28,10 @@
       "word":"word",
       "on":"on",
       "off":"off",
-      "reason":"reason"
+      "reason":"reason",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"상태를 사용가능으로 설정",
-      "afk":"자리비움 자동응답",
-      "work":"상태를 일 하는 중으로 설정",
-      "gaming":"게임 중",
       "join":"사용자 입장.",
       "leave":"사용자 퇴장",
       "whoami":"자신의 정보를 나타냅니다.",
@@ -42,6 +43,7 @@
       "alertson":"정의 된 단어가 채팅에 기록 될 때마다 알려줍니다.",
       "alertsoff":"정의 된 단어가 채팅에 기록 될 때마다 노래의 재생을 멈춥니다.",
       "grab":"add current song to your selected playlist",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"현재 대기자 명단의 위치를 얻습니다.",
       "version":"버전 번호를 표시합니다",
       "commands":"이 목록을 보여줍니다.",
@@ -54,22 +56,23 @@
       "unlock":"DJ 부스를 잠금해제 합니다.",
       "add":"해당 유저를 DJ 부스 \/ 대기열에 가입 시킵니다.",
       "remove":"해당 유저를 DJ 부스 \/ 대기열에서 퇴장시킵니다.",
-      "strobe":"조명 활성화 \/ 비활성화",
-      "rave":"조명 활성화 \/ 비활성화를 나타내지 않습니다.",
       "whois all":"방에 있는 모든 사용자의 ID와 사용자 이름을 제공합니다.",
-      "banall":"방에 있는 모두를 내쫓습니다."
+      "banall":"방에 있는 모두를 내쫓습니다.",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
       "alertsoff":"No longer playing sound on specific words",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
       "automute":{
         "automuted":"%1 automuted.",
         "registered":"%1 registered to automute on future plays.",
         "unregistered":"%1 removed from automute registry."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Song Stats",
     "updates":"Song Updates",
     "history":"Songs in history",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Song Length (%1 min)",
     "message":{
       "grab":"grabbed %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"left the room",
       "history":"Song is in history (%1 of %2)",
       "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
-      "songLength":"Song is longer than %1 minutes"
-    },
-    "notification":{
-      "songLength":"Song Length"
+      "songLength":"Song is longer than %1 minutes",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"투표",
     "position":"Position",
     "points":"Points",
-    "fans":"팬",
     "wootCount":"Woot Count",
     "mehCount":"Meh Count",
     "ratio":"Woot\/Meh Ratio",
@@ -163,6 +167,7 @@
     "autorespond":"자리비움 시 자동응답",
     "notify":"Notifications",
     "afktimers":"AFK Timers",
+    "etatimer":"ETA Timer",
     "roomsettings":"Room Settings",
     "chatimages":"Chat Images",
     "twitchemotes":"Twitch Emotes",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"User not found",
-    "usernameNotFound":"Username not found",
     "unknownModeration":"Unknown moderation",
     "unknownMenuKey":"Unknown menu key: %1",
     "missingReason":"Missing reason",
-    "notConnected":"Not connected to socket server",
     "noLiteSupport":"This is not supported in plug&#179; Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
     "noNextSong":"You have no queued song"
   }
 }

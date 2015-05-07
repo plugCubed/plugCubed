@@ -15,6 +15,10 @@
     "commandDisable":"%1 otomatik giriş devre dışı",
     "commandNotEnabled":"%1 autojoin kullanılamaz"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"plug³ komutları",
     "userCommands":"Kullanıcı komutları",
@@ -24,13 +28,10 @@
       "word":"kelime",
       "on":"Açık",
       "off":"Kapalı",
-      "reason":"Neden"
+      "reason":"Neden",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"kullanılabilir için mevcut durum ayarı",
-      "afk":"AFK mesaj",
-      "work":"çalışma için  durum ayarı",
-      "gaming":"Oyun",
       "join":"Kullanıcı Girdi.",
       "leave":"Kullanıcı Odayı terk etti.",
       "whoami":"kendi bilgi almak",
@@ -42,6 +43,7 @@
       "alertson":"tanımlı kelimeleri sohbette yazılan her ses çalmak",
       "alertsoff":"tanımlanan sözcükleri yazılır zaman sesi oynatmayı durdurmak sohbet",
       "grab":"add current song to your selected playlist",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"Geçerli bekleme konumuna getir",
       "version":"sürüm numarasını görüntüle",
       "commands":"Liste olarak göster",
@@ -54,22 +56,23 @@
       "unlock":"DJ kabini kilidini açar",
       "add":"hedeflenen kullanıcı için dj kabini\/bekleme listesine ekler",
       "remove":"dj kabin\/bekleme listesine hedeflenen kullanıcıdan kaldırır",
-      "strobe":"Acık\/kapalı strobe",
-      "rave":"Işıklar söner etkinleştir\/devre dışı bırak",
       "whois all":"kullanıcı kimliği ve odadaki tüm kullanıcıların kullanıcı adınızı verir",
-      "banall":"Odadaki tüm kullanıcılar yasakları"
+      "banall":"Odadaki tüm kullanıcılar yasakları",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
       "alertsoff":"No longer playing sound on specific words",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
       "automute":{
         "automuted":"%1 automuted.",
         "registered":"%1 registered to automute on future plays.",
         "unregistered":"%1 removed from automute registry."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Şarkı istatistikleri",
     "updates":"Şarkı güncellemeleri",
     "history":"Oynatılan şarkılar",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Şarkı %1 dakikadan daha uzun",
     "message":{
       "grab":"grabbed %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"left the room",
       "history":"Şarkı geçmiş (%1 of %2) ",
       "historySkipped":"Şarkı tarihinin (%1 of %2), ama son şarkıda atlandı",
-      "songLength":"Şarkı %1 dakikadan daha uzun"
-    },
-    "notification":{
-      "songLength":"Şarkı uzunluğu"
+      "songLength":"Şarkı %1 dakikadan daha uzun",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Oy",
     "position":"Pozisyon",
     "points":"Puan",
-    "fans":"Hayranları",
     "wootCount":"Begenme sayısı",
     "mehCount":"begenilmeme sayısı",
     "ratio":"begeneilme\/begenilmeme oranı",
@@ -163,6 +167,7 @@
     "autorespond":"AFK Otomatik Yanıt",
     "notify":"Bildirimler",
     "afktimers":"AFK zamanlayıcı",
+    "etatimer":"ETA Timer",
     "roomsettings":"Oda Ayarları",
     "chatimages":"Sohbet görüntüleri",
     "twitchemotes":"Twitch Emotes",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Kullanıcı bulunamadı",
-    "usernameNotFound":"Username not found",
     "unknownModeration":"Bilinmeyen moderatör",
     "unknownMenuKey":"Bilinmeyen menü tuşu: %1",
     "missingReason":"Kayıp bir neden",
-    "notConnected":"Soket sunucusuna bağlı değil",
     "noLiteSupport":"Burada plug³ Lite desteklenmiyor",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
     "noNextSong":"You have no queued song"
   }
 }

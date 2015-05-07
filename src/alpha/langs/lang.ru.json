@@ -15,6 +15,10 @@
     "commandDisable":"%1 автодобавление отключено",
     "commandNotEnabled":"%1 автодобавление недоступно"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"Команды plug&#179;",
     "userCommands":"Пользовательские команды",
@@ -24,13 +28,10 @@
       "word":"слово",
       "on":"включено",
       "off":"выключено",
-      "reason":"причина"
+      "reason":"причина",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"сменить статус на \"доступен\"",
-      "afk":"поставить статус \"недоступен\"",
-      "work":"поставить статус \"работаю\"",
-      "gaming":"поставить статус \"играю\"",
       "join":"встать в очередь",
       "leave":"выйти из очереди",
       "whoami":"получить информацию о себе",
@@ -42,6 +43,7 @@
       "alertson":"воспроизводить звук, когда указанные слова будут написаны в чате",
       "alertsoff":"останавливать воспроизведение звука, когда определённые слова пишутся в чате",
       "grab":"add current song to your selected playlist",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"узнать свою положение в очереди",
       "version":"отобразить номер текущей версии",
       "commands":"показать этот список",
@@ -54,22 +56,23 @@
       "unlock":"Разблокировать DJ - лист",
       "add":"добавить выбранного пользователя в очередь",
       "remove":"удалить выбранного пользователя из очереди",
-      "strobe":"включить\/выключить вспышки",
-      "rave":"включить\/выключить свет",
       "whois all":"предоставить идентификатор пользователя, или имя пользователя, или всех пользователей в комнате",
-      "banall":"забанить всех пользователей в этой комнате"
+      "banall":"забанить всех пользователей в этой комнате",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
       "alertsoff":"No longer playing sound on specific words",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
       "automute":{
         "automuted":"%1 automuted.",
         "registered":"%1 registered to automute on future plays.",
         "unregistered":"%1 removed from automute registry."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Статистика трека",
     "updates":"Обновления треков",
     "history":"Треки в истории",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Продолжительность песни (%1 мин)",
     "message":{
       "grab":"grabbed %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"left the room",
       "history":"Песня в истории (%1 из %2)",
       "historySkipped":"Песня в истории (%1 из %2), но была пропущена в последнем проигрывании",
-      "songLength":"Песня длиннее, чем %1 минут"
-    },
-    "notification":{
-      "songLength":"Длительность трека"
+      "songLength":"Песня длиннее, чем %1 минут",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Голосовать",
     "position":"Позиция",
     "points":"Баллы",
-    "fans":"Фанаты",
     "wootCount":"Количество Woot",
     "mehCount":"Количество Meh",
     "ratio":"Соотношение Woot\/Meh",
@@ -163,6 +167,7 @@
     "autorespond":"Автоматическое оповещение об отсутствии",
     "notify":"Уведомления",
     "afktimers":"Таймер отсутствия",
+    "etatimer":"ETA Timer",
     "roomsettings":"Настройки Комнаты",
     "chatimages":"Изображения в чате",
     "twitchemotes":"Twitch Emotes",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Пользователь не найден",
-    "usernameNotFound":"Username not found",
     "unknownModeration":"Неизвестная команда",
     "unknownMenuKey":"Неизвестный элемент меню: %1",
     "missingReason":"Отсутствует причина",
-    "notConnected":"Не подключен к сокет-серверу",
     "noLiteSupport":"Это не поддерживается в plug³ Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
     "noNextSong":"You have no queued song"
   }
 }

@@ -15,6 +15,10 @@
     "commandDisable":"%1 autó-belépés kikapcsolva",
     "commandNotEnabled":"%1 autó-belépés nem volt bekapcsolva"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"plug&#179; parancsok",
     "userCommands":"Felhasználói Parancsok",
@@ -24,13 +28,10 @@
       "word":"szó",
       "on":"be",
       "off":"ki",
-      "reason":"inditék"
+      "reason":"inditék",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"Állapot állítása elérhető-re",
-      "afk":"AFK Üzenet",
-      "work":"Állapot állítása dolgozik-ra",
-      "gaming":"Játszik",
       "join":"Felhasználó Csatlakozik",
       "leave":"Felhasználó Lelépett",
       "whoami":"Saját adatok megtekintése",
@@ -42,6 +43,7 @@
       "alertson":"Hang lejátszása ha egy megadott szót írnak a chat-ben",
       "alertsoff":"Ne játszon le hangot ha egy megadott szót írnak a chat-ben",
       "grab":"Most jätszott szám hozzáadni a jelenleg kiválasztott listádba",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"Sorszám lekérése a váró listán",
       "version":"Verziószám megjelenítése",
       "commands":"Lista mutatása",
@@ -54,22 +56,23 @@
       "unlock":"kinyitja a DJ Bódét",
       "add":"Hozzáadja a kijelölt felhasználót a DJ Bódé\/Várólistához",
       "remove":"Eltávolítja a kijelölt felhasználót a DJ Bódé\/Várolistából",
-      "strobe":"engedélyezi\/tiltja a stroboszkópot ",
-      "rave":"engedélyezi\/tiltja a lámpák kikapcsolását",
       "whois all":"Lekéri a szobában tartózkodó összes felhasználó ID-jét és felhasználónevét",
-      "banall":"Kitilt minden felhasználót a szobában"
+      "banall":"Kitilt minden felhasználót a szobában",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
       "alertsoff":"No longer playing sound on specific words",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
       "automute":{
         "automuted":"%1 automuted.",
         "registered":"%1 registered to automute on future plays.",
         "unregistered":"%1 removed from automute registry."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"a szám statisztikája",
     "updates":"Dal frissítések",
     "history":"Számok a történelemben",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Dal hossza (%1 perc)",
     "message":{
       "grab":"%1 felszedte ezt: %2 - %3",
@@ -98,10 +102,11 @@
       "leave":"left the room",
       "history":"A szám szerepel az előzményekben (%1 közül %2)",
       "historySkipped":"A szám szerepel az előzményekben (%1 közül %2), de kihagyták az előző lejátszáskor",
-      "songLength":"A szám hosszabb mint %1 perc"
-    },
-    "notification":{
-      "songLength":"A Dal hossza"
+      "songLength":"A szám hosszabb mint %1 perc",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Szavaz",
     "position":"Helyezet",
     "points":"Pontok",
-    "fans":"Rajongók",
     "wootCount":"Tetszik-ek Száma",
     "mehCount":"Nem Tetszik-ek Száma",
     "ratio":"Tetszik\/Nem Tetszik Aránya",
@@ -163,6 +167,7 @@
     "autorespond":"AFK Autóválasz ",
     "notify":"Értesítések ",
     "afktimers":"AFK Számlálók",
+    "etatimer":"ETA Timer",
     "roomsettings":"Szoba beállításai",
     "chatimages":"Chat-képek",
     "twitchemotes":"Twitch smiley-k",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Felhasználó nem található",
-    "usernameNotFound":"Username not found",
     "unknownModeration":"Ismeretlen moderáció",
     "unknownMenuKey":"Ismeretlen menü gomb: %1",
     "missingReason":"Hiányzó ok",
-    "notConnected":"Nincs csatlakozva a \"socket\" szerverhez",
     "noLiteSupport":"Ez nincs támogatva a plug&#179; Lite-ban",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
     "noNextSong":"You have no queued song"
   }
 }

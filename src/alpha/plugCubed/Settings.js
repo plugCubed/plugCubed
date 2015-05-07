@@ -15,8 +15,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
             case void 0:
             case 1:
                 // Inline Images => Chat Images
-                if (save['inlineimages'] != null)
-                    save.chatImages = save['inlineimages'];
+                if (save.inlineimages != null)
+                    save.chatImages = save.inlineimages;
 
                 // Moderation
                 if (save.moderation == null)

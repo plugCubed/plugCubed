@@ -1,36 +1,37 @@
 {
   "running":"Versija : #179 %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
-  "commandsHelp":"Raksti '\/commands' lai redzētu vairāk čata komandas.",
+  "runningLite":"plug&#179; darbojas Lite režīmā!",
+  "runningLiteInfo":"Vairākas funkcijas nedarbosies.",
+  "commandsHelp":"Raksti '\/commands' lai redzētu čata komandas.",
   "autorespond":{
     "default":"Es esmu prom no klaviatūras",
-    "disable":"Izslēdz AFK auto atbildēšanu lai čatotu",
-    "nextIn":"Nākamo autoatbildēšanas ziņu uzrakstīs %1",
-    "next":"AFK autoatbildēšana kad kāds pasauc tevi.",
-    "commandDisable":"%1 automātiskā pievienošanās DJ sarakstam izslēgta",
-    "commandNotEnabled":"%1 Automātiskā DJ pieslēgšanās nav atļauta"
+    "disable":"Izslēgt automātisko AFK atbildi",
+    "nextIn":"Nākamā automātiskā AFK atbildes ziņa tiks sūtīta %1",
+    "next":"AFK automātiskā atbilde kad tevi piemin",
+    "commandDisable":"%1 AFK ziņa atspējota",
+    "commandNotEnabled":"%1 AFK ziņa nebija iespējota"
   },
   "autojoin":{
-    "commandDisable":"%1 automātiskā pievienošanās DJ sarakstam izslēgta",
+    "commandDisable":"%1 automātiskā pievienošanās DJ sarakstam atspējota",
     "commandNotEnabled":"%1 Automātiskā DJ pieslēgšanās nav atļauta"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
-    "header":"Lietotāja informācija",
+    "header":"plug&#179; Komandas",
     "userCommands":"Lietotāja komandas",
-    "modCommands":"Moderatora komandas",
+    "modCommands":"Moderācijas komandas",
     "variables":{
-      "username":"Segvārds",
+      "username":"lietotājvārds",
       "word":"vārds",
       "on":"ieslēgts",
       "off":"izslēgts",
-      "reason":"iemesls"
+      "reason":"iemesls",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"uzliec statusu uz pieejams",
-      "afk":"iestatīt statusu uz afk",
-      "work":"uzsliec statusu uz strādāju",
-      "gaming":"Spēlēju",
       "join":"Lietotājs pievienojās",
       "leave":"Lietotājs aizgāja",
       "whoami":"saņemt informāciju par sevi",
@@ -41,7 +42,8 @@
       "refresh":"restartēt video",
       "alertson":"atskaņot signālu kad noteiktais vārds tiek uzrakstīts čatā",
       "alertsoff":"beigt atskaņot skaņas kad jebkāds vārds tiek uzrakstīts čatā",
-      "grab":"add current song to your selected playlist",
+      "grab":"pievienot esošo dziesmu izvēlētajam sarakstam",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"apstīties pašreizējo waitlist pozīciju",
       "version":"parādīt plug³ versiju",
       "commands":"parādīt šo sarakstu",
@@ -54,54 +56,57 @@
       "unlock":"atslēgt DJ saraksti",
       "add":"pievienot izvēlēto lietotāju DJ sarakstam",
       "remove":"izņemt izvēlēto lietotāju no DJ saraksta",
-      "strobe":"ieslēgt\/izslēgt  mirgošanu",
-      "rave":"ieslēgt\/izslēgt gaismas",
       "whois all":"parādīt visu lietotāju id un to lietotājvārdus kas atrodas šajā istabā",
-      "banall":"liegt pieeju visiem lietotājiem kas ir šajā istabā"
+      "banall":"liegt pieeju visiem lietotājiem kas ir šajā istabā",
+      "status":"shows status of plug servers"
     },
     "responses":{
-      "alertson":"Playing sound on the following words: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
+      "alertson":"Dod skaņas paziņojumu šiem vārdiem:%1",
+      "alertsoff":"Vairs nedod skaņas paziņojumu noteiktiem vārdiem",
+      "nextsong":"Tava nākošā dziesma ir %1 no %2",
+      "isHistory":"Brīdinājums: Šī dziesma vēlprojām atrodas vēsturē (%1 no %2)",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "automuted":"%1 apklusināts automātiski.",
+        "registered":"%1 reģistrēts lai tiktu apklusināts nākotnē.",
+        "unregistered":"%1 izņemts no automātiskās apklusēšanas reģistra."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "boothAvailable":"Ja tu pievienotos rindai, tu būtu DJ!",
+    "alreadyDJ":"Tu jau esi DJ!",
+    "waitListTime":"Tu atrodies rindā %1 no %2, būsi DJ pēc aptuveni %3!",
+    "joinTime":"Ja pievienosies rindai tagad, būsi DJ pēc aptuveni %1!"
   },
   "notify":{
     "header":"Lietotāja informācija",
     "join":"Lietotājs pievienojās!",
     "leave":"Lietotājs aizgāja",
-    "grab":"User Grab",
+    "grab":"Lietotājs Paņēma",
     "meh":"Lietotāja meh",
     "stats":"Dziesma sākas",
     "updates":"Dziesmu atjauninājumi",
     "history":"Dziesmu vēsture",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Dziesmas garums",
     "message":{
-      "grab":"grabbed %1 - %2",
+      "grab":"paņēma %1 - %2",
       "stats":"Stati: %1 Wooti -- %2 Mehi -- %3Pievienoja savam sarakstam",
       "updates":"Tagat skan: %1  %2<br \/>Dj: %3",
       "meh":"%1 meh  šo dziesmu",
-      "join":"joined the room",
-      "leave":"left the room",
+      "join":"Pievienojās kopienai",
+      "leave":"pameta kopienu",
       "history":"Mūzika pagātnē (%1 no %2)",
       "historySkipped":"Mūzika ir pagātnē (%1 no %2), bet tikka izlaista.",
-      "songLength":"Mūzika ir garāka par %1 minūtem"
-    },
-    "notification":{
-      "songLength":"Dziesmas garums"
+      "songLength":"Mūzika ir garāka par %1 minūtem",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Balso",
     "position":"Pozīcija",
     "points":"Punkti",
-    "fans":"Fani",
     "wootCount":"Woot skaits",
     "mehCount":"Meh skaits",
     "ratio":"Woot\/Meh attiecība",
@@ -163,15 +167,16 @@
     "autorespond":"AFK auto atbildēšana",
     "notify":"Paziņojumi",
     "afktimers":"AFK skaitītājs",
+    "etatimer":"ETA Timer",
     "roomsettings":"Istabas iestatījumi",
     "chatimages":"čata foto",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "twitchemotes":"Twitch Emotikonas",
+    "controlpanel":"Vadības Panelis"
   },
   "vote":{
     "meh":"Meh",
     "woot":"Woot",
-    "grab":"Grab",
+    "grab":"Paņemt",
     "undecided":"Neizlēmis",
     "djing":"Dīdžejo"
   },
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Lietotājs netika atrasts",
-    "usernameNotFound":"Username not found",
     "unknownModeration":"Nezināma moderācija",
     "unknownMenuKey":"Nezināma izvēlne %1",
     "missingReason":"Trūkst iemesls",
-    "notConnected":"Nav savienots ar ligzdu serveri",
     "noLiteSupport":"Tas netiek atbalstīts plug&#179; Lite!",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
-    "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
-    "noNextSong":"You have no queued song"
+    "errorGettingPlaylistInfo":"Kļūda iegūstot saraksta informāciju",
+    "noPlaylistsFound":"Nav atrastu sarakstu",
+    "yourActivePlaylistIsFull":"Tavs aktīvais saraksts ir pilns",
+    "noNextSong":"Tev nav ierindotas dziesmas"
   }
 }

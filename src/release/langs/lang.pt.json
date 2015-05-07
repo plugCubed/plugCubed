@@ -15,6 +15,10 @@
     "commandDisable":"%1 auto-join desativado",
     "commandNotEnabled":"%1 auto-join não foi ativado"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"plug&#179; Comandos",
     "userCommands":"Comandos de Usuário",
@@ -24,13 +28,10 @@
       "word":"palavra",
       "on":"Ligado",
       "off":"Desligado",
-      "reason":"motivo"
+      "reason":"motivo",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"definir o status para disponível",
-      "afk":"definir status de afk",
-      "work":"definir o status para trabalhando",
-      "gaming":"Defina o status para jogando",
       "join":"Junte-se a cabine de dj\/lista de espera",
       "leave":"Deixa a cabine de dj\/lista de espera",
       "whoami":"obter a sua própria informação",
@@ -42,6 +43,7 @@
       "alertson":"alertar sempre que palavras definidas aparecerem no chat",
       "alertsoff":"parar de alertar quando palavras definidas aparecerem no chat",
       "grab":"adicionar música atual à sua playlist selecionada",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"mostrar minha posição na lista",
       "version":"exibe o número de versão",
       "commands":"mostra esta lista",
@@ -54,22 +56,23 @@
       "unlock":"desbloqueia a cabine de DJ",
       "add":"adiciona o usuário selecionado à cabine",
       "remove":"remove o usuário selecionado da cabine",
-      "strobe":"ativar\/desativar strobe",
-      "rave":"ativar\/desativar luzes",
       "whois all":"fornece id e usuário de todos na sala",
-      "banall":"bane todos da sala"
+      "banall":"bane todos da sala",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Tocando o som das seguintes palavras: %1",
       "alertsoff":"Não está mais tocando o som em palavras específicas",
       "nextsong":"Sua próxima música em espera será %1 por %2",
       "isHistory":"Aviso: Está música ainda está no histórico (%1 de %2)",
-      "lightsOut":"%1 apagou as luzes",
-      "strobe":"%1 ativou as luzes strobe",
       "automute":{
         "automuted":"%1 mutado automaticamente.",
         "registered":"%1 registrado para mutado automaticamente nas próximas reproduções",
         "unregistered":"%1 removido do histórico de auto mutado"
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Estatísticas da música",
     "updates":"Atualizações da música",
     "history":"Músicas no Histórico",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Duração da Música (%1 min)",
     "message":{
       "grab":"%1 adicionado %2 - %3",
@@ -98,10 +102,11 @@
       "leave":"saiu da sala",
       "history":"A música está no histórico (%1 of %2)",
       "historySkipped":"A música está no histórico (%1 of %2), mas foi pulada na última vez",
-      "songLength":"A música tem mais de %1 minutos"
-    },
-    "notification":{
-      "songLength":"Duração da música"
+      "songLength":"A música tem mais de %1 minutos",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Voto",
     "position":"Posição",
     "points":"Pontos",
-    "fans":"Fãs",
     "wootCount":"Contagem de Legais",
     "mehCount":"Quantidade de Chatos",
     "ratio":"Relação Legais\/Chatos",
@@ -163,6 +167,7 @@
     "autorespond":"Auto resposta AFK",
     "notify":"Notificações",
     "afktimers":"Tempo de inatividade",
+    "etatimer":"ETA Timer",
     "roomsettings":"Configurações de sala",
     "chatimages":"Imagens no chat",
     "twitchemotes":"Emoticons do Twitch",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Usuário não encontrado",
-    "usernameNotFound":"Nome de usuário não encontrado",
     "unknownModeration":"Moderação desconhecida",
     "unknownMenuKey":"Atalho desconhecido: %1",
     "missingReason":"Sem motivo",
-    "notConnected":"Não está conectado ao servidor",
     "noLiteSupport":"Isto não é suportado em plug³ Lite",
     "errorGettingPlaylistInfo":"Erro ao obter informações da lista de reprodução",
     "noPlaylistsFound":"Não há lista de reproduções encontrada",
     "yourActivePlaylistIsFull":"Sua lista de reproduções ativa está cheia",
-    "canNotFindTheLastPMReceiver":"Não consigo encontrar o último recebidor de PM",
     "noNextSong":"Você não tem música para tocar"
   }
 }

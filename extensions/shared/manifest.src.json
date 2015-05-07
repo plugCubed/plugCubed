@@ -3,7 +3,7 @@
 
     "name": "plugCubed",
     "description": "Adding a new dimension to plug.dj",
-    "homepage_url": "http://plugCubed.net",
+    "homepage_url": "https://plugCubed.net",
     "version": "VERSION.MAJOR.VERSION.MINOR.VERSION.PATCH.VERSION.BUILD",
 
     "icons": {

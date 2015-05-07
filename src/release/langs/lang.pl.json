@@ -15,6 +15,10 @@
     "commandDisable":"%1 autojoin wyłączony",
     "commandNotEnabled":"%1 automatyczne dołączanie nie jest włączone"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"plug&#179; Polecenia",
     "userCommands":"Komendy użytkownika",
@@ -24,13 +28,10 @@
       "word":"słowo",
       "on":"on",
       "off":"Wył",
-      "reason":"powód"
+      "reason":"powód",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"Ustaw status na dostępny",
-      "afk":"ustaw status na AFK",
-      "work":"ustaw status na zajęty",
-      "gaming":"Ustaw status na \"Gra\"",
       "join":"Dołącz do listy oczekiwania",
       "leave":"Wyjdź z listy oczekiwania",
       "whoami":"Uzyskaj informacje o sobie",
@@ -42,6 +43,7 @@
       "alertson":"Odtwarza dźwięk, gdy wybrane wyrazy będą napisane na czacie",
       "alertsoff":"wyłącza odtwarzeanie dźwięku gdy dane słowa zostaną napisane na chacie",
       "grab":"dodaj bieżący utwór do wybranej listy utworów",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"pokazuje aktualną pozycję w liście oczekiwania",
       "version":"pokazuje numer wersji",
       "commands":"pokazuje tę listę",
@@ -54,22 +56,23 @@
       "unlock":"odblokowuje listę oczekiwania",
       "add":"dodaje podanego użytkownika do listy oczekiwania",
       "remove":"usuwa podanego użytkownika z listy oczekiwania",
-      "strobe":"Włącz\/Wyłącz światła stroboskopowe",
-      "rave":"Włącz\/Wyłącz światła",
       "whois all":"podaje numer identyfikacyjny oraz nazwę użytkownika każdego użytkownika znajdującego się w pokoju",
-      "banall":"zbanuj wszystkich użytkowników w tym pokoju"
+      "banall":"zbanuj wszystkich użytkowników w tym pokoju",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Odtwarzanie dźwięku na następujące słowa: %1",
       "alertsoff":"Dźwięk nie będzie już odtwarzany przy wcześniej podanych słowach",
       "nextsong":"Twoja następna piosenka w kolejce to %1 stworzona przez %2",
       "isHistory":"Uwaga: ta piosenka jest wciąż w historii (%1 z %2)",
-      "lightsOut":"%1 wyłączył światła",
-      "strobe":"%1 aktywował światła stroboskopowe",
       "automute":{
         "automuted":"%1 został automatycznie wyciszony.",
         "registered":"%1 zostanie automatycznie wyciszony podczas przyszłych odtworzeń.",
         "unregistered":"%1 został usunięty z listy automatycnego wyciszania."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Statystyki utworów",
     "updates":"Aktualizacje utworów",
     "history":"Piosenki w historii",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Długość piosenki (%1 min)",
     "message":{
       "grab":"%1 chwycił %2 - %3",
@@ -98,10 +102,11 @@
       "leave":"wyszedł z pokoju",
       "history":"Ten utwór jest w historii (%1 z %2)",
       "historySkipped":"Piosenka jest w historii (%1 z %2), lecz została pominięta przy ostatnim zagraniu",
-      "songLength":"Piosenka jest dłuższa niż %1 minut"
-    },
-    "notification":{
-      "songLength":"Długość piosenki"
+      "songLength":"Piosenka jest dłuższa niż %1 minut",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Głosuj",
     "position":"Pozycja",
     "points":"Punkty",
-    "fans":"Fani",
     "wootCount":"Licznik Wootów",
     "mehCount":"Licznik Meh-ów",
     "ratio":"Stosunek Woot\/Meh",
@@ -163,6 +167,7 @@
     "autorespond":"Auto odpowiedź AFK",
     "notify":"Powiadomienia",
     "afktimers":"Licznik AFK",
+    "etatimer":"ETA Timer",
     "roomsettings":"Ustawienia pokoju",
     "chatimages":"Pokazuj zdjęcia na czacie",
     "twitchemotes":"Emotikony Twitcha",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Użytkownik nie znaleziony",
-    "usernameNotFound":"Nazwa użytkownika nie została znaleziona",
     "unknownModeration":"Nieznana moderacja",
     "unknownMenuKey":"Nieznany klawisz menu: %1",
     "missingReason":"Brak przyczyny",
-    "notConnected":"Nie połączono z serwerem",
     "noLiteSupport":"Ta funkcja nie jest dostępna w plug&#179; Lite",
     "errorGettingPlaylistInfo":"Wystąpił błąd podczas uzyskiwania informacji na temat listy odtwarzania",
     "noPlaylistsFound":"Nie znaleziono żadnej listy utworów",
     "yourActivePlaylistIsFull":"Twoja aktywna lista odtwarzania jest pełna",
-    "canNotFindTheLastPMReceiver":"Nie można znaleźć ostatniego odbiorcy prywatnej wiadomości",
     "noNextSong":"Nie masz w kolejce żadnych utworów"
   }
 }

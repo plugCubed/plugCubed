@@ -15,6 +15,10 @@
     "commandDisable":"%1 autojoin dezactivat",
     "commandNotEnabled":"%1 autojoin nu a fost activat"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"Comenzi plug&#179;",
     "userCommands":"Comenzi Utilizator",
@@ -24,13 +28,10 @@
       "word":"cuvânt",
       "on":"activat",
       "off":"dezactivat",
-      "reason":"Motiv"
+      "reason":"Motiv",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"Setaţi starea pe disponibil",
-      "afk":"Setaţi starea ca afk",
-      "work":"setați starea ca ocupat",
-      "gaming":"setați starea ca jucand",
       "join":"Alatură-te listei de aşteptare",
       "leave":"paraseste dj booth\/waitlist",
       "whoami":"obţine informaţii proprii",
@@ -42,6 +43,7 @@
       "alertson":"redă sunet când cuvintele selectate sunt scrise in chat",
       "alertsoff":"opreşte redarea sunetului când un cuvânt selectat este scris in chat",
       "grab":"adaugă melodia curentă la playlist-ul tău",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"obtine informatii despre pozitia in waitlist",
       "version":"arata versiunea",
       "commands":"Arată această listă",
@@ -54,22 +56,23 @@
       "unlock":"deblochează DJ booth",
       "add":"adauga utilizatorul la dj booth\/waitlist",
       "remove":"sterge utilizatorul din dj booth\/waitlist",
-      "strobe":"activeaza\/dezactiveaza reflectoarele",
-      "rave":"activeaza\/dezactiveaza luminile",
       "whois all":"ofera userid si username tuturor utilizatorilor din camera",
-      "banall":"baneaza toti utilizatorii din camera"
+      "banall":"baneaza toti utilizatorii din camera",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
       "alertsoff":"No longer playing sound on specific words",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
       "automute":{
         "automuted":"%1 automuted.",
         "registered":"%1 registered to automute on future plays.",
         "unregistered":"%1 removed from automute registry."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Statistici Melodii",
     "updates":"Updateuri Melodii",
     "history":"Istoric melodii",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Lungime melodie (%1 min)",
     "message":{
       "grab":"%1 a apucat %2 - %3",
@@ -98,10 +102,11 @@
       "leave":"left the room",
       "history":"Piesa este în istoric (%1 din %2)",
       "historySkipped":"Piesa este in istoric (%1 din %2), dar a fost sarita in ultimul play",
-      "songLength":"Piesa are mai mult de %1 minut"
-    },
-    "notification":{
-      "songLength":"Lungimea cântecului"
+      "songLength":"Piesa are mai mult de %1 minut",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Vot",
     "position":"Pozitie",
     "points":"Puncte",
-    "fans":"Fani",
     "wootCount":"Woot Cota",
     "mehCount":"Meh Cota",
     "ratio":"Raportul Woot\/Meh",
@@ -163,6 +167,7 @@
     "autorespond":"AFK Autorespond",
     "notify":"Notificări",
     "afktimers":"AFK Timers",
+    "etatimer":"ETA Timer",
     "roomsettings":"Setari Camera",
     "chatimages":"Imagini în chat",
     "twitchemotes":"Emote-uri de pe Twitch",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Utilizator negăsit",
-    "usernameNotFound":"Username not found",
     "unknownModeration":"Moderare necunoscuta",
     "unknownMenuKey":"Tasta meniu necunoscuta: %1",
     "missingReason":"Lipseste motivul",
-    "notConnected":"Nu esti conectat la server",
     "noLiteSupport":"Acest lucru nu este acceptat in plug&#179; Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
     "noNextSong":"You have no queued song"
   }
 }

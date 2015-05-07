@@ -13,10 +13,10 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
             $.getJSON('https://d1rfegul30378.cloudfront.net/files/lang.json?_' + Date.now(), function(a) {
                 _this.allLangs = a;
             }).done(function() {
-                if (_this.allLangs.length === 1) API.chatLog('Error loading language info for plugCubed');
+                if (_this.allLangs.length === 1) API.chatLog('Error loading language info for plug³');
                 _this.loadDefault();
             }).fail(function() {
-                API.chatLog('Error loading language info for plugCubed');
+                API.chatLog('Error loading language info for plug³');
                 _this.loadDefault();
             });
         },

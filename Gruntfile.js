@@ -3,7 +3,7 @@ fs = require('fs');
 path = require('path');
 
 var config;
-config = require(path.resolve((process.env.USERPROFILE || process.env.HOME), 'p3.config.js'));
+config = require(path.resolve('config', 'p3.config.js'));
 
 var deleteFolderRecursive = function(path) {
     if (fs.existsSync(path)) {
@@ -40,9 +40,6 @@ module.exports = function(grunt) {
         exec: {
             packCRX: {
                 command: '"' + config.paths.chromePath + '" --pack-extension="' + path.resolve(__dirname, 'extensions', 'Opera') + '" --pack-extension-key="' + path.resolve(__dirname, 'extensions', 'key.pem') + '"'
-            },
-            packMXADDON: {
-                command: '"' + config.paths.mxPackerPath + '" "' + path.resolve(__dirname, 'extensions', 'Maxthon') + '"'
             },
             alphaToRelease: {
                 command: 'xcopy "src/alpha" "src/release" /S /Y'
@@ -143,9 +140,6 @@ module.exports = function(grunt) {
                 }, {
                     from: 'https://d1rfegul30378.cloudfront.net/dev/',
                     to: 'https://d1rfegul30378.cloudfront.net/files/'
-                }, {
-                    from: 'https://localhost:7000/_',
-                    to: 'https://socket.plugcubed.net/_'
                 }]
             },
             linksAlpha: {
@@ -157,9 +151,6 @@ module.exports = function(grunt) {
                 }, {
                     from: 'https://d1rfegul30378.cloudfront.net/dev/',
                     to: 'https://d1rfegul30378.cloudfront.net/alpha/'
-                }, {
-                    from: 'https://localhost:7000/_',
-                    to: 'https://socket.plugcubed.net/_'
                 }]
             },
             linksDev: {
@@ -171,9 +162,6 @@ module.exports = function(grunt) {
                 }, {
                     from: 'https://d1rfegul30378.cloudfront.net/files/',
                     to: 'https://d1rfegul30378.cloudfront.net/dev/'
-                }, {
-                    from: 'https://socket.plugcubed.net/_',
-                    to: 'https://localhost:7000/_'
                 }]
             },
             versionRelease: {
@@ -239,26 +227,6 @@ module.exports = function(grunt) {
             operaVersionExtension: {
                 src: ['extensions/shared/manifest.src.json'],
                 dest: 'extensions/Opera/manifest.json',
-                replacements: [{
-                    from: 'VERSION.MAJOR',
-                    to: versionRelease.major.toString()
-                }, {
-                    from: 'VERSION.MINOR',
-                    to: versionRelease.minor.toString()
-                }, {
-                    from: 'VERSION.PATCH',
-                    to: versionRelease.patch.toString()
-                }, {
-                    from: 'VERSION.PRERELEASE',
-                    to: versionRelease.prerelease
-                }, {
-                    from: 'VERSION.BUILD',
-                    to: versionRelease.build.toString()
-                }]
-            },
-            maxthonVersionExtension: {
-                src: ['extensions/shared/def.src.json'],
-                dest: 'extensions/Maxthon/def.json',
                 replacements: [{
                     from: 'VERSION.MAJOR',
                     to: versionRelease.major.toString()
@@ -587,16 +555,18 @@ module.exports = function(grunt) {
                 }
             }
         },
-        s3: {
+        aws_s3: {
             options: {
                 accessKeyId: config.aws.accessKeyId,
                 secretAccessKey: config.aws.secretAccessKey,
                 bucket: 'plug3',
-                headers: {
-                    CacheControl: 300
+                debug: verboseEnabled || false,
+                differential: true,
+                params: {
+                    CacheControl: '300'
                 },
-                dryRun: false,
-                cacheTTL: 5 * 60 * 1000
+                progress: 'progressBar',
+                uploadConcurrency: 20
             },
             donations: {
                 files: [{
@@ -618,22 +588,27 @@ module.exports = function(grunt) {
                     src: 'src/release/lang.json',
                     dest: 'files/lang.json'
                 }, {
+                    expand: true,
                     cwd: 'src/release/images',
                     src: '**.png',
                     dest: 'files/images/'
                 }, {
+                    expand: true,
                     cwd: 'src/release/images/badges',
                     src: '**.png',
                     dest: 'files/images/badges/'
                 }, {
+                    expand: true,
                     cwd: 'src/release/images/icons',
                     src: '**.png',
                     dest: 'files/images/icons/'
                 }, {
+                    expand: true,
                     cwd: 'src/release/images/ranks',
                     src: '**.png',
                     dest: 'files/images/ranks/'
                 }, {
+                    expand: true,
                     cwd: 'src/release/langs',
                     src: '**.json',
                     dest: 'files/langs/'
@@ -653,22 +628,27 @@ module.exports = function(grunt) {
                     src: 'src/alpha/lang.json',
                     dest: 'alpha/lang.json'
                 }, {
+                    expand: true,
                     cwd: 'src/alpha/images',
                     src: '**.png',
                     dest: 'alpha/images/'
                 }, {
+                    expand: true,
                     cwd: 'src/alpha/images/badges',
                     src: '**.png',
                     dest: 'alpha/images/badges/'
                 }, {
+                    expand: true,
                     cwd: 'src/alpha/images/icons',
                     src: '**.png',
                     dest: 'alpha/images/icons/'
                 }, {
+                    expand: true,
                     cwd: 'src/alpha/images/ranks',
                     src: '**.png',
                     dest: 'alpha/images/ranks/'
                 }, {
+                    expand: true,
                     cwd: 'src/alpha/langs',
                     src: '**.json',
                     dest: 'alpha/langs/'
@@ -682,22 +662,27 @@ module.exports = function(grunt) {
                     src: 'src/dev/lang.json',
                     dest: 'dev/lang.json'
                 }, {
+                    expand: true,
                     cwd: 'src/dev/images',
                     src: '**.png',
                     dest: 'dev/images/'
                 }, {
+                    expand: true,
                     cwd: 'src/dev/images/badges',
                     src: '**.png',
                     dest: 'dev/images/badges/'
                 }, {
+                    expand: true,
                     cwd: 'src/dev/images/icons',
                     src: '**.png',
                     dest: 'dev/images/icons/'
                 }, {
+                    expand: true,
                     cwd: 'src/dev/images/ranks',
                     src: '**.png',
                     dest: 'dev/images/ranks/'
                 }, {
+                    expand: true,
                     cwd: 'src/dev/langs',
                     src: '**.json',
                     dest: 'dev/langs/'
@@ -713,20 +698,14 @@ module.exports = function(grunt) {
     });
 
     // Load tasks
-    grunt.loadNpmTasks('grunt-aws');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-requirejs');
-    grunt.loadNpmTasks('grunt-exec');
-    grunt.loadNpmTasks('grunt-execute');
-    grunt.loadNpmTasks('grunt-mozilla-addon-sdk');
-    grunt.loadNpmTasks('grunt-requirejs-obfuscate');
-    grunt.loadNpmTasks('grunt-text-replace');
+    require('load-grunt-tasks')(grunt, {
+        scope: 'devDependencies'
+    });
 
     // Extensions
     grunt.registerTask('extension:packOpera', ['replace:operaVersionExtension', 'exec:packCRX']);
-    grunt.registerTask('extension:packMaxthon', ['replace:maxthonVersionExtension', 'exec:packMXADDON']);
     grunt.registerTask('extension:packFirefox', ['replace:firefoxVersionExtension', 'mozilla-addon-sdk', 'mozilla-cfx-xpi']);
-    grunt.registerTask('extension', ['execute:extension', 'extension:packFirefox', 'extension:packOpera', 'extension:packMaxthon']);
+    grunt.registerTask('extension', ['execute:extension', 'extension:packFirefox', 'extension:packOpera']);
 
     grunt.registerTask('build:release', ['replace:linksRelease', 'requirejs:release', 'replace:versionRelease', 'execute:reobfuscateRelease', 'replace:enableMinifyRelease', 'requirejs_obfuscate:release', 'execute:closureCompilerRelease', 'extension']);
     grunt.registerTask('build:alpha', ['replace:linksAlpha', 'requirejs:alpha', 'replace:versionAlpha', 'execute:reobfuscateAlpha', 'replace:enableMinifyAlpha', 'requirejs_obfuscate:alpha', 'execute:closureCompilerAlpha']);
@@ -736,8 +715,8 @@ module.exports = function(grunt) {
     grunt.registerTask('update', ['execute:getRoom', 'execute:createConfig', 'execute:deobfuscate', 'build']);
     grunt.registerTask('default', 'build');
 
-    grunt.registerTask('publish:release', ['execute:incrementBuildRelease', 'build:release', 's3:release']);
-    grunt.registerTask('publish:alpha', ['execute:incrementBuildAlpha', 'build:alpha', 's3:alpha']);
-    grunt.registerTask('publish:dev', ['execute:incrementBuildDev', 'build:dev', 's3:dev']);
+    grunt.registerTask('publish:release', ['execute:incrementBuildRelease', 'build:release', 'aws_s3:release']);
+    grunt.registerTask('publish:alpha', ['execute:incrementBuildAlpha', 'build:alpha', 'aws_s3:alpha']);
+    grunt.registerTask('publish:dev', ['execute:incrementBuildDev', 'build:dev', 'aws_s3:dev']);
     grunt.registerTask('publish', ['publish:release', 'publish:alpha', 'publish:dev']);
 };

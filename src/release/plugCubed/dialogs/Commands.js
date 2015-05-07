@@ -27,13 +27,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
         ['/unlock', 'commands.descriptions.unlock', API.ROLE.MANAGER],
         ['/add (commands.variables.username)', 'commands.descriptions.add', API.ROLE.BOUNCER],
         ['/remove (commands.variables.username)', 'commands.descriptions.remove', API.ROLE.BOUNCER],
-        ['/strobe (commands.variables.on/commands.variables.off)', 'commands.descriptions.strobe', API.ROLE.COHOST],
-        ['/rave (commands.variables.on/commands.variables.off)', 'commands.descriptions.rave', API.ROLE.COHOST],
         ['/whois all', 'commands.descriptions.whois', API.ROLE.AMBASSADOR],
         ['/banall', 'commands.descriptions.banall', API.ROLE.AMBASSADOR]
     ], a = Class.extend({
         userCommands: function() {
-            var response = '<strong style="position:relative;left:-20px">=== ' + p3Lang.i18n('commands.userCommands') + ' ===</strong><br>';
+            var response = '<strong style="position:relative;left: 20%;">=== ' + p3Lang.i18n('commands.userCommands') + ' ===</strong><br><ul class="p3-commands">';
             for (var i in userCommands) {
                 if (!userCommands.hasOwnProperty(i)) continue;
                 var command = userCommands[i][0];
@@ -53,12 +51,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
 
                     command += '</em>';
                 }
-                response += '<div style="position:relative;left:-10px">' + command + '<br><em style="position:relative;left:10px">' + p3Lang.i18n(userCommands[i][1]) + '</em></div>';
+                response += '<li class="userCommands">' + command + '<br><em>' + p3Lang.i18n(userCommands[i][1]) + '</em></li>';
             }
+            response+= '</ul>';
             return response;
         },
         modCommands: function() {
-            var response = '<br><strong style="position:relative;left:-20px">=== ' + p3Lang.i18n('commands.modCommands') + ' ===</strong><br>';
+            var response = '<br><strong style="position:relative;left: 20%;">=== ' + p3Lang.i18n('commands.modCommands') + ' ===</strong><br><ul class="p3-commands">';
             for (var i in modCommands) {
                 if (!modCommands.hasOwnProperty(i)) continue;
                 if (API.hasPermission(undefined, modCommands[i][2])) {
@@ -79,13 +78,14 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
 
                         command += '</em>';
                     }
-                    response += '<div style="position:relative;left:-10px">' + command + '<br><em style="position:relative;left:10px">' + p3Lang.i18n(modCommands[i][1]) + '</em></div>';
+                    response += '<li class="modCommands">' + command + '<br><em>' + p3Lang.i18n(modCommands[i][1]) + '</em></li>';
                 }
             }
+            response += '</ul>';
             return response;
         },
         print: function() {
-            var content = '<strong style="font-size:1.4em;position:relative;left: -20px">' + p3Lang.i18n('commands.header') + '</strong><br>';
+            var content = '<strong style="font-size:1.4em;position:relative;left: 20%">' + p3Lang.i18n('commands.header') + '</strong><br>';
             content += this.userCommands();
             if (API.hasPermission(undefined, API.ROLE.BOUNCER)) {
                 content += this.modCommands();

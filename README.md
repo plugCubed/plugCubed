@@ -32,7 +32,7 @@ We welcome all contributions to this project.
 * Cd to the folder through command prompt or bash
 * Run `npm install` to set up the environment.
 * Make your changes in the src/alpha folder and please make sure you follow our [Code Style](https://github.com/plugCubed/Code-Style).
-* If you haven't, set up the p3.config.js file in your home/user folder. (A sample can be found [here](https://github.com/plugCubed/plugCubed/blob/master/p3.config.sample.js))
+* If you haven't, set up the p3.config.js file in the config folder. (A sample can be found [here](https://github.com/plugCubed/plugCubed/blob/master/config/p3.config.sample.js))
 * Run `grunt build:alpha` to compile the code and test. (If `grunt` doesn't work, please install it by typing `npm install -g grunt-cli` in commandline)
 * Submit your changes as a Pull Requests [here](https://github.com/plugCubed/plugCubed/pulls).
 

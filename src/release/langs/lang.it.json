@@ -1,200 +1,202 @@
 {
-  "running": "Eseguendo plug&#179; version%1",
-  "runningLite": "Eseguendo plug&#179; in modalità Lite!",
-  "runningLiteInfo": "Some features will not work.",
-  "commandsHelp": "Usa \"\/commands\" per estendere la lista dei comandi eseguibili in chat.",
-  "autorespond": {
-    "default": "Sono assente",
-    "disable": "Disattiva la Risposta automatica in chat durante l'assenza",
-    "nextIn": "La prossima Risposta automatica per assenza sarà inviata tra %1",
-    "next": "Risposta automatica per assenza nella prossima menzione",
-    "commandDisable": "%1 autojoin disabilitato",
-    "commandNotEnabled": "%1 autojoin non era abilitato"
+  "running":"Eseguire plug&#179; version%1",
+  "runningLite":"Sto eseguendo plug&#179; in Lite!",
+  "runningLiteInfo":"Alcune caratteristiche potrebbero non funzionare.",
+  "commandsHelp":"Usa \"\/commands\" per estendere la lista dei comandi eseguibili in chat.",
+  "autorespond":{
+    "default":"Sono assente",
+    "disable":"Disattiva la Risposta automatica in chat durante l'assenza",
+    "nextIn":"La prossima Risposta automatica per assenza sarà inviata tra %1",
+    "next":"Risposta automatica per assenza nella prossima menzione",
+    "commandDisable":"%1 autojoin disabled",
+    "commandNotEnabled":"%1 autojoin was not enabled"
   },
-  "autojoin": {
-    "commandDisable": "%1 autojoin disabilitato",
-    "commandNotEnabled": "%1 autojoin non era abilitato"
+  "autojoin":{
+    "commandDisable":"%1 autojoin disattivato",
+    "commandNotEnabled":"autojoin %1 non è stato abilitato"
   },
-  "commands": {
-    "header": "Informazioni dell'utente",
-    "userCommands": "Controlli dell'utente",
-    "modCommands": "Commandi di moderazione",
-    "variables": {
-      "username": "Nome Utente",
-      "word": "parola",
-      "on": "attivato",
-      "off": "disattivato",
-      "reason": "Motivo"
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
+  "commands":{
+    "header":"User Information",
+    "userCommands":"Controlli dell'utente",
+    "modCommands":"Commandi di moderazione",
+    "variables":{
+      "username":"Nome Utente",
+      "word":"parola",
+      "on":"attivato",
+      "off":"disattivato",
+      "reason":"Motivo",
+      "number":"number"
     },
-    "descriptions": {
-      "avail": "imposta lo stato su \"Disponibile\"",
-      "afk": "AFK Message",
-      "work": "Imposta lo stato su \"Al lavoro\"",
-      "gaming": "Giocando",
-      "join": "User Join",
-      "leave": "Uscita di un giocatore",
-      "whoami": "Ottieni le tue informazioni",
-      "mute": "Imposta il volume a 0",
-      "automute": "Registra la canzone corrente per mutarla automaticamente la prossima volta che viene eseguita",
-      "unmute": "Reimposta il volume al livello precedente",
-      "nextsong": "Visualizza la prossima canzone nella playlist e se è presente nella cronologia",
-      "refresh": "Ricarica il video",
-      "alertson": "Avvia un suono quando una certa parola è scritta in chat",
-      "alertsoff": "Interrompe il suono quando una certa parola è scritta in chat",
-      "grab": "Aggiungi la canzone attuale alla tua playlist attiva",
-      "getpos": "Mostra la posizione attuale nella lista d'attesa",
-      "version": "Mostra il numero di versione",
-      "commands": "Mostra questa lista.",
-      "link": "paste link to plugCubed website in chat",
-      "whois": "Da informazioni generali riguardo l'utente",
-      "skip": "Salta la canzone corrente",
-      "ban": "Caccia l'utente selezionato",
-      "lockskip": "locks DJ booth, skip and unlocks afterwards",
-      "lock": "locks DJ booth",
-      "unlock": "unlocks DJ booth",
-      "add": "adds targeted user to dj booth\/waitlist",
-      "remove": "removes targeted user from dj booth\/waitlist",
-      "strobe": "enable\/disable strobe",
-      "rave": "enable\/disable lights out",
-      "whois all": "Dice userid e username di tutti gli utenti presenti nella sala",
-      "banall": "Banna tutti gli utenti della sala"
+    "descriptions":{
+      "join":"User Join",
+      "leave":"User Leave",
+      "whoami":"Ottieni le tue informazioni",
+      "mute":"Imposta il volume a 0",
+      "automute":"registra la canzone corrente per non fartela sentire automaticamente la prossima volta che viene riprodotta",
+      "unmute":"Reimposta il volume al livello precedente",
+      "nextsong":"Visualizza la prossima canzone nella playlist e se è presente nella cronologia",
+      "refresh":"Ricarica il video",
+      "alertson":"riproduce il suono ogni volta che le parole definite sono scritte in chat",
+      "alertsoff":"interrompe la riproduzione del suono quando le parole definite sono scritte in chat",
+      "grab":"aggiunge il brano corrente alla tua playlist selezionata",
+      "badges":"show\/hide the user badges in chat",
+      "getpos":"Mostra la posizione attuale nella lista d'attesa",
+      "version":"Mostra il numero di versione",
+      "commands":"Mostra questa lista.",
+      "link":"incolla il link al sito Web plugCubed in chat",
+      "whois":"da informazioni generali riguardo l'utente",
+      "skip":"salta la canzone corrente",
+      "ban":"Caccia l'utente selezionato",
+      "lockskip":"locks DJ booth, skip and unlocks afterwards",
+      "lock":"Blocca la cabina DJ",
+      "unlock":"Sblocca la cabina DJ",
+      "add":"adds targeted user to dj booth\/waitlist",
+      "remove":"removes targeted user from dj booth\/waitlist",
+      "whois all":"dà userid e username di tutti gli utenti nella stanza",
+      "banall":"banna tutti gli utenti nella stanza",
+      "status":"shows status of plug servers"
     },
-    "responses": {
-      "alertson": "Avvio un suono alla seguente parola: %1",
-      "alertsoff": "Interrompo il suono alle seguenti parole",
-      "nextsong": "La tua prossima canzone è %1 di %2",
-      "isHistory": "Attenzione: This song is still in the history (%1 of %2)",
-      "lightsOut": "%1 disattivate le luci",
-      "strobe": "%1 attivate luci strobosferiche",
-      "automute": {
-        "automuted": "%1 automutata.",
-        "registered": "%1 registrata per mutarla automaticamente la prossima volta che viene riprodotta.",
-        "unregistered": "%1 rimossa dall'archivio delle canzoni da mutare."
+    "responses":{
+      "alertson":"Riproduzione del suono alle seguenti parole: %1",
+      "alertsoff":"Non riprodurrò il suono sulle parole impostate",
+      "nextsong":"Il brano successivo in coda è %1 di %2",
+      "isHistory":"Attenzione: Questa canzone è ancora presente nella cronologia (%1  di %2)",
+      "automute":{
+        "automuted":"%1 Silenziato automaticamente.",
+        "registered":"%1 registrata per essere silenziata automaticamente la prossima volta che viene riprodotta.",
+        "unregistered":"%1 rimossa dall'archivio delle canzoni autosilenziate."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
-  "eta": {
-    "boothAvailable": "If you join the waitlist now, you would be DJing!",
-    "alreadyDJ": "Sei già DJing!",
-    "waitListTime": "You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime": "If you join the waitlist now, you would be DJing in about %1!"
+  "eta":{
+    "boothAvailable":"Se ti iscrivi adesso alla lista d'attesa, diventeresti DJing!",
+    "alreadyDJ":"Sei già DJing!",
+    "waitListTime":"Sei nella lista d'attesa %1 di %2, sarai DJing in circa %3!",
+    "joinTime":"Se ti iscrivi adesso alla lista d'attesa, saresti DJing in circa %1!"
   },
-  "notify": {
-    "header": "Informazioni utente",
-    "join": "User Join",
-    "leave": "User Leave",
-    "grab": "User Grab",
-    "meh": "User Mehs",
-    "stats": "Song Stats",
-    "updates": "Song Updates",
-    "history": "Songs in history",
-    "songLength": "Song Length (%1 min)",
-    "message": {
-      "grab": "Salvata %1 - %2",
-      "stats": "Stats: %1 woots -- %2 mehs -- %3 grabs",
-      "updates": "Now Playing: %1 by %2<br>Played by: %3",
-      "meh": "meh'd this track",
-      "join": "joined the room",
-      "leave": "left the room",
-      "history": "Song is in history (%1 of %2)",
-      "historySkipped": "Song is in history (%1 of %2), but was skipped on the last play",
-      "songLength": "Song is longer than %1 minutes"
-    },
-    "notification": {
-      "songLength": "Musica lunghezza"
+  "notify":{
+    "header":"User Information",
+    "join":"User Join",
+    "leave":"User Leave",
+    "grab":"User Grab",
+    "meh":"User Mehs",
+    "stats":"Statistiche della canzone",
+    "updates":"Aggiornamenti della canzone",
+    "history":"Songs in history",
+    "songUnavailable":"Song Unavailable",
+    "songLength":"Lunghezza della Canzone (%1 min)",
+    "message":{
+      "grab":"Salvata %1 - %2",
+      "stats":"Statistiche: %1 woots -- %2 mehs -- %3 grabs",
+      "updates":"Rriproducendo: %1 di %2 <br>Riprodotta da: %3",
+      "meh":"Valuta meh questa canzone",
+      "join":"è entrato nella stanza",
+      "leave":"ha lasciato la stanza",
+      "history":"Song is in history (%1 of %2)",
+      "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
+      "songLength":"Song is longer than %1 minutes",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
-  "info": {
-    "header": "Informazioni utente",
-    "name": "Nome",
-    "title": "Titolo",
-    "specialTitles": {
-      "developer": "plug³ sviluppatore",
-      "sponsor": "plug³ Sponsor",
-      "ambassador": "plug³ Ambasciatore ",
-      "donatorDiamond": "plug³ Diamante Donatore",
-      "donatorPlatinum": "plug³ Platino Donatore",
-      "donatorGold": "plug³ Oro Donatore",
-      "donatorSilver": "plug³ Argento Donatore",
-      "donatorBronze": "plug³ Bronzo Donator",
-      "special": "plug³ Sostenitore speciale - %1"
+  "info":{
+    "header":"Informazioni utente",
+    "name":"Nome",
+    "title":"Titolo",
+    "specialTitles":{
+      "developer":"plug³ sviluppatore",
+      "sponsor":"plug³ Sponsor",
+      "ambassador":"plug³ Ambasciatore ",
+      "donatorDiamond":"plug³ Diamante Donatore",
+      "donatorPlatinum":"plug³ Platino Donatore",
+      "donatorGold":"plug³ Oro Donatore",
+      "donatorSilver":"plug³ Argento Donatore",
+      "donatorBronze":"plug³ Bronzo Donator",
+      "special":"plug³ Sostenitore speciale - %1"
     },
-    "id": "ID",
-    "rank": "Rango",
-    "joined": "Time Joined",
-    "status": "Stato",
-    "vote": "Vota",
-    "position": "Posizione",
-    "points": "Punti",
-    "fans": "Fans",
-    "wootCount": "Woot Contatore",
-    "mehCount": "Meh Contatore",
-    "ratio": "Woot\/Meh Rapporto",
-    "djing": "DJing",
-    "notInList": "Not in waitlist nor booth",
-    "inWaitlist": "%1\/%2 in waitlist",
-    "userDjing": "%1 are currently DJing",
-    "userNextDJ": "%1 are DJing next",
-    "disconnects": "Disconnects",
-    "lastDisconnect": "Last Disconnect",
-    "lastPosition": "Posizione",
-    "time": "Tempo"
+    "id":"ID",
+    "rank":"Rango",
+    "joined":"Time Joined",
+    "status":"Stato",
+    "vote":"Vota",
+    "position":"Posizione",
+    "points":"Punti",
+    "wootCount":"Woot contati",
+    "mehCount":"Meh Contati",
+    "ratio":"Rapporto tra Woot\/Meh",
+    "djing":"DJing attuale",
+    "notInList":"Not in waitlist nor booth",
+    "inWaitlist":"%1\/%2 in waitlist",
+    "userDjing":"%1 are currently DJing",
+    "userNextDJ":"%1 are DJing next",
+    "disconnects":"Disconnects",
+    "lastDisconnect":"Last Disconnect",
+    "lastPosition":"Posizione",
+    "time":"Tempo"
   },
-  "ranks": {
-    "you": "Tu",
-    "regular": "Normale",
-    "residentdj": "DJ resident",
-    "bouncer": "Buttafuori",
-    "manager": "Direttore",
-    "cohost": "Co-Host",
-    "host": "Conduttore",
-    "ambassador": "Ambasciatore\n",
-    "admin": "Amministratore\n"
+  "ranks":{
+    "you":"Tu",
+    "regular":"Normale",
+    "residentdj":"DJ residente",
+    "bouncer":"Buttafuori",
+    "manager":"Direttore",
+    "cohost":"Co-Host",
+    "host":"Conduttore",
+    "ambassador":"Ambasciatore",
+    "admin":"Amministratore\n"
   },
-  "roomSpecificSettings": {
-    "infoHeader": "Questa stanza una impostazioni speciali",
-    "infoHeaderCredits": "Questa stanza una impostazioni speciali di %1",
-    "infoDisable": "Puoi disattivarle nel menù"
+  "roomSpecificSettings":{
+    "infoHeader":"This room is using special settings",
+    "infoHeaderCredits":"This room is using special settings by %1",
+    "infoDisable":"You can disable them in the menu"
   },
-  "menu": {
-    "autowoot": "Autowoot",
-    "autojoin": "Autojoin",
-    "customchatcolors": "Colori personalizzati chat",
-    "autorespond": "AFK Autorespond",
-    "notify": "Notifiche",
-    "afktimers": "AFK Timers",
-    "roomsettings": "Immagini tridimensionali",
-    "chatimages": "Chat Images",
-    "twitchemotes": "Twitch Emotes",
-    "controlpanel": "Pannello di controllo"
+  "menu":{
+    "autowoot":"Autowoot",
+    "autojoin":"Join Automatico",
+    "customchatcolors":"Colori personalizzati chat",
+    "autorespond":"AFK Autorespond",
+    "notify":"Notifiche",
+    "afktimers":"AFK Timers",
+    "etatimer":"ETA Timer",
+    "roomsettings":"Impostazioni della Camera",
+    "chatimages":"Chat Images",
+    "twitchemotes":"Twitch Emotes",
+    "controlpanel":"Control Panel"
   },
-  "vote": {
-    "meh": "Non mi piace!",
-    "woot": "Mi piace!",
-    "grab": "Salva",
-    "undecided": "Indeciso",
-    "djing": "DJing"
+  "vote":{
+    "meh":"Meh",
+    "woot":"Woot",
+    "grab":"Grab",
+    "undecided":"Indeciso",
+    "djing":"DJing"
   },
-  "tooltip": {
-    "stream": "Mostra\/Nasconde Video\/Audio Stream",
-    "clear": "Pulisce la conversazione",
-    "afk": "AFK Message",
-    "reset": "Ripristinare le impostazioni",
-    "muted": "All songs are muted",
-    "mutedOnce": "Current song is muted"
+  "tooltip":{
+    "stream":"Toggle Video\/Audio Stream",
+    "clear":"Pulisce la conversazione",
+    "afk":"Messaggio di AFK",
+    "reset":"Ripristinare le impostazioni",
+    "muted":"All songs are muted",
+    "mutedOnce":"Current song is muted"
   },
-  "error": {
-    "userNotFound": "Utente non trovato",
-    "usernameNotFound": "Username non trovato",
-    "unknownModeration": "Unknown moderation",
-    "unknownMenuKey": "Unknown menu key: %1",
-    "missingReason": "Ragione dell'assenza",
-    "notConnected": "Not connected to socket server",
-    "noLiteSupport": "This is not supported in plug&#179; Lite",
-    "errorGettingPlaylistInfo": "Si è riscontrato un errore nel recupero delle informazioni della playlist",
-    "noPlaylistsFound": "Non ho trovato playlist",
-    "yourActivePlaylistIsFull": "La tua playlist attiva è piena",
-    "canNotFindTheLastPMReceiver": "Can not find the last PM receiver",
-    "noNextSong": "Non hai canzoni in coda"
+  "error":{
+    "userNotFound":"Utente non trovato",
+    "unknownModeration":"Unknown moderation",
+    "unknownMenuKey":"Unknown menu key: %1",
+    "missingReason":"Ragione dell'assenza",
+    "noLiteSupport":"This is not supported in plug&#179; Lite",
+    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "noPlaylistsFound":"No playlists found",
+    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "noNextSong":"You have no queued song"
   }
 }

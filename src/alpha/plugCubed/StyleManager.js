@@ -17,7 +17,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Ut
         }
         obj.text(a);
         if (PopoutView && PopoutView._window)
-            $(PopoutView._window.document).find('#plugCubedStyles').text(a)
+            $(PopoutView._window.document).find('#plugCubedStyles').text(a);
     }
 
     var a = Class.extend({

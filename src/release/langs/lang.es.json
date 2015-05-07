@@ -15,6 +15,10 @@
     "commandDisable":"%1 Auto Unirse desactivado",
     "commandNotEnabled":"%1 Auto Unirse está deshabilitado"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"Comandos plugCubed",
     "userCommands":"Comandos de usuario",
@@ -24,13 +28,10 @@
       "word":"palabra",
       "on":"Encendido",
       "off":"Apagar",
-      "reason":"razón"
+      "reason":"razón",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"Establecer el estado a disponible",
-      "afk":"Mensage AFK",
-      "work":"Establecer el estado a trabajando",
-      "gaming":"Jugando",
       "join":"Conexión de usuario",
       "leave":"Desconexion de usuario",
       "whoami":"Busca tu propia información",
@@ -42,6 +43,7 @@
       "alertson":"reproducir sonido cuando las palabras definidas sean escritas en el chat",
       "alertsoff":"para la reproducción cuando las palabras definidas aparecen en el chat.",
       "grab":"add current song to your selected playlist",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"posición actual en la lista de espera",
       "version":"muestra el numero de versión",
       "commands":"muestra esta lista",
@@ -54,22 +56,23 @@
       "unlock":"desbloquea la mesa de DJ",
       "add":"agrega el usuario seleccionado a la mesa de dj\/lista de espera",
       "remove":"elimina el usuario seleccionado a la mesa de dj\/lista de espera",
-      "strobe":"Activa\/Desactiva Luz Estroboscópica",
-      "rave":"activa\/desactiva luces apagadas",
       "whois all":"da el userid y el username de todos los usuarios en la sala",
-      "banall":"banea todos los usuarios en la sala"
+      "banall":"banea todos los usuarios en la sala",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
       "alertsoff":"No longer playing sound on specific words",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
       "automute":{
         "automuted":"%1 automuted.",
         "registered":"%1 registered to automute on future plays.",
         "unregistered":"%1 removed from automute registry."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Estadísticas de la canción",
     "updates":"Actualizaciones de la canción",
     "history":"Canciones en el historial",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Longitud de la canción (%1min)",
     "message":{
       "grab":"grabbed %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"left the room",
       "history":"Canción en el historial (%1 de %2)",
       "historySkipped":"Canción en el historial (%1 de %2), pero se saltó en la ultima reproducción",
-      "songLength":"Canción más larga que %1 minutos"
-    },
-    "notification":{
-      "songLength":"Longitud de la canción"
+      "songLength":"Canción más larga que %1 minutos",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Votar",
     "position":"Posición",
     "points":"Puntos",
-    "fans":"Admiradores",
     "wootCount":"Conteo de Woot",
     "mehCount":"Conteo de Meh",
     "ratio":"Índice de Genial\/Aburrido",
@@ -163,6 +167,7 @@
     "autorespond":"Autorespuesta AFK",
     "notify":"Notificaciones",
     "afktimers":"AFK Tiempo",
+    "etatimer":"ETA Timer",
     "roomsettings":"Configuracion de la Sala",
     "chatimages":"Imagenes de chat",
     "twitchemotes":"Twitch Emotes",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Usuario no encontrado",
-    "usernameNotFound":"Username not found",
     "unknownModeration":"Moderación Desconocida",
     "unknownMenuKey":"Tecla de menú desconocida",
     "missingReason":"Falta razón",
-    "notConnected":"No conectado al servidor socket",
     "noLiteSupport":"Esto no es compatible con plug&#179; Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
     "noNextSong":"You have no queued song"
   }
 }

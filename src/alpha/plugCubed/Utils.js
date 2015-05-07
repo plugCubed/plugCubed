@@ -192,12 +192,12 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             return msg.split("<").join("&lt;").split(">").join("&gt;");
         },
         chatLog: function(type, message, color, fromID, fromName) {
-            var $chat, b, $message, $box, $msg, $text, $msgSpan, $from, from;
+            var $chat, b, $message, $box, $msg, $text, $msgSpan, $timestamp, $from, from;
 
             if (!message) return;
             if (typeof message !== 'string') message = message.html();
 
-            message = cleanHTMLMessage(message);
+            message = cleanHTMLMessage(message, undefined, ['ul', 'li']);
             $msgSpan = $('<span>').html(message);
 
             $chat = !runLite && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages');
@@ -205,9 +205,14 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
 
             $message = $('<div>').addClass(type ? type : 'message');
             $box = $('<div>').addClass('badge-box').data('uid', fromID ? fromID : 'p3');
-            $from = $('<div>').addClass('from').append($('<span>').addClass('un'));
+            $timestamp = $('<span>').addClass('timestamp').text(this.getTimestamp());
+            $from = $('<div>').addClass('from').append($('<span>').addClass('un')).append($timestamp);
             $msg = $('<div>').addClass('msg').append($from);
             $text = $('<span>').addClass('text').append($msgSpan);
+
+            if ($('.icon-timestamps-off').length === 0) {
+                $timestamp.show();
+            }
 
             if (type === 'system') {
                 $box.append('<i class="icon icon-chat-system"></i>');
@@ -390,7 +395,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
 
                 var title = this.getAllPlugCubedRanks(user.id, true), message = $('<table>').css({
                     width: '100%',
-                    color: '#CC00CC'
+                    color: '#CC00CC',
+                    'font-size': '1.02em'
                 });
 
                 // Username
@@ -443,9 +449,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
         getAllUsers: function() {
             var table = $('<table>').css({
                 width: '100%',
-                color: '#CC00CC',
-                position: 'relative',
-                left: '-25px'
+                color: '#CC00CC'
             }), users = API.getUsers();
             for (var i in users) {
                 if (users.hasOwnProperty(i)) {
@@ -668,6 +672,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                 conn.onopen = function() {
                     conn.close();
                 };
+
                 conn.onclose = function(req) {
                     if (req.code !== 1000) {
                         if (att < 3) setTimeout(connect, 500);
@@ -676,7 +681,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                         return;
                     }
                     call(req.code, req.reason, Date.now() - time);
-                }
+                };
             }
             connect();
         }

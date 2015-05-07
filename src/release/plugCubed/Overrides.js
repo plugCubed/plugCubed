@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/overrides/UserInventory', 'plugCubed/overrides/UserRolloverView', 'plugCubed/overrides/WaitListRow'], function() {
+define(['plugCubed/Class', 'plugCubed/overrides/UserRolloverView', 'plugCubed/overrides/WaitListRow'], function() {
     var modules, Class, handler;
 
     modules = $.makeArray(arguments);
@@ -8,13 +8,13 @@ define(['plugCubed/Class', 'plugCubed/overrides/UserInventory', 'plugCubed/overr
         override: function() {
             this.revert();
             for (var i in modules) {
-                if (modules.hasOwnProperty(i))
+                if (modules.hasOwnProperty(i) && modules[i] != null)
                     modules[i].override();
             }
         },
         revert: function() {
             for (var i in modules) {
-                if (modules.hasOwnProperty(i))
+                if (modules.hasOwnProperty(i) && modules[i] != null)
                     modules[i].revert();
             }
         }

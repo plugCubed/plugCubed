@@ -15,6 +15,10 @@
     "commandDisable":"%1 rejoindre automatiquement la file d'attente désactivé",
     "commandNotEnabled":"%1 rejoindre automatiquement la file d'attente n'était pas activé"
   },
+  "fullscreen":{
+    "shrink":"Rétrécir",
+    "enlarge":"Élargir"
+  },
   "commands":{
     "header":"Commandes de Plug&#179;",
     "userCommands":"Commandes d'utilisateur",
@@ -24,13 +28,10 @@
       "word":"mot",
       "on":"Activé",
       "off":"Désactivé",
-      "reason":"raison"
+      "reason":"raison",
+      "number":"nombre"
     },
     "descriptions":{
-      "avail":"Changer son statut à \"Disponible\"",
-      "afk":"Changer son statut à \"Absent\"",
-      "work":"Changer son statut à \"En plein travail\"",
-      "gaming":"Changer son statut à \"En train de jouer\"",
       "join":"Rejoindre la cabine ou la liste d'attente de DJ",
       "leave":"Quitte la liste d'attente ou la cabine de DJ",
       "whoami":"Obtenir vos propres informations",
@@ -42,6 +43,7 @@
       "alertson":"Émettre un son lorsque les mots définis sont écrits dans le chat",
       "alertsoff":"Arrêter de jouer les sons quand les mots définis sont écrits dans le chat",
       "grab":"Ajouter la musique actuelle à une de vos playlist",
+      "badges":"afficher\/masquer les badges des utilisateurs dans le chat",
       "getpos":"Afficher votre position actuelle dans la file d'attente",
       "version":"Affiche la version actuelle de Plug³",
       "commands":"Montrer cette liste",
@@ -54,22 +56,23 @@
       "unlock":"Déverrouille la cabine de DJ.",
       "add":"Ajoute l'utilisateur sélectionné à la cabine de DJ ou la liste d'attente.",
       "remove":"Retire l'utilisateur de la cabine de DJ ou de la liste d'attente.",
-      "strobe":"Activer ou désactiver les stroboscopes",
-      "rave":"Activer ou désactiver les projecteurs.",
       "whois all":"Donne l'ID et le pseudonyme de tous les utilisateurs présents dans la communauté.",
-      "banall":"Banni tous les membres dans la communauté"
+      "banall":"Banni tous les membres dans la communauté",
+      "status":"afficher l'état des serveurs plug"
     },
     "responses":{
       "alertson":"Émet un son sur les mots suivants: %1",
       "alertsoff":"N'émet plus de sons sur des mots spécifiques",
       "nextsong":"Votre prochaine musique est %1 de %2",
       "isHistory":"Attention: Cette musique est déjà dans l'historique (%1 de %2)",
-      "lightsOut":"%1 a éteint les lumières",
-      "strobe":"%1 a activé les stroboscopes",
       "automute":{
         "automuted":"%1 est mis en silencieux automatiquement.",
         "registered":"%1 enregistré dans la liste noire pour les prochaines fois.",
         "unregistered":"%1 a été retiré de la liste noire."
+      },
+      "status":{
+        "rest":"RESTE: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Statistiques de la musique",
     "updates":"Changements de musique",
     "history":"Musiques dans l'historique des DJs",
+    "songUnavailable":"Son indisponible",
     "songLength":"Durée de la chanson (%1 min)",
     "message":{
       "grab":"ajouté %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"a quitté la salle",
       "history":"Musique dans l'historique des DJs (%1 de %2)",
       "historySkipped":"La musique est dans l'historique des DJs (%1 sur %2) mais a été sautée la dernière fois qu'elle a été jouée",
-      "songLength":"La musique est plus longue que %1 minutes"
-    },
-    "notification":{
-      "songLength":"Durée de la musique"
+      "songLength":"La musique est plus longue que %1 minutes",
+      "songPrivate":"Le son est privée",
+      "songNotFound":"Son introuvable",
+      "songEmbed":"L'intégration du son est désactivé",
+      "songStreamable":"Le son ne supporte pas le streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Vote",
     "position":"Position",
     "points":"Points",
-    "fans":"Fans",
     "wootCount":"Total de Woots",
     "mehCount":"Total de Mehs",
     "ratio":"Ratio Woots\/Mehs",
@@ -163,6 +167,7 @@
     "autorespond":"Réponse automatique lors d'une absence.",
     "notify":"Notifications",
     "afktimers":"Minuteurs d'absence.",
+    "etatimer":"Minuteur ETA",
     "roomsettings":"Paramètres de la communauté",
     "chatimages":"Images du chat",
     "twitchemotes":"Emoticones de Twitch",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Utilisateur non trouvé",
-    "usernameNotFound":"Cet utilisateur n'a pas été trouvé",
     "unknownModeration":"Modération inconnue.",
     "unknownMenuKey":"Touche de menu inconnue : %1",
     "missingReason":"Raison manquante",
-    "notConnected":"N'est pas connecté au serveur socket",
     "noLiteSupport":"Ceci n'est sur supporté dans plug³ Lite",
     "errorGettingPlaylistInfo":"Erreur lors de l'obtention des informations de la playlist",
     "noPlaylistsFound":"Aucune playlist trouvée",
     "yourActivePlaylistIsFull":"Votre playlist active est pleine",
-    "canNotFindTheLastPMReceiver":"impossible de trouver le dernier récepteur de PM",
     "noNextSong":"Vous n'avez aucune musique en attente"
   }
 }

@@ -15,6 +15,10 @@
     "commandDisable":"%1 automatsko pridruživanje je isključeno",
     "commandNotEnabled":"%1 automatsko pridruživanje nije bilo uključeno"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"Informacije o korisniku",
     "userCommands":"Korisničke komande",
@@ -24,13 +28,10 @@
       "word":"reč",
       "on":"on",
       "off":"off",
-      "reason":"razlog"
+      "reason":"razlog",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"postavlja status na dostupan",
-      "afk":"AFK poruka",
-      "work":"postavlja status na radim",
-      "gaming":"Igra",
       "join":"Korisnik uđe",
       "leave":"Korisnik ode",
       "whoami":"dobij informacije o sebi",
@@ -42,6 +43,7 @@
       "alertson":"pusti zvuk kada se definisane reči pomenu u chatu",
       "alertsoff":"isključi zvuk kada se definisane reči pomenu u chatu",
       "grab":"add current song to your selected playlist",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"Trenutna pozicija na listi čekanja",
       "version":"Prikaži broj verzije",
       "commands":"prikazuje ovu listu",
@@ -54,22 +56,23 @@
       "unlock":"odključava DJ listu",
       "add":"dodaje odabranog korisnika na DJ listu",
       "remove":"uklanja odabranog korisnika sa DJ liste",
-      "strobe":"uključi\/isključi svetla",
-      "rave":"uljuči\/isključi svetla",
       "whois all":"daje ID korisnika kao i korisničko ime svih korisnika u sobi",
-      "banall":"banuje sve korisnike u sobi"
+      "banall":"banuje sve korisnike u sobi",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
       "alertsoff":"No longer playing sound on specific words",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
       "automute":{
         "automuted":"%1 automuted.",
         "registered":"%1 registered to automute on future plays.",
         "unregistered":"%1 removed from automute registry."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Song Stats",
     "updates":"Song Updates",
     "history":"Songs in history",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Song Length (%1 min)",
     "message":{
       "grab":"grabbed %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"left the room",
       "history":"Pesma je u istoriji (%1 od %2)",
       "historySkipped":"Pesma je u istoriji (%1 od %2),ali je bila skipovana",
-      "songLength":"Pesma je duža od %1 minuta"
-    },
-    "notification":{
-      "songLength":"Song Length"
+      "songLength":"Pesma je duža od %1 minuta",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Glasaj",
     "position":"Pozicija",
     "points":"Poena",
-    "fans":"Fanovi",
     "wootCount":"Broj sviđanja",
     "mehCount":"Broj Mehova",
     "ratio":"Odnos Woot\/Meh",
@@ -163,6 +167,7 @@
     "autorespond":"AFK automatsko odgovaranje",
     "notify":"Obaveštenja",
     "afktimers":"AFK tajmer",
+    "etatimer":"ETA Timer",
     "roomsettings":"Podešavanja sobe",
     "chatimages":"Chat Images",
     "twitchemotes":"Twitch Emotes",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Korisnik nije pronađen",
-    "usernameNotFound":"Username not found",
     "unknownModeration":"Nepoznata komanda",
     "unknownMenuKey":"Nepoznata komanda: %1",
     "missingReason":"Nedostaje razlog",
-    "notConnected":"Nisi povezan sa serverom",
     "noLiteSupport":"This is not supported in plug&#179; Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
     "noNextSong":"You have no queued song"
   }
 }

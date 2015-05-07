@@ -15,6 +15,10 @@
     "commandDisable":"%1 Autojoin vypnut",
     "commandNotEnabled":"%1 Autojoin nebyl zapnut"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"plug&#179; příkazy",
     "userCommands":"Uživatelské příkazy",
@@ -24,13 +28,10 @@
       "word":"slovo",
       "on":"zapnuto",
       "off":"vypnuto",
-      "reason":"důvod"
+      "reason":"důvod",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"nastaví status na DOSTUPNÝ",
-      "afk":"nastaví status na PRYČ",
-      "work":"nastaví status na PRACUJI",
-      "gaming":"nastaví status na HRAJI HRY",
       "join":"připojit se do fronty",
       "leave":"opustí DJ stolek \/ frontu",
       "whoami":"získá vaše informace",
@@ -42,6 +43,7 @@
       "alertson":"přehraje zvuk vždy, když jsou definovaná slovo napsána do chatu",
       "alertsoff":"přestane přehrávat zvuk, když jsou definovaná slova napsána v chatu",
       "grab":"přidá aktuální skladbu do vybraného seznamu skladeb",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"zjistí současnou pozici ve frontě",
       "version":"zobrazí číslo verze",
       "commands":"zobrazí tento seznam",
@@ -54,22 +56,23 @@
       "unlock":"odemkne DJ pult",
       "add":"přidá označeného uživatele do DJ listu",
       "remove":"odstraní označeného uživatele z DJ pultu \/ fronty",
-      "strobe":"zapne \/ vypne stroboskop",
-      "rave":"zapnout \/ vypnout světla",
       "whois all":"zobrazí uživatelská ID a jména všech uživatelů v této místnosti",
-      "banall":"zabanuje všechny uživatele v této místnosti"
+      "banall":"zabanuje všechny uživatele v této místnosti",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Zvuk se přehraje při následujících slovech: %1",
       "alertsoff":"Zvuk již nebude při určených slovech přehráván",
       "nextsong":"Vaše další skladba bude %1 od %2",
       "isHistory":"Pozor: Tato skladba je stále v historii (%1 z %2)",
-      "lightsOut":"%1 vypnul světla",
-      "strobe":"%1 aktivoval stroboskop",
       "automute":{
         "automuted":"%1 automaticky ztlumeno.",
         "registered":"%1 zaregistrována k budoucím automatickým ztlumením.",
         "unregistered":"Skladba %1 byla odebrána ze seznamu pro automatické ztlumení."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Statistiky skladeb",
     "updates":"Aktualizace skladeb",
     "history":"Skladby v historii",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Délka skladby (%1 min)",
     "message":{
       "grab":"přidáno %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"opustil místnost",
       "history":"Skladba je v historii (%1 z %2)",
       "historySkipped":"Skladba je v historii (%1 z %2), ale při minulém přehrávání byla přeskočena",
-      "songLength":"Skladba je delší než %1 minut"
-    },
-    "notification":{
-      "songLength":"Délka skladby"
+      "songLength":"Skladba je delší než %1 minut",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Hlas",
     "position":"Pozice",
     "points":"Bodů",
-    "fans":"Fanoušků",
     "wootCount":"Počet Wootů",
     "mehCount":"Počet Mehů",
     "ratio":"Poměr Woot \/ Meh ",
@@ -163,6 +167,7 @@
     "autorespond":"AFK automatická odpověď",
     "notify":"Upozornění",
     "afktimers":"Statistika AFK uživatelů",
+    "etatimer":"ETA Timer",
     "roomsettings":"Nastavení místnosti",
     "chatimages":"Obrázky v chatu",
     "twitchemotes":"Twitch smajlíky",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Uživatel nenalezen",
-    "usernameNotFound":"Uživatelské jméno nenalezeno",
     "unknownModeration":"Neznámá moderace",
     "unknownMenuKey":"Neznámý klíč menu: %1",
     "missingReason":"Chybí důvod",
-    "notConnected":"Nepřipojeno k socket serveru",
     "noLiteSupport":"Tato možnost není podporována v plug&#179; Lite",
     "errorGettingPlaylistInfo":"Chyba při získávání informací o playlistu",
     "noPlaylistsFound":"Nebyl nalezen žádný playlist",
     "yourActivePlaylistIsFull":"Váš aktivní seznam skladeb je plný",
-    "canNotFindTheLastPMReceiver":"Nelze dohledat poslední příjemce PM zprávy",
     "noNextSong":"Nemáte žádnou skladbu ve frontě"
   }
 }

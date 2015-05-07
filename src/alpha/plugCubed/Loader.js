@@ -1,4 +1,4 @@
-define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Socket', 'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/Overrides/RoomUserListRow', 'plugCubed/Overrides'], function(module, Class, Notifications, Version, Styles, Settings, p3Utils, p3Lang, Socket, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, Features, Tickers, Panels, p3RoomUserListRow, Overrides) {
+define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/handlers/DialogHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/Overrides/RoomUserListRow', 'plugCubed/Overrides'], function(module, Class, Notifications, Version, Styles, Settings, p3Utils, p3Lang, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, DialogHandler, Features, Tickers, Panels, p3RoomUserListRow, Overrides) {
     var Loader, loaded = false;
 
     var RoomUserListView;
@@ -33,10 +33,10 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
 
         RoomSettings.update();
 
-        Socket.connect();
         Settings.load();
 
         Panels.register();
+        DialogHandler.register();
 
         loaded = true;
     }
@@ -79,7 +79,6 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
 
             Menu.close();
             RoomSettings.close();
-            Socket.disconnect();
             Features.unregister();
             Notifications.unregister();
             Tickers.unregister();
@@ -87,6 +86,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
             Styles.destroy();
             ChatHandler.close();
             CommandHandler.close();
+            DialogHandler.close();
 
             if (!p3Utils.runLite) {
                 RoomUserListView.prototype.RowClass = require('app/views/room/user/RoomUserListRow');

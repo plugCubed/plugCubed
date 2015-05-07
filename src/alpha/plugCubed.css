@@ -289,6 +289,10 @@
     background: url('https://d1rfegul30378.cloudfront.net/alpha/images/icons/mute_once.png') no-repeat 9px 6px;
 }
 
+.p3-commands {
+    list-style: square;
+}
+
 #p3-settings-wrapper {
     position: absolute;
     top: 54px;
@@ -625,7 +629,7 @@
     height: 16px;
 }
 
-.is-p3developer .from.has-sub .icon-chat-subscriber, .is-p3sponsor .from.has-sub .icon-chat-subscriber .is-p3special .from.has-sub .icon-chat-subscriber, .is-p3ambassador .from.has-sub .icon-chat-subscriber, .is-p3donatorDiamond .from.has-sub .icon-chat-subscriber, .is-p3donatorPlatinum .from.has-sub .icon-chat-subscriber, .is-p3donatorGold .from.has-sub .icon-chat-subscriber, .is-p3donatorSilver .from.has-sub .icon-chat-subscriber, .is-p3donatorBronze .from.has-sub .icon-chat-subscriber {
+.is-p3developer .from .icon-chat-subscriber, .is-p3sponsor .from .icon-chat-subscriber .is-p3special .from .icon-chat-subscriber, .is-p3ambassador .from .icon-chat-subscriber, .is-p3donatorDiamond .from .icon-chat-subscriber, .is-p3donatorPlatinum .from .icon-chat-subscriber, .is-p3donatorGold .from .icon-chat-subscriber, .is-p3donatorSilver .from .icon-chat-subscriber, .is-p3donatorBronze .from .icon-chat-subscriber {
     display: none;
 }
 

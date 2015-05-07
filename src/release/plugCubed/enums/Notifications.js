@@ -7,6 +7,7 @@ define(function() {
         SONG_UPDATE: 16,
         SONG_HISTORY: 32,
         SONG_LENGTH: 64,
-        USER_MEH: 128
+        USER_MEH: 128,
+        SONG_UNAVAILABLE: 256
     };
 });

@@ -15,6 +15,10 @@
     "commandDisable":"%1 autojoin disabled",
     "commandNotEnabled":"%1 autojoin was not enabled"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"Comandes plugCubed",
     "userCommands":"Comandes d'usuari",
@@ -24,13 +28,10 @@
       "word":"paraula",
       "on":"on",
       "off":"off",
-      "reason":"raó"
+      "reason":"raó",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"canviar estat a disponible",
-      "afk":"AFK Message",
-      "work":"canviar estat a treballant",
-      "gaming":"Jugant",
       "join":"Usuari s'uneix",
       "leave":"Usuari marxa",
       "whoami":"get your own information",
@@ -42,6 +43,7 @@
       "alertson":"reprodueix so quan les paraules definides s'escriguin al chat",
       "alertsoff":"atura la reproducció de so quan les paraules definides s'escriguin al chat",
       "grab":"add current song to your selected playlist",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"get current waitlist position",
       "version":"mostra el nombre de versió",
       "commands":"mostra aquesta llista",
@@ -54,22 +56,23 @@
       "unlock":"desbloqueja la taula de DJ",
       "add":"afegeix l'usuari seleccionat a la taula de DJ\/llista d'espera",
       "remove":"elimina l'usuari seleccionat a la taula de DJ\/llista d'espera",
-      "strobe":"enable\/disable strobe",
-      "rave":"activa\/desactiva apagar llums",
       "whois all":"gives userid and username of all users in the room",
-      "banall":"bans all users in the room"
+      "banall":"bans all users in the room",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
       "alertsoff":"No longer playing sound on specific words",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
       "automute":{
         "automuted":"%1 automuted.",
         "registered":"%1 registered to automute on future plays.",
         "unregistered":"%1 removed from automute registry."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Estadístiques de la cançó",
     "updates":"Actualitzacions de cançó",
     "history":"Cançons a l'historial",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Longitud de la cançó (%1 min)",
     "message":{
       "grab":"grabbed %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"left the room",
       "history":"Cançó a l'istóric (%1 de %2)",
       "historySkipped":"Cançó a l'istóric (%1 de %2), però es va saltar la útlima vegada",
-      "songLength":"La cançó és més llarga que %1 minuts"
-    },
-    "notification":{
-      "songLength":"Song Length"
+      "songLength":"La cançó és més llarga que %1 minuts",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Vot",
     "position":"Posició",
     "points":"Punts",
-    "fans":"Fans",
     "wootCount":"Woot Count",
     "mehCount":"Meh Count",
     "ratio":"Woot\/Meh Ratio",
@@ -163,6 +167,7 @@
     "autorespond":"AFK Autorespond",
     "notify":"Notificacions",
     "afktimers":"AFK Timers",
+    "etatimer":"ETA Timer",
     "roomsettings":"Configuració de la sala",
     "chatimages":"Chat Images",
     "twitchemotes":"Twitch Emotes",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Usuari no trobat",
-    "usernameNotFound":"Username not found",
     "unknownModeration":"Moderació desconeguda",
     "unknownMenuKey":"Tecla de menú desconeguda",
     "missingReason":"Falta la raó",
-    "notConnected":"No conectat al servidor socket",
     "noLiteSupport":"This is not supported in plug&#179; Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
     "noNextSong":"You have no queued song"
   }
 }

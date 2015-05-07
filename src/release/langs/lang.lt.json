@@ -15,6 +15,10 @@
     "commandDisable":"&1 Auto-priemimas išjungtas",
     "commandNotEnabled":"%1 Auto-priemimas nebuvo įjungtas"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"Vartotojo info",
     "userCommands":"Vartotojo Komandos",
@@ -24,13 +28,10 @@
       "word":"žodis",
       "on":"įjungta",
       "off":"išjungta",
-      "reason":"priežastis"
+      "reason":"priežastis",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"nustatyti statusą į prieinamas",
-      "afk":"\"Aš nesu prie klaviatūros\" žinutė",
-      "work":"nustatyti statusą į dirbantis",
-      "gaming":"nustatyti statusą žaidžiantis",
       "join":"Vartotojo Prisijungimas",
       "leave":"Vartotojo Išėjimas",
       "whoami":"gauk pačio savęs informacija",
@@ -42,6 +43,7 @@
       "alertson":"sugrok garsą kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
       "alertsoff":"sustok groti garsus kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
       "grab":"pridėti esamą dainą į jūsų pasirinktą grojaraštį",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"gauk dabartinę pozicija laukimo eilėje",
       "version":"rodo versijos numeri",
       "commands":"parodo šį sąrašą",
@@ -54,22 +56,23 @@
       "unlock":"atrakina DJ pulta",
       "add":"prideda nustatytus vartotojus prie dj pulto\/laukimo eilės",
       "remove":"išmeta nustatytus vartotojus iš dj pulto\/laukimo eilės",
-      "strobe":"įjungia\/išjungia mirgėjimą",
-      "rave":"įjungia\/išjungia šviesas",
       "whois all":"parodo vartotojo ID ir vardą kiekvieno esančio kambaryje",
-      "banall":"užblokuoja visus vartotojus esančius kambaryje"
+      "banall":"užblokuoja visus vartotojus esančius kambaryje",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
       "alertsoff":"No longer playing sound on specific words",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
       "automute":{
         "automuted":"%1 automuted.",
         "registered":"%1 registered to automute on future plays.",
         "unregistered":"%1 removed from automute registry."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Dainų nustatymai",
     "updates":"Dainu atnaujinimai",
     "history":"Dainų istorija",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Dainos trukmė minutėmis",
     "message":{
       "grab":"grabbed %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"left the room",
       "history":"Daina rasta praeityje (%1 of %2)",
       "historySkipped":"Daina rasta praeityje (%1 of %2), bet buvo praleista",
-      "songLength":"Daina ilgesnė negu %1 minutės"
-    },
-    "notification":{
-      "songLength":"Dainos trukmė"
+      "songLength":"Daina ilgesnė negu %1 minutės",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Balsas",
     "position":"Vieta",
     "points":"Taškai",
-    "fans":"Fanai",
     "wootCount":"Woot Skaičius",
     "mehCount":"Meh Skaičius",
     "ratio":"Woot\/Meh Santykis",
@@ -163,6 +167,7 @@
     "autorespond":"Išjunkite \"Aš nesu prie klaviatūros\" Auto-atsiliepimą",
     "notify":"Pranešimai",
     "afktimers":"\"Aš nesu prie klaviatūros\"  Laikai",
+    "etatimer":"ETA Timer",
     "roomsettings":"Kambario nustatymai",
     "chatimages":"Pokalbio žinutės",
     "twitchemotes":"Twitch Emotes",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Vartotojas nerastas",
-    "usernameNotFound":"Username not found",
     "unknownModeration":"Nežinoma moderacija",
     "unknownMenuKey":"Nežinomas meniu mygtukas: %1",
     "missingReason":"Priežastis nerasta",
-    "notConnected":"Neprisijungta prie serverio lizdo",
     "noLiteSupport":"Tai nėra palaikoma plug&#179; Lengvasis",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
     "noNextSong":"You have no queued song"
   }
 }

@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/AvatarManifest', 'plugCubed/overrides/UserInventory'], function(Class, p3Utils, p3Avatars, UserInventory) {
+define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/AvatarManifest'], function(Class, p3Utils, p3Avatars) {
     if (p3Utils.runLite) return;
 
     var AvatarManifest = require('app/utils/AvatarManifest'), initialized = false;
@@ -18,10 +18,12 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/AvatarManifest', 'plugC
                 }
             };
 
-            // Override My Avatars
-            // TODO: Write override of my avatars
-
             initialized = true;
+        },
+        close: function() {
+            if (!initialized) return;
+
+            initialized = false;
         }
     });
 });

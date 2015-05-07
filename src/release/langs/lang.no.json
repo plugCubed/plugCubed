@@ -15,6 +15,10 @@
     "commandDisable":"%1 autojoin disabled",
     "commandNotEnabled":"%1 autojoin was not enabled"
   },
+  "fullscreen":{
+    "shrink":"Shrink",
+    "enlarge":"Enlarge"
+  },
   "commands":{
     "header":"Bruker informasjon",
     "userCommands":"Bruker kommandoer",
@@ -24,13 +28,10 @@
       "word":"ord",
       "on":"on",
       "off":"off",
-      "reason":"begrunnelse"
+      "reason":"begrunnelse",
+      "number":"number"
     },
     "descriptions":{
-      "avail":"Sett statusen til ledig",
-      "afk":"AFK melding",
-      "work":"sett status til jobber",
-      "gaming":"Spiller",
       "join":"Brukeren koble seg til",
       "leave":"Brukeren logget av",
       "whoami":"get your own information",
@@ -42,6 +43,7 @@
       "alertson":"spille av lyd når definerte ord er skrevet i chat",
       "alertsoff":"stop playing sound when defined words are written in chat",
       "grab":"add current song to your selected playlist",
+      "badges":"show\/hide the user badges in chat",
       "getpos":"Gir deg din gjeldende posisjon i ventelista.",
       "version":"viser versjonsnummer",
       "commands":"viser denne lista",
@@ -54,22 +56,23 @@
       "unlock":"åpner DJ lista",
       "add":"Legger målrettet brukeren til DJ ventelista",
       "remove":"fjerner målrettet brukeren fra DJ ventelista",
-      "strobe":"aktivere\/deaktivere strobe",
-      "rave":"enable\/disable lights out",
       "whois all":"gives userid and username of all users in the room",
-      "banall":"fjerner og forbyr alle brukere i rommet"
+      "banall":"fjerner og forbyr alle brukere i rommet",
+      "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
       "alertsoff":"No longer playing sound on specific words",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
-      "lightsOut":"%1 turned the lights off",
-      "strobe":"%1 activated strobe lights",
       "automute":{
         "automuted":"%1 automuted.",
         "registered":"%1 registered to automute on future plays.",
         "unregistered":"%1 removed from automute registry."
+      },
+      "status":{
+        "rest":"REST: %1 %2 [%3ms]",
+        "socket":"Socket: %1 %2 [%3ms]"
       }
     }
   },
@@ -88,6 +91,7 @@
     "stats":"Song Stats",
     "updates":"Song Updates",
     "history":"Songs in history",
+    "songUnavailable":"Song Unavailable",
     "songLength":"Song Length (%1 min)",
     "message":{
       "grab":"grabbed %1 - %2",
@@ -98,10 +102,11 @@
       "leave":"left the room",
       "history":"Song is in history (%1 of %2)",
       "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
-      "songLength":"Song is longer than %1 minutes"
-    },
-    "notification":{
-      "songLength":"Song Length"
+      "songLength":"Song is longer than %1 minutes",
+      "songPrivate":"Song is private",
+      "songNotFound":"Song not found",
+      "songEmbed":"Song has embedding disabled",
+      "songStreamable":"Song doesn't support streaming"
     }
   },
   "info":{
@@ -126,7 +131,6 @@
     "vote":"Stemme",
     "position":"Posisjon",
     "points":"Poeng",
-    "fans":"Fans",
     "wootCount":"Woot Count",
     "mehCount":"Meh Count",
     "ratio":"Woot\/Meh Ratio",
@@ -163,6 +167,7 @@
     "autorespond":"AFK Autorespond",
     "notify":"Notifications",
     "afktimers":"AFK timer",
+    "etatimer":"ETA Timer",
     "roomsettings":"Rom innstillinger",
     "chatimages":"Chat Images",
     "twitchemotes":"Twitch Emotes",
@@ -185,16 +190,13 @@
   },
   "error":{
     "userNotFound":"Bruker ble ikke funnet",
-    "usernameNotFound":"Username not found",
     "unknownModeration":"Ukjent moderasjon",
     "unknownMenuKey":"Ukjent menytast: %1",
     "missingReason":"Mangler begrunnelse",
-    "notConnected":"IIkke koblet til socket server",
     "noLiteSupport":"This is not supported in plug&#179; Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
-    "canNotFindTheLastPMReceiver":"Can not find the last PM receiver",
     "noNextSong":"You have no queued song"
   }
 }
