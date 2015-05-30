@@ -71,7 +71,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/handlers/TriggerHandler', 'plugC
 
             curVote = p3Utils.getUserData(data.user.id, 'curVote', 0);
             wootCount = p3Utils.getUserData(data.user.id, 'wootcount', 0) - (curVote === 1 ? 1 : 0) + (data.vote === 1 ? 1 : 0);
-            mehCount = p3Utils.getUserData(data.user.id, 'mehcount', 0) - (curVote === -1 ? 1 : 0) + (data.vote === 1 ? 1 : 0);
+            mehCount = p3Utils.getUserData(data.user.id, 'mehcount', 0) - (curVote === -1 ? 1 : 0) + (data.vote === -1 ? 1 : 0);
 
             p3Utils.setUserData(data.user.id, 'wootcount', wootCount);
             p3Utils.setUserData(data.user.id, 'mehcount', mehCount);
