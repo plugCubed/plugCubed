@@ -1,7 +1,8 @@
 {
     "manifest_version": 2,
-
+    "author": "plug³ Team",
     "name": "plugCubed",
+    "short_name": "plug³",
     "description": "Adding a new dimension to plug.dj",
     "homepage_url": "https://plugCubed.net",
     "version": "VERSION.MAJOR.VERSION.MINOR.VERSION.PATCH.VERSION.BUILD",

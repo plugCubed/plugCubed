@@ -38,9 +38,6 @@ module.exports = function(grunt) {
             }
         },
         exec: {
-            packCRX: {
-                command: '"' + config.paths.chromePath + '" --pack-extension="' + path.resolve(__dirname, 'extensions', 'Opera') + '" --pack-extension-key="' + path.resolve(__dirname, 'extensions', 'key.pem') + '"'
-            },
             alphaToRelease: {
                 command: 'xcopy "src/alpha" "src/release" /S /Y'
             },
@@ -222,6 +219,26 @@ module.exports = function(grunt) {
                 }, {
                     from: 'VERSION.BUILD',
                     to: versionDev.build.toString()
+                }]
+            },
+            chromeVersionExtension: {
+                src: ['extensions/shared/manifest.src.json'],
+                dest: 'extensions/Chrome/manifest.json',
+                replacements: [{
+                    from: 'VERSION.MAJOR',
+                    to: versionRelease.major.toString()
+                }, {
+                    from: 'VERSION.MINOR',
+                    to: versionRelease.minor.toString()
+                }, {
+                    from: 'VERSION.PATCH',
+                    to: versionRelease.patch.toString()
+                }, {
+                    from: 'VERSION.PRERELEASE',
+                    to: versionRelease.prerelease
+                }, {
+                    from: 'VERSION.BUILD',
+                    to: versionRelease.build.toString()
                 }]
             },
             operaVersionExtension: {
@@ -688,9 +705,9 @@ module.exports = function(grunt) {
     });
 
     // Extensions
-    grunt.registerTask('extension:packOpera', ['replace:operaVersionExtension', 'exec:packCRX']);
-    grunt.registerTask('extension:packFirefox', ['replace:firefoxVersionExtension', 'mozilla-addon-sdk', 'mozilla-cfx-xpi']);
-    grunt.registerTask('extension', ['execute:extension', 'extension:packFirefox', 'extension:packOpera']);
+    grunt.registerTask('extension:replaceVersions', ['replace:chromeVersionExtension', 'replace:operaVersionExtension', 'replace:firefoxVersionExtension', 'replace:operaVersionExtension']);
+    grunt.registerTask('extension:packFirefox', ['mozilla-addon-sdk', 'mozilla-cfx-xpi']);
+    grunt.registerTask('extension', ['extension:replaceVersions', 'execute:extension', 'extension:packFirefox']);
 
     grunt.registerTask('build:release', ['replace:linksRelease', 'requirejs:release', 'replace:versionRelease', 'execute:reobfuscateRelease', 'replace:enableMinifyRelease', 'requirejs_obfuscate:release', 'execute:closureCompilerRelease', 'extension']);
     grunt.registerTask('build:alpha', ['replace:linksAlpha', 'requirejs:alpha', 'replace:versionAlpha', 'execute:reobfuscateAlpha', 'replace:enableMinifyAlpha', 'requirejs_obfuscate:alpha', 'execute:closureCompilerAlpha']);
