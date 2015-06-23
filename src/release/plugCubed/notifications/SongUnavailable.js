@@ -2,6 +2,7 @@ define(['jquery', 'plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'pl
     var handler = TriggerHandler.extend({
         trigger: API.ADVANCE,
         handler: function (data) {
+            return;
             if ((Settings.notify & enumNotifications.SONG_UNAVAILABLE) === enumNotifications.SONG_UNAVAILABLE) {
                 var url;
                 if (data.media.format === 1) {
