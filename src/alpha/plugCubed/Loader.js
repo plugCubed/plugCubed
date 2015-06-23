@@ -31,9 +31,9 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         CommandHandler.register();
         ChatHandler.register();
 
-        RoomSettings.update();
-
         Settings.load();
+
+        RoomSettings.update();
 
         Panels.register();
         DialogHandler.register();
