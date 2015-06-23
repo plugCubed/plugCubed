@@ -1,7 +1,7 @@
 {
   "running":"Corriendo plug&#179; versión %1",
   "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLiteInfo":"Algunas características no funcionaran.",
   "commandsHelp":"Usa '\/commands' para ver todos los comandos",
   "autorespond":{
     "default":"Estoy Lejos del Teclado.",
@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 Auto Unirse está deshabilitado"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Contraer",
+    "enlarge":"Ampliar"
   },
   "commands":{
     "header":"Comandos plugCubed",
@@ -29,7 +29,7 @@
       "on":"Encendido",
       "off":"Apagar",
       "reason":"razón",
-      "number":"number"
+      "number":"Número"
     },
     "descriptions":{
       "join":"Conexión de usuario",
@@ -42,8 +42,8 @@
       "refresh":"recarga el video",
       "alertson":"reproducir sonido cuando las palabras definidas sean escritas en el chat",
       "alertsoff":"para la reproducción cuando las palabras definidas aparecen en el chat.",
-      "grab":"add current song to your selected playlist",
-      "badges":"show\/hide the user badges in chat",
+      "grab":"agregar canción actual a tu lista de reproducción seleccionada",
+      "badges":"mostrar\/ocultar las medallas de usuario en el chat",
       "getpos":"posición actual en la lista de espera",
       "version":"muestra el numero de versión",
       "commands":"muestra esta lista",
@@ -58,20 +58,20 @@
       "remove":"elimina el usuario seleccionado a la mesa de dj\/lista de espera",
       "whois all":"da el userid y el username de todos los usuarios en la sala",
       "banall":"banea todos los usuarios en la sala",
-      "status":"shows status of plug servers"
+      "status":"mostrar el estado de los servidores de plug"
     },
     "responses":{
-      "alertson":"Playing sound on the following words: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "alertson":"Reproduciendo sonido en las siguientes palabras: %1",
+      "alertsoff":"Dejando de reproducir sonido en palabras especificas",
+      "nextsong":"Tu siguiente canción en espera es %1 por %2",
+      "isHistory":"Atención: Esta canción aún esta en el historial (%1 de %2)",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "automuted":"%1 auto-silenciado.",
+        "registered":"%1 registrada para auto-silenciarse en reproducciones futuras.",
+        "unregistered":"%1 removida del registro de auto-silenciar."
       },
       "status":{
-        "rest":"REST: %1 %2 [%3ms]",
+        "rest":"QUEDA: %1 %2 [%3ms]",
         "socket":"Socket: %1 %2 [%3ms]"
       }
     }
@@ -195,8 +195,8 @@
     "missingReason":"Falta razón",
     "noLiteSupport":"Esto no es compatible con plug&#179; Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
-    "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
-    "noNextSong":"You have no queued song"
+    "noPlaylistsFound":"No se encontraron listas de reproducción",
+    "yourActivePlaylistIsFull":"Tu lista de reproduccion activa esta llena",
+    "noNextSong":"No tienes ninguna canción en lista de espera"
   }
 }

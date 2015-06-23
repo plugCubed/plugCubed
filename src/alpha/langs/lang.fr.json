@@ -58,7 +58,7 @@
       "remove":"Retire l'utilisateur de la cabine de DJ ou de la liste d'attente.",
       "whois all":"Donne l'ID et le pseudonyme de tous les utilisateurs présents dans la communauté.",
       "banall":"Banni tous les membres dans la communauté",
-      "status":"afficher l'état des serveurs plug"
+      "status":"affiche l'état des serveurs de plug"
     },
     "responses":{
       "alertson":"Émet un son sur les mots suivants: %1",
@@ -91,7 +91,7 @@
     "stats":"Statistiques de la musique",
     "updates":"Changements de musique",
     "history":"Musiques dans l'historique des DJs",
-    "songUnavailable":"Son indisponible",
+    "songUnavailable":"Musique indisponible",
     "songLength":"Durée de la chanson (%1 min)",
     "message":{
       "grab":"ajouté %1 - %2",
@@ -103,10 +103,10 @@
       "history":"Musique dans l'historique des DJs (%1 de %2)",
       "historySkipped":"La musique est dans l'historique des DJs (%1 sur %2) mais a été sautée la dernière fois qu'elle a été jouée",
       "songLength":"La musique est plus longue que %1 minutes",
-      "songPrivate":"Le son est privée",
-      "songNotFound":"Son introuvable",
+      "songPrivate":"La musique est privée",
+      "songNotFound":"Musique introuvable",
       "songEmbed":"L'intégration du son est désactivé",
-      "songStreamable":"Le son ne supporte pas le streaming"
+      "songStreamable":"La musique ne supporte pas le streaming"
     }
   },
   "info":{

@@ -1,7 +1,7 @@
 {
   "running":"Pokrećeš plug plug&#179; verzija %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLite":"Pokretanje plug&#179; Lajt verzija!",
+  "runningLiteInfo":"Neke funkcije neće raditi.",
   "commandsHelp":"Koristi ' \/commands' da vidis komande.",
   "autorespond":{
     "default":"Nisam za kompjuterom.",
@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 automatsko pridruživanje nije bilo uključeno"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Smanji",
+    "enlarge":"Uvećaj"
   },
   "commands":{
     "header":"Informacije o korisniku",
@@ -26,10 +26,10 @@
     "variables":{
       "username":"nik",
       "word":"reč",
-      "on":"on",
-      "off":"off",
+      "on":"Uključi",
+      "off":"Isključi",
       "reason":"razlog",
-      "number":"number"
+      "number":"Broj"
     },
     "descriptions":{
       "join":"Korisnik uđe",
@@ -42,8 +42,8 @@
       "refresh":"Osveži video",
       "alertson":"pusti zvuk kada se definisane reči pomenu u chatu",
       "alertsoff":"isključi zvuk kada se definisane reči pomenu u chatu",
-      "grab":"add current song to your selected playlist",
-      "badges":"show\/hide the user badges in chat",
+      "grab":"Dodaj trenutnu pesmu u tvoju izabranu playlist-u",
+      "badges":"Pokaži\/Sakrij korisničke bedževe u čet-u",
       "getpos":"Trenutna pozicija na listi čekanja",
       "version":"Prikaži broj verzije",
       "commands":"prikazuje ovu listu",
@@ -58,55 +58,55 @@
       "remove":"uklanja odabranog korisnika sa DJ liste",
       "whois all":"daje ID korisnika kao i korisničko ime svih korisnika u sobi",
       "banall":"banuje sve korisnike u sobi",
-      "status":"shows status of plug servers"
+      "status":"Pokaži statuse plug servera"
     },
     "responses":{
-      "alertson":"Playing sound on the following words: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "alertson":"Reprodukcija zvuka na sledeće reči: %1",
+      "alertsoff":"Više ne reproduktuj zvuke na određene reči",
+      "nextsong":"Tvoja sledeća pjesma koju puštaš je %1 od %2",
+      "isHistory":"Upozorenje: Ova pesma je u istoriji (%1 od %2)",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "automuted":"%1 AutoMute-ovano.",
+        "registered":"%1 je registrovano za AutoMute za sledeće puteve kada bude puštana.",
+        "unregistered":"%1 je izbrisan iz liste AutoMute-ovanih pesama."
       },
       "status":{
-        "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
+        "rest":"Ostalo: %1 %2 [%3ms]",
+        "socket":"Priključak: %1 %2 [%3ms]"
       }
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "boothAvailable":"Ako se pridružite liszi čekanja sada, onda će te vi puštati!",
+    "alreadyDJ":"Već si DJ!",
+    "waitListTime":"Ti si u listi čekanja %1 od %2, puštaćeš za otprilike %3!",
+    "joinTime":"Ako uđeš u listu čekanja sad, puštaćeš za otprilike %1!"
   },
   "notify":{
     "header":"Informacije o korisniku",
     "join":"Korisnik uđe",
     "leave":"Korisnik ode",
-    "grab":"User Grab",
-    "meh":"User Mehs",
-    "stats":"Song Stats",
-    "updates":"Song Updates",
-    "history":"Songs in history",
-    "songUnavailable":"Song Unavailable",
-    "songLength":"Song Length (%1 min)",
+    "grab":"Korisnik Grab-ovao",
+    "meh":"Korianik Meh-ovao",
+    "stats":"Statistike pesme",
+    "updates":"Ažuriranja Pesme",
+    "history":"Pesma u istoriji",
+    "songUnavailable":"Pesma Nedostupna",
+    "songLength":"Dužina pesme (%1 minut\/a)",
     "message":{
-      "grab":"grabbed %1 - %2",
+      "grab":"Grab-ovano %1 - %2",
       "stats":"Statistika: %1 Woot -- %2 Meh -- %3 Grab",
       "updates":"Trenutna pesma: %1 od %2<br \/>Pustio: %3",
-      "meh":"meh'd this track",
-      "join":"joined the room",
-      "leave":"left the room",
+      "meh":"Meh-ovao ovu pesmu",
+      "join":"Ušao\/la u sobu",
+      "leave":"Napustio\/la sobu",
       "history":"Pesma je u istoriji (%1 od %2)",
       "historySkipped":"Pesma je u istoriji (%1 od %2),ali je bila skipovana",
       "songLength":"Pesma je duža od %1 minuta",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"Pesma je privatna",
+      "songNotFound":"Pesma nije pronađena",
+      "songEmbed":"Pesma je onemogućena",
+      "songStreamable":"Pesma ne podržava Stream-ovanje"
     }
   },
   "info":{
@@ -116,13 +116,13 @@
     "specialTitles":{
       "developer":"plug&#179; Autor",
       "sponsor":"plug&#179;Sponzor",
-      "ambassador":"plug&#179; Ambassador",
-      "donatorDiamond":"plug&#179; Diamond Donator",
+      "ambassador":"plug&#179; Ambasador",
+      "donatorDiamond":"plug&#179; Dijamant Donator",
       "donatorPlatinum":"plug&#179; Platinum Donator",
       "donatorGold":"plug&#179;Zlatni donator",
-      "donatorSilver":"plug&#179; Silver Donator",
-      "donatorBronze":"plug&#179; Bronze Donator",
-      "special":"plug&#179; Special Supporter - %1"
+      "donatorSilver":"plug&#179; Srebrni Donator",
+      "donatorBronze":"plug&#179; Bronzani Donator",
+      "special":"plug&#179; Specijalni Podržalac - %1"
     },
     "id":"ID",
     "rank":"Rank",
@@ -147,31 +147,31 @@
   "ranks":{
     "you":"Vi",
     "regular":"Regularan",
-    "residentdj":"Rezident DJ",
+    "residentdj":"Specijalni DJ",
     "bouncer":"Izbacivač",
     "manager":"Menadžer",
-    "cohost":"Domaćin",
+    "cohost":"Zamenik Domaćin",
     "host":"Domaćin",
     "ambassador":"Ambasador",
     "admin":"Admin"
   },
   "roomSpecificSettings":{
-    "infoHeader":"This room is using special settings",
-    "infoHeaderCredits":"This room is using special settings by %1",
-    "infoDisable":"You can disable them in the menu"
+    "infoHeader":"Ova soba koristi specijalne efekte",
+    "infoHeaderCredits":"Ova zajednica koristi specijalne efekte od %1",
+    "infoDisable":"Možeš ih isključiti u Meni-u"
   },
   "menu":{
-    "autowoot":"Autowoot",
+    "autowoot":"AutoWoot",
     "autojoin":"Automatsko pridruživanje",
     "customchatcolors":"Prilagođene boje četa",
     "autorespond":"AFK automatsko odgovaranje",
     "notify":"Obaveštenja",
     "afktimers":"AFK tajmer",
-    "etatimer":"ETA Timer",
+    "etatimer":"ETA Tajmer",
     "roomsettings":"Podešavanja sobe",
-    "chatimages":"Chat Images",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "chatimages":"Čet slike",
+    "twitchemotes":"Twitch Emotikoni",
+    "controlpanel":"Kontrolna Tabla"
   },
   "vote":{
     "meh":"Ne sviđa mi se",
@@ -193,10 +193,10 @@
     "unknownModeration":"Nepoznata komanda",
     "unknownMenuKey":"Nepoznata komanda: %1",
     "missingReason":"Nedostaje razlog",
-    "noLiteSupport":"This is not supported in plug&#179; Lite",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
-    "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
-    "noNextSong":"You have no queued song"
+    "noLiteSupport":"Ovo nije podržano u plug&#179; Lajt",
+    "errorGettingPlaylistInfo":"Greška pri dobijanju informacije o playlist-i",
+    "noPlaylistsFound":"PlayList-a nije pronađena",
+    "yourActivePlaylistIsFull":"Tvoja aktivirana PlayList-a je puna",
+    "noNextSong":"Nemaš pesmu na čekanju"
   }
 }

@@ -1,7 +1,7 @@
 {
   "running":"Plug³ verziu %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLite":"Spustená Lite verzia plug&#179;!",
+  "runningLiteInfo":"Niektoré funkcie nebudú fungovať správne.",
   "commandsHelp":"Použi '\/commands' k rozšírenému zobrazeniu rozkazov\n",
   "autorespond":{
     "default":"Som preč od klávesnice.",
@@ -16,8 +16,8 @@
     "commandNotEnabled":"Automatické spojenie %1 nebolo povolené"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Zmenšiť",
+    "enlarge":"Zväčšiť"
   },
   "commands":{
     "header":"User Information",
@@ -29,7 +29,7 @@
       "on":"Zapnuté",
       "off":"vypnutie",
       "reason":"dôvod",
-      "number":"number"
+      "number":"číslo"
     },
     "descriptions":{
       "join":"User Join",
@@ -42,8 +42,8 @@
       "refresh":"obnoviť video",
       "alertson":"Prehrať zvuk vždy definované slová sú napísané v chate",
       "alertsoff":"zastaviť prehrávanie zvuku pri definovaných slová sú napísané v chate",
-      "grab":"add current song to your selected playlist",
-      "badges":"show\/hide the user badges in chat",
+      "grab":"pridá aktuálnu skladbu do vybraného zoznamu skladieb",
+      "badges":"zobraziť\/skryť užívateľské odznaky v chate",
       "getpos":"získať aktuálnu pozíciu waitlist",
       "version":"zobrazí číslo verzie",
       "commands":"Tento zoznam sa zobrazuje",
@@ -58,17 +58,17 @@
       "remove":"odstraňuje cieľových používateľov od dj búdky\/waitlist",
       "whois all":"dáva userid a užívateľské meno všetkých používateľov v miestnosti",
       "banall":"zákazy všetkých používateľov v miestnosti",
-      "status":"shows status of plug servers"
+      "status":"zobrazí stav plug.dj serverov"
     },
     "responses":{
-      "alertson":"Playing sound on the following words: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "alertson":"Zvuk sa prehrá pri následujúcich slovách: %1",
+      "alertsoff":"Zvuk už nebude pri určených slovách prehratý",
+      "nextsong":"Vaša ďalšia skladba bude %1 od %2",
+      "isHistory":"Pozor: Tato skladba je stále v historií (%1 z %2)",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "automuted":"%1 automaticky ztlmené.",
+        "registered":"%1 zaregistrovaná k budúcim automatickým stlmením.",
+        "unregistered":"%1 bola odobraná zo zoznamu pre automatické stlmenie."
       },
       "status":{
         "rest":"REST: %1 %2 [%3ms]",

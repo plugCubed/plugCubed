@@ -1,7 +1,7 @@
 {
   "running":"Работает plug&#179; версии %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
+  "runningLite":"Запуск plug&#179; в Lite режиме!",
+  "runningLiteInfo":"Некоторые функции не будут работать.",
   "commandsHelp":"Для просмотра доступных команд чата используйте '\/commands' ",
   "autorespond":{
     "default":"Я отошёл от клавиатуры.",
@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 автодобавление недоступно"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Растянуть",
+    "enlarge":"Увеличить"
   },
   "commands":{
     "header":"Команды plug&#179;",
@@ -29,7 +29,7 @@
       "on":"включено",
       "off":"выключено",
       "reason":"причина",
-      "number":"number"
+      "number":"номер"
     },
     "descriptions":{
       "join":"встать в очередь",
@@ -42,8 +42,8 @@
       "refresh":"перезагрузить видео",
       "alertson":"воспроизводить звук, когда указанные слова будут написаны в чате",
       "alertsoff":"останавливать воспроизведение звука, когда определённые слова пишутся в чате",
-      "grab":"add current song to your selected playlist",
-      "badges":"show\/hide the user badges in chat",
+      "grab":"добавить данную песню в выбраный плейлист",
+      "badges":"показать\/скрыть пользовательские значки в чате",
       "getpos":"узнать свою положение в очереди",
       "version":"отобразить номер текущей версии",
       "commands":"показать этот список",
@@ -58,7 +58,7 @@
       "remove":"удалить выбранного пользователя из очереди",
       "whois all":"предоставить идентификатор пользователя, или имя пользователя, или всех пользователей в комнате",
       "banall":"забанить всех пользователей в этой комнате",
-      "status":"shows status of plug servers"
+      "status":"показывает статус подключаемых серверов"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",

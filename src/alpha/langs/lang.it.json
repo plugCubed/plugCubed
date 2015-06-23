@@ -16,8 +16,8 @@
     "commandNotEnabled":"autojoin %1 non è stato abilitato"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Rimpicciolisci",
+    "enlarge":"Ingrandisci"
   },
   "commands":{
     "header":"User Information",
@@ -29,7 +29,7 @@
       "on":"attivato",
       "off":"disattivato",
       "reason":"Motivo",
-      "number":"number"
+      "number":"numero"
     },
     "descriptions":{
       "join":"User Join",
@@ -43,7 +43,7 @@
       "alertson":"riproduce il suono ogni volta che le parole definite sono scritte in chat",
       "alertsoff":"interrompe la riproduzione del suono quando le parole definite sono scritte in chat",
       "grab":"aggiunge il brano corrente alla tua playlist selezionata",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"Mostra\/Nascondi i distintivi utente nella chat",
       "getpos":"Mostra la posizione attuale nella lista d'attesa",
       "version":"Mostra il numero di versione",
       "commands":"Mostra questa lista.",

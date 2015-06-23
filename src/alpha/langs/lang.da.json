@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 autojoin var ikke aktiveret"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Formindsk",
+    "enlarge":"Forstør"
   },
   "commands":{
     "header":"plugCubed Kommandoer",
@@ -29,7 +29,7 @@
       "on":"til",
       "off":"fra",
       "reason":"begrundelse",
-      "number":"number"
+      "number":"nummer"
     },
     "descriptions":{
       "join":"tilslut dj boden\/ventelisten",
@@ -43,7 +43,7 @@
       "alertson":"afspil lyd når valgte ord bliver skrevet i chat",
       "alertsoff":"stop med at spille lyd når valgte ord bliver skrevet i chat",
       "grab":"Tilføj nuværende sang til din valgte afspilningsliste",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"vis\/skjul brugerens emblemer i chatten",
       "getpos":"få nuværende position i ventelisten",
       "version":"viser versionsnummer",
       "commands":"viser denne liste",
@@ -58,7 +58,7 @@
       "remove":"fjerner valgte bruger fra DJ bod\/venteliste",
       "whois all":"giver bruger-id og brugernavn for alle brugere i rummet",
       "banall":"banner alle brugere i rummet",
-      "status":"shows status of plug servers"
+      "status":"viser status for plug-servere"
     },
     "responses":{
       "alertson":"Afspiller lyd ved følgende ord: %1",
@@ -67,8 +67,8 @@
       "isHistory":"Advarsel! Denne sang er stadigvæk i historikken (%1 af %2)",
       "automute":{
         "automuted":"%1 auto-dæmpet.",
-        "registered":"%1 registeret til at blive automatisk muted fremover.",
-        "unregistered":"%1 fjernet fra automatisk at blive muted fremover."
+        "registered":"%1 registeret til at automatisk blive dæmpet fremover.",
+        "unregistered":"%1 fjernet fra automatisk at blive dæmpet fremover."
       },
       "status":{
         "rest":"REST: %1 %2 [%3ms]",
@@ -77,24 +77,24 @@
     }
   },
   "eta":{
-    "boothAvailable":"Hvis du tilslutter dig ventelisten nu ville du være DJ!",
+    "boothAvailable":"Hvis du tilmelder dig til ventelisten nu ville du være DJ!",
     "alreadyDJ":"Du er allerede DJ!",
-    "waitListTime":"Du befinder dig i venteliste %1 af %2 og vil være DJ om %3!",
+    "waitListTime":"Du er på ventelisten %1 af %2 og vil være DJ om %3!",
     "joinTime":"Hvis du tilslutter dig ventelisten nu, vil du være DJ om omkring %1!"
   },
   "notify":{
     "header":"Chat notifikationer",
     "join":"Bruger tilsluttet",
     "leave":"Bruger Forlader",
-    "grab":"User Grab",
+    "grab":"Bruger Grab",
     "meh":"Bruger kan ikke lide",
     "stats":"Sang statistik",
     "updates":"Sang opdateringer",
     "history":"Sange i historik",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Sangen er ikke tilgængelig",
     "songLength":"Sang længde (%1 min)",
     "message":{
-      "grab":"grabbed %1 - %2",
+      "grab":"Grabbed %1 - %2",
       "stats":"Statistik: %1 kan lide -- %2 kan ikke lide -- %3 tilføjelser",
       "updates":"Afspiller nu: %1 af %2<br>Afspillet af: %3",
       "meh":"%1 kunne ikke lide denne sang",
@@ -103,10 +103,10 @@
       "history":"Denne sang er i historikken (%1 af %2)",
       "historySkipped":"Denne sang er i historikken (%1 af %2), men blev sprunget over ved sidste afspilning",
       "songLength":"Sang er længere end %1 minutter",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"Sangen er privat",
+      "songNotFound":"Sangen blev ikke fundet",
+      "songEmbed":"Sangen har ikke indlejring aktiveret",
+      "songStreamable":"Sangen understøtter ikke streaming"
     }
   },
   "info":{
@@ -194,7 +194,7 @@
     "unknownMenuKey":"Ukendt menu knap: %1",
     "missingReason":"Mangler begrundelse",
     "noLiteSupport":"Dette understøttes ikke i plug&#179; Lite",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "errorGettingPlaylistInfo":"Fejl under hentning af afspilningslisten information",
     "noPlaylistsFound":"Ingen afspilningslister fundet",
     "yourActivePlaylistIsFull":"Din aktive afspilningsliste er fuld",
     "noNextSong":"Du har ingen sange i kø"

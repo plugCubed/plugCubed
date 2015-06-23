@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 automatyczne dołączanie nie jest włączone"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Zminimalizuj",
+    "enlarge":"Powiększ"
   },
   "commands":{
     "header":"plug&#179; Polecenia",
@@ -29,7 +29,7 @@
       "on":"on",
       "off":"Wył",
       "reason":"powód",
-      "number":"number"
+      "number":"numer"
     },
     "descriptions":{
       "join":"Dołącz do listy oczekiwania",
@@ -43,7 +43,7 @@
       "alertson":"Odtwarza dźwięk, gdy wybrane wyrazy będą napisane na czacie",
       "alertsoff":"wyłącza odtwarzeanie dźwięku gdy dane słowa zostaną napisane na chacie",
       "grab":"dodaj bieżący utwór do wybranej listy utworów",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"pokaż\/ukryj plakietki użytkowników na czacie",
       "getpos":"pokazuje aktualną pozycję w liście oczekiwania",
       "version":"pokazuje numer wersji",
       "commands":"pokazuje tę listę",
@@ -58,7 +58,7 @@
       "remove":"usuwa podanego użytkownika z listy oczekiwania",
       "whois all":"podaje numer identyfikacyjny oraz nazwę użytkownika każdego użytkownika znajdującego się w pokoju",
       "banall":"zbanuj wszystkich użytkowników w tym pokoju",
-      "status":"shows status of plug servers"
+      "status":"pokaż status serwerów"
     },
     "responses":{
       "alertson":"Odtwarzanie dźwięku na następujące słowa: %1",
@@ -91,7 +91,7 @@
     "stats":"Statystyki utworów",
     "updates":"Aktualizacje utworów",
     "history":"Piosenki w historii",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Piosenka niedostępna",
     "songLength":"Długość piosenki (%1 min)",
     "message":{
       "grab":"%1 chwycił %2 - %3",
@@ -103,9 +103,9 @@
       "history":"Ten utwór jest w historii (%1 z %2)",
       "historySkipped":"Piosenka jest w historii (%1 z %2), lecz została pominięta przy ostatnim zagraniu",
       "songLength":"Piosenka jest dłuższa niż %1 minut",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
+      "songPrivate":"Ta piosenka jest prywatna",
+      "songNotFound":"Piosenka nie znaleziona",
+      "songEmbed":"Ta piosenka ma wyłączone odtwarzanie na stronach zewnętrznych",
       "songStreamable":"Song doesn't support streaming"
     }
   },
@@ -167,7 +167,7 @@
     "autorespond":"Auto odpowiedź AFK",
     "notify":"Powiadomienia",
     "afktimers":"Licznik AFK",
-    "etatimer":"ETA Timer",
+    "etatimer":"Przewidywany czas",
     "roomsettings":"Ustawienia pokoju",
     "chatimages":"Pokazuj zdjęcia na czacie",
     "twitchemotes":"Emotikony Twitcha",

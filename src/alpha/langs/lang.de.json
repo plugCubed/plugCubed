@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 Automatisches Beitreten war nicht aktiviert"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Verkleinern",
+    "enlarge":"Vergrößern"
   },
   "commands":{
     "header":"plug&#179; Befehle",
@@ -29,7 +29,7 @@
       "on":"an",
       "off":"aus",
       "reason":"Grund",
-      "number":"number"
+      "number":"Nummer"
     },
     "descriptions":{
       "join":"Nutzer beigetreten",
@@ -43,7 +43,7 @@
       "alertson":"Spiele einen Ton, sobald bestimmte Worte im Chat geschrieben werden",
       "alertsoff":"Kein Signalton bei einem im Chat erwähntem Wort  ",
       "grab":"Füge den aktuellen Song zu deiner ausgewählten Playlist hinzu",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"Benutzeabzeichen im chat ein-\/ausblenden",
       "getpos":"Zeigt deine Position in der Warteliste an",
       "version":"Zeigt die Versionsnummer an",
       "commands":"Zeigt diese Liste",
@@ -58,7 +58,7 @@
       "remove":"Entfernt den markierten Benutzer von der DJ Warteliste",
       "whois all":"Zeigt die Benutzer-ID und Benutzernamen von allen Benutzern im Raum an",
       "banall":"Bannt alle Benutzer im Raum",
-      "status":"shows status of plug servers"
+      "status":"Status der Plug Server zeigen"
     },
     "responses":{
       "alertson":"Mache ein Geräusch bei folgenden Wörtern: %1",
@@ -91,10 +91,10 @@
     "stats":"Song-Statistik",
     "updates":"Song-Updates",
     "history":"Songs im Verlauf",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Lied nicht verfügbar",
     "songLength":"Song Länge (%1 min)",
     "message":{
-      "grab":"grabbed %1 - %2",
+      "grab":"gegrabt %1 - %2",
       "stats":"Statistiken: %1 woots -- %2 mehs -- %3 grabs",
       "updates":"Jetzt läuft: %1 von %2<br\/>Gespielt von: %3",
       "meh":"%1 meh-te diesen Song",
@@ -103,10 +103,10 @@
       "history":"Song ist im Verlauf (%1 von %2)",
       "historySkipped":"Song ist im Verlauf (%1 von %2), aber wurde beim letzten Mal übersprungen",
       "songLength":"Song ist länger als %1 Minuten ",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"Dieses Lied ist Privat",
+      "songNotFound":"Lied konnte nicht gefunden werden",
+      "songEmbed":"Dieses Lied hat das Einbetten deaktiviert",
+      "songStreamable":"Dieses Lied unterstützt Streaming nicht"
     }
   },
   "info":{
@@ -167,7 +167,7 @@
     "autorespond":"AFK Autoantwort",
     "notify":"Benachrichtigungen",
     "afktimers":"AFK Timer",
-    "etatimer":"ETA Timer",
+    "etatimer":"ETA TImer",
     "roomsettings":"Raum Einstellungen",
     "chatimages":"Chat-Bilder",
     "twitchemotes":"Twitch Emotes",

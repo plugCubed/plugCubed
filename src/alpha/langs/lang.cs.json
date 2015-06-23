@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 Autojoin nebyl zapnut"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Zmenšit",
+    "enlarge":"Zvětšit"
   },
   "commands":{
     "header":"plug&#179; příkazy",
@@ -29,7 +29,7 @@
       "on":"zapnuto",
       "off":"vypnuto",
       "reason":"důvod",
-      "number":"number"
+      "number":"číslo"
     },
     "descriptions":{
       "join":"připojit se do fronty",
@@ -43,7 +43,7 @@
       "alertson":"přehraje zvuk vždy, když jsou definovaná slovo napsána do chatu",
       "alertsoff":"přestane přehrávat zvuk, když jsou definovaná slova napsána v chatu",
       "grab":"přidá aktuální skladbu do vybraného seznamu skladeb",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"Zobrazit\/Skrýt uživatelské odznaky v chatu",
       "getpos":"zjistí současnou pozici ve frontě",
       "version":"zobrazí číslo verze",
       "commands":"zobrazí tento seznam",
@@ -58,7 +58,7 @@
       "remove":"odstraní označeného uživatele z DJ pultu \/ fronty",
       "whois all":"zobrazí uživatelská ID a jména všech uživatelů v této místnosti",
       "banall":"zabanuje všechny uživatele v této místnosti",
-      "status":"shows status of plug servers"
+      "status":"zobrazí stav plug.dj serverů"
     },
     "responses":{
       "alertson":"Zvuk se přehraje při následujících slovech: %1",
@@ -71,8 +71,8 @@
         "unregistered":"Skladba %1 byla odebrána ze seznamu pro automatické ztlumení."
       },
       "status":{
-        "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
+        "rest":"REST: %1 %2 [%3 ms]",
+        "socket":"Socket: %1 %2 [%3 ms]"
       }
     }
   },
@@ -91,7 +91,7 @@
     "stats":"Statistiky skladeb",
     "updates":"Aktualizace skladeb",
     "history":"Skladby v historii",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Nedostupná skladba",
     "songLength":"Délka skladby (%1 min)",
     "message":{
       "grab":"přidáno %1 - %2",
@@ -103,10 +103,10 @@
       "history":"Skladba je v historii (%1 z %2)",
       "historySkipped":"Skladba je v historii (%1 z %2), ale při minulém přehrávání byla přeskočena",
       "songLength":"Skladba je delší než %1 minut",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"Skladba je soukromá",
+      "songNotFound":"Skladba nenalezena",
+      "songEmbed":"Skladba nemá vkládání povolené",
+      "songStreamable":"Skladba nepodporuje streamování"
     }
   },
   "info":{
@@ -167,7 +167,7 @@
     "autorespond":"AFK automatická odpověď",
     "notify":"Upozornění",
     "afktimers":"Statistika AFK uživatelů",
-    "etatimer":"ETA Timer",
+    "etatimer":"Časovač zbývajícího času",
     "roomsettings":"Nastavení místnosti",
     "chatimages":"Obrázky v chatu",
     "twitchemotes":"Twitch smajlíky",

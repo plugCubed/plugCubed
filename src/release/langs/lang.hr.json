@@ -1,86 +1,86 @@
 {
-  "running":"Koristite plug&#179; inačicu %1",
-  "runningLite":"Koristite plug&#179; u Lite verziji!",
+  "running":"Koristite se plug&#179;-om, inačicom %1.",
+  "runningLite":"Koristite se plug&#179;-om u Lite inačici!",
   "runningLiteInfo":"Neke značajke neće raditi.",
-  "commandsHelp":"Koristite \"\/commands\" da biste vidjeli proširene naredbe razgovora.",
+  "commandsHelp":"Koristite se naredbom \"\/commands\" da biste vidjeli proširene naredbe razgovora.",
   "autorespond":{
     "default":"Nisam kod tipkovnice.",
-    "disable":"Onemogućite AFK auto. odgovor u razgovoru",
-    "nextIn":"Sljedeći će se AFK auto. odgovor poslati za %1",
-    "next":"AFK auto. odgovor pri sljedećem spominjanju",
-    "commandDisable":"%1 AFK message disabled",
-    "commandNotEnabled":"%1 AFK message was not enabled"
+    "disable":"Onemogućite auto. AFK odgovor da biste razgovarali.",
+    "nextIn":"Sljedeći će se automatski AFK odgovor poslati za %1.",
+    "next":"Auto. AFK odgovor pri sljedećem spominjanju",
+    "commandDisable":"%1 AFK poruka je onemogućena.",
+    "commandNotEnabled":"%1 AFK poruka nije omogućena."
   },
   "autojoin":{
-    "commandDisable":"%1 autojoin disabled",
-    "commandNotEnabled":"%1 autojoin was not enabled"
+    "commandDisable":"%1 auto. pridruživanje je onemogućeno.",
+    "commandNotEnabled":"%1 auto. pridruživanje nije omogućeno."
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Smanji",
+    "enlarge":"Uvećaj"
   },
   "commands":{
-    "header":"plug&#179; naredbe",
+    "header":"Naredbe plug&#179;-a",
     "userCommands":"Korisničke naredbe",
-    "modCommands":"Moderatorske Naredbe",
+    "modCommands":"Moderatorske naredbe",
     "variables":{
       "username":"korisničko ime",
       "word":"riječ",
       "on":"uklj.",
       "off":"isklj.",
       "reason":"razlog",
-      "number":"number"
+      "number":"broj"
     },
     "descriptions":{
       "join":"pridruživanje stolu za DJ-anje\/popisu čekanja",
-      "leave":"napuštanje stola za dj-anje\/popisa čekanja",
+      "leave":"napuštanje stola za DJ-anje\/popisa čekanja",
       "whoami":"dobivanje svojih informacija",
-      "mute":"podešavanje glasnoće na 0",
+      "mute":"postavljanje glasnoće na 0",
       "automute":"zabilježivanje pjesme koja se trenutno pušta da se automatski utiša na budućim puštanjima",
-      "unmute":"podešavanje glasnoće za posljednju glasnoću",
+      "unmute":"postavljanje glasnoće za posljednju glasnoću",
       "nextsong":"prikaz sljedeće pjesme na popisu za reprodukciju i je li u povijesti",
       "refresh":"osvježavanje videozapisa",
-      "alertson":"reprodukcija zvuka kad god su određene riječi napisane u čavrljanju",
-      "alertsoff":"prestanak reprodukcije zvuka kada su određene riječi napisane u čavrljanju",
+      "alertson":"reprodukcija zvuka kad god netko u razgovoru napiše određene riječi",
+      "alertsoff":"prestanak reprodukcije zvuka kad god netko u razgovoru napiše određene riječi",
       "grab":"dodavanje trenutne pjesme na vaš odabrani popis za reprodukciju",
-      "badges":"show\/hide the user badges in chat",
-      "getpos":"dobivanje trenutnog mjesta na popisu čekanja",
+      "badges":"prikaz\/skrivanje korisničkih znački u razgovoru",
+      "getpos":"dobivanje trenutnog položaja na popisu čekanja",
       "version":"prikaz broja inačice",
       "commands":"prikaz ovog popisa",
-      "link":"lijepljenje veze plugCubed web stranice u čavrljanje",
+      "link":"lijepljenje veze plugCubed-ove mrežne stranice u razgovor",
       "whois":"dobivanje općih informacija o korisniku",
       "skip":"preskakanje trenutne pjesme",
-      "ban":"izbacuje ciljanog korisnika",
-      "lockskip":"zaključavanje DJ kabine, preskakanje i naknadno otključavanje",
-      "lock":"zaključavanje DJ kabine",
+      "ban":"izbaivanje ciljanog korisnika",
+      "lockskip":"zaključavanje stola za DJ-anje, preskakanje i naknadno otključavanje",
+      "lock":"zaključavanje stola za DJ-anje",
       "unlock":"otključavanje stola za DJ-anje",
       "add":"dodavanje ciljanog korisnika na stol za DJ-anje\/popis čekanja",
       "remove":"uklanjanje ciljanog korisnika sa stola za DJ-anje\/popisa čekanja",
-      "whois all":"davanje ID-a korisnika i korisničkog imena svih korisnika ju sobi",
+      "whois all":"dobivanje ID-a korisnika i korisničkog imena svih korisnika u sobi",
       "banall":"zabranjivanje pristupa svim korisnicima u sobi",
-      "status":"shows status of plug servers"
+      "status":"prikaz stanja plug poslužitelja"
     },
     "responses":{
-      "alertson":"Reprodukcija zvuka sljedećih riječi: %1",
-      "alertsoff":"Više se ne reproducira zvuk određenih riječi",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "alertson":"Reprodukcija zvuka pri sljedećim riječima: %1",
+      "alertsoff":"Zvuk se više ne reproducira pri određenim riječima.",
+      "nextsong":"Vaša sljedeća pjesma na čekanju je %1 izvođača %2.",
+      "isHistory":"Upozorenje: ova je pjesma još uvijek u povijesti (%1. od %2).",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "automuted":"Pjesma %1 automatski je utišana.",
+        "registered":"Pjesma %1 je zabilježena da se automatski utiša na budućim puštanjima.",
+        "unregistered":"Pjesma %1 je uklonjena s popisa za automatsko utišavanje."
       },
       "status":{
         "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
+        "socket":"Priključak: %1 %2 [%3ms]"
       }
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
+    "boothAvailable":"Ako se sada pridružite popisu čekanja DJ-at ćete!",
     "alreadyDJ":"Već DJ-ate!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "waitListTime":"Na popisu čekanja vi ste %1. od %2, DJ-at ćete za otprilike %3!",
+    "joinTime":"Ako se sada pridružite popisu čekanje DJ-at ćete za otprilike %1!"
   },
   "notify":{
     "header":"Obavijesti razgovora",
@@ -91,54 +91,54 @@
     "stats":"Statistika o pjesmi",
     "updates":"Ažuriranja pjesama",
     "history":"Pjesme u povijesti",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Pjesma nije dostupna.",
     "songLength":"Duljina pjesme (%1 min)",
     "message":{
-      "grab":"grabbed %1 - %2",
-      "stats":"Stats: %1 woots -- %2 mehs -- %3 grabs",
-      "updates":"Now Playing: %1 by %2<br>Played by: %3",
-      "meh":"je meh-ao ovu pjesmu",
-      "join":"se pridružio sobi",
-      "leave":"napustio je sobu",
-      "history":"Song is in history (%1 of %2)",
-      "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
-      "songLength":"Pjesma je dulja od %1 minute\/a",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "grab":"je dodao\/la %1 - %2.",
+      "stats":"Statistika: %1 woot-ova -- %2 meh-ova -- %3 dodavanja",
+      "updates":"Trenutno se pušta: %1 izvođača %2.<br>Pušta: %3.",
+      "meh":"je meh-ao\/la ovu pjesmu.",
+      "join":"se pridružio\/la sobi.",
+      "leave":"napustio\/la je sobu.",
+      "history":"Pjesma je u povijesti (%1. od %2).",
+      "historySkipped":"Pjesma je u povijesti (%1 od %2), ali je preskočena na posljednjem puštanju.",
+      "songLength":"Pjesma je dulja od %1 minute\/a.",
+      "songPrivate":"Pjesma je privatna.",
+      "songNotFound":"Pjesma nije pronađena.",
+      "songEmbed":"Pjesma ima onemogućenu ugradnju.",
+      "songStreamable":"Pjesma ne podržava strujanje."
     }
   },
   "info":{
     "header":"Informacije o korisniku",
-    "name":"Naziv",
+    "name":"Ime",
     "title":"Naslov",
     "specialTitles":{
-      "developer":"plug&#179; Developer",
-      "sponsor":"plug&#179; Sponsor",
-      "ambassador":"plug&#179; Ambassador",
-      "donatorDiamond":"plug&#179; Diamond Donator",
-      "donatorPlatinum":"plug&#179; Platinum Donator",
-      "donatorGold":"plug&#179; Gold Donator",
-      "donatorSilver":"plug&#179; Silver Donator",
-      "donatorBronze":"plug&#179; Brončani davalac",
-      "special":"plug&#179; Posebni pobornik - %1"
+      "developer":"Razvojni programer plug&#179;-a",
+      "sponsor":"Pokrovitelj plug&#179;-a",
+      "ambassador":"Veleposlanik plug&#179;-a",
+      "donatorDiamond":"Dijamantni darivatelj plug&#179;-a",
+      "donatorPlatinum":"Platinski darivatelj plug&#179;-a",
+      "donatorGold":"Zlatni darivatelj plug&#179;-a",
+      "donatorSilver":"Srebrni darivatelj plug&#179;-a",
+      "donatorBronze":"Brončani darivatelj plug&#179;-a",
+      "special":"Posebni pobornik plug&#179;-a - %1"
     },
     "id":"ID",
-    "rank":"Rank",
+    "rank":"Položaj",
     "joined":"Vrijeme od pridruživanja",
     "status":"Status",
     "vote":"Glas",
     "position":"Položaj",
     "points":"Bodovi",
-    "wootCount":"Broj Woot-ova",
-    "mehCount":"Broj Meh-ova",
-    "ratio":"Omjer Woot-ova\/Meh-ova",
-    "djing":"Trenutno DJ-a",
-    "notInList":"Nije na popisu čekanja niti u kabini",
-    "inWaitlist":"%1\/%2 na popisu čekanja",
-    "userDjing":"%1 are currently DJing",
-    "userNextDJ":"%1 are DJing next",
+    "wootCount":"Broj woot-ova",
+    "mehCount":"Broj meh-ova",
+    "ratio":"Omjer woot-ova\/meh-ova",
+    "djing":"Trenutno DJ-a.",
+    "notInList":"Nije na popisu čekanja ni na stolu za DJ-anje.",
+    "inWaitlist":"%1.\/%2 na popisu čekanja.",
+    "userDjing":"%1 trenutno DJ-a.",
+    "userNextDJ":"%1 sljedeći\/a će DJ-ati.",
     "disconnects":"Odspajanja",
     "lastDisconnect":"Posljednje odspajanje",
     "lastPosition":"Položaj",
@@ -146,7 +146,7 @@
   },
   "ranks":{
     "you":"Vi",
-    "regular":"Regular",
+    "regular":"Običan korisnik",
     "residentdj":"Istaknuti DJ",
     "bouncer":"Izbacivač",
     "manager":"Upravitelj",
@@ -156,47 +156,47 @@
     "admin":"Administrator"
   },
   "roomSpecificSettings":{
-    "infoHeader":"Ova soba koristi posebne postavke",
-    "infoHeaderCredits":"This room is using special settings by %1",
-    "infoDisable":"Možete ih onemogućiti u izborniku"
+    "infoHeader":"Ova soba upotrebljava posebne postavke.",
+    "infoHeaderCredits":"Ova soba upotrebljava posebne postavke korisnika %1.",
+    "infoDisable":"Možete ih onemogućiti u izborniku."
   },
   "menu":{
-    "autowoot":"Auto. Woot-anje",
-    "autojoin":"Auto. pridruživanje",
-    "customchatcolors":"Prilagođene boje razgovora",
-    "autorespond":"AFK auto. odgovor",
+    "autowoot":"Automatsko woot-anje",
+    "autojoin":"Automatsko pridruživanje",
+    "customchatcolors":"Prilagođene boje u razgovoru",
+    "autorespond":"Automatski AFK odgovor",
     "notify":"Obavijesti",
     "afktimers":"AFK brojači vremena",
-    "etatimer":"ETA Timer",
+    "etatimer":"Brojač preostalog vremena",
     "roomsettings":"Postavke zajednice",
-    "chatimages":"Slike razgovora",
-    "twitchemotes":"Twitch Emotes",
+    "chatimages":"Slike u razgovoru",
+    "twitchemotes":"Uključivanje\/isključivanje emojija",
     "controlpanel":"Nadzorna ploča"
   },
   "vote":{
     "meh":"Meh",
     "woot":"Woot",
     "grab":"Dodaj",
-    "undecided":"Neodlučan",
-    "djing":"DJ-anje"
+    "undecided":"Neodlučan\/a",
+    "djing":"DJ-a"
   },
   "tooltip":{
-    "stream":"Toggle Video\/Audio Stream",
-    "clear":"Očistite razgovor",
+    "stream":"Uključivanje\/isključivanje strujanja videozapisa\/zvuka",
+    "clear":"Obrišite razgovor",
     "afk":"AFK poruka",
     "reset":"Vraćanje na zadano",
-    "muted":"Sve su pjesme utišane",
-    "mutedOnce":"Current song is muted"
+    "muted":"Sve su pjesme utišane.",
+    "mutedOnce":"Trenutna je pjesma utišana."
   },
   "error":{
-    "userNotFound":"User not found",
-    "unknownModeration":"Unknown moderation",
-    "unknownMenuKey":"Unknown menu key: %1",
-    "missingReason":"Missing reason",
-    "noLiteSupport":"This is not supported in plug&#179; Lite",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
-    "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
-    "noNextSong":"You have no queued song"
+    "userNotFound":"Korisnik nije pronađen.",
+    "unknownModeration":"Nepoznato moderiranje.",
+    "unknownMenuKey":"Nepoznati ključ izbornika: %1",
+    "missingReason":"Nema razloga",
+    "noLiteSupport":"Ovo nije podržano na plug&#179;-u Lite.",
+    "errorGettingPlaylistInfo":"Greška pri dobivanju informacija o popisu za reprodukciju.",
+    "noPlaylistsFound":"Nema pronađenih popisa za reprodukciju.",
+    "yourActivePlaylistIsFull":"Vaš je aktivni popis za reprodukciju pun.",
+    "noNextSong":"Nemate pjesma na čekanju za reprodukciju."
   }
 }

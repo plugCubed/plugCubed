@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 autojoin ei olnud lubatud"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Kahanda",
+    "enlarge":"Suuremalt"
   },
   "commands":{
     "header":"plug&#179; käsud",
@@ -32,8 +32,8 @@
       "number":"number"
     },
     "descriptions":{
-      "join":"Kasutaja Ühinemine",
-      "leave":"Kasutaja Lahkumine",
+      "join":"Ühine ootejärjekorraga",
+      "leave":"lehed dj booth\/waitlist",
       "whoami":"saa oma info",
       "mute":"sea helitugevuseks 0",
       "automute":"praegu esitatava Loo automaatseks summutamiseks tulevikus mängib registreerida",
@@ -43,14 +43,14 @@
       "alertson":"Esita heli, kui määratletud sõnu kirjutatakse",
       "alertsoff":"Lõpetage mängimine heli määratletud sõnu kirjutada chat",
       "grab":"praeguse Loo lisamiseks valitud esitusloendi",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"Kuva\/peida vestlus rinnamärgid kasutaja",
       "getpos":"saada praegusest waitlist",
       "version":"Sellel väljal kuvatakse versiooni number",
       "commands":"näitab seda nimekirja",
       "link":"Kleebi link plugCubed veebisaidile",
       "whois":"annab üldist kasutaja teavet",
       "skip":"praeguse Loo vahele",
-      "ban":"lööb sihitud kasutajat",
+      "ban":"peksab suunatud kasutaja",
       "lockskip":"lukud DJ booth vahele ja avab hiljem",
       "lock":"lukud DJ putka",
       "unlock":"avab DJ putka",
@@ -58,7 +58,7 @@
       "remove":"eemaldab suunatud kasutaja: dj booth\/waitlist",
       "whois all":"annab kasutajatunnus ja kõik kasutajad toas kasutajanimi",
       "banall":"keelab kõik kasutajad toas",
-      "status":"shows status of plug servers"
+      "status":"näitab staatust plug serverid"
     },
     "responses":{
       "alertson":"Mängib heli järgmised sõnad: %1",
@@ -71,8 +71,8 @@
         "unregistered":"%1 eemaladati automute-i registrist."
       },
       "status":{
-        "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
+        "rest":"MUUD: %1 %2 [%3ms]",
+        "socket":"Sokkel: %1 %2 [%3ms]"
       }
     }
   },
@@ -91,7 +91,7 @@
     "stats":"Laul Stats",
     "updates":"Laul uuendused",
     "history":"Laulude ajaloos",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Laul pole saadaval",
     "songLength":"Laulu pikkus (%1 min)",
     "message":{
       "grab":"haarasid %1 - %2",
@@ -103,10 +103,10 @@
       "history":"Laul on ajalugu (%1 %2)",
       "historySkipped":"laul on ajalugu (% 1% 2), aga jäeti vahele viimase mäng",
       "songLength":"\nlaul on pikem kui% 1 minut",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"Laul on privaatne",
+      "songNotFound":"Laul ei leitud",
+      "songEmbed":"Laul on manustamine keelatud",
+      "songStreamable":"Laul ei toeta streaming"
     }
   },
   "info":{
@@ -167,7 +167,7 @@
     "autorespond":"AFK automaatvastaja",
     "notify":"Teavitused",
     "afktimers":"AFK Taimerid",
-    "etatimer":"ETA Timer",
+    "etatimer":"ETA taimer",
     "roomsettings":"Ruumi seaded",
     "chatimages":"Jututuba pildid",
     "twitchemotes":"tõmblema Emotikonid",

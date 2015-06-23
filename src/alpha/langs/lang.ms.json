@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 auto menyertai tidak enable"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Mengecut",
+    "enlarge":"Membesar"
   },
   "commands":{
     "header":"plug&#179; Arahan",
@@ -29,7 +29,7 @@
       "on":"on",
       "off":"off",
       "reason":"sebab",
-      "number":"number"
+      "number":"nombor"
     },
     "descriptions":{
       "join":"Menyertai dj booth\/senarai menunggu",
@@ -43,7 +43,7 @@
       "alertson":"memainkan bunyi setiap kali perkataan yang ditakrifkan muncul dalam chat",
       "alertsoff":"hentikan bunyi setiap kali perkataan yang ditakrifkan muncul dalam chat",
       "grab":"Menambahkan Lagu Sekarang ke dalam senarai main yang anda pilih",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"Tunjuk\/Simpan lencana pengguna dalam chat",
       "getpos":"mendapatkan kedudukan senarai menunggu semasa",
       "version":"memaparkan nombor versi",
       "commands":"menunjukkan senarai ini",
@@ -58,7 +58,7 @@
       "remove":"mengeluarkan target pengguna dari dj booth\/senarai menunggu",
       "whois all":"memberikan id pengguna dan nama pengguna daripada semua pengguna di dalam bilik",
       "banall":"ban semua pengguna di dalam bilik",
-      "status":"shows status of plug servers"
+      "status":"Menunjukkan status Pelayan Plug"
     },
     "responses":{
       "alertson":"Berbunyi pada perkataan yang berikut: %1",
@@ -71,8 +71,8 @@
         "unregistered":"%1 telah dikeluarkan dari daftaran auto bisu."
       },
       "status":{
-        "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
+        "rest":"REHAT: %1 %2 [%3ms]",
+        "socket":"Soket: %1 %2 [%3ms]"
       }
     }
   },
@@ -91,7 +91,7 @@
     "stats":"statistik lagu",
     "updates":"Lagu update",
     "history":"Lagu dalam sejarah",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Lagu tidak available",
     "songLength":"Kepanjangan Lagu (%1 min)",
     "message":{
       "grab":"telah grab %1 - %2",
@@ -103,10 +103,10 @@
       "history":"Lagu adalah dalam senarai sejarah (%1 - %2)",
       "historySkipped":"Lagu adalah dalam senarai sejarah (%1 - %2), tetapi telah dilangkau pada main yang terakhir",
       "songLength":"Lagu adalah panjang dari %1 minit",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"Lagu adalah peribadi",
+      "songNotFound":"Lagu yang tidak dijumpai",
+      "songEmbed":"Lagu telah menutup fungsi embed",
+      "songStreamable":"Lagu tidak menyokong aliran"
     }
   },
   "info":{
@@ -167,7 +167,7 @@
     "autorespond":"AFK Auto Jawap",
     "notify":"Pemberitahuan",
     "afktimers":"AFK Timers",
-    "etatimer":"ETA Timer",
+    "etatimer":"Pemasa ETA",
     "roomsettings":"Tetapan bilik",
     "chatimages":"Gambar Chat",
     "twitchemotes":"Twitch Emotes",

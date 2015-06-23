@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 Automaattinen liittyminen jonoon ei ole käytössä"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Pienennä",
+    "enlarge":"Suurenna"
   },
   "commands":{
     "header":"plug&#179; Komennot",
@@ -29,7 +29,7 @@
       "on":"päälle",
       "off":"pois",
       "reason":"Syy",
-      "number":"number"
+      "number":"numero"
     },
     "descriptions":{
       "join":"liity dj boothiin\/jonotuslistalle",
@@ -43,7 +43,7 @@
       "alertson":"Antaa äänimerkin, kun määritetyt sanat kirjoitetaan chatissa",
       "alertsoff":"Pysäyttää soitettavan äänen, kun määritetyt sanat on kirjoitettu chatissa.",
       "grab":"Lisää nykyinen kappale valitulle soittolistallesi",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"Näytä\/piilota käyttäjä-merkit chatissa",
       "getpos":"Saa nykyinen jonotuslista sijoitus",
       "version":"Näytä versio numero",
       "commands":"Näytä tämä lista",
@@ -58,7 +58,7 @@
       "remove":"Poista kohdennettu käyttäjä dj alustalta\/listalta",
       "whois all":"antaa Käyttäjien id ja käyttäjänimet kaikista käyttäjistä huoneesssa",
       "banall":"Porttikielto kaikille käyttäjille huoneessa",
-      "status":"shows status of plug servers"
+      "status":"näytä plug palvelimien tila"
     },
     "responses":{
       "alertson":"Soitetaan ääni seuraavissa sanoissa: %1",
@@ -91,7 +91,7 @@
     "stats":"Kappale Tilastot",
     "updates":"Kappale päivitykset",
     "history":"Kappaleet historiassa",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Kappale ei ole käytettävissä",
     "songLength":"Kappaleen pituus (%1 min)",
     "message":{
       "grab":"lisäsi %1 - %2",
@@ -103,10 +103,10 @@
       "history":"Kappale on historiassa(%1 - %2)",
       "historySkipped":"Kappale on historiassa(%1 - %2),mutta ohitettiin viime soitossa",
       "songLength":"Kappale on pidempi kuin %1 minuuttia",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"Kappale on yksityinen",
+      "songNotFound":"Kappaletta ei löydy",
+      "songEmbed":"Kappaleelta on upottaminen pois käytöstä",
+      "songStreamable":"Kappale ei tue suoratoistoa"
     }
   },
   "info":{
@@ -167,7 +167,7 @@
     "autorespond":"AFK Automaattinen vastaus",
     "notify":"Ilmoitukset",
     "afktimers":"AFK Ajat",
-    "etatimer":"ETA Timer",
+    "etatimer":"ETA ajastin",
     "roomsettings":"Huoneen Asetukset",
     "chatimages":"Keskustelun Kuvat",
     "twitchemotes":"Twich Emojit",

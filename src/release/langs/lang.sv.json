@@ -1,8 +1,8 @@
 {
   "running":"Kör plug&179; version %1",
   "runningLite":"Kör plug&#179; i Lite!",
-  "runningLiteInfo":"Vissa funktioner fungerar inte.",
-  "commandsHelp":"Använd '\/commands' för att se extra chatt kommandon.",
+  "runningLiteInfo":"Vissa funktioner kommer inte att fungera.",
+  "commandsHelp":"Använd '\/commands' för att se extra chattkommandon.",
   "autorespond":{
     "default":"Jag är borta från tangentbordet.",
     "disable":"Stäng av AFK Autosvar för att chatta",
@@ -12,63 +12,63 @@
     "commandNotEnabled":"%1 AFK meddelande var inte aktiverad"
   },
   "autojoin":{
-    "commandDisable":"%1 automatiskt deltagande är inaktiverat",
+    "commandDisable":"%1 automatiskt gå med i väntelistan är inaktiverat",
     "commandNotEnabled":"%1 automatiskt gå med var inte aktiverat"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Krymp",
+    "enlarge":"Förstora"
   },
   "commands":{
     "header":"plug&#179; Kommandon",
-    "userCommands":"Användar kommandon",
-    "modCommands":"Moderations Kommandon",
+    "userCommands":"Användarkommandon",
+    "modCommands":"Moderationskommandon",
     "variables":{
       "username":"användarnamn",
       "word":"ord",
       "on":"på",
       "off":"av",
       "reason":"anledning",
-      "number":"number"
+      "number":"nummer"
     },
     "descriptions":{
-      "join":"Gå med dj båset\/väntelista",
-      "leave":"Lämnar dj båset\/väntelista",
+      "join":"gå med i väntelistan\/DJ-Båset",
+      "leave":"lämnar väntelistan\/Dj-Båset",
       "whoami":"skaffa din egen information",
       "mute":"sätt volymen till 0",
-      "automute":"registrera den nuvarande låten till att automatiskt mutas i framtiden",
+      "automute":"registrera den nuvarande låten till att automatiskt tystas i framtiden",
       "unmute":"sätt volymen till den senaste volymen",
       "nextsong":"visa nästa låt i spellistan och om den ligger i historiken",
       "refresh":"ladda om videon",
       "alertson":"spela upp ett ljud när de definierade orden skrivs i chatten",
       "alertsoff":"sluta spela upp ljud när de definierade orden skrivs i chatten",
       "grab":"Lägg till nuvarande låt till din valda spellista",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"visa\/göm märken i chatten",
       "getpos":"få din nuvarande position i väntelistan",
       "version":"visar versionsnummer",
       "commands":"visar denna lista",
-      "link":"klistra in länk till plugCubed webbplatsen i chatten",
-      "whois":"ger allmän information om användare",
-      "skip":"skippa nuvarande låt",
-      "ban":"kickar given användare",
-      "lockskip":"låset DJ båset, skippar och låser upp efteråt",
-      "lock":"låser DJ båset",
-      "unlock":"låser upp DJ båset",
-      "add":"lägger till given användare till dj båset\/väntelistan",
+      "link":"klistra in en länk till plug&#179; i chatten",
+      "whois":"ger allmän information om användaren",
+      "skip":"hoppa över nuvarande låt",
+      "ban":"sparkar given användare",
+      "lockskip":"låser DJ-båset, hoppar över och låser upp efteråt",
+      "lock":"låser DJ-båset",
+      "unlock":"låser upp DJ-båset",
+      "add":"lägger till given användare i Dj-båset\/väntelistan",
       "remove":"tar bort given användare från dj båset\/väntelistan",
       "whois all":"ger användarid och användarnamn av alla användare i rummet",
-      "banall":"banna alla användare i rummet",
-      "status":"shows status of plug servers"
+      "banall":"bannlyser alla användare i rummet",
+      "status":"visar statusen av plug.djs servrar"
     },
     "responses":{
-      "alertson":"Spelar låtar på de följande orden: %1",
+      "alertson":"Spelar ljud på följande ord: %1",
       "alertsoff":"Spelar inte längre ljud på specifika ord",
       "nextsong":"Din nästa köade sång är %1 av %2",
       "isHistory":"Varning: Den här låten finns fortfarande i historiken (%1 av %2)",
       "automute":{
-        "automuted":"%1 automutad.",
-        "registered":"%1 registrerad till automute på framtida spelningar.",
-        "unregistered":"%1 togs bort från automute registret."
+        "automuted":"%1 autotystad.",
+        "registered":"%1 registrerad till autotystning för framtida spelningar.",
+        "unregistered":"%1 togs bort från autotystnings registret."
       },
       "status":{
         "rest":"REST: %1 %2 [%3ms]",
@@ -77,36 +77,36 @@
     }
   },
   "eta":{
-    "boothAvailable":"Om du går med i väntelistan nu, Så kommer du vara DJ!",
+    "boothAvailable":"Om du går med i väntelistan nu, så kommer du snart vara DJ!",
     "alreadyDJ":"Du är redan DJ!",
-    "waitListTime":"Du är i väntelistan %1 av %2, Du kommer vara DJ om %3!",
+    "waitListTime":"Du är i väntelistan %1 av %2, Du kommer spela om ungefär %3!",
     "joinTime":"Om du går med i väntelistan nu, Kommer du vara DJ om %1!"
   },
   "notify":{
     "header":"Chat Notifieringar",
-    "join":"Användare Anslut*",
-    "leave":"Användare Lämna",
+    "join":"Användare Anslöt",
+    "leave":"Användare Lämnade",
     "grab":"Användaren Tog",
     "meh":"Användare Mehs",
     "stats":"Låt Stats",
     "updates":"Låt uppdateringar",
-    "history":"Låtar i historia",
-    "songUnavailable":"Song Unavailable",
+    "history":"Låtar i historiken",
+    "songUnavailable":"Låten är inte tillgänglig",
     "songLength":"Låt Längd (%1 min)",
     "message":{
-      "grab":"Lagde Till %1 - %2",
-      "stats":"Stats: %1 woots -- %2 mehs -- %3 Grabs",
+      "grab":"La Till %1 - %2",
+      "stats":"Resultat: %1 Woots -- %2 Mehs -- %3 Grabs",
       "updates":"Spelas Nu: %1 av %2<br \/>Spelad av: %3",
-      "meh":"%1 meh'ade detta spår",
+      "meh":"valde att rösta Meh på detta spår",
       "join":"gick med i rummet",
       "leave":"lämnade rummet",
-      "history":"Låten ligger i historiken (%1 av %2)",
-      "historySkipped":"Låten ligger i historiken (%1 av %2) men skippades förra gången den blev blev uppspelad",
+      "history":"Låten finns i historiken (%1 av %2)",
+      "historySkipped":"Låten finns i historiken (%1 av %2) men hoppades över förra gången den blev blev spelad",
       "songLength":"Låten är längre än %1 minuter",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"Låten är privat",
+      "songNotFound":"Kunde inte hitta låten",
+      "songEmbed":"Låten har inbäddning avstängd",
+      "songStreamable":"Låten stödjer inte streaming"
     }
   },
   "info":{
@@ -133,23 +133,23 @@
     "points":"Poäng",
     "wootCount":"Woot Summa",
     "mehCount":"Meh Summa",
-    "ratio":"Woot\/Meh Ratio",
+    "ratio":"Woot\/Meh Förhållande",
     "djing":"DJ'ar just nu",
-    "notInList":"Inte i väntelista eller båset",
-    "inWaitlist":"%1\/%2 i väntelista",
+    "notInList":"Inte i väntelistan eller Dj-Båset",
+    "inWaitlist":"%1\/%2 i väntelistan",
     "userDjing":"%1 DJ'ar nu",
     "userNextDJ":"%1 DJ'ar snart",
-    "disconnects":"Disconnectar",
-    "lastDisconnect":"Senaste Disconnecten",
+    "disconnects":"Antal gånger användaren har lämnat",
+    "lastDisconnect":"Senaste gången användaren lämnade",
     "lastPosition":"Position",
     "time":"Tid"
   },
   "ranks":{
     "you":"Du",
-    "regular":"Normal",
-    "residentdj":"Bosatt DJ",
-    "bouncer":"Vakt",
-    "manager":"Manager",
+    "regular":"Vanlig",
+    "residentdj":"Känd DJ",
+    "bouncer":"Dörrvakt",
+    "manager":"Chef",
     "cohost":"Co-Värd",
     "host":"Värd",
     "ambassador":"Ambassadör",
@@ -162,15 +162,15 @@
   },
   "menu":{
     "autowoot":"Autowoot",
-    "autojoin":"AutomatiskJoin",
-    "customchatcolors":"Skräddarsydda Chattfärger",
+    "autojoin":"AutoJoin",
+    "customchatcolors":"Anpassade Chattfärger",
     "autorespond":"AFK Autosvara",
     "notify":"Notifikationer",
     "afktimers":"AFK Timers",
     "etatimer":"ETA Timer",
-    "roomsettings":"Rums inställningar",
+    "roomsettings":"Rumsinstallningar",
     "chatimages":"Chatt bilder",
-    "twitchemotes":"Twitch Emotes",
+    "twitchemotes":"Twitch Figurer",
     "controlpanel":"Kontrollpanel"
   },
   "vote":{
@@ -181,22 +181,22 @@
     "djing":"DJ'ar"
   },
   "tooltip":{
-    "stream":"Växla Video\/Ljud Ström",
+    "stream":"Växla Video\/Ljud Stream",
     "clear":"Rensa Chatten",
     "afk":"AFK Meddelande",
     "reset":"Återställ till standard",
-    "muted":"Alla låtar är mutade",
-    "mutedOnce":"Nuvarande låt är mutad"
+    "muted":"Alla låtar är tystade",
+    "mutedOnce":"Nuvarande låt är tystad"
   },
   "error":{
-    "userNotFound":"Avändare ej funnen",
+    "userNotFound":"Användaren hittades inte",
     "unknownModeration":"Okänd moderation",
     "unknownMenuKey":"Okänd menyknapp: %1",
-    "missingReason":"Saknad anledning",
+    "missingReason":"Saknar anledning",
     "noLiteSupport":"Detta stöds inte i plug&#179; Lite",
     "errorGettingPlaylistInfo":"Fel när spellistan hämtades",
-    "noPlaylistsFound":"Inga spellistor hittade",
+    "noPlaylistsFound":"Inga spellistor hittades",
     "yourActivePlaylistIsFull":"Din aktiva spellista är full",
-    "noNextSong":"Du har ingen köad låt"
+    "noNextSong":"Du har inga köade låtar"
   }
 }

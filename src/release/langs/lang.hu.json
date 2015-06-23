@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 autó-belépés nem volt bekapcsolva"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Zsugorítás",
+    "enlarge":"Nagyítás"
   },
   "commands":{
     "header":"plug&#179; parancsok",
@@ -29,7 +29,7 @@
       "on":"be",
       "off":"ki",
       "reason":"inditék",
-      "number":"number"
+      "number":"szám"
     },
     "descriptions":{
       "join":"Felhasználó Csatlakozik",
@@ -43,7 +43,7 @@
       "alertson":"Hang lejátszása ha egy megadott szót írnak a chat-ben",
       "alertsoff":"Ne játszon le hangot ha egy megadott szót írnak a chat-ben",
       "grab":"Most jätszott szám hozzáadni a jelenleg kiválasztott listádba",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"Felhasználói jelvények a chatben be\/ki kapcsolása",
       "getpos":"Sorszám lekérése a váró listán",
       "version":"Verziószám megjelenítése",
       "commands":"Lista mutatása",
@@ -58,17 +58,17 @@
       "remove":"Eltávolítja a kijelölt felhasználót a DJ Bódé\/Várolistából",
       "whois all":"Lekéri a szobában tartózkodó összes felhasználó ID-jét és felhasználónevét",
       "banall":"Kitilt minden felhasználót a szobában",
-      "status":"shows status of plug servers"
+      "status":"plug server állapotát mutatja"
     },
     "responses":{
-      "alertson":"Playing sound on the following words: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "alertson":"Hang lejátszása adott szavakra: %1",
+      "alertsoff":"Hang már nem lesz lejátszva",
+      "nextsong":"A következő számnak a címe: %1 készítője: %2",
+      "isHistory":"Figyelem: Ez a szám még mindig szerepel az előzményekben (%1 a %2)",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "automuted":"%1 automatikusan lenémítva.",
+        "registered":"%1 regisztrálva a autónémítás listára.",
+        "unregistered":"%1 törölve lett az autónémítás listárol."
       },
       "status":{
         "rest":"REST: %1 %2 [%3ms]",

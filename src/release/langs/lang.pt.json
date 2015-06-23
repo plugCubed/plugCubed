@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 auto-join não foi ativado"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Diminuir",
+    "enlarge":"Ampliar"
   },
   "commands":{
     "header":"plug&#179; Comandos",
@@ -29,7 +29,7 @@
       "on":"Ligado",
       "off":"Desligado",
       "reason":"motivo",
-      "number":"number"
+      "number":"número"
     },
     "descriptions":{
       "join":"Junte-se a cabine de dj\/lista de espera",
@@ -43,7 +43,7 @@
       "alertson":"alertar sempre que palavras definidas aparecerem no chat",
       "alertsoff":"parar de alertar quando palavras definidas aparecerem no chat",
       "grab":"adicionar música atual à sua playlist selecionada",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"mostrar\/esconder os emblemas no chat",
       "getpos":"mostrar minha posição na lista",
       "version":"exibe o número de versão",
       "commands":"mostra esta lista",
@@ -58,7 +58,7 @@
       "remove":"remove o usuário selecionado da cabine",
       "whois all":"fornece id e usuário de todos na sala",
       "banall":"bane todos da sala",
-      "status":"shows status of plug servers"
+      "status":"mostrar o status dos servidores do plug"
     },
     "responses":{
       "alertson":"Tocando o som das seguintes palavras: %1",
@@ -72,7 +72,7 @@
       },
       "status":{
         "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
+        "socket":"Encaixe: %1 %2 [%3ms]"
       }
     }
   },
@@ -91,10 +91,10 @@
     "stats":"Estatísticas da música",
     "updates":"Atualizações da música",
     "history":"Músicas no Histórico",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Música Indisponível",
     "songLength":"Duração da Música (%1 min)",
     "message":{
-      "grab":"%1 adicionado %2 - %3",
+      "grab":"%1 adicionou %2",
       "stats":"Estatística: %1 legais -- %2 chatos -- %3 adds",
       "updates":"Tocando agora: %1 de %2<br\/>Tocado por: %3",
       "meh":"%1 deu chato nesta música",
@@ -103,10 +103,10 @@
       "history":"A música está no histórico (%1 of %2)",
       "historySkipped":"A música está no histórico (%1 of %2), mas foi pulada na última vez",
       "songLength":"A música tem mais de %1 minutos",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"Música privada",
+      "songNotFound":"Música não encontrada",
+      "songEmbed":"Música embutida desativada",
+      "songStreamable":"Música não dá suporte de streaming"
     }
   },
   "info":{
@@ -167,7 +167,7 @@
     "autorespond":"Auto resposta AFK",
     "notify":"Notificações",
     "afktimers":"Tempo de inatividade",
-    "etatimer":"ETA Timer",
+    "etatimer":"ETA Tempo",
     "roomsettings":"Configurações de sala",
     "chatimages":"Imagens no chat",
     "twitchemotes":"Emoticons do Twitch",

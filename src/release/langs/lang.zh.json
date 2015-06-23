@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 自動加入排隊沒被啓用"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"縮小",
+    "enlarge":"放大"
   },
   "commands":{
     "header":"plug&#179; 指令",
@@ -29,7 +29,7 @@
       "on":"開啟",
       "off":"關閉",
       "reason":"原因",
-      "number":"number"
+      "number":"數目"
     },
     "descriptions":{
       "join":"加入dj展台\/等候列表",
@@ -43,7 +43,7 @@
       "alertson":"播放音效當任何設定字詞出現在聊天中",
       "alertsoff":"停止播放音效當任何設定字詞出現在聊天中",
       "grab":"添加當前歌曲到你指定的播放清單",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"顯示\/隱藏用戶在聊天時的徽章",
       "getpos":"獲取目前等候清單位置",
       "version":"顯示版本號碼",
       "commands":"展示此清單",
@@ -58,7 +58,7 @@
       "remove":"從 dj 展台\/等候清單 移除目標用戶",
       "whois all":"提供 整個房間裡所有用戶的 用戶id 與 用戶名 ",
       "banall":"禁止所有在房間裡的用戶",
-      "status":"shows status of plug servers"
+      "status":"顯示plug伺服器的狀態"
     },
     "responses":{
       "alertson":"對下列詞語播放聲音: %1",
@@ -71,8 +71,8 @@
         "unregistered":"%1 已從自動靜音註冊表中刪除."
       },
       "status":{
-        "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
+        "rest":"休息: %1 %2 [%3分秒]",
+        "socket":"通訊端: %1 %2 [%3分秒]"
       }
     }
   },
@@ -91,7 +91,7 @@
     "stats":"歌曲統計",
     "updates":"歌曲更新",
     "history":"在歷史裡的歌曲",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"歌曲不可用",
     "songLength":"歌曲長度 (%1 分鐘)",
     "message":{
       "grab":"收藏了 %1 - %2",
@@ -103,10 +103,10 @@
       "history":"歌曲在歷史紀錄裡 (%1 - %2)",
       "historySkipped":"歌曲在歷史紀錄裡 (%1 - %2), 但在最後一次播放已被跳過",
       "songLength":"歌曲長過 %1 分鐘",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"歌曲屬私人",
+      "songNotFound":"歌曲不存在",
+      "songEmbed":"歌曲已被禁用嵌入",
+      "songStreamable":"歌曲不支援串流"
     }
   },
   "info":{
@@ -167,7 +167,7 @@
     "autorespond":"AFK 自動回應",
     "notify":"通知",
     "afktimers":"AFK 計時",
-    "etatimer":"ETA Timer",
+    "etatimer":"ETA計時器",
     "roomsettings":"房間設定",
     "chatimages":"聊天圖像",
     "twitchemotes":"搞怪表情",
