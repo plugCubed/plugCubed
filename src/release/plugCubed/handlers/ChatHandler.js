@@ -1,8 +1,6 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/bridges/Context'], function($, Class, p3Utils, p3Lang, Settings, _$context) {
-    var PopoutView, twitchEmoteTemplate = '', twitchEmotes = [];
+define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/bridges/Context', 'plugCubed/bridges/PopoutView'], function($, Class, p3Utils, p3Lang, Settings, _$context, PopoutView) {
 
-    if (!p3Utils.runLite)
-        PopoutView = require('app/views/room/popout/PopoutView');
+    var twitchEmoteTemplate = '', twitchEmotes = [];
 
     $("#chat-messages").on('mouseover', '.twitch-emote', function() {
         _$context.trigger('tooltip:show', $(this).data('emote'), $(this), true);
@@ -305,7 +303,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
         if ($messages.length > 0) {
             $messages.each(function() {
-                $(this).removeClass('cid-' + cid).closest('.cm').removeClass('deletable').css('opacity', 0.3).off('mouseenter').off('mouseleave');
+                $(this).removeClass('cid-' + cid).closest('.cm').removeClass('deletable').css('opacity', 0.3).off('mouseenter').off('mouseleave').find('.timestamp').prepend($('<span/>').text('[DELETED] '));
             });
         }
     }
@@ -342,7 +340,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     var handler = Class.extend({
         loadTwitchEmotes: function() {
             $.getJSON('https://api.plugcubed.net/twitchemotes', function(data) {
-                twitchEmoteTemplate = data['template']['small'];
+                twitchEmoteTemplate = data.template.small;
 
                 twitchEmotes = [];
                 for (var i in data['emotes']) {

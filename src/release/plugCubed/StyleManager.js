@@ -1,9 +1,5 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Utils) {
-    var PopoutView, obj, styles = {}, imports = [];
-
-    if (!p3Utils.runLite) {
-        PopoutView = require('app/views/room/popout/PopoutView');
-    }
+define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/bridges/PopoutView'], function($, Class, p3Utils, PopoutView) {
+    var obj, styles = {}, imports = [];
 
     function update() {
         var a = '', i;

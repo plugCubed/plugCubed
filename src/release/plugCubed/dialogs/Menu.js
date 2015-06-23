@@ -1,14 +1,10 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notifications', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/RoomSettings', 'plugCubed/Slider', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/ControlPanel', 'plugCubed/bridges/Context', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/FullscreenHandler', 'lang/Lang'], function($, Class, Version, enumNotifications, Settings, p3Utils, p3Lang, Styles, RoomSettings, Slider, dialogColors, dialogControlPanel, Context, ChatHandler, FullscreenHandler, Lang) {
-    var $wrapper, $menuDiv, Database, PlaybackModel, menuClass, _this, menuButton, streamButton, clearChatButton, _onClick;
+define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notifications', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/RoomSettings', 'plugCubed/Slider', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/ControlPanel', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/FullscreenHandler', 'plugCubed/bridges/context', 'plugCubed/bridges/Database', 'lang/Lang'], function($, Class, Version, enumNotifications, Settings, p3Utils, p3Lang, Styles, RoomSettings, Slider, dialogColors, dialogControlPanel, ChatHandler, FullscreenHandler, Context, Database, Lang) {
+
+    var $wrapper, $menuDiv, menuClass, _this, menuButton, streamButton, clearChatButton, _onClick;
 
     menuButton = $('<div id="plugcubed"><div class="cube-wrap"><div class="cube"><i class="icon icon-plugcubed"></i><i class="icon icon-plugcubed other"></i></div></div></div>');
     streamButton = $('<div>').addClass('chat-header-button p3-s-stream').data('key', 'stream');
     clearChatButton = $('<div>').addClass('chat-header-button p3-s-clear').data('key', 'clear');
-
-    if (!p3Utils.runLite) {
-        Database = require('app/store/Database');
-        PlaybackModel = require('app/models/PlaybackModel');
-    }
 
     function GUIButton(setting, id, text) {
         return $('<div>').addClass('item p3-s-' + id + (setting ? ' selected' : '')).append($('<i>').addClass('icon icon-check-blue')).append($('<span>').text(text)).data('key', id).click(_onClick);
@@ -33,8 +29,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             $('#plugcubed').mouseenter(function(){
                 $('#plugcubed .cube-wrap .cube').addClass('spin');
             });
-            
-            if (!p3Utils.runLite) {
                 $('#chat-header').append(streamButton.click($.proxy(this.onClick, this)).mouseover(function() {
                     Context.trigger('tooltip:show', p3Lang.i18n('tooltip.stream'), $(this), true);
                 }).mouseout(function() {
@@ -47,7 +41,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 this.onRoomJoin();
 
                 Context.on('room:joined', this.onRoomJoin, this);
-            }
 
             FullscreenHandler.create();
         },
@@ -59,12 +52,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             if ($wrapper != null)
                 $wrapper.remove();
             $('#room-bar').css('left', 54).find('.favorite').css('right', 0);
-            if (!p3Utils.runLite) {
-                streamButton.remove();
-                clearChatButton.remove();
+            streamButton.remove();
+            clearChatButton.remove();
 
-                Context.off('room:joined', this.onRoomJoin, this);
-            }
+            Context.off('room:joined', this.onRoomJoin, this);
             dialogControlPanel.close();
             FullscreenHandler.close();
         },
@@ -144,7 +135,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 case 'notify-updates':
                 case 'notify-history':
                 case 'notify-songLength':
-                case 'notify-unavailable':
+                //case 'notify-unavailable':
                     var elem = $('.p3-s-' + a);
                     if (!elem.data('perm') || (API.hasPermission(undefined, elem.data('perm')) || p3Utils.isPlugCubedDeveloper())) {
                         var bit = elem.data('bit');
@@ -156,10 +147,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     Database.settings.streamDisabled = !Database.settings.streamDisabled;
                     Context.trigger('change:streamDisabled');
                     this.setEnabled('stream', Database.settings.streamDisabled);
-                    return;
+                    break;
                 case 'clear':
                     Context.trigger('ChatFacadeEvent:clear');
-                    return;
+                    break;
                 case 'roomsettings':
                     var b = Settings.useRoomSettings[window.location.pathname.split('/')[1]];
                     b = !(b == null || b === true);
@@ -200,7 +191,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     break;
                 default:
                     API.chatLog(p3Lang.i18n('error.unknownMenuKey', a));
-                    return;
+                    break;
             }
             Settings.save();
         },
@@ -235,18 +226,15 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     Settings.awaymsg = $(this).val().trim();
                     Settings.save();
                 })).mouseover(function() {
-                    if (!p3Utils.runLite) {
-                        Context.trigger('tooltip:show', p3Lang.i18n('tooltip.afk'), $(this), false);
-                    }
+                    Context.trigger('tooltip:show', p3Lang.i18n('tooltip.afk'), $(this), false);
                 }).mouseout(function() {
-                    if (!p3Utils.runLite) {
-                        Context.trigger('tooltip:hide');
-                    }
+                    Context.trigger('tooltip:hide');
                 }));
             }
 
             if (p3Utils.isPlugCubedDeveloper() || API.hasPermission(undefined, API.ROLE.BOUNCER)) {
                 container.append(GUIButton(Settings.moderation.afkTimers, 'afktimers', p3Lang.i18n('menu.afktimers')));
+                //container.append(GUIButton(Settings.moderation.showDeletedMessages, 'showdeletedmessages', p3Lang.i18n('menu.showdeletedmessages')))
             }
 
             if (RoomSettings.haveRoomSettings) {
@@ -279,10 +267,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 var songLengthSlider = new Slider(5, 30, Settings.notifySongLength, function(v) {
                     Settings.notifySongLength = v;
                     Settings.save();
-                    $('.p3-s-notify-songLength').find('span').text(p3Lang.i18n('notify.songLength', v))
+                    $('.p3-s-notify-songLength').find('span').text(p3Lang.i18n('notify.songLength', v));
                 });
                 container.append(GUIButton((Settings.notify & enumNotifications.SONG_HISTORY) === enumNotifications.SONG_HISTORY, 'notify-history', p3Lang.i18n('notify.history')).data('bit', enumNotifications.SONG_HISTORY).data('perm', API.ROLE.BOUNCER));
-                container.append(GUIButton((Settings.notify & enumNotifications.SONG_UNAVAILABLE) === enumNotifications.SONG_UNAVAILABLE, 'notify-unavailable', p3Lang.i18n('notify.songUnavailable')).data('bit', enumNotifications.SONG_UNAVAILABLE).data('perm', API.ROLE.BOUNCER));
+                //container.append(GUIButton((Settings.notify & enumNotifications.SONG_UNAVAILABLE) === enumNotifications.SONG_UNAVAILABLE, 'notify-unavailable', p3Lang.i18n('notify.songUnavailable')).data('bit', enumNotifications.SONG_UNAVAILABLE).data('perm', API.ROLE.BOUNCER));
                 container.append(GUIButton((Settings.notify & enumNotifications.SONG_LENGTH) === enumNotifications.SONG_LENGTH, 'notify-songLength', p3Lang.i18n('notify.songLength', Settings.notifySongLength)).data('bit', enumNotifications.SONG_LENGTH).data('perm', API.ROLE.BOUNCER));
                 container.append(songLengthSlider.$slider.css('left', 40));
             }

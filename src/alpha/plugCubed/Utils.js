@@ -1,13 +1,13 @@
 var plugCubedUserData;
-define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lang, Lang) {
-    var cleanHTMLMessage, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, PopoutView, ChatFacade, Database, runLite;
+define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoader', 'plugCubed/bridges/Database', 'plugCubed/bridges/PopoutView'], function(Class, p3Lang, Lang, ModuleLoader, Database, PopoutView) {
+    var cleanHTMLMessage, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, PlugUI, runLite;
 
-    cleanHTMLMessage = function(input, disallow, extra_allow) {
+    cleanHTMLMessage = function(input, disallow, extraAllow) {
         if (input == null) return '';
         var allowed, tags, disallowed = [];
         if ($.isArray(disallow)) disallowed = disallow;
-        if (!extra_allow || !$.isArray(extra_allow)) extra_allow = [];
-        allowed = $(['span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em', 'a'].concat(extra_allow)).not(disallowed).get();
+        if (!extraAllow || !$.isArray(extraAllow)) extraAllow = [];
+        allowed = $(['span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em', 'a'].concat(extraAllow)).not(disallowed).get();
         if (disallow === '*') allowed = [];
         tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
         input = input.split('&#8237;').join('&amp;#8237;').split('&#8238;').join('&amp;#8238;');
@@ -19,16 +19,9 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
     special = {};
     runLite = !requirejs.defined('app/base/Class');
 
-    if (!runLite) {
-        PopoutView = require('app/views/room/popout/PopoutView');
-        ChatFacade = require('app/facades/ChatFacade');
-        Database = require('app/store/Database');
-    } else {
-        ChatFacade = {
-            uiLanguages: [],
-            chatLanguages: []
-        };
-    }
+    PlugUI = ModuleLoader.getModule({
+        sfx: 'string'
+    });
 
     $.getJSON('https://d1rfegul30378.cloudfront.net/titles.json', /**
      * @param {{developer: Array, sponsor: Array, special: Array, ambassador: Array, donator: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}, patreon: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}}} data
@@ -185,8 +178,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             if (!uid) uid = API.getUser().id;
             return special[uid];
         },
-        cleanHTML: function(msg, disallow, extra_allow) {
-            return cleanHTMLMessage(msg, disallow, extra_allow);
+        cleanHTML: function(msg, disallow, extraAllow) {
+            return cleanHTMLMessage(msg, disallow, extraAllow);
         },
         cleanTypedString: function(msg) {
             return msg.split("<").join("&lt;").split(">").join("&gt;");
@@ -200,7 +193,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             message = cleanHTMLMessage(message, undefined, ['ul', 'li']);
             $msgSpan = $('<span>').html(message);
 
-            $chat = !runLite && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages');
+            $chat = PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages');
             b = $chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - 20;
 
             $message = $('<div>').addClass(type ? type : 'message');
@@ -464,8 +457,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
             this.playMentionSound();
         },
         playMentionSound: function() {
-            if (!runLite && Database.settings.chatSound) {
-                (new Audio(require('app/utils/UI').sfx)).play();
+            if (Database.settings.chatSound) {
+                (new Audio(PlugUI.sfx)).play();
             }
         },
         getTimestamp: function(t, format) {
@@ -489,10 +482,6 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang'], function(Class, p3Lan
                     hours = 12;
                 }
             }
-
-            hours = (hours < 10 ? '0' : '') + hours;
-            minutes = (minutes < 10 ? '0' : '') + minutes;
-            seconds = (seconds < 10 ? '0' : '') + seconds;
 
             return format.split('hh').join(hours).split('mm').join(minutes).split('ss').join(seconds) + postfix;
         },
