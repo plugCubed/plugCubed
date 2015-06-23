@@ -7,7 +7,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settin
 
             var that = this;
 
-            var a = data.type == 'mention' && API.hasPermission(data.fromID, API.ROLE.BOUNCER), b = data.message.indexOf('@') < 0 && (API.hasPermission(data.fromID, API.ROLE.MANAGER) || p3Utils.isPlugCubedDeveloper(data.fromID));
+            var a = data.type === 'mention' && API.hasPermission(data.fromID, API.ROLE.BOUNCER), b = data.message.indexOf('@') < 0 && (API.hasPermission(data.fromID, API.ROLE.MANAGER) || p3Utils.isPlugCubedDeveloper(data.fromID));
             if (a || b) {
                 if (data.message.indexOf('!afkdisable') > -1) {
                     Settings.autorespond = false;
@@ -21,7 +21,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settin
                 }
             }
 
-            if (data.type == 'mention') {
+            if (data.type === 'mention' && data.message.indexOf('@'  + API.getUser().username) > -1) {
                 if (Settings.autorespond && !Settings.recent) {
                     Settings.recent = true;
                     $('#chat-input-field').attr('placeholder', p3Lang.i18n('autorespond.nextIn', p3Utils.getTimestamp(Date.now() + 18E4)));
