@@ -38,6 +38,7 @@ extensions/*.zip
 extensions/*.mxaddon
 extensions/Firefox-release
 extensions/promotionalSmall.png
+extensions/Chrome/plugCubed.js
 extensions/Opera/plugCubed.js
 extensions/Firefox/data/plugCubed.js
 p3.config.js
