@@ -45,8 +45,8 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
                 return;
 
             var a, b;
-            a = data.type === 'mention' && API.hasPermission(data.fromID, API.ROLE.BOUNCER);
-            b = data.message.indexOf('@') < 0 && (API.hasPermission(data.fromID, API.ROLE.MANAGER) || p3Utils.isPlugCubedDeveloper(data.fromID));
+            a = data.type === 'mention' && API.hasPermission(data.uid, API.ROLE.BOUNCER);
+            b = data.message.indexOf('@') < 0 && (API.hasPermission(data.uid, API.ROLE.MANAGER) || p3Utils.isPlugCubedDeveloper(data.uid));
             if (a || b) {
                 if (data.message.indexOf('!joindisable') > -1) {
                     Settings.autojoin = false;

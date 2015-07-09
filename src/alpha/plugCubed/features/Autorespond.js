@@ -7,7 +7,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settin
 
             var that = this;
 
-            var a = data.type === 'mention' && API.hasPermission(data.fromID, API.ROLE.BOUNCER), b = data.message.indexOf('@') < 0 && (API.hasPermission(data.fromID, API.ROLE.MANAGER) || p3Utils.isPlugCubedDeveloper(data.fromID));
+            var a = data.type === 'mention' && API.hasPermission(data.uid, API.ROLE.BOUNCER), b = data.message.indexOf('@') < 0 && (API.hasPermission(data.uid, API.ROLE.MANAGER) || p3Utils.isPlugCubedDeveloper(data.uid));
             if (a || b) {
                 if (data.message.indexOf('!afkdisable') > -1) {
                     Settings.autorespond = false;
