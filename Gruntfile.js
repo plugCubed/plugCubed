@@ -572,18 +572,17 @@ module.exports = function(grunt) {
                 }
             }
         },
-        aws_s3: {
+   s3: {
             options: {
                 accessKeyId: config.aws.accessKeyId,
                 secretAccessKey: config.aws.secretAccessKey,
                 bucket: 'plug3',
-                debug: verboseEnabled || false,
-                differential: true,
-                params: {
-                    CacheControl: '300'
+                region: 'eu-west-1',
+                headers: {
+                    CacheControl: 300
                 },
-                progress: 'progressBar',
-                uploadConcurrency: 20
+                dryRun: false,
+                cacheTTL: 5 * 60 * 1000
             },
             donations: {
                 files: [{
@@ -605,22 +604,18 @@ module.exports = function(grunt) {
                     src: 'src/release/lang.json',
                     dest: 'files/lang.json'
                 }, {
-                    expand: true,
                     cwd: 'src/release/images/badges',
                     src: '**.png',
                     dest: 'files/images/badges/'
                 }, {
-                    expand: true,
                     cwd: 'src/release/images/icons',
                     src: '**.png',
                     dest: 'files/images/icons/'
                 }, {
-                    expand: true,
                     cwd: 'src/release/images/ranks',
                     src: '**.png',
                     dest: 'files/images/ranks/'
                 }, {
-                    expand: true,
                     cwd: 'src/release/langs',
                     src: '**.json',
                     dest: 'files/langs/'
@@ -640,22 +635,18 @@ module.exports = function(grunt) {
                     src: 'src/alpha/lang.json',
                     dest: 'alpha/lang.json'
                 }, {
-                    expand: true,
                     cwd: 'src/alpha/images/badges',
                     src: '**.png',
                     dest: 'alpha/images/badges/'
                 }, {
-                    expand: true,
                     cwd: 'src/alpha/images/icons',
                     src: '**.png',
                     dest: 'alpha/images/icons/'
                 }, {
-                    expand: true,
                     cwd: 'src/alpha/images/ranks',
                     src: '**.png',
                     dest: 'alpha/images/ranks/'
                 }, {
-                    expand: true,
                     cwd: 'src/alpha/langs',
                     src: '**.json',
                     dest: 'alpha/langs/'
@@ -669,22 +660,18 @@ module.exports = function(grunt) {
                     src: 'src/dev/lang.json',
                     dest: 'dev/lang.json'
                 }, {
-                    expand: true,
                     cwd: 'src/dev/images/badges',
                     src: '**.png',
                     dest: 'dev/images/badges/'
                 }, {
-                    expand: true,
                     cwd: 'src/dev/images/icons',
                     src: '**.png',
                     dest: 'dev/images/icons/'
                 }, {
-                    expand: true,
                     cwd: 'src/dev/images/ranks',
                     src: '**.png',
                     dest: 'dev/images/ranks/'
                 }, {
-                    expand: true,
                     cwd: 'src/dev/langs',
                     src: '**.json',
                     dest: 'dev/langs/'
@@ -717,8 +704,8 @@ module.exports = function(grunt) {
     grunt.registerTask('update', ['execute:getRoom', 'execute:createConfig', 'execute:deobfuscate', 'build']);
     grunt.registerTask('default', 'build');
 
-    grunt.registerTask('publish:release', ['execute:incrementBuildRelease', 'build:release', 'aws_s3:release']);
-    grunt.registerTask('publish:alpha', ['execute:incrementBuildAlpha', 'build:alpha', 'aws_s3:alpha']);
-    grunt.registerTask('publish:dev', ['execute:incrementBuildDev', 'build:dev', 'aws_s3:dev']);
+    grunt.registerTask('publish:release', ['execute:incrementBuildRelease', 'build:release', 's3:release']);
+    grunt.registerTask('publish:alpha', ['execute:incrementBuildAlpha', 'build:alpha', 's3:alpha']);
+    grunt.registerTask('publish:dev', ['execute:incrementBuildDev', 'build:dev', 's3:dev']);
     grunt.registerTask('publish', ['publish:release', 'publish:alpha', 'publish:dev']);
 };
