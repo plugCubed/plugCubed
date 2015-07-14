@@ -4,9 +4,6 @@ module.exports = {
         secretAccessKey: ''
     },
     debug: false,
-    paths: {
-        chromePath: '',
-        plugDeobfuscation: ''    },
     requirejs: {
         salt: function(type) {
             return type;

@@ -7,16 +7,20 @@
     "closurecompiler": "^1.5.2",
     "crx": "^3.0.2",
     "grunt-aws": "^0.5.4",
-    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-requirejs": "^0.4.4",
-    "grunt-exec": "^0.4.6",
     "grunt-execute": "^0.2.2",
-    "grunt-mozilla-addon-sdk": "^0.3.2",
+    "grunt-mozilla-addon-sdk": "rpl/grunt-mozilla-addon-sdk",
     "grunt-requirejs-obfuscate": "plugCubed/grunt-requirejs-obfuscate#patch2",
     "grunt-text-replace": "^0.4.0",
-    "load-grunt-tasks": "^3.2.0",
-    "time-grunt": "^1.2.1",
+    "grunto": "^1.4.3",
     "yuicompressor": "^2.4.8"
   },
-  "private": true
+  "homepage": "https://plugcubed.net",
+  "license": "GPL-3.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plugcubed/plugcubed.git"
+  }
 }
