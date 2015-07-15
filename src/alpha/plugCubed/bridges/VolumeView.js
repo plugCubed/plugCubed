@@ -2,9 +2,9 @@
  Modified version of plug.dj's VolumeView
  VolumeView copyright (C) 2014 by Plug DJ, Inc.
  */
-define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Context'], function($, p3Lang, p3Utils, _$context) {
-    if (p3Utils.runLite) return null;
-    var original = require('app/views/room/playback/VolumeView'), _PlaybackModel;
+define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Context', 'plugCubed/ModuleLoader'], function($, p3Lang, p3Utils, _$context, ModuleLoader) {
+
+    var original = ModuleLoader.getView({id: 'volume'}), _PlaybackModel;
 
     return original.extend({
         initialize: function(PlaybackModel) {

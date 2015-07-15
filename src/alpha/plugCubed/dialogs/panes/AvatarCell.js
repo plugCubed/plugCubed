@@ -1,8 +1,12 @@
-define(['jquery', 'plugCubed/Utils', 'plugCubed/AvatarManifest'], function($, p3Utils, p3AvatarManifest) {
-    if (p3Utils.runLite) return;
+define(['jquery', 'plugCubed/Utils', 'plugCubed/AvatarManifest', 'plugCubed/ModuleLoader'], function($, p3Utils, p3AvatarManifest, ModuleLoader) {
 
-    var TheUserModel = require('app/models/TheUserModel');
-    var AvatarCell = require('app/views/user/inventory/AvatarCell');
+    var TheUserModel = ModuleLoader.getModule({
+        canModStaff: 'function'
+    });
+    var AvatarCell = ModuleLoader.getView({
+        className: 'cell',
+        func: 'getBlinkFrame'
+    });
     var Template = require('hbs!templates/user/inventory/AvatarCell');
 
     var handler = AvatarCell.extend({

@@ -1,7 +1,9 @@
-define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], function($, OverrideHandler, p3Utils) {
-    if (p3Utils.runLite) return null;
+define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/ModuleLoader'], function($, OverrideHandler, p3Utils, ModuleLoader) {
 
-    var UserRolloverView = require('app/views/user/UserRolloverView');
+    var UserRolloverView = ModuleLoader.getView({
+        isBackbone: true,
+        id: 'user-rollover'
+    });
 
     var handler = OverrideHandler.extend({
         doOverride: function() {

@@ -11,6 +11,6 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
             }
         }
     });
-    
+
     return new handler();
 });
