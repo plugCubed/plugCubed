@@ -280,7 +280,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             }
         }
 
-        $this.closest('.cm').attr('class', msgClass);
+        $this.closest('.cm').find('.message').attr('class', msgClass);
         $this.html(previousMessages + p3Utils.cleanHTML(data.message, ['div', 'table', 'tr', 'td'], ['img', 'video', 'source']));
 
         $this.data('translated', false);
