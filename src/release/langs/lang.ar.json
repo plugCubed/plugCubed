@@ -63,6 +63,8 @@
     "responses":{
       "alertson":"Playing sound on the following words: %1",
       "alertsoff":"No longer playing sound on specific words",
+      "badgeon":"Badges have been turned on",
+      "badgeoff":"Badges have been turned off",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
       "automute":{
@@ -142,7 +144,8 @@
     "disconnects":"Disconnects",
     "lastDisconnect":"Last Disconnect",
     "lastPosition":"Position",
-    "time":"Time"
+    "time":"Time",
+    "lastMessage":"Last Message"
   },
   "ranks":{
     "you":"You",
@@ -171,7 +174,8 @@
     "roomsettings":"Room Settings",
     "chatimages":"Chat Images",
     "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "controlpanel":"Control Panel",
+    "showdeletedmessages":"Show Deleted Messages"
   },
   "vote":{
     "meh":"Meh",
@@ -190,9 +194,14 @@
   },
   "error":{
     "userNotFound":"User not found",
-    "unknownModeration":"Unknown moderation",
+    "alreadyInWaitList":"User %1 is already in waitlist",
+    "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Unknown menu key: %1",
-    "missingReason":"Missing reason",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
     "noLiteSupport":"This is not supported in plug&#179; Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",

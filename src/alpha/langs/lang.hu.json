@@ -1,7 +1,7 @@
 {
   "running":"Jelenleg fut plug&#179; verzió %1",
-  "runningLite":"Plug&#179; lite futtatása!",
-  "runningLiteInfo":"Egy pár funkcíók nem fognak menni.",
+  "runningLite":"A Plug&#179; Lite verziója fut!",
+  "runningLiteInfo":"Néhány funkció nem fog működni.",
   "commandsHelp":"Használd a '\/commands' parancsot hogy lásd a chat parancsokat.",
   "autorespond":{
     "default":"Nem vagyok a gépnél",
@@ -42,8 +42,8 @@
       "refresh":"videó újratöltése",
       "alertson":"Hang lejátszása ha egy megadott szót írnak a chat-ben",
       "alertsoff":"Ne játszon le hangot ha egy megadott szót írnak a chat-ben",
-      "grab":"Most jätszott szám hozzáadni a jelenleg kiválasztott listádba",
-      "badges":"Felhasználói jelvények a chatben be\/ki kapcsolása",
+      "grab":"Aktuális szám hozzáadása a jelenleg kiválasztott lejátszási listádhoz",
+      "badges":"Felhasználói jelvények chatben való be\/ki kapcsolása",
       "getpos":"Sorszám lekérése a váró listán",
       "version":"Verziószám megjelenítése",
       "commands":"Lista mutatása",
@@ -58,17 +58,19 @@
       "remove":"Eltávolítja a kijelölt felhasználót a DJ Bódé\/Várolistából",
       "whois all":"Lekéri a szobában tartózkodó összes felhasználó ID-jét és felhasználónevét",
       "banall":"Kitilt minden felhasználót a szobában",
-      "status":"plug server állapotát mutatja"
+      "status":"a plug szerverek állapotát mutatja"
     },
     "responses":{
-      "alertson":"Hang lejátszása adott szavakra: %1",
-      "alertsoff":"Hang már nem lesz lejátszva",
-      "nextsong":"A következő számnak a címe: %1 készítője: %2",
-      "isHistory":"Figyelem: Ez a szám még mindig szerepel az előzményekben (%1 a %2)",
+      "alertson":"Hang lejátszása bizonyos szavaknál: %1",
+      "alertsoff":"Már nem lesz hang lejátszva bizonyos szavaknál",
+      "badgeon":"Badges have been turned on",
+      "badgeoff":"Badges have been turned off",
+      "nextsong":"A sorban álló következő számod címe: %1 készítője: %2",
+      "isHistory":"Figyelmeztetés: Ez a szám még mindig szerepel az előzményekben (%1. %2-ből)",
       "automute":{
-        "automuted":"%1 automatikusan lenémítva.",
-        "registered":"%1 regisztrálva a autónémítás listára.",
-        "unregistered":"%1 törölve lett az autónémítás listárol."
+        "automuted":"%1 autómatikusan lenémítva.",
+        "registered":"%1 regisztrálva a jövőbeli autó-némításra.",
+        "unregistered":"%1 törölve lett az autó-némítás listáról."
       },
       "status":{
         "rest":"REST: %1 %2 [%3ms]",
@@ -77,36 +79,36 @@
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "boothAvailable":"Ha most csatlakoznál a várólistára, te DJ-znél!",
+    "alreadyDJ":"Már te DJ-zel!",
+    "waitListTime":"A várólistán %1. vagy a %2-ból, ennyi idő múlva DJ-zel: %3!",
+    "joinTime":"Ha most csatlakozol a várólistához, körülbelül ennyi idő múlva fogsz DJ-zni: %1!"
   },
   "notify":{
     "header":"Felhasználó Információi",
     "join":"Felhasználó Csatlakozik",
     "leave":"Felhasználó Lelépett",
-    "grab":"Vki. felszed",
-    "meh":"ember meh-elte",
-    "stats":"a szám statisztikája",
-    "updates":"Dal frissítések",
-    "history":"Számok a történelemben",
-    "songUnavailable":"Song Unavailable",
-    "songLength":"Dal hossza (%1 perc)",
+    "grab":"Vki. hozzáadja a számot a lej.listájához",
+    "meh":"Vki. a számot meh-elte",
+    "stats":"A szám statisztikái",
+    "updates":"Szám frissítések",
+    "history":"Számok az előzményekben",
+    "songUnavailable":"A szám nem elérhető",
+    "songLength":"Szám hossza (%1 perc)",
     "message":{
-      "grab":"%1 felszedte ezt: %2 - %3",
+      "grab":"a lej.listájára tette ezt: %1 - %2",
       "stats":"Statisztika: %1 tetszik -- %2 nem tetszik -- %3 hozzáadás",
       "updates":"Most Következik: %1 %2-tól <br\/> lejátssza: %3",
-      "meh":"%1 mehelte ezt a számot",
-      "join":"joined the room",
-      "leave":"left the room",
+      "meh":"meh-elte ezt a számot",
+      "join":"csatlakozott a szobához",
+      "leave":"elhagyta a szobát",
       "history":"A szám szerepel az előzményekben (%1 közül %2)",
       "historySkipped":"A szám szerepel az előzményekben (%1 közül %2), de kihagyták az előző lejátszáskor",
       "songLength":"A szám hosszabb mint %1 perc",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"A szám privát",
+      "songNotFound":"A szám nem található",
+      "songEmbed":"A dal beágyazása le van tiltva",
+      "songStreamable":"A dal nem támogatja a streamelést"
     }
   },
   "info":{
@@ -116,13 +118,13 @@
     "specialTitles":{
       "developer":"plug&#179; Fejlesztő\n",
       "sponsor":"plug&#179; Szponzor",
-      "ambassador":"plug&#179; nagykövet",
-      "donatorDiamond":"plug&#179; gyémánt támogató",
-      "donatorPlatinum":"plug&#179; Platin támogató",
-      "donatorGold":"plug&#179; Arany Donátor",
-      "donatorSilver":"plug&#179; ezüst támogató",
+      "ambassador":"plug&#179; Nagykövet",
+      "donatorDiamond":"plug&#179; Gyémánt Támogató",
+      "donatorPlatinum":"plug&#179; Platinum Támogató",
+      "donatorGold":"plug&#179; Arany Támogató",
+      "donatorSilver":"plug&#179; Ezüst Támogató",
       "donatorBronze":"plug&#179; Bronz Támogató",
-      "special":"plug&#179; Különleges támogató - %1"
+      "special":"plug&#179; Különleges Támogató - %1"
     },
     "id":"Azonosító",
     "rank":"Rang",
@@ -142,7 +144,8 @@
     "disconnects":"Kilép",
     "lastDisconnect":"Utolsó Kilépés",
     "lastPosition":"Pozíció",
-    "time":"Idő"
+    "time":"Idő",
+    "lastMessage":"Last Message"
   },
   "ranks":{
     "you":"Te",
@@ -150,7 +153,7 @@
     "residentdj":"Rezidens DJ",
     "bouncer":"Kidobó",
     "manager":"Igazgató",
-    "cohost":"Műsorvezető",
+    "cohost":"Társ-Műsorvezető",
     "host":"Műsorvezető",
     "ambassador":"Nagykövet",
     "admin":"Admin"
@@ -158,7 +161,7 @@
   "roomSpecificSettings":{
     "infoHeader":"Ez a szoba speciális beállításokat használ",
     "infoHeaderCredits":"Ez a szoba speciális beállításokat használ tőle: %1",
-    "infoDisable":"A menüben kitudod kapcsolni ezt"
+    "infoDisable":"A menüben ki tudod kapcsolni őket"
   },
   "menu":{
     "autowoot":"Autó-Tetszik",
@@ -166,12 +169,13 @@
     "customchatcolors":"Egyedi Chat Szinek",
     "autorespond":"AFK Autóválasz ",
     "notify":"Értesítések ",
-    "afktimers":"AFK Számlálók",
-    "etatimer":"ETA Timer",
+    "afktimers":"\"Távol vagyok a géptől\" Időzítők",
+    "etatimer":"Az érkezés várható időpontjának időzítője",
     "roomsettings":"Szoba beállításai",
     "chatimages":"Chat-képek",
     "twitchemotes":"Twitch smiley-k",
-    "controlpanel":"Irányítópult"
+    "controlpanel":"Irányítópult",
+    "showdeletedmessages":"Show Deleted Messages"
   },
   "vote":{
     "meh":"Nem Tetszik",
@@ -190,13 +194,18 @@
   },
   "error":{
     "userNotFound":"Felhasználó nem található",
-    "unknownModeration":"Ismeretlen moderáció",
+    "alreadyInWaitList":"User %1 is already in waitlist",
+    "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Ismeretlen menü gomb: %1",
-    "missingReason":"Hiányzó ok",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
     "noLiteSupport":"Ez nincs támogatva a plug&#179; Lite-ban",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
-    "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
-    "noNextSong":"You have no queued song"
+    "errorGettingPlaylistInfo":"Hiba a lejátszási lista adatainak lekérése során",
+    "noPlaylistsFound":"Nem található lejátszási lista",
+    "yourActivePlaylistIsFull":"Az aktív lejátszási listád teli van",
+    "noNextSong":"Nincs sorban álló számod"
   }
 }

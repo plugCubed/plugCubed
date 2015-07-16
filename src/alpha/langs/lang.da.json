@@ -63,6 +63,8 @@
     "responses":{
       "alertson":"Afspiller lyd ved følgende ord: %1",
       "alertsoff":"Afspiller ikke længere lyd ved specifikke ord",
+      "badgeon":"Badges have been turned on",
+      "badgeoff":"Badges have been turned off",
       "nextsong":"Din næste sang i køen er %1 af %2",
       "isHistory":"Advarsel! Denne sang er stadigvæk i historikken (%1 af %2)",
       "automute":{
@@ -142,7 +144,8 @@
     "disconnects":"Forlader",
     "lastDisconnect":"Seneste Disconnect",
     "lastPosition":"Position",
-    "time":"Tid"
+    "time":"Tid",
+    "lastMessage":"Last Message"
   },
   "ranks":{
     "you":"Dig",
@@ -171,7 +174,8 @@
     "roomsettings":"Rum-indstillinger",
     "chatimages":"Chat billeder",
     "twitchemotes":"Twitch Smileys",
-    "controlpanel":"Kontrolpanel"
+    "controlpanel":"Kontrolpanel",
+    "showdeletedmessages":"Show Deleted Messages"
   },
   "vote":{
     "meh":"Kan ikke lide",
@@ -190,9 +194,14 @@
   },
   "error":{
     "userNotFound":"Bruger ikke fundet",
-    "unknownModeration":"Ukendt moderation",
+    "alreadyInWaitList":"User %1 is already in waitlist",
+    "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Ukendt menu knap: %1",
-    "missingReason":"Mangler begrundelse",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
     "noLiteSupport":"Dette understøttes ikke i plug&#179; Lite",
     "errorGettingPlaylistInfo":"Fejl under hentning af afspilningslisten information",
     "noPlaylistsFound":"Ingen afspilningslister fundet",

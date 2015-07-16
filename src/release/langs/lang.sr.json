@@ -63,6 +63,8 @@
     "responses":{
       "alertson":"Reprodukcija zvuka na sledeće reči: %1",
       "alertsoff":"Više ne reproduktuj zvuke na određene reči",
+      "badgeon":"Badges have been turned on",
+      "badgeoff":"Badges have been turned off",
       "nextsong":"Tvoja sledeća pjesma koju puštaš je %1 od %2",
       "isHistory":"Upozorenje: Ova pesma je u istoriji (%1 od %2)",
       "automute":{
@@ -142,7 +144,8 @@
     "disconnects":"Isključenja",
     "lastDisconnect":"Poslednje isključenje",
     "lastPosition":"Pozicija",
-    "time":"Vreme"
+    "time":"Vreme",
+    "lastMessage":"Last Message"
   },
   "ranks":{
     "you":"Vi",
@@ -171,7 +174,8 @@
     "roomsettings":"Podešavanja sobe",
     "chatimages":"Čet slike",
     "twitchemotes":"Twitch Emotikoni",
-    "controlpanel":"Kontrolna Tabla"
+    "controlpanel":"Kontrolna Tabla",
+    "showdeletedmessages":"Show Deleted Messages"
   },
   "vote":{
     "meh":"Ne sviđa mi se",
@@ -190,9 +194,14 @@
   },
   "error":{
     "userNotFound":"Korisnik nije pronađen",
-    "unknownModeration":"Nepoznata komanda",
+    "alreadyInWaitList":"User %1 is already in waitlist",
+    "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Nepoznata komanda: %1",
-    "missingReason":"Nedostaje razlog",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
     "noLiteSupport":"Ovo nije podržano u plug&#179; Lajt",
     "errorGettingPlaylistInfo":"Greška pri dobijanju informacije o playlist-i",
     "noPlaylistsFound":"PlayList-a nije pronađena",

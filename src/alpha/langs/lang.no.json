@@ -1,49 +1,49 @@
 {
   "running":"Kjører plug&#179; versjon %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
-  "commandsHelp":"Bruk '\/commands' for å se en større liste av alle kommandoene.",
+  "runningLite":"Kjører plug&#179; i Beta!",
+  "runningLiteInfo":"Enkelte funksjoner vil ikke fungere.",
+  "commandsHelp":"Bruk '\/commands' for å se en liste over alle kommandoene.",
   "autorespond":{
     "default":"Jeg er ikke her akkurat nå.",
-    "disable":"Deaktiver AFK autorespons får å chatte",
+    "disable":"Deaktiver AFK autorespons for å chatte",
     "nextIn":"Neste AFK autorespons kommer til å bli sendt fra %1",
-    "next":"AFK Autorespond on next mention",
-    "commandDisable":"%1 autojoin disabled",
+    "next":"AFK Autosvar på neste omtale",
+    "commandDisable":"%1 AFK melding deaktivert",
     "commandNotEnabled":"%1 autojoin was not enabled"
   },
   "autojoin":{
-    "commandDisable":"%1 autojoin disabled",
-    "commandNotEnabled":"%1 autojoin was not enabled"
+    "commandDisable":"%1 autojoin deaktivert",
+    "commandNotEnabled":"%1 autojoin var ikke aktivert"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Reduser",
+    "enlarge":"Forstørr"
   },
   "commands":{
-    "header":"Bruker informasjon",
+    "header":"plug&#179; Kommandoer",
     "userCommands":"Bruker kommandoer",
-    "modCommands":"Moderation Commands",
+    "modCommands":"Moderator Kommandoer",
     "variables":{
       "username":"Brukernavn",
       "word":"ord",
-      "on":"on",
-      "off":"off",
+      "on":"PÅ",
+      "off":"AV",
       "reason":"begrunnelse",
-      "number":"number"
+      "number":"nummer"
     },
     "descriptions":{
-      "join":"Brukeren koble seg til",
+      "join":"Gå i ventelisten",
       "leave":"Brukeren logget av",
-      "whoami":"get your own information",
+      "whoami":"få din egen informasjon",
       "mute":"Sett volum til 0",
-      "automute":"register currently playing song to automatically mute on future plays",
-      "unmute":"set volume to last volume",
-      "nextsong":"display next song in playlist and if it's in history",
+      "automute":"Registrer spillende sang til å automatisk bli dempet hver gang den spilles",
+      "unmute":"Angi volumet til siste volum",
+      "nextsong":"Viser neste sang på spillelisten, og om den er på historie-listen",
       "refresh":"Oppdater video",
       "alertson":"spille av lyd når definerte ord er skrevet i chat",
-      "alertsoff":"stop playing sound when defined words are written in chat",
-      "grab":"add current song to your selected playlist",
-      "badges":"show\/hide the user badges in chat",
+      "alertsoff":"slutt å spille lyd når definerte ord er skrevet i chat",
+      "grab":"Legg til spillende sang i spillelisten",
+      "badges":"Vis\/Skjul bruker-merkene i chat",
       "getpos":"Gir deg din gjeldende posisjon i ventelista.",
       "version":"viser versjonsnummer",
       "commands":"viser denne lista",
@@ -51,62 +51,64 @@
       "whois":"Gir deg generelt informasjon om en bruker",
       "skip":"Hopper over denne sangen",
       "ban":"spark den målrettet brukeren",
-      "lockskip":"locks DJ booth, skip and unlocks afterwards",
+      "lockskip":"låser DJ køen, hopper over og låser opp etterpå",
       "lock":"Lokker DJ lista",
       "unlock":"åpner DJ lista",
       "add":"Legger målrettet brukeren til DJ ventelista",
       "remove":"fjerner målrettet brukeren fra DJ ventelista",
-      "whois all":"gives userid and username of all users in the room",
-      "banall":"fjerner og forbyr alle brukere i rommet",
-      "status":"shows status of plug servers"
+      "whois all":"Gir brukerID og brukernavn på alle brukere i rommet",
+      "banall":"bannlys alle brukere i rommet",
+      "status":"Viser status for plug servere"
     },
     "responses":{
-      "alertson":"Playing sound on the following words: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "alertson":"Spiller av lyd på følgende ord: %1",
+      "alertsoff":"Ikke lenger spille lyd på bestemte ord",
+      "badgeon":"Badges have been turned on",
+      "badgeoff":"Badges have been turned off",
+      "nextsong":"Neste i køen er %1 av %2",
+      "isHistory":"Advarsel: Denne sangen er forsatt i historie-listen (%1 av %2)",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "automuted":"%1 autodempet.",
+        "registered":"%1 er registret til å bli automatisk dempet.",
+        "unregistered":"%1 fjernet fra autodemp lista."
       },
       "status":{
-        "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
+        "rest":"RESTEN: %1 %2 [%3ms]",
+        "socket":"Kontakt: %1 %2 [%3ms]"
       }
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "boothAvailable":"Hvis du kommer inn i ventelisten, ville du være DJ!",
+    "alreadyDJ":"Du er allerede DJ!",
+    "waitListTime":"Du er på ventelisten %1 av %2, vil bli DJ om %3!",
+    "joinTime":"Hvis du joiner ventelisten nå, vil du bli DJ om %1!"
   },
   "notify":{
     "header":"Bruker informasjon",
     "join":"Brukeren koble seg til",
     "leave":"Brukeren logget av",
-    "grab":"User Grab",
-    "meh":"User Mehs",
-    "stats":"Song Stats",
-    "updates":"Song Updates",
-    "history":"Songs in history",
-    "songUnavailable":"Song Unavailable",
-    "songLength":"Song Length (%1 min)",
+    "grab":"Bruker Grabbet",
+    "meh":"Bruker 'Meh'-et sangen",
+    "stats":"Sang Stastikk",
+    "updates":"sang Oppdateringer",
+    "history":"Sanger i historie-listen",
+    "songUnavailable":"Sang utilgjengelig",
+    "songLength":"Sangens lengde (%1 min)",
     "message":{
-      "grab":"grabbed %1 - %2",
-      "stats":"Stats: %1 woots -- %2 mehs -- %3 grabs",
-      "updates":"Now Playing: %1 by %2<br>Played by: %3",
-      "meh":"meh'd this track",
-      "join":"joined the room",
-      "leave":"left the room",
-      "history":"Song is in history (%1 of %2)",
-      "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
-      "songLength":"Song is longer than %1 minutes",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "grab":"grep %1 - %2",
+      "stats":"Statistikk: %1 woots -- %2 mehs -- %3 grab",
+      "updates":"Spiller nå: %1 av %2<br>Spilt av %3",
+      "meh":"stemte skip",
+      "join":"kom inn i rommet",
+      "leave":"forlot rommet",
+      "history":"Sang i loggen (%1 av %2)",
+      "historySkipped":"Sang i loggen (%1 av %2), men ble hoppet over på forrige avspilling",
+      "songLength":"Sangen er lengre enn %1 minutter",
+      "songPrivate":"Sangen er privat",
+      "songNotFound":"Sangen ble ikke funnet",
+      "songEmbed":"Sangen er ikke tilgjengelig",
+      "songStreamable":"Sangen støtter ikke direkteavspilling"
     }
   },
   "info":{
@@ -114,35 +116,36 @@
     "name":"Navn",
     "title":"Titel",
     "specialTitles":{
-      "developer":"plug&#179; Developer",
+      "developer":"plug&#179; Utvikler",
       "sponsor":"plug&#179; Sponsor",
-      "ambassador":"plug&#179; Ambassador",
-      "donatorDiamond":"plug&#179; Diamond Donator",
-      "donatorPlatinum":"plug&#179; Platinum Donator",
-      "donatorGold":"plug&#179; Gold Donator",
-      "donatorSilver":"plug&#179; Silver Donator",
-      "donatorBronze":"plug&#179; Bronze Donator",
-      "special":"plug&#179; Special Supporter - %1"
+      "ambassador":"plug&#179; Ambassadør",
+      "donatorDiamond":"plug&#179; Diamant Sponsor",
+      "donatorPlatinum":"plug&#179; Platinium Sponsor",
+      "donatorGold":"plug&#179; Gull Sponsor",
+      "donatorSilver":"plug&#179; Sølv Sponsor",
+      "donatorBronze":"plug&#179; Bronse Sponsor",
+      "special":"plug&#179; Spesiell supporter - %1"
     },
     "id":"ID",
     "rank":"Rangering",
-    "joined":"Time Joined",
+    "joined":"Når han kom inn",
     "status":"Status",
     "vote":"Stemme",
     "position":"Posisjon",
     "points":"Poeng",
-    "wootCount":"Woot Count",
-    "mehCount":"Meh Count",
-    "ratio":"Woot\/Meh Ratio",
+    "wootCount":"Woot's",
+    "mehCount":"Meh's",
+    "ratio":"Woot\/Meh Forhold",
     "djing":"DJing",
-    "notInList":"Not in waitlist nor booth",
-    "inWaitlist":"%1\/%2 in waitlist",
-    "userDjing":"%1 are currently DJing",
-    "userNextDJ":"%1 are DJing next",
+    "notInList":"Ikke i ventelisten",
+    "inWaitlist":"%1\/%2 i ventelisten",
+    "userDjing":"%1 er DJ",
+    "userNextDJ":"%1 er neste DJ",
     "disconnects":"Frakoblinger",
     "lastDisconnect":"Siste frakobling",
     "lastPosition":"Posisjon ",
-    "time":"Tid"
+    "time":"Tid",
+    "lastMessage":"Last Message"
   },
   "ranks":{
     "you":"Deg",
@@ -156,32 +159,33 @@
     "admin":"Administrator"
   },
   "roomSpecificSettings":{
-    "infoHeader":"This room is using special settings",
-    "infoHeaderCredits":"This room is using special settings by %1",
-    "infoDisable":"You can disable them in the menu"
+    "infoHeader":"Dette rommet bruker spesielle innstillinger",
+    "infoHeaderCredits":"Dette rommet bruker spesielle innstillinger av %1",
+    "infoDisable":"Du kan deaktivere de i menyen"
   },
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Autojoin",
-    "customchatcolors":"Custom Chat Colors",
-    "autorespond":"AFK Autorespond",
-    "notify":"Notifications",
+    "customchatcolors":"Tilpassede Chat Farger",
+    "autorespond":"AFK Autosvar",
+    "notify":"Varslinger",
     "afktimers":"AFK timer",
     "etatimer":"ETA Timer",
     "roomsettings":"Rom innstillinger",
-    "chatimages":"Chat Images",
+    "chatimages":"Chat Bilder",
     "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel"
+    "controlpanel":"Kontrollpanel",
+    "showdeletedmessages":"Show Deleted Messages"
   },
   "vote":{
     "meh":"Meh",
     "woot":"Woot",
     "grab":"Grab",
     "undecided":"Ubestemt",
-    "djing":"DJing"
+    "djing":"Djer"
   },
   "tooltip":{
-    "stream":"Toggle Video\/Audio Stream",
+    "stream":"Bytt Video\/Audio Stream",
     "clear":"Fjern Chat",
     "afk":"AFK melding",
     "reset":"Tilbakestille til standard ",
@@ -190,13 +194,18 @@
   },
   "error":{
     "userNotFound":"Bruker ble ikke funnet",
-    "unknownModeration":"Ukjent moderasjon",
+    "alreadyInWaitList":"User %1 is already in waitlist",
+    "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Ukjent menytast: %1",
-    "missingReason":"Mangler begrunnelse",
-    "noLiteSupport":"This is not supported in plug&#179; Lite",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
-    "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
-    "noNextSong":"You have no queued song"
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "noLiteSupport":"Dette støttes ikke i plug³ Lite",
+    "errorGettingPlaylistInfo":"Feil ved henting av spilleliste info",
+    "noPlaylistsFound":"Ingen spillelister funnet",
+    "yourActivePlaylistIsFull":"Din aktive spilleliste er full",
+    "noNextSong":"Du har ingen sang klar i køen din"
   }
 }

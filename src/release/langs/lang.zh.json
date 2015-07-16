@@ -63,6 +63,8 @@
     "responses":{
       "alertson":"對下列詞語播放聲音: %1",
       "alertsoff":"不再對特定詞語播放聲音",
+      "badgeon":"Badges have been turned on",
+      "badgeoff":"Badges have been turned off",
       "nextsong":"你下一首排隊的歌曲是 %1 來自 %2",
       "isHistory":"警告: 這首歌仍在播放歷史紀錄裡 (%1 - %2)",
       "automute":{
@@ -142,7 +144,8 @@
     "disconnects":"斷線",
     "lastDisconnect":"上次斷線",
     "lastPosition":"位置",
-    "time":"時間"
+    "time":"時間",
+    "lastMessage":"Last Message"
   },
   "ranks":{
     "you":"你",
@@ -171,7 +174,8 @@
     "roomsettings":"房間設定",
     "chatimages":"聊天圖像",
     "twitchemotes":"搞怪表情",
-    "controlpanel":"控制面板"
+    "controlpanel":"控制面板",
+    "showdeletedmessages":"Show Deleted Messages"
   },
   "vote":{
     "meh":"負評",
@@ -190,9 +194,14 @@
   },
   "error":{
     "userNotFound":"找不到此用戶",
-    "unknownModeration":"未知管理動作",
+    "alreadyInWaitList":"User %1 is already in waitlist",
+    "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"未知菜單匙碼: %1",
-    "missingReason":"遺失原因",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
     "noLiteSupport":"這並不被 plug&#179; Lite 所支援",
     "errorGettingPlaylistInfo":"獲取播放清單資訊時出錯",
     "noPlaylistsFound":"無法找到播放清單",

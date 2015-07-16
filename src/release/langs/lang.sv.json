@@ -63,6 +63,8 @@
     "responses":{
       "alertson":"Spelar ljud på följande ord: %1",
       "alertsoff":"Spelar inte längre ljud på specifika ord",
+      "badgeon":"Badges have been turned on",
+      "badgeoff":"Badges have been turned off",
       "nextsong":"Din nästa köade sång är %1 av %2",
       "isHistory":"Varning: Den här låten finns fortfarande i historiken (%1 av %2)",
       "automute":{
@@ -142,7 +144,8 @@
     "disconnects":"Antal gånger användaren har lämnat",
     "lastDisconnect":"Senaste gången användaren lämnade",
     "lastPosition":"Position",
-    "time":"Tid"
+    "time":"Tid",
+    "lastMessage":"Last Message"
   },
   "ranks":{
     "you":"Du",
@@ -171,7 +174,8 @@
     "roomsettings":"Rumsinstallningar",
     "chatimages":"Chatt bilder",
     "twitchemotes":"Twitch Figurer",
-    "controlpanel":"Kontrollpanel"
+    "controlpanel":"Kontrollpanel",
+    "showdeletedmessages":"Show Deleted Messages"
   },
   "vote":{
     "meh":"Meh",
@@ -190,9 +194,14 @@
   },
   "error":{
     "userNotFound":"Användaren hittades inte",
-    "unknownModeration":"Okänd moderation",
+    "alreadyInWaitList":"User %1 is already in waitlist",
+    "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Okänd menyknapp: %1",
-    "missingReason":"Saknar anledning",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
     "noLiteSupport":"Detta stöds inte i plug&#179; Lite",
     "errorGettingPlaylistInfo":"Fel när spellistan hämtades",
     "noPlaylistsFound":"Inga spellistor hittades",

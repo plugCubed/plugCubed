@@ -63,6 +63,8 @@
     "responses":{
       "alertson":"Zvuk se přehraje při následujících slovech: %1",
       "alertsoff":"Zvuk již nebude při určených slovech přehráván",
+      "badgeon":"Badges have been turned on",
+      "badgeoff":"Badges have been turned off",
       "nextsong":"Vaše další skladba bude %1 od %2",
       "isHistory":"Pozor: Tato skladba je stále v historii (%1 z %2)",
       "automute":{
@@ -142,7 +144,8 @@
     "disconnects":"Odpojení",
     "lastDisconnect":"Poslední odpojení",
     "lastPosition":"Pozice",
-    "time":"Čas"
+    "time":"Čas",
+    "lastMessage":"Last Message"
   },
   "ranks":{
     "you":"Ty",
@@ -171,7 +174,8 @@
     "roomsettings":"Nastavení místnosti",
     "chatimages":"Obrázky v chatu",
     "twitchemotes":"Twitch smajlíky",
-    "controlpanel":"Ovládací panel"
+    "controlpanel":"Ovládací panel",
+    "showdeletedmessages":"Show Deleted Messages"
   },
   "vote":{
     "meh":"Meh",
@@ -190,9 +194,14 @@
   },
   "error":{
     "userNotFound":"Uživatel nenalezen",
-    "unknownModeration":"Neznámá moderace",
+    "alreadyInWaitList":"User %1 is already in waitlist",
+    "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Neznámý klíč menu: %1",
-    "missingReason":"Chybí důvod",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
     "noLiteSupport":"Tato možnost není podporována v plug&#179; Lite",
     "errorGettingPlaylistInfo":"Chyba při získávání informací o playlistu",
     "noPlaylistsFound":"Nebyl nalezen žádný playlist",

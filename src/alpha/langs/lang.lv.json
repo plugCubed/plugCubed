@@ -63,6 +63,8 @@
     "responses":{
       "alertson":"Atskaņot skaņu uz šādiem vārdiem: %1",
       "alertsoff":"Vairs nedod skaņas paziņojumu noteiktiem vārdiem",
+      "badgeon":"Badges have been turned on",
+      "badgeoff":"Badges have been turned off",
       "nextsong":"Tava nākošā dziesma ir %1 no %2",
       "isHistory":"Brīdinājums: Šī dziesma vēlprojām atrodas vēsturē (%1 no %2)",
       "automute":{
@@ -142,7 +144,8 @@
     "disconnects":"Atvienojās",
     "lastDisconnect":"Pēdējā Atvienošanās",
     "lastPosition":"Pozīcija",
-    "time":"Laiks"
+    "time":"Laiks",
+    "lastMessage":"Last Message"
   },
   "ranks":{
     "you":"Jūs",
@@ -171,7 +174,8 @@
     "roomsettings":"Kopienas Iestatījumi",
     "chatimages":"Bildes Čatā",
     "twitchemotes":"Twitch Smaidiņi",
-    "controlpanel":"Vadības Panelis"
+    "controlpanel":"Vadības Panelis",
+    "showdeletedmessages":"Show Deleted Messages"
   },
   "vote":{
     "meh":"Meh",
@@ -190,9 +194,14 @@
   },
   "error":{
     "userNotFound":"Lietotājs netika atrasts",
-    "unknownModeration":"Nezināma moderācija",
+    "alreadyInWaitList":"User %1 is already in waitlist",
+    "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Nezināma izvēlne; %1",
-    "missingReason":"Nav Iemesla",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
     "noLiteSupport":"Šis nav atbalstīts iekš plug&#179; Vieglā",
     "errorGettingPlaylistInfo":"Kļūda iegūstot saraksta informāciju",
     "noPlaylistsFound":"Atskaņošanas Saraksti nav atrasti",

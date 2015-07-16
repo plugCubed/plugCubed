@@ -63,6 +63,8 @@
     "responses":{
       "alertson":"Odtwarzanie dźwięku na następujące słowa: %1",
       "alertsoff":"Dźwięk nie będzie już odtwarzany przy wcześniej podanych słowach",
+      "badgeon":"Badges have been turned on",
+      "badgeoff":"Badges have been turned off",
       "nextsong":"Twoja następna piosenka w kolejce to %1 stworzona przez %2",
       "isHistory":"Uwaga: ta piosenka jest wciąż w historii (%1 z %2)",
       "automute":{
@@ -106,7 +108,7 @@
       "songPrivate":"Ta piosenka jest prywatna",
       "songNotFound":"Piosenka nie znaleziona",
       "songEmbed":"Ta piosenka ma wyłączone odtwarzanie na stronach zewnętrznych",
-      "songStreamable":"Song doesn't support streaming"
+      "songStreamable":"Ta piosenka nie wspiera odtwarzania na żywo"
     }
   },
   "info":{
@@ -142,7 +144,8 @@
     "disconnects":"Rozłączenia",
     "lastDisconnect":"Ostatnie rozłączenie",
     "lastPosition":"Pozycja",
-    "time":"Czas"
+    "time":"Czas",
+    "lastMessage":"Last Message"
   },
   "ranks":{
     "you":"Ty",
@@ -171,7 +174,8 @@
     "roomsettings":"Ustawienia pokoju",
     "chatimages":"Pokazuj zdjęcia na czacie",
     "twitchemotes":"Emotikony Twitcha",
-    "controlpanel":"Panel sterowania"
+    "controlpanel":"Panel sterowania",
+    "showdeletedmessages":"Show Deleted Messages"
   },
   "vote":{
     "meh":"Meh",
@@ -190,9 +194,14 @@
   },
   "error":{
     "userNotFound":"Użytkownik nie znaleziony",
-    "unknownModeration":"Nieznana moderacja",
+    "alreadyInWaitList":"User %1 is already in waitlist",
+    "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Nieznany klawisz menu: %1",
-    "missingReason":"Brak przyczyny",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
     "noLiteSupport":"Ta funkcja nie jest dostępna w plug&#179; Lite",
     "errorGettingPlaylistInfo":"Wystąpił błąd podczas uzyskiwania informacji na temat listy odtwarzania",
     "noPlaylistsFound":"Nie znaleziono żadnej listy utworów",

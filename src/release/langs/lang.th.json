@@ -63,6 +63,8 @@
     "responses":{
       "alertson":"เล่นเสียงจากคำต่อไปนี้: %1",
       "alertsoff":"ไม่เล่นเสียงเฉพาะคำ",
+      "badgeon":"Badges have been turned on",
+      "badgeoff":"Badges have been turned off",
       "nextsong":"เพลงอยู่ในคิวต่อไปเป็น %1 โดย %2",
       "isHistory":"คำเตือน: เพลงนี้ยังอยู่ในรายการเพลงที่เล่นแล้วในประวัติ (%1 จาก %2)",
       "automute":{
@@ -142,7 +144,8 @@
     "disconnects":"ยกเลิกการเชื่อมต่อ",
     "lastDisconnect":"ยกเลิกการเชื่อมต่อครั้งที่แล้ว",
     "lastPosition":"ตำแหน่ง",
-    "time":"เวลา"
+    "time":"เวลา",
+    "lastMessage":"Last Message"
   },
   "ranks":{
     "you":"คุณ",
@@ -171,7 +174,8 @@
     "roomsettings":"ตั้งค่าห้อง",
     "chatimages":"รูปแชท",
     "twitchemotes":"อีโมติคอน Twitch",
-    "controlpanel":"'แผงควบคุม'"
+    "controlpanel":"'แผงควบคุม'",
+    "showdeletedmessages":"Show Deleted Messages"
   },
   "vote":{
     "meh":"ไม่ชอบ",
@@ -190,9 +194,14 @@
   },
   "error":{
     "userNotFound":"ผู้ใช้ไม่พบ",
-    "unknownModeration":"ไม่รู้จักผู้ดูแล",
+    "alreadyInWaitList":"User %1 is already in waitlist",
+    "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"คีย์เมนูที่ไม่รู้จัก: %1",
-    "missingReason":"ขาดเหตุผล",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
     "noLiteSupport":"นี้ไม่สนับสนุนใน plug&#179; Lite",
     "errorGettingPlaylistInfo":"ข้อผิดพลาดในการรับข้อมูลรายการที่เล่น",
     "noPlaylistsFound":"ไม่พบรายการที่เล่น",

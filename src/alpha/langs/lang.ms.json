@@ -63,6 +63,8 @@
     "responses":{
       "alertson":"Berbunyi pada perkataan yang berikut: %1",
       "alertsoff":"Tidak lagi berbunyi pada perkataan yang tertentu",
+      "badgeon":"Badges have been turned on",
+      "badgeoff":"Badges have been turned off",
       "nextsong":"Lagu seterusnya anda adalah %1 dari %2",
       "isHistory":"Amaran: lagu ini masih berada dalam DJ sejarah (%1 dari %2)",
       "automute":{
@@ -142,7 +144,8 @@
     "disconnects":"Disconnects",
     "lastDisconnect":"Disconnect yang terakhir",
     "lastPosition":"Kedudukan",
-    "time":"Masa"
+    "time":"Masa",
+    "lastMessage":"Last Message"
   },
   "ranks":{
     "you":"Anda",
@@ -171,7 +174,8 @@
     "roomsettings":"Tetapan bilik",
     "chatimages":"Gambar Chat",
     "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Panel Kawalan"
+    "controlpanel":"Panel Kawalan",
+    "showdeletedmessages":"Show Deleted Messages"
   },
   "vote":{
     "meh":"Meh",
@@ -190,9 +194,14 @@
   },
   "error":{
     "userNotFound":"Pengguna tidak dijumpai",
-    "unknownModeration":"Moderation tidak diketahui",
+    "alreadyInWaitList":"User %1 is already in waitlist",
+    "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"menu key tidak diketahui: %1",
-    "missingReason":"Hilang sebab",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
     "noLiteSupport":"Ini tidak disokong dalam plug&#179; Lite",
     "errorGettingPlaylistInfo":"Ralat untuk mendapatkan maklumat senarai main",
     "noPlaylistsFound":"Tiada senarai main dijumpai",

@@ -63,6 +63,8 @@
     "responses":{
       "alertson":"Soitetaan ääni seuraavissa sanoissa: %1",
       "alertsoff":"Ei enää soiteta ääntä asetetuissa sanoissa",
+      "badgeon":"Badges have been turned on",
+      "badgeoff":"Badges have been turned off",
       "nextsong":"Seuraava kappaleesi jonossa on %1 tekijältä %2",
       "isHistory":"Varoitus: Tämä kappale on historiassa. (%1 - %2)",
       "automute":{
@@ -142,7 +144,8 @@
     "disconnects":"Yhteyden katkeamiset",
     "lastDisconnect":"Viimeisin yhteydenkatkaisu",
     "lastPosition":"Sijainti",
-    "time":"Aika"
+    "time":"Aika",
+    "lastMessage":"Last Message"
   },
   "ranks":{
     "you":"Sinä",
@@ -171,7 +174,8 @@
     "roomsettings":"Huoneen Asetukset",
     "chatimages":"Keskustelun Kuvat",
     "twitchemotes":"Twich Emojit",
-    "controlpanel":"Ohjauspaneeli"
+    "controlpanel":"Ohjauspaneeli",
+    "showdeletedmessages":"Show Deleted Messages"
   },
   "vote":{
     "meh":"Meh",
@@ -190,9 +194,14 @@
   },
   "error":{
     "userNotFound":"Käyttäjää ei löydy",
-    "unknownModeration":"Tuntematon moderaatio",
+    "alreadyInWaitList":"User %1 is already in waitlist",
+    "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Tuntematon valikko avain: %1",
-    "missingReason":"Puuttuva syy",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
     "noLiteSupport":"Tätä ei tueta plug&#179; Lite",
     "errorGettingPlaylistInfo":"Virhe soittolistan infoa haettaessa",
     "noPlaylistsFound":"Soittolistoja ei löytynyt",
