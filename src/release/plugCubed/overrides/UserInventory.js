@@ -1,10 +1,14 @@
-define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/dialogs/panes/InventoryPane', 'plugCubed/Utils'], function($, OverrideHandler, InventoryPane, p3Utils) {
+define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/dialogs/panes/InventoryPane', 'plugCubed/Utils', 'plugCubed/ModuleLoader', 'plugCubed/bridges/Layout'], function($, OverrideHandler, InventoryPane, p3Utils, ModuleLoader, Layout) {
     if (p3Utils.runLite) return null;
 
-    var Layout = require('app/utils/Layout');
-    var UserInventory = require('app/views/user/inventory/UserInventory');
+    var UserInventory = ModuleLoader.getView({
+        id: 'user-inventory'
+    });
 
-    var TabMenu = require('app/views/user/inventory/TabMenu');
+    var TabMenu = ModuleLoader.getView({
+        isTemplate: true,
+        template: 'hbs!templates/user/inventory/TabMenu'
+    });
 
     var handler = OverrideHandler.extend({
         doOverride: function() {
@@ -51,4 +55,3 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/dialogs/panes
 
     return new handler();
 });
-

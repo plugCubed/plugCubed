@@ -1,6 +1,6 @@
 var plugCubedUserData;
 define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoader', 'plugCubed/bridges/Database', 'plugCubed/bridges/PopoutView'], function(Class, p3Lang, Lang, ModuleLoader, Database, PopoutView) {
-    var cleanHTMLMessage, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, PlugUI, runLite;
+    var cleanHTMLMessage, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, PlugUI;
 
     cleanHTMLMessage = function(input, disallow, extraAllow) {
         if (input == null) return '';
@@ -17,7 +17,6 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
     };
     developer = sponsor = ambassador = donatorDiamond = donatorPlatinum = donatorGold = donatorSilver = donatorBronze = [];
     special = {};
-    runLite = !requirejs.defined('app/base/Class');
 
     PlugUI = ModuleLoader.getModule({
         sfx: 'string'
@@ -41,7 +40,6 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
     });
 
     var handler = Class.extend({
-        runLite: runLite,
         proxifyImage: function(url) {
             if (this.startsWithIgnoreCase(url, 'http://')) {
                 return 'https://api.plugCubed.net/proxy/' + url;
@@ -321,7 +319,6 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
         getLastMessageTime: function(uid) {
             var time = Date.now() - this.getUserData(uid, 'lastChat', this.getUserData(uid, 'joinTime', Date.now()));
             var IgnoreCollection = require('plugCubed/bridges/IgnoreCollection');
-
             if (IgnoreCollection._byId[uid] === true)
                 return p3Lang.i18n('error.ignoredUser');
             return this.getRoundedTimestamp(time, true);

@@ -1,9 +1,11 @@
-define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], function($, OverrideHandler, p3Utils) {
-    if (p3Utils.runLite) return null;
+define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/ModuleLoader'], function($, OverrideHandler, p3Utils, ModuleLoader) {
 
     var WaitListRow, WaitListRowPrototype, originalFunction;
 
-    WaitListRow = require('app/views/room/user/WaitListRow');
+    WaitListRow = ModuleLoader.getView({
+        className: 'user',
+        func: 'onRemoveClick'
+    });
     WaitListRowPrototype = WaitListRow.prototype;
     originalFunction = WaitListRowPrototype.onRole;
 

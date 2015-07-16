@@ -1,11 +1,8 @@
-define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Utils'], function(TriggerHandler, Settings, p3Utils) {
-    var Database, PlaybackModel;
+define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/bridges/Database', 'plugCubed/ModuleLoader'], function(TriggerHandler, Settings, p3Utils, Database, ModuleLoader) {
 
-    if (!p3Utils.runLite) {
-        Database = require('app/store/Database');
-        PlaybackModel = require('app/models/PlaybackModel');
-    }
-
+    var PlaybackModel = ModuleLoader.getModule({
+        onElapsedChange: 'function'
+    });
     var handler = TriggerHandler.extend({
         trigger: 'advance',
         register: function() {
@@ -13,8 +10,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
             this.title = '';
             this.titleClean = '';
             this.titlePrefix = '';
-            if (!p3Utils.runLite)
-                PlaybackModel.on('change:streamDisabled change:volume change:muted', this.onStreamChange, this);
+            PlaybackModel.on('change:streamDisabled change:volume change:muted', this.onStreamChange, this);
             this.onStreamChange();
         },
         close: function() {
@@ -22,8 +18,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
             if (this.intervalID)
                 clearInterval(this.intervalID);
             document.title = p3Utils.getRoomName();
-            if (!p3Utils.runLite)
-                PlaybackModel.off('change:streamDisabled change:volume change:muted', this.onStreamChange, this);
+            PlaybackModel.off('change:streamDisabled change:volume change:muted', this.onStreamChange, this);
         },
         handler: function(data) {
             if (Settings.songTitle && data.media && data.media.title) {
@@ -53,7 +48,9 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
             document.title = this.title;
         },
         onStreamChange: function() {
-            this.handler({media: API.getMedia()});
+            this.handler({
+                media: API.getMedia()
+            });
         }
     });
 

@@ -135,7 +135,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 case 'notify-updates':
                 case 'notify-history':
                 case 'notify-songLength':
-                //case 'notify-unavailable':
+                case 'notify-unavailable':
                     var elem = $('.p3-s-' + a);
                     if (!elem.data('perm') || (API.hasPermission(undefined, elem.data('perm')) || p3Utils.isPlugCubedDeveloper())) {
                         var bit = elem.data('bit');
@@ -155,9 +155,15 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     var b = Settings.useRoomSettings[window.location.pathname.split('/')[1]];
                     b = !(b == null || b === true);
                     Settings.useRoomSettings[window.location.pathname.split('/')[1]] = b;
+                    if (b) RoomSettings.update();
                     RoomSettings.execute(b);
                     this.setEnabled('roomsettings', b);
                     break;
+                case 'showdeletedmessages':
+                  Settings.moderation.showDeletedMessages = !Settings.moderation.showDeletedMessages;
+                  this.setEnabled('showdeletedmessages', Settings.moderation.showDeletedMessages);
+                  console.log(Settings.moderation.showDeletedMessages);
+                  break;
                 case 'afktimers':
                     Settings.moderation.afkTimers = !Settings.moderation.afkTimers;
                     this.setEnabled('afktimers', Settings.moderation.afkTimers);
@@ -234,7 +240,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
 
             if (p3Utils.isPlugCubedDeveloper() || API.hasPermission(undefined, API.ROLE.BOUNCER)) {
                 container.append(GUIButton(Settings.moderation.afkTimers, 'afktimers', p3Lang.i18n('menu.afktimers')));
-                //container.append(GUIButton(Settings.moderation.showDeletedMessages, 'showdeletedmessages', p3Lang.i18n('menu.showdeletedmessages')))
+                container.append(GUIButton(Settings.moderation.showDeletedMessages, 'showdeletedmessages', p3Lang.i18n('menu.showdeletedmessages')))
             }
 
             if (RoomSettings.haveRoomSettings) {
@@ -270,7 +276,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     $('.p3-s-notify-songLength').find('span').text(p3Lang.i18n('notify.songLength', v));
                 });
                 container.append(GUIButton((Settings.notify & enumNotifications.SONG_HISTORY) === enumNotifications.SONG_HISTORY, 'notify-history', p3Lang.i18n('notify.history')).data('bit', enumNotifications.SONG_HISTORY).data('perm', API.ROLE.BOUNCER));
-                //container.append(GUIButton((Settings.notify & enumNotifications.SONG_UNAVAILABLE) === enumNotifications.SONG_UNAVAILABLE, 'notify-unavailable', p3Lang.i18n('notify.songUnavailable')).data('bit', enumNotifications.SONG_UNAVAILABLE).data('perm', API.ROLE.BOUNCER));
+                container.append(GUIButton((Settings.notify & enumNotifications.SONG_UNAVAILABLE) === enumNotifications.SONG_UNAVAILABLE, 'notify-unavailable', p3Lang.i18n('notify.songUnavailable')).data('bit', enumNotifications.SONG_UNAVAILABLE).data('perm', API.ROLE.BOUNCER));
                 container.append(GUIButton((Settings.notify & enumNotifications.SONG_LENGTH) === enumNotifications.SONG_LENGTH, 'notify-songLength', p3Lang.i18n('notify.songLength', Settings.notifySongLength)).data('bit', enumNotifications.SONG_LENGTH).data('perm', API.ROLE.BOUNCER));
                 container.append(songLengthSlider.$slider.css('left', 40));
             }
