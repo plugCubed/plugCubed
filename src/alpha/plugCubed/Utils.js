@@ -22,22 +22,23 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
         sfx: 'string'
     });
 
-    $.getJSON('https://d1rfegul30378.cloudfront.net/titles.json', /**
-     * @param {{developer: Array, sponsor: Array, special: Array, ambassador: Array, donator: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}, patreon: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}}} data
-     */
-    function(data) {
-        developer = data.developer ? data.developer : [];
-        sponsor = data.sponsor ? data.sponsor : [];
-        special = data.special ? data.special : {};
-        ambassador = data.ambassador ? data.ambassador : [];
-        if (data.donator) {
-            donatorDiamond = data.donator.diamond ? data.donator.diamond : [];
-            donatorPlatinum = data.donator.platinum ? data.donator.platinum : [];
-            donatorGold = data.donator.gold ? data.donator.gold : [];
-            donatorSilver = data.donator.silver ? data.donator.silver : [];
-            donatorBronze = data.donator.bronze ? data.donator.bronze : [];
-        }
-    });
+    $.getJSON('https://d1rfegul30378.cloudfront.net/titles.json',
+        /**
+         * @param {{developer: Array, sponsor: Array, special: Array, ambassador: Array, donator: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}, patreon: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}}} data
+         */
+        function(data) {
+            developer = data.developer ? data.developer : [];
+            sponsor = data.sponsor ? data.sponsor : [];
+            special = data.special ? data.special : {};
+            ambassador = data.ambassador ? data.ambassador : [];
+            if (data.donator) {
+                donatorDiamond = data.donator.diamond ? data.donator.diamond : [];
+                donatorPlatinum = data.donator.platinum ? data.donator.platinum : [];
+                donatorGold = data.donator.gold ? data.donator.gold : [];
+                donatorSilver = data.donator.silver ? data.donator.silver : [];
+                donatorBronze = data.donator.bronze ? data.donator.bronze : [];
+            }
+        });
 
     var handler = Class.extend({
         proxifyImage: function(url) {
@@ -175,6 +176,10 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
         getPlugCubedSpecial: function(uid) {
             if (!uid) uid = API.getUser().id;
             return special[uid];
+        },
+        html2text: function(html) {
+            if (!html) return;
+            return $('<div/>').html(html).text();
         },
         cleanHTML: function(msg, disallow, extraAllow) {
             return cleanHTMLMessage(msg, disallow, extraAllow);
@@ -383,11 +388,12 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
                 }
                 if (inbooth) voted = p3Lang.i18n('vote.djing');
 
-                var title = this.getAllPlugCubedRanks(user.id, true), message = $('<table>').css({
-                    width: '100%',
-                    color: '#CC00CC',
-                    'font-size': '1.02em'
-                });
+                var title = this.getAllPlugCubedRanks(user.id, true),
+                    message = $('<table>').css({
+                        width: '100%',
+                        color: '#CC00CC',
+                        'font-size': '1.02em'
+                    });
 
                 // Username
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.name') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.cleanTypedString(user.username)))));
@@ -438,9 +444,10 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
         },
         getAllUsers: function() {
             var table = $('<table>').css({
-                width: '100%',
-                color: '#CC00CC'
-            }), users = API.getUsers();
+                    width: '100%',
+                    color: '#CC00CC'
+                }),
+                users = API.getUsers();
             for (var i in users) {
                 if (users.hasOwnProperty(i)) {
                     var user = users[i];

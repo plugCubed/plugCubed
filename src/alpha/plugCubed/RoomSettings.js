@@ -1,4 +1,4 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/bridges/Context', 'plugCubed/bridges/Layout', 'plugCubed/ModuleLoader', 'lang/Lang'], function($, Class, p3Utils, p3Lang, Styles, Settings, Context, Layout, ModuleLoader, Lang) {
+define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/bridges/Context', 'plugCubed/bridges/Layout', 'plugCubed/ModuleLoader', 'lang/Lang'], function($, _, Class, p3Utils, p3Lang, Styles, Settings, Context, Layout, ModuleLoader, Lang) {
     var RoomModel, RoomLoader, handler, showMessage, oriLang, langKeys, ranks, that;
 
     /**
@@ -10,7 +10,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
      * @property {String|undefined} roomscript
      */
     var roomSettings;
-
     showMessage = false;
     oriLang = $.extend(true, {}, Lang);
     langKeys = $.map(oriLang, function(v, i) {
@@ -69,19 +68,28 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     }
 
     function parseDescription(description) {
+        var isRCS = false;
         if (description.indexOf('@p3=') > -1) {
             description = description.substr(description.indexOf('@p3=') + 4);
-            if (description.indexOf('\n') > -1)
-                description = description.substr(0, description.indexOf('\n'));
-            $.getJSON(description + '?_' + Date.now(), function(settings) {
-                roomSettings = settings;
-                showMessage = true;
-                that.execute();
-            }).fail(function() {
-                API.chatLog('Error loading Room Settings', true);
-            });
-            that.haveRoomSettings = true;
+        } else if (description.indexOf('@rcs=') > -1) {
+            description = description.substr(description.indexOf('@rcs=') + 5);
+            isRCS = true;
+        } else {
+            return;
         }
+        if (description.indexOf('\n') > -1)
+            description = description.substr(0, description.indexOf('\n'));
+        $.getJSON(p3Utils.html2text(description) + '?=' + Date.now(), function(settings) {
+            roomSettings = settings;
+            if (isRCS) {
+                roomSettings = that.convertRCSToPlugCubed(settings);
+            }
+            showMessage = true;
+            that.execute();
+        }).fail(function() {
+            API.chatLog('Error loading Room Settings', true);
+        });
+        that.haveRoomSettings = true;
     }
 
     handler = Class.extend({
@@ -101,12 +109,38 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         update: function() {
             parseDescription(p3Utils.cleanHTML(RoomModel.get('description')));
         },
+        /**
+        * Converts RCS CCS to P3 RSS Format. Written by ReAnna.
+        **/
+        convertRCSToPlugCubed: function(ccs) {
+            var rs = _.clone(ccs);
+            var colors = ccs.ccc;
+            var images = ccs.images;
+            if (ccs.css) {
+                rs.css = {
+                    import: [ccs.css]
+                };
+            }
+            if (colors) {
+                rs.colors || (rs.colors = {});
+                rs.colors.chat = _.omit(colors, 'rdj');
+                if (colors.rdj) rs.colors.chat.residentdj = colors.rdj;
+            }
+            if (images) {
+                rs.images = _.clone(images);
+                rs.images.background = images.background;
+                rs.images.playback = images.playback;
+                rs.images.chat = _.omit(images, 'background', 'playback', 'rdj');
+                if (images.rdj) rs.images.chat.residentdj = images.rdj;
+            }
+
+            return rs;
+        },
         execute: function() {
             var i, a, loadEverything;
             loadEverything = Settings.useRoomSettings[document.location.pathname.split('/')[1]] != null ? Settings.useRoomSettings[document.location.pathname.split('/')[1]] : true;
 
             this.clear();
-
             if (roomSettings != null) {
                 if (loadEverything) {
                     // colors
@@ -134,7 +168,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                         if (roomSettings.colors.footer != null && typeof roomSettings.colors.footer === 'string' && p3Utils.isRGB(roomSettings.colors.footer))
                             Styles.set('room-settings-footer', '.app-header { background-color: ' + p3Utils.toRGB(roomSettings.colors.footer) + '!important; }');
                     }
-
 
                     // css
                     if (roomSettings.css != null) {
