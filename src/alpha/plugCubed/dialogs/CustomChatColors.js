@@ -1,4 +1,8 @@
 define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColors', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/bridges/Context'], function($, Class, p3Lang, CCC, Settings, p3Utils, _$context) {
+    if (API.getUser().gRole = 3) {
+        $('.has-p3Role').height('116px')
+        $('.has-p3Role .user-id').css('top','94px')
+    }
     function GUIInput(id, text, defaultColor) {
         if (!Settings.colors[id])
             Settings.colors[id] = defaultColor;
