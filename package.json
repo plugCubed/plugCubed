@@ -1,11 +1,12 @@
 {
   "name": "plugCubed",
+  "description": "Grunt build setup for plugCubed",
   "version": "1.0.0",
   "author": "The plugCubed Team",
-  "description": "Grunt build setup for plugCubed",
   "devDependencies": {
     "closurecompiler": "^1.5.2",
-    "crx": "^3.0.2",
+    "crx": "^3.0.3",
+    "grunt": "^0.4.5",
     "grunt-aws": "^0.5.4",
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-requirejs": "^0.4.4",
@@ -13,7 +14,7 @@
     "grunt-mozilla-addon-sdk": "rpl/grunt-mozilla-addon-sdk",
     "grunt-requirejs-obfuscate": "plugCubed/grunt-requirejs-obfuscate#patch2",
     "grunt-text-replace": "^0.4.0",
-    "grunto": "^1.4.3",
+    "grunto": "^1.4.4",
     "yuicompressor": "^2.4.8"
   },
   "homepage": "https://plugcubed.net",
