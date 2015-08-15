@@ -1,5 +1,5 @@
 module.exports = function() {
-    this.include([
+    this.$run([
         'replace/linksAlpha',
         'requirejs/alpha',
         'replace/versionAlpha',

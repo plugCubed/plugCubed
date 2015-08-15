@@ -1,6 +1,6 @@
 module.exports = function() {
     if (this.devExists) {
-        this.include([
+        this.$run([
             'replace/linksDev',
             'requirejs/dev',
             'replace/versionDev',

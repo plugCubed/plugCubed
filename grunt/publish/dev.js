@@ -1,5 +1,5 @@
 module.exports = function() {
-    this.include([
+    this.$run([
         'execute/incrementBuildDev',
         'build/dev'
     ]).s3({

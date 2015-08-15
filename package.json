@@ -14,7 +14,7 @@
     "grunt-mozilla-addon-sdk": "rpl/grunt-mozilla-addon-sdk",
     "grunt-requirejs-obfuscate": "plugCubed/grunt-requirejs-obfuscate#patch2",
     "grunt-text-replace": "^0.4.0",
-    "grunto": "^1.4.4",
+    "grunto": "^2.0.2",
     "yuicompressor": "^2.4.8"
   },
   "homepage": "https://plugcubed.net",

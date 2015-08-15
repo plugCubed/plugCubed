@@ -1,5 +1,5 @@
 module.exports = function() {
-    this.include([
+    this.$run([
         'publish/release',
         'publish/alpha',
         'publish/dev',

@@ -1,5 +1,5 @@
 module.exports = function() {
-    this.include([
+    this.$run([
         'extensions/replaceVersionExtensions',
         'execute/extension',
         'extensions/packFirefox'

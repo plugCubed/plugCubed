@@ -1,5 +1,5 @@
 module.exports = function() {
-    this.include([
+    this.$run([
         'replace/linksRelease',
         'requirejs/release',
         'replace/versionRelease',
