@@ -63,8 +63,8 @@
     "responses":{
       "alertson":"Zvuk se přehraje při následujících slovech: %1",
       "alertsoff":"Zvuk již nebude při určených slovech přehráván",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"Uživatelské odznaky zapnuty",
+      "badgeoff":"Uživatelské odznaky vypnuty",
       "nextsong":"Vaše další skladba bude %1 od %2",
       "isHistory":"Pozor: Tato skladba je stále v historii (%1 z %2)",
       "automute":{
@@ -145,7 +145,7 @@
     "lastDisconnect":"Poslední odpojení",
     "lastPosition":"Pozice",
     "time":"Čas",
-    "lastMessage":"Last Message"
+    "lastMessage":"Poslední zpráva"
   },
   "ranks":{
     "you":"Ty",
@@ -175,7 +175,7 @@
     "chatimages":"Obrázky v chatu",
     "twitchemotes":"Twitch smajlíky",
     "controlpanel":"Ovládací panel",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Zobrazit odstraněné zprávy"
   },
   "vote":{
     "meh":"Meh",
@@ -194,14 +194,14 @@
   },
   "error":{
     "userNotFound":"Uživatel nenalezen",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Uživatel %1 je již ve frontě",
+    "notInWaitList":"Uživatel %1 není ve frontě",
     "unknownMenuKey":"Neznámý klíč menu: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Syntaxe příkazu pro přidání uživatele není platná. Použití: \/add @uživatel",
+    "invalidBanSyntax":"Syntaxe příkazu zabanování uživatele není platná. Použití: \/ban @uživatel nebo \/ban @uživatel::doba::důvod",
+    "invalidBanTime":"Zadaný čas %1 je neplatný. Platné hodnoty jsou 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Syntaxe příkazu pro odstranění uživatele není platná. Použití: \/remove @uživatel",
+    "invalidWhoisSyntax":"Syntaxe whois příkazu není platná. Použití: \/whois @uživatel",
     "noLiteSupport":"Tato možnost není podporována v plug&#179; Lite",
     "errorGettingPlaylistInfo":"Chyba při získávání informací o playlistu",
     "noPlaylistsFound":"Nebyl nalezen žádný playlist",

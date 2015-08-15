@@ -63,8 +63,8 @@
     "responses":{
       "alertson":"Spelar ljud på följande ord: %1",
       "alertsoff":"Spelar inte längre ljud på specifika ord",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"Märken har satts igång",
+      "badgeoff":"Märken har stängts av",
       "nextsong":"Din nästa köade sång är %1 av %2",
       "isHistory":"Varning: Den här låten finns fortfarande i historiken (%1 av %2)",
       "automute":{
@@ -145,7 +145,7 @@
     "lastDisconnect":"Senaste gången användaren lämnade",
     "lastPosition":"Position",
     "time":"Tid",
-    "lastMessage":"Last Message"
+    "lastMessage":"Senaste Meddelandet"
   },
   "ranks":{
     "you":"Du",
@@ -175,7 +175,7 @@
     "chatimages":"Chatt bilder",
     "twitchemotes":"Twitch Figurer",
     "controlpanel":"Kontrollpanel",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Visa Borttagna Meddelanden"
   },
   "vote":{
     "meh":"Meh",
@@ -194,11 +194,11 @@
   },
   "error":{
     "userNotFound":"Användaren hittades inte",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Användaren %1 är redan med på väntelistan",
+    "notInWaitList":"Användaren %1 är inte med på väntelistan",
     "unknownMenuKey":"Okänd menyknapp: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidAddSyntax":"Ogiltig syntax för att lägga till kommando. Användning: \/add @user",
+    "invalidBanSyntax":"Ogiltig syntax för banningskommando. Användning: \/ban @användare eller \/ban @användare::time::anledning",
     "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
     "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",

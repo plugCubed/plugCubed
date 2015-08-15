@@ -63,8 +63,8 @@
     "responses":{
       "alertson":"Mache ein Geräusch bei folgenden Wörtern: %1",
       "alertsoff":"Mache kein Gerüsch bei spezifischen Wörten mehr",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"Abzeichen wurden eingeschaltet",
+      "badgeoff":"Abzeichen wurden ausgeschaltet",
       "nextsong":"Dein nächstes Lied ist %1 von %2",
       "isHistory":"Warnung: Dieser Song ist noch im Verlauf (%1 von %2)",
       "automute":{
@@ -145,7 +145,7 @@
     "lastDisconnect":"Letzte Unterbrechung",
     "lastPosition":"Position",
     "time":"Zeit",
-    "lastMessage":"Last Message"
+    "lastMessage":"Letzte Nachricht"
   },
   "ranks":{
     "you":"Du",
@@ -175,7 +175,7 @@
     "chatimages":"Chat-Bilder",
     "twitchemotes":"Twitch Emotes",
     "controlpanel":"Einstellungen",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Gelöschte Nachrichten anzeigen"
   },
   "vote":{
     "meh":"Meh",
@@ -194,14 +194,14 @@
   },
   "error":{
     "userNotFound":"Benutzer konnte nicht gefunden werden.",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Benutzer %1 ist bereits in der Warteliste",
+    "notInWaitList":"Benutzer %1 ist nicht in der Warteliste",
     "unknownMenuKey":"Unbekannte Menü-Taste: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Ungültige Syntax des \"add\"-Befehls. Syntax: \/add @user",
+    "invalidBanSyntax":"Ungültige Syntax für \"ban\"-Befehl. Syntax: \/ban @user oder \/ban @Nutzer::Uhrzeit::Grund",
+    "invalidBanTime":"Die angegebene Zeit %1 ist ungültig. Gültige Zeiten sind 60, 1, 24, 1440,-1",
+    "invalidRemoveSyntax":"Ungültige Syntax für den \"remove\"-Befehl. Syntax: \/remove @Nutzer",
+    "invalidWhoisSyntax":"Ungültige Syntax für für den \"whois\"-Befehl. Syntax: \/whois @Nutzer",
     "noLiteSupport":"Das ist in plug&#179; Lite nicht unterstützt",
     "errorGettingPlaylistInfo":"Error beim Laden der Playlist Informationen",
     "noPlaylistsFound":"Keine Playlist gefunden",

@@ -63,8 +63,8 @@
     "responses":{
       "alertson":"Soitetaan ääni seuraavissa sanoissa: %1",
       "alertsoff":"Ei enää soiteta ääntä asetetuissa sanoissa",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"Merkit ovat käytössä",
+      "badgeoff":"Merkit on poistettu käytöstä",
       "nextsong":"Seuraava kappaleesi jonossa on %1 tekijältä %2",
       "isHistory":"Varoitus: Tämä kappale on historiassa. (%1 - %2)",
       "automute":{
@@ -145,7 +145,7 @@
     "lastDisconnect":"Viimeisin yhteydenkatkaisu",
     "lastPosition":"Sijainti",
     "time":"Aika",
-    "lastMessage":"Last Message"
+    "lastMessage":"Viimeisin viesti"
   },
   "ranks":{
     "you":"Sinä",
@@ -175,7 +175,7 @@
     "chatimages":"Keskustelun Kuvat",
     "twitchemotes":"Twich Emojit",
     "controlpanel":"Ohjauspaneeli",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Näytä poistetut viestit"
   },
   "vote":{
     "meh":"Meh",
@@ -194,14 +194,14 @@
   },
   "error":{
     "userNotFound":"Käyttäjää ei löydy",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Käyttäjä %1 on jo odotuslistalla",
+    "notInWaitList":"Käyttäjä %1 ei ole odotuslistalla",
     "unknownMenuKey":"Tuntematon valikko avain: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Virheellinen syntaksi add-komennolle. Käyttö: \/add @user",
+    "invalidBanSyntax":"Virheellinen syntaksi ban-komennolle. Käyttö: \/ban @user tai \/ban @user::time::syy",
+    "invalidBanTime":"Määritetty aika, %1 on virheellinen. Kelvolliset ajat ovat 60, 1,24, 1440, -1",
+    "invalidRemoveSyntax":"Virheellinen syntaksi remove-komennolle. Käyttö: \/remove @user",
+    "invalidWhoisSyntax":"Virheellinen syntaksi whois-komennolle. Käyttö: \/whois @user",
     "noLiteSupport":"Tätä ei tueta plug&#179; Lite",
     "errorGettingPlaylistInfo":"Virhe soittolistan infoa haettaessa",
     "noPlaylistsFound":"Soittolistoja ei löytynyt",

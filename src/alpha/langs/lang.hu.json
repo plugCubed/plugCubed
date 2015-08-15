@@ -1,5 +1,5 @@
 {
-  "running":"Jelenleg fut plug&#179; verzió %1",
+  "running":"Jelenleg a plug&#179; %1 verziója fut",
   "runningLite":"A Plug&#179; Lite verziója fut!",
   "runningLiteInfo":"Néhány funkció nem fog működni.",
   "commandsHelp":"Használd a '\/commands' parancsot hogy lásd a chat parancsokat.",
@@ -63,8 +63,8 @@
     "responses":{
       "alertson":"Hang lejátszása bizonyos szavaknál: %1",
       "alertsoff":"Már nem lesz hang lejátszva bizonyos szavaknál",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"A jelvények be lettek kapcsolva",
+      "badgeoff":"A jelvények ki lettek kapcsolva",
       "nextsong":"A sorban álló következő számod címe: %1 készítője: %2",
       "isHistory":"Figyelmeztetés: Ez a szám még mindig szerepel az előzményekben (%1. %2-ből)",
       "automute":{
@@ -145,7 +145,7 @@
     "lastDisconnect":"Utolsó Kilépés",
     "lastPosition":"Pozíció",
     "time":"Idő",
-    "lastMessage":"Last Message"
+    "lastMessage":"Utolsó Üzenet"
   },
   "ranks":{
     "you":"Te",
@@ -175,7 +175,7 @@
     "chatimages":"Chat-képek",
     "twitchemotes":"Twitch smiley-k",
     "controlpanel":"Irányítópult",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Törölt Üzenetek Megjelenítése"
   },
   "vote":{
     "meh":"Nem Tetszik",
@@ -194,14 +194,14 @@
   },
   "error":{
     "userNotFound":"Felhasználó nem található",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"%1 felhasználó már a várólistán van",
+    "notInWaitList":"%1 felhasználó nincs várólistán",
     "unknownMenuKey":"Ismeretlen menü gomb: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Érvénytelen szintaxis a 'hozzáad' paranccsal. Használat: \/add @felhasználó",
+    "invalidBanSyntax":"Érvénytelen szintaxis a 'kitiltás' paranccsal. Használat: \/ban @felhasználó VAGY \/ban @felhasználó::time::ok",
+    "invalidBanTime":"A meghatározott idő, %1 érvénytelen. Érvényes idők a 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Érvénytelen szintaxis az 'eltávolít' paranccsal. Használat: \/remove @felhasználó",
+    "invalidWhoisSyntax":"Érvénytelen szintaxis a 'ki' paranccsal. Használat: \/whois @felhasználó",
     "noLiteSupport":"Ez nincs támogatva a plug&#179; Lite-ban",
     "errorGettingPlaylistInfo":"Hiba a lejátszási lista adatainak lekérése során",
     "noPlaylistsFound":"Nem található lejátszási lista",

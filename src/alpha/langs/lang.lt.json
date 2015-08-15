@@ -1,6 +1,6 @@
 {
   "running":"Naudojama plug&#179; versija %1",
-  "runningLite":"Running plug&#179; in Lite!",
+  "runningLite":"Paleistas plug&#179; Lite!",
   "runningLiteInfo":"Gali neveikti kelios funkcijos.",
   "commandsHelp":"Rašykite \"\/commands\" kad pamatytumėt paaiškintas pokalbio kambario komandas.",
   "autorespond":{
@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 Auto-priemimas nebuvo įjungtas"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Suspausti",
+    "enlarge":"Padidinti"
   },
   "commands":{
     "header":"Vartotojo info",
@@ -29,10 +29,10 @@
       "on":"įjungta",
       "off":"išjungta",
       "reason":"priežastis",
-      "number":"number"
+      "number":"skaičius"
     },
     "descriptions":{
-      "join":"Vartotojo Prisijungimas",
+      "join":"Stoti į DJ eilę",
       "leave":"Vartotojo Išėjimas",
       "whoami":"gauk pačio savęs informacija",
       "mute":"nustatyti garsą į 0",
@@ -43,7 +43,7 @@
       "alertson":"sugrok garsą kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
       "alertsoff":"sustok groti garsus kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
       "grab":"pridėti esamą dainą į jūsų pasirinktą grojaraštį",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"slėpti\/rodyti narių ženkliukus pokalbiuose",
       "getpos":"gauk dabartinę pozicija laukimo eilėje",
       "version":"rodo versijos numeri",
       "commands":"parodo šį sąrašą",
@@ -58,57 +58,57 @@
       "remove":"išmeta nustatytus vartotojus iš dj pulto\/laukimo eilės",
       "whois all":"parodo vartotojo ID ir vardą kiekvieno esančio kambaryje",
       "banall":"užblokuoja visus vartotojus esančius kambaryje",
-      "status":"shows status of plug servers"
+      "status":"Rodyti plug serverių informaciją"
     },
     "responses":{
-      "alertson":"Playing sound on the following words: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "alertson":"Grojamas garsas ant šių žodžių: %1",
+      "alertsoff":"Nebegrojamas garsas ant specifinių žodžių",
+      "badgeon":"Ženkliukai įjungti",
+      "badgeoff":"Ženkliukai išjungti",
+      "nextsong":"Tavo kita daina yra %1 by %2",
+      "isHistory":"Įspėjimas! Ši daina tebėra istorijoje (%1 of %2)",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "automuted":"%1 užtildytas.",
+        "registered":"%1 Užregistruota automatiškai uždrausti groti ateityje.",
+        "unregistered":"%1 pašalinta iš automute sąrašo."
       },
       "status":{
-        "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
+        "rest":"Trukmė: %1 %2 [%3ms]",
+        "socket":"Lizdas: %1 %2 [%3ms]"
       }
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "boothAvailable":"Prisijunkite į waitlistą dabar, ir iš karto grosite!",
+    "alreadyDJ":"Jūs jau grojate!",
+    "waitListTime":"Jūsų vieta waitliste %1 of %2, jūs grosite maždaug po %3!",
+    "joinTime":"Prisijunkite į waitlistą dabar, ir iš karto grosite maždaug po %1!"
   },
   "notify":{
     "header":"Vartotojo info",
     "join":"Vartotojo Prisijungimas",
     "leave":"Vartotojo Išėjimas",
-    "grab":"User Grab",
+    "grab":"Narys Pridėjo",
     "meh":"Nepatinka",
     "stats":"Dainų nustatymai",
     "updates":"Dainu atnaujinimai",
     "history":"Dainų istorija",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Daina negalima",
     "songLength":"Dainos trukmė minutėmis",
     "message":{
-      "grab":"grabbed %1 - %2",
+      "grab":"pridėjo %1 - %2",
       "stats":"Statistika: %1 palaikymai -- %2 mehs -- %3 pasiėmimai",
       "updates":"Dabar Groja: %1 by %2<br \/>Kas leidžia dainą: %3",
       "meh":"%1 nepatinka ši daina",
-      "join":"joined the room",
-      "leave":"left the room",
+      "join":"prisijungė",
+      "leave":"išėjo",
       "history":"Daina rasta praeityje (%1 of %2)",
       "historySkipped":"Daina rasta praeityje (%1 of %2), bet buvo praleista",
       "songLength":"Daina ilgesnė negu %1 minutės",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"Daina privati",
+      "songNotFound":"Daina nerasta",
+      "songEmbed":"Daina buvo išjungta",
+      "songStreamable":"Daina nepalaikoma"
     }
   },
   "info":{
@@ -145,7 +145,7 @@
     "lastDisconnect":"Paskutinis atsijungimas",
     "lastPosition":"Pozicija",
     "time":"Laikas",
-    "lastMessage":"Last Message"
+    "lastMessage":"Paskutinė žinutė"
   },
   "ranks":{
     "you":"Jūs",
@@ -170,17 +170,17 @@
     "autorespond":"Išjunkite \"Aš nesu prie klaviatūros\" Auto-atsiliepimą",
     "notify":"Pranešimai",
     "afktimers":"\"Aš nesu prie klaviatūros\"  Laikai",
-    "etatimer":"ETA Timer",
+    "etatimer":"ETA laikmatis",
     "roomsettings":"Kambario nustatymai",
     "chatimages":"Pokalbio žinutės",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel",
-    "showdeletedmessages":"Show Deleted Messages"
+    "twitchemotes":"Twitch paveiksliukai",
+    "controlpanel":"Valdymo skydas",
+    "showdeletedmessages":"Rodyti ištrintas žinutes"
   },
   "vote":{
     "meh":"Nepatinka",
     "woot":"Patinka",
-    "grab":"Grab",
+    "grab":"Pridėti",
     "undecided":"Nenuspręsta",
     "djing":"DJ'avimas"
   },
@@ -194,18 +194,18 @@
   },
   "error":{
     "userNotFound":"Vartotojas nerastas",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Narys %1 jau yra waitliste",
+    "notInWaitList":"Narys %1 nėra waitliste",
     "unknownMenuKey":"Nežinomas meniu mygtukas: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Neleistina sintaksė pridėti komandą. Naudojimas: \/add @user",
+    "invalidBanSyntax":"Neleistina sintaksė ban komandai. Naudojimas: \/ban @user arba \/ban @user::time::reason",
+    "invalidBanTime":"Nustatytas laikas %1 yra neleistinas. Galimi laikai yra 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Neleistina sintaksė šalinti komandai. Naudojimas: \/remove @user",
+    "invalidWhoisSyntax":"Neleistina sintaksė whois komandai. Naudojimas: \/whois @user",
     "noLiteSupport":"Tai nėra palaikoma plug&#179; Lengvasis",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
-    "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
-    "noNextSong":"You have no queued song"
+    "errorGettingPlaylistInfo":"Klaida gaunant grojaraščio informacija",
+    "noPlaylistsFound":"Grojaraštis nerastas",
+    "yourActivePlaylistIsFull":"Jūsų grojaraštis pilnas",
+    "noNextSong":"Jūs neturite jokios dainos eilėje"
   }
 }

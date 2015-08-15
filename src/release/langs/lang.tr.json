@@ -1,23 +1,23 @@
 {
-  "running":"Plug³ sürümü %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
-  "commandsHelp":"genişletilmiş sohbet komutları görmek için '\/commands' yazın sobet'e",
+  "running":"Plug&#179; %1 sürümünde çalışıyor",
+  "runningLite":"Plug&#179; hafif versiyonda çalışıyor!",
+  "runningLiteInfo":"Bazı özellikler çalışmaz.",
+  "commandsHelp":"Genişletilmiş sohbet komutları görmek için '\/commands' kullanın",
   "autorespond":{
-    "default":"Ben klavye başında degilim",
-    "disable":"AFK-konuşmaya çalışmamasının devre dışı bırakma",
-    "nextIn":"%1 Öğesinden sonraki AFK çalışmamasının gönderilecektir",
+    "default":"Ben klavye başında değilim.",
+    "disable":"AFK otocevabı devre dışı bırak",
+    "nextIn":"Sonraki AFK otocevap %1 de gönderilicektir",
     "next":"AFK çalışmamasının sonraki anma üstünde",
-    "commandDisable":"%1 otomatik giriş devre dışı",
-    "commandNotEnabled":"%1 autojoin kullanılamaz"
+    "commandDisable":"%1 AFK mesajı devre dışı",
+    "commandNotEnabled":"%1 AFK ileti etkin değil"
   },
   "autojoin":{
     "commandDisable":"%1 otomatik giriş devre dışı",
-    "commandNotEnabled":"%1 autojoin kullanılamaz"
+    "commandNotEnabled":"%1 Otomatik giriş kullanılamaz"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Küçült",
+    "enlarge":"Genişlet"
   },
   "commands":{
     "header":"plug³ komutları",
@@ -29,7 +29,7 @@
       "on":"Açık",
       "off":"Kapalı",
       "reason":"Neden",
-      "number":"number"
+      "number":"Rakam"
     },
     "descriptions":{
       "join":"Kullanıcı Girdi.",
@@ -37,13 +37,13 @@
       "whoami":"kendi bilgi almak",
       "mute":"Ses 0",
       "automute":"gelecekteki şarkıları otomatik olarak kapatmak için şu anda yürütülen şarkı kaydedin",
-      "unmute":"Son birim için Ses ayarı",
+      "unmute":"Sesi son sese ayarla",
       "nextsong":"Sonraki şarkı çalma ve geçmişinde sanki görüntülemek",
       "refresh":"yenileme video",
       "alertson":"tanımlı kelimeleri sohbette yazılan her ses çalmak",
       "alertsoff":"tanımlanan sözcükleri yazılır zaman sesi oynatmayı durdurmak sohbet",
-      "grab":"add current song to your selected playlist",
-      "badges":"show\/hide the user badges in chat",
+      "grab":"Şu an ki şarkıyı seçili oynatma listenize ekleyin",
+      "badges":"Kullanıcı rozetlerini sohbette göster\/gizle",
       "getpos":"Geçerli bekleme konumuna getir",
       "version":"sürüm numarasını görüntüle",
       "commands":"Liste olarak göster",
@@ -52,25 +52,25 @@
       "skip":"Geçerli şarkıyı atlayın",
       "ban":"hedeflenen kullanıcıyı atar",
       "lockskip":"kilitleri DJ kabini, atlayabilir ve daha sonra kilidini açar",
-      "lock":"kilitle DJ kabini",
-      "unlock":"DJ kabini kilidini açar",
-      "add":"hedeflenen kullanıcı için dj kabini\/bekleme listesine ekler",
-      "remove":"dj kabin\/bekleme listesine hedeflenen kullanıcıdan kaldırır",
-      "whois all":"kullanıcı kimliği ve odadaki tüm kullanıcıların kullanıcı adınızı verir",
-      "banall":"Odadaki tüm kullanıcılar yasakları",
-      "status":"shows status of plug servers"
+      "lock":"Dj kabinini kilitler",
+      "unlock":"DJ kabininin kilidini açar",
+      "add":"hedeflenen kullanıcıyı dj kabini\/bekleme listesine ekler",
+      "remove":"hedeflenen kullanıcıyı dj kabin\/bekleme listesinden kaldırır",
+      "whois all":"Odadaki bütün kullanıcıların kullanıcı kimliklerini ve kullanıcı adlarını verir",
+      "banall":"Odadaki tüm kullanıcıları yasaklar",
+      "status":"Plug sunucularının durumunu gösterir"
     },
     "responses":{
-      "alertson":"Playing sound on the following words: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "alertson":"Aşağıdaki sözcükleri ses çalma: %1",
+      "alertsoff":"Uzun belli sözcüklerde ses çalma",
+      "badgeon":"Rozetler açıldı",
+      "badgeoff":"Rozetler kapatıldı",
+      "nextsong":"Bir sonraki sıraya şarkı %1 ile %2",
+      "isHistory":"Uyarı: Bu şarkı geçmişte hala var (%1 of %2)",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "automuted":"%1 otomatik susturuldu.",
+        "registered":"%1 gelecekteki çalış otomatik sessizdeki kayıtlı.",
+        "unregistered":"%1 oto sessiz kayıt defterinden kaldırılır."
       },
       "status":{
         "rest":"REST: %1 %2 [%3ms]",
@@ -79,36 +79,36 @@
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "boothAvailable":"Eğer bekleme sırasına şimdi katılırsan, şu süre içinde Dj olursun!",
+    "alreadyDJ":"Zaten DJ'lik yapıyorsunuz!",
+    "waitListTime":"Şu an bekleme sırasındasın, %3 içinde Dj olucaksın! %1%2",
+    "joinTime":"Eğer bekleme sırasına şimdi katılırsan %1 içinde Djlik yapıyor olucaksın!"
   },
   "notify":{
-    "header":"Kullanıcı bilgileri",
+    "header":"Sohbet bildirimleri",
     "join":"Kullanıcı Girdi.",
     "leave":"Kullanıcı Odayı terk etti.",
-    "grab":"User Grab",
-    "meh":"User Mehs",
+    "grab":"Kullanıcının kaptıkları",
+    "meh":"Kullanıcı Iyyları",
     "stats":"Şarkı istatistikleri",
     "updates":"Şarkı güncellemeleri",
     "history":"Oynatılan şarkılar",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Şarkı kullanılamaz",
     "songLength":"Şarkı %1 dakikadan daha uzun",
     "message":{
-      "grab":"grabbed %1 - %2",
+      "grab":"Kapıldı %1-%2",
       "stats":"İstatistikler: %1 Begenilme -- %2 Beğenilmeme --%3 listeye eklenme",
       "updates":"Şimdi Yürütülüyor: %1 by %2 < br \/ > şarkıyı acan: %3",
       "meh":"%1 meh bu parçada vardı",
-      "join":"joined the room",
-      "leave":"left the room",
+      "join":"odaya katıldı",
+      "leave":"odadan ayrıldı",
       "history":"Şarkı geçmiş (%1 of %2) ",
       "historySkipped":"Şarkı tarihinin (%1 of %2), ama son şarkıda atlandı",
       "songLength":"Şarkı %1 dakikadan daha uzun",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"şarkı gizlidir",
+      "songNotFound":"şarkı bulunamadı",
+      "songEmbed":"Şarkı devre dışı katıştırma etti",
+      "songStreamable":"şarkı yayınlanmayı desteklemiyor"
     }
   },
   "info":{
@@ -118,15 +118,15 @@
     "specialTitles":{
       "developer":"plug³ geliştirici",
       "sponsor":"plug³ sponsoru",
-      "ambassador":"plug&#179; Ambassador",
-      "donatorDiamond":"plug&#179; Diamond Donator",
-      "donatorPlatinum":"plug&#179; Platinum Donator",
+      "ambassador":"plug&#179; Büyükelçi",
+      "donatorDiamond":"plug&#179; Elmas Bağışçı",
+      "donatorPlatinum":"plug&#179; Platinyum Bağışçı",
       "donatorGold":"plug&#179; Altın Donator",
-      "donatorSilver":"plug&#179; Silver Donator",
-      "donatorBronze":"plug&#179; Bronze Donator",
-      "special":"plug&#179; Special Supporter - %1"
+      "donatorSilver":"Plug&#179; Gümüş Bağışçı",
+      "donatorBronze":"Plug&#179; Bronz Bağışçı",
+      "special":"Plug&#179; Özel destekçi -%1"
     },
-    "id":"ID",
+    "id":"Kimlik",
     "rank":"Sırası",
     "joined":"Katıldıgı Zaman",
     "status":"Durum",
@@ -141,11 +141,11 @@
     "inWaitlist":"%1\/ %2 'bekleme listesinde",
     "userDjing":"%1 şu anda DJlik",
     "userNextDJ":"%1 Bir sonraki DJ",
-    "disconnects":"Disconnects",
+    "disconnects":"Bağlantı kesintisi",
     "lastDisconnect":"Son Disconnect",
     "lastPosition":"Pozisyon",
     "time":"Zaman",
-    "lastMessage":"Last Message"
+    "lastMessage":"Son mesaj"
   },
   "ranks":{
     "you":"Sen",
@@ -170,17 +170,17 @@
     "autorespond":"AFK Otomatik Yanıt",
     "notify":"Bildirimler",
     "afktimers":"AFK zamanlayıcı",
-    "etatimer":"ETA Timer",
+    "etatimer":"ETA zamanlayıcısı",
     "roomsettings":"Oda Ayarları",
     "chatimages":"Sohbet görüntüleri",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel",
-    "showdeletedmessages":"Show Deleted Messages"
+    "twitchemotes":"Twitch ifadeleri",
+    "controlpanel":"Kontrol paneli",
+    "showdeletedmessages":"Silinen mesajları göster"
   },
   "vote":{
     "meh":"Kötü",
     "woot":"Dans",
-    "grab":"Grab",
+    "grab":"Kap",
     "undecided":"Kararsız",
     "djing":"DJlik"
   },
@@ -194,18 +194,18 @@
   },
   "error":{
     "userNotFound":"Kullanıcı bulunamadı",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Kullanıcı %1 zaten bekleme listesinde",
+    "notInWaitList":"Kullanıcı %1 bekleme listesinde değil",
     "unknownMenuKey":"Bilinmeyen menü tuşu: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Komut eklemek için geçersiz sözdizimi. Kullanımı: \/ add @user",
+    "invalidBanSyntax":"Engelleme komutu için geçersiz sözdizimi. Kullanımı: \/ ban @user ya da \/ban @user::time::reason",
+    "invalidBanTime":"Belirtilen %1 zamanı geçerli değildir. Geçerli olan zamanlar 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Kaldırmak için geçersiz sözdizimi. Kullanımı: \/remove @user",
+    "invalidWhoisSyntax":"Whois komutu için geçersiz sözdizimi. Kullanımı \/whois @user",
     "noLiteSupport":"Burada plug³ Lite desteklenmiyor",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
-    "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
-    "noNextSong":"You have no queued song"
+    "errorGettingPlaylistInfo":"Çalma listesi bilgisi alınırken hata oluştu",
+    "noPlaylistsFound":"Hiç bir çalma listesi bulunamadı",
+    "yourActivePlaylistIsFull":"Aktif çalma listen dolu",
+    "noNextSong":"Sıraya eklediğiniz şarkınız yok"
   }
 }

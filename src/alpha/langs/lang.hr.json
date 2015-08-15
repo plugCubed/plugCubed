@@ -63,8 +63,8 @@
     "responses":{
       "alertson":"Reprodukcija zvuka pri sljedećim riječima: %1",
       "alertsoff":"Zvuk se više ne reproducira pri određenim riječima.",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"Značke su uključene.",
+      "badgeoff":"Značke su isključene.",
       "nextsong":"Vaša sljedeća pjesma na čekanju je %1 izvođača %2.",
       "isHistory":"Upozorenje: ova je pjesma još uvijek u povijesti (%1. od %2).",
       "automute":{
@@ -93,7 +93,7 @@
     "stats":"Statistika o pjesmi",
     "updates":"Ažuriranja pjesama",
     "history":"Pjesme u povijesti",
-    "songUnavailable":"Pjesma nije dostupna.",
+    "songUnavailable":"Pjesma nije dostupna",
     "songLength":"Duljina pjesme (%1 min)",
     "message":{
       "grab":"je dodao\/la %1 - %2.",
@@ -145,7 +145,7 @@
     "lastDisconnect":"Posljednje odspajanje",
     "lastPosition":"Položaj",
     "time":"Vrijeme",
-    "lastMessage":"Last Message"
+    "lastMessage":"Posljednja poruka"
   },
   "ranks":{
     "you":"Vi",
@@ -175,7 +175,7 @@
     "chatimages":"Slike u razgovoru",
     "twitchemotes":"Uključivanje\/isključivanje emojija",
     "controlpanel":"Nadzorna ploča",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Prikaz obrisanih poruka"
   },
   "vote":{
     "meh":"Meh",
@@ -194,14 +194,14 @@
   },
   "error":{
     "userNotFound":"Korisnik nije pronađen.",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Korisnik %1 već je na popisu čekanja.",
+    "notInWaitList":"Korisnik %1 nije na popisu čekanja.",
     "unknownMenuKey":"Nepoznati ključ izbornika: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Nevažeća sintaksa za naredbu dodavanja. Korištenje: \/add @korisnik",
+    "invalidBanSyntax":"Nevažeća sintaksa za naredbu zabrane pristupa. Korištenje: \/ban @korisnik ili \/ban @korisnik::vrijeme::razlog",
+    "invalidBanTime":"Navedeno vrijeme %1 nije važeće. Važeća su vremena 60, 1, 24, 1440, -1.",
+    "invalidRemoveSyntax":"Nevažeća sintaksa za naredbu uklanjanja. Korištenje: \/remove @korisnik",
+    "invalidWhoisSyntax":"Nevažeća sintaksa za naredbu \"tko je\". Korištenje: \/whois @korisnik",
     "noLiteSupport":"Ovo nije podržano na plug&#179;-u Lite.",
     "errorGettingPlaylistInfo":"Greška pri dobivanju informacija o popisu za reprodukciju.",
     "noPlaylistsFound":"Nema pronađenih popisa za reprodukciju.",

@@ -63,8 +63,8 @@
     "responses":{
       "alertson":"Berbunyi pada perkataan yang berikut: %1",
       "alertsoff":"Tidak lagi berbunyi pada perkataan yang tertentu",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"Lencana telah dihidupkan",
+      "badgeoff":"Lencana telah ditutupkan",
       "nextsong":"Lagu seterusnya anda adalah %1 dari %2",
       "isHistory":"Amaran: lagu ini masih berada dalam DJ sejarah (%1 dari %2)",
       "automute":{
@@ -145,7 +145,7 @@
     "lastDisconnect":"Disconnect yang terakhir",
     "lastPosition":"Kedudukan",
     "time":"Masa",
-    "lastMessage":"Last Message"
+    "lastMessage":"Mesej terakhir"
   },
   "ranks":{
     "you":"Anda",
@@ -175,7 +175,7 @@
     "chatimages":"Gambar Chat",
     "twitchemotes":"Twitch Emotes",
     "controlpanel":"Panel Kawalan",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Menunjukkan Mesej dipadamkan"
   },
   "vote":{
     "meh":"Meh",
@@ -194,14 +194,14 @@
   },
   "error":{
     "userNotFound":"Pengguna tidak dijumpai",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Pengguna %1 telah berada dalam senarai menunggu",
+    "notInWaitList":"Pengguna %1 tidak berada dalam senarai menunggu",
     "unknownMenuKey":"menu key tidak diketahui: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Sintaks tidak sah untuk arahan tambahan. Cara: \/add @pengguna",
+    "invalidBanSyntax":"Sintaks tidak sah untuk arahan Melarang. Cara: \/ban @pengguna atau \/ban @pengguna::time::Sebab",
+    "invalidBanTime":"Masa yang dinyatakan, %1 tidak sah. Masa yang sah adalah 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Sintaks tidak sah untuk arahan mengeluarkan. Cara: \/remove @pengguna",
+    "invalidWhoisSyntax":"Sintaks tidak sah untuk arahan whois. Cara: \/whois @pengguna",
     "noLiteSupport":"Ini tidak disokong dalam plug&#179; Lite",
     "errorGettingPlaylistInfo":"Ralat untuk mendapatkan maklumat senarai main",
     "noPlaylistsFound":"Tiada senarai main dijumpai",

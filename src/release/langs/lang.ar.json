@@ -16,26 +16,26 @@
     "commandNotEnabled":"%1 autojoin was not enabled"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"تصغير",
+    "enlarge":"تكبير الصورة"
   },
   "commands":{
     "header":"plug&#179; Commands",
-    "userCommands":"User Commands",
-    "modCommands":"Moderation Commands",
+    "userCommands":"لوحة مفاتيح المستخدم",
+    "modCommands":"لوحة مفاتيح الظبط",
     "variables":{
-      "username":"username",
-      "word":"word",
-      "on":"on",
-      "off":"off",
-      "reason":"reason",
-      "number":"number"
+      "username":"اسم المستخدم",
+      "word":"كلمة",
+      "on":"تشغيل",
+      "off":"إغلاق",
+      "reason":"السبب",
+      "number":"الرقم"
     },
     "descriptions":{
       "join":"join dj booth\/waitlist",
       "leave":"leaves dj booth\/waitlist",
-      "whoami":"get your own information",
-      "mute":"set volume to 0",
+      "whoami":"الحصول على المعلومات الخاصة بك",
+      "mute":"ظبط الصوت على 0",
       "automute":"register currently playing song to automatically mute on future plays",
       "unmute":"set volume to last volume",
       "nextsong":"display next song in playlist and if it's in history",
@@ -50,20 +50,20 @@
       "link":"paste link to plugCubed website in chat",
       "whois":"gives general information about user",
       "skip":"skip current song",
-      "ban":"kicks targeted user",
+      "ban":"ركل المستخدم من القائمة",
       "lockskip":"locks DJ booth, skip and unlocks afterwards",
-      "lock":"locks DJ booth",
-      "unlock":"unlocks DJ booth",
-      "add":"adds targeted user to dj booth\/waitlist",
-      "remove":"removes targeted user from dj booth\/waitlist",
+      "lock":"إغلاق القائمة",
+      "unlock":"فتح القائمة",
+      "add":"اظافة المستخدم إلى القائمة",
+      "remove":"ركل المستخدم من القائمة",
       "whois all":"gives userid and username of all users in the room",
-      "banall":"bans all users in the room",
+      "banall":"حظر كافة المستخدمين في الغرفة",
       "status":"shows status of plug servers"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
       "alertsoff":"No longer playing sound on specific words",
-      "badgeon":"Badges have been turned on",
+      "badgeon":"تم تشغيل الشارات",
       "badgeoff":"Badges have been turned off",
       "nextsong":"Your next queued song is %1 by %2",
       "isHistory":"Warning: This song is still in the history (%1 of %2)",
@@ -86,22 +86,22 @@
   },
   "notify":{
     "header":"Chat Notifications",
-    "join":"User Join",
-    "leave":"User Leave",
+    "join":"دخول المستخدم",
+    "leave":"خروج المستخدم",
     "grab":"User Grab",
     "meh":"User Mehs",
-    "stats":"Song Stats",
-    "updates":"Song Updates",
+    "stats":"إحصائيات الأغنية",
+    "updates":"تحديثات الاغنية",
     "history":"Songs in history",
-    "songUnavailable":"Song Unavailable",
-    "songLength":"Song Length (%1 min)",
+    "songUnavailable":"الأغنية غير متوفرة",
+    "songLength":"طول الأغنية (%1 دقيقة)",
     "message":{
       "grab":"grabbed %1 - %2",
       "stats":"Stats: %1 woots -- %2 mehs -- %3 grabs",
       "updates":"Now Playing: %1 by %2<br>Played by: %3",
       "meh":"meh'd this track",
-      "join":"joined the room",
-      "leave":"left the room",
+      "join":"انضم إلى الغرفة",
+      "leave":"غادر الغرفة",
       "history":"Song is in history (%1 of %2)",
       "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
       "songLength":"Song is longer than %1 minutes",
@@ -112,9 +112,9 @@
     }
   },
   "info":{
-    "header":"User Information",
-    "name":"Name",
-    "title":"Title",
+    "header":"معلومات عن المستخدم",
+    "name":"الاسم",
+    "title":"إسم الأغنية",
     "specialTitles":{
       "developer":"plug&#179; Developer",
       "sponsor":"plug&#179; Sponsor",
@@ -127,12 +127,12 @@
       "special":"plug&#179; Special Supporter - %1"
     },
     "id":"ID",
-    "rank":"Rank",
+    "rank":"الرتبة",
     "joined":"Time Joined",
-    "status":"Status",
+    "status":"حالة",
     "vote":"Vote",
-    "position":"Position",
-    "points":"Points",
+    "position":"ترتيب العرض",
+    "points":"النقاط",
     "wootCount":"Woot Count",
     "mehCount":"Meh Count",
     "ratio":"Woot\/Meh Ratio",
@@ -143,23 +143,23 @@
     "userNextDJ":"%1 are DJing next",
     "disconnects":"Disconnects",
     "lastDisconnect":"Last Disconnect",
-    "lastPosition":"Position",
-    "time":"Time",
+    "lastPosition":"ترتيب العرض",
+    "time":"الوقت",
     "lastMessage":"Last Message"
   },
   "ranks":{
-    "you":"You",
+    "you":"أنت",
     "regular":"Regular",
     "residentdj":"Resident DJ",
     "bouncer":"Bouncer",
-    "manager":"Manager",
+    "manager":"المدير",
     "cohost":"Co-Host",
-    "host":"Host",
-    "ambassador":"Ambassador",
-    "admin":"Admin"
+    "host":"المضيف",
+    "ambassador":"السفير",
+    "admin":"المشرف"
   },
   "roomSpecificSettings":{
-    "infoHeader":"This room is using special settings",
+    "infoHeader":"هذه الغرفة تستخدم إعدادات خاصة",
     "infoHeaderCredits":"This room is using special settings by %1",
     "infoDisable":"You can disable them in the menu"
   },
@@ -168,14 +168,14 @@
     "autojoin":"Autojoin",
     "customchatcolors":"Custom Chat Colors",
     "autorespond":"AFK Autorespond",
-    "notify":"Notifications",
+    "notify":"الاشعارات",
     "afktimers":"AFK Timers",
     "etatimer":"ETA Timer",
-    "roomsettings":"Room Settings",
-    "chatimages":"Chat Images",
+    "roomsettings":"إعدادات الغرفة",
+    "chatimages":"صور الدردشة",
     "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel",
-    "showdeletedmessages":"Show Deleted Messages"
+    "controlpanel":"لوحة التحكم",
+    "showdeletedmessages":"إظهار الرسائل المحذوفة"
   },
   "vote":{
     "meh":"Meh",
@@ -193,7 +193,7 @@
     "mutedOnce":"Current song is muted"
   },
   "error":{
-    "userNotFound":"User not found",
+    "userNotFound":"إسم المستخدم غير موجود",
     "alreadyInWaitList":"User %1 is already in waitlist",
     "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Unknown menu key: %1",
@@ -205,7 +205,7 @@
     "noLiteSupport":"This is not supported in plug&#179; Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
-    "noNextSong":"You have no queued song"
+    "yourActivePlaylistIsFull":"قائمة الأغاني الخاصة بك ممتلئة",
+    "noNextSong":"ليس لديك أي أغاني فـي القائمة"
   }
 }

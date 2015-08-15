@@ -63,8 +63,8 @@
     "responses":{
       "alertson":"Émet un son sur les mots suivants: %1",
       "alertsoff":"N'émet plus de sons sur des mots spécifiques",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"Les badges ont été activés",
+      "badgeoff":"Les badges ont été désactivés",
       "nextsong":"Votre prochaine musique est %1 de %2",
       "isHistory":"Attention: Cette musique est déjà dans l'historique (%1 de %2)",
       "automute":{
@@ -145,7 +145,7 @@
     "lastDisconnect":"Dernière déconnexion",
     "lastPosition":"Position",
     "time":"Heure",
-    "lastMessage":"Last Message"
+    "lastMessage":"Dernier Message"
   },
   "ranks":{
     "you":"Vous",
@@ -175,7 +175,7 @@
     "chatimages":"Images du chat",
     "twitchemotes":"Emoticones de Twitch",
     "controlpanel":"Panneau de Configuration",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Afficher les Messages Supprimés"
   },
   "vote":{
     "meh":"Meh",
@@ -194,14 +194,14 @@
   },
   "error":{
     "userNotFound":"Utilisateur non trouvé",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"L'utilisateur %1 est déjà dans la liste d'attente",
+    "notInWaitList":"L'utilisateur %1 n'est pas dans la liste d'attente",
     "unknownMenuKey":"Touche de menu inconnue : %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Syntaxe invalide pour la commande d'ajout. Utilisation: \/add @user",
+    "invalidBanSyntax":"Syntaxe invalide pour la commande de ban. Utilisation: \/ban @utilisateur ou \/ban @utilisateur::durée::raison",
+    "invalidBanTime":"Le temps spécifié, %1 est invalide. Les durées valides sont 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Syntaxe invalide pour la commande de suppression. Utilisation: \/remove @utilisateur",
+    "invalidWhoisSyntax":"Syntaxe invalide pour la commande \/whois. Utilisation: \/whois @utilisateur",
     "noLiteSupport":"Ceci n'est sur supporté dans plug³ Lite",
     "errorGettingPlaylistInfo":"Erreur lors de l'obtention des informations de la playlist",
     "noPlaylistsFound":"Aucune playlist trouvée",

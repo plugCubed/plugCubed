@@ -4,7 +4,7 @@
   "runningLiteInfo":"一部の機能が動作しません.",
   "commandsHelp":"使用して '\/command ' 拡張チャット コマンドを参照します。",
   "autorespond":{
-    "default":"私は離れて、キーボードからです.",
+    "default":"離席中です",
     "disable":"Disable AFK Autorespond to chat",
     "nextIn":"Next AFK Autorespond will be sent from %1",
     "next":"AFK Autorespond on next mention",
@@ -164,15 +164,15 @@
     "infoDisable":"You can disable them in the menu"
   },
   "menu":{
-    "autowoot":"Autowoot",
-    "autojoin":"Autojoin",
+    "autowoot":"自動 Woot!",
+    "autojoin":"自動join",
     "customchatcolors":"Custom Chat Colors",
-    "autorespond":"AFK Autorespond",
+    "autorespond":"自動離席メッセージ",
     "notify":"Notifications",
-    "afktimers":"AFK Timers",
+    "afktimers":"離席タイマー",
     "etatimer":"ETA Timer",
     "roomsettings":"Room Settings",
-    "chatimages":"Chat Images",
+    "chatimages":"チャット画像",
     "twitchemotes":"Twitch Emotes",
     "controlpanel":"Control Panel",
     "showdeletedmessages":"Show Deleted Messages"
@@ -187,7 +187,7 @@
   "tooltip":{
     "stream":"Toggle Video\/Audio Stream",
     "clear":"Clear Chat",
-    "afk":"AFK Message",
+    "afk":"離席メッセージ",
     "reset":"Reset to default",
     "muted":"All songs are muted",
     "mutedOnce":"Current song is muted"
