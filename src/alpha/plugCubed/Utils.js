@@ -1,14 +1,29 @@
 var plugCubedUserData;
 define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoader', 'plugCubed/bridges/Database', 'plugCubed/bridges/PopoutView'], function(Class, p3Lang, Lang, ModuleLoader, Database, PopoutView) {
-    var cleanHTMLMessage, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, PlugUI;
+    var cleanHTMLMessage;
+    var developer;
+    var sponsor;
+    var ambassador;
+    var donatorDiamond;
+    var donatorPlatinum;
+    var donatorGold;
+    var donatorSilver;
+    var donatorBronze;
+    var special;
+    var PlugUI;
 
     cleanHTMLMessage = function(input, disallow, extraAllow) {
         if (input == null) return '';
-        var allowed, tags, disallowed = [];
-        if ($.isArray(disallow)) disallowed = disallow;
-        if (!extraAllow || !$.isArray(extraAllow)) extraAllow = [];
+        var allowed;
+        var tags;
+        var disallowed = [];
+        if ($.isArray(disallow))
+            disallowed = disallow;
+        if (!extraAllow || !$.isArray(extraAllow))
+            extraAllow = [];
         allowed = $(['span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em', 'a'].concat(extraAllow)).not(disallowed).get();
-        if (disallow === '*') allowed = [];
+        if (disallow === '*')
+            allowed = [];
         tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
         input = input.split('&#8237;').join('&amp;#8237;').split('&#8238;').join('&amp;#8238;');
         return input.replace(tags, function(a, b) {
@@ -54,7 +69,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             return url;
         },
         getHighestRank: function(uid) {
-            if (!uid) uid = API.getUser().id;
+            if (!uid)
+                uid = API.getUser().id;
 
             if (this.isPlugCubedDeveloper(uid)) return 'developer';
             if (this.isPlugCubedSponsor(uid)) return 'sponsor';
@@ -138,43 +154,53 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             return ranks.join(' / ');
         },
         isPlugCubedDeveloper: function(uid) {
-            if (!uid) uid = API.getUser().id;
+            if (!uid)
+                uid = API.getUser().id;
             return developer.indexOf(uid) > -1;
         },
         isPlugCubedSponsor: function(uid) {
-            if (!uid) uid = API.getUser().id;
+            if (!uid)
+                uid = API.getUser().id;
             return sponsor.indexOf(uid) > -1;
         },
         isPlugCubedSpecial: function(uid) {
-            if (!uid) uid = API.getUser().id;
+            if (!uid)
+                uid = API.getUser().id;
             return this.getPlugCubedSpecial(uid) != null;
         },
         isPlugCubedAmbassador: function(uid) {
-            if (!uid) uid = API.getUser().id;
+            if (!uid)
+                uid = API.getUser().id;
             return ambassador.indexOf(uid) > -1;
         },
         isPlugCubedDonatorDiamond: function(uid) {
-            if (!uid) uid = API.getUser().id;
+            if (!uid)
+                uid = API.getUser().id;
             return donatorDiamond.indexOf(uid) > -1;
         },
         isPlugCubedDonatorPlatinum: function(uid) {
-            if (!uid) uid = API.getUser().id;
+            if (!uid)
+                uid = API.getUser().id;
             return donatorPlatinum.indexOf(uid) > -1;
         },
         isPlugCubedDonatorGold: function(uid) {
-            if (!uid) uid = API.getUser().id;
+            if (!uid)
+                uid = API.getUser().id;
             return donatorGold.indexOf(uid) > -1;
         },
         isPlugCubedDonatorSilver: function(uid) {
-            if (!uid) uid = API.getUser().id;
+            if (!uid)
+                uid = API.getUser().id;
             return donatorSilver.indexOf(uid) > -1;
         },
         isPlugCubedDonatorBronze: function(uid) {
-            if (!uid) uid = API.getUser().id;
+            if (!uid)
+                uid = API.getUser().id;
             return donatorBronze.indexOf(uid) > -1;
         },
         getPlugCubedSpecial: function(uid) {
-            if (!uid) uid = API.getUser().id;
+            if (!uid)
+                uid = API.getUser().id;
             return special[uid];
         },
         html2text: function(html) {
@@ -188,10 +214,20 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             return msg.split("<").join("&lt;").split(">").join("&gt;");
         },
         chatLog: function(type, message, color, fromID, fromName) {
-            var $chat, b, $message, $box, $msg, $text, $msgSpan, $timestamp, $from, from;
+            var $chat;
+            var b;
+            var $message;
+            var $box;
+            var $msg;
+            var $text;
+            var $msgSpan;
+            var $timestamp;
+            var $from;
+            var from;
 
             if (!message) return;
-            if (typeof message !== 'string') message = message.html();
+            if (typeof message !== 'string')
+                message = message.html();
 
             message = cleanHTMLMessage(message, undefined, ['ul', 'li']);
             $msgSpan = $('<span>').html(message);
@@ -333,7 +369,15 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             if (user === null) {
                 API.chatLog(p3Lang.i18n('error.userNotFound'));
             } else {
-                var rank, status, voted, position, waitlistpos, inbooth, lang, lastMessage, disconnectInfo;
+                var rank;
+                var status;
+                var voted;
+                var position;
+                var waitlistpos;
+                var inbooth;
+                var lang;
+                var lastMessage;
+                var disconnectInfo;
 
                 waitlistpos = API.getWaitListPosition(user.id);
                 inbooth = API.getDJ() != null && API.getDJ().id === user.id;
@@ -386,10 +430,11 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
                         voted = p3Lang.i18n('vote.woot');
                         break;
                 }
-                if (inbooth) voted = p3Lang.i18n('vote.djing');
+                if (inbooth)
+                    voted = p3Lang.i18n('vote.djing');
 
-                var title = this.getAllPlugCubedRanks(user.id, true),
-                    message = $('<table>').css({
+                var title = this.getAllPlugCubedRanks(user.id, true);
+                var message = $('<table>').css({
                         width: '100%',
                         color: '#CC00CC',
                         'font-size': '1.02em'
@@ -446,8 +491,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             var table = $('<table>').css({
                     width: '100%',
                     color: '#CC00CC'
-                }),
-                users = API.getUsers();
+                });
+            var users = API.getUsers();
             for (var i in users) {
                 if (users.hasOwnProperty(i)) {
                     var user = users[i];
@@ -466,8 +511,13 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             }
         },
         getTimestamp: function(t, format) {
-            var time, hours, minutes, seconds, postfix = '';
-            if (!format) format = 'hh:mm';
+            var time;
+            var hours;
+            var minutes;
+            var seconds;
+            var postfix = '';
+            if (!format)
+                format = 'hh:mm';
 
             time = t ? new Date(t) : new Date();
 
@@ -486,6 +536,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
                     hours = 12;
                 }
             }
+            minutes = (minutes < 10 ? '0' : '') + minutes;
+            seconds = (seconds < 10 ? '0' : '') + seconds;
 
             return format.split('hh').join(hours).split('mm').join(minutes).split('ss').join(seconds) + postfix;
         },
@@ -512,7 +564,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             return 'Unknown';
         },
         formatTime: function(seconds) {
-            var hours, minutes;
+            var hours;
+            var minutes;
 
             minutes = Math.floor(seconds / 60);
             seconds -= minutes * 60;
@@ -612,7 +665,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
         },
         getRandomString: function(length) {
             var chars = 'abcdefghijklmnopqrstuvwxyz0123456789_';
-            var i, ret = [];
+            var i;
+            var ret = [];
             for (i = 0; i < length; i++) {
                 ret.push(chars.substr(Math.floor(Math.random() * chars.length), 1));
             }
@@ -656,9 +710,9 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             });
         },
         statusSocket: function(call) {
-            var att = 0,
-                time = Date.now(),
-                conn;
+            var att = 0;
+            var time = Date.now();
+            var conn;
 
             function connect() {
                 conn = new WebSocket('wss://godj.plug.dj:443/socket');

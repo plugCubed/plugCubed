@@ -97,7 +97,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
 
             $('#plugcubed-css,#p3-settings-wrapper').remove();
 
-            delete plugCubed;
+            plugCubed = undefined;
         }
     });
     return Loader;

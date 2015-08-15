@@ -6,13 +6,14 @@
  Modified by Plug DJ, Inc.
  */
 define(function() {
-    var e, t, n;
+    var e;
+    var t;
+    var n;
     e = false;
     t = /xyz/.test(function() {
         xyz
     }) ? /\b_super\b/ : /.*/;
-    n = function() {
-    };
+    n = function() {};
     n.extend = function(n) {
         var r = this.prototype;
 

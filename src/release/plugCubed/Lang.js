@@ -1,5 +1,8 @@
 define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
-    var language, defaultLanguage, _this, Lang;
+    var language;
+    var defaultLanguage;
+    var _this;
+    var Lang;
 
     language = {};
     defaultLanguage = {};
@@ -74,7 +77,8 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
          * @returns {*} String from language file, if not found returns selector and additional arguments.
          */
         i18n: function(selector) {
-            var a = language, i;
+            var a = language;
+            var i;
             if (a == null || selector == null) {
                 return '{' + $.makeArray(arguments).join(', ') + '}';
             }

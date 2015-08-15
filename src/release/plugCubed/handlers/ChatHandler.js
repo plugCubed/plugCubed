@@ -1,7 +1,7 @@
 define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/bridges/Context', 'plugCubed/bridges/PopoutView'], function($, Class, p3Utils, p3Lang, Settings, _$context, PopoutView) {
 
-    var twitchEmoteTemplate = '',
-        twitchEmotes = [];
+    var twitchEmoteTemplate = '';
+    var twitchEmotes = [];
 
     $("#chat-messages").on('mouseover', '.twitch-emote', function() {
         _$context.trigger('tooltip:show', $(this).data('emote'), $(this), true);
@@ -14,19 +14,21 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             if (text.toLowerCase().indexOf('nsfw') < 0) {
                 var temp = $('<div/>');
                 temp.html(text).find('a').each(function() {
-                    var url = $(this).attr('href'),
-                        path, imageURL = null,
-                        $video, identifier;
+                    var url = $(this).attr('href');
+                    var path;
+                    var imageURL = null;
+                    var $video;
+                    var identifier;
 
                     // Prevent plug.dj exploits
                     if (p3Utils.startsWithIgnoreCase(url, ['http://plug.dj', 'https://plug.dj'])) {
                         return;
 
-                        // Normal image links
+                    // Normal image links
                     } else if (p3Utils.endsWithIgnoreCase(url, ['.gif', '.jpg', '.jpeg', '.png']) || p3Utils.endsWithIgnoreCase(p3Utils.getBaseURL(url), ['.gif', '.jpg', '.jpeg', '.png'])) {
                         imageURL = p3Utils.proxifyImage(url);
 
-                        // gfycat links
+                    // gfycat links
                     } else if (p3Utils.startsWithIgnoreCase(url, ['http://gfycat.com/', 'https://gfycat.com/'])) {
                         path = url.split('/');
                         if (path.length > 3) {
@@ -39,9 +41,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                                 $(this).html('').append($video);
 
                                 $video.on('load', function() {
-                                    var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages'),
-                                        height = this.height;
-                                    if (this.width > $chat.find('.message').width()) height *= this.width / $chat.find('.message').width();
+                                    var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages');
+                                    var height = this.height;
+                                    if (this.width > $chat.find('.message').width())
+                                        height *= this.width / $chat.find('.message').width();
                                     $chat.scrollTop($chat[0].scrollHeight + height);
                                 });
 
@@ -54,7 +57,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                                         return;
                                     }
 
-                                    var webmUrl, mp4Url, imgUrl;
+                                    var webmUrl;
+                                    var mp4Url;
+                                    var imgUrl;
 
                                     webmUrl = p3Utils.httpsifyURL(videoData.gfyItem.webmUrl);
                                     mp4Url = p3Utils.httpsifyURL(videoData.gfyItem.mp4Url);
@@ -67,15 +72,16 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                             }
                         }
 
-                        // Lightshot links
+                    // Lightshot links
                     } else if (p3Utils.startsWithIgnoreCase(url, ['http://prntscr.com/', 'https://prntscr.com/'])) {
                         path = url.split('/');
                         if (path.length > 3) {
                             path = path[3];
-                            if (path.trim().length !== 0) imageURL = 'https://api.plugCubed.net/redirect/prntscr/' + path;
+                            if (path.trim().length !== 0)
+                                imageURL = 'https://api.plugCubed.net/redirect/prntscr/' + path;
                         }
 
-                        // Imgur links
+                    // Imgur links
                     } else if (p3Utils.startsWithIgnoreCase(url, ['http://imgur.com/gallery/', 'https://imgur.com/gallery/', 'http://imgur.com/', 'https://imgur.com/'])) {
                         path = url.split('/');
                         if (path.length > 4) {
@@ -88,9 +94,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                                 $(this).html('').append($video);
 
                                 $video.on('load', function() {
-                                    var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages'),
-                                        height = this.height;
-                                    if (this.width > $chat.find('.message').width()) height *= this.width / $chat.find('.message').width();
+                                    var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages');
+                                    var height = this.height;
+                                    if (this.width > $chat.find('.message').width())
+                                        height *= this.width / $chat.find('.message').width();
                                     $chat.scrollTop($chat[0].scrollHeight + height);
                                 });
 
@@ -113,12 +120,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                             }
                         }
 
-                        // Gyazo links
+                    // Gyazo links
                     } else if (p3Utils.startsWithIgnoreCase(url, ['http://gyazo.com/', 'https://gyazo.com/'])) {
                         path = url.split('/');
                         if (path.length > 3) {
                             path = path[3];
-                            if (path.trim().length !== 0) imageURL = 'https://i.gyazo.com/' + path + '.png';
+                            if (path.trim().length !== 0)
+                                imageURL = 'https://i.gyazo.com/' + path + '.png';
                         }
                     } else {
                         // DeviantArt links
@@ -136,9 +144,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                         var image = $('<img>').attr('src', imageURL).css('display', 'block').css('max-width', '100%').css('height', 'auto').css('margin', '0 auto');
                         $(this).html(image);
                         image.on('load', function() {
-                            var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages'),
-                                height = this.height;
-                            if (this.width > $chat.find('.message').width()) height *= this.width / $chat.find('.message').width();
+                            var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages');
+                            var height = this.height;
+                            if (this.width > $chat.find('.message').width())
+                                height *= this.width / $chat.find('.message').width();
                             $chat.scrollTop($chat[0].scrollHeight + height);
                         });
                     }
@@ -157,12 +166,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 if (!twitchEmotes.hasOwnProperty(i)) continue;
                 var twitchEmote = twitchEmotes[i];
                 if (text.indexOf(' ' + twitchEmote.emote + ' ') > -1 || text.indexOf(':' + twitchEmote.emote + ':') > -1) {
-                    var temp = $('<div>'),
-                        image = $('<img>').addClass('twitch-emote').attr('src', twitchEmoteTemplate.split('{image_id}').join(twitchEmote.image_id)).data('emote', $('<span>').html(twitchEmote.emote).text());
+                    var temp = $('<div>');
+                    var image = $('<img>').addClass('twitch-emote').attr('src', twitchEmoteTemplate.split('{image_id}').join(twitchEmote.image_id)).data('emote', $('<span>').html(twitchEmote.emote).text());
                     image.on('load', function() {
-                        var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages'),
-                            height = this.height;
-                        if (this.width > $chat.find('.message').width()) height *= this.width / $chat.find('.message').width();
+                        var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages');
+                        var height = this.height;
+                        if (this.width > $chat.find('.message').width())
+                            height *= this.width / $chat.find('.message').width();
                         $chat.scrollTop($chat[0].scrollHeight + height);
                     });
                     temp.append(image);
@@ -203,12 +213,12 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatReceivedLate(data) {
         if (!data.uid) return;
 
-        var $this = $('.msg.cid-' + data.cid).closest('.cm'),
-            $msg = $('.msg .text.cid-' + data.cid),
-            $icon;
+        var $this = $('.msg.cid-' + data.cid).closest('.cm');
+        var $msg = $('.msg .text.cid-' + data.cid);
+        var $icon;
 
-        var previousMessages = '',
-            innerHTML = $msg.html();
+        var previousMessages = '';
+        var innerHTML = $msg.html();
         if (innerHTML != null && innerHTML.indexOf('<br>') > -1) {
             previousMessages = innerHTML.substr(0, innerHTML.lastIndexOf('<br>') + 4);
         }

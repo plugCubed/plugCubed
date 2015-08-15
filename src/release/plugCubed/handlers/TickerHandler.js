@@ -13,8 +13,7 @@ define(['jquery', 'plugCubed/Class'], function($, Class) {
                 this.timeoutID = setTimeout(this.proxy, this.tickTime);
             }
         }, // The function that is called on each tick
-        tick: function() {
-        },
+        tick: function() {},
         close: function() {
             clearTimeout(this.timeoutID);
             this.closed = true;

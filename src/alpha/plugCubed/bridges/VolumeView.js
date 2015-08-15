@@ -4,7 +4,10 @@
  */
 define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Context', 'plugCubed/ModuleLoader'], function($, p3Lang, p3Utils, _$context, ModuleLoader) {
 
-    var original = ModuleLoader.getView({id: 'volume'}), _PlaybackModel;
+    var original = ModuleLoader.getView({
+        id: 'volume'
+    });
+    var _PlaybackModel;
 
     return original.extend({
         initialize: function(PlaybackModel) {

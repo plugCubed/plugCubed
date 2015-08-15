@@ -1,5 +1,7 @@
 define(['plugCubed/Class', 'plugCubed/notifications/History', 'plugCubed/notifications/SongLength', 'plugCubed/notifications/SongStats', 'plugCubed/notifications/SongUpdate', 'plugCubed/notifications/UserGrab', 'plugCubed/notifications/UserJoin', 'plugCubed/notifications/UserLeave', 'plugCubed/notifications/UserMeh', 'plugCubed/notifications/History', 'plugCubed/notifications/SongUnavailable'], function() {
-    var modules, Class, handler;
+    var modules;
+    var Class;
+    var handler;
 
     modules = $.makeArray(arguments);
     Class = modules.shift();

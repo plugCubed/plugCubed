@@ -67,7 +67,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/handlers/TriggerHandler', 'plugC
         },
         onVoteUpdate: function(data) {
             if (!data || !data.user) return;
-            var curVote, wootCount, mehCount;
+            var curVote;
+            var wootCount;
+            var mehCount;
 
             curVote = p3Utils.getUserData(data.user.id, 'curVote', 0);
             wootCount = p3Utils.getUserData(data.user.id, 'wootcount', 0) - (curVote === 1 ? 1 : 0) + (data.vote === 1 ? 1 : 0);

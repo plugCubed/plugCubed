@@ -1,6 +1,8 @@
 define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/ModuleLoader'], function($, OverrideHandler, p3Utils, ModuleLoader) {
 
-    var WaitListRow, WaitListRowPrototype, originalFunction;
+    var WaitListRow;
+    var WaitListRowPrototype;
+    var originalFunction;
 
     WaitListRow = ModuleLoader.getView({
         className: 'user',

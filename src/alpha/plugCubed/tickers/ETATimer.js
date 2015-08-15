@@ -31,7 +31,12 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
                     if (API.getHistory() == null)
                         return;
 
-                    var isDJ, waitListPos, timePerSong, history, time, $djButton;
+                    var isDJ;
+                    var waitListPos;
+                    var timePerSong;
+                    var history;
+                    var time;
+                    var $djButton;
 
                     isDJ = API.getDJ() != null && API.getDJ().id == this.myID;
                     waitListPos = API.getWaitListPosition();

@@ -1,5 +1,6 @@
 define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/enums/Notifications'], function(TriggerHandler, Settings, p3Utils, p3Lang, enumNotifications) {
-    var lastJoin = {}, handler = TriggerHandler.extend({
+    var lastJoin = {};
+    var handler = TriggerHandler.extend({
         trigger: API.USER_JOIN,
         handler: function(data) {
             if ((Settings.notify & enumNotifications.USER_JOIN) === enumNotifications.USER_JOIN && (lastJoin[data.id] == null || lastJoin[data.id] < Date.now() - 5e3)) {

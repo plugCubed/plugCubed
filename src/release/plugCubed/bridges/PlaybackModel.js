@@ -1,9 +1,11 @@
 define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/bridges/VolumeView', 'plugCubed/ModuleLoader'], function(Class, p3Utils, p3Lang, VolumeView, ModuleLoader) {
-    var handler, that, volume;
+    var handler;
+    var that;
+    var volume;
 
     var PlaybackModel = ModuleLoader.getModule({
-            onElapsedChange: 'function'
-        });
+        onElapsedChange: 'function'
+    });
 
     function onMediaChange() {
         if (PlaybackModel.get('mutedOnce') === true)
@@ -26,8 +28,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/bridg
                             this.set('muted', true);
                         } else if (!this.get('mutedOnce')) {
                             this.set('mutedOnce', true);
-                        }
-                        else {
+                        } else {
                             this.set('mutedOnce', false);
                             this.set('muted', false);
                         }
@@ -60,15 +61,15 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/bridg
         },
         mute: function() {
             while (!PlaybackModel.get('muted') || PlaybackModel.get('mutedOnce'))
-                volume.onClick();
+            volume.onClick();
         },
         muteOnce: function() {
             while (!PlaybackModel.get('mutedOnce'))
-                volume.onClick();
+            volume.onClick();
         },
         unmute: function() {
             while (PlaybackModel.get('muted'))
-                volume.onClick();
+            volume.onClick();
         },
         close: function() {}
     });

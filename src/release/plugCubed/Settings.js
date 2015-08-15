@@ -1,5 +1,6 @@
 define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/bridges/PlaybackModel'], function(Class, p3Utils, p3Lang, Styles, PlaybackModel) {
-    var names = [], curVersion;
+    var names = [];
+    var curVersion;
 
     // Misc
     names.push('version');

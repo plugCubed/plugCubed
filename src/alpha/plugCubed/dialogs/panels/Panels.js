@@ -1,5 +1,7 @@
 define(['plugCubed/Class', 'plugCubed/dialogs/panels/Background', 'plugCubed/dialogs/panels/Notifications'], function() {
-    var modules, Class, handler;
+    var modules;
+    var Class;
+    var handler;
 
     modules = $.makeArray(arguments);
     Class = modules.shift();

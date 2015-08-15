@@ -3,10 +3,8 @@ define(['plugCubed/Class'], function(Class) {
         init: function() {
             this.overridden = false;
         },
-        doOverride: function() {
-        },
-        doRevert: function() {
-        },
+        doOverride: function() {},
+        doRevert: function() {},
         override: function() {
             if (this.overridden) return;
             this.doOverride();
@@ -17,5 +15,5 @@ define(['plugCubed/Class'], function(Class) {
             this.doRevert();
             this.overridden = false;
         }
-    })
+    });
 });

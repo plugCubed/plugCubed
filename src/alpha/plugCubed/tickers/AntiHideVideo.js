@@ -3,7 +3,10 @@ define(['jquery', 'plugCubed/handlers/TickerHandler'], function($, TickerHandler
         tickTime: 1E4,
         tick: function() {
             var $ytFrame = $('#yt-frame');
-            var a, b = true, c = true, d;
+            var a;
+            var b = true;
+            var c = true;
+            var d;
 
             a = $ytFrame.height() == null || $ytFrame.height() > 230;
             if ($ytFrame.width() != null) {

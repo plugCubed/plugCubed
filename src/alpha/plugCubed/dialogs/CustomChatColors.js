@@ -3,30 +3,32 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
         if (!Settings.colors[id])
             Settings.colors[id] = defaultColor;
         return $('<div class="item">').addClass('p3-s-cc-' + id).append($('<span>').text(text)).append($('<span>').addClass('default').css('display', Settings.colors[id] === defaultColor ? 'none' : 'block').mouseover(function() {
-                _$context.trigger('tooltip:show', p3Lang.i18n('tooltip.reset'), $(this), false);
-            }).mouseout(function() {
-                _$context.trigger('tooltip:hide');
-            }).click(function() {
-                $(this).parent().find('input').val(defaultColor);
-                $(this).parent().find('.example').css('background-color', p3Utils.toRGB(defaultColor));
-                $(this).css('display', 'none');
-                Settings.colors[id] = defaultColor;
+            _$context.trigger('tooltip:show', p3Lang.i18n('tooltip.reset'), $(this), false);
+        }).mouseout(function() {
+            _$context.trigger('tooltip:hide');
+        }).click(function() {
+            $(this).parent().find('input').val(defaultColor);
+            $(this).parent().find('.example').css('background-color', p3Utils.toRGB(defaultColor));
+            $(this).css('display', 'none');
+            Settings.colors[id] = defaultColor;
+            Settings.save();
+            CCC.update();
+        })).append($('<span>').addClass('example').css('background-color', p3Utils.toRGB(Settings.colors[id]))).append($('<input>').val(Settings.colors[id]).keyup(function() {
+            if (p3Utils.isRGB($(this).val())) {
+                $(this).parent().find('.example').css('background-color', p3Utils.toRGB($(this).val()));
+                Settings.colors[id] = $(this).val();
                 Settings.save();
                 CCC.update();
-            })).append($('<span>').addClass('example').css('background-color', p3Utils.toRGB(Settings.colors[id]))).append($('<input>').val(Settings.colors[id]).keyup(function() {
-                if (p3Utils.isRGB($(this).val())) {
-                    $(this).parent().find('.example').css('background-color', p3Utils.toRGB($(this).val()));
-                    Settings.colors[id] = $(this).val();
-                    Settings.save();
-                    CCC.update();
-                }
-                $(this).parent().find('.default').css('display', $(this).val() === defaultColor ? 'none' : 'block');
-            }));
+            }
+            $(this).parent().find('.default').css('display', $(this).val() === defaultColor ? 'none' : 'block');
+        }));
     }
 
-    var div, a = Class.extend({
+    var div;
+    var a = Class.extend({
         render: function() {
-            var i, $settings = $('#p3-settings');
+            var i;
+            var $settings = $('#p3-settings');
             if (div != null) {
                 if (div.css('left') === '-500px') {
                     div.animate({
@@ -50,18 +52,18 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
                     container.append(GUIInput(i, p3Lang.i18n(Settings.colorInfo.notifications[i].title), Settings.colorInfo.notifications[i].color));
             }
             div = $('<div id="p3-settings-custom-colors" style="left: -500px;">').append($('<div class="header">').append($('<div class="back">').append($('<i class="icon icon-arrow-left"></i>')).click(function() {
-                    if (div != null) div.animate({
+                if (div != null) div.animate({
                         left: -500
                     });
-                })).append($('<div class="title">').append($('<span>').text(p3Lang.i18n('menu.customchatcolors'))))).append(container).animate({
+            })).append($('<div class="title">').append($('<span>').text(p3Lang.i18n('menu.customchatcolors'))))).append(container).animate({
                 left: $settings.width() + 1
             });
             $('#p3-settings-wrapper').append(div);
         },
         hide: function() {
             if (div != null) div.animate({
-                left: -500
-            });
+                    left: -500
+                });
         }
     });
     return new a();

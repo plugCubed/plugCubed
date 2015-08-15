@@ -1,5 +1,6 @@
 define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/RoomSettings', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/dialogs/Menu'], function(TriggerHandler, Settings, RoomSettings, p3Lang, p3Utils, Menu) {
-    var join, handler;
+    var join;
+    var handler;
 
     join = function() {
         var dj = API.getDJ();
@@ -44,7 +45,8 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
             if (!(RoomSettings.rules.allowAutojoin !== false && Settings.autojoin))
                 return;
 
-            var a, b;
+            var a;
+            var b;
             a = data.type === 'mention' && API.hasPermission(data.uid, API.ROLE.BOUNCER);
             b = data.message.indexOf('@') < 0 && (API.hasPermission(data.uid, API.ROLE.MANAGER) || p3Utils.isPlugCubedDeveloper(data.uid));
             if (a || b) {

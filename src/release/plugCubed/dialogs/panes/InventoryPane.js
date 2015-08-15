@@ -5,7 +5,7 @@ define(['jquery', 'plugCubed/Utils', 'plugCubed/AvatarManifest', 'plugCubed/dial
     var Template = require('hbs!templates/user/inventory/Inventory');
     var TheUserModel = require('app/models/TheUserModel');
     var Random = require('app/utils/Random');
-    
+
     var handler = GenericPane.extend({
         className: "p3",
         render: function() {

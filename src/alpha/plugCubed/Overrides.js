@@ -1,5 +1,7 @@
 define(['plugCubed/Class', 'plugCubed/overrides/UserRolloverView', 'plugCubed/overrides/WaitListRow'], function() {
-    var modules, Class, handler;
+    var modules;
+    var Class;
+    var handler;
 
     modules = $.makeArray(arguments);
     Class = modules.shift();

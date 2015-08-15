@@ -1,5 +1,6 @@
 define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/RoomSettings', 'plugCubed/Utils'], function(TriggerHandler, Settings, RoomSettings, p3Utils) {
-    var woot, handler;
+    var woot;
+    var handler;
 
     woot = function() {
         var dj = API.getDJ();

@@ -1,5 +1,6 @@
 define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/enums/Notifications'], function(TriggerHandler, Settings, p3Utils, p3Lang, enumNotifications) {
-    var history = [], handler = TriggerHandler.extend({
+    var history = [];
+    var handler = TriggerHandler.extend({
         trigger: {
             advance: 'onDjAdvance',
             modSkip: 'onSkip',
@@ -68,7 +69,8 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
             var data = API.getHistory();
             for (var i in data) {
                 if (!data.hasOwnProperty(i)) continue;
-                var a = data[i], obj = {
+                var a = data[i];
+                var obj = {
                     cid: a.media.cid,
                     author: a.media.author,
                     title: a.media.title,

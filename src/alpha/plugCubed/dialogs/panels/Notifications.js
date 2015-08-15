@@ -1,5 +1,7 @@
 define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel'], function(Class, ControlPanel) {
-    var handler, $contentDiv, panel;
+    var handler;
+    var $contentDiv;
+    var panel;
 
     handler = Class.extend({
         register: function() {

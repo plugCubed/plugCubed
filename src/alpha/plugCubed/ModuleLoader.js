@@ -40,7 +40,8 @@ define(['plugCubed/Class', 'underscore', 'backbone'], function(Class, _, backbon
             for (iterator in modules) {
                 if (modules.hasOwnProperty(iterator)) {
                     var module = modules[iterator];
-                    var idMatch, classMatch;
+                    var idMatch;
+                    var classMatch;
                     if (!module) continue;
 
                     if (module.prototype && _.isFunction(module.prototype.render) && _.isFunction(module.prototype.$) && !identifier.isBackbone) {

@@ -5,9 +5,12 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/bridges/IgnoreC
         tickTime: 1E3,
         tick: function() {
             if (Settings.moderation.afkTimers && (p3Utils.isPlugCubedDeveloper() || API.hasPermission(undefined, API.ROLE.BOUNCER)) && $('#waitlist-button').hasClass('selected')) {
-                var a = API.getWaitList(), b = $('#waitlist').find('.user');
+                var a = API.getWaitList();
+                var b = $('#waitlist').find('.user');
                 for (var c = 0; c < a.length; c++) {
-                    var d, e, f;
+                    var d;
+                    var e;
+                    var f;
 
                     d = Date.now() - p3Utils.getUserData(a[c].id, 'lastChat', p3Utils.getUserData(a[c].id, 'joinTime', Date.now()));
                     e = IgnoreCollection._byId[a[c].id] === true ? p3Lang.i18n('error.ignoredUser') : p3Utils.getTimestamp(d, d < 36E5 ? 'mm:ss' : 'hh:mm:ss');

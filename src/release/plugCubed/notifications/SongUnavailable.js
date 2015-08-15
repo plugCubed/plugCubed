@@ -1,7 +1,7 @@
-define(['jquery', 'plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/enums/Notifications'], function ($, TriggerHandler, Settings, p3Utils, p3Lang, enumNotifications) {
+define(['jquery', 'plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/enums/Notifications'], function($, TriggerHandler, Settings, p3Utils, p3Lang, enumNotifications) {
     var handler = TriggerHandler.extend({
         trigger: API.ADVANCE,
-        handler: function (data) {
+        handler: function(data) {
             return;
             if ((Settings.notify & enumNotifications.SONG_UNAVAILABLE) === enumNotifications.SONG_UNAVAILABLE) {
                 var url;
@@ -14,7 +14,7 @@ define(['jquery', 'plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'pl
                     url: url,
                     dataType: 'json',
                     crossDomain: true,
-                    success: function (response) {
+                    success: function(response) {
                         var final;
                         if (data.media.format === 1) {
                             if (response.data.accessControl.embed === 'denied') {
@@ -31,7 +31,7 @@ define(['jquery', 'plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'pl
                             p3Utils.chatLog('system', p3Lang.i18n(final) + '<br><span onclick="if (API.getMedia().cid === \'' + data.media.cid + '\') API.moderateForceSkip()" style="cursor:pointer;">Click here to skip</span>', undefined, -1);
                         }
                     },
-                    error: function (response) {
+                    error: function(response) {
                         var final;
                         if (data.media.format === 1) {
                             if (response.status === 403 && response.responseJSON.error.message === 'Private video') {

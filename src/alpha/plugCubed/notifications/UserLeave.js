@@ -1,5 +1,6 @@
 define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/enums/Notifications'], function(TriggerHandler, Settings, p3Utils, p3Lang, enumNotifications) {
-    var lastLeave = {}, handler = TriggerHandler.extend({
+    var lastLeave = {};
+    var handler = TriggerHandler.extend({
         trigger: API.USER_LEAVE,
         handler: function(data) {
             var disconnects = p3Utils.getUserData(data.id, 'disconnects', {

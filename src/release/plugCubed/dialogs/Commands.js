@@ -18,7 +18,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
         ['/commands', 'commands.descriptions.commands'],
         ['/link', 'commands.descriptions.link'],
         ['/volume (commands.variables.number/+/-)']
-    ], modCommands = [
+    ];
+    var modCommands = [
         ['/whois (commands.variables.username)', 'commands.descriptions.whois', API.ROLE.BOUNCER],
         ['/skip', 'commands.descriptions.skip', API.ROLE.BOUNCER],
         ['/ban (commands.variables.username)', 'commands.descriptions.ban', API.ROLE.BOUNCER],
@@ -29,7 +30,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
         ['/remove (commands.variables.username)', 'commands.descriptions.remove', API.ROLE.BOUNCER],
         ['/whois all', 'commands.descriptions.whois', API.ROLE.AMBASSADOR],
         ['/banall', 'commands.descriptions.banall', API.ROLE.AMBASSADOR]
-    ], a = Class.extend({
+    ];
+    var a = Class.extend({
         userCommands: function() {
             var response = '<strong style="position:relative;left: 20%;">=== ' + p3Lang.i18n('commands.userCommands') + ' ===</strong><br><ul class="p3-commands">';
             for (var i in userCommands) {
@@ -53,7 +55,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
                 }
                 response += '<li class="userCommands">' + command + '<br><em>' + p3Lang.i18n(userCommands[i][1]) + '</em></li>';
             }
-            response+= '</ul>';
+            response += '</ul>';
             return response;
         },
         modCommands: function() {

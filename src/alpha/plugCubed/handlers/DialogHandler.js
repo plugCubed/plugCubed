@@ -1,10 +1,11 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/enums/Notifications'], function ($, Class, p3Lang, Settings, enumNotifications) {
-    var dialogTarget, dialogObserver;
+define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/enums/Notifications'], function($, Class, p3Lang, Settings, enumNotifications) {
+    var dialogTarget;
+    var dialogObserver;
     var handler = Class.extend({
-        register: function () {
+        register: function() {
             dialogTarget = document.querySelector('#dialog-container');
-            dialogObserver = new MutationObserver(function (mutations) {
-                mutations.forEach(function (mutation) {
+            dialogObserver = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
                     if (mutation.type === 'childList' && mutation.addedNodes[0] !== undefined) {
                         if (mutation.addedNodes[0].attributes[0].nodeValue === 'dialog-restricted-media') {
                             if ((Settings.notify & enumNotifications.SONG_UNAVAILABLE) === enumNotifications.SONG_UNAVAILABLE) {
@@ -18,7 +19,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Settings', 'pl
                 childList: true
             });
         },
-        close: function () {
+        close: function() {
             dialogObserver.disconnect();
         }
     });

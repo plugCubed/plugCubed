@@ -1,8 +1,11 @@
 define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/bridges/PopoutView'], function($, Class, p3Utils, PopoutView) {
-    var obj, styles = {}, imports = [];
+    var obj;
+    var styles = {};
+    var imports = [];
 
     function update() {
-        var a = '', i;
+        var a = '';
+        var i;
         for (i in imports) {
             if (imports.hasOwnProperty(i))
                 a += '@import url("' + imports[i] + '");\n';

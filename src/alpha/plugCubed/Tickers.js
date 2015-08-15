@@ -1,5 +1,7 @@
 define(['plugCubed/Class', 'plugCubed/tickers/AFKTimer', 'plugCubed/tickers/ETATimer', 'plugCubed/tickers/AntiDangerousScripts', 'plugCubed/tickers/AntiHideVideo'], function() {
-    var modules, Class, instances;
+    var modules;
+    var Class;
+    var instances;
 
     modules = $.makeArray(arguments);
     Class = modules.shift();

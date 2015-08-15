@@ -1,10 +1,12 @@
 define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/dialogs/Commands', 'plugCubed/Settings', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/bridges/Context', 'plugCubed/bridges/PlaybackModel', 'plugCubed/ModuleLoader'], function(TriggerHandler, p3Utils, p3Lang, dialogCommands, Settings, Version, StyleManager, Context, PlaybackModel, ModuleLoader) {
-    var commandHandler, user;
+    var commandHandler;
+    var user;
     commandHandler = TriggerHandler.extend({
         trigger: API.CHAT_COMMAND,
         handler: function(value) {
-            var i, args = value.split(' '),
-                command = args.shift().substr(1);
+            var i;
+            var args = value.split(' ');
+            var command = args.shift().substr(1);
             if (p3Utils.hasPermission(undefined, 2, true) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) {
                 if (p3Utils.equalsIgnoreCase(command, 'whois')) {
                     if (args.length > 0 && p3Utils.equalsIgnoreCase(args[0], 'all')) {
@@ -19,8 +21,8 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
 
                 if (API.hasPermission(undefined, API.ROLE.MANAGER)) {
                     if (p3Utils.equalsIgnoreCase(command, 'banall')) {
-                        var me = API.getUser(),
-                            users = API.getUsers();
+                        var me = API.getUser();
+                        var users = API.getUsers();
                         if (users.length < 2) return;
                         for (i in users) {
                             if (users.hasOwnProperty(i) && users[i].id !== me.id)
@@ -71,13 +73,15 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                                 API.chatLog(p3Lang.i18n('error.userNotFound'));
                                 return;
                             } else {
-                                var time, reason;
+                                var time;
+                                var reason;
                                 time = values[1];
                                 reason = values[2];
                                 if ([60, 1, 1440, 24, -1].indexOf(time) < -1) {
                                     API.chatLog(p3Lang.i18n('error.invalidBanTime'), time);
                                 } else {
-                                    if ([0, 1, 2, 3, 4, 5].indexOf(reason) < -1) reason = 0;
+                                    if ([0, 1, 2, 3, 4, 5].indexOf(reason) < -1)
+                                        reason = 0;
                                     API.moderateBanUser(user.id, time, reason);
                                 }
                             }

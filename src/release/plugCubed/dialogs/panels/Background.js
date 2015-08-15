@@ -1,5 +1,10 @@
 define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleManager', 'plugCubed/RoomSettings'], function(Class, ControlPanel, Styles, RoomSettings) {
-    var handler, $contentDiv, $formDiv, $localFileInput, $clearButton, panel;
+    var handler;
+    var $contentDiv;
+    var $formDiv;
+    var $localFileInput;
+    var $clearButton;
+    var panel;
 
     handler = Class.extend({
         register: function() {

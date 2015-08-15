@@ -21,12 +21,12 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Contex
                 this.$icon = undefined;
             }
 
-            var id = this.model.get('id'),
-                $voteIcon = this.$el.find('.icon-woot,.icon-meh,.icon-grab');
+            var id = this.model.get('id');
+            var $voteIcon = this.$el.find('.icon-woot,.icon-meh,.icon-grab');
 
             if (p3Utils.havePlugCubedRank(id) || p3Utils.hasPermission(id, API.ROLE.DJ)) {
-                var $icon = this.$el.find('.icon:not(.icon-woot,.icon-meh,.icon-grab)'),
-                    specialIconInfo = p3Utils.getPlugCubedSpecial(id);
+                var $icon = this.$el.find('.icon:not(.icon-woot,.icon-meh,.icon-grab)');
+                var specialIconInfo = p3Utils.getPlugCubedSpecial(id);
 
                 if ($icon.length < 1) {
                     $icon = $('<i>').addClass('icon');

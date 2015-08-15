@@ -1,9 +1,22 @@
 define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
-    var ControlPanelClass, JQueryElementClass;
+    var ControlPanelClass;
+    var JQueryElementClass;
 
-    var PanelClass, ButtonClass, InputClass;
+    var PanelClass;
+    var ButtonClass;
+    var InputClass;
 
-    var $controlPanelDiv, $topBarDiv, $menuDiv, $currentDiv, $closeDiv, scrollPane, shownHeight, tabs = {}, _this, _onResize, _onTabClick;
+    var $controlPanelDiv;
+    var $topBarDiv;
+    var $menuDiv;
+    var $currentDiv;
+    var $closeDiv;
+    var scrollPane;
+    var shownHeight;
+    var tabs = {};
+    var _this;
+    var _onResize;
+    var _onTabClick;
 
     JQueryElementClass = Class.extend({
         getJQueryElement: function() {
@@ -170,7 +183,8 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
         },
         onResize: function() {
             if ($controlPanelDiv == null) return;
-            var $panel = $('#playlist-panel'), shownHeight = $(window).height() - 150;
+            var $panel = $('#playlist-panel');
+            var shownHeight = $(window).height() - 150;
 
             $controlPanelDiv.css({
                 width: $panel.width(),

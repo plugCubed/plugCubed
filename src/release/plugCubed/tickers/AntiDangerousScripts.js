@@ -2,7 +2,8 @@ define(['plugCubed/handlers/TickerHandler', 'plugCubed/bridges/Context'], functi
     return TickerHandler.extend({
         tickTime: 1E4,
         tick: function() {
-            var a = _$context._events['chat:receive'].concat(API._events[API.CHAT]), c = function() {
+            var a = _$context._events['chat:receive'].concat(API._events[API.CHAT]);
+            var c = function() {
                 API.chatLog('plug³ does not support one or more of the other scripts that are currently running because of potential dangerous behaviour');
                 plugCubed.close();
             };

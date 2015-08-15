@@ -1,5 +1,12 @@
 define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/bridges/Context', 'plugCubed/bridges/Layout', 'plugCubed/ModuleLoader', 'lang/Lang'], function($, _, Class, p3Utils, p3Lang, Styles, Settings, Context, Layout, ModuleLoader, Lang) {
-    var RoomModel, RoomLoader, handler, showMessage, oriLang, langKeys, ranks, that;
+    var RoomModel;
+    var RoomLoader;
+    var handler;
+    var showMessage;
+    var oriLang;
+    var langKeys;
+    var ranks;
+    var that;
 
     /**
      * @property {{ background: String, chat: { admin: String, ambassador: String, bouncer: String, cohost: String, residentdj: String, host: String, manager: String }, footer: String, header: String }} colors
@@ -33,10 +40,10 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
 
     function getPlugDJLang(key, original) {
         if (!key) return '';
-        var parts = key.split('.'),
-            last = parts.pop(),
-            partsLen = parts.length,
-            cur = original ? oriLang : Lang;
+        var parts = key.split('.');
+        var last = parts.pop();
+        var partsLen = parts.length;
+        var cur = original ? oriLang : Lang;
         for (var i = 0; i < partsLen; i++) {
             var part = parts[i];
             if (cur[part] != null) {
@@ -53,10 +60,10 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
 
     function setPlugDJLang(key, value) {
         if (!key || !value) return;
-        var parts = key.split('.'),
-            last = parts.pop(),
-            partsLen = parts.length,
-            cur = Lang;
+        var parts = key.split('.');
+        var last = parts.pop();
+        var partsLen = parts.length;
+        var cur = Lang;
         for (var i = 0; i < partsLen; i++) {
             var part = parts[i];
             if (cur[part] != null)
@@ -122,22 +129,24 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                 };
             }
             if (colors) {
-                rs.colors || (rs.colors = {});
+                rs.colors = rs.colors || {};
                 rs.colors.chat = _.omit(colors, 'rdj');
-                if (colors.rdj) rs.colors.chat.residentdj = colors.rdj;
+                if (colors.rdj)
+                    rs.colors.chat.residentdj = colors.rdj;
             }
             if (images) {
                 rs.images = _.clone(images);
-                rs.images.background = images.background;
-                rs.images.playback = images.playback;
-                rs.images.chat = _.omit(images, 'background', 'playback', 'rdj');
-                if (images.rdj) rs.images.chat.residentdj = images.rdj;
+                rs.images.icons = _.omit(images, 'background', 'playback', 'rdj');
+                if (images.rdj)
+                    rs.images.icons.residentdj = images.rdj;
             }
 
             return rs;
         },
         execute: function() {
-            var i, a, loadEverything;
+            var i;
+            var a;
+            var loadEverything;
             loadEverything = Settings.useRoomSettings[document.location.pathname.split('/')[1]] != null ? Settings.useRoomSettings[document.location.pathname.split('/')[1]] : true;
 
             this.clear();
@@ -181,8 +190,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                                     font.toString = function() {
                                         var sources = [];
                                         if (typeof this.url === 'string')
-                                            sources.push('url("' + this.url + '")');
-                                        else {
+                                            sources.push('url("' + this.url + '")'); else {
                                             for (var j in this.url) {
                                                 if (!this.url.hasOwnProperty(j)) continue;
                                                 if (['woff', 'woff2', 'opentype', 'svg', 'svgz', 'embedded-opentype', 'truetype'].indexOf(j) > -1)

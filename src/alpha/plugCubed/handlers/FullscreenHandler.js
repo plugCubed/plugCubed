@@ -16,7 +16,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/bridges/Contex
         toggleFullScreen: function() {
             Database.settings.videoOnly = !Database.settings.videoOnly;
             Context.trigger('change:videoOnly');
-            if (Database.settings.videoOnly ) {
+            if (Database.settings.videoOnly) {
                 fullScreenButton.find('.box').text(p3Lang.i18n('fullscreen.shrink'));
             } else {
                 fullScreenButton.find('.box').text(p3Lang.i18n('fullscreen.enlarge'));
