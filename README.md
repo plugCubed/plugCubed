@@ -43,6 +43,10 @@ We would like to thank the following people
 * [Nicole "Colgate" Richardson](https://github.com/colgate) - for being one of the creators
 * [plug.dj](https://plug.dj) - for creating an awesome website
 
+### Support
+
+We have a [Slack](https://plugcubed.slack.com/) channel we use to communicate. Please email [1337alexpham@gmail.com](1337alexpham@gmail.com) if you'd like to be added
+
 ### License
 Copyright &copy; 2012-2015 The plug&#179; Team and other contributors
 
