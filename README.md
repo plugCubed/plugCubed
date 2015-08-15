@@ -45,7 +45,7 @@ We would like to thank the following people
 
 ### Support
 
-We have a [Slack](https://plugcubed.slack.com/) channel we use to communicate. Please email [1337alexpham@gmail.com](1337alexpham@gmail.com) if you'd like to be added
+We have a [Slack](https://plugcubed.slack.com/) channel we use to communicate. Please email [1337alexpham@gmail.com](mailto:1337alexpham@gmail.com?subject=Slack&nbsp;Plug3) if you'd like to be added
 
 ### License
 Copyright &copy; 2012-2015 The plug&#179; Team and other contributors
