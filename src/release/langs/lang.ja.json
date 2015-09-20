@@ -165,17 +165,17 @@
   },
   "menu":{
     "autowoot":"自動 Woot!",
-    "autojoin":"自動join",
-    "customchatcolors":"Custom Chat Colors",
+    "autojoin":"自動 Join",
+    "customchatcolors":"チャット色変更",
     "autorespond":"自動離席メッセージ",
     "notify":"Notifications",
     "afktimers":"離席タイマー",
-    "etatimer":"ETA Timer",
+    "etatimer":"ETA タイマー",
     "roomsettings":"Room Settings",
     "chatimages":"チャット画像",
     "twitchemotes":"Twitch Emotes",
     "controlpanel":"Control Panel",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"削除されたメッセージを表示"
   },
   "vote":{
     "meh":"Meh",

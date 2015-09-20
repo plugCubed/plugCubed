@@ -16,8 +16,8 @@
     "commandNotEnabled":"%1 automatisch joinen was niet ingeschakeld"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Verkleinen",
+    "enlarge":"Vergroten"
   },
   "commands":{
     "header":"Gebruiker informatie",
@@ -29,7 +29,7 @@
       "on":"aan",
       "off":"uit",
       "reason":"reden",
-      "number":"number"
+      "number":"nummer"
     },
     "descriptions":{
       "join":"Gebruiker join",
@@ -43,7 +43,7 @@
       "alertson":"Maak geluid waneer gedefinieerde woorden zijn geschreven in de chat",
       "alertsoff":"Stop geluid spelen wanneer gedefinieerde woorden zijn geschreven in de chat",
       "grab":"Voeg de huidige track toe aan je geselecteerde afspeellijst",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"toon\/verberg de gebruiker badges in chat",
       "getpos":"Krijg huidige wachtlijst positie",
       "version":"Weergeef versienummer",
       "commands":"Laat deze lijst zien",
@@ -58,19 +58,19 @@
       "remove":"Verwijder gerichte gebruiker  van de dj booth\/wachtlijst",
       "whois all":"Geeft gebruikerid en gebruikernaam van iedere gebruiker in de kamer",
       "banall":"Verbied alle gebruikers in de kamer",
-      "status":"shows status of plug servers"
+      "status":"toon status van plug servers"
     },
     "responses":{
       "alertson":"Geluid afspelen bij de volgende woorden: %1",
       "alertsoff":"Niet langer geluid afspelen op specifieke woorden",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"Badges worden weergegeven",
+      "badgeoff":"Badges worden verborgen",
       "nextsong":"Je volgende track in de wachtlijst is %1 van %2",
       "isHistory":"Waarschuwing: Deze track bevindt zich nog in de geschiedenis (%1 van %2)",
       "automute":{
         "automuted":"%1 automatisch gedempt.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "registered":"%1 zal ge-automute worden de volgende keer dat deze draait.",
+        "unregistered":"%1 zal niet meer ge-automute worden."
       },
       "status":{
         "rest":"REST: %1 %2 [%3ms]",
@@ -79,36 +79,36 @@
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "boothAvailable":"Als je nu de wachtlijst toetreed, DJ je meteen!",
+    "alreadyDJ":"Je bent al de DJ!",
+    "waitListTime":"Je staat in de wachtlijst op plaats %1 van %2. Je zal DJ'en in ongeveer %3!",
+    "joinTime":"Als je nu toetreed tot de wachtlijst ben je aan het DJ'en in ongeveer %1!"
   },
   "notify":{
     "header":"Gebruiker informatie",
     "join":"Gebruiker join",
     "leave":"Gebruiker gaat weg",
-    "grab":"User Grab",
+    "grab":"Gebruiker heeft gegrabbed",
     "meh":"Gebruiker Mehs",
     "stats":"Nummer Statistieken",
     "updates":"Nummer Updates",
     "history":"Nummers in geschiedenis",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Song niet beschikbaar",
     "songLength":"Lengte van een nummer (1% min)",
     "message":{
-      "grab":"grabbed %1 - %2",
+      "grab":"gegrabbed %1 - %2",
       "stats":"Status: %1 woots - %2 mehs - %3 grabs",
       "updates":"Nu aan het spelen: %1 by %2<br\/> Gespeeld door: %3",
       "meh":"%1 Heeft deze track gemeh'd",
-      "join":"joined the room",
-      "leave":"left the room",
+      "join":"kamer binnen gekomen",
+      "leave":"kamer verlaten",
       "history":"Dit liedje is nog steeds in de geschiedenis (%1 van %2)",
       "historySkipped":"Liedje in geschiedenis (%1 van %2), maar is overgeslagen bij de vorige keer dat het gedraaid is",
       "songLength":"Lied is langer dan %1 minuten",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"Song is privé",
+      "songNotFound":"Song niet gevonden",
+      "songEmbed":"Song kan niet embed worden",
+      "songStreamable":"Song kan niet gestreamed worden"
     }
   },
   "info":{
@@ -145,7 +145,7 @@
     "lastDisconnect":"Laatste Disconnect",
     "lastPosition":"Positie",
     "time":"Tijd",
-    "lastMessage":"Last Message"
+    "lastMessage":"Laatste bericht"
   },
   "ranks":{
     "you":"Jij",
@@ -170,12 +170,12 @@
     "autorespond":"AFK Automatisch Reageren",
     "notify":"Notificatie's",
     "afktimers":"AFK Wekkers",
-    "etatimer":"ETA Timer",
+    "etatimer":"ETA timer",
     "roomsettings":"Kamer instellingen",
     "chatimages":"Chat Afbeeldingen",
     "twitchemotes":"Twitch emoticons",
     "controlpanel":"Configuratiescherm",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Toon verwijderde berichten"
   },
   "vote":{
     "meh":"Meh",
@@ -194,18 +194,18 @@
   },
   "error":{
     "userNotFound":"Gebruiker niet gevonden",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Gebruiker %1 bevindt zich al in de wachtlijst",
+    "notInWaitList":"Gebruiker %1 staat niet in de wachtlijst",
     "unknownMenuKey":"Onbekende menu key: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Ongeldige syntax voor add comando. Gebruik: \/add @gebruiker",
+    "invalidBanSyntax":"Ongeldige syntax voor ban commando. Gebruik: \/ban @gebruiker of \/ban @gebruiker::tijd::reden",
+    "invalidBanTime":"Te gespecificeerde tijd, %1 is ongeldig. Geldige tijden zijn 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Ongeldige syntax voor remove commando. Gebruik: \/remove @gebruiker",
+    "invalidWhoisSyntax":"Ongeldige syntax voor whois commando. Gebruik: \/whois @gebruiker",
     "noLiteSupport":"Dit wordt niet ondersteund in plug&#179; Lite",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "errorGettingPlaylistInfo":"Fout bij het verkrijgen van afspeellijst info",
     "noPlaylistsFound":"Geen afspeellijsten gevonden",
     "yourActivePlaylistIsFull":"Uw actieve afspeellijst is vol",
-    "noNextSong":"You have no queued song"
+    "noNextSong":"Je hebt geen songs in je afspeellijst"
   }
 }

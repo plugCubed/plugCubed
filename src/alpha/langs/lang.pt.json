@@ -63,9 +63,9 @@
     "responses":{
       "alertson":"Tocando o som das seguintes palavras: %1",
       "alertsoff":"Não está mais tocando o som em palavras específicas",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
-      "nextsong":"Sua próxima música em espera será %1 por %2",
+      "badgeon":"Os emblemas foram ativados",
+      "badgeoff":"Os emblemas foram desativados",
+      "nextsong":"Sua próxima música a ser tocada é %1 de %2",
       "isHistory":"Aviso: Está música ainda está no histórico (%1 de %2)",
       "automute":{
         "automuted":"%1 mutado automaticamente.",
@@ -88,7 +88,7 @@
     "header":"Notificações do chat",
     "join":"Usuário entrou",
     "leave":"Saída de Usuário",
-    "grab":"Adição de Usuário",
+    "grab":"Add de Usuário",
     "meh":"Chatos do usuário ",
     "stats":"Estatísticas da música",
     "updates":"Atualizações da música",
@@ -100,7 +100,7 @@
       "stats":"Estatística: %1 legais -- %2 chatos -- %3 adds",
       "updates":"Tocando agora: %1 de %2<br\/>Tocado por: %3",
       "meh":"%1 deu chato nesta música",
-      "join":"entrou na sala!",
+      "join":"entrou na sala",
       "leave":"saiu da sala",
       "history":"A música está no histórico (%1 of %2)",
       "historySkipped":"A música está no histórico (%1 of %2), mas foi pulada na última vez",
@@ -145,7 +145,7 @@
     "lastDisconnect":"Última desconexão",
     "lastPosition":"Posição",
     "time":"Tempo",
-    "lastMessage":"Last Message"
+    "lastMessage":"Última Mensagem"
   },
   "ranks":{
     "you":"Você",
@@ -175,12 +175,12 @@
     "chatimages":"Imagens no chat",
     "twitchemotes":"Emoticons do Twitch",
     "controlpanel":"Painel de Controle",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Mostrar Mensagens Apagadas"
   },
   "vote":{
     "meh":"Chato",
     "woot":"Legal!",
-    "grab":"Adicionar",
+    "grab":"Add",
     "undecided":"Indeciso",
     "djing":"Tocando Agora"
   },
@@ -194,18 +194,18 @@
   },
   "error":{
     "userNotFound":"Usuário não encontrado",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"O usuário %1 já está na lista de espera",
+    "notInWaitList":"O usuário %1 não está na lista de espera",
     "unknownMenuKey":"Atalho desconhecido: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Sintaxe inválida para o comando adicionar. Utilize: \/add @usuário",
+    "invalidBanSyntax":"Sintaxe inválida para o comando banir. Utilize: \/ban @usuário ou \/ban @usuário::time::motivo",
+    "invalidBanTime":"O tempo especificado, %1 é inválido. Os tempos válidos são 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Sintaxe inválida para o comando remover. Utilize: \/remove @usuário",
+    "invalidWhoisSyntax":"Sintaxe inválida para o comando QuemÉ. Utilize: \/whois @usuário",
     "noLiteSupport":"Isto não é suportado em plug³ Lite",
-    "errorGettingPlaylistInfo":"Erro ao obter informações da lista de reprodução",
-    "noPlaylistsFound":"Não há lista de reproduções encontrada",
-    "yourActivePlaylistIsFull":"Sua lista de reproduções ativa está cheia",
+    "errorGettingPlaylistInfo":"Erro ao obter informações da playlist",
+    "noPlaylistsFound":"Nenhuma playlist encontrada",
+    "yourActivePlaylistIsFull":"Sua playlist ativa está cheia",
     "noNextSong":"Você não tem música para tocar"
   }
 }

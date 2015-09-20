@@ -63,8 +63,8 @@
     "responses":{
       "alertson":"Zvuk sa prehrá pri následujúcich slovách: %1",
       "alertsoff":"Zvuk už nebude pri určených slovách prehratý",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"Odznaky boli zapnuté",
+      "badgeoff":"Odznaky oli vypnuté",
       "nextsong":"Vaša ďalšia skladba bude %1 od %2",
       "isHistory":"Pozor: Tato skladba je stále v historií (%1 z %2)",
       "automute":{
@@ -79,36 +79,36 @@
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "boothAvailable":"Ak by ste sa pridali do waitlistu, boli by ste na rade!",
+    "alreadyDJ":"Práve ste DJ!",
+    "waitListTime":"Vo waitliste ste %1 z %2, budete DJ za %3!",
+    "joinTime":"Ak by ste sa pridali do waitlistu teraz, boli by ste na rade za %1!"
   },
   "notify":{
     "header":"User Information",
     "join":"Používateľ pripojiť",
     "leave":"Nechajte používateľa",
-    "grab":"User Grab",
+    "grab":"Pridanie užívateľov",
     "meh":"Užívateľ Mehs",
     "stats":"Pieseň štatistiky",
     "updates":"Pieseň aktualizácie",
     "history":"Piesní v histórii",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Skladba nedostupná",
     "songLength":"Dĺžka piesne (%1 min)",
     "message":{
-      "grab":"grabbed %1 - %2",
+      "grab":"pridané %1 - %2",
       "stats":"Štatistiky: %1 woots--%2 mehs--%3 curates",
       "updates":"Prehráva: %1 %2 <br>hrajú: %3",
       "meh":"%1 meh mal túto trať",
-      "join":"joined the room",
-      "leave":"left the room",
+      "join":"sa pripojil do miestnosti",
+      "leave":"opustil miestnosť",
       "history":"Skladba je v histórii (%1 z %2)",
       "historySkipped":"Pesnička je v histórii (%1 z %2), ale bola preskočí pretože dnes hrala",
       "songLength":"Pesnička je dlhšia ako %1 minúta",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"Skladba je súkromná",
+      "songNotFound":"Skladba nenájdená",
+      "songEmbed":"Skladba nemá povolené vkladanie",
+      "songStreamable":"Skladba nepodporuje streamovanie"
     }
   },
   "info":{
@@ -145,7 +145,7 @@
     "lastDisconnect":"Naposledy odpojiť",
     "lastPosition":"Pozícia",
     "time":"Čas",
-    "lastMessage":"Last Message"
+    "lastMessage":"Posledná správa"
   },
   "ranks":{
     "you":"Ste",
@@ -170,17 +170,17 @@
     "autorespond":"AFK Autorespond",
     "notify":"Oznámenia",
     "afktimers":"AFK časovač",
-    "etatimer":"ETA Timer",
+    "etatimer":"Časovač zostávajúceho času",
     "roomsettings":"Nastavenie Miestnosti",
     "chatimages":"Chat obrázky",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel",
-    "showdeletedmessages":"Show Deleted Messages"
+    "twitchemotes":"Twitch smajlíky",
+    "controlpanel":"Ovládací panel",
+    "showdeletedmessages":"Zobraziď odstránené správy"
   },
   "vote":{
     "meh":"Meh",
     "woot":"Woot",
-    "grab":"Grab",
+    "grab":"Pridať",
     "undecided":"Nerozhodný",
     "djing":"Djing"
   },
@@ -194,18 +194,18 @@
   },
   "error":{
     "userNotFound":"Užívateľ nebol nájdený",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Užívateľ %1 už je vo waitliste",
+    "notInWaitList":"Užívateľ %1 nie je vo waitliste",
     "unknownMenuKey":"Neznámy menu kľúč: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Nesprávny syntax pre pridanie užívateľa. Použitie: \/add @užívateľ",
+    "invalidBanSyntax":"Nesprávny syntax pre zabanovanie užívateľa. Použitie: \/ban @užívateľ alebo \/ban @užívateľ::doba::dôvod",
+    "invalidBanTime":"Zadaný čas %1 je neplatný. Platné hodnoty sú 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Neplatný syntax pre príkaz na odstránenie užívateľa. Použitie: \/remove @užívateľ",
+    "invalidWhoisSyntax":"Neplatný syntax pre príkaz whois. Použitie: \/whois @užívateľ",
     "noLiteSupport":"Toto nie je podporované v plug³ Lite",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
-    "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
-    "noNextSong":"You have no queued song"
+    "errorGettingPlaylistInfo":"Chyba pri získavaní informácií o playliste",
+    "noPlaylistsFound":"Nebol nájdený žiadny playlist",
+    "yourActivePlaylistIsFull":"Váš aktívny playlist je plný",
+    "noNextSong":"Nemáte žiadnu skladbu v poradí"
   }
 }

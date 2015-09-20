@@ -2,7 +2,7 @@
   "running":"Pokrećeš plug plug&#179; verzija %1",
   "runningLite":"Pokretanje plug&#179; Lajt verzija!",
   "runningLiteInfo":"Neke funkcije neće raditi.",
-  "commandsHelp":"Koristi ' \/commands' da vidis komande.",
+  "commandsHelp":"Koristi ' \/commands' da vidiš komande.",
   "autorespond":{
     "default":"Nisam za kompjuterom.",
     "disable":"Isključi automatsko odgovaranje na četu",
@@ -63,8 +63,8 @@
     "responses":{
       "alertson":"Reprodukcija zvuka na sledeće reči: %1",
       "alertsoff":"Više ne reproduktuj zvuke na određene reči",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"Bedževi su uključeni",
+      "badgeoff":"Bedževi su isključeni",
       "nextsong":"Tvoja sledeća pjesma koju puštaš je %1 od %2",
       "isHistory":"Upozorenje: Ova pesma je u istoriji (%1 od %2)",
       "automute":{
@@ -145,7 +145,7 @@
     "lastDisconnect":"Poslednje isključenje",
     "lastPosition":"Pozicija",
     "time":"Vreme",
-    "lastMessage":"Last Message"
+    "lastMessage":"Poslednja Poruka"
   },
   "ranks":{
     "you":"Vi",
@@ -153,7 +153,7 @@
     "residentdj":"Specijalni DJ",
     "bouncer":"Izbacivač",
     "manager":"Menadžer",
-    "cohost":"Zamenik Domaćin",
+    "cohost":"Zamenik Domaćina",
     "host":"Domaćin",
     "ambassador":"Ambasador",
     "admin":"Admin"
@@ -175,7 +175,7 @@
     "chatimages":"Čet slike",
     "twitchemotes":"Twitch Emotikoni",
     "controlpanel":"Kontrolna Tabla",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Prikaži izbrisane poruke"
   },
   "vote":{
     "meh":"Ne sviđa mi se",
@@ -194,14 +194,14 @@
   },
   "error":{
     "userNotFound":"Korisnik nije pronađen",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Korisnik %1 je već u Listi Čekanja",
+    "notInWaitList":"%1 korisnik nije u Listi Čekanja",
     "unknownMenuKey":"Nepoznata komanda: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Nevažeća sintaksa za dodavanje komande. Upotreba: \/add @user",
+    "invalidBanSyntax":"Nevažeća sintaksa za Ban komandu. Upotreba: \/zabrani @user ili \/ban @user::time::reason",
+    "invalidBanTime":"Navedeni vremenski interval %1 je nevažeći. Važeća vremena su 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Nevažeća sintaksa za uklanjanje komande. Upotreba: \/remove @user",
+    "invalidWhoisSyntax":"Nevažeća sintaksa za \"ko je\" komandu. Upotreba: \/whois @user",
     "noLiteSupport":"Ovo nije podržano u plug&#179; Lajt",
     "errorGettingPlaylistInfo":"Greška pri dobijanju informacije o playlist-i",
     "noPlaylistsFound":"PlayList-a nije pronađena",

@@ -63,8 +63,8 @@
     "responses":{
       "alertson":"Mängib heli järgmised sõnad: %1",
       "alertsoff":"Enam mängib heli teatud sõnu",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"Märgid on sisse lülitatud",
+      "badgeoff":"Märgid on välja lülitatud",
       "nextsong":"Oma järgmises järjekorras olevad laul on %1 poolt %2",
       "isHistory":"Hoiatus: See laul on ajaloos (%1 \/ %2)",
       "automute":{
@@ -145,7 +145,7 @@
     "lastDisconnect":"Viimati Katkesta",
     "lastPosition":"Positsioon",
     "time":"aeg",
-    "lastMessage":"Last Message"
+    "lastMessage":"Viimane sõnum"
   },
   "ranks":{
     "you":"Sina",
@@ -175,7 +175,7 @@
     "chatimages":"Jututuba pildid",
     "twitchemotes":"tõmblema Emotikonid",
     "controlpanel":"juhtpaneel",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Kuva kustutatud sõnumid"
   },
   "vote":{
     "meh":"Kehv lugu",
@@ -194,14 +194,14 @@
   },
   "error":{
     "userNotFound":"Kasutajat ei leitud",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Kasutaja %1 on juba waitlist",
+    "notInWaitList":"Kasutaja %1 ei ole waitlist",
     "unknownMenuKey":"Tundmatu nupp %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidAddSyntax":"Käsu lisamine kehtetu süntaks. Kasutamine: \/ lisa @user",
+    "invalidBanSyntax":"Sobimatu süntaks ban käsk. Kasutamine: \/ keeld @user või \/ban @user::time::reason",
+    "invalidBanTime":"Määratud, %1 ei sobi. Kehtiv ajad on 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Sobimatu süntaks Eemalda käsk. Kasutamine: \/remove @user",
+    "invalidWhoisSyntax":"Sobimatu süntaks whois käsk. Kasutamine: \/whois @user",
     "noLiteSupport":"See ei toeta plug³ Lite",
     "errorGettingPlaylistInfo":"Esitusloendi info toomisel ilmnes tõrge",
     "noPlaylistsFound":"Leitud esitusloendid",
