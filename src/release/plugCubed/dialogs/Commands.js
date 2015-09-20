@@ -44,7 +44,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
 
                     for (var j in argumentTranslationParts) {
                         if (!argumentTranslationParts.hasOwnProperty(j)) continue;
-                        if (argumentTranslationParts[j] == '+' || argumentTranslationParts[j] == '-') {
+                        if (argumentTranslationParts[j] === '+' || argumentTranslationParts[j] === '-') {
                             command += argumentTranslationParts[j];
                         } else {
                             command += p3Lang.i18n(argumentTranslationParts[j]);
@@ -71,7 +71,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
 
                         for (var j in argumentTranslationParts) {
                             if (!argumentTranslationParts.hasOwnProperty(j)) continue;
-                            if (argumentTranslationParts[j] == '+' || argumentTranslationParts[j] == '-') {
+                            if (argumentTranslationParts[j] === '+' || argumentTranslationParts[j] === '-') {
                                 command += argumentTranslationParts[j];
                             } else {
                                 command += p3Lang.i18n(argumentTranslationParts[j]);

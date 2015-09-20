@@ -22,11 +22,10 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
     langKeys = $.map(oriLang, function(v, i) {
         if (typeof v === 'string') {
             return i;
-        } else {
-            return $.map(v, function(v2, i2) {
-                return i + '.' + i2;
-            });
         }
+        return $.map(v, function(v2, i2) {
+            return i + '.' + i2;
+        });
     });
     ranks = ['admin', 'ambassador', 'bouncer', 'cohost', 'residentdj', 'leader', 'host', 'manager', 'volunteer'];
     RoomLoader = ModuleLoader.getView({
@@ -116,9 +115,8 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
         update: function() {
             parseDescription(p3Utils.cleanHTML(RoomModel.get('description')));
         },
-        /**
-        * Converts RCS CCS to P3 RSS Format. Written by ReAnna.
-        **/
+
+        //Converts RCS CCS to P3 RSS Format. Written by ReAnna.
         convertRCSToPlugCubed: function(ccs) {
             var rs = _.clone(ccs);
             var colors = ccs.ccc;
@@ -141,6 +139,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                     rs.images.icons.residentdj = images.rdj;
             }
 
+            console.log(rs);
             return rs;
         },
         execute: function() {
@@ -190,11 +189,12 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                                     font.toString = function() {
                                         var sources = [];
                                         if (typeof this.url === 'string')
-                                            sources.push('url("' + this.url + '")'); else {
+                                            sources.push('url("' + this.url + '")');
+                                        else {
                                             for (var j in this.url) {
                                                 if (!this.url.hasOwnProperty(j)) continue;
                                                 if (['woff', 'woff2', 'opentype', 'svg', 'svgz', 'embedded-opentype', 'truetype'].indexOf(j) > -1)
-                                                    sources.push('url("' + this.url[j] + '") format("' + j + '")')
+                                                    sources.push('url("' + this.url[j] + '") format("' + j + '")');
                                             }
                                         }
                                         return '@font-face { font-family: "' + this.name + '"; src: ' + sources.join(',') + '; }';

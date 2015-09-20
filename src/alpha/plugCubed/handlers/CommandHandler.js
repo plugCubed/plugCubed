@@ -62,7 +62,6 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                             user = p3Utils.getUser(args.join(' '));
                             if (user === null) {
                                 API.chatLog(p3Lang.i18n('error.userNotFound'));
-                                return;
                             } else {
                                 API.moderateBanUser(user.id, API.BAN.HOUR, 0);
                             }
@@ -71,7 +70,6 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                             user = p3Utils.getUser(values[0]);
                             if (user === null) {
                                 API.chatLog(p3Lang.i18n('error.userNotFound'));
-                                return;
                             } else {
                                 var time;
                                 var reason;
@@ -161,7 +159,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 return;
             }
             if (p3Utils.equalsIgnoreCase(command, 'refresh')) {
-                $('#refresh-button').click();
+                $('.button.refresh').click();
                 return;
             }
             if (p3Utils.equalsIgnoreCase(command, 'volume')) {
@@ -201,10 +199,10 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             }
             if (p3Utils.equalsIgnoreCase(command, 'status')) {
                 p3Utils.statusREST(function(status, text, time) {
-                    p3Utils.chatLog(undefined, p3Lang.i18n('commands.responses.status.rest', status, text, time), status == 200 ? '00FF00' : 'FF0000', -1);
+                    p3Utils.chatLog(undefined, p3Lang.i18n('commands.responses.status.rest', status, text, time), status === 200 ? '00FF00' : 'FF0000', -1);
                 });
                 p3Utils.statusSocket(function(status, text, time) {
-                    p3Utils.chatLog(undefined, p3Lang.i18n('commands.responses.status.socket', status, text, time), status == 1000 ? '00FF00' : 'FF0000', -1);
+                    p3Utils.chatLog(undefined, p3Lang.i18n('commands.responses.status.socket', status, text, time), status === 1000 ? '00FF00' : 'FF0000', -1);
                 });
                 return;
             }
@@ -253,9 +251,6 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 return;
             }
             if (p3Utils.equalsIgnoreCase(command, 'grab')) {
-                if (p3Utils.runLite) {
-                    return API.chatLog(p3Lang.i18n('error.noLiteSupport'));
-                }
                 $.getJSON('https://plug.dj/_/playlists', function(response) {
                     if (response.status !== 'ok') {
                         API.chatLog(p3Lang.i18n('error.errorGettingPlaylistInfo'));

@@ -5,7 +5,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
     // Misc
     names.push('version');
     // Features
-    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle');
+    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'useRoomSettings');
     // Registers
     names.push('registeredSongs', 'alertson', 'colors');
 
@@ -13,7 +13,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
 
     function upgradeVersion(save) {
         switch (save.version) {
-            case void 0:
+            case undefined:
             case 1:
                 // Inline Images => Chat Images
                 if (save.inlineimages != null)
@@ -202,9 +202,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 }
 
                 if (this.registeredSongs.length > 0 && API.getMedia() != null && this.registeredSongs.indexOf(API.getMedia().id) > -1) {
-                    if (!p3Utils.runLite) {
-                        PlaybackModel.muteOnce();
-                    }
+                    PlaybackModel.muteOnce();
                     API.chatLog(p3Lang.i18n('automuted', API.getMedia().title));
                 }
 
@@ -219,8 +217,9 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         save: function() {
             var settings = {};
             for (var i in names) {
-                if (names.hasOwnProperty(i))
+                if (names.hasOwnProperty(i)) {
                     settings[names[i]] = this[names[i]];
+                }
             }
             settings.version = curVersion;
             localStorage.setItem('plugCubed', JSON.stringify(settings));

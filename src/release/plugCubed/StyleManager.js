@@ -39,7 +39,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/bridges/Popou
             update();
         },
         clearImports: function() {
-            if (imports.length == 0) return;
+            if (imports.length === 0) return;
             imports = [];
             update();
         },

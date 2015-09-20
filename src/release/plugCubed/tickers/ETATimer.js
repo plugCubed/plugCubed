@@ -38,7 +38,7 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
                     var time;
                     var $djButton;
 
-                    isDJ = API.getDJ() != null && API.getDJ().id == this.myID;
+                    isDJ = API.getDJ() != null && API.getDJ().id === this.myID;
                     waitListPos = API.getWaitListPosition();
                     timePerSong = 0;
                     history = API.getHistory();

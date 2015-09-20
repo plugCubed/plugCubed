@@ -1,5 +1,4 @@
 define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/dialogs/panes/InventoryPane', 'plugCubed/Utils', 'plugCubed/ModuleLoader', 'plugCubed/bridges/Layout'], function($, OverrideHandler, InventoryPane, p3Utils, ModuleLoader, Layout) {
-    if (p3Utils.runLite) return null;
 
     var UserInventory = ModuleLoader.getView({
         id: 'user-inventory'
@@ -12,7 +11,7 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/dialogs/panes
 
     var handler = OverrideHandler.extend({
         doOverride: function() {
-            if (typeof TabMenu.prototype._render != 'function')
+            if (typeof TabMenu.prototype._render !== 'function')
                 TabMenu.prototype._render = TabMenu.prototype.render;
 
             TabMenu.prototype.render = function() {
@@ -33,7 +32,7 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/dialogs/panes
                 UserInventory.prototype._onMenuSelect = UserInventory.prototype.onMenuSelect;
 
             UserInventory.prototype.onMenuSelect = function(a) {
-                if (a == 'p3') {
+                if (a === 'p3') {
                     this.clear();
                     this.view = new InventoryPane();
                     this.$el.append(this.view.$el);

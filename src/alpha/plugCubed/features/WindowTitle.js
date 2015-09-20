@@ -22,7 +22,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
         },
         handler: function(data) {
             if (Settings.songTitle && data.media && data.media.title) {
-                this.titlePrefix = (API.getVolume() > 0 && (p3Utils.runLite || (!p3Utils.runLite && !Database.settings.streamDisabled)) ? '▶' : '❚❚') + ' ';
+                this.titlePrefix = (API.getVolume() > 0 && !Database.settings.streamDisabled ? '▶' : '❚❚') + ' ';
 
                 if (this.titleClean === data.media.author + ' - ' + data.media.title + ' :: ' + p3Utils.getRoomName() + ' :: ') return;
 
@@ -31,9 +31,9 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
                 this.titleClean = data.media.author + ' - ' + data.media.title + ' :: ' + p3Utils.getRoomName() + ' :: ';
                 this.title = (this.titlePrefix + this.titleClean).split(' ').join(' ');
                 document.title = this.title;
-                var _this = this;
+                var that = this;
                 this.intervalID = setInterval(function() {
-                    _this.onIntervalTick();
+                    that.onIntervalTick();
                 }, 300);
                 return;
             }

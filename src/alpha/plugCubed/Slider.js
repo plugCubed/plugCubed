@@ -43,7 +43,7 @@ define(['jquery', 'plugCubed/Class'], function($, Class) {
             return false;
         },
         onChange: function() {
-            this.$circle.css('left', parseInt(this.$hit.css('left')) + this.$line.width() * ((this.value - this.min) / (this.max - this.min)) - this.$circle.width() / 2);
+            this.$circle.css('left', parseInt(this.$hit.css('left'), 10) + this.$line.width() * ((this.value - this.min) / (this.max - this.min)) - this.$circle.width() / 2);
             if (typeof this.cb === 'function') this.cb(this.value);
         }
     });

@@ -1,0 +1,15 @@
+{
+    "extends": "thedark1337/plugdj",
+    "globals": {
+        "gapi": false,
+        "plugCubed": true,
+        "plugCubedUserData": true,
+        "SC": false,
+        "startWooting": false
+    },
+    "rules":  {
+       "camelcase": 0,
+       "no-implicit-coercion": 0,
+        "strict": 0
+    }
+}

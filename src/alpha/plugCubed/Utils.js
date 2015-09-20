@@ -211,7 +211,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             return cleanHTMLMessage(msg, disallow, extraAllow);
         },
         cleanTypedString: function(msg) {
-            return msg.split("<").join("&lt;").split(">").join("&gt;");
+            return msg.split('<').join('&lt;').split('>').join('&gt;');
         },
         chatLog: function(type, message, color, fromID, fromName) {
             var $chat;
@@ -259,7 +259,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
                 var lastSender = lastMessageContainer.children('.badge-box').data('uid');
 
                 if (from != null && from.username != null) {
-                    if (lastSender == from.id) {
+                    if (lastSender === from.id) {
                         lastMessageContainer.find('.text').append('<br>').append($msgSpan);
                         if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height())
                             $chat.scrollTop($chat[0].scrollHeight);
@@ -291,13 +291,13 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
                     } else if (this.hasPermission(from.id, API.ROLE.DJ)) {
                         $message.addClass('from-dj');
                         $from.addClass('dj').append('<i class="icon icon-chat-dj"></i>');
-                    } else if (from.id == API.getUser().id) {
+                    } else if (from.id === API.getUser().id) {
                         $message.addClass('from-you');
                         $from.addClass('you');
                     }
                 } else if (fromID < 0) {
                     $from.find('.un').html('plug&#179;');
-                    if (lastSender == fromID) {
+                    if (lastSender === fromID) {
                         lastMessageContainer.find('.text').append('<br>').append($msgSpan);
                         if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height())
                             $chat.scrollTop($chat[0].scrollHeight);
@@ -435,10 +435,10 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
 
                 var title = this.getAllPlugCubedRanks(user.id, true);
                 var message = $('<table>').css({
-                        width: '100%',
-                        color: '#CC00CC',
-                        'font-size': '1.02em'
-                    });
+                    width: '100%',
+                    color: '#CC00CC',
+                    'font-size': '1.02em'
+                });
 
                 // Username
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.name') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.cleanTypedString(user.username)))));
@@ -489,9 +489,9 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
         },
         getAllUsers: function() {
             var table = $('<table>').css({
-                    width: '100%',
-                    color: '#CC00CC'
-                });
+                width: '100%',
+                color: '#CC00CC'
+            });
             var users = API.getUsers();
             for (var i in users) {
                 if (users.hasOwnProperty(i)) {

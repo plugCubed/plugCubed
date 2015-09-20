@@ -1,7 +1,7 @@
 define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
     var language;
     var defaultLanguage;
-    var _this;
+    var that;
     var Lang;
 
     language = {};
@@ -12,15 +12,15 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
         defaultLoaded: false,
         loaded: false,
         init: function() {
-            _this = this;
+            that = this;
             $.getJSON('https://d1rfegul30378.cloudfront.net/alpha/lang.json?_' + Date.now(), function(a) {
-                _this.allLangs = a;
+                that.allLangs = a;
             }).done(function() {
-                if (_this.allLangs.length === 1) API.chatLog('Error loading language info for plug³');
-                _this.loadDefault();
+                if (that.allLangs.length === 1) API.chatLog('Error loading language info for plug³');
+                that.loadDefault();
             }).fail(function() {
                 API.chatLog('Error loading language info for plug³');
-                _this.loadDefault();
+                that.loadDefault();
             });
         },
         /**
@@ -29,10 +29,10 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
         loadDefault: function() {
             $.getJSON('https://d1rfegul30378.cloudfront.net/alpha/langs/lang.en.json?_' + Date.now(), function(languageData) {
                 defaultLanguage = languageData;
-                _this.defaultLoaded = true;
+                that.defaultLoaded = true;
             }).error(function() {
                 setTimeout(function() {
-                    _this.loadDefault();
+                    that.loadDefault();
                 }, 500);
             });
         },
@@ -43,7 +43,7 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
         load: function(callback) {
             if (!this.defaultLoaded) {
                 setTimeout(function() {
-                    _this.load(callback);
+                    that.load(callback);
                 }, 500);
                 return;
             }
@@ -53,22 +53,31 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
                 $.extend(true, language, defaultLanguage);
                 this.curLang = 'en';
                 this.loaded = true;
-                if (typeof callback === 'function') callback();
+                if (typeof callback === 'function') {
+                    callback();
+                    return;
+                }
                 return;
             }
             $.getJSON('https://d1rfegul30378.cloudfront.net/alpha/langs/lang.' + lang + '.json?_' + Date.now(), function(languageData) {
                 language = {};
                 $.extend(true, language, defaultLanguage, languageData);
-                _this.curLang = lang;
-                _this.loaded = true;
-                if (typeof callback === 'function') callback();
+                that.curLang = lang;
+                that.loaded = true;
+                if (typeof callback === 'function') {
+                    callback();
+                    return;
+                }
             }).error(function() {
                 console.log('[plug³] Couldn\'t load language file for ' + lang);
                 language = {};
                 $.extend(true, language, defaultLanguage);
-                _this.curLang = 'en';
-                _this.loaded = true;
-                if (typeof callback === 'function') callback();
+                that.curLang = 'en';
+                that.loaded = true;
+                if (typeof callback === 'function') {
+                    callback();
+                    return;
+                }
             });
         },
         /**
@@ -97,8 +106,8 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class'], function($, Class) {
             return a;
         },
         allLangs: [{
-            "file": "en",
-            "name": "English"
+            file: 'en',
+            name: 'English'
         }]
     });
     return new Lang();

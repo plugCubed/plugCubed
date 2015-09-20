@@ -1,8 +1,7 @@
 define(['jquery', 'plugCubed/Utils', 'plugCubed/AvatarManifest', 'plugCubed/ModuleLoader'], function($, p3Utils, p3AvatarManifest, ModuleLoader) {
 
-    var TheUserModel = ModuleLoader.getModule({
-        canModStaff: 'function'
-    });
+    var TheUserModel = require('plugCubed/bridges/TheUserModel');
+
     var AvatarCell = ModuleLoader.getView({
         className: 'cell',
         func: 'getBlinkFrame'

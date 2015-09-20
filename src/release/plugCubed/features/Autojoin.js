@@ -4,7 +4,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
 
     join = function() {
         var dj = API.getDJ();
-        if ((dj !== null && dj.id == API.getUser().id) || API.getWaitListPosition() > -1 || API.getWaitList().length == 50) return;
+        if ((dj !== null && dj.id === API.getUser().id) || API.getWaitListPosition() > -1 || API.getWaitList().length === 50) return;
         $('#dj-button').click();
     };
 
@@ -27,13 +27,13 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
             if (!Settings.autojoin) return;
             // If user is DJing, don't try to disable
             var dj = API.getDJ();
-            if (dj !== null && dj.id === API.getUser().id) return;
+            if (dj != null && dj.id === API.getUser().id) return;
             // If user is in waitlist, don't try to disable
             if (this.lastPosition > -1) return;
             // If waitlist is full, don't try to disable
-            if (API.getWaitList().length == 50) return;
+            if (API.getWaitList().length === 50) return;
             // If user was last DJ (DJ Cycle Disabled)
-            if (this.lastDJ == API.getUser().id) return;
+            if (this.lastDJ === API.getUser().id) return;
             // If the user was in the waitlist but is no longer, disable autojoin
             if (oldPosition > -1) {
                 // Disable

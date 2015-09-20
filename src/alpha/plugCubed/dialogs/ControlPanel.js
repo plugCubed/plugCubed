@@ -14,7 +14,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
     var scrollPane;
     var shownHeight;
     var tabs = {};
-    var _this;
+    var that;
     var _onResize;
     var _onTabClick;
 
@@ -111,7 +111,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
 
     ControlPanelClass = Class.extend({
         init: function() {
-            _this = this;
+            that = this;
             _onResize = _.bind(this.onResize, this);
             _onTabClick = _.bind(this.onTabClick, this);
 
@@ -147,7 +147,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
             $controlPanelDiv.append($currentDiv);
 
             $closeDiv = $('<div>').attr('id', 'p3-control-panel-close').append('<i class="icon icon-arrow-down"></i>').click(function() {
-                _this.toggleControlPanel(false);
+                that.toggleControlPanel(false);
             });
 
             $controlPanelDiv.append($closeDiv);
@@ -158,9 +158,9 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
         /**
          * Create an input field
          * @param {string} type Type of input field
-         * @param {undefined|string} [label]
+         * @param {undefined|string} [label] Label for input field
          * @param {undefined|string} [placeholder] Placeholder
-         * @returns {*|jQuery}
+         * @returns {*|jQuery} Returns new input field class
          */
         inputField: function(type, label, placeholder) {
             return new InputClass(type, label, placeholder);
@@ -170,10 +170,10 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
          */
         /**
          * Create a button
-         * @param {string} label
-         * @param {boolean} submit
-         * @param {onButtonClick} onClick
-         * @returns {*|jQuery}
+         * @param {string} label Label for button
+         * @param {boolean} submit Adds submit class to button
+         * @param {onButtonClick} onClick Function handler for onclick
+         * @returns {*|jQuery} Returns new button class
          */
         button: function(label, submit, onClick) {
             var newButton = new ButtonClass(label, submit);
@@ -214,7 +214,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
                 duration: 350,
                 easing: 'easeInOutExpo',
                 complete: function() {
-                    if (!_this.shown) {
+                    if (!that.shown) {
                         $controlPanelDiv.detach();
                         $controlPanelDiv = null;
                         scrollPane.destroy();
@@ -249,7 +249,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
         /**
          * Add a new tab, if it doesn't already exists
          * @param {string} name Name of tab
-         * @returns {PanelClass}
+         * @returns {PanelClass} Returns new tab
          */
         addPanel: function(name) {
             name = name.trim();
@@ -261,7 +261,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
         /**
          * Remove a tab, if tab exists
          * @param {PanelClass} panel Name of tab
-         * @returns {Boolean}
+         * @returns {Boolean} Returns true for deleted, false if panel not defined
          */
         removePanel: function(panel) {
             if (!(panel instanceof PanelClass) || tabs[panel.name] == null) return false;

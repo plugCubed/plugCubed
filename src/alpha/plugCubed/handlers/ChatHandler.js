@@ -3,7 +3,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     var twitchEmoteTemplate = '';
     var twitchEmotes = [];
 
-    $("#chat-messages").on('mouseover', '.twitch-emote', function() {
+    $('#chat-messages').on('mouseover', '.twitch-emote', function() {
         _$context.trigger('tooltip:show', $(this).data('emote'), $(this), true);
     }).on('mouseout', '.twitch-emote', function() {
         _$context.trigger('tooltip:hide');
@@ -24,11 +24,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                     if (p3Utils.startsWithIgnoreCase(url, ['http://plug.dj', 'https://plug.dj'])) {
                         return;
 
-                    // Normal image links
+                        // Normal image links
                     } else if (p3Utils.endsWithIgnoreCase(url, ['.gif', '.jpg', '.jpeg', '.png']) || p3Utils.endsWithIgnoreCase(p3Utils.getBaseURL(url), ['.gif', '.jpg', '.jpeg', '.png'])) {
                         imageURL = p3Utils.proxifyImage(url);
 
-                    // gfycat links
+                        // gfycat links
                     } else if (p3Utils.startsWithIgnoreCase(url, ['http://gfycat.com/', 'https://gfycat.com/'])) {
                         path = url.split('/');
                         if (path.length > 3) {
@@ -72,7 +72,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                             }
                         }
 
-                    // Lightshot links
+                        // Lightshot links
                     } else if (p3Utils.startsWithIgnoreCase(url, ['http://prntscr.com/', 'https://prntscr.com/'])) {
                         path = url.split('/');
                         if (path.length > 3) {
@@ -81,7 +81,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                                 imageURL = 'https://api.plugCubed.net/redirect/prntscr/' + path;
                         }
 
-                    // Imgur links
+                        // Imgur links
                     } else if (p3Utils.startsWithIgnoreCase(url, ['http://imgur.com/gallery/', 'https://imgur.com/gallery/', 'http://imgur.com/', 'https://imgur.com/'])) {
                         path = url.split('/');
                         if (path.length > 4) {
@@ -120,7 +120,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                             }
                         }
 
-                    // Gyazo links
+                        // Gyazo links
                     } else if (p3Utils.startsWithIgnoreCase(url, ['http://gyazo.com/', 'https://gyazo.com/'])) {
                         path = url.split('/');
                         if (path.length > 3) {
@@ -161,20 +161,21 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function convertEmotes(text) {
         if (Settings.twitchEmotes) {
             var nbspStart = p3Utils.startsWithIgnoreCase(text, '&nbsp;');
+            var onLoad = function() {
+                var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages');
+                var height = this.height;
+                if (this.width > $chat.find('.message').width())
+                    height *= this.width / $chat.find('.message').width();
+                $chat.scrollTop($chat[0].scrollHeight + height);
+            };
             text = ' ' + (nbspStart ? text.replace('&nbsp;', '') : text) + ' ';
             for (var i in twitchEmotes) {
                 if (!twitchEmotes.hasOwnProperty(i)) continue;
                 var twitchEmote = twitchEmotes[i];
-                if (text.indexOf(' ' + twitchEmote.emote + ' ') > -1 || text.indexOf(':' + twitchEmote.emote + ':') > -1) {
+                if (text.indexOf(' ' + twitchEmote.emote.toLowerCase() + ' ') > -1 || text.indexOf(':' + twitchEmote.emote.toLowerCase() + ':') > -1) {
                     var temp = $('<div>');
                     var image = $('<img>').addClass('twitch-emote').attr('src', twitchEmoteTemplate.split('{image_id}').join(twitchEmote.image_id)).data('emote', $('<span>').html(twitchEmote.emote).text());
-                    image.on('load', function() {
-                        var $chat = PopoutView && PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages');
-                        var height = this.height;
-                        if (this.width > $chat.find('.message').width())
-                            height *= this.width / $chat.find('.message').width();
-                        $chat.scrollTop($chat[0].scrollHeight + height);
-                    });
+                    image.on('load', onLoad);
                     temp.append(image);
                     text = text.split(' ' + twitchEmote.emote + ' ').join(' ' + temp.html() + ' ');
                     text = text.split(':' + twitchEmote.emote + ':').join(temp.html());
@@ -199,12 +200,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         }
 
         p3Utils.setUserData(data.uid, 'lastChat', Date.now());
-
-        if (p3Utils.hasPermission(undefined, API.ROLE.DJ) && (function(_) {
-                return p3Utils.isPlugCubedDeveloper(_) || p3Utils.isPlugCubedSponsor(_) || p3Utils.isPlugCubedAmbassador(_);
-            })(API.getUser().id)) {
-            data.deletable = true;
-        }
 
         data.un = p3Utils.cleanHTML(data.un, '*');
         data.message = p3Utils.cleanHTML(data.message, ['div', 'table', 'tr', 'td']);
@@ -279,7 +274,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             });
 
             if (specialIconInfo != null) {
-                $icon.css('background-image', 'url("https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3special.' + specialIconInfo.icon + '.png")');
+                $icon.css('background-image', 'url("https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3special."' + specialIconInfo.icon + '.png)');
             }
         }
 
@@ -311,12 +306,20 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
     function onChatDelete(cid) {
         if ((!p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) && !p3Utils.isPlugCubedDeveloper()) || !Settings.moderation.showDeletedMessages) return;
 
-        var $messages = $('.text.cid-' + cid);
+        var $messages = $('.cid-' + cid);
+        var deleteEvent = _$context._events['chat:delete'];
+        var deleteView;
+        for (var i in deleteEvent) {
+            if (deleteEvent.hasOwnProperty(i) && typeof deleteEvent[i].context === 'object') {
+                deleteView = deleteEvent[i].context;
+            }
+        }
+        if (deleteView.lastText && deleteView.lastText.hasClass('cid-' + cid)) {
+            deleteView.lastID = deleteView.lastType = deleteView.lastText = deleteView.lastTime = null;
+        }
 
-        if ($messages.length > 0) {
-            $messages.each(function() {
-                $(this).removeClass('cid-' + cid).closest('.cm').removeClass('deletable').css('opacity', 0.3).off('mouseenter').off('mouseleave').find('.timestamp').prepend($('<span/>').text('[DELETED] '));
-            });
+        if (!$messages.hasClass('plugcubed-deleted')) {
+            $messages.removeClass('cid-' + cid).closest('.cm').removeClass('deletable').addClass('plugcubed-deleted').css('opacity', 0.5).off('mouseenter').off('mouseleave').find('.timestamp').prepend('[DELETED] ');
         }
     }
 

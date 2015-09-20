@@ -1,13 +1,11 @@
 define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/handlers/DialogHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/Overrides/RoomUserListRow', 'plugCubed/Overrides', 'plugCubed/bridges/RoomUserListView'], function(module, Class, Notifications, Version, Styles, Settings, p3Utils, p3Lang, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, DialogHandler, Features, Tickers, Panels, p3RoomUserListRow, Overrides, RoomUserListView) {
-    var Loader, loaded = false;
+    var Loader;
+    var loaded = false;
 
     var original = RoomUserListView.prototype.RowClass;
 
     function __init() {
         p3Utils.chatLog(undefined, p3Lang.i18n('running', Version) + '</span><br><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), Settings.colors.infoMessage1, -1, 'plug&#179;');
-        if (p3Utils.runLite) {
-            p3Utils.chatLog(undefined, p3Lang.i18n('runningLite') + '</span><br><span class="chat-text" style="color:#FFFFFF">' + p3Lang.i18n('runningLiteInfo'), Settings.colors.warningMessage, -1, 'plug&#179;');
-        }
 
         $('head').append('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://d1rfegul30378.cloudfront.net/files/plugCubed.css" />');
 
@@ -87,8 +85,8 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
             RoomUserListView.prototype.RowClass = original;
             Overrides.revert();
 
-            var mainClass = module.id.split('/')[0],
-                modules = require.s.contexts._.defined;
+            var mainClass = module.id.split('/')[0];
+            var modules = require.s.contexts._.defined;
             for (var i in modules) {
                 if (!modules.hasOwnProperty(i)) continue;
                 if (p3Utils.startsWith(i, mainClass))

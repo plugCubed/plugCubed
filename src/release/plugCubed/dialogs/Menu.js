@@ -3,7 +3,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
     var $wrapper;
     var $menuDiv;
     var menuClass;
-    var _this;
+    var that;
     var menuButton;
     var streamButton;
     var clearChatButton;
@@ -19,19 +19,19 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
 
     menuClass = Class.extend({
         init: function() {
-            _this = this;
+            that = this;
             _onClick = $.proxy(this.onClick, this);
 
             this.shown = false;
 
             $('#app-menu').after(menuButton);
             menuButton.click(function() {
-                _this.toggleMenu();
+                that.toggleMenu();
                 dialogControlPanel.toggleControlPanel(false);
             });
             $('#room-bar').css('left', 108).find('.favorite').css('right', 55);
             $('#plugcubed .cube-wrap .cube').bind('webkitAnimationEnd mozAnimationEnd msAnimationEnd animationEnd', function() {
-                $("#plugcubed .cube-wrap .cube").removeClass('spin');
+                $('#plugcubed .cube-wrap .cube').removeClass('spin');
             });
             $('#plugcubed').mouseenter(function() {
                 $('#plugcubed .cube-wrap .cube').addClass('spin');
@@ -99,7 +99,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     if (Settings.autojoin) {
                         (function() {
                             var dj = API.getDJ();
-                            if (dj != null && dj.id == API.getUser().id || API.getWaitListPosition() > -1) return;
+                            if (dj != null && dj.id === API.getUser().id || API.getWaitListPosition() > -1) return;
                             $('#dj-button').click();
                         })();
                     }
@@ -128,7 +128,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     Settings.autorespond = !Settings.autorespond;
                     this.setEnabled('autorespond', Settings.autorespond);
                     if (Settings.autorespond) {
-                        if (Settings.awaymsg.trim() === "")
+                        if (Settings.awaymsg.trim() === '')
                             Settings.awaymsg = p3Lang.i18n('autorespond.default');
                         $('#chat-input-field').attr('disabled', 'disabled').attr('placeholder', p3Lang.i18n('autorespond.disable'));
                     } else {
@@ -200,9 +200,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                         $djButton.html(Lang.dj.waitLeave);
                     }
                     break;
-                case 'language':
-                    console.log('Language click');
-                    break;
                 default:
                     API.chatLog(p3Lang.i18n('error.unknownMenuKey', a));
                     break;
@@ -222,7 +219,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
 
             // Header
             header.append($('<div>').addClass('back').append($('<i>').addClass('icon icon-arrow-left')).click(function() {
-                _this.toggleMenu(false);
+                that.toggleMenu(false);
             }));
             header.append($('<div>').addClass('title').append($('<i>').addClass('icon icon-settings-white')).append($('<span>plug&#179;</span>')).append($('<span>').addClass('version').text(Version)));
 
@@ -288,12 +285,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 container.append(GUIButton((Settings.notify & enumNotifications.SONG_UNAVAILABLE) === enumNotifications.SONG_UNAVAILABLE, 'notify-unavailable', p3Lang.i18n('notify.songUnavailable')).data('bit', enumNotifications.SONG_UNAVAILABLE).data('perm', API.ROLE.BOUNCER));
                 container.append(GUIButton((Settings.notify & enumNotifications.SONG_LENGTH) === enumNotifications.SONG_LENGTH, 'notify-songLength', p3Lang.i18n('notify.songLength', Settings.notifySongLength)).data('bit', enumNotifications.SONG_LENGTH).data('perm', API.ROLE.BOUNCER));
                 container.append(songLengthSlider.$slider.css('left', 40));
+                $wrapper = $('<div>').attr('id', 'p3-settings-wrapper');
+                $('body').append($wrapper.append($menuDiv.append(header).append(container)));
+                if (songLengthSlider != null) songLengthSlider.onChange();
             }
-
-            $wrapper = $('<div>').attr('id', 'p3-settings-wrapper');
-
-            $('body').append($wrapper.append($menuDiv.append(header).append(container)));
-            if (songLengthSlider != null) songLengthSlider.onChange();
         },
         /**
          * Toggle the visibility of the menu
@@ -310,7 +305,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 left: this.shown ? 0 : -500
             }, {
                 complete: function() {
-                    if (!_this.shown) {
+                    if (!that.shown) {
                         $menuDiv.detach();
                         $menuDiv = undefined;
                     }

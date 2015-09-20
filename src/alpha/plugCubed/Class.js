@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 /**
  Simple JavaScript Inheritance
  By John Resig http://ejohn.org/
@@ -39,7 +41,7 @@ define(function() {
         }
 
         function Class() {
-            !e && this.init && this.init.apply(this, arguments)
+            !e && this.init && this.init.apply(this, arguments);
         }
 
         Class.prototype = i;

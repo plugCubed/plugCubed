@@ -53,8 +53,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
             }
             div = $('<div id="p3-settings-custom-colors" style="left: -500px;">').append($('<div class="header">').append($('<div class="back">').append($('<i class="icon icon-arrow-left"></i>')).click(function() {
                 if (div != null) div.animate({
-                        left: -500
-                    });
+                    left: -500
+                });
             })).append($('<div class="title">').append($('<span>').text(p3Lang.i18n('menu.customchatcolors'))))).append(container).animate({
                 left: $settings.width() + 1
             });
@@ -62,8 +62,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
         },
         hide: function() {
             if (div != null) div.animate({
-                    left: -500
-                });
+                left: -500
+            });
         }
     });
     return new a();

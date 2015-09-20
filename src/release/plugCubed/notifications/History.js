@@ -21,7 +21,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
             for (var i in history) {
                 if (!history.hasOwnProperty(i)) continue;
                 var a = history[i];
-                if (a.cid == cid && (~~i + 1) < history.length) {
+                if (a.cid === cid && (~~i + 1) < history.length) {
                     info.pos = ~~i + 2;
                     info.inHistory = true;
                     if (!a.wasSkipped) {
@@ -76,8 +76,8 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
                     title: a.media.title,
                     wasSkipped: false,
                     dj: {
-                        id: a['user'].id.toString(),
-                        username: a['user'].username
+                        id: a.user.id.toString(),
+                        username: a.user.username
                     }
                 };
                 history.push(obj);

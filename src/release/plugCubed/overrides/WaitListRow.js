@@ -15,7 +15,7 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
         doOverride: function() {
             WaitListRowPrototype.onRole = function() {
                 originalFunction.apply(this);
-                if (this.model.get('role') == 4) {
+                if (this.model.get('role') === 4) {
                     this.$('.name i').removeClass().addClass('icon icon-chat-cohost');
                 }
             };

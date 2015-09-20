@@ -51,7 +51,18 @@ define(['plugCubed/Class', 'underscore', 'backbone'], function(Class, _, backbon
                         var templateMatch = identifier.isTemplate && module.prototype.template === require(identifier.template);
                         var idFunction = identifier.func && _.isFunction(module.prototype[identifier.func]) && idMatch;
                         var classFunction = identifier.func && _.isFunction(module.prototype[identifier.func]) && classMatch;
+                        var objMatch;
 
+                        if (identifier.objMatch && identifier.objMatch.length) {
+                            for (var i in identifier.objMatch) {
+                                if (identifier.objMatch.hasOwnProperty(i) && identifier.objMatch[i] in module.prototype)
+                                    objMatch = true;
+                            }
+                        }
+
+                        if (identifier.objMatch && objMatch) {
+                            if (module.prototype.collection === 'undefined' && module.prototype.eventName === 'undefined') return module;
+                        }
                         if ((!identifier.func && classMatch) || (!identifier.func && idMatch) || (!identifier.func && templateMatch) || (identifier.func && idFunction) || (identifier.func && classFunction)) return module;
 
                     } else if (identifier.isBackbone) {
@@ -63,7 +74,7 @@ define(['plugCubed/Class', 'underscore', 'backbone'], function(Class, _, backbon
                         var backboneClass = module instanceof viewConstructor && classMatch;
 
                         if ((idMatch && backboneId) || (classMatch && backboneClass)) return module;
-                        if (identifier.isModel && module instanceof modelConstructor && _.isArray(module.get('fx'))) return module;
+                        if (identifier.isModel && module instanceof modelConstructor && _.isString(module.get('description'))) return module;
                     }
                 }
             }
