@@ -5,8 +5,8 @@
     "author": "plug³ Team",
     "homepage": "https://plugcubed.net",
     "license": "MIT",
-    "version": "4.0.9.6",
+    "version": "4.1.0.1",
     "id": "plug3@plugcubed.net",
-    "icon": "icons/48.png",
-    "icon64": "icons/64.png"
+    "icon": "data/icons/48.png",
+    "icon64": "data/icons/64.png"
 }

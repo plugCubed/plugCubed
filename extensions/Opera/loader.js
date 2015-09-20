@@ -1,10 +1,10 @@
-function loader() {
-    if (typeof requirejs !== 'undefined' && typeof API !== 'undefined' && API.enabled)
-        $.getScript('URL');
-    else
-        setTimeout(loader, 1e3);
-}
+var load = function() {
+    console.log('plugCubed Opera Loader v1 enabled!');
+    var plug = document.createElement('script');
+    plug.type = 'text/javascript';
+    plug.id = 'plugCubed-loader';
+    plug.src = chrome.extension.getURL('plugCubed.js');
+    document.head.appendChild(plug);
+};
 
-var s = document.createElement('script');
-s.innerText = loader.toString().split('URL').join(chrome.extension.getURL('plugCubed.js')) + ' loader();';
-document.head.appendChild(s);
+load();

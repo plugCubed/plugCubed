@@ -7,6 +7,6 @@
     "license": "MIT",
     "version": "VERSION.MAJOR.VERSION.MINOR.VERSION.PATCH.VERSION.BUILD",
     "id": "plug3@plugcubed.net",
-    "icon": "icons/48.png",
-    "icon64": "icons/64.png"
+    "icon": "data/icons/48.png",
+    "icon64": "data/icons/64.png"
 }
