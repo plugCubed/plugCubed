@@ -1,5 +1,6 @@
 var fs = require('fs');
 module.exports = function(grunt) {
+    var that = this;
     this.requirejs({
         options: {
             appDir: './src/alpha',
@@ -20,52 +21,40 @@ module.exports = function(grunt) {
                 include: []
             }],
             done: function(done) {
-                fs.readFile('./src/alpha/plugCubed/_postfix.js', function(err, postfixData) {
+                fs.readFile('./out/plugCubed/Loader.js', function(err, p3Data) {
                     if (err) {
                         done(err);
                         return;
                     }
-                    fs.readFile('./out/plugCubed/Loader.js', function(err, p3Data) {
+                    fs.writeFile('./out/plugCubed/combined.js', that.prefix, function(err) {
                         if (err) {
                             done(err);
                             return;
                         }
-                        fs.readFile('./src/alpha/plugCubed/_prefix.js', function(err, prefixData) {
+                        fs.appendFile('./out/plugCubed/combined.js', p3Data, function(err) {
                             if (err) {
                                 done(err);
                                 return;
                             }
-                            fs.writeFile('./out/plugCubed/combined.js', prefixData, function(err) {
+                            fs.appendFile('./out/plugCubed/combined.js', that.postfix, function(err) {
                                 if (err) {
                                     done(err);
                                     return;
                                 }
-                                fs.appendFile('./out/plugCubed/combined.js', p3Data, function(err) {
-                                    if (err) {
+                                fs.mkdir('./bin/alpha', function(err) {
+                                    if (err && err.code !== 'EEXIST') {
                                         done(err);
                                         return;
                                     }
-                                    fs.appendFile('./out/plugCubed/combined.js', postfixData, function(err) {
+                                    fs.rename('./out/plugCubed/combined.js', './bin/alpha/plugCubed.src.js', function(err) {
                                         if (err) {
                                             done(err);
                                             return;
                                         }
-                                        fs.mkdir('./bin/alpha', function(err) {
-                                            if (err && err.code !== 'EEXIST') {
-                                                done(err);
-                                                return;
-                                            }
-                                            fs.rename('./out/plugCubed/combined.js', './bin/alpha/plugCubed.src.js', function(err) {
-                                                if (err) {
-                                                    done(err);
-                                                    return;
-                                                }
 
-                                                grunt.file.delete('./out/');
+                                        grunt.file.delete('./out');
 
-                                                done();
-                                            });
-                                        });
+                                        done();
                                     });
                                 });
                             });

@@ -3,7 +3,7 @@ module.exports = function() {
         files: [{
             cwd: 'src/release/langs',
             src: '**.json',
-            dest: 'release/langs/'
+            dest: 'files/langs/'
         }, {
             cwd: 'src/alpha/langs',
             src: '**.json',

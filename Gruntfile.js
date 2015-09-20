@@ -1,7 +1,9 @@
 var grunto = require('grunto');
+var exists;
 var fs = require('fs');
+var fsAccess = require('fs-access');
 var path = require('path');
-var config = require(path.resolve('config', 'p3.config.js'));
+var config = require(path.join(__dirname, 'config', 'p3.config.js'));
 module.exports = grunto(function(grunt) {
 
     this.scan({
@@ -9,9 +11,18 @@ module.exports = grunto(function(grunt) {
         src: '**/*.js'
     });
 
+    try {
+        fsAccess.sync(path.join(__dirname, 'src', 'dev'));
+        exists = true;
+    } catch (er) {
+        exists = false;
+    }
+
     this.context({
         config: config,
-        devExists: fs.existsSync(path.resolve('src', 'dev')),
+        devExists: exists,
+        prefix: fs.readFileSync(path.join(__dirname, 'src', 'shared', '_prefix.js')),
+        postfix: fs.readFileSync(path.join(__dirname, 'src', 'shared', '_postfix.js')),
         verboseEnabled: grunt.option('verbose')
     });
 
@@ -25,7 +36,7 @@ module.exports = grunto(function(grunt) {
             }
         },
         'mozilla-addon-sdk': {
-            'latest': {
+            latest: {
                 options: {
                     revision: 'latest'
                 }
@@ -35,9 +46,9 @@ module.exports = grunto(function(grunt) {
             release: {
                 options: {
                     'mozilla-addon-sdk': 'latest',
-                    extension_dir: path.resolve(__dirname, 'extensions', 'Firefox'),
-                    dist_dir: 'extensions/Firefox-release',
-                    strip_sdk: false
+                    extension_dir: path.join(__dirname, 'extensions', 'Firefox'),
+                    dist_dir: path.join(__dirname, 'extensions', 'Firefox-release'),
+                    strip_sdk: true
                 }
             }
         },

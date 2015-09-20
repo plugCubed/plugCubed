@@ -4,7 +4,7 @@ var path = require('path');
 var crx = new Extension({
     privateKey: fs.readFileSync(path.join(__dirname, 'extensions', 'key.pem'))
 });
-var p3Release = path.join(__dirname, 'bin', 'release', 'plugCubed.js');
+var p3Release = path.join(__dirname, 'bin', 'release', 'plugCubed.extension.js');
 
 //Writes plug³ release files to the extension folders.
 fs.createReadStream(p3Release).pipe(fs.createWriteStream(path.join(__dirname, 'extensions', 'Opera', 'plugCubed.js')));
