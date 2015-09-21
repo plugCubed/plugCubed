@@ -1,4 +1,4 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notifications', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/RoomSettings', 'plugCubed/Slider', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/ControlPanel', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/FullscreenHandler', 'plugCubed/bridges/context', 'plugCubed/bridges/Database', 'lang/Lang'], function($, Class, Version, enumNotifications, Settings, p3Utils, p3Lang, Styles, RoomSettings, Slider, dialogColors, dialogControlPanel, ChatHandler, FullscreenHandler, Context, Database, Lang) {
+define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notifications', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/RoomSettings', 'plugCubed/Slider', 'plugCubed/dialogs/CustomChatColors', 'plugCubed/dialogs/ControlPanel', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/FullscreenHandler', 'plugCubed/bridges/Context', 'plugCubed/bridges/Database', 'lang/Lang'], function($, Class, Version, enumNotifications, Settings, p3Utils, p3Lang, Styles, RoomSettings, Slider, dialogColors, dialogControlPanel, ChatHandler, FullscreenHandler, Context, Database, Lang) {
 
     var $wrapper;
     var $menuDiv;
@@ -170,7 +170,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 case 'showdeletedmessages':
                     Settings.moderation.showDeletedMessages = !Settings.moderation.showDeletedMessages;
                     this.setEnabled('showdeletedmessages', Settings.moderation.showDeletedMessages);
-                    console.log(Settings.moderation.showDeletedMessages);
                     break;
                 case 'afktimers':
                     Settings.moderation.afkTimers = !Settings.moderation.afkTimers;
@@ -285,10 +284,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 container.append(GUIButton((Settings.notify & enumNotifications.SONG_UNAVAILABLE) === enumNotifications.SONG_UNAVAILABLE, 'notify-unavailable', p3Lang.i18n('notify.songUnavailable')).data('bit', enumNotifications.SONG_UNAVAILABLE).data('perm', API.ROLE.BOUNCER));
                 container.append(GUIButton((Settings.notify & enumNotifications.SONG_LENGTH) === enumNotifications.SONG_LENGTH, 'notify-songLength', p3Lang.i18n('notify.songLength', Settings.notifySongLength)).data('bit', enumNotifications.SONG_LENGTH).data('perm', API.ROLE.BOUNCER));
                 container.append(songLengthSlider.$slider.css('left', 40));
-                $wrapper = $('<div>').attr('id', 'p3-settings-wrapper');
-                $('body').append($wrapper.append($menuDiv.append(header).append(container)));
                 if (songLengthSlider != null) songLengthSlider.onChange();
             }
+            $wrapper = $('<div>').attr('id', 'p3-settings-wrapper');
+            $('body').append($wrapper.append($menuDiv.append(header).append(container)));
         },
         /**
          * Toggle the visibility of the menu
