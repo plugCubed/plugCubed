@@ -7,128 +7,6 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             var i;
             var args = value.split(' ');
             var command = args.shift().substr(1);
-            if (p3Utils.hasPermission(undefined, 2, true) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) {
-                if (p3Utils.equalsIgnoreCase(command, 'whois')) {
-                    if (args.length > 0 && p3Utils.equalsIgnoreCase(args[0], 'all')) {
-                        p3Utils.getAllUsers();
-                    } else if (args.length > 0) {
-                        p3Utils.getUserInfo(args.join(' '));
-                    } else {
-                        API.chatLog(p3Lang.i18n('error.invalidWhoisSyntax'));
-                    }
-                    return;
-                }
-
-                if (API.hasPermission(undefined, API.ROLE.MANAGER)) {
-                    if (p3Utils.equalsIgnoreCase(command, 'banall')) {
-                        var me = API.getUser();
-                        var users = API.getUsers();
-                        if (users.length < 2) return;
-                        for (i in users) {
-                            if (users.hasOwnProperty(i) && users[i].id !== me.id)
-                                API.moderateBanUser(users[i].id, 0, API.BAN.PERMA);
-                        }
-                        return;
-                    }
-                    if (p3Utils.equalsIgnoreCase(command, 'lock')) {
-                        API.moderateLockWaitList(true, false);
-                        return;
-                    }
-                    if (p3Utils.equalsIgnoreCase(command, 'unlock')) {
-                        API.moderateLockWaitList(false, false);
-                        return;
-                    }
-                    if (p3Utils.equalsIgnoreCase(command, 'lockskip')) {
-                        var userID = API.getDJ().id;
-                        if (API.getDJ() == null) return;
-                        API.once(API.ADVANCE, function() {
-                            API.once(API.WAIT_LIST_UPDATE, function() {
-                                API.moderateMoveDJ(userID, 1);
-                            });
-                            API.moderateAddDJ(userID);
-                        });
-                        API.moderateForceSkip();
-                        return;
-                    }
-                }
-
-                if (API.hasPermission(undefined, API.ROLE.BOUNCER)) {
-                    if (p3Utils.equalsIgnoreCase(command, 'ban')) {
-                        if (p3Utils.equalsIgnoreCaseTrim(command, 'ban')) {
-                            API.chatLog('error.invalidBanSyntax');
-                            return;
-                        }
-                        if (value.indexOf('::') < 0) {
-                            user = p3Utils.getUser(args.join(' '));
-                            if (user === null) {
-                                API.chatLog(p3Lang.i18n('error.userNotFound'));
-                            } else {
-                                API.moderateBanUser(user.id, API.BAN.HOUR, 0);
-                            }
-                        } else {
-                            var values = value.split('::');
-                            user = p3Utils.getUser(values[0]);
-                            if (user === null) {
-                                API.chatLog(p3Lang.i18n('error.userNotFound'));
-                            } else {
-                                var time;
-                                var reason;
-                                time = values[1];
-                                reason = values[2];
-                                if ([60, 1, 1440, 24, -1].indexOf(time) < -1) {
-                                    API.chatLog(p3Lang.i18n('error.invalidBanTime'), time);
-                                } else {
-                                    if ([0, 1, 2, 3, 4, 5].indexOf(reason) < -1)
-                                        reason = 0;
-                                    API.moderateBanUser(user.id, time, reason);
-                                }
-                            }
-                        }
-                        return;
-                    }
-                    if (p3Utils.equalsIgnoreCase(command, 'skip')) {
-                        if (API.getDJ() == null) return;
-                        if (value.length > 5)
-                            API.sendChat('@' + API.getDJ().username + ' - Reason for skip: ' + value.substr(5).trim());
-                        API.moderateForceSkip();
-                        return;
-                    }
-                    if (p3Utils.equalsIgnoreCase(command, 'add')) {
-                        if (args.length < 1) {
-                            API.chatLog(p3Lang.i18n('error.invalidAddSyntax'));
-                            return;
-                        }
-                        user = p3Utils.getUser(args.join(' '));
-                        if (user !== null) {
-                            if (API.getWaitListPosition(user.id) === -1) {
-                                API.moderateAddDJ(user.id);
-                            } else {
-                                API.chatLog(p3Lang.i18n('error.alreadyInWaitList', user.username));
-                            }
-                        } else {
-                            API.chatLog(p3Lang.i18n('error.userNotFound'));
-                        }
-                        return;
-                    }
-                    if (p3Utils.equalsIgnoreCase(command, 'remove')) {
-                        if (args.length < 1) {
-                            API.chatLog(p3Lang.i18n('error.invalidRemoveSyntax'));
-                            return;
-                        }
-                        user = p3Utils.getUser(args.join(' '));
-                        if (user !== null) {
-                            if (API.getWaitListPosition(user.id !== -1)) {
-                                API.moderateRemoveDJ(user.id);
-                            } else {
-                                API.chatLog(p3Lang.i18n('error.notInWaitList', user.username));
-                            }
-                        } else {
-                            API.chatLog(p3Lang.i18n('error.userNotFound'));
-                        }
-                        return;
-                    }
-                }
-            }
             if (p3Utils.equalsIgnoreCase(command, 'commands')) {
                 dialogCommands.print();
                 return;
@@ -291,6 +169,142 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 Settings.alertson = [];
                 Settings.save();
                 API.chatLog(p3Lang.i18n('commands.responses.alertsoff'));
+                return;
+            }
+
+            //Bouncer and above or p3 Ambassador or p3 Dev
+            if (API.hasPermission(undefined, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) {
+                if (p3Utils.equalsIgnoreCase(command, 'whois')) {
+                    if (args.length > 0 && p3Utils.equalsIgnoreCase(args[0], 'all')) {
+                        p3Utils.getAllUsers();
+                    } else if (args.length > 0) {
+                        p3Utils.getUserInfo(args.join(' '));
+                    } else {
+                        API.chatLog(p3Lang.i18n('error.invalidWhoisSyntax'));
+                    }
+                    return;
+                }
+            }
+
+            //Bouncer and above
+            if (API.hasPermission(undefined, API.ROLE.BOUNCER)) {
+                if (p3Utils.equalsIgnoreCaseTrim(command, 'ban') || p3Utils.equalsIgnoreCase(command, 'ban')) {
+                    if (value.indexOf('::') < 0) {
+                        user = p3Utils.getUser(args.join(' '));
+                        if (user == null) {
+                            API.chatLog(p3Lang.i18n('error.userNotFound'));
+                        } else {
+                            API.moderateBanUser(user.id, 1, API.BAN.HOUR);
+                        }
+                    } else {
+                        var values = value.split('::');
+                        user = p3Utils.getUser(values[0].split('/ban').join(''));
+                        if (user == null) {
+                            API.chatLog(p3Lang.i18n('error.userNotFound'));
+                        } else {
+                            var time;
+                            var reason;
+                            if (!isNaN(values[1]) && values[1] !== Infinity && values[1] !== -Infinity) {
+                                time = parseInt(values[1], 10);
+                            } else {
+                                API.chatLog(p3Lang.i18n('error.invalidBanTime'), values[1]);
+                                return;
+                            }
+                            if (!isNaN(values[2]) && values[2] !== Infinity && values[2] !== -Infinity) {
+                                reason = parseInt(values[2], 10);
+                            } else {
+                                return;
+                            }
+                            if ([60, 1, 1440, 24, -1].indexOf(time) < 0) {
+                                API.chatLog(p3Lang.i18n('error.invalidBanTime'), time);
+                                return;
+                            }
+                            if (time === 60 || time === 1) time = API.BAN.HOUR;
+                            if (time === 24 || time === 1440) time = API.BAN.DAY;
+                            if (time === -1) time = API.BAN.PERMA;
+                            if ([1, 2, 3, 4, 5].indexOf(reason) < 0)
+                                reason = 1;
+                            API.moderateBanUser(user.id, reason, time);
+                        }
+                    }
+                    return;
+                }
+                if (p3Utils.equalsIgnoreCase(command, 'skip')) {
+                    if (API.getDJ() == null) return;
+                    if (value.length > 5)
+                        API.sendChat('@' + API.getDJ().username + ' - Reason for skip: ' + value.substr(5).trim());
+                    API.moderateForceSkip();
+                    return;
+                }
+                if (p3Utils.equalsIgnoreCase(command, 'add')) {
+                    if (args.length < 1) {
+                        API.chatLog(p3Lang.i18n('error.invalidAddSyntax'));
+                        return;
+                    }
+                    user = p3Utils.getUser(args.join(' '));
+                    if (user !== null) {
+                        if (API.getWaitListPosition(user.id) === -1) {
+                            API.moderateAddDJ(user.id);
+                        } else {
+                            API.chatLog(p3Lang.i18n('error.alreadyInWaitList', user.username));
+                        }
+                    } else {
+                        API.chatLog(p3Lang.i18n('error.userNotFound'));
+                    }
+                    return;
+                }
+                if (p3Utils.equalsIgnoreCase(command, 'remove')) {
+                    if (args.length < 1) {
+                        API.chatLog(p3Lang.i18n('error.invalidRemoveSyntax'));
+                        return;
+                    }
+                    user = p3Utils.getUser(args.join(' '));
+                    if (user !== null) {
+                        if (API.getWaitListPosition(user.id !== -1)) {
+                            API.moderateRemoveDJ(user.id);
+                        } else {
+                            API.chatLog(p3Lang.i18n('error.notInWaitList', user.username));
+                        }
+                    } else {
+                        API.chatLog(p3Lang.i18n('error.userNotFound'));
+                    }
+                    return;
+                }
+            }
+
+            //Manager and Above
+            if (API.hasPermission(undefined, API.ROLE.MANAGER)) {
+                if (p3Utils.equalsIgnoreCase(command, 'lock')) {
+                    API.moderateLockWaitList(true, false);
+                    return;
+                }
+                if (p3Utils.equalsIgnoreCase(command, 'unlock')) {
+                    API.moderateLockWaitList(false, false);
+                    return;
+                }
+                if (p3Utils.equalsIgnoreCase(command, 'lockskip')) {
+                    var userID = API.getDJ().id;
+                    if (API.getDJ() == null) return;
+                    API.once(API.ADVANCE, function() {
+                        API.once(API.WAIT_LIST_UPDATE, function() {
+                            API.moderateMoveDJ(userID, 1);
+                        });
+                        API.moderateAddDJ(userID);
+                    });
+                    API.moderateForceSkip();
+                    return;
+                }
+            }
+
+            //BA and above only
+            if (p3Utils.equalsIgnoreCase(command, 'banall') && p3Utils.hasPermission(undefined, API.ROLE.MANAGER, true)) {
+                var me = API.getUser();
+                var users = API.getUsers();
+                if (users.length < 2) return;
+                for (i in users) {
+                    if (users.hasOwnProperty(i) && users[i].id !== me.id)
+                        API.moderateBanUser(users[i].id, 0, API.BAN.PERMA);
+                }
                 return;
             }
         }

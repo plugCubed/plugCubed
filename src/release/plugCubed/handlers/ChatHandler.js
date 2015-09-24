@@ -172,13 +172,15 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             for (var i in twitchEmotes) {
                 if (!twitchEmotes.hasOwnProperty(i)) continue;
                 var twitchEmote = twitchEmotes[i];
-                if (text.indexOf(' ' + twitchEmote.emote.toLowerCase() + ' ') > -1 || text.indexOf(':' + twitchEmote.emote.toLowerCase() + ':') > -1) {
+                var lowerText = text.toLowerCase();
+                var lowerTwitch = twitchEmote.emote.toLowerCase();
+                if (lowerText.indexOf(' ' + lowerTwitch + ' ') > -1 || lowerText.indexOf(':' + lowerTwitch + ':') > -1) {
                     var temp = $('<div>');
                     var image = $('<img>').addClass('twitch-emote').attr('src', twitchEmoteTemplate.split('{image_id}').join(twitchEmote.image_id)).data('emote', $('<span>').html(twitchEmote.emote).text());
                     image.on('load', onLoad);
                     temp.append(image);
-                    text = text.split(' ' + twitchEmote.emote + ' ').join(' ' + temp.html() + ' ');
-                    text = text.split(':' + twitchEmote.emote + ':').join(temp.html());
+                    text = text.replace(new RegExp(' ' + twitchEmote.emote + ' ', 'gi'), ' ' + temp.html() + ' ');
+                    text = text.replace(new RegExp(':' + twitchEmote.emote + ':', 'gi'), temp.html());
                 }
             }
             return (nbspStart ? '&nbsp;' : '') + text.substr(1, text.length - 2);
