@@ -1,4 +1,6 @@
-#plug&#179; (plugCubed)
+# plug&#179; (plugCubed)
+
+**NOTE:** Development work has stopped on this project. Issues and Pull Requests will not be answered. This is due to plug.dj shutting down. [Farewell Letter](https://plugcubed.net/goodbye)
 
 ### Information / Installation
 Find all information and installation information [here](http://plugCubed.net/)
