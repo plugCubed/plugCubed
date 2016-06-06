@@ -1,10 +1,11 @@
-# plug&#179; (plugCubed)
+# plug&#179; (plugCubed) [![Slack Status](https://slack.plugcubed.net/badge.svg)](https://slack.plugcubed.net)
+
 
 ### Information / Installation
-Find all information and installation information [here](http://plugCubed.net/)
+Find out how to install, and read more about plug&#179; [here](http://plugCubed.net/)
 
 ### Issues / Feature Requests
-Please use this repository's Github [issues](https://github.com/plugCubed/plugCubed/issues) to report a bug report, feature request or enhancement.
+Please use this repository's Github [issues](https://github.com/plugCubed/plugCubed/issues) to report a bug, feature request or enhancement.
 
 ### Developers
 * [Thomas "TAT" Andresen](https://github.com/TATDK)
@@ -42,10 +43,6 @@ We would like to thank the following people
 * All our lovely supporters
 * [Nicole "Colgate" Richardson](https://github.com/colgate) - for being one of the creators
 * [plug.dj](https://plug.dj) - for creating an awesome website
-
-### Support
-
-We have a [Slack](https://plugcubed.slack.com/) channel we use to communicate. Please email [1337alexpham@gmail.com](mailto:1337alexpham@gmail.com?subject=Slack&nbsp;Plug3) if you'd like to be added
 
 ### License
 Copyright &copy; 2012-2015 The plug&#179; Team and other contributors
