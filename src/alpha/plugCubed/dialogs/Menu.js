@@ -286,8 +286,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 container.append(songLengthSlider.$slider.css('left', 40));
                 if (songLengthSlider != null) songLengthSlider.onChange();
             }
-            $wrapper = $('<div>').attr('id', 'p3-settings-wrapper');
-            $('body').append($wrapper.append($menuDiv.append(header).append(container)));
+            if ($wrapper == null) {
+                $wrapper = $('<div>').attr('id', 'p3-settings-wrapper');
+                $('body').append($wrapper);
+            }
+            $wrapper.append($menuDiv.append(header).append(container));
         },
         /**
          * Toggle the visibility of the menu
