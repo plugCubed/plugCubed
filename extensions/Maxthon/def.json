@@ -1,0 +1,46 @@
+[{
+    "type": "extension",
+    "frameworkVersion": "1.0.6",
+    "guid": "{AE633E9F-045E-40E5-9B53-A4C3DE51DDEC}",
+    "name": "plugCubed",
+    "author": {
+        "name": "Thomas Andresen",
+        "email": "TAT@plugCubed.net"
+    },
+    "version": "4.3.0.28",
+    "title": {
+        "en": "plugCubed"
+    },
+    "description": "Adding a new dimension to plug.dj",
+    "actions": [{
+        "type": "script",
+        "name": "plugCubed",
+        "entryPoints": [
+            "doc_end"
+        ],
+        "include": [
+            "plug.dj"
+        ],
+        "exclude": [
+            "plug.dj/",
+            "plug.dj/@/*",
+            "plug.dj/_/*",
+            "plug.dj/about",
+            "plug.dj/ba",
+            "plug.dj/dashboard",
+            "plug.dj/jobs",
+            "plug.dj/logout",
+            "plug.dj/partners",
+            "plug.dj/plot",
+            "plug.dj/press",
+            "plug.dj/privacy",
+            "plug.dj/purchase",
+            "plug.dj/subscribe",
+            "plug.dj/team",
+            "plug.dj/terms"
+        ],
+        "js": [
+            "loader.js"
+        ]
+    }]
+}]
