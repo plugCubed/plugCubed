@@ -1,0 +1,40 @@
+{
+    "extends": "thedark1337/browser",
+    "ecmaFeatures": {
+        "modules": false
+    },
+    "env": {
+        "amd": true
+    },
+    "globals": {
+        "API": false,
+        "gapi": false,
+        "loading": false,
+        "plugCubed": true,
+        "plugCubedUserData": true,
+        "requirejs": false,
+        "SC": false,
+        "startWooting": false,
+        "VERSION": false,
+        "_": false
+    },
+    "rules": {
+        "camelcase": 0,
+        "func-style": 0,
+        "newline-per-chained-call": 0,
+        "no-caller": 0,
+        "no-implicit-coercion": 0,
+        "no-loop-func": 0,
+        "no-negated-condition": 0,
+        "no-var": 0,
+        "object-shorthand": 0,
+        "one-var": [2, {
+            "uninitialized": "always",
+            "initialized": "never"
+        }],
+        "prefer-arrow-callback": 0,
+        "prefer-spread": 0,
+        "prefer-template": 0,
+        "strict": 0
+    }
+}
