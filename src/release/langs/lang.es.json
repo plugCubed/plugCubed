@@ -1,7 +1,5 @@
 {
   "running":"Corriendo plug&#179; versión %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Algunas características no funcionaran.",
   "commandsHelp":"Usa '\/commands' para ver todos los comandos",
   "autorespond":{
     "default":"Estoy Lejos del Teclado.",
@@ -58,7 +56,8 @@
       "remove":"elimina el usuario seleccionado a la mesa de dj\/lista de espera",
       "whois all":"da el userid y el username de todos los usuarios en la sala",
       "banall":"banea todos los usuarios en la sala",
-      "status":"mostrar el estado de los servidores de plug"
+      "status":"mostrar el estado de los servidores de plug",
+      "unload":"Closes plug&#179;"
     },
     "responses":{
       "alertson":"Reproduciendo sonido en las siguientes palabras: %1",
@@ -94,8 +93,11 @@
     "updates":"Actualizaciones de la canción",
     "history":"Canciones en el historial",
     "songUnavailable":"Song Unavailable",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Longitud de la canción (%1min)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"grabbed %1 - %2",
       "stats":"Estadísticas:  %1 ¡Genial! -- %2 Aburrido -- %3 Favoritos",
       "updates":"Ahora Tocando: %1 por %2<br \/>Canción Tocada por: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Autoentrar",
+    "chatlog":"ChatLog",
     "customchatcolors":"Colores de chat personalizados",
     "autorespond":"Autorespuesta AFK",
     "notify":"Notificaciones",
@@ -175,7 +178,9 @@
     "chatimages":"Imagenes de chat",
     "twitchemotes":"Twitch Emotes",
     "controlpanel":"Control Panel",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Show Deleted Messages",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Pesado",
@@ -202,7 +207,6 @@
     "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
     "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
-    "noLiteSupport":"Esto no es compatible con plug&#179; Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No se encontraron listas de reproducción",
     "yourActivePlaylistIsFull":"Tu lista de reproduccion activa esta llena",

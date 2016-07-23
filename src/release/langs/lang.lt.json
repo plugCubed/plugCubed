@@ -1,30 +1,28 @@
 {
   "running":"Naudojama plug&#179; versija %1",
-  "runningLite":"Paleistas plug&#179; Lite!",
-  "runningLiteInfo":"Gali neveikti kelios funkcijos.",
   "commandsHelp":"Rašykite \"\/commands\" kad pamatytumėt paaiškintas pokalbio kambario komandas.",
   "autorespond":{
     "default":"Aš nesu prie klaviatūros.",
     "disable":"Išjunkite AFK Auto-atsiliepiama į pokalbio kambary",
     "nextIn":"Kitas AFK Auto-atsiliepimas bus išsiųstas nuo %1",
     "next":"AFK Auto-atsiliepimas artimiausiame paminėjime",
-    "commandDisable":"%1 autojoin disabled",
-    "commandNotEnabled":"%1 autojoin was not enabled"
+    "commandDisable":"%1 AFK pranešimas išjungtas",
+    "commandNotEnabled":"%1 AFK žinutė nebuvo įjungta"
   },
   "autojoin":{
-    "commandDisable":"&1 Auto-priemimas išjungtas",
-    "commandNotEnabled":"%1 Auto-priemimas nebuvo įjungtas"
+    "commandDisable":"%1 autojoin išjungtas",
+    "commandNotEnabled":"%1 autojoin nebuvo įjungtas"
   },
   "fullscreen":{
     "shrink":"Suspausti",
     "enlarge":"Padidinti"
   },
   "commands":{
-    "header":"Vartotojo info",
+    "header":"plug&#179; Komandos",
     "userCommands":"Vartotojo Komandos",
-    "modCommands":"Moderatoriaus Komandos",
+    "modCommands":"Moderavimo Komandos",
     "variables":{
-      "username":"vardas",
+      "username":"vartotojo vardas",
       "word":"žodis",
       "on":"įjungta",
       "off":"išjungta",
@@ -33,19 +31,19 @@
     },
     "descriptions":{
       "join":"Stoti į DJ eilę",
-      "leave":"Vartotojo Išėjimas",
-      "whoami":"gauk pačio savęs informacija",
+      "leave":"paliko dj eilę",
+      "whoami":"gauk savo informaciją",
       "mute":"nustatyti garsą į 0",
       "automute":"registracija dabar automatiškai užtildys grojančias dainas ateityje",
-      "unmute":"nustatyk garsą į tokį pat kaip buvo paskutini karta ",
+      "unmute":"nustatyti garsą į prieš tai buvusį",
       "nextsong":"parodyk kita daina grojaraštyje ir ar ji buvo sugrota praeityje ",
-      "refresh":"perkrauk video",
+      "refresh":"perkrauti vaizdo įrašą",
       "alertson":"sugrok garsą kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
       "alertsoff":"sustok groti garsus kada būna parašomas paminėtas žodis šiame pokalbiu kambaryje",
       "grab":"pridėti esamą dainą į jūsų pasirinktą grojaraštį",
       "badges":"slėpti\/rodyti narių ženkliukus pokalbiuose",
       "getpos":"gauk dabartinę pozicija laukimo eilėje",
-      "version":"rodo versijos numeri",
+      "version":"rodo versijos numerį",
       "commands":"parodo šį sąrašą",
       "link":"Įklijuoja plugCubed tinklapio nuoroda į pokalbio kambarį",
       "whois":"Duoda paprasta informacija apie vartotoja",
@@ -58,7 +56,8 @@
       "remove":"išmeta nustatytus vartotojus iš dj pulto\/laukimo eilės",
       "whois all":"parodo vartotojo ID ir vardą kiekvieno esančio kambaryje",
       "banall":"užblokuoja visus vartotojus esančius kambaryje",
-      "status":"Rodyti plug serverių informaciją"
+      "status":"Rodyti plug serverių informaciją",
+      "unload":"Išjungia plug&#179;"
     },
     "responses":{
       "alertson":"Grojamas garsas ant šių žodžių: %1",
@@ -94,8 +93,11 @@
     "updates":"Dainu atnaujinimai",
     "history":"Dainų istorija",
     "songUnavailable":"Daina negalima",
+    "boothAlert":"Perspėjimas Eilėje (%1 \/ 50)",
     "songLength":"Dainos trukmė minutėmis",
     "message":{
+      "boothAlertNext":"Netrukus gros tavo daina!",
+      "boothAlertPos":"Dabar esi %1 dj eilėje",
       "grab":"pridėjo %1 - %2",
       "stats":"Statistika: %1 palaikymai -- %2 mehs -- %3 pasiėmimai",
       "updates":"Dabar Groja: %1 by %2<br \/>Kas leidžia dainą: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"AutoWoot",
     "autojoin":"Auto Prisijungimas",
+    "chatlog":"Pokalbių logai",
     "customchatcolors":"Specialios pokalbio spalvos",
     "autorespond":"Išjunkite \"Aš nesu prie klaviatūros\" Auto-atsiliepimą",
     "notify":"Pranešimai",
@@ -175,7 +178,9 @@
     "chatimages":"Pokalbio žinutės",
     "twitchemotes":"Twitch paveiksliukai",
     "controlpanel":"Valdymo skydas",
-    "showdeletedmessages":"Rodyti ištrintas žinutes"
+    "showdeletedmessages":"Rodyti ištrintas žinutes",
+    "visualizers":"RCS SoundCloud Vizualaizeriai",
+    "inlineuserinfo":"Papildoma Vartotojo Informacija"
   },
   "vote":{
     "meh":"Nepatinka",
@@ -202,7 +207,6 @@
     "invalidBanTime":"Nustatytas laikas %1 yra neleistinas. Galimi laikai yra 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Neleistina sintaksė šalinti komandai. Naudojimas: \/remove @user",
     "invalidWhoisSyntax":"Neleistina sintaksė whois komandai. Naudojimas: \/whois @user",
-    "noLiteSupport":"Tai nėra palaikoma plug&#179; Lengvasis",
     "errorGettingPlaylistInfo":"Klaida gaunant grojaraščio informacija",
     "noPlaylistsFound":"Grojaraštis nerastas",
     "yourActivePlaylistIsFull":"Jūsų grojaraštis pilnas",

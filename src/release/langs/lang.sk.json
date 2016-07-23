@@ -1,7 +1,5 @@
 {
   "running":"Plug³ verziu %1",
-  "runningLite":"Spustená Lite verzia plug&#179;!",
-  "runningLiteInfo":"Niektoré funkcie nebudú fungovať správne.",
   "commandsHelp":"Použi '\/commands' k rozšírenému zobrazeniu rozkazov\n",
   "autorespond":{
     "default":"Som preč od klávesnice.",
@@ -58,7 +56,8 @@
       "remove":"odstraňuje cieľových používateľov od dj búdky\/waitlist",
       "whois all":"dáva userid a užívateľské meno všetkých používateľov v miestnosti",
       "banall":"zákazy všetkých používateľov v miestnosti",
-      "status":"zobrazí stav plug.dj serverov"
+      "status":"zobrazí stav plug.dj serverov",
+      "unload":"Closes plug&#179;"
     },
     "responses":{
       "alertson":"Zvuk sa prehrá pri následujúcich slovách: %1",
@@ -94,8 +93,11 @@
     "updates":"Pieseň aktualizácie",
     "history":"Piesní v histórii",
     "songUnavailable":"Skladba nedostupná",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Dĺžka piesne (%1 min)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"pridané %1 - %2",
       "stats":"Štatistiky: %1 woots--%2 mehs--%3 curates",
       "updates":"Prehráva: %1 %2 <br>hrajú: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Automatické spojenie",
+    "chatlog":"ChatLog",
     "customchatcolors":"Vlastný Chat farby",
     "autorespond":"AFK Autorespond",
     "notify":"Oznámenia",
@@ -175,7 +178,9 @@
     "chatimages":"Chat obrázky",
     "twitchemotes":"Twitch smajlíky",
     "controlpanel":"Ovládací panel",
-    "showdeletedmessages":"Zobraziď odstránené správy"
+    "showdeletedmessages":"Zobraziď odstránené správy",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Meh",
@@ -202,7 +207,6 @@
     "invalidBanTime":"Zadaný čas %1 je neplatný. Platné hodnoty sú 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Neplatný syntax pre príkaz na odstránenie užívateľa. Použitie: \/remove @užívateľ",
     "invalidWhoisSyntax":"Neplatný syntax pre príkaz whois. Použitie: \/whois @užívateľ",
-    "noLiteSupport":"Toto nie je podporované v plug³ Lite",
     "errorGettingPlaylistInfo":"Chyba pri získavaní informácií o playliste",
     "noPlaylistsFound":"Nebol nájdený žiadny playlist",
     "yourActivePlaylistIsFull":"Váš aktívny playlist je plný",

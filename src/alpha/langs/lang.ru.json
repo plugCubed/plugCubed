@@ -1,7 +1,5 @@
 {
   "running":"Работает plug&#179; версии %1",
-  "runningLite":"Запуск plug&#179; в Lite режиме!",
-  "runningLiteInfo":"Некоторые функции не будут работать.",
   "commandsHelp":"Для просмотра доступных команд чата используйте '\/commands' ",
   "autorespond":{
     "default":"Я отошёл от клавиатуры.",
@@ -58,7 +56,8 @@
       "remove":"удалить выбранного пользователя из очереди",
       "whois all":"предоставить идентификатор пользователя, или имя пользователя, или всех пользователей в комнате",
       "banall":"забанить всех пользователей в этой комнате",
-      "status":"показывает статус подключаемых серверов"
+      "status":"показывает статус подключаемых серверов",
+      "unload":"Closes plug&#179;"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
@@ -94,8 +93,11 @@
     "updates":"Обновления треков",
     "history":"Треки в истории",
     "songUnavailable":"Song Unavailable",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Продолжительность песни (%1 мин)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"grabbed %1 - %2",
       "stats":"Статистика: %1 вутов -- %2 мехов -- %3 грабов",
       "updates":"Сейчас играет: %1 - %2<br \/> Поставил: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Авто-woot",
     "autojoin":"Авто вход",
+    "chatlog":"ChatLog",
     "customchatcolors":"Настроить цвета чата",
     "autorespond":"Автоматическое оповещение об отсутствии",
     "notify":"Уведомления",
@@ -175,7 +178,9 @@
     "chatimages":"Изображения в чате",
     "twitchemotes":"Twitch Emotes",
     "controlpanel":"Control Panel",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Show Deleted Messages",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Не нравится",
@@ -202,7 +207,6 @@
     "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
     "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
-    "noLiteSupport":"Это не поддерживается в plug³ Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",

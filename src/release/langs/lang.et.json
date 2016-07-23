@@ -1,7 +1,5 @@
 {
   "running":"Töötab plug&#179; versioon %1",
-  "runningLite":"Töötab plug³ Lite!&#179;",
-  "runningLiteInfo":"Mõned võimalused ei tööta.",
   "commandsHelp":"Kasuta '\/commands' et näha käske.",
   "autorespond":{
     "default":"Ma olen klaviatuurist eemal.",
@@ -58,7 +56,8 @@
       "remove":"eemaldab suunatud kasutaja: dj booth\/waitlist",
       "whois all":"annab kasutajatunnus ja kõik kasutajad toas kasutajanimi",
       "banall":"keelab kõik kasutajad toas",
-      "status":"näitab staatust plug serverid"
+      "status":"näitab staatust plug serverid",
+      "unload":"Suleb plug³"
     },
     "responses":{
       "alertson":"Mängib heli järgmised sõnad: %1",
@@ -94,8 +93,11 @@
     "updates":"Laul uuendused",
     "history":"Laulude ajaloos",
     "songUnavailable":"Laul pole saadaval",
+    "boothAlert":"Putka Alert (%1 \/ 50)",
     "songLength":"Laulu pikkus (%1 min)",
     "message":{
+      "boothAlertNext":"Olete muutmas DJ!",
+      "boothAlertPos":"Nüüd olete %1 selle waitlist",
       "grab":"haarasid %1 - %2",
       "stats":"Statistika: %1 meeldimisi -- %2 vihkamisi -- %3 lisamisi",
       "updates":"Praegu Mängib: %1 - %2<br>%3 poolt",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Autohääletus",
     "autojoin":"Autoühinemine",
+    "chatlog":"Jututuba Logi",
     "customchatcolors":"Kohandatud Teksti Värvid",
     "autorespond":"AFK automaatvastaja",
     "notify":"Teavitused",
@@ -175,7 +178,9 @@
     "chatimages":"Jututuba pildid",
     "twitchemotes":"tõmblema Emotikonid",
     "controlpanel":"juhtpaneel",
-    "showdeletedmessages":"Kuva kustutatud sõnumid"
+    "showdeletedmessages":"Kuva kustutatud sõnumid",
+    "visualizers":"RCS SoundCloud Visuaalid",
+    "inlineuserinfo":"Tekstisiseseid Kasutajateave"
   },
   "vote":{
     "meh":"Kehv lugu",
@@ -202,7 +207,6 @@
     "invalidBanTime":"Määratud, %1 ei sobi. Kehtiv ajad on 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Sobimatu süntaks Eemalda käsk. Kasutamine: \/remove @user",
     "invalidWhoisSyntax":"Sobimatu süntaks whois käsk. Kasutamine: \/whois @user",
-    "noLiteSupport":"See ei toeta plug³ Lite",
     "errorGettingPlaylistInfo":"Esitusloendi info toomisel ilmnes tõrge",
     "noPlaylistsFound":"Leitud esitusloendid",
     "yourActivePlaylistIsFull":"Teie aktiivne playlist on täis",

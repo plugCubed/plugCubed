@@ -1,7 +1,5 @@
 {
   "running":"Ieslēdz plug&#179; versija %1",
-  "runningLite":"plug&#179; darbojas Vieglajā režīmā!",
-  "runningLiteInfo":"Vairākas funkcijas nedarbosies.",
   "commandsHelp":"Raksti '\/commands' lai redzētu vairākas čata komandas.",
   "autorespond":{
     "default":"Esmu prom no klaviatūras.",
@@ -58,7 +56,8 @@
       "remove":"izņemt izvēlēto lietotāju no DJ rindas",
       "whois all":"parādīt visu lietotāju id un to lietotājvārdus kas atrodas šajā istabā",
       "banall":"liegt pieeju visiem lietotājiem kas ir šajā istabā",
-      "status":"parāda statusu no plug serveriem"
+      "status":"parāda statusu no plug serveriem",
+      "unload":"Closes plug&#179;"
     },
     "responses":{
       "alertson":"Atskaņot skaņu uz šādiem vārdiem: %1",
@@ -94,8 +93,11 @@
     "updates":"Dziesmu Atjauninājumi",
     "history":"Dziesmas Vēsturē",
     "songUnavailable":"Dziesma Nav Pieejama",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Dziesmu Garums (%1 min)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"paņēma %1 - %2",
       "stats":"Stati: %1 Woot'i -- %2 Meh'i -- %3 Paņēma",
       "updates":"Tagad skan: %1  %2<br \/>Dj: %3",
@@ -145,7 +147,7 @@
     "lastDisconnect":"Pēdējā Atvienošanās",
     "lastPosition":"Pozīcija",
     "time":"Laiks",
-    "lastMessage":"Last Message"
+    "lastMessage":"Pēdējais ziņojums"
   },
   "ranks":{
     "you":"Jūs",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Auto-Woot",
     "autojoin":"Auto-Join",
+    "chatlog":"ChatLog",
     "customchatcolors":"Maini Čata Krāsas",
     "autorespond":"AFK Auto Atbildēšana",
     "notify":"Ziņojumi",
@@ -175,7 +178,9 @@
     "chatimages":"Bildes Čatā",
     "twitchemotes":"Twitch Smaidiņi",
     "controlpanel":"Vadības Panelis",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Rādīt dzēstos ziņojumus",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Meh",
@@ -195,14 +200,13 @@
   "error":{
     "userNotFound":"Lietotājs netika atrasts",
     "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "notInWaitList":"Lietotājs %1 nav gaidāmo sarakstā",
     "unknownMenuKey":"Nezināma izvēlne; %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
+    "invalidAddSyntax":"Nederīga sintakse komandai add. Lietojums: \/add @Lietotājs",
     "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
-    "noLiteSupport":"Šis nav atbalstīts iekš plug&#179; Vieglā",
+    "invalidBanTime":"Norādītais laiks %1 ir nederīgs. Derīgi laiki ir 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Nederīga sintakse komandai remove. Lietojums: \/remove @Lietotājs",
+    "invalidWhoisSyntax":"Nederīga sintakse komandai whois. Lietojums: \/whois @Lietotājs",
     "errorGettingPlaylistInfo":"Kļūda iegūstot saraksta informāciju",
     "noPlaylistsFound":"Atskaņošanas Saraksti nav atrasti",
     "yourActivePlaylistIsFull":"Tavs aktīvais atskaņošanas saraksts ir pilns",

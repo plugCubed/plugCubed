@@ -1,7 +1,5 @@
 {
   "running":"Usando plug&#179; versão %1",
-  "runningLite":"Rodando plug&#179 no Leve!",
-  "runningLiteInfo":"Algumas funções não irão funcionar.",
   "commandsHelp":"Use '\/commands' para ver os comandos.",
   "autorespond":{
     "default":"Estou ausente",
@@ -58,7 +56,8 @@
       "remove":"remove o usuário selecionado da cabine",
       "whois all":"fornece id e usuário de todos na sala",
       "banall":"bane todos da sala",
-      "status":"mostrar o status dos servidores do plug"
+      "status":"mostrar o status dos servidores do plug",
+      "unload":"Fecha o plug&#179;"
     },
     "responses":{
       "alertson":"Tocando o som das seguintes palavras: %1",
@@ -94,9 +93,12 @@
     "updates":"Atualizações da música",
     "history":"Músicas no Histórico",
     "songUnavailable":"Música Indisponível",
+    "boothAlert":"Alerta da fila (%1 \/ 50)",
     "songLength":"Duração da Música (%1 min)",
     "message":{
-      "grab":"%1 adicionou %2",
+      "boothAlertNext":"Você está prestes a tocar!",
+      "boothAlertPos":"Agora você está em %1 na lista de espera",
+      "grab":"adicionou %1 - %2",
       "stats":"Estatística: %1 legais -- %2 chatos -- %3 adds",
       "updates":"Tocando agora: %1 de %2<br\/>Tocado por: %3",
       "meh":"%1 deu chato nesta música",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Auto Woot",
     "autojoin":"Auto Join",
+    "chatlog":"Registro de conversa",
     "customchatcolors":"Cores Customizadas no Chat",
     "autorespond":"Auto resposta AFK",
     "notify":"Notificações",
@@ -175,7 +178,9 @@
     "chatimages":"Imagens no chat",
     "twitchemotes":"Emoticons do Twitch",
     "controlpanel":"Painel de Controle",
-    "showdeletedmessages":"Mostrar Mensagens Apagadas"
+    "showdeletedmessages":"Mostrar Mensagens Apagadas",
+    "visualizers":"RCS SoundCloud Visualizadores",
+    "inlineuserinfo":"Informação de usuário online"
   },
   "vote":{
     "meh":"Chato",
@@ -202,7 +207,6 @@
     "invalidBanTime":"O tempo especificado, %1 é inválido. Os tempos válidos são 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Sintaxe inválida para o comando remover. Utilize: \/remove @usuário",
     "invalidWhoisSyntax":"Sintaxe inválida para o comando QuemÉ. Utilize: \/whois @usuário",
-    "noLiteSupport":"Isto não é suportado em plug³ Lite",
     "errorGettingPlaylistInfo":"Erro ao obter informações da playlist",
     "noPlaylistsFound":"Nenhuma playlist encontrada",
     "yourActivePlaylistIsFull":"Sua playlist ativa está cheia",

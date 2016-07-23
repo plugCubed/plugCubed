@@ -1,7 +1,5 @@
 {
   "running":"Folosind plug&#179; versiunea %1",
-  "runningLite":"Rulând plug&#179; Lite!",
-  "runningLiteInfo":"Unele caracteristici nu vor funcţiona.",
   "commandsHelp":"Scrie '\/commands' pentru a vedea in chat o lista cu comenzi.",
   "autorespond":{
     "default":"Nu sunt la tastatura.",
@@ -16,8 +14,8 @@
     "commandNotEnabled":"%1 autojoin nu a fost activat"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"Micșorează",
+    "enlarge":"Mărește"
   },
   "commands":{
     "header":"Comenzi plug&#179;",
@@ -29,7 +27,7 @@
       "on":"activat",
       "off":"dezactivat",
       "reason":"Motiv",
-      "number":"number"
+      "number":"număr"
     },
     "descriptions":{
       "join":"Alatură-te listei de aşteptare",
@@ -43,7 +41,7 @@
       "alertson":"redă sunet când cuvintele selectate sunt scrise in chat",
       "alertsoff":"opreşte redarea sunetului când un cuvânt selectat este scris in chat",
       "grab":"adaugă melodia curentă la playlist-ul tău",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"arată\/ascunde insigna utilizatorului în chat",
       "getpos":"obtine informatii despre pozitia in waitlist",
       "version":"arata versiunea",
       "commands":"Arată această listă",
@@ -58,31 +56,32 @@
       "remove":"sterge utilizatorul din dj booth\/waitlist",
       "whois all":"ofera userid si username tuturor utilizatorilor din camera",
       "banall":"baneaza toti utilizatorii din camera",
-      "status":"shows status of plug servers"
+      "status":"vezi statusul serverelor plug",
+      "unload":"Closes plug&#179;"
     },
     "responses":{
-      "alertson":"Playing sound on the following words: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "alertson":"Se redă sunetul pentru următoarele cuvinte: %1",
+      "alertsoff":"Nu s-au putut reda cuvintele specifice",
+      "badgeon":"Insignele au fost pornite",
+      "badgeoff":"Insignele au fost oprite",
+      "nextsong":"Următoarea ta melodie din coada de așteptare este %1 după %2",
+      "isHistory":"Avertisment: Această melodie este încă în istoric (%1 din %2)",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "automuted":"%1 a fost automatizată.",
+        "registered":"%1 a fost înregistrată automat pentru viitoarele redări.",
+        "unregistered":"%1 a fost ștearsă automat din registru."
       },
       "status":{
         "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
+        "socket":"Soclu: %1 %2 [%3ms]"
       }
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "boothAvailable":"Dacă vei intra în lista de așteptare acum, tu ai fi DJ-ul!",
+    "alreadyDJ":"Ești deja DJ!",
+    "waitListTime":"Ești în lista de așteptare %1 din %2, tu vei fi DJ-ul în aproape %3!",
+    "joinTime":"Dacă vei intra în lista de așteptare acum, o să fii DJ în aproximativ %1!"
   },
   "notify":{
     "header":"Notificari Chat",
@@ -93,22 +92,25 @@
     "stats":"Statistici Melodii",
     "updates":"Updateuri Melodii",
     "history":"Istoric melodii",
-    "songUnavailable":"Song Unavailable",
+    "songUnavailable":"Melodie indisponibilă",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Lungime melodie (%1 min)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"%1 a apucat %2 - %3",
       "stats":"Statistici: %1 woots--%2 mehs --%3 curates",
       "updates":"Acum canta: %1 de %2<br \/>Pus de: %3",
       "meh":"Lui %1 nu îi place această piesă",
-      "join":"joined the room",
-      "leave":"left the room",
+      "join":"a intrat în cameră",
+      "leave":"a ieșit din cameră",
       "history":"Piesa este în istoric (%1 din %2)",
       "historySkipped":"Piesa este in istoric (%1 din %2), dar a fost sarita in ultimul play",
       "songLength":"Piesa are mai mult de %1 minut",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songPrivate":"Melodia este privată",
+      "songNotFound":"Melodia nu a fost găsită",
+      "songEmbed":"Melodia are încorporarea dezactivată",
+      "songStreamable":"Melodia nu suportă streaming-ul"
     }
   },
   "info":{
@@ -145,7 +147,7 @@
     "lastDisconnect":"Ultima Deconectare",
     "lastPosition":"Poziţia",
     "time":"Timp",
-    "lastMessage":"Last Message"
+    "lastMessage":"Ultimul mesaj"
   },
   "ranks":{
     "you":"Tu",
@@ -166,16 +168,19 @@
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Autojoin",
+    "chatlog":"ChatLog",
     "customchatcolors":"Culori personalizate Chat",
     "autorespond":"AFK Autorespond",
     "notify":"Notificări",
     "afktimers":"AFK Timers",
-    "etatimer":"ETA Timer",
+    "etatimer":"Timp estimat",
     "roomsettings":"Setari Camera",
     "chatimages":"Imagini în chat",
     "twitchemotes":"Emote-uri de pe Twitch",
     "controlpanel":"Panou de Control",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Arată mesajele șterse",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Meh",
@@ -194,18 +199,17 @@
   },
   "error":{
     "userNotFound":"Utilizator negăsit",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Utilizatorul %1 este deja în lista de așteptare",
+    "notInWaitList":"Utilizatorul %1 nu este în lista de așteptare",
     "unknownMenuKey":"Tasta meniu necunoscuta: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
-    "noLiteSupport":"Acest lucru nu este acceptat in plug&#179; Lite",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
-    "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
-    "noNextSong":"You have no queued song"
+    "invalidAddSyntax":"Sintaxă invalidă pentru comanda add. Folosește: \/add @user",
+    "invalidBanSyntax":"Sintaxă invalidă pentru comanda ban. Folosește: \/ban @user sau \/ban @user::timp::motiv",
+    "invalidBanTime":"Timpul specificat, %1 este invalid. Timpurile valide sunt 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Sintaxă invalidă pentru comanda remove. Folosește: \/remove @user",
+    "invalidWhoisSyntax":"Sintaxă invalidă pentru comanda whois. Folosește: \/whois @user",
+    "errorGettingPlaylistInfo":"Eroare la obținerea informațiilor din playlist",
+    "noPlaylistsFound":"Nici un playlist găsit",
+    "yourActivePlaylistIsFull":"Playlist-ul activ este plin",
+    "noNextSong":"Nu ai nici o melodie în coada de așteptare"
   }
 }

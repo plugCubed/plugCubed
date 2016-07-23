@@ -1,7 +1,5 @@
 {
   "running":"מריץ plug&#179; גרסא %1",
-  "runningLite":"Running plug&#179; in Lite!",
-  "runningLiteInfo":"Some features will not work.",
   "commandsHelp":"הקלד 'commands\/' לראות רשימת פקודות.",
   "autorespond":{
     "default":"אני לא נמצא ליד המחשב כעת. (AFK)",
@@ -58,7 +56,8 @@
       "remove":"removes targeted user from dj booth\/waitlist",
       "whois all":"gives userid and username of all users in the room",
       "banall":"bans all users in the room",
-      "status":"shows status of plug servers"
+      "status":"shows status of plug servers",
+      "unload":"Closes plug&#179;"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
@@ -94,8 +93,11 @@
     "updates":"Song Updates",
     "history":"Songs in history",
     "songUnavailable":"Song Unavailable",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Song Length (%1 min)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"grabbed %1 - %2",
       "stats":"Stats: %1 woots -- %2 mehs -- %3 grabs",
       "updates":"Now Playing: %1 by %2<br>Played by: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Autojoin",
+    "chatlog":"ChatLog",
     "customchatcolors":"Custom Chat Colors",
     "autorespond":"AFK Autorespond",
     "notify":"Notifications",
@@ -175,7 +178,9 @@
     "chatimages":"Chat Images",
     "twitchemotes":"Twitch Emotes",
     "controlpanel":"Control Panel",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Show Deleted Messages",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Meh",
@@ -202,7 +207,6 @@
     "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
     "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
-    "noLiteSupport":"This is not supported in plug&#179; Lite",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",

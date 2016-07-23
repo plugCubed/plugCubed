@@ -1,7 +1,5 @@
 {
   "running":"กำลังรันplug&#179; เวอร์ชัน %1",
-  "runningLite":"ปลั๊ก&#179;กำลังทำงานในโหมด Lite!",
-  "runningLiteInfo":"บางระบบจะไม่สามารถทำงานใด้",
   "commandsHelp":"ใช้คำสั่ง '\/commands' เพื่อดูคำสั่งแชทเพิ่มเติม.",
   "autorespond":{
     "default":"ฉันไม่อยู่ (AFK).",
@@ -58,7 +56,8 @@
       "remove":"ลบผู้ใช้ที่เลือกไว้จากบูธ ดีเจ\/waitlist",
       "whois all":"ให้ไอดีผู้ใช้และชื่อผู้ใช้ของผู้ใช้ทั้งหมดในห้อง",
       "banall":"แบนผู้ใช้ทั้งหมดในห้อง",
-      "status":"shows status of plug servers"
+      "status":"shows status of plug servers",
+      "unload":"Closes plug&#179;"
     },
     "responses":{
       "alertson":"เล่นเสียงจากคำต่อไปนี้: %1",
@@ -94,8 +93,11 @@
     "updates":"ปรับปรุงเพลง",
     "history":"เพลงในรายการที่เล่นแล้ว",
     "songUnavailable":"Song Unavailable",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"เพลงยาว (%1 นาที)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"Grabbed  %1 - %2",
       "stats":"สถิติ:  %1 woots - %2 mehs - %3 grabs",
       "updates":"เพลงที่กำลังเล่น: %1 โดย %2 <br>เล่นโดย: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"ถูกใจโดยอัตโนมัติ",
     "autojoin":"เข้ารอโดยอัตโนมัติ",
+    "chatlog":"ChatLog",
     "customchatcolors":"สีการสนทนา",
     "autorespond":"AFK Autorespond",
     "notify":"แจ้งให้ทราบ",
@@ -175,7 +178,9 @@
     "chatimages":"รูปแชท",
     "twitchemotes":"อีโมติคอน Twitch",
     "controlpanel":"'แผงควบคุม'",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Show Deleted Messages",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"ไม่ชอบ",
@@ -202,7 +207,6 @@
     "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
     "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
-    "noLiteSupport":"นี้ไม่สนับสนุนใน plug&#179; Lite",
     "errorGettingPlaylistInfo":"ข้อผิดพลาดในการรับข้อมูลรายการที่เล่น",
     "noPlaylistsFound":"ไม่พบรายการที่เล่น",
     "yourActivePlaylistIsFull":"รายการที่เล่นของคุณเต็ม",

@@ -1,7 +1,5 @@
 {
   "running":"Kjører plug&#179; versjon %1",
-  "runningLite":"Kjører plug&#179; i Beta!",
-  "runningLiteInfo":"Enkelte funksjoner vil ikke fungere.",
   "commandsHelp":"Bruk '\/commands' for å se en liste over alle kommandoene.",
   "autorespond":{
     "default":"Jeg er ikke her akkurat nå.",
@@ -9,7 +7,7 @@
     "nextIn":"Neste AFK autorespons kommer til å bli sendt fra %1",
     "next":"AFK Autosvar på neste omtale",
     "commandDisable":"%1 AFK melding deaktivert",
-    "commandNotEnabled":"%1 autojoin was not enabled"
+    "commandNotEnabled":"%1 AFK melding var ikke aktivert"
   },
   "autojoin":{
     "commandDisable":"%1 autojoin deaktivert",
@@ -24,7 +22,7 @@
     "userCommands":"Bruker kommandoer",
     "modCommands":"Moderator Kommandoer",
     "variables":{
-      "username":"Brukernavn",
+      "username":"brukernavn",
       "word":"ord",
       "on":"PÅ",
       "off":"AV",
@@ -33,44 +31,45 @@
     },
     "descriptions":{
       "join":"Gå i ventelisten",
-      "leave":"Brukeren logget av",
+      "leave":"forlater ventelisten",
       "whoami":"få din egen informasjon",
-      "mute":"Sett volum til 0",
+      "mute":"sett volum til 0",
       "automute":"Registrer spillende sang til å automatisk bli dempet hver gang den spilles",
-      "unmute":"Angi volumet til siste volum",
-      "nextsong":"Viser neste sang på spillelisten, og om den er på historie-listen",
-      "refresh":"Oppdater video",
-      "alertson":"spille av lyd når definerte ord er skrevet i chat",
+      "unmute":"vngi volumet til siste volum",
+      "nextsong":"viser neste sang på spillelisten, og om den er på historie-listen",
+      "refresh":"oppdater video",
+      "alertson":"spill av lyd når definerte ord er skrevet i chat",
       "alertsoff":"slutt å spille lyd når definerte ord er skrevet i chat",
       "grab":"Legg til spillende sang i spillelisten",
       "badges":"Vis\/Skjul bruker-merkene i chat",
       "getpos":"Gir deg din gjeldende posisjon i ventelista.",
       "version":"viser versjonsnummer",
       "commands":"viser denne lista",
-      "link":"Gir deg linken til plugCubed nettsiden",
+      "link":"sender lenke til plugCubed nettsiden i chat",
       "whois":"Gir deg generelt informasjon om en bruker",
-      "skip":"Hopper over denne sangen",
+      "skip":"hopp over denne sangen",
       "ban":"spark den målrettet brukeren",
       "lockskip":"låser DJ køen, hopper over og låser opp etterpå",
-      "lock":"Lokker DJ lista",
+      "lock":"lukker DJ lista",
       "unlock":"åpner DJ lista",
       "add":"Legger målrettet brukeren til DJ ventelista",
       "remove":"fjerner målrettet brukeren fra DJ ventelista",
       "whois all":"Gir brukerID og brukernavn på alle brukere i rommet",
       "banall":"bannlys alle brukere i rommet",
-      "status":"Viser status for plug servere"
+      "status":"Viser status for plug servere",
+      "unload":"Kukker plug&#179;"
     },
     "responses":{
       "alertson":"Spiller av lyd på følgende ord: %1",
       "alertsoff":"Ikke lenger spille lyd på bestemte ord",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"Merker er aktivert",
+      "badgeoff":"Merker er deaktivert",
       "nextsong":"Neste i køen er %1 av %2",
       "isHistory":"Advarsel: Denne sangen er forsatt i historie-listen (%1 av %2)",
       "automute":{
         "automuted":"%1 autodempet.",
         "registered":"%1 er registret til å bli automatisk dempet.",
-        "unregistered":"%1 fjernet fra autodemp lista."
+        "unregistered":"%1 fjernet fra autodemp-lista."
       },
       "status":{
         "rest":"RESTEN: %1 %2 [%3ms]",
@@ -94,8 +93,11 @@
     "updates":"sang Oppdateringer",
     "history":"Sanger i historie-listen",
     "songUnavailable":"Sang utilgjengelig",
+    "boothAlert":"Kø-varsel (%1 \/ 50)",
     "songLength":"Sangens lengde (%1 min)",
     "message":{
+      "boothAlertNext":"Du er i ferd med å spille!",
+      "boothAlertPos":"Du er nå %1 i ventelisten",
       "grab":"grep %1 - %2",
       "stats":"Statistikk: %1 woots -- %2 mehs -- %3 grab",
       "updates":"Spiller nå: %1 av %2<br>Spilt av %3",
@@ -145,7 +147,7 @@
     "lastDisconnect":"Siste frakobling",
     "lastPosition":"Posisjon ",
     "time":"Tid",
-    "lastMessage":"Last Message"
+    "lastMessage":"Siste melding"
   },
   "ranks":{
     "you":"Deg",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Autojoin",
+    "chatlog":"Chat Logg",
     "customchatcolors":"Tilpassede Chat Farger",
     "autorespond":"AFK Autosvar",
     "notify":"Varslinger",
@@ -175,7 +178,9 @@
     "chatimages":"Chat Bilder",
     "twitchemotes":"Twitch Emotes",
     "controlpanel":"Kontrollpanel",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Vis slettede meldinger",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Bruker Informasjon"
   },
   "vote":{
     "meh":"Meh",
@@ -194,15 +199,14 @@
   },
   "error":{
     "userNotFound":"Bruker ble ikke funnet",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"Bruker %1 er allerede i ventelisten",
+    "notInWaitList":"Bruker %1 er ikke i ventelisten",
     "unknownMenuKey":"Ukjent menytast: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
-    "noLiteSupport":"Dette støttes ikke i plug³ Lite",
+    "invalidAddSyntax":"Ugyldig bruk av kommandown. Bruk: \/add @bruker",
+    "invalidBanSyntax":"Ugyldig bruk av kommandoen. Bruk: \/ban @bruker eller \/ban @bruker::tid::grunn",
+    "invalidBanTime":"Angitt tid, %1 er ugyldig. Gyldig klokkeslett er 60, 1, 24, 1440, -1",
+    "invalidRemoveSyntax":"Ugyldig bruk av kommandoen. Bruk: \/remove @bruker",
+    "invalidWhoisSyntax":"Ugyldig bruk av kommandoen. Bruk: \/whois @bruker",
     "errorGettingPlaylistInfo":"Feil ved henting av spilleliste info",
     "noPlaylistsFound":"Ingen spillelister funnet",
     "yourActivePlaylistIsFull":"Din aktive spilleliste er full",

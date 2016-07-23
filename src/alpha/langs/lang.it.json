@@ -1,7 +1,5 @@
 {
   "running":"Sto eseguendo plug&#179; versione %1",
-  "runningLite":"Sto eseguendo plug&#179; in Lite!",
-  "runningLiteInfo":"Alcune caratteristiche potrebbero non funzionare.",
   "commandsHelp":"Usa \"\/commands\" per estendere la lista dei comandi eseguibili in chat.",
   "autorespond":{
     "default":"Sono assente",
@@ -58,7 +56,8 @@
       "remove":"rimuove utente selezionato dalla lista d'attesa",
       "whois all":"dà userid e username di tutti gli utenti nella stanza",
       "banall":"banna tutti gli utenti nella stanza",
-      "status":"mostra lo stato dei server di plug"
+      "status":"mostra lo stato dei server di plug",
+      "unload":"Chiude plug&#179;"
     },
     "responses":{
       "alertson":"Riproduzione del suono alle seguenti parole: %1",
@@ -94,8 +93,11 @@
     "updates":"Aggiornamenti della canzone",
     "history":"Canzoni nello storico",
     "songUnavailable":"Canzone non disponibile",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Lunghezza della Canzone (%1 min)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"Salvata %1 - %2",
       "stats":"Statistiche: %1 woots -- %2 mehs -- %3 grabs",
       "updates":"Rriproducendo: %1 di %2 <br>Riprodotta da: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Join Automatico",
+    "chatlog":"Storico chat",
     "customchatcolors":"Colori personalizzati chat",
     "autorespond":"Auto-risposte AFK",
     "notify":"Notifiche",
@@ -175,7 +178,9 @@
     "chatimages":"Immagini chat",
     "twitchemotes":"Emoticons Twitch",
     "controlpanel":"Pannello di Controllo",
-    "showdeletedmessages":"Visualizza i messaggi eliminati"
+    "showdeletedmessages":"Visualizza i messaggi eliminati",
+    "visualizers":"Visualizzatore RCS SoundCloud",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Meh",
@@ -202,7 +207,6 @@
     "invalidBanTime":"Il tempo specificato, %1 non è valido. Orari validi sono 1, 24, 60, 1440, -1",
     "invalidRemoveSyntax":"Sintassi non valida per il comando \"rimuovi\". Uso: \/remove @user",
     "invalidWhoisSyntax":"Sintassi non valida per il comando \"whois\". Uso: \/whois @user",
-    "noLiteSupport":"Questo non è supportato in plug&#179; Lite",
     "errorGettingPlaylistInfo":"Errore durante il recupero info playlist",
     "noPlaylistsFound":"Nessuna playlist trovata",
     "yourActivePlaylistIsFull":"La tua playlist attiva è piena",

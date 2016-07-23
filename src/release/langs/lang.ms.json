@@ -1,7 +1,5 @@
 {
   "running":"Menjalankan plug&#179; versi %1",
-  "runningLite":"Menjalankan plug&#179; dalam Lite!",
-  "runningLiteInfo":"sesetengah ciri tidak akan berfungsi.",
   "commandsHelp":"Gunakan '\/commands' untuk melihat arahan chat diperluaskan.",
   "autorespond":{
     "default":"Saya tidak didepan komputer sekarang",
@@ -58,7 +56,8 @@
       "remove":"mengeluarkan target pengguna dari dj booth\/senarai menunggu",
       "whois all":"memberikan id pengguna dan nama pengguna daripada semua pengguna di dalam bilik",
       "banall":"ban semua pengguna di dalam bilik",
-      "status":"Menunjukkan status Pelayan Plug"
+      "status":"Menunjukkan status Pelayan Plug",
+      "unload":"Tutupkan Plug&#179;"
     },
     "responses":{
       "alertson":"Berbunyi pada perkataan yang berikut: %1",
@@ -94,8 +93,11 @@
     "updates":"Lagu update",
     "history":"Lagu dalam sejarah",
     "songUnavailable":"Lagu tidak available",
+    "boothAlert":"Alert untuk Booth (%1 \/ 50)",
     "songLength":"Kepanjangan Lagu (%1 min)",
     "message":{
+      "boothAlertNext":"Anda akan main seterusnya!",
+      "boothAlertPos":"Anda sekarang berada di %1 dalam senarai menunggu",
       "grab":"telah grab %1 - %2",
       "stats":"statistik: %1 woot -- %2 meh -- %3 Koleksi",
       "updates":"Sekarang Memainkan: %1 - %2<br \/>Main oleh: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Auto menyertai",
+    "chatlog":"Log Chat",
     "customchatcolors":"Custom Chat Warna",
     "autorespond":"AFK Auto Jawap",
     "notify":"Pemberitahuan",
@@ -175,7 +178,9 @@
     "chatimages":"Gambar Chat",
     "twitchemotes":"Twitch Emotes",
     "controlpanel":"Panel Kawalan",
-    "showdeletedmessages":"Menunjukkan Mesej dipadamkan"
+    "showdeletedmessages":"Menunjukkan Mesej dipadamkan",
+    "visualizers":"RCS SoundCloud Visualizer",
+    "inlineuserinfo":"Maklumat pengguna Inline"
   },
   "vote":{
     "meh":"Meh",
@@ -202,7 +207,6 @@
     "invalidBanTime":"Masa yang dinyatakan, %1 tidak sah. Masa yang sah adalah 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Sintaks tidak sah untuk arahan mengeluarkan. Cara: \/remove @pengguna",
     "invalidWhoisSyntax":"Sintaks tidak sah untuk arahan whois. Cara: \/whois @pengguna",
-    "noLiteSupport":"Ini tidak disokong dalam plug&#179; Lite",
     "errorGettingPlaylistInfo":"Ralat untuk mendapatkan maklumat senarai main",
     "noPlaylistsFound":"Tiada senarai main dijumpai",
     "yourActivePlaylistIsFull":"Senarai main yang aktif anda telah penuh",

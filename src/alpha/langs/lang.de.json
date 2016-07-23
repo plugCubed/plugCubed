@@ -1,7 +1,5 @@
 {
   "running":"Es läuft die Version plug&#179 %1",
-  "runningLite":"Plug&#179; wird im Lite-Modus ausgeführt!",
-  "runningLiteInfo":"Ein paar Features werden nicht funktionieren.",
   "commandsHelp":"Gib '\/commands' ein, um alle Chat Befehle zu sehen.",
   "autorespond":{
     "default":"Bin mal weg.",
@@ -58,7 +56,8 @@
       "remove":"Entfernt den markierten Benutzer von der DJ Warteliste",
       "whois all":"Zeigt die Benutzer-ID und Benutzernamen von allen Benutzern im Raum an",
       "banall":"Bannt alle Benutzer im Raum",
-      "status":"Status der Plug Server zeigen"
+      "status":"Status der Plug Server zeigen",
+      "unload":"Schließt plug&#179;"
     },
     "responses":{
       "alertson":"Mache ein Geräusch bei folgenden Wörtern: %1",
@@ -94,8 +93,11 @@
     "updates":"Song-Updates",
     "history":"Songs im Verlauf",
     "songUnavailable":"Lied nicht verfügbar",
+    "boothAlert":"Pult-Alarm (%1 \/ 50)",
     "songLength":"Song Länge (%1 min)",
     "message":{
+      "boothAlertNext":"Du bist als Nächstes an der Reihe!",
+      "boothAlertPos":"Du bist jetzt %1 in der Warteliste",
       "grab":"gegrabt %1 - %2",
       "stats":"Statistiken: %1 woots -- %2 mehs -- %3 grabs",
       "updates":"Jetzt läuft: %1 von %2<br\/>Gespielt von: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Automatisch beitreten",
+    "chatlog":"ChatLog",
     "customchatcolors":"Eigene Chat Farben",
     "autorespond":"AFK Autoantwort",
     "notify":"Benachrichtigungen",
@@ -175,7 +178,9 @@
     "chatimages":"Chat-Bilder",
     "twitchemotes":"Twitch Emotes",
     "controlpanel":"Einstellungen",
-    "showdeletedmessages":"Gelöschte Nachrichten anzeigen"
+    "showdeletedmessages":"Gelöschte Nachrichten anzeigen",
+    "visualizers":"RCS SoundCloud Visualizer",
+    "inlineuserinfo":"Inlinse User-Info"
   },
   "vote":{
     "meh":"Meh",
@@ -202,7 +207,6 @@
     "invalidBanTime":"Die angegebene Zeit %1 ist ungültig. Gültige Zeiten sind 60, 1, 24, 1440,-1",
     "invalidRemoveSyntax":"Ungültige Syntax für den \"remove\"-Befehl. Syntax: \/remove @Nutzer",
     "invalidWhoisSyntax":"Ungültige Syntax für für den \"whois\"-Befehl. Syntax: \/whois @Nutzer",
-    "noLiteSupport":"Das ist in plug&#179; Lite nicht unterstützt",
     "errorGettingPlaylistInfo":"Error beim Laden der Playlist Informationen",
     "noPlaylistsFound":"Keine Playlist gefunden",
     "yourActivePlaylistIsFull":"Deine aktive Playlist ist voll",

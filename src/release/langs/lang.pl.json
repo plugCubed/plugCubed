@@ -1,7 +1,5 @@
 {
   "running":"Plug³ wersja %1",
-  "runningLite":"Uruchomiono plug&#179; w wersji Lite!",
-  "runningLiteInfo":"Niektóre funkcje nie będą działać.",
   "commandsHelp":"Użyj '\/commands' aby zobaczyć rozszerzoną listę komend.",
   "autorespond":{
     "default":"Jestem z dala od klawiatury.",
@@ -58,7 +56,8 @@
       "remove":"usuwa podanego użytkownika z listy oczekiwania",
       "whois all":"podaje numer identyfikacyjny oraz nazwę użytkownika każdego użytkownika znajdującego się w pokoju",
       "banall":"zbanuj wszystkich użytkowników w tym pokoju",
-      "status":"pokaż status serwerów"
+      "status":"pokaż status serwerów",
+      "unload":"Wyłącz plug&#179;"
     },
     "responses":{
       "alertson":"Odtwarzanie dźwięku na następujące słowa: %1",
@@ -94,8 +93,11 @@
     "updates":"Aktualizacje utworów",
     "history":"Piosenki w historii",
     "songUnavailable":"Piosenka niedostępna",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Długość piosenki (%1 min)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"%1 chwycił %2 - %3",
       "stats":"Statystyki: %1 osób lubi -- %2 osób nie lubi -- %3 osób chwyciło utwór",
       "updates":"Obecnie odtwarzane: %1 przez %2 <br>grane przez: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Autowooter",
     "autojoin":"Automatyczne dołączanie",
+    "chatlog":"ChatLog",
     "customchatcolors":"Niestandardowe kolory chatu",
     "autorespond":"Auto odpowiedź AFK",
     "notify":"Powiadomienia",
@@ -175,7 +178,9 @@
     "chatimages":"Pokazuj zdjęcia na czacie",
     "twitchemotes":"Emotikony Twitcha",
     "controlpanel":"Panel sterowania",
-    "showdeletedmessages":"Pokaż usunięte wiadomości"
+    "showdeletedmessages":"Pokaż usunięte wiadomości",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Meh",
@@ -202,7 +207,6 @@
     "invalidBanTime":"Nie określono czasu. %1 jest nieprawidłowy. Dostępne czasy to 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Nieprawidłowa składnia dla tej komendy. Sposób użycia: \/remove @user",
     "invalidWhoisSyntax":"Nieprawidłowa składnia dla tej komendy. Sposób użycia: \/whois @user",
-    "noLiteSupport":"Ta funkcja nie jest dostępna w plug&#179; Lite",
     "errorGettingPlaylistInfo":"Wystąpił błąd podczas uzyskiwania informacji na temat listy odtwarzania",
     "noPlaylistsFound":"Nie znaleziono żadnej listy utworów",
     "yourActivePlaylistIsFull":"Twoja aktywna lista odtwarzania jest pełna",

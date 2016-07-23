@@ -1,7 +1,5 @@
 {
   "running":"Je gebruikt plug&#179; versie %1",
-  "runningLite":"Plug&#179; draait nu in Lite modus!",
-  "runningLiteInfo":"Sommige functies zullen niet werken.",
   "commandsHelp":"Gebruik '\/commands' om alle chat commando's te zien",
   "autorespond":{
     "default":"Ik ben niet op mijn pc!",
@@ -32,8 +30,8 @@
       "number":"nummer"
     },
     "descriptions":{
-      "join":"Gebruiker join",
-      "leave":"Gebruiker gaat weg",
+      "join":"gebruiker betreed wachtrij",
+      "leave":"gebruiker verlaat wachtrij",
       "whoami":"Krijg je eigen informatie",
       "mute":"Zet volume naar 0",
       "automute":"register huidige nummer aan automatisch demp bij volgende spelen",
@@ -54,11 +52,12 @@
       "lockskip":"Sluit DJ booth, overslaan en ontgrendelt daarna",
       "lock":"Sluit DJ booth",
       "unlock":"Ontgrendel DJ Booth",
-      "add":"Voeg gerichte gebruiker toe aan de dj booth\/wachtlijst",
-      "remove":"Verwijder gerichte gebruiker  van de dj booth\/wachtlijst",
-      "whois all":"Geeft gebruikerid en gebruikernaam van iedere gebruiker in de kamer",
+      "add":"voeg gerichte gebruiker toe aan de dj wachtrij",
+      "remove":"verwijder gerichte gebruiker van de dj wachtrij",
+      "whois all":"geeft gebruikerID en gebruikernaam van iedere gebruiker in de kamer",
       "banall":"Verbied alle gebruikers in de kamer",
-      "status":"toon status van plug servers"
+      "status":"toon status van plug servers",
+      "unload":"Sluit plug&#179;"
     },
     "responses":{
       "alertson":"Geluid afspelen bij de volgende woorden: %1",
@@ -94,8 +93,11 @@
     "updates":"Nummer Updates",
     "history":"Nummers in geschiedenis",
     "songUnavailable":"Song niet beschikbaar",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Lengte van een nummer (1% min)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"gegrabbed %1 - %2",
       "stats":"Status: %1 woots - %2 mehs - %3 grabs",
       "updates":"Nu aan het spelen: %1 by %2<br\/> Gespeeld door: %3",
@@ -121,7 +123,7 @@
       "ambassador":"plug&#179; Ambassadeur",
       "donatorDiamond":"plug&#179; Diamond Donateur",
       "donatorPlatinum":"plug&#179; Platinum Donateur",
-      "donatorGold":"plug&#179; Gouden Donator",
+      "donatorGold":"plug&#179; Gouden Donateur",
       "donatorSilver":"plug&#179; Zilveren Donateur",
       "donatorBronze":"plug&#179; Bronzen Donateur",
       "special":"plug&#179; Speciale Supporter -% 1"
@@ -133,11 +135,11 @@
     "vote":"Stem",
     "position":"Positie",
     "points":"Punten",
-    "wootCount":"Woot tellen",
-    "mehCount":"Meh tellen",
+    "wootCount":"Woot aantal",
+    "mehCount":"Meh aantal",
     "ratio":"Woot\/Meh Verhouding",
-    "djing":"DJing",
-    "notInList":"NIet in wachtlijst noch booth",
+    "djing":"Aan het DJen",
+    "notInList":"Niet op de wachtlijst of op het podium",
     "inWaitlist":"%1\/%2 in de wachtlijst",
     "userDjing":"%1 zijn op dit moment DJing",
     "userNextDJ":"%1 DJing volgende ",
@@ -166,7 +168,8 @@
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"AutoJoin",
-    "customchatcolors":"Custom chat kleuren",
+    "chatlog":"Chat historie",
+    "customchatcolors":"Veranderlijke chat kleuren",
     "autorespond":"AFK Automatisch Reageren",
     "notify":"Notificatie's",
     "afktimers":"AFK Wekkers",
@@ -175,7 +178,9 @@
     "chatimages":"Chat Afbeeldingen",
     "twitchemotes":"Twitch emoticons",
     "controlpanel":"Configuratiescherm",
-    "showdeletedmessages":"Toon verwijderde berichten"
+    "showdeletedmessages":"Toon verwijderde berichten",
+    "visualizers":"RCS SoundCloud Visualizer",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Meh",
@@ -202,7 +207,6 @@
     "invalidBanTime":"Te gespecificeerde tijd, %1 is ongeldig. Geldige tijden zijn 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Ongeldige syntax voor remove commando. Gebruik: \/remove @gebruiker",
     "invalidWhoisSyntax":"Ongeldige syntax voor whois commando. Gebruik: \/whois @gebruiker",
-    "noLiteSupport":"Dit wordt niet ondersteund in plug&#179; Lite",
     "errorGettingPlaylistInfo":"Fout bij het verkrijgen van afspeellijst info",
     "noPlaylistsFound":"Geen afspeellijsten gevonden",
     "yourActivePlaylistIsFull":"Uw actieve afspeellijst is vol",

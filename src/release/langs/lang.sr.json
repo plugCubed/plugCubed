@@ -1,7 +1,5 @@
 {
   "running":"Pokrećeš plug plug&#179; verzija %1",
-  "runningLite":"Pokretanje plug&#179; Lajt verzija!",
-  "runningLiteInfo":"Neke funkcije neće raditi.",
   "commandsHelp":"Koristi ' \/commands' da vidiš komande.",
   "autorespond":{
     "default":"Nisam za kompjuterom.",
@@ -58,7 +56,8 @@
       "remove":"uklanja odabranog korisnika sa DJ liste",
       "whois all":"daje ID korisnika kao i korisničko ime svih korisnika u sobi",
       "banall":"banuje sve korisnike u sobi",
-      "status":"Pokaži statuse plug servera"
+      "status":"Pokaži statuse plug servera",
+      "unload":"Closes plug&#179;"
     },
     "responses":{
       "alertson":"Reprodukcija zvuka na sledeće reči: %1",
@@ -94,8 +93,11 @@
     "updates":"Ažuriranja Pesme",
     "history":"Pesma u istoriji",
     "songUnavailable":"Pesma Nedostupna",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Dužina pesme (%1 minut\/a)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"Grab-ovano %1 - %2",
       "stats":"Statistika: %1 Woot -- %2 Meh -- %3 Grab",
       "updates":"Trenutna pesma: %1 od %2<br \/>Pustio: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"AutoWoot",
     "autojoin":"Automatsko pridruživanje",
+    "chatlog":"ChatLog",
     "customchatcolors":"Prilagođene boje četa",
     "autorespond":"AFK automatsko odgovaranje",
     "notify":"Obaveštenja",
@@ -175,7 +178,9 @@
     "chatimages":"Čet slike",
     "twitchemotes":"Twitch Emotikoni",
     "controlpanel":"Kontrolna Tabla",
-    "showdeletedmessages":"Prikaži izbrisane poruke"
+    "showdeletedmessages":"Prikaži izbrisane poruke",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Ne sviđa mi se",
@@ -202,7 +207,6 @@
     "invalidBanTime":"Navedeni vremenski interval %1 je nevažeći. Važeća vremena su 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Nevažeća sintaksa za uklanjanje komande. Upotreba: \/remove @user",
     "invalidWhoisSyntax":"Nevažeća sintaksa za \"ko je\" komandu. Upotreba: \/whois @user",
-    "noLiteSupport":"Ovo nije podržano u plug&#179; Lajt",
     "errorGettingPlaylistInfo":"Greška pri dobijanju informacije o playlist-i",
     "noPlaylistsFound":"PlayList-a nije pronađena",
     "yourActivePlaylistIsFull":"Tvoja aktivirana PlayList-a je puna",

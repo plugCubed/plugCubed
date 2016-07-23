@@ -1,7 +1,5 @@
 {
   "running":"執行 plug&#179; 版本 %1",
-  "runningLite":"執行 plug&#179; 精簡版!",
-  "runningLiteInfo":"某些功能將無法運作.",
   "commandsHelp":"使用 '\/commands' 擴大去看聊天指令.",
   "autorespond":{
     "default":"我正在暫離電腦中.",
@@ -58,7 +56,8 @@
       "remove":"從 dj 展台\/等候清單 移除目標用戶",
       "whois all":"提供 整個房間裡所有用戶的 用戶id 與 用戶名 ",
       "banall":"禁止所有在房間裡的用戶",
-      "status":"顯示plug伺服器的狀態"
+      "status":"顯示plug伺服器的狀態",
+      "unload":"關閉 Plug&#179;"
     },
     "responses":{
       "alertson":"對下列詞語播放聲音: %1",
@@ -94,8 +93,11 @@
     "updates":"歌曲更新",
     "history":"在歷史裡的歌曲",
     "songUnavailable":"歌曲不可用",
+    "boothAlert":"播放提醒 (%1 \/ 50)",
     "songLength":"歌曲長度 (%1 分鐘)",
     "message":{
+      "boothAlertNext":"你就快要播放!",
+      "boothAlertPos":"你目前在等候列表 %1 裡",
       "grab":"收藏了 %1 - %2",
       "stats":"統計:   %1 正評 -- %2 負評 -- %3 收藏",
       "updates":"正在播放: %1 - %2<br \/>播放者: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"自動正評",
     "autojoin":"自動加入排隊",
+    "chatlog":"聊天紀錄",
     "customchatcolors":"自定義聊天顏色",
     "autorespond":"AFK 自動回應",
     "notify":"通知",
@@ -175,7 +178,9 @@
     "chatimages":"聊天圖像",
     "twitchemotes":"搞怪表情",
     "controlpanel":"控制面板",
-    "showdeletedmessages":"顯示已刪除訊息"
+    "showdeletedmessages":"顯示已刪除訊息",
+    "visualizers":"RCS SoundCloud另類展示效果",
+    "inlineuserinfo":"聊天用戶資訊"
   },
   "vote":{
     "meh":"負評",
@@ -202,7 +207,6 @@
     "invalidBanTime":"指定的時間, %1是無效的. 有效時間為 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"無效的移除指令語法. 用法: \/remove @用戶",
     "invalidWhoisSyntax":"無效的whois指令語法. 用法: \/whois @用戶",
-    "noLiteSupport":"這並不被 plug&#179; Lite 所支援",
     "errorGettingPlaylistInfo":"獲取播放清單資訊時出錯",
     "noPlaylistsFound":"無法找到播放清單",
     "yourActivePlaylistIsFull":"你的活躍播放清單已滿",

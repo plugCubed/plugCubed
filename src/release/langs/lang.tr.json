@@ -1,7 +1,5 @@
 {
   "running":"Plug&#179; %1 sürümünde çalışıyor",
-  "runningLite":"Plug&#179; hafif versiyonda çalışıyor!",
-  "runningLiteInfo":"Bazı özellikler çalışmaz.",
   "commandsHelp":"Genişletilmiş sohbet komutları görmek için '\/commands' kullanın",
   "autorespond":{
     "default":"Ben klavye başında değilim.",
@@ -58,7 +56,8 @@
       "remove":"hedeflenen kullanıcıyı dj kabin\/bekleme listesinden kaldırır",
       "whois all":"Odadaki bütün kullanıcıların kullanıcı kimliklerini ve kullanıcı adlarını verir",
       "banall":"Odadaki tüm kullanıcıları yasaklar",
-      "status":"Plug sunucularının durumunu gösterir"
+      "status":"Plug sunucularının durumunu gösterir",
+      "unload":"Closes plug&#179;"
     },
     "responses":{
       "alertson":"Aşağıdaki sözcükleri ses çalma: %1",
@@ -94,8 +93,11 @@
     "updates":"Şarkı güncellemeleri",
     "history":"Oynatılan şarkılar",
     "songUnavailable":"Şarkı kullanılamaz",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Şarkı %1 dakikadan daha uzun",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"Kapıldı %1-%2",
       "stats":"İstatistikler: %1 Begenilme -- %2 Beğenilmeme --%3 listeye eklenme",
       "updates":"Şimdi Yürütülüyor: %1 by %2 < br \/ > şarkıyı acan: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"OtomatikBegen",
     "autojoin":"OtomatikKatıl",
+    "chatlog":"ChatLog",
     "customchatcolors":"Özel sohbet renkleri",
     "autorespond":"AFK Otomatik Yanıt",
     "notify":"Bildirimler",
@@ -175,7 +178,9 @@
     "chatimages":"Sohbet görüntüleri",
     "twitchemotes":"Twitch ifadeleri",
     "controlpanel":"Kontrol paneli",
-    "showdeletedmessages":"Silinen mesajları göster"
+    "showdeletedmessages":"Silinen mesajları göster",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Kötü",
@@ -202,7 +207,6 @@
     "invalidBanTime":"Belirtilen %1 zamanı geçerli değildir. Geçerli olan zamanlar 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Kaldırmak için geçersiz sözdizimi. Kullanımı: \/remove @user",
     "invalidWhoisSyntax":"Whois komutu için geçersiz sözdizimi. Kullanımı \/whois @user",
-    "noLiteSupport":"Burada plug³ Lite desteklenmiyor",
     "errorGettingPlaylistInfo":"Çalma listesi bilgisi alınırken hata oluştu",
     "noPlaylistsFound":"Hiç bir çalma listesi bulunamadı",
     "yourActivePlaylistIsFull":"Aktif çalma listen dolu",

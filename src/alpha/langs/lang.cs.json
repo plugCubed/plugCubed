@@ -1,7 +1,5 @@
 {
   "running":"plug&#179; byl spuštěn, verze %1",
-  "runningLite":"Spuštěna Lite verze plug&#179;",
-  "runningLiteInfo":"Některé funkce nebudou fungovat správně.",
   "commandsHelp":"Použijte „\/commands“ k zobrazení příkazů.",
   "autorespond":{
     "default":"Jsem nepřítomen.",
@@ -43,7 +41,7 @@
       "alertson":"přehraje zvuk vždy, když jsou definovaná slovo napsána do chatu",
       "alertsoff":"přestane přehrávat zvuk, když jsou definovaná slova napsána v chatu",
       "grab":"přidá aktuální skladbu do vybraného seznamu skladeb",
-      "badges":"Zobrazit\/Skrýt uživatelské odznaky v chatu",
+      "badges":"zobrazí \/ skryje uživatelské odznaky v chatu",
       "getpos":"zjistí současnou pozici ve frontě",
       "version":"zobrazí číslo verze",
       "commands":"zobrazí tento seznam",
@@ -58,7 +56,8 @@
       "remove":"odstraní označeného uživatele z DJ pultu \/ fronty",
       "whois all":"zobrazí uživatelská ID a jména všech uživatelů v této místnosti",
       "banall":"zabanuje všechny uživatele v této místnosti",
-      "status":"zobrazí stav plug.dj serverů"
+      "status":"zobrazí stav plug.dj serverů",
+      "unload":"Vypne plug&#179;"
     },
     "responses":{
       "alertson":"Zvuk se přehraje při následujících slovech: %1",
@@ -94,8 +93,11 @@
     "updates":"Aktualizace skladeb",
     "history":"Skladby v historii",
     "songUnavailable":"Nedostupná skladba",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Délka skladby (%1 min)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"přidáno %1 - %2",
       "stats":"Statistiky: %1 Wootů -- %2 Mehů -- %3 Přidaní",
       "updates":"Právě hraje: %1 od %2<br> DJ: %3",
@@ -107,7 +109,7 @@
       "songLength":"Skladba je delší než %1 minut",
       "songPrivate":"Skladba je soukromá",
       "songNotFound":"Skladba nenalezena",
-      "songEmbed":"Skladba nemá vkládání povolené",
+      "songEmbed":"Skladba nemá povolené vkládání",
       "songStreamable":"Skladba nepodporuje streamování"
     }
   },
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Autojoin",
+    "chatlog":"Historie chatu",
     "customchatcolors":"Vlastní barvy chatu",
     "autorespond":"AFK automatická odpověď",
     "notify":"Upozornění",
@@ -175,7 +178,9 @@
     "chatimages":"Obrázky v chatu",
     "twitchemotes":"Twitch smajlíky",
     "controlpanel":"Ovládací panel",
-    "showdeletedmessages":"Zobrazit odstraněné zprávy"
+    "showdeletedmessages":"Zobrazit odstraněné zprávy",
+    "visualizers":"RCS SoundCloud vizualizéry",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Meh",
@@ -198,11 +203,10 @@
     "notInWaitList":"Uživatel %1 není ve frontě",
     "unknownMenuKey":"Neznámý klíč menu: %1",
     "invalidAddSyntax":"Syntaxe příkazu pro přidání uživatele není platná. Použití: \/add @uživatel",
-    "invalidBanSyntax":"Syntaxe příkazu zabanování uživatele není platná. Použití: \/ban @uživatel nebo \/ban @uživatel::doba::důvod",
+    "invalidBanSyntax":"Syntaxe příkazu banování uživatele není platná. Použití: \/ban @uživatel nebo \/ban @uživatel::doba::důvod",
     "invalidBanTime":"Zadaný čas %1 je neplatný. Platné hodnoty jsou 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Syntaxe příkazu pro odstranění uživatele není platná. Použití: \/remove @uživatel",
     "invalidWhoisSyntax":"Syntaxe whois příkazu není platná. Použití: \/whois @uživatel",
-    "noLiteSupport":"Tato možnost není podporována v plug&#179; Lite",
     "errorGettingPlaylistInfo":"Chyba při získávání informací o playlistu",
     "noPlaylistsFound":"Nebyl nalezen žádný playlist",
     "yourActivePlaylistIsFull":"Váš aktivní seznam skladeb je plný",

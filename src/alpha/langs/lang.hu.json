@@ -1,7 +1,5 @@
 {
   "running":"Jelenleg a plug&#179; %1 verziója fut",
-  "runningLite":"A Plug&#179; Lite verziója fut!",
-  "runningLiteInfo":"Néhány funkció nem fog működni.",
   "commandsHelp":"Használd a '\/commands' parancsot hogy lásd a chat parancsokat.",
   "autorespond":{
     "default":"Nem vagyok a gépnél",
@@ -58,7 +56,8 @@
       "remove":"Eltávolítja a kijelölt felhasználót a DJ Bódé\/Várolistából",
       "whois all":"Lekéri a szobában tartózkodó összes felhasználó ID-jét és felhasználónevét",
       "banall":"Kitilt minden felhasználót a szobában",
-      "status":"a plug szerverek állapotát mutatja"
+      "status":"a plug szerverek állapotát mutatja",
+      "unload":"Closes plug&#179;"
     },
     "responses":{
       "alertson":"Hang lejátszása bizonyos szavaknál: %1",
@@ -94,8 +93,11 @@
     "updates":"Szám frissítések",
     "history":"Számok az előzményekben",
     "songUnavailable":"A szám nem elérhető",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Szám hossza (%1 perc)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"a lej.listájára tette ezt: %1 - %2",
       "stats":"Statisztika: %1 tetszik -- %2 nem tetszik -- %3 hozzáadás",
       "updates":"Most Következik: %1 %2-tól <br\/> lejátssza: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Autó-Tetszik",
     "autojoin":"Autó-belépés",
+    "chatlog":"ChatLog",
     "customchatcolors":"Egyedi Chat Szinek",
     "autorespond":"AFK Autóválasz ",
     "notify":"Értesítések ",
@@ -175,7 +178,9 @@
     "chatimages":"Chat-képek",
     "twitchemotes":"Twitch smiley-k",
     "controlpanel":"Irányítópult",
-    "showdeletedmessages":"Törölt Üzenetek Megjelenítése"
+    "showdeletedmessages":"Törölt Üzenetek Megjelenítése",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Nem Tetszik",
@@ -202,7 +207,6 @@
     "invalidBanTime":"A meghatározott idő, %1 érvénytelen. Érvényes idők a 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Érvénytelen szintaxis az 'eltávolít' paranccsal. Használat: \/remove @felhasználó",
     "invalidWhoisSyntax":"Érvénytelen szintaxis a 'ki' paranccsal. Használat: \/whois @felhasználó",
-    "noLiteSupport":"Ez nincs támogatva a plug&#179; Lite-ban",
     "errorGettingPlaylistInfo":"Hiba a lejátszási lista adatainak lekérése során",
     "noPlaylistsFound":"Nem található lejátszási lista",
     "yourActivePlaylistIsFull":"Az aktív lejátszási listád teli van",

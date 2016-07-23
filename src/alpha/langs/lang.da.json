@@ -1,7 +1,5 @@
 {
   "running":"Kører plug&#179; version %1",
-  "runningLite":"Kører plug&#179; i Lite!",
-  "runningLiteInfo":"Nogle funktioner vil ikke fungere.",
   "commandsHelp":"Brug '\/commands' for at se en udvidet liste over chat kommandoer.",
   "autorespond":{
     "default":"Jeg er væk fra tastaturet.",
@@ -58,7 +56,8 @@
       "remove":"fjerner valgte bruger fra DJ bod\/venteliste",
       "whois all":"giver bruger-id og brugernavn for alle brugere i rummet",
       "banall":"banner alle brugere i rummet",
-      "status":"viser status for plug-servere"
+      "status":"viser status for plug-servere",
+      "unload":"Closes plug&#179;"
     },
     "responses":{
       "alertson":"Afspiller lyd ved følgende ord: %1",
@@ -94,8 +93,11 @@
     "updates":"Sang opdateringer",
     "history":"Sange i historik",
     "songUnavailable":"Sangen er ikke tilgængelig",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Sang længde (%1 min)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"Grabbed %1 - %2",
       "stats":"Statistik: %1 kan lide -- %2 kan ikke lide -- %3 tilføjelser",
       "updates":"Afspiller nu: %1 af %2<br>Afspillet af: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Automatisk Kan lide",
     "autojoin":"Auto-forbind",
+    "chatlog":"ChatLog",
     "customchatcolors":"Brugerdefinerede Chat Farver",
     "autorespond":"AFK Autosvar",
     "notify":"Notifikationer",
@@ -175,7 +178,9 @@
     "chatimages":"Chat billeder",
     "twitchemotes":"Twitch Smileys",
     "controlpanel":"Kontrolpanel",
-    "showdeletedmessages":"Show Deleted Messages"
+    "showdeletedmessages":"Show Deleted Messages",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Kan ikke lide",
@@ -202,7 +207,6 @@
     "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
     "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
-    "noLiteSupport":"Dette understøttes ikke i plug&#179; Lite",
     "errorGettingPlaylistInfo":"Fejl under hentning af afspilningslisten information",
     "noPlaylistsFound":"Ingen afspilningslister fundet",
     "yourActivePlaylistIsFull":"Din aktive afspilningsliste er fuld",

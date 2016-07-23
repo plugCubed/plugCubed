@@ -1,7 +1,5 @@
 {
   "running":"Kör plug&179; version %1",
-  "runningLite":"Kör plug&#179; i Lite!",
-  "runningLiteInfo":"Vissa funktioner kommer inte att fungera.",
   "commandsHelp":"Använd '\/commands' för att se extra chattkommandon.",
   "autorespond":{
     "default":"Jag är borta från tangentbordet.",
@@ -58,7 +56,8 @@
       "remove":"tar bort given användare från dj båset\/väntelistan",
       "whois all":"ger användarid och användarnamn av alla användare i rummet",
       "banall":"bannlyser alla användare i rummet",
-      "status":"visar statusen av plug.djs servrar"
+      "status":"visar statusen av plug.djs servrar",
+      "unload":"Closes plug&#179;"
     },
     "responses":{
       "alertson":"Spelar ljud på följande ord: %1",
@@ -94,8 +93,11 @@
     "updates":"Låt uppdateringar",
     "history":"Låtar i historiken",
     "songUnavailable":"Låten är inte tillgänglig",
+    "boothAlert":"Booth Alert (%1 \/ 50)",
     "songLength":"Låt Längd (%1 min)",
     "message":{
+      "boothAlertNext":"You are about to DJ!",
+      "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"La Till %1 - %2",
       "stats":"Resultat: %1 Woots -- %2 Mehs -- %3 Grabs",
       "updates":"Spelas Nu: %1 av %2<br \/>Spelad av: %3",
@@ -166,6 +168,7 @@
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"AutoJoin",
+    "chatlog":"ChatLog",
     "customchatcolors":"Anpassade Chattfärger",
     "autorespond":"AFK Autosvara",
     "notify":"Notifikationer",
@@ -175,7 +178,9 @@
     "chatimages":"Chatt bilder",
     "twitchemotes":"Twitch Figurer",
     "controlpanel":"Kontrollpanel",
-    "showdeletedmessages":"Visa Borttagna Meddelanden"
+    "showdeletedmessages":"Visa Borttagna Meddelanden",
+    "visualizers":"RCS SoundCloud Visualizers",
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Meh",
@@ -202,7 +207,6 @@
     "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
     "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
     "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
-    "noLiteSupport":"Detta stöds inte i plug&#179; Lite",
     "errorGettingPlaylistInfo":"Fel när spellistan hämtades",
     "noPlaylistsFound":"Inga spellistor hittades",
     "yourActivePlaylistIsFull":"Din aktiva spellista är full",
