@@ -1,16 +1,32 @@
 // ==UserScript==
-// @name           plugCubedLoader
-// @namespace      net.plugCubed
-// @description    Autorun plugCubed on plug.dj
-// @author         Thomas "TAT" Andresen
-// @include        https://plug.dj/*
-// @version        2.1
-// @grant          none
+// @icon         https://plugcubed.net/scripts/48.png
+// @name         plugCubedLoader
+// @namespace    https://plugcubed.net
+// @description  Autorun plugCubed on plug.dj
+// @author       Thomas "TAT" Andresen
+// @match        https://*.plug.dj/*
+// @include      https://*.plug.dj*
+// @exclude      https://*.plug.dj/_/*
+// @exclude      https://*.plug.dj/@/*
+// @exclude      https://*.plug.dj/ba
+// @exclude      https://*.plug.dj/dashboard
+// @exclude      https://*.plug.dj/plot
+// @exclude      https://*.plug.dj/press
+// @exclude      https://*.plug.dj/partners
+// @exclude      https://*.plug.dj/team
+// @exclude      https://*.plug.dj/about
+// @exclude      https://*.plug.dj/jobs
+// @exclude      https://*.plug.dj/purchase
+// @exclude      https://*.plug.dj/subscribe
+// @downloadURL  https://plugcubed.net/scripts/plugCubed.user.js
+// @updateURL    https://plugcubed.net/scripts/plugCubed.user.js
+// @version      2.3
+// @grant        none
 // ==/UserScript==
 
 /*
  The MIT License (MIT)
- Copyright (c) 2012-2015 The plugCubed Team
+ Copyright (c) 2012-2016 The plugCubed Team
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -32,20 +48,31 @@
  */
 
 var a = function() {
-    var a = {
-        b: function() {
-            if (typeof API !== 'undefined' && API.enabled)
-                this.c();
-            else
-                setTimeout(function() { a.b(); }, 100);
-        },
+    var b = {
         c: function() {
-            console.log('plugCubedLoader v.1.10 enabled!');
-            $.getScript('https://d1rfegul30378.cloudfront.net/files/plugCubed.min.js');
+            if (typeof API !== 'undefined' && API.enabled) {
+                this.d();
+            } else {
+                setTimeout(function() {
+                    b.c();
+                }, 100);
+            }
+        },
+        d: function() {
+            $.getScript('https://plugcubed.net/scripts/release/plugCubed.min.js')
+                .done(function() {
+                    console.log('[plug³ UserScript] Loaded');
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    console.error('[plug³ UserScript] Error loading plug³ ' + jqXHR.status);
+                });
         }
     };
-    a.b();
+
+    b.c();
 };
+
 var b = document.createElement('script');
+
 b.textContent = '(' + a.toString() + ')();';
 document.head.appendChild(b);
