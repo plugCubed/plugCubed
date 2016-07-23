@@ -5,7 +5,7 @@
     "short_name": "plug³",
     "description": "Adding a new dimension to plug.dj",
     "homepage_url": "https://plugCubed.net",
-    "version": "4.1.0.4",
+    "version": "4.3.0.28",
 
     "icons": {
         "48": "icons/48.png",
@@ -14,14 +14,24 @@
     },
 
     "content_scripts": [{
-        "matches": ["https://plug.dj/*"],
+        "matches": ["https://*.plug.dj/*"],
         "exclude_matches": [
-            "https://plug.dj/communities/",
-            "https://plug.dj/about",
-            "https://plug.dj/terms",
-            "https://plug.dj/privacy",
-            "https://plug.dj/logout",
-            "https://plug.dj/"
+            "https://*.plug.dj/",
+            "https://*.plug.dj/@/*",
+            "https://*.plug.dj/_/*",
+            "https://*.plug.dj/about",
+            "https://*.plug.dj/ba",
+            "https://*.plug.dj/dashboard",
+            "https://*.plug.dj/jobs",
+            "https://*.plug.dj/logout",
+            "https://*.plug.dj/partners",
+            "https://*.plug.dj/plot",
+            "https://*.plug.dj/press",
+            "https://*.plug.dj/privacy",
+            "https://*.plug.dj/purchase",
+            "https://*.plug.dj/subscribe",
+            "https://*.plug.dj/team",
+            "https://*.plug.dj/terms"
         ],
         "js": ["loader.js"]
     }],
