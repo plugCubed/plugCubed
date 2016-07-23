@@ -1,27 +1,25 @@
-define(['plugCubed/Class', 'plugCubed/tickers/AFKTimer', 'plugCubed/tickers/ETATimer', 'plugCubed/tickers/AntiDangerousScripts', 'plugCubed/tickers/AntiHideVideo'], function() {
-    var modules;
-    var Class;
-    var instances;
+define(['plugCubed/Class', 'plugCubed/tickers/AFKTimer', 'plugCubed/tickers/ETATimer'], function() {
+    var modules, Class, instances;
 
-    modules = $.makeArray(arguments);
+    modules = _.toArray(arguments);
     Class = modules.shift();
     instances = [];
 
-    var handler = Class.extend({
+    var Handler = Class.extend({
         register: function() {
             this.unregister();
-            for (var i in modules) {
-                if (!modules.hasOwnProperty(i)) continue;
+            for (var i = 0; i < modules.length; i++) {
                 instances[i] = new modules[i]();
             }
         },
         unregister: function() {
-            for (var i in instances) {
-                if (!instances.hasOwnProperty(i)) continue;
-                instances[i].close();
+            for (var i = 0; i < modules.length; i++) {
+                if (instances[i]) {
+                    instances[i].close();
+                }
             }
         }
     });
 
-    return new handler();
+    return new Handler();
 });
