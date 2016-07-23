@@ -33,8 +33,7 @@ We welcome all contributions to this project.
 * Cd to the folder through command prompt or bash
 * Run `npm install` to set up the environment.
 * Make your changes in the src/alpha folder and please make sure you follow our [Code Style](https://github.com/plugCubed/Code-Style).
-* If you haven't, set up the p3.config.js file in the config folder. (A sample can be found [here](https://github.com/plugCubed/plugCubed/blob/master/config/p3.config.sample.js))
-* Run `grunt build/alpha` to compile the code and test. (If `grunt` doesn't work, please install it by typing `npm install -g grunt-cli` in commandline)
+* Run `gulp build:alpha` to compile the code and test with `gulp test:alpha`. (If `gulp` doesn't work, please install it by typing `npm install -g gulp-cli` in commandline)
 * Submit your changes as a Pull Requests [here](https://github.com/plugCubed/plugCubed/pulls).
 
 ### Credits
@@ -45,7 +44,7 @@ We would like to thank the following people
 * [plug.dj](https://plug.dj) - for creating an awesome website
 
 ### License
-Copyright &copy; 2012-2015 The plug&#179; Team and other contributors
+Copyright &copy; 2012-2016 The plug&#179; Team and other contributors
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
