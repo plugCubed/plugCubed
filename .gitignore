@@ -1,11 +1,6 @@
 # Building system
 node_modules
 npm-debug.log
-_htaccess
-_*bat
-_*tmp.js
-!_postfix.js
-!_prefix.js
 
 # Development
 src/dev
@@ -35,9 +30,8 @@ extensions/*.pem
 extensions/*.crx
 extensions/*.zip
 extensions/*.mxaddon
-extensions/Firefox-release
 extensions/promotionalSmall.png
 extensions/Chrome/plugCubed.js
 extensions/Opera/plugCubed.js
 extensions/Firefox/data/plugCubed.js
-p3.config.js
+extensions/Firefox/*.xpi
