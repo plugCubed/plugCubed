@@ -1,20 +1,23 @@
-define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/handlers/DialogHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/overrides/RoomUserListRow', 'plugCubed/Overrides', 'plugCubed/bridges/RoomUserListView'], function(module, Class, Notifications, Version, Styles, Settings, p3Utils, p3Lang, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, DialogHandler, Features, Tickers, Panels, p3RoomUserListRow, Overrides, RoomUserListView) {
+define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Lang', 'plugCubed/Utils',
+    'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/handlers/DialogHandler', 'plugCubed/handlers/FullscreenHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/overrides/RoomUserListRow', 'plugCubed/Overrides'
+], function(module, Class, Notifications, Version, Styles, Settings, p3Lang, p3Utils, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, DialogHandler, FullscreenHandler, Features, Tickers, Panels, p3RoomUserListRow, Overrides) {
     var Loader;
     var loaded = false;
-
-    var original = RoomUserListView.prototype.RowClass;
+    var RoomUsersListView = window.plugCubedModules.RoomUsersListView;
+    var original = RoomUsersListView.prototype.RowClass;
 
     function __init() {
-        p3Utils.chatLog(undefined, p3Lang.i18n('running', Version) + '</span><br><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), Settings.colors.infoMessage1, -1, 'plug&#179;');
+        p3Utils.chatLog(undefined, p3Lang.i18n('running', Version) + '</span><br><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), Settings.colors.infoMessage1, -10);
 
-        $('head').append('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://d1rfegul30378.cloudfront.net/alpha/plugCubed.css" />');
-
+        $('head').append('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://plugcubed.net/scripts/alpha/plugCubed.css?v=' + Version.getSemver() + '"/>');
         var users = API.getUsers();
-        for (var i in users) {
-            if (users.hasOwnProperty(i) && p3Utils.getUserData(users[i].id, 'joinTime', -1) < 0)
+
+        for (var i = 0; i < users.length; i++) {
+            if (p3Utils.getUserData(users[i].id, 'joinTime', -1) < 0) {
                 p3Utils.setUserData(users[i].id, 'joinTime', Date.now());
+            }
         }
-        RoomUserListView.prototype.RowClass = p3RoomUserListRow;
+        RoomUsersListView.prototype.RowClass = p3RoomUserListRow;
         Overrides.override();
 
         initBody();
@@ -24,6 +27,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         Tickers.register();
         CommandHandler.register();
         ChatHandler.register();
+        FullscreenHandler.create();
 
         Settings.load();
 
@@ -33,25 +37,14 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         DialogHandler.register();
 
         loaded = true;
+        window.plugCubed.version = Version.getSemver();
+        if (typeof console.timeEnd === 'function') console.timeEnd('[plug³] Loaded');
     }
 
     function initBody() {
-        var rank = 'regular';
-        if (p3Utils.hasPermission(undefined, API.ROLE.HOST, true)) {
-            rank = 'admin';
-        } else if (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER, true)) {
-            rank = 'ambassador';
-        } else if (p3Utils.hasPermission(undefined, API.ROLE.HOST)) {
-            rank = 'host';
-        } else if (p3Utils.hasPermission(undefined, API.ROLE.COHOST)) {
-            rank = 'cohost';
-        } else if (p3Utils.hasPermission(undefined, API.ROLE.MANAGER)) {
-            rank = 'manager';
-        } else if (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER)) {
-            rank = 'bouncer';
-        } else if (p3Utils.hasPermission(undefined, API.ROLE.DJ)) {
-            rank = 'residentdj';
-        }
+        var rank = p3Utils.getRank();
+
+        if (rank === 'dj') rank = 'residentdj';
         $('body').addClass('rank-' + rank).addClass('id-' + API.getUser().id);
     }
 
@@ -60,9 +53,8 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
             if (loaded) return;
 
             // Define UserData in case it's not already defined (reloaded p3 without refresh)
-            if (typeof plugCubedUserData === 'undefined') {
-                //noinspection JSUndeclaredVariable
-                plugCubedUserData = {};
+            if (typeof window.plugCubedUserData === 'undefined') {
+                window.plugCubedUserData = {};
             }
 
             // Load language and begin script after language loaded
@@ -79,18 +71,20 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
             Panels.unregister();
             Styles.destroy();
             ChatHandler.close();
+            FullscreenHandler.close();
             CommandHandler.close();
             DialogHandler.close();
 
-            RoomUserListView.prototype.RowClass = original;
+            RoomUsersListView.prototype.RowClass = original;
             Overrides.revert();
 
             var mainClass = module.id.split('/')[0];
-            var modules = require.s.contexts._.defined;
-            for (var i in modules) {
-                if (!modules.hasOwnProperty(i)) continue;
-                if (p3Utils.startsWith(i, mainClass))
-                    requirejs.undef(i);
+            var modules = Object.keys(require.s.contexts._.defined);
+
+            for (var i = 0, j = modules.length; i < j; i++) {
+                if (modules[i] && p3Utils.startsWith(modules[i], mainClass)) {
+                    requirejs.undef(modules[i]);
+                }
             }
 
             $('#plugcubed-css,#p3-settings-wrapper').remove();

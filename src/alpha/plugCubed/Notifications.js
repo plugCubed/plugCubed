@@ -1,26 +1,26 @@
-define(['plugCubed/Class', 'plugCubed/notifications/History', 'plugCubed/notifications/SongLength', 'plugCubed/notifications/SongStats', 'plugCubed/notifications/SongUpdate', 'plugCubed/notifications/UserGrab', 'plugCubed/notifications/UserJoin', 'plugCubed/notifications/UserLeave', 'plugCubed/notifications/UserMeh', 'plugCubed/notifications/History', 'plugCubed/notifications/SongUnavailable'], function() {
-    var modules;
-    var Class;
-    var handler;
+define(['plugCubed/Class', 'plugCubed/notifications/History', 'plugCubed/notifications/SongLength', 'plugCubed/notifications/SongStats', 'plugCubed/notifications/SongUpdate', 'plugCubed/notifications/UserGrab', 'plugCubed/notifications/UserJoin', 'plugCubed/notifications/UserLeave', 'plugCubed/notifications/UserMeh', 'plugCubed/notifications/History', 'plugCubed/notifications/SongUnavailable', 'plugCubed/notifications/BoothAlert'], function() {
+    var modules, Class, Handler;
 
-    modules = $.makeArray(arguments);
+    modules = _.toArray(arguments);
     Class = modules.shift();
 
-    handler = Class.extend({
+    Handler = Class.extend({
         register: function() {
             this.unregister();
-            for (var i in modules) {
-                if (modules.hasOwnProperty(i) && !modules[i].registered)
+            for (var i = 0; i < modules.length; i++) {
+                if (!modules[i].registered) {
                     modules[i].register();
+                }
             }
         },
         unregister: function() {
-            for (var i in modules) {
-                if (modules.hasOwnProperty(i) && modules[i].registered)
+            for (var i = 0; i < modules.length; i++) {
+                if (modules[i].registered) {
                     modules[i].close();
+                }
             }
         }
     });
 
-    return new handler();
+    return new Handler();
 });

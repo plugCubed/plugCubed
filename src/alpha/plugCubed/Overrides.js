@@ -1,26 +1,26 @@
-define(['plugCubed/Class', 'plugCubed/overrides/UserRolloverView', 'plugCubed/overrides/WaitListRow'], function() {
-    var modules;
-    var Class;
-    var handler;
+define(['plugCubed/Class', 'plugCubed/overrides/Context', 'plugCubed/overrides/UserRolloverView', 'plugCubed/overrides/WaitListRow', 'plugCubed/overrides/ChatFacadeEvent'], function() {
+    var modules, Class, Handler;
 
-    modules = $.makeArray(arguments);
+    modules = _.toArray(arguments);
     Class = modules.shift();
 
-    handler = Class.extend({
+    Handler = Class.extend({
         override: function() {
             this.revert();
-            for (var i in modules) {
-                if (modules.hasOwnProperty(i) && modules[i] != null)
+            for (var i = 0; i < modules.length; i++) {
+                if (modules[i] != null) {
                     modules[i].override();
+                }
             }
         },
         revert: function() {
-            for (var i in modules) {
-                if (modules.hasOwnProperty(i) && modules[i] != null)
+            for (var i = 0; i < modules.length; i++) {
+                if (modules[i] != null) {
                     modules[i].revert();
+                }
             }
         }
     });
 
-    return new handler();
+    return new Handler();
 });

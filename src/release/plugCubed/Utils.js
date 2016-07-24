@@ -1,45 +1,44 @@
-var plugCubedUserData;
-define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoader', 'plugCubed/bridges/Database', 'plugCubed/bridges/PopoutView'], function(Class, p3Lang, Lang, ModuleLoader, Database, PopoutView) {
-    var cleanHTMLMessage;
-    var developer;
-    var sponsor;
-    var ambassador;
-    var donatorDiamond;
-    var donatorPlatinum;
-    var donatorGold;
-    var donatorSilver;
-    var donatorBronze;
-    var special;
-    var PlugUI;
+define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function(Class, p3Lang) {
+    var cleanHTMLMessage, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PlugUI, PopoutView;
+
+    if (typeof window.plugCubedUserData === 'undefined') {
+        window.plugCubedUserData = {};
+    }
+    var plugcubedUserData = window.plugCubedUserData;
 
     cleanHTMLMessage = function(input, disallow, extraAllow) {
         if (input == null) return '';
-        var allowed;
-        var tags;
+        var allowed, tags;
         var disallowed = [];
-        if ($.isArray(disallow))
+
+        if (_.isArray(disallow)) {
             disallowed = disallow;
-        if (!extraAllow || !$.isArray(extraAllow))
+        }
+        if (!extraAllow || !_.isArray(extraAllow)) {
             extraAllow = [];
+        }
         allowed = $(['span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em', 'a'].concat(extraAllow)).not(disallowed).get();
-        if (disallow === '*')
+        if (disallow === '*') {
             allowed = [];
+        }
         tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
         input = input.split('&#8237;').join('&amp;#8237;').split('&#8238;').join('&amp;#8238;');
         return input.replace(tags, function(a, b) {
             return allowed.indexOf(b.toLowerCase()) > -1 ? a : '';
         });
     };
+    Database = window.plugCubedModules.database;
+    Lang = window.plugCubedModules.Lang;
+    PopoutView = window.plugCubedModules.PopoutView;
     developer = sponsor = ambassador = donatorDiamond = donatorPlatinum = donatorGold = donatorSilver = donatorBronze = [];
     special = {};
 
-    PlugUI = ModuleLoader.getModule({
-        sfx: 'string'
-    });
+    PlugUI = window.plugCubedModules.plugUrls;
 
-    $.getJSON('https://d1rfegul30378.cloudfront.net/titles.json',
+    $.getJSON('https://plugcubed.net/scripts/titles.json',
+
         /**
-         * @param {{developer: Array, sponsor: Array, special: Array, ambassador: Array, donator: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}, patreon: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}}} data
+         * @param {{developer: Array, sponsor: Array, special: Array, ambassador: Array, donator: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}, patreon: {diamond: Array, platinum: Array, gold: Array, silver: Array, bronze: Array}}} data Object of User ID's for plug³ ranks.
          */
         function(data) {
             developer = data.developer ? data.developer : [];
@@ -55,7 +54,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             }
         });
 
-    var handler = Class.extend({
+    var Handler = Class.extend({
         proxifyImage: function(url) {
             if (this.startsWithIgnoreCase(url, 'http://')) {
                 return 'https://api.plugCubed.net/proxy/' + url;
@@ -69,8 +68,9 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             return url;
         },
         getHighestRank: function(uid) {
-            if (!uid)
+            if (!uid) {
                 uid = API.getUser().id;
+            }
 
             if (this.isPlugCubedDeveloper(uid)) return 'developer';
             if (this.isPlugCubedSponsor(uid)) return 'sponsor';
@@ -85,6 +85,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
         },
         getHighestRankString: function(uid) {
             var highestRank = this.getHighestRank(uid);
+
             if (highestRank != null) {
                 if (this.isPlugCubedSpecial(uid)) {
                     return p3Lang.i18n('info.specialTitles.special', this.getPlugCubedSpecial(uid).title);
@@ -153,58 +154,71 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
 
             return ranks.join(' / ');
         },
+        is24Hours: function() {
+            return $('.icon-timestamps-12').length === 1;
+        },
         isPlugCubedDeveloper: function(uid) {
-            if (!uid)
+            if (!uid) {
                 uid = API.getUser().id;
+            }
             return developer.indexOf(uid) > -1;
         },
         isPlugCubedSponsor: function(uid) {
-            if (!uid)
+            if (!uid) {
                 uid = API.getUser().id;
+            }
             return sponsor.indexOf(uid) > -1;
         },
         isPlugCubedSpecial: function(uid) {
-            if (!uid)
+            if (!uid) {
                 uid = API.getUser().id;
+            }
             return this.getPlugCubedSpecial(uid) != null;
         },
         isPlugCubedAmbassador: function(uid) {
-            if (!uid)
+            if (!uid) {
                 uid = API.getUser().id;
+            }
             return ambassador.indexOf(uid) > -1;
         },
         isPlugCubedDonatorDiamond: function(uid) {
-            if (!uid)
+            if (!uid) {
                 uid = API.getUser().id;
+            }
             return donatorDiamond.indexOf(uid) > -1;
         },
         isPlugCubedDonatorPlatinum: function(uid) {
-            if (!uid)
+            if (!uid) {
                 uid = API.getUser().id;
+            }
             return donatorPlatinum.indexOf(uid) > -1;
         },
         isPlugCubedDonatorGold: function(uid) {
-            if (!uid)
+            if (!uid) {
                 uid = API.getUser().id;
+            }
             return donatorGold.indexOf(uid) > -1;
         },
         isPlugCubedDonatorSilver: function(uid) {
-            if (!uid)
+            if (!uid) {
                 uid = API.getUser().id;
+            }
             return donatorSilver.indexOf(uid) > -1;
         },
         isPlugCubedDonatorBronze: function(uid) {
-            if (!uid)
+            if (!uid) {
                 uid = API.getUser().id;
+            }
             return donatorBronze.indexOf(uid) > -1;
         },
         getPlugCubedSpecial: function(uid) {
-            if (!uid)
+            if (!uid) {
                 uid = API.getUser().id;
+            }
             return special[uid];
         },
         html2text: function(html) {
-            if (!html) return;
+            if (!html) return '';
             return $('<div/>').html(html).text();
         },
         cleanHTML: function(msg, disallow, extraAllow) {
@@ -213,101 +227,109 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
         cleanTypedString: function(msg) {
             return msg.split('<').join('&lt;').split('>').join('&gt;');
         },
+        repeatString: function(str, count) {
+            count = +count;
+
+            if (!_.isFinite(count) || count < 0) throw new RangeError("Count can't be less than zero");
+
+            count = Math.floor(count);
+
+            if (str.length === 0 || count === 0) {
+                return '';
+            }
+
+            return Array(count + 1).join(str);
+        },
         chatLog: function(type, message, color, fromID, fromName) {
-            var $chat;
-            var b;
-            var $message;
-            var $box;
-            var $msg;
-            var $text;
-            var $msgSpan;
-            var $timestamp;
-            var $from;
-            var from;
+            var $chat, b, $message, $box, $msg, $text, $msgSpan, $timestamp, $from, fromUser, chat;
+
+            chat = window.plugCubedModules.chat;
 
             if (!message) return;
-            if (typeof message !== 'string')
+            if (typeof message !== 'string') {
                 message = message.html();
+            }
 
             message = cleanHTMLMessage(message, undefined, ['ul', 'li']);
             $msgSpan = $('<span>').html(message);
-
             $chat = PopoutView._window ? $(PopoutView._window.document).find('#chat-messages') : $('#chat-messages');
             b = $chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - 20;
 
-            $message = $('<div>').addClass(type ? type : 'message');
-            $box = $('<div>').addClass('badge-box').data('uid', fromID ? fromID : 'p3');
+            $message = $('<div>').addClass('message');
+            $box = $('<div>').addClass('badge-box').data('uid', fromID ? fromID : 'p3').data('type', type);
             $timestamp = $('<span>').addClass('timestamp').text(this.getTimestamp());
             $from = $('<div>').addClass('from').append($('<span>').addClass('un')).append($timestamp);
             $msg = $('<div>').addClass('msg').append($from);
             $text = $('<span>').addClass('text').append($msgSpan);
 
+            chat.lastText = chat.lastID = chat.lastType = chat.lastTime = null;
+
             if ($('.icon-timestamps-off').length === 0) {
                 $timestamp.show();
             }
-
-            if (type === 'system') {
-                $box.append('<i class="icon icon-chat-system"></i>');
-            } else {
-                $box.append('<i class="icon icon-plugcubed"></i>');
-                $msgSpan.css('color', this.toRGB(color && this.isRGB(color) ? color : 'd1d1d1'));
-            }
+            $msgSpan.css('color', this.toRGB(color && this.isRGB(color) ? color : 'd1d1d1'));
+            $box.append('<i class="icon icon-plugcubed"></i>');
 
             if (fromID) {
-                from = API.getUser(fromID);
+                fromUser = API.getUser(fromID);
                 var lastMessageContainer = $('#chat-messages').find('.message').last();
                 var lastSender = lastMessageContainer.children('.badge-box').data('uid');
+                var lastType = lastMessageContainer.children('.badge-box').data('type');
 
-                if (from != null && from.username != null) {
-                    if (lastSender === from.id) {
+                if (fromUser != null && fromUser.username != null) {
+                    if (lastSender === fromUser.id) {
                         lastMessageContainer.find('.text').append('<br>').append($msgSpan);
-                        if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height())
+                        if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height()) {
                             $chat.scrollTop($chat[0].scrollHeight);
+                        }
                         return;
                     }
 
-                    $from.find('.un').html(cleanHTMLMessage(from.username));
+                    $from.find('.un').html(cleanHTMLMessage(fromUser.username));
 
-                    if (this.hasPermission(from.id, API.ROLE.HOST, true)) {
+                    if (this.hasPermission(fromUser.id, API.ROLE.HOST, true)) {
                         $message.addClass('from-admin');
                         $from.addClass('admin').append('<i class="icon icon-chat-admin"></i>');
-                    } else if (this.hasPermission(from.id, API.ROLE.BOUNCER, true)) {
+                    } else if (this.hasPermission(fromUser.id, API.ROLE.BOUNCER, true)) {
                         $message.addClass('from-ambassador');
                         $from.addClass('ambassador').append('<i class="icon icon-chat-ambassador"></i>');
-                    } else if (this.hasPermission(from.id, API.ROLE.BOUNCER)) {
+                    } else if (this.hasPermission(fromUser.id, API.ROLE.BOUNCER)) {
                         $from.addClass('staff');
-                        if (this.hasPermission(from.id, API.ROLE.HOST))
+                        if (this.hasPermission(fromUser.id, API.ROLE.HOST)) {
                             $message.addClass('from-host');
-                        if (this.hasPermission(from.id, API.ROLE.COHOST)) {
-                            $message.addClass('from-cohost');
                             $from.append('<i class="icon icon-chat-host"></i>');
-                        } else if (this.hasPermission(from.id, API.ROLE.MANAGER)) {
+
+                        } else if (this.hasPermission(fromUser.id, API.ROLE.COHOST)) {
+                            $message.addClass('from-cohost');
+                            $from.append('<i class="icon icon-chat-cohost"></i>');
+                        } else if (this.hasPermission(fromUser.id, API.ROLE.MANAGER)) {
                             $message.addClass('from-manager');
                             $from.append('<i class="icon icon-chat-manager"></i>');
-                        } else if (this.hasPermission(from.id, API.ROLE.BOUNCER)) {
+                        } else if (this.hasPermission(fromUser.id, API.ROLE.BOUNCER)) {
                             $message.addClass('from-bouncer');
                             $from.append('<i class="icon icon-chat-bouncer"></i>');
                         }
-                    } else if (this.hasPermission(from.id, API.ROLE.DJ)) {
+                    } else if (this.hasPermission(fromUser.id, API.ROLE.DJ)) {
                         $message.addClass('from-dj');
                         $from.addClass('dj').append('<i class="icon icon-chat-dj"></i>');
-                    } else if (from.id === API.getUser().id) {
+                    } else if (fromUser.id === API.getUser().id) {
                         $message.addClass('from-you');
                         $from.addClass('you');
                     }
                 } else if (fromID < 0) {
                     $from.find('.un').html('plug&#179;');
-                    if (lastSender === fromID) {
+                    if (lastSender === fromID && type === lastType) {
                         lastMessageContainer.find('.text').append('<br>').append($msgSpan);
-                        if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height())
+                        if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height()) {
                             $chat.scrollTop($chat[0].scrollHeight);
+                        }
                         return;
                     }
                 } else {
-                    $from.find('.un').html(fromName ? cleanHTMLMessage(fromName) : 'Unknown');
+                    $from.find('.un').html((fromName ? cleanHTMLMessage(fromName) : 'Unknown'));
                 }
             } else {
-                $from.find('.un').html('plug&#179;');
+                $from.find('.un').html((fromName ? cleanHTMLMessage(fromName) : 'plug&#179;'));
             }
 
             $chat.append($message.append($box).append($msg.append($text)));
@@ -322,62 +344,62 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             return $('#room-name').text().trim();
         },
         getUserData: function(uid, key, defaultValue) {
-            if (plugCubedUserData[uid] == null || plugCubedUserData[uid][key] == null) {
+            if (plugcubedUserData[uid] == null || plugcubedUserData[uid][key] == null) {
                 return defaultValue;
             }
-            return plugCubedUserData[uid][key];
+            return plugcubedUserData[uid][key];
         },
         setUserData: function(uid, key, value) {
-            if (plugCubedUserData[uid] == null) {
-                plugCubedUserData[uid] = {};
+            if (plugcubedUserData[uid] == null) {
+                plugcubedUserData[uid] = {};
             }
-            plugCubedUserData[uid][key] = value;
+            plugcubedUserData[uid][key] = value;
         },
         getUser: function(data) {
             var method = 'number';
+
             if (typeof data === 'string') {
                 method = 'string';
                 data = data.trim();
-                if (data.substr(0, 1) === '@')
+                if (data.substr(0, 1) === '@') {
                     data = data.substr(1);
+                }
             }
 
             var users = API.getUsers();
-            for (var i in users) {
-                if (!users.hasOwnProperty(i)) continue;
+
+            for (var i = 0; i < users.length; i++) {
+                if (!users[i]) continue;
                 if (method === 'string') {
-                    if (this.equalsIgnoreCase(users[i].username, data) || this.equalsIgnoreCaseTrim(users[i].id.toString(), data))
+                    if (this.equalsIgnoreCase(users[i].username, data) || this.equalsIgnoreCaseTrim(users[i].id.toString(), data)) {
                         return users[i];
+                    }
                     continue;
                 }
                 if (method === 'number') {
-                    if (users[i].id === data)
+                    if (users[i].id === data) {
                         return users[i];
+                    }
                 }
             }
             return null;
         },
         getLastMessageTime: function(uid) {
             var time = Date.now() - this.getUserData(uid, 'lastChat', this.getUserData(uid, 'joinTime', Date.now()));
-            var IgnoreCollection = require('plugCubed/bridges/IgnoreCollection');
-            if (IgnoreCollection._byId[uid] === true)
+            var IgnoreCollection = window.plugCubedModules.ignoreCollection;
+
+            if (IgnoreCollection._byId[uid] === true) {
                 return p3Lang.i18n('error.ignoredUser');
+            }
             return this.getRoundedTimestamp(time, true);
         },
         getUserInfo: function(data) {
             var user = this.getUser(data);
+
             if (user === null) {
-                API.chatLog(p3Lang.i18n('error.userNotFound'));
+                this.chatLog(undefined, p3Lang.i18n('error.userNotFound'));
             } else {
-                var rank;
-                var status;
-                var voted;
-                var position;
-                var waitlistpos;
-                var inbooth;
-                var lang;
-                var lastMessage;
-                var disconnectInfo;
+                var rank, status, voted, position, waitlistpos, inbooth, lang, lastMessage, disconnectInfo;
 
                 waitlistpos = API.getWaitListPosition(user.id);
                 inbooth = API.getDJ() != null && API.getDJ().id === user.id;
@@ -430,8 +452,9 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
                         voted = p3Lang.i18n('vote.woot');
                         break;
                 }
-                if (inbooth)
+                if (inbooth) {
                     voted = p3Lang.i18n('vote.djing');
+                }
 
                 var title = this.getAllPlugCubedRanks(user.id, true);
                 var message = $('<table>').css({
@@ -442,48 +465,62 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
 
                 // Username
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.name') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.cleanTypedString(user.username)))));
+
                 // Title
-                if (title !== '')
+                if (title !== '') {
                     message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.title') + ' ')).append($('<span>').css('color', '#FFFFFF').html(title))));
+                }
+
                 // UserID
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.id') + ' ')).append($('<span>').css('color', '#FFFFFF').text(user.id))));
+
                 // Rank / Time Joined
                 message.append($('<tr>').append($('<td>').append($('<strong>').text(p3Lang.i18n('info.rank') + ' ')).append($('<span>').css('color', '#FFFFFF').text(rank))).append($('<td>').append($('<strong>').text(p3Lang.i18n('info.joined') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getTimestamp(this.getUserData(user.id, 'joinTime', Date.now()))))));
+
                 // Status / Vote
                 message.append($('<tr>').append($('<td>').append($('<strong>').text(p3Lang.i18n('info.status') + ' ')).append($('<span>').css('color', '#FFFFFF').text(status))).append($('<td>').append($('<strong>').text(p3Lang.i18n('info.vote') + ' ')).append($('<span>').css('color', '#FFFFFF').text(voted))));
+
                 // Position
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.position') + ' ')).append($('<span>').css('color', '#FFFFFF').text(position))));
+
                 // Language
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(Lang.languages.label + ' ')).append($('<span>').css('color', '#FFFFFF').text(lang))));
+
                 // Last Message
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.lastMessage') + ' ')).append($('<span>').css('color', '#FFFFFF').text(lastMessage))));
+
                 // Woot / Meh
                 message.append($('<tr>').append($('<td>').append($('<strong>').text(p3Lang.i18n('info.wootCount') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getUserData(user.id, 'wootcount', 0)))).append($('<td>').append($('<strong>').text(p3Lang.i18n('info.mehCount') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getUserData(user.id, 'mehcount', 0)))));
+
                 // Ratio
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.ratio') + ' ')).append($('<span>').css('color', '#FFFFFF').text((function(a, b) {
                     if (b === 0) return a === 0 ? '0:0' : '1:0';
                     for (var i = 1; i <= b; i++) {
                         var e = i * (a / b);
+
                         if (e % 1 === 0) return e + ':' + i;
                     }
                 })(this.getUserData(user.id, 'wootcount', 0), this.getUserData(user.id, 'mehcount', 0))))));
+
                 // Disconnects
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.disconnects') + ' ')).append($('<span>').css('color', '#FFFFFF').text(disconnectInfo.count))));
                 if (disconnectInfo.count > 0) {
+
                     // Last Position
                     message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.lastPosition') + ' ')).append($('<span>').css('color', '#FFFFFF').text(disconnectInfo.position < 0 ? 'Wasn\'t in booth nor waitlist' : (disconnectInfo.position === 0 ? 'Was DJing' : 'Was ' + disconnectInfo.position + ' in waitlist')))));
-                    // Lase Disconnect Time
+
+                    // Last Disconnect Time
                     message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.lastDisconnect') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getTimestamp(disconnectInfo.time)))));
                 }
 
                 this.chatLog(undefined, $('<div>').append(message).html());
             }
         },
-        hasPermission: function(uid, permission, global) {
+        hasPermission: function(uid, permission, hasGRole) {
             var user = API.getUser(uid);
+
             if (user && user.id) {
-                var role = global ? user.gRole : user.role + (user.gRole > 0 ? 5 + user.gRole : 0);
-                return role >= permission;
+                return hasGRole ? user.gRole >= permission : user.role >= permission || user.gRole >= permission;
             }
             return false;
         },
@@ -493,31 +530,46 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
                 color: '#CC00CC'
             });
             var users = API.getUsers();
+
             for (var i in users) {
                 if (users.hasOwnProperty(i)) {
                     var user = users[i];
+
                     table.append($('<tr>').append($('<td>').append(user.username)).append($('<td>').append(user.id)));
                 }
             }
             this.chatLog(undefined, $('<div>').append(table).html());
         },
         playChatSound: function() {
+
             // Should get another sound, until then - use mention sound
             this.playMentionSound();
         },
-        playMentionSound: function() {
+        playMentionSound: function(playCount) {
+            if (!playCount) playCount = 2;
+
+            var count = 0;
+
             if (Database.settings.chatSound) {
-                (new Audio(PlugUI.sfx)).play();
+                var mentionSound = new Audio(PlugUI.sfx);
+
+                mentionSound.addEventListener('ended', function() {
+                    count++;
+                    if (playCount === count) return mentionSound.pause();
+                    mentionSound.currentTime = 0;
+                    mentionSound.play();
+
+                });
+                mentionSound.play();
             }
         },
         getTimestamp: function(t, format) {
-            var time;
-            var hours;
-            var minutes;
-            var seconds;
+            var time, hours, minutes, seconds;
             var postfix = '';
-            if (!format)
+
+            if (!format) {
                 format = 'hh:mm';
+            }
 
             time = t ? new Date(t) : new Date();
 
@@ -525,11 +577,11 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             minutes = time.getMinutes();
             seconds = time.getSeconds();
 
-            if ($('.icon-timestamps-12').length === 1) {
+            if (this.is24Hours()) {
                 if (hours < 12) {
-                    postfix = ' AM';
+                    postfix = ' am';
                 } else {
-                    postfix = ' PM';
+                    postfix = ' pm';
                     hours -= 12;
                 }
                 if (hours === 0) {
@@ -542,8 +594,9 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             return format.split('hh').join(hours).split('mm').join(minutes).split('ss').join(seconds) + postfix;
         },
         getRoundedTimestamp: function(t, milliseconds) {
-            if (milliseconds)
+            if (milliseconds) {
                 t = Math.floor(t / 1000);
+            }
 
             var units = {
                 week: 604800,
@@ -556,22 +609,25 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             for (var i in units) {
                 if (!units.hasOwnProperty(i)) continue;
                 var unit = units[i];
+
                 if (t < unit) continue;
+
                 var numberOfUnit = Math.floor(t / unit);
+
                 return numberOfUnit + ' ' + i + (numberOfUnit > 1 ? 's' : '') + ' ago';
             }
 
             return 'Unknown';
         },
         formatTime: function(seconds) {
-            var hours;
-            var minutes;
+            var hours, minutes;
 
             minutes = Math.floor(seconds / 60);
             seconds -= minutes * 60;
 
-            if (minutes < 60)
+            if (minutes < 60) {
                 return (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+            }
 
             hours = Math.floor(minutes / 60);
             minutes -= hours * 60;
@@ -587,9 +643,6 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
         toRGB: function(text) {
             return this.isRGB(text) ? text.substr(0, 1) === '#' ? text : '#' + text : undefined;
         },
-        isNumber: function(text) {
-            return typeof text === 'string' ? !isNaN(parseInt(text, 10)) && isFinite(text) : false;
-        },
         equalsIgnoreCase: function(a, b) {
             return typeof a === 'string' && typeof b === 'string' ? a.toLowerCase() === b.toLowerCase() : false;
         },
@@ -600,10 +653,11 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             if (typeof a === 'string') {
                 if (typeof b === 'string' && a.length >= b.length) {
                     return a.indexOf(b) === 0;
-                } else if ($.isArray(b)) {
-                    for (var c in b) {
-                        if (!b.hasOwnProperty(c)) continue;
+                } else if (_.isArray(b)) {
+                    for (var c = 0; c < b.length; c++) {
+                        if (!b[c]) continue;
                         var d = b[c];
+
                         if (typeof d === 'string' && this.startsWith(a, d)) {
                             return true;
                         }
@@ -615,11 +669,12 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
         endsWith: function(a, b) {
             if (typeof a === 'string') {
                 if (typeof b === 'string' && a.length >= b.length) {
-                    return a.lastIndexOf(b) === a.length - b.length;
-                } else if ($.isArray(b)) {
-                    for (var c in b) {
-                        if (!b.hasOwnProperty(c)) continue;
+                    return a.indexOf(b, a.length - b.length) !== -1;
+                } else if (_.isArray(b)) {
+                    for (var c = 0; c < b.length; c++) {
+                        if (!b[c]) continue;
                         var d = b[c];
+
                         if (typeof d === 'string' && this.endsWith(a, d)) {
                             return true;
                         }
@@ -632,10 +687,11 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             if (typeof a === 'string') {
                 if (typeof b === 'string' && a.length >= b.length) {
                     return this.startsWith(a.toLowerCase(), b.toLowerCase());
-                } else if ($.isArray(b)) {
-                    for (var c in b) {
-                        if (!b.hasOwnProperty(c)) continue;
+                } else if (_.isArray(b)) {
+                    for (var c = 0; c < b.length; c++) {
+                        if (!b[c]) continue;
                         var d = b[c];
+
                         if (typeof d === 'string' && this.startsWithIgnoreCase(a, d)) {
                             return true;
                         }
@@ -648,10 +704,11 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             if (typeof a === 'string') {
                 if (typeof b === 'string' && a.length >= b.length) {
                     return this.endsWith(a.toLowerCase(), b.toLowerCase());
-                } else if ($.isArray(b)) {
-                    for (var c in b) {
-                        if (!b.hasOwnProperty(c)) continue;
+                } else if (_.isArray(b)) {
+                    for (var c = 0; c < b.length; c++) {
+                        if (!b[c]) continue;
                         var d = b[c];
+
                         if (typeof d === 'string' && this.endsWithIgnoreCase(a, d)) {
                             return true;
                         }
@@ -667,10 +724,20 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             var chars = 'abcdefghijklmnopqrstuvwxyz0123456789_';
             var i;
             var ret = [];
+
             for (i = 0; i < length; i++) {
                 ret.push(chars.substr(Math.floor(Math.random() * chars.length), 1));
             }
             return ret.join('');
+        },
+        getRank: function(user) {
+            user = API.getUser(user);
+
+            if (user.gRole) {
+                return user.gRole === 5 ? 'admin' : 'ambassador';
+            }
+
+            return ['regular', 'dj', 'bouncer', 'manager', 'cohost', 'host'][user.role || 0];
         },
         logColors: {
             userCommands: '66FFFF',
@@ -695,6 +762,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
         },
         statusREST: function(call) {
             var time;
+
             $.ajax({
                 url: 'https://plug.dj/_/rooms',
                 type: 'HEAD',
@@ -708,6 +776,81 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
                     call(req.status, req.statusText, Date.now() - time);
                 }
             });
+        },
+        setSoundCloudVisualizer: function() {
+            if (API.getMedia() == null || (API.getMedia().format && API.getMedia().format !== 2)) return;
+
+            // RCS Visualizers. Licensed MIT
+            var visualizers = [
+                'https://cdn.radiant.dj/rcs/visualizers/00-balls',
+                'https://cdn.radiant.dj/rcs/visualizers/00-bromley',
+                'https://cdn.radiant.dj/rcs/visualizers/00-hyperspace',
+                'https://cdn.radiant.dj/rcs/visualizers/00-rainbow1',
+                'https://cdn.radiant.dj/rcs/visualizers/00-rainbow2',
+                'https://cdn.radiant.dj/rcs/visualizers/01-ball-random',
+                'https://cdn.radiant.dj/rcs/visualizers/02-circle-dot',
+                'https://cdn.radiant.dj/rcs/visualizers/03-flower-power',
+                'https://cdn.radiant.dj/rcs/visualizers/04-foo-particles',
+                'https://cdn.radiant.dj/rcs/visualizers/05-particles',
+                'https://cdn.radiant.dj/rcs/visualizers/06-hexagons',
+                'https://cdn.radiant.dj/rcs/visualizers/07-star-pentagon',
+                'https://cdn.radiant.dj/rcs/visualizers/08-black-hole',
+                'https://cdn.radiant.dj/rcs/visualizers/09-trippy-curves',
+                'https://cdn.radiant.dj/rcs/visualizers/10-racing-lines',
+                'https://cdn.radiant.dj/rcs/visualizers/11-particles-background',
+                'https://cdn.radiant.dj/rcs/visualizers/12-pliable-swirl',
+                'https://cdn.radiant.dj/rcs/visualizers/13-paper-boat',
+                'https://cdn.radiant.dj/rcs/visualizers/14-torus-tunnel',
+                'https://cdn.radiant.dj/rcs/visualizers/15-passing-night',
+                'https://cdn.radiant.dj/rcs/visualizers/16-quadratic-wavy',
+                'https://cdn.radiant.dj/rcs/visualizers/17-vintage-wave',
+                'https://cdn.radiant.dj/rcs/visualizers/18-floating-dust',
+                'https://cdn.radiant.dj/rcs/visualizers/19-radial-waves',
+                'https://cdn.radiant.dj/rcs/visualizers/20-rain',
+                'https://cdn.radiant.dj/rcs/visualizers/21-starry-night',
+                'https://cdn.radiant.dj/rcs/visualizers/22-hexagon-particles',
+                'https://cdn.radiant.dj/rcs/visualizers/23-bits-particle',
+                'https://cdn.radiant.dj/rcs/visualizers/24-color-embraced',
+                'https://cdn.radiant.dj/rcs/visualizers/25-hexagon-ripple',
+                'https://cdn.radiant.dj/rcs/visualizers/26-mystify',
+                'https://cdn.radiant.dj/rcs/visualizers/27-neon-bubbles',
+                'https://cdn.radiant.dj/rcs/visualizers/28-random-tile',
+                'https://cdn.radiant.dj/rcs/visualizers/29-stupid-snake-loader',
+                'https://cdn.radiant.dj/rcs/visualizers/30-animated-msv-rocket',
+                'https://cdn.radiant.dj/rcs/visualizers/31-circular-trail',
+                'https://cdn.radiant.dj/rcs/visualizers/33-it-s-been-a-while',
+                'https://cdn.radiant.dj/rcs/visualizers/34-octahedron-corner-spin-pure-css',
+                'https://cdn.radiant.dj/rcs/visualizers/35-particle-mesh-system',
+                'https://cdn.radiant.dj/rcs/visualizers/36-rainbow-grid',
+                'https://cdn.radiant.dj/rcs/visualizers/37-run-stickman-run',
+                'https://cdn.radiant.dj/rcs/visualizers/38-simon-the-jellyfish',
+                'https://cdn.radiant.dj/rcs/visualizers/39-stretching-is-good-for-you-pure-css',
+                'https://cdn.radiant.dj/rcs/visualizers/40-circuits',
+                'https://cdn.radiant.dj/rcs/visualizers/41-cssloop-005-dna',
+                'https://cdn.radiant.dj/rcs/visualizers/42-moar-plasma',
+                'https://cdn.radiant.dj/rcs/visualizers/43-neural-network-visualization',
+                'https://cdn.radiant.dj/rcs/visualizers/44-simple-animating-emotions',
+                'https://cdn.radiant.dj/rcs/visualizers/45-starry-night-background',
+                'https://cdn.radiant.dj/rcs/visualizers/46-turret-of-order',
+                'https://cdn.radiant.dj/rcs/visualizers/47-blobs',
+                'https://cdn.radiant.dj/rcs/visualizers/48-aZzQQz',
+                'https://cdn.radiant.dj/rcs/visualizers/49-dentelle',
+                'https://cdn.radiant.dj/rcs/visualizers/50-flat-design-amusement-park',
+                'https://cdn.radiant.dj/rcs/visualizers/51-ripples',
+                'https://cdn.radiant.dj/rcs/visualizers/52-threejs-gradient',
+                'https://cdn.radiant.dj/rcs/visualizers/53-wave-loader'
+            ];
+            var visualizer = visualizers[~~(Math.random() * visualizers.length)];
+            var scFrame = $('#sc-frame');
+
+            scFrame.attr('src', visualizer);
+        },
+        getOrdinal: function(num) {
+            var suffixes = ['th', 'st', 'nd', 'rd'];
+            var remainder = num % 100;
+
+            return num + (suffixes[(remainder - 20) % 10] || suffixes[remainder] || suffixes[0]);
+
         },
         statusSocket: function(call) {
             var att = 0;
@@ -733,5 +876,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'lang/Lang', 'plugCubed/ModuleLoade
             connect();
         }
     });
-    return new handler();
+
+    return new Handler();
 });
+

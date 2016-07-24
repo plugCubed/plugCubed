@@ -1,32 +1,60 @@
-define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/ModuleLoader'], function($, OverrideHandler, p3Utils, ModuleLoader) {
+define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], function($, OverrideHandler, p3Utils) {
+    var CurrentUser, Handler, UserRolloverView;
 
-    var UserRolloverView = ModuleLoader.getView({
-        isBackbone: true,
-        id: 'user-rollover'
-    });
-
-    var handler = OverrideHandler.extend({
+    CurrentUser = window.plugCubedModules.CurrentUser;
+    UserRolloverView = window.plugCubedModules.userRollover;
+    Handler = OverrideHandler.extend({
         doOverride: function() {
-            if (typeof UserRolloverView._showSimple !== 'function')
+            if (typeof UserRolloverView._showSimple !== 'function') {
                 UserRolloverView._showSimple = UserRolloverView.showSimple;
+            }
 
-            if (typeof UserRolloverView._clear !== 'function')
+            if (typeof UserRolloverView._clear !== 'function') {
                 UserRolloverView._clear = UserRolloverView.clear;
+            }
 
             UserRolloverView.showSimple = function(a, b) {
                 this._showSimple(a, b);
                 var specialIconInfo = p3Utils.getPlugCubedSpecial(a.id);
 
-                if (this.$p3Role == null) {
-                    this.$p3Role = $('<span>').addClass('p3Role');
-                    this.$meta.append(this.$p3Role);
+                if (p3Utils.hasPermission(a.id, API.ROLE.COHOST) && !p3Utils.hasPermission(a.id, API.ROLE.HOST) && !p3Utils.hasPermission(a.id, API.ROLE.BOUNCER, true)) {
+                    this.$roleIcon.removeClass().addClass('icon icon-chat-cohost');
+                }
+                if (CurrentUser.hasPermission(API.ROLE.BOUNCER) || CurrentUser.hasPermission(API.ROLE.BOUNCER, true) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) {
+                    if (this.$voteID == null) {
+                        this.$voteID = $('<i>');
+                    }
+
+                    if (a.get('vote') && (a.get('vote') === 1 || a.get('vote') === -1)) {
+                        var vote = a.get('vote');
+
+                        this.$voteID.removeClass().addClass('p3VoteIcon icon icon-' + (vote === -1 ? 'meh' : 'woot'));
+                        this.$meta.append(this.$voteID);
+                    } else {
+                        this.$voteID.remove();
+                    }
+                }
+
+                if (this.$userID == null) {
+                    this.$userID = $('<span>').addClass('p3UserID');
+                }
+                if (CurrentUser.get('gRole') === 0) {
+                    this.$userID.text('User ID: ' + a.id);
+                    this.$meta.append(this.$userID);
+                } else {
+                    this.$userID.remove();
                 }
 
                 if (p3Utils.havePlugCubedRank(a.id)) {
+                    if (this.$p3Role == null) {
+                        this.$p3Role = $('<span>').addClass('p3Role');
+                        this.$meta.append(this.$p3Role);
+                    }
+
                     this.$meta.addClass('has-p3Role is-p3' + p3Utils.getHighestRank(a.id));
                     if (specialIconInfo != null) {
                         this.$p3Role.text($('<span>').html(specialIconInfo.title).text()).css({
-                            'background-image': 'url("https://d1rfegul30378.cloudfront.net/alpha/images/icons.p3special.' + specialIconInfo.icon + '.png")'
+                            'background-image': 'url("https://plugcubed.net/scripts/alpha/images/icons.p3special.' + specialIconInfo.icon + '.png")'
                         });
                     } else {
                         this.$p3Role.text($('<span>').html(p3Utils.getHighestRankString(a.id)).text());
@@ -36,16 +64,28 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
 
             UserRolloverView.clear = function() {
                 this._clear();
+                if (this.$p3Role != null) {
+                    this.$p3Role.empty();
+                }
+                if (this.$p3UserID != null) {
+                    this.$p3UserID.empty();
+                }
+                if (this.$p3VoteIcon != null) {
+                    this.$p3VoteIcon.empty();
+                }
                 this.$meta.removeClass('has-p3Role is-p3developer is-p3sponsor is-p3special is-p3ambassador is-p3donatorDiamond is-p3donatorPlatinum is-p3donatorGold is-p3donatorSilver is-p3donatorBronze');
             };
         },
         doRevert: function() {
-            if (typeof UserRolloverView._showSimple === 'function')
+            if (typeof UserRolloverView._showSimple === 'function') {
                 UserRolloverView.showSimple = UserRolloverView._showSimple;
+            }
 
-            if (typeof UserRolloverView._clear === 'function')
+            if (typeof UserRolloverView._clear === 'function') {
                 UserRolloverView.clear = UserRolloverView._clear;
+            }
         }
     });
-    return new handler();
+
+    return new Handler();
 });

@@ -1,12 +1,23 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/bridges/Context', 'plugCubed/bridges/Database'], function($, Class, p3Lang, Context, Database) {
-    var fullScreenButton;
-    var handler = Class.extend({
-        create: function() {
-            fullScreenButton = $('<div>').addClass('button p3-fullscreen').append($('<div>').addClass('box').text('Enlarge')).css('background-color', 'rgba(28,31,37,.7)');
+define(['jquery', 'plugCubed/Class', 'plugCubed/Lang'], function($, Class, p3Lang) {
+    var fullScreenButton, Context, Database, Handler;
 
-            $('#playback-controls').append(fullScreenButton)
-                .find('.button').width('25%')
-                .parent().find('.button .box .icon').hide();
+    Context = window.plugCubedModules.context;
+    Database = window.plugCubedModules.database;
+    Handler = Class.extend({
+        create: function() {
+            fullScreenButton = $('<div>')
+                .addClass('button p3-fullscreen')
+                .css('background-color', 'rgba(28,31,37,.7)')
+                .append($('<div>')
+                    .addClass('box')
+                    .text(Database.settings.videoOnly ? p3Lang.i18n('fullscreen.shrink') : p3Lang.i18n('fullscreen.enlarge')));
+            $('#playback-controls')
+                .append(fullScreenButton)
+                .find('.button')
+                .width('25%')
+                .parent()
+                .find('.button .box .icon')
+                .hide();
 
             fullScreenButton.click($.proxy(this.onClick, this));
         },
@@ -15,18 +26,22 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/bridges/Contex
         },
         toggleFullScreen: function() {
             Database.settings.videoOnly = !Database.settings.videoOnly;
+            Database.save();
             Context.trigger('change:videoOnly');
-            if (Database.settings.videoOnly) {
-                fullScreenButton.find('.box').text(p3Lang.i18n('fullscreen.shrink'));
-            } else {
-                fullScreenButton.find('.box').text(p3Lang.i18n('fullscreen.enlarge'));
-            }
+            fullScreenButton
+                .find('.box')
+                .text(Database.settings.videoOnly ? p3Lang.i18n('fullscreen.shrink') : p3Lang.i18n('fullscreen.enlarge'));
         },
         close: function() {
             fullScreenButton.remove();
-            $('#playback-controls').find('.button').removeAttr('style')
-                .parent().find('.button .box .icon').show();
+            $('#playback-controls')
+                .find('.button')
+                .removeAttr('style')
+                .parent()
+                .find('.button .box .icon')
+                .show();
         }
     });
-    return new handler();
+
+    return new Handler();
 });

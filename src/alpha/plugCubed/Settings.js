@@ -4,33 +4,52 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
 
     // Misc
     names.push('version');
+
     // Features
-    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'useRoomSettings');
+    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'chatLog', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'visualizers', 'boothAlert', 'badges');
+
     // Registers
     names.push('registeredSongs', 'alertson', 'colors');
 
-    curVersion = 3;
+    curVersion = 3.2;
 
     function upgradeVersion(save) {
         switch (save.version) {
             case undefined:
             case 1:
+
                 // Inline Images => Chat Images
-                if (save.inlineimages != null)
+                if (save.inlineimages != null) {
                     save.chatImages = save.inlineimages;
+                }
 
                 // Moderation
-                if (save.moderation == null)
+                if (save.moderation == null) {
                     save.moderation = {};
-                if (save.afkTimers != null)
+                }
+                if (save.afkTimers != null) {
                     save.moderation.afkTimers = save.afkTimers;
+                }
                 break;
             case 2:
+
                 // Curate => Grab
-                if (save.colors != null)
+                if (save.colors != null) {
                     save.colors = {};
-                if (save.colors.curate != null)
+                }
+                if (save.colors.curate != null) {
                     save.colors.grab = save.colors.curate;
+                }
+                break;
+            case 3:
+                if (save.colors.leave != null) {
+                    save.colors.leave = 'E26728';
+                }
+                break;
+            case 3.1:
+                if (save.colors.boothAlert != null) {
+                    save.colors.boothAlert = 'AC76FF';
+                }
                 break;
             default:
                 break;
@@ -40,24 +59,29 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         return save;
     }
 
-    var controller = Class.extend({
+    var Controller = Class.extend({
         recent: false,
         awaymsg: '',
         autowoot: false,
+        badges: true,
+        chatLog: false,
         autojoin: false,
         autorespond: false,
         notify: 0,
         customColors: false,
         chatImages: true,
-        twitchEmotes: true,
+        twitchEmotes: false,
         songTitle: false,
         registeredSongs: [],
         alertson: [],
         etaTimer: true,
+        visualizers: false,
         moderation: {
             afkTimers: false,
+            inlineUserInfo: false,
             showDeletedMessages: false
         },
+        boothAlert: 1,
         notifySongLength: 10,
         useRoomSettings: {},
         colorInfo: {
@@ -106,7 +130,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 },
                 leave: {
                     title: 'notify.leave',
-                    color: '3366FF'
+                    color: 'E26728'
                 },
                 grab: {
                     title: 'notify.grab',
@@ -124,8 +148,12 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     title: 'notify.updates',
                     color: 'FFFF00'
                 },
+                boothAlert: {
+                    title: 'notify.boothAlert',
+                    color: 'AC76FF'
+                },
                 songLength: {
-                    title: 'notify.notification.songLength',
+                    title: 'notify.songLength',
                     color: '66FFFF'
                 }
             }
@@ -141,10 +169,11 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
             ambassador: '89BE6C',
             admin: '42A5DC',
             join: '3366FF',
-            leave: '3366FF',
+            leave: 'E26728',
             grab: '00FF00',
             stats: '66FFFF',
             updates: 'FFFF00',
+            boothAlert: 'AC76FF',
             songLength: '66FFFF'
         },
         load: function() {
@@ -158,14 +187,18 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 }
 
                 // Get the settings
-                for (var i in names) {
-                    if (!names.hasOwnProperty(i)) continue;
+                for (var i = 0; i < names.length; i++) {
+                    if (!names[i]) continue;
                     if (save[names[i]] != null && typeof this[names[i]] == typeof save[names[i]]) {
                         if ($.isPlainObject(this[names[i]])) {
-                            for (var j in this[names[i]]) {
-                                if (!this[names[i]].hasOwnProperty(j)) continue;
-                                if (save[names[i]][j] != null) {
-                                    this[names[i]][j] = save[names[i]][j];
+                            if (_.isEmpty(this[names[i]]) && !_.isEmpty(save[names[i]])) {
+                                this[names[i]] = save[names[i]];
+                            } else {
+                                for (var j in this[names[i]]) {
+                                    if (!this[names[i]].hasOwnProperty(j)) continue;
+                                    if (save[names[i]][j] != null) {
+                                        this[names[i]][j] = save[names[i]][j];
+                                    }
                                 }
                             }
                         } else {
@@ -177,6 +210,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 if (this.autowoot) {
                     (function() {
                         var dj = API.getDJ();
+
                         if (dj == null || dj.id === API.getUser().id) return;
                         $('#woot').click();
                     })();
@@ -185,20 +219,18 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 if (this.autojoin) {
                     (function() {
                         var dj = API.getDJ();
+
                         if (dj == null || dj.id === API.getUser().id || API.getWaitListPosition() > -1) return;
                         $('#dj-button').click();
                     })();
                 }
 
-                /*
-                 // Update styles if AFK timers are enabled
-                 if (this.moderation.afkTimers && (p3Utils.isPlugCubedDeveloper() || p3Utils.hasPermission(undefined, API.ROLE.BOUNCER))) {
-                 Styles.set('waitListMove', '#waitlist .list .user .name { top: 2px; }');
-                 }
-                 */
-
                 if (this.twitchEmotes) {
                     require('plugCubed/handlers/ChatHandler').loadTwitchEmotes();
+                }
+
+                if (!this.badges) {
+                    Styles.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { display: none; }');
                 }
 
                 if (this.registeredSongs.length > 0 && API.getMedia() != null && this.registeredSongs.indexOf(API.getMedia().id) > -1) {
@@ -210,20 +242,23 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     Styles.set('etaTimer', '#your-next-media .song { top: 8px!important; }');
                 }
             } catch (e) {
-                console.error('[plug³] Error loading settings', e);
+                console.error('[plug³ Settings] Error loading settings', e.stack);
                 p3Utils.chatLog('system', 'Error loading settings');
             }
         },
         save: function() {
             var settings = {};
-            for (var i in names) {
-                if (names.hasOwnProperty(i)) {
+
+            for (var i = 0; i < names.length; i++) {
+                if (names[i]) {
                     settings[names[i]] = this[names[i]];
                 }
             }
+
             settings.version = curVersion;
             localStorage.setItem('plugCubed', JSON.stringify(settings));
         }
     });
-    return new controller();
+
+    return new Controller();
 });
