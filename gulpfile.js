@@ -5,9 +5,9 @@ const gulp = require('gulp');
 const HubRegistry = require('gulp-hub');
 const tryRequire = require('try-require');
 
-const devVersion = tryRequire(path.join('src', 'dev', 'version.js'));
-const devVersionExists = (devVersion === null && typeof devVersion !== 'object');
-const regex = devVersionExists ? ['tasks/**/*.js'] : 'tasks/**/+(alpha|release).js';
+const devVersion = tryRequire(path.resolve('src', 'dev', 'version.js'));
+const devVersionExists = devVersion != null && typeof devVersion === 'object';
+const regex = devVersionExists ? ['tasks/**/*.js'] : 'tasks/**/+(*?(a|A)lpha*|*?(c|C)hrome*|*?(m|M)axthon*|*?(f|F)irefox*|*?(o|O)pera*|*?(r|R)elease*).js';
 const hub = new HubRegistry(regex);
 
 gulp.registry(hub);
