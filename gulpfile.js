@@ -6,7 +6,7 @@ const HubRegistry = require('gulp-hub');
 const tryRequire = require('try-require');
 
 const devVersion = tryRequire(path.join('src', 'dev', 'version.js'));
-const devVersionExists = !(devVersion === null && typeof devVersion !== 'object');
+const devVersionExists = (devVersion === null && typeof devVersion !== 'object');
 const regex = devVersionExists ? ['tasks/**/*.js'] : 'tasks/**/+(alpha|release).js';
 const hub = new HubRegistry(regex);
 
