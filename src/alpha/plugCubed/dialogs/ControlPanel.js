@@ -1,22 +1,8 @@
 define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
-    var ControlPanelClass;
-    var JQueryElementClass;
 
-    var PanelClass;
-    var ButtonClass;
-    var InputClass;
-
-    var $controlPanelDiv;
-    var $topBarDiv;
-    var $menuDiv;
-    var $currentDiv;
-    var $closeDiv;
-    var scrollPane;
-    var shownHeight;
+    var ControlPanelClass, JQueryElementClass, PanelClass, ButtonClass, InputClass, $controlPanelDiv, $topBarDiv, $menuDiv, $currentDiv, $closeDiv, scrollPane, shownHeight,
+        that1, that2, _onResize, _onTabClick;
     var tabs = {};
-    var that;
-    var _onResize;
-    var _onTabClick;
 
     JQueryElementClass = Class.extend({
         getJQueryElement: function() {
@@ -27,12 +13,13 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
 
     ButtonClass = JQueryElementClass.extend({
         init: function(label, submit) {
-            var that = this;
+            that1 = this;
             this.$div = $('<div>').addClass('button').text(label);
-            if (submit)
+            if (submit) {
                 this.$div.addClass('submit');
+            }
             this.$div.click(function() {
-                that.onClick();
+                that1.onClick();
             });
             return this;
         },
@@ -42,8 +29,9 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
         },
         changeSubmit: function(submit) {
             this.$div.removeClass('submit');
-            if (submit)
+            if (submit) {
                 this.$div.addClass('submit');
+            }
             return this;
         },
         onClick: function() {
@@ -57,15 +45,17 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
     InputClass = JQueryElementClass.extend({
         init: function(type, label, placeholder) {
             this.$div = $('<div>').addClass('input-group');
-            if (label)
+            if (label) {
                 this.$label = $('<div>').addClass('label').text(label);
+            }
             this.$input = $('<input>').attr({
                 type: type,
                 placeholder: placeholder
             });
 
-            if (label)
+            if (label) {
                 this.$div.append(this.$label);
+            }
             this.$div.append(this.$input);
         },
         changeLabel: function(label) {
@@ -74,13 +64,15 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
         },
         changeSubmit: function(submit) {
             this.$div.removeClass('submit');
-            if (submit)
+            if (submit) {
                 this.$div.addClass('submit');
+            }
             return this;
         },
         change: function(onChangeFunc) {
-            if (typeof onChangeFunc == 'function')
+            if (typeof onChangeFunc == 'function') {
                 this.$div.change(onChangeFunc);
+            }
             return this;
         },
         getJQueryElement: function() {
@@ -102,8 +94,10 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
             for (var i in this._content) {
                 if (!this._content.hasOwnProperty(i)) continue;
                 var $content = this._content[i];
-                if ($content instanceof JQueryElementClass)
+
+                if ($content instanceof JQueryElementClass) {
                     $content = $content.getJQueryElement();
+                }
                 scrollPane.getContentPane().append($content);
             }
         }
@@ -111,7 +105,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
 
     ControlPanelClass = Class.extend({
         init: function() {
-            that = this;
+            that2 = this;
             _onResize = _.bind(this.onResize, this);
             _onTabClick = _.bind(this.onTabClick, this);
 
@@ -121,8 +115,9 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
         },
         close: function() {
             $(window).off('resize', _onResize);
-            if ($controlPanelDiv != null)
+            if ($controlPanelDiv != null) {
                 $controlPanelDiv.remove();
+            }
         },
         createControlPanel: function(onlyRecreate) {
             if ($controlPanelDiv != null) {
@@ -147,7 +142,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
             $controlPanelDiv.append($currentDiv);
 
             $closeDiv = $('<div>').attr('id', 'p3-control-panel-close').append('<i class="icon icon-arrow-down"></i>').click(function() {
-                that.toggleControlPanel(false);
+                that2.toggleControlPanel(false);
             });
 
             $controlPanelDiv.append($closeDiv);
@@ -155,6 +150,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
             $('body').append($controlPanelDiv);
             this.onResize();
         },
+
         /**
          * Create an input field
          * @param {string} type Type of input field
@@ -164,7 +160,9 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
          */
         inputField: function(type, label, placeholder) {
             return new InputClass(type, label, placeholder);
-        }, /**
+        },
+
+        /**
          * @callback onButtonClick
          * @param {object}
          */
@@ -177,15 +175,17 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
          */
         button: function(label, submit, onClick) {
             var newButton = new ButtonClass(label, submit);
-            if (typeof onClick === 'function')
+
+            if (typeof onClick === 'function') {
                 newButton.onClick = onClick;
+            }
             return newButton;
         },
         onResize: function() {
             if ($controlPanelDiv == null) return;
             var $panel = $('#playlist-panel');
-            var shownHeight = $(window).height() - 150;
 
+            shownHeight = $(window).height() - 150;
             $controlPanelDiv.css({
                 width: $panel.width(),
                 height: this.shown ? shownHeight : 0,
@@ -214,7 +214,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
                 duration: 350,
                 easing: 'easeInOutExpo',
                 complete: function() {
-                    if (!that.shown) {
+                    if (!that2.shown && scrollPane != null) {
                         $controlPanelDiv.detach();
                         $controlPanelDiv = null;
                         scrollPane.destroy();
@@ -229,6 +229,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
         openTab: function(id) {
             this.toggleControlPanel(true);
             var tab = tabs[id];
+
             if (tab == null || !(tab instanceof PanelClass)) return;
 
             $menuDiv.find('.current').removeClass('current');
@@ -246,6 +247,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
 
             this.onResize();
         },
+
         /**
          * Add a new tab, if it doesn't already exists
          * @param {string} name Name of tab
@@ -258,6 +260,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
             this.createControlPanel(true);
             return tabs[name];
         },
+
         /**
          * Remove a tab, if tab exists
          * @param {PanelClass} panel Name of tab
