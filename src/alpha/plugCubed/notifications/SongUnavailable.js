@@ -10,5 +10,6 @@ define(['jquery', 'plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'pl
             // }
         }
     });
+
     return new Handler();
 });
