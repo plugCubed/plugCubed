@@ -1,12 +1,6 @@
-define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/bridges/Context', 'plugCubed/bridges/Layout', 'plugCubed/ModuleLoader', 'lang/Lang'], function($, _, Class, p3Utils, p3Lang, Styles, Settings, Context, Layout, ModuleLoader, Lang) {
-    var RoomModel;
-    var RoomLoader;
-    var handler;
-    var showMessage;
-    var oriLang;
-    var langKeys;
-    var ranks;
-    var that;
+define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/Settings'], function($, _, Class, p3Utils, p3Lang, Styles, Settings) {
+
+    var Context, Layout, PlugUI, RoomModel, RoomLoader, Handler, showMessage, oriLang, Lang, langKeys, ranks, that;
 
     /**
      * @property {{ background: String, chat: { admin: String, ambassador: String, bouncer: String, cohost: String, residentdj: String, host: String, manager: String }, footer: String, header: String }} colors
@@ -16,9 +10,16 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
      * @property {{ allowAutorespond: Boolean, allowAutojoin: Boolean, allowAutowoot: Boolean }} rules
      * @property {String|undefined} roomscript
      */
-    var roomSettings;
+    var roomSettings; // eslint-disable-line one-var
+
+    Context = window.plugCubedModules.context;
+    Layout = window.plugCubedModules.Layout;
+    Lang = window.plugCubedModules.Lang;
+    PlugUI = window.plugCubedModules.plugUrls;
+    RoomLoader = window.plugCubedModules.roomLoader;
+    RoomModel = window.plugCubedModules.room;
     showMessage = false;
-    oriLang = $.extend(true, {}, Lang);
+    oriLang = _.extend({}, Lang);
     langKeys = $.map(oriLang, function(v, i) {
         if (typeof v === 'string') {
             return i;
@@ -28,14 +29,6 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
         });
     });
     ranks = ['admin', 'ambassador', 'bouncer', 'cohost', 'residentdj', 'leader', 'host', 'manager', 'volunteer'];
-    RoomLoader = ModuleLoader.getView({
-        isBackbone: true,
-        className: 'loading-box'
-    });
-    RoomModel = ModuleLoader.getView({
-        isBackbone: true,
-        isModel: true
-    });
 
     function getPlugDJLang(key, original) {
         if (!key) return '';
@@ -43,8 +36,10 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
         var last = parts.pop();
         var partsLen = parts.length;
         var cur = original ? oriLang : Lang;
+
         for (var i = 0; i < partsLen; i++) {
             var part = parts[i];
+
             if (cur[part] != null) {
                 cur = cur[part];
             } else {
@@ -57,70 +52,90 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
         return '';
     }
 
+    function setFooterIcon() {
+        $('#footer-user .name .icon').removeClass().addClass('icon icon-chat-' + p3Utils.getRank());
+    }
+
     function setPlugDJLang(key, value) {
         if (!key || !value) return;
         var parts = key.split('.');
         var last = parts.pop();
         var partsLen = parts.length;
         var cur = Lang;
+
         for (var i = 0; i < partsLen; i++) {
             var part = parts[i];
-            if (cur[part] != null)
+
+            if (cur[part] != null) {
                 cur = cur[part];
-            else return;
+            } else return;
         }
-        if (cur[last] != null)
+        if (cur[last] != null) {
             cur[last] = value;
+        }
     }
 
     function parseDescription(description) {
         var isRCS = false;
+
         if (description.indexOf('@p3=') > -1) {
             description = description.substr(description.indexOf('@p3=') + 4);
+            that.haveRoomSettings = true;
         } else if (description.indexOf('@rcs=') > -1) {
             description = description.substr(description.indexOf('@rcs=') + 5);
             isRCS = true;
+            that.haveRoomSettings = true;
         } else {
+            that.haveRoomSettings = false;
             return;
         }
-        if (description.indexOf('\n') > -1)
+        if (description.indexOf('\n') > -1) {
             description = description.substr(0, description.indexOf('\n'));
+        }
         $.getJSON(p3Utils.html2text(description) + '?=' + Date.now(), function(settings) {
             roomSettings = settings;
             if (isRCS) {
                 roomSettings = that.convertRCSToPlugCubed(settings);
             }
-            showMessage = true;
+            if (!(Settings.useRoomSettings[p3Utils.getRoomID()] != null ? Settings.useRoomSettings[p3Utils.getRoomID()] : true)) {
+                showMessage = false;
+            } else {
+                showMessage = true;
+            }
             that.execute();
-        }).fail(function() {
-            API.chatLog('Error loading Room Settings', true);
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR, textStatus, errorThrown);
+            p3Utils.chatLog(undefined, 'Error loading Room Settings ' + jqXHR.status, -2);
         });
-        that.haveRoomSettings = true;
     }
 
-    handler = Class.extend({
+    Handler = Class.extend({
         rules: {
             allowAutowoot: true,
             allowAutorespond: true,
-            allowAutojoin: true
+            allowAutojoin: true,
+            allowEmotes: true
         },
         haveRoomSettings: false,
         chatColors: {},
         chatIcons: {},
         init: function() {
             that = this;
+            Context.on('change:role', setFooterIcon);
             Context.on('room:joining', this.clear, this);
             Context.on('room:joined', this.update, this);
+            setFooterIcon();
         },
         update: function() {
             parseDescription(p3Utils.cleanHTML(RoomModel.get('description')));
         },
 
-        //Converts RCS CCS to P3 RSS Format. Written by ReAnna.
+        // Converts RCS CCS to P3 RSS Format. Written by ReAnna.
         convertRCSToPlugCubed: function(ccs) {
             var rs = _.clone(ccs);
             var colors = ccs.ccc;
             var images = ccs.images;
+
             if (ccs.css) {
                 rs.css = {
                     import: [ccs.css]
@@ -129,72 +144,83 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             if (colors) {
                 rs.colors = rs.colors || {};
                 rs.colors.chat = _.omit(colors, 'rdj');
-                if (colors.rdj)
+                if (colors.rdj) {
                     rs.colors.chat.residentdj = colors.rdj;
+                }
             }
             if (images) {
                 rs.images = _.clone(images);
                 rs.images.icons = _.omit(images, 'background', 'playback', 'rdj');
-                if (images.rdj)
+                if (images.rdj) {
                     rs.images.icons.residentdj = images.rdj;
+                }
             }
 
-            console.log(rs);
             return rs;
         },
         execute: function() {
-            var i;
-            var a;
-            var loadEverything;
-            loadEverything = Settings.useRoomSettings[document.location.pathname.split('/')[1]] != null ? Settings.useRoomSettings[document.location.pathname.split('/')[1]] : true;
+            var i, a, loadEverything;
+
+            loadEverything = Settings.useRoomSettings[p3Utils.getRoomID()] != null ? Settings.useRoomSettings[p3Utils.getRoomID()] : true;
 
             this.clear();
             if (roomSettings != null) {
                 if (loadEverything) {
+
                     // colors
                     if (roomSettings.colors != null) {
+
                         // colors.background
-                        if (roomSettings.colors.background != null && typeof roomSettings.colors.background === 'string' && p3Utils.isRGB(roomSettings.colors.background))
+                        if (roomSettings.colors.background != null && typeof roomSettings.colors.background === 'string' && p3Utils.isRGB(roomSettings.colors.background)) {
                             Styles.set('room-settings-background-color', 'body { background-color: ' + p3Utils.toRGB(roomSettings.colors.background) + '!important; }');
+                        }
 
                         // colors.chat
                         if (roomSettings.colors.chat != null) {
                             a = {};
                             for (i in roomSettings.colors.chat) {
                                 if (!roomSettings.colors.chat.hasOwnProperty(i)) continue;
-                                if (ranks.indexOf(i) > -1 && typeof roomSettings.colors.chat[i] === 'string' && p3Utils.isRGB(roomSettings.colors.chat[i]))
+                                if (ranks.indexOf(i) > -1 && typeof roomSettings.colors.chat[i] === 'string' && p3Utils.isRGB(roomSettings.colors.chat[i])) {
                                     a[i] = p3Utils.toRGB(roomSettings.colors.chat[i]);
+                                }
                             }
                             this.chatColors = a;
                         }
 
                         // colors.header
-                        if (roomSettings.colors.header != null && typeof roomSettings.colors.header === 'string' && p3Utils.isRGB(roomSettings.colors.header))
+                        if (roomSettings.colors.header != null && typeof roomSettings.colors.header === 'string' && p3Utils.isRGB(roomSettings.colors.header)) {
                             Styles.set('room-settings-header', '#header { background-color: ' + p3Utils.toRGB(roomSettings.colors.header) + '!important; }');
+                        }
 
                         // colors.footer
-                        if (roomSettings.colors.footer != null && typeof roomSettings.colors.footer === 'string' && p3Utils.isRGB(roomSettings.colors.footer))
+                        if (roomSettings.colors.footer != null && typeof roomSettings.colors.footer === 'string' && p3Utils.isRGB(roomSettings.colors.footer)) {
                             Styles.set('room-settings-footer', '.app-header { background-color: ' + p3Utils.toRGB(roomSettings.colors.footer) + '!important; }');
+                        }
                     }
 
                     // css
                     if (roomSettings.css != null) {
+
                         // css.font
-                        if (roomSettings.css.font != null && $.isArray(roomSettings.css.font)) {
+                        if (roomSettings.css.font != null && _.isArray(roomSettings.css.font)) {
                             var roomFonts = [];
+
                             for (i in roomSettings.css.font) {
                                 if (!roomSettings.css.font.hasOwnProperty(i)) continue;
                                 var font = roomSettings.css.font[i];
+
                                 if (font.name != null && font.url != null) {
                                     font.toString = function() {
                                         var sources = [];
-                                        if (typeof this.url === 'string')
+
+                                        if (typeof this.url === 'string') {
                                             sources.push('url("' + this.url + '")');
-                                        else {
+                                        } else {
                                             for (var j in this.url) {
                                                 if (!this.url.hasOwnProperty(j)) continue;
-                                                if (['woff', 'woff2', 'opentype', 'svg', 'svgz', 'embedded-opentype', 'truetype'].indexOf(j) > -1)
+                                                if (['woff', 'woff2', 'opentype', 'svg', 'svgz', 'embedded-opentype', 'truetype'].indexOf(j) > -1) {
                                                     sources.push('url("' + this.url[j] + '") format("' + j + '")');
+                                                }
                                             }
                                         }
                                         return '@font-face { font-family: "' + this.name + '"; src: ' + sources.join(',') + '; }';
@@ -204,19 +230,24 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                             }
                             Styles.set('room-settings-fonts', roomFonts.join('\n'));
                         }
+
                         // css.import
-                        if (roomSettings.css.import != null && $.isArray(roomSettings.css.import)) {
+                        if (roomSettings.css.import != null && _.isArray(roomSettings.css.import)) {
                             for (i in roomSettings.css.import) {
-                                if (roomSettings.css.import.hasOwnProperty(i) && typeof roomSettings.css.import[i] === 'string')
+                                if (roomSettings.css.import.hasOwnProperty(i) && typeof roomSettings.css.import[i] === 'string') {
                                     Styles.addImport(roomSettings.css.import[i]);
+                                }
                             }
                         }
+
                         // css.setting
                         if (roomSettings.css.rule != null) {
                             var roomCSSRules = [];
+
                             for (i in roomSettings.css.rule) {
                                 if (!roomSettings.css.rule.hasOwnProperty(i)) continue;
                                 var rule = [];
+
                                 for (var j in roomSettings.css.rule[i]) {
                                     if (!roomSettings.css.rule[i].hasOwnProperty(j)) continue;
                                     rule.push(j + ':' + roomSettings.css.rule[i][j]);
@@ -229,18 +260,23 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
 
                     // images
                     if (roomSettings.images != null) {
+
                         // images.background
-                        if (roomSettings.images.background)
-                            Styles.set('room-settings-background-image', '.room-background { background-image: url("' + p3Utils.proxifyImage(roomSettings.images.background) + '")!important; }');
+                        if (roomSettings.images.background) {
+                            Styles.set('room-settings-background-image', '.room-background { background: url("' + p3Utils.proxifyImage(roomSettings.images.background) + '") !important; }');
+                        }
 
                         // images.playback
                         var playbackBackground = $('#playback').find('.background img');
-                        if (playbackBackground.data('_o') == null)
+
+                        if (playbackBackground.data('_o') == null) {
                             playbackBackground.data('_o', playbackBackground.attr('src'));
+                        }
 
                         if (roomSettings.images.playback != null) {
                             if (typeof roomSettings.images.playback === 'string' && roomSettings.images.playback.indexOf('http') === 0) {
                                 var playbackFrame = new Image();
+
                                 playbackFrame.onload = function() {
                                     playbackBackground.attr('src', this.src);
                                     RoomLoader.frameHeight = this.height - 10;
@@ -254,16 +290,18 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                         }
 
                         // images.booth
-                        if (roomSettings.images.booth != null && typeof roomSettings.images.booth === 'string')
+                        if (roomSettings.images.booth != null && typeof roomSettings.images.booth === 'string') {
                             $('#dj-booth').append($('<div id="p3-dj-booth">').css('background-image', 'url("' + p3Utils.proxifyImage(roomSettings.images.booth) + '")'));
+                        }
 
                         // images.icons
                         if (roomSettings.images.icons != null) {
                             a = {};
                             for (i in roomSettings.images.icons) {
                                 if (!roomSettings.images.icons.hasOwnProperty(i)) continue;
-                                if (ranks.indexOf(i) > -1 && typeof roomSettings.images.icons[i] === 'string')
+                                if (ranks.indexOf(i) > -1 && typeof roomSettings.images.icons[i] === 'string') {
                                     a[i] = p3Utils.proxifyImage(roomSettings.images.icons[i]);
+                                }
                             }
                             this.chatIcons = a;
                         }
@@ -271,9 +309,9 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
 
                     // text
                     if (roomSettings.text != null) {
-                        // text.plugCubed
-                        if (roomSettings.text.plugCubed != null) {
 
+                        // text.plugCubed
+                        if (roomSettings.text.plugCubed != null) { // eslint-disable-line no-empty
                         }
 
                         // text.plugDJ
@@ -281,8 +319,10 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                             for (i in roomSettings.text.plugDJ) {
                                 if (!roomSettings.text.plugDJ.hasOwnProperty(i)) continue;
                                 var value = roomSettings.text.plugDJ[i];
-                                if (i && value && typeof value == 'string')
+
+                                if (i && value && typeof value == 'string') {
                                     setPlugDJLang(i, roomSettings.text.plugDJ[i]);
+                                }
                             }
                         }
                     }
@@ -293,15 +333,20 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                     this.rules.allowAutowoot = roomSettings.rules.allowAutowoot == null || roomSettings.rules.allowAutowoot === 'true' || roomSettings.rules.allowAutowoot === true;
                     this.rules.allowAutojoin = roomSettings.rules.allowAutojoin == null || roomSettings.rules.allowAutojoin === 'true' || roomSettings.rules.allowAutojoin === true;
                     this.rules.allowAutorespond = roomSettings.rules.allowAutorespond == null || roomSettings.rules.allowAutorespond === 'true' || roomSettings.rules.allowAutorespond === true;
+                    this.rules.allowEmotes = roomSettings.rules.allowEmotes == null || roomSettings.rules.allowEmotes === 'true' || roomSettings.rules.allowEmotes === true;
+
                 } else {
                     this.rules.allowAutowoot = true;
                     this.rules.allowAutojoin = true;
                     this.rules.allowAutorespond = true;
+                    this.rules.allowEmotes = true;
                 }
 
                 // roomscript
                 if (roomSettings.roomscript != null) {
+
                     // TODO: Make this
+
                 }
 
                 // Update autorespond
@@ -331,28 +376,30 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             for (var i in langKeys) {
                 if (!langKeys.hasOwnProperty(i)) continue;
                 var key = langKeys[i];
+
                 setPlugDJLang(key, getPlugDJLang(key, true));
             }
 
             $('#p3-dj-booth').remove();
 
-            Styles.unset(['room-settings-background-color', 'room-settings-background-image', 'room-settings-booth', 'room-settings-fonts', 'room-settings-rules', 'room-settings-maingui']);
+            Styles.unset(['room-settings-background-color', 'room-settings-background-image', 'room-settings-booth', 'room-settings-fonts', 'room-settings-rules', 'room-settings-maingui', 'CCC-text-admin', 'CCC-text-ambassador', 'CCC-text-host', 'CCC-text-cohost', 'CCC-text-manager', 'CCC-text-bouncer', 'CCC-text-residentdj', 'CCC-text-regular', 'CCC-text-you', 'CCC-image-admin', 'CCC-image-ambassador', 'CCC-image-host', 'CCC-image-cohost', 'CCC-image-manager', 'CCC-image-bouncer', 'CCC-image-residentdj']);
             Styles.clearImports();
-
             var playbackBackground = $('#playback').find('.background img');
-            if (playbackBackground.data('_o') == null)
-                playbackBackground.data('_o', playbackBackground.attr('src'));
+
+            playbackBackground.data('_o', PlugUI.videoframe);
             playbackBackground.attr('src', playbackBackground.data('_o'));
             playbackBackground.show();
-            RoomLoader.frameHeight = playbackBackground.height() - 10;
-            RoomLoader.frameWidth = playbackBackground.width() - 18;
+            RoomLoader.frameHeight = 274;
+            RoomLoader.frameWidth = 490;
             RoomLoader.onVideoResize(Layout.getSize());
         },
         close: function() {
+            Context.off('change:role', setFooterIcon);
             Context.off('room:joining', this.clear, this);
             Context.off('room:joined', this.update, this);
             this.clear();
         }
     });
-    return new handler();
+
+    return new Handler();
 });
