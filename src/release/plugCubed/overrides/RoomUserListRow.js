@@ -1,6 +1,9 @@
-define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Context', 'plugCubed/bridges/RoomUserListView'], function($, p3Lang, p3Utils, _$context, RoomUserListView) {
+define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils'], function($, p3Lang, p3Utils) {
+    var Context, RoomUserListRow, RoomUsersListView;
 
-    var RoomUserListRow = RoomUserListView.prototype.RowClass;
+    Context = window.plugCubedModules.context;
+    RoomUsersListView = window.plugCubedModules.RoomUsersListView;
+    RoomUserListRow = RoomUsersListView.prototype.RowClass;
 
     return RoomUserListRow.extend({
         vote: function() {
@@ -34,25 +37,27 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Contex
                 }
 
                 if (p3Utils.havePlugCubedRank(id)) {
-                    $icon.addClass('icon-is-p3' + p3Utils.getHighestRank(id));
+                    $icon.removeClass('icon-chat-subscriber');
+                    $icon.removeClass('icon-chat-silver-subscriber');
+                    $icon.addClass('icon-chat-p3' + p3Utils.getHighestRank(id));
                 }
 
                 $icon.mouseover(function() {
-                    _$context.trigger('tooltip:show', $('<span>').html(p3Utils.getAllPlugCubedRanks(id)).text(), $(this), true);
+                    Context.trigger('tooltip:show', $('<span>').html(p3Utils.getAllPlugCubedRanks(id)).text(), $(this), true);
                 }).mouseout(function() {
-                    _$context.trigger('tooltip:hide');
+                    Context.trigger('tooltip:hide');
                 });
 
                 if (specialIconInfo != null) {
-                    $icon.css('background-image', 'url("https://d1rfegul30378.cloudfront.net/files/images/icons.p3special.' + specialIconInfo.icon + '.png")');
+                    $icon.css('background-image', 'url("https://plugcubed.net/scripts/release/icons.p3special.' + specialIconInfo.icon + '.png")');
                 }
             }
 
             if ($voteIcon.length > 0) {
                 $voteIcon.mouseover(function() {
-                    _$context.trigger('tooltip:show', $('<span>').html(p3Lang.i18n('vote.' + ($voteIcon.hasClass('icon-grab') ? 'grab' : ($voteIcon.hasClass('icon-woot') ? 'woot' : 'meh')))).text(), $(this), true);
+                    Context.trigger('tooltip:show', $('<span>').html(p3Lang.i18n('vote.' + ($voteIcon.hasClass('icon-grab') ? 'grab' : ($voteIcon.hasClass('icon-woot') ? 'woot' : 'meh')))).text(), $(this), true);
                 }).mouseout(function() {
-                    _$context.trigger('tooltip:hide');
+                    Context.trigger('tooltip:hide');
                 });
             }
         }
