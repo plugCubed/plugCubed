@@ -2,14 +2,12 @@
  Modified version of plug.dj's VolumeView
  VolumeView copyright (C) 2014 by Plug DJ, Inc.
  */
-define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Context', 'plugCubed/ModuleLoader'], function($, p3Lang, p3Utils, _$context, ModuleLoader) {
-
-    var original = ModuleLoader.getView({
-        id: 'volume'
-    });
+define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils'], function($, p3Lang, p3Utils) {
+    var Context = window.plugCubedModules.context;
+    var Original = window.plugCubedModules.Volume;
     var _PlaybackModel;
 
-    return original.extend({
+    return Original.extend({
         initialize: function(PlaybackModel) {
             _PlaybackModel = PlaybackModel;
             this._super();
@@ -17,38 +15,29 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Contex
         render: function() {
             this._super();
             this.$('.button').mouseover(function() {
-                if (typeof plugCubed !== 'undefined') {
+                if (typeof window.plugCubed !== 'undefined') {
                     if (_PlaybackModel.get('mutedOnce')) {
-                        _$context.trigger('tooltip:show', p3Lang.i18n('tooltip.mutedOnce'), $(this), true);
+                        Context.trigger('tooltip:show', p3Lang.i18n('tooltip.mutedOnce'), $(this), true);
                     } else if (_PlaybackModel.get('muted')) {
-                        _$context.trigger('tooltip:show', p3Lang.i18n('tooltip.muted'), $(this), true);
+                        Context.trigger('tooltip:show', p3Lang.i18n('tooltip.muted'), $(this), true);
                     }
                 }
             }).mouseout(function() {
-                if (typeof plugCubed !== 'undefined')
-                    _$context.trigger('tooltip:hide');
+                if (typeof window.plugCubed !== 'undefined') {
+                    Context.trigger('tooltip:hide');
+                }
             });
             this.onChange();
             return this;
         },
         remove: function() {
             this._super();
-            var volume = new original();
+            var volume = new Original();
+
             $('#now-playing-bar').append(volume.$el);
             volume.render();
         },
         onClick: function() {
-            if (typeof plugCubed !== 'undefined') {
-                _$context.trigger('tooltip:hide');
-                if (_PlaybackModel.get('muted')) {
-                    _$context.trigger('tooltip:show', p3Lang.i18n('tooltip.mutedOnce'), this.$('.button'), true);
-                } else if (!_PlaybackModel.get('mutedOnce')) {
-                    _$context.trigger('tooltip:show', p3Lang.i18n('tooltip.muted'), this.$('.button'), true);
-                } else {
-                    _$context.trigger('tooltip:hide');
-                }
-            }
-
             if (_PlaybackModel.get('mutedOnce')) {
                 _PlaybackModel.set('volume', _PlaybackModel.get('lastVolume'));
             } else if (_PlaybackModel.get('muted')) {
@@ -60,9 +49,20 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/bridges/Contex
                     volume: 0
                 });
             }
+            if (typeof window.plugCubed !== 'undefined') {
+                Context.trigger('tooltip:hide');
+                if (_PlaybackModel.get('mutedOnce')) {
+                    Context.trigger('tooltip:show', p3Lang.i18n('tooltip.mutedOnce'), this.$('.button'), true);
+                } else if (_PlaybackModel.get('muted')) {
+                    Context.trigger('tooltip:show', p3Lang.i18n('tooltip.muted'), this.$('.button'), true);
+                } else {
+                    Context.trigger('tooltip:hide');
+                }
+            }
         },
         onChange: function() {
             var currentVolume = _PlaybackModel.get('volume');
+
             this.$span.text(currentVolume + '%');
             this.$circle.css('left', parseInt(this.$hit.css('left'), 10) + this.max * (currentVolume / 100) - this.$circle.width() / 2);
             if (currentVolume > 60 && !this.$icon.hasClass('icon-volume-on')) {
