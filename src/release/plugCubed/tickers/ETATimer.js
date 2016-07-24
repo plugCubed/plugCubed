@@ -1,5 +1,7 @@
-define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang', 'lang/Lang'], function($, TickerHandler, Settings, p3Utils, p3Lang, Lang) {
-    var handler;
+define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang'], function($, TickerHandler, Settings, p3Utils, p3Lang) {
+    var handler, Lang;
+
+    Lang = window.plugCubedModules.Lang;
 
     try {
         handler = TickerHandler.extend({
@@ -28,28 +30,30 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
                         return;
                     }
 
-                    if (API.getHistory() == null)
+                    if (API.getHistory() == null) {
                         return;
-
-                    var isDJ;
-                    var waitListPos;
-                    var timePerSong;
-                    var history;
-                    var time;
-                    var $djButton;
-
-                    isDJ = API.getDJ() != null && API.getDJ().id === this.myID;
-                    waitListPos = API.getWaitListPosition();
-                    timePerSong = 0;
-                    history = API.getHistory();
-                    $djButton = $('#dj-button').find('span');
-
-                    for (var i in history) {
-                        if (history.hasOwnProperty(i))
-                            timePerSong += history[i].info == null || history[i].info.duration === 0 ? 240 : history[i].info.duration;
                     }
 
-                    timePerSong = Math.round(timePerSong / history.length);
+                    var time;
+
+                    var isDJ = API.getDJ() != null && API.getDJ().id === this.myID;
+                    var waitListPos = API.getWaitListPosition();
+                    var timePerSong = 0;
+                    var historyArr = API.getHistory();
+                    var $djButton = $('#dj-button').find('span');
+
+                    for (var i = 0; i < historyArr.length; i++) {
+                        if (historyArr[i] == null || historyArr[i].media == null || !_.isFinite(historyArr[i].media.duration)) continue;
+
+                        if (historyArr[i].media.duration === 0 || historyArr[i].media.duration >= 600) {
+                            timePerSong += 240;
+                        } else {
+                            timePerSong += historyArr[i].media.duration;
+                        }
+
+                    }
+
+                    timePerSong = Math.round(timePerSong / historyArr.length);
 
                     if (isDJ) {
                         this.$span.text(p3Lang.i18n('eta.alreadyDJ'));
@@ -57,13 +61,13 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
                     }
 
                     if (waitListPos < 0) {
-                        time = p3Utils.formatTime(API.getWaitList().length * timePerSong + API.getTimeRemaining());
+                        time = p3Utils.formatTime((API.getWaitList().length * timePerSong) + API.getTimeRemaining());
                         this.$span.text(p3Lang.i18n('eta.joinTime', time));
                         $djButton.html((API.getWaitList().length < 50 ? Lang.dj.waitJoin : Lang.dj.waitFull) + '<br><small class="dark-label">' + time + '</small>');
                         return;
                     }
 
-                    time = p3Utils.formatTime(waitListPos * timePerSong + API.getTimeRemaining());
+                    time = p3Utils.formatTime((waitListPos * timePerSong) + API.getTimeRemaining());
                     this.$span.text(p3Lang.i18n('eta.waitListTime', waitListPos + 1, API.getWaitList().length, time), 10);
                     $djButton.html(Lang.dj.waitLeave + '<br><small class="dark-label">' + (waitListPos + 1) + '/' + API.getWaitList().length + ' (' + time + ')</small>');
                 } else if (this.$span != null) {
@@ -81,8 +85,8 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
             }
         });
     } catch (e) {
-        console.log('Error while creating ETATimer');
-        console.log(e);
+        console.error('Error while creating ETATimer');
+        console.error(e);
     }
 
     return handler;
