@@ -1,14 +1,17 @@
-define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/RoomSettings', 'plugCubed/Utils', 'plugCubed/bridges/PlaybackModel', 'plugCubed/dialogs/Menu', 'lang/Lang'], function(TriggerHandler, p3Lang, Settings, RoomSettings, p3Utils, PlaybackModel, Menu, Lang) {
-    var handler = TriggerHandler.extend({
+define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/RoomSettings', 'plugCubed/Utils', 'plugCubed/bridges/PlaybackModel', 'plugCubed/dialogs/Menu'], function(TriggerHandler, p3Lang, Settings, RoomSettings, p3Utils, PlaybackModel, Menu) {
+    var Lang, Handler;
+
+    Lang = window.plugCubedModules.Lang;
+    Handler = TriggerHandler.extend({
         trigger: 'chat',
         handler: function(data) {
-            if (!(RoomSettings.rules.allowAutorespond !== false && Settings.autorespond))
-                return;
+            if (!(RoomSettings.rules.allowAutorespond !== false && Settings.autorespond)) return;
 
             var that = this;
 
             var a = data.type === 'mention' && API.hasPermission(data.uid, API.ROLE.BOUNCER);
             var b = data.message.indexOf('@') < 0 && (API.hasPermission(data.uid, API.ROLE.MANAGER) || p3Utils.isPlugCubedDeveloper(data.uid));
+
             if (a || b) {
                 if (data.message.indexOf('!afkdisable') > -1) {
                     Settings.autorespond = false;
@@ -16,8 +19,9 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settin
                     Settings.save();
                     API.sendChat(p3Lang.i18n('autorespond.commandDisable', '@' + data.un));
                     $('#chat-input-field').removeAttr('disabled').attr('placeholder', Lang.chat.placeholder);
-                    if (this.timeoutId != null)
+                    if (this.timeoutId != null) {
                         clearTimeout(this.timeoutId);
+                    }
                     return;
                 }
             }
@@ -44,5 +48,5 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settin
         }
     });
 
-    return new handler();
+    return new Handler();
 });

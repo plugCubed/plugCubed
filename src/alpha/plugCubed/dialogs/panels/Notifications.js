@@ -1,9 +1,7 @@
 define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel'], function(Class, ControlPanel) {
-    var handler;
-    var $contentDiv;
-    var panel;
+    var Handler, $contentDiv, panel;
 
-    handler = Class.extend({
+    Handler = Class.extend({
         register: function() {
             panel = ControlPanel.addPanel('Notifications');
 
@@ -16,5 +14,5 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel'], function(Class, Co
         }
     });
 
-    return new handler();
+    return new Handler();
 });

@@ -1,26 +1,26 @@
-define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/bridges/VolumeView', 'plugCubed/ModuleLoader'], function(Class, p3Utils, p3Lang, VolumeView, ModuleLoader) {
-    var handler;
-    var volume;
+define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/bridges/VolumeView'], function(Class, p3Utils, p3Lang, VolumeView) {
+    var Handler, volume, PlaybackModel;
 
-    var PlaybackModel = ModuleLoader.getModule({
-        updateElapsed: 'function'
-    });
+    PlaybackModel = window.plugCubedModules.currentMedia;
 
     function onMediaChange() {
-        if (PlaybackModel.get('mutedOnce') === true)
+        if (PlaybackModel.get('mutedOnce') === true) {
             PlaybackModel.set('volume', PlaybackModel.get('lastVolume'));
+        }
     }
 
-    handler = Class.extend({
+    Handler = Class.extend({
         init: function() {
             var that = this;
+
             PlaybackModel.off('change:volume', PlaybackModel.onVolumeChange);
             PlaybackModel.onVolumeChange = function() {
-                if (typeof plugCubed === 'undefined') {
+                if (typeof window.plugCubed === 'undefined') {
                     this.set('muted', this.get('volume') === 0);
                 } else {
-                    if (this.get('mutedOnce') == null)
+                    if (!_.isBoolean(this.get('mutedOnce'))) {
                         this.set('mutedOnce', false);
+                    }
 
                     if (this.get('volume') === 0) {
                         if (!this.get('muted')) {
@@ -59,19 +59,22 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/bridg
             PlaybackModel.set(key, value);
         },
         mute: function() {
-            while (!PlaybackModel.get('muted') || PlaybackModel.get('mutedOnce'))
+            while (!PlaybackModel.get('muted') || PlaybackModel.get('mutedOnce')) {
                 volume.onClick();
+            }
         },
         muteOnce: function() {
-            while (!PlaybackModel.get('mutedOnce'))
+            while (!PlaybackModel.get('mutedOnce')) {
                 volume.onClick();
+            }
         },
         unmute: function() {
-            while (PlaybackModel.get('muted'))
+            while (PlaybackModel.get('muted')) {
                 volume.onClick();
+            }
         },
         close: function() {}
     });
 
-    return new handler();
+    return new Handler();
 });

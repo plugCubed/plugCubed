@@ -1,5 +1,6 @@
 define(['jquery', 'plugCubed/Class'], function($, Class) {
     return Class.extend({
+
         // Time between each tick (in milliseconds)
         tickTime: 1E3,
         closed: false,
@@ -12,7 +13,9 @@ define(['jquery', 'plugCubed/Class'], function($, Class) {
             if (!this.closed) {
                 this.timeoutID = setTimeout(this.proxy, this.tickTime);
             }
-        }, // The function that is called on each tick
+        },
+
+        // The function that is called on each tick
         tick: function() {},
         close: function() {
             clearTimeout(this.timeoutID);

@@ -1,5 +1,5 @@
 define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Utils'], function(TriggerHandler, Settings, p3Utils) {
-    var handler = TriggerHandler.extend({
+    var Handler = TriggerHandler.extend({
         trigger: 'chat',
         handler: function(data) {
             for (var i in Settings.alertson) {
@@ -12,5 +12,5 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
         }
     });
 
-    return new handler();
+    return new Handler();
 });

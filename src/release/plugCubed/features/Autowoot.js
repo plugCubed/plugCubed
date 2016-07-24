@@ -1,14 +1,14 @@
 define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/RoomSettings', 'plugCubed/Utils'], function(TriggerHandler, Settings, RoomSettings, p3Utils) {
-    var woot;
-    var handler;
+    var woot, Handler;
 
     woot = function() {
         var dj = API.getDJ();
-        if (dj === null || dj.id === API.getUser().id) return;
+
+        if (dj == null || dj.id === API.getUser().id) return;
         $('#woot').click();
     };
 
-    handler = TriggerHandler.extend({
+    Handler = TriggerHandler.extend({
         trigger: 'advance',
         handler: function(data) {
             if (!data.media || !Settings.autowoot || !RoomSettings.rules.allowAutowoot) return;
@@ -18,5 +18,5 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
         }
     });
 
-    return new handler();
+    return new Handler();
 });

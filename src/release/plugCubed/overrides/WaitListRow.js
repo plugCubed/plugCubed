@@ -1,17 +1,12 @@
-define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/ModuleLoader'], function($, OverrideHandler, p3Utils, ModuleLoader) {
+define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], function($, OverrideHandler, p3Utils) {
 
-    var WaitListRow;
-    var WaitListRowPrototype;
-    var originalFunction;
+    var WaitListRow, WaitListRowPrototype, originalFunction, Handler;
 
-    WaitListRow = ModuleLoader.getView({
-        className: 'user',
-        func: 'onRemoveClick'
-    });
+    WaitListRow = window.plugCubedModules.WaitlistRow;
     WaitListRowPrototype = WaitListRow.prototype;
     originalFunction = WaitListRowPrototype.onRole;
 
-    var handler = OverrideHandler.extend({
+    Handler = OverrideHandler.extend({
         doOverride: function() {
             WaitListRowPrototype.onRole = function() {
                 originalFunction.apply(this);
@@ -25,5 +20,5 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
         }
     });
 
-    return new handler();
+    return new Handler();
 });

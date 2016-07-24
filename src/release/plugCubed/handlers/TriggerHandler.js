@@ -5,16 +5,19 @@ define(['jquery', 'plugCubed/Class'], function($, Class) {
         registered: false,
         init: function() {
             var i;
-            if (this.triggerHandlers.length > 0)
+
+            if (this.triggerHandlers.length > 0) {
                 this.close();
+            }
             this.triggerHandlers = [];
-            if (this.trigger == null)
+            if (this.trigger == null) {
                 throw new Error('Missing TriggerHandler trigger!');
+            }
             if (typeof this.trigger === 'string') {
                 this.triggerHandlers[this.trigger] = this.handler;
-            } else if ($.isArray(this.trigger)) {
-                for (i in this.trigger) {
-                    if (!this.trigger.hasOwnProperty(i)) continue;
+            } else if (_.isArray(this.trigger)) {
+                for (i = 0; i < this.trigger.length; i++) {
+                    if (!this.trigger[i]) continue;
                     if (typeof this[this.trigger[i]] === 'function') {
                         this.triggerHandlers[this.trigger[i]] = this[this.trigger[i]];
                     } else {
@@ -30,6 +33,7 @@ define(['jquery', 'plugCubed/Class'], function($, Class) {
         },
         register: function() {
             var i;
+
             for (i in this.triggerHandlers) {
                 if (!this.triggerHandlers.hasOwnProperty(i)) continue;
                 if (typeof this.triggerHandlers[i] === 'function') {
@@ -42,6 +46,7 @@ define(['jquery', 'plugCubed/Class'], function($, Class) {
         },
         close: function() {
             var i;
+
             for (i in this.triggerHandlers) {
                 if (!this.triggerHandlers.hasOwnProperty(i)) continue;
                 if (typeof this.triggerHandlers[i] === 'function') {

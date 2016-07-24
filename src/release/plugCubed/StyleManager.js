@@ -1,25 +1,32 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/bridges/PopoutView'], function($, Class, p3Utils, PopoutView) {
+define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Utils) {
     var obj;
     var styles = {};
     var imports = [];
+    var PopoutView = window.plugCubedModules.PopoutView;
 
     function update() {
         var a = '';
         var i;
-        for (i in imports) {
-            if (imports.hasOwnProperty(i))
+
+        for (i = 0; i < imports.length; i++) {
+            if (imports[i]) {
                 a += '@import url("' + imports[i] + '");\n';
+            }
         }
+
         for (i in styles) {
-            if (styles.hasOwnProperty(i))
+            if (styles.hasOwnProperty(i)) {
                 a += styles[i] + '\n';
+            }
         }
+
         obj.text(a);
-        if (PopoutView && PopoutView._window)
+        if (PopoutView && PopoutView._window) {
             $(PopoutView._window.document).find('#plugCubedStyles').text(a);
+        }
     }
 
-    var a = Class.extend({
+    var A = Class.extend({
         init: function() {
             obj = $('<style type="text/css">');
             $('body').prepend(obj);
@@ -27,7 +34,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/bridges/Popou
         getList: function() {
             for (var key in styles) {
                 if (!styles.hasOwnProperty(key)) continue;
-                console.log(key, styles[key]);
+                console.log('[plug³ StyleManager]', key, styles);
             }
         },
         get: function(key) {
@@ -64,13 +71,15 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/bridges/Popou
                 }
             }
 
-            if (doUpdate)
+            if (doUpdate) {
                 update();
+            }
         },
         destroy: function() {
             styles = {};
             obj.remove();
         }
     });
-    return new a();
+
+    return new A();
 });

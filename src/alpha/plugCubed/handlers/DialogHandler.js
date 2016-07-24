@@ -1,7 +1,7 @@
 define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/enums/Notifications'], function($, Class, p3Lang, Settings, enumNotifications) {
-    var dialogTarget;
-    var dialogObserver;
-    var handler = Class.extend({
+    var dialogTarget, dialogObserver, Handler;
+
+    Handler = Class.extend({
         register: function() {
             dialogTarget = document.querySelector('#dialog-container');
             dialogObserver = new MutationObserver(function(mutations) {
@@ -23,5 +23,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Settings', 'pl
             dialogObserver.disconnect();
         }
     });
-    return new handler();
+
+    return new Handler();
 });

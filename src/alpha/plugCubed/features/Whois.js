@@ -38,7 +38,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/handlers/TriggerHandler', 'plugC
 
     var watcher = new WatcherClass();
 
-    var handler = TriggerHandler.extend({
+    var Handler = TriggerHandler.extend({
         trigger: {
             userJoin: 'onUserJoin',
             userLeave: 'onUserLeave',
@@ -47,13 +47,15 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/handlers/TriggerHandler', 'plugC
             waitListUpdate: 'onWaitListUpdate'
         },
         onUserJoin: function(data) {
-            if (p3Utils.getUserData(data.id, 'joinTime', 0) === 0)
+            if (p3Utils.getUserData(data.id, 'joinTime', 0) === 0) {
                 p3Utils.setUserData(data.id, 'joinTime', Date.now());
+            }
         },
         onUserLeave: function(data) {
             var disconnects = p3Utils.getUserData(data.id, 'disconnects', {
                 count: 0
             });
+
             disconnects.count++;
             disconnects.position = watcher.last.dj === data.id ? 0 : (watcher.last.waitList.indexOf(data.id) < 0 ? -1 : watcher.last.waitList.indexOf(data.id) + 1);
             disconnects.time = Date.now();
@@ -67,9 +69,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/handlers/TriggerHandler', 'plugC
         },
         onVoteUpdate: function(data) {
             if (!data || !data.user) return;
-            var curVote;
-            var wootCount;
-            var mehCount;
+            var curVote, wootCount, mehCount;
 
             curVote = p3Utils.getUserData(data.user.id, 'curVote', 0);
             wootCount = p3Utils.getUserData(data.user.id, 'wootcount', 0) - (curVote === 1 ? 1 : 0) + (data.vote === 1 ? 1 : 0);
@@ -84,9 +84,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/handlers/TriggerHandler', 'plugC
                 watcher.setDJ(data.dj);
             }
             var users = API.getUsers();
+
             for (var i in users) {
-                if (users.hasOwnProperty(i))
+                if (users.hasOwnProperty(i)) {
                     p3Utils.setUserData(users[i].id, 'curVote', 0);
+                }
             }
         },
         onWaitListUpdate: function(data) {
@@ -94,5 +96,5 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/handlers/TriggerHandler', 'plugC
         }
     });
 
-    return new handler();
+    return new Handler();
 });
