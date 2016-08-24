@@ -30,7 +30,7 @@
       "number":"Nummer"
     },
     "descriptions":{
-      "join":"Tritt dem DJ-Booth\/der Warteliste bei",
+      "join":"Tritt der DJ Warteliste bei",
       "leave":"Verlässt den DJ-Booth\/die Warteliste",
       "whoami":"Siehe deine eigenen Informationen ein",
       "mute":"Stelle die Lautstärke auf 0",
@@ -41,7 +41,7 @@
       "alertson":"Spiele einen Ton, sobald bestimmte Worte im Chat geschrieben werden",
       "alertsoff":"Kein Signalton bei einem im Chat erwähntem Wort  ",
       "grab":"Füge den aktuellen Song zu deiner ausgewählten Playlist hinzu",
-      "badges":"Benutzeabzeichen im chat ein-\/ausblenden",
+      "badges":"Benutzerabzeichen im chat ein-\/ausblenden",
       "getpos":"Zeigt deine Position in der Warteliste an",
       "version":"Zeigt die Versionsnummer an",
       "commands":"Zeigt diese Liste",
@@ -56,20 +56,20 @@
       "remove":"Entfernt den markierten Benutzer von der DJ Warteliste",
       "whois all":"Zeigt die Benutzer-ID und Benutzernamen von allen Benutzern im Raum an",
       "banall":"Bannt alle Benutzer im Raum",
-      "status":"Status der Plug Server zeigen",
+      "status":"Status der Plug Server anzeigen",
       "unload":"Schließt plug&#179;"
     },
     "responses":{
-      "alertson":"Mache ein Geräusch bei folgenden Wörtern: %1",
-      "alertsoff":"Mache kein Gerüsch bei spezifischen Wörten mehr",
+      "alertson":"Spiele einen Signalton bei folgenden Wörtern: %1",
+      "alertsoff":"Spiele keinen Signalton bei spezifischen Wörten mehr",
       "badgeon":"Abzeichen wurden eingeschaltet",
       "badgeoff":"Abzeichen wurden ausgeschaltet",
       "nextsong":"Dein nächstes Lied ist %1 von %2",
-      "isHistory":"Warnung: Dieser Song ist noch im Verlauf (%1 von %2)",
+      "isHistory":"Achtung: Dieser Song ist noch im Verlauf (%1 von %2)",
       "automute":{
         "automuted":"%1 automatisch stumm geschaltet.",
-        "registered":"%1 für automatisches Stummstellen bei zukünftigen DJ's registriert.",
-        "unregistered":"%1 wurde von der Automatisch-Stummstellen Liste entfernt."
+        "registered":"%1 für automatisches Stumm schalten bei zukünftigem abspielen registriert.",
+        "unregistered":"%1 wurde von der Automatisch-Stumm schalten Liste entfernt."
       },
       "status":{
         "rest":"REST: %1 %2 [%3ms]",
@@ -78,17 +78,17 @@
     }
   },
   "eta":{
-    "boothAvailable":"Wenn du jetzt in die Warteliste eintrittst, würdest du gleich DJing!",
+    "boothAvailable":"Wenn du jetzt in der Warteliste beitrittst, würdest du gleich DJen!",
     "alreadyDJ":"Du stehst schon am Mischpult!",
-    "waitListTime":"Du bist in der Warteliste %1 von %2, du wirst in etwa %3 DJing!",
-    "joinTime":"Wenn du der Warteliste jetzt beitrittst. würdest du in ungefähr %1 DJing!"
+    "waitListTime":"Du bist in der Warteliste %1 von %2, du wirst in etwa %3 DJen!",
+    "joinTime":"Wenn du der Warteliste jetzt beitrittst. würdest du in ungefähr %1 DJen!"
   },
   "notify":{
     "header":"Chat Benachrichtigungen",
     "join":"Nutzer betritt den Raum",
     "leave":"Nutzer verlässt den Raum",
     "grab":"User Grab",
-    "meh":"Mehs",
+    "meh":"User Mehs",
     "stats":"Song-Statistik",
     "updates":"Song-Updates",
     "history":"Songs im Verlauf",
@@ -97,13 +97,13 @@
     "songLength":"Song Länge (%1 min)",
     "message":{
       "boothAlertNext":"Du bist als Nächstes an der Reihe!",
-      "boothAlertPos":"Du bist jetzt %1 in der Warteliste",
-      "grab":"gegrabt %1 - %2",
+      "boothAlertPos":"Du bist jetzt auf Position %1 in der Warteliste",
+      "grab":"grabbed %1 - %2",
       "stats":"Statistiken: %1 woots -- %2 mehs -- %3 grabs",
       "updates":"Jetzt läuft: %1 von %2<br\/>Gespielt von: %3",
-      "meh":"%1 meh-te diesen Song",
-      "join":"Ist der Community beigetreten",
-      "leave":"Hat die Community verlassen",
+      "meh":"meh'd this track",
+      "join":"ist dem Raum beigetreten",
+      "leave":"hat den Raum verlassen",
       "history":"Song ist im Verlauf (%1 von %2)",
       "historySkipped":"Song ist im Verlauf (%1 von %2), aber wurde beim letzten Mal übersprungen",
       "songLength":"Song ist länger als %1 Minuten ",
@@ -115,7 +115,7 @@
   },
   "info":{
     "header":"Nutzer Informationen",
-    "name":"Name",
+    "name":"Benutzername",
     "title":"Titel",
     "specialTitles":{
       "developer":"plug&#179; Entwickler",
@@ -130,7 +130,7 @@
     },
     "id":"ID",
     "rank":"Rang",
-    "joined":"Zeit hinzugefügt",
+    "joined":"Zeit beigetreten",
     "status":"Status",
     "vote":"Abstimmen",
     "position":"Position",
@@ -180,7 +180,7 @@
     "controlpanel":"Einstellungen",
     "showdeletedmessages":"Gelöschte Nachrichten anzeigen",
     "visualizers":"RCS SoundCloud Visualizer",
-    "inlineuserinfo":"Inlinse User-Info"
+    "inlineuserinfo":"Inline User Info"
   },
   "vote":{
     "meh":"Meh",
@@ -206,9 +206,9 @@
     "invalidBanSyntax":"Ungültige Syntax für \"ban\"-Befehl. Syntax: \/ban @user oder \/ban @Nutzer::Uhrzeit::Grund",
     "invalidBanTime":"Die angegebene Zeit %1 ist ungültig. Gültige Zeiten sind 60, 1, 24, 1440,-1",
     "invalidRemoveSyntax":"Ungültige Syntax für den \"remove\"-Befehl. Syntax: \/remove @Nutzer",
-    "invalidWhoisSyntax":"Ungültige Syntax für für den \"whois\"-Befehl. Syntax: \/whois @Nutzer",
-    "errorGettingPlaylistInfo":"Error beim Laden der Playlist Informationen",
-    "noPlaylistsFound":"Keine Playlist gefunden",
+    "invalidWhoisSyntax":"Ungültige Syntax für den \"whois\"-Befehl. Syntax: \/whois @Nutzer",
+    "errorGettingPlaylistInfo":"Fehler beim Laden der Playlist Informationen",
+    "noPlaylistsFound":"Keine Playlists gefunden",
     "yourActivePlaylistIsFull":"Deine aktive Playlist ist voll",
     "noNextSong":"Du hast kein Lied in der Warteschlange"
   }

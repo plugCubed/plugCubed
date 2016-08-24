@@ -93,11 +93,11 @@
     "updates":"Changements de musique",
     "history":"Musiques dans l'historique des DJs",
     "songUnavailable":"Musique indisponible",
-    "boothAlert":"Booth Alert (%1 \/ 50)",
+    "boothAlert":"Alerte de passage (%1 \/ 50)",
     "songLength":"Durée de la chanson (%1 min)",
     "message":{
-      "boothAlertNext":"You are about to DJ!",
-      "boothAlertPos":"You are now %1 in the waitlist",
+      "boothAlertNext":"Vous êtes sur le point d'être DJ!",
+      "boothAlertPos":"Vous êtes maintenant %1 dans la liste d'attente",
       "grab":"ajouté %1 - %2",
       "stats":"Statistiques: %1 Woot(s) -- %2 Meh(s) -- %3 ajout(s)",
       "updates":"Actuellement en train d'être joué: %1 de %2<br>Joué par: %3",
@@ -154,10 +154,10 @@
     "regular":"Membre",
     "residentdj":"DJ Résident",
     "bouncer":"Videur",
-    "manager":"Manager",
+    "manager":"Gestionnaire",
     "cohost":"Hôte adjoint",
     "host":"Hôte",
-    "ambassador":"Brand Ambassador",
+    "ambassador":"Ambassadeur",
     "admin":"Administrateur"
   },
   "roomSpecificSettings":{
@@ -167,7 +167,7 @@
   },
   "menu":{
     "autowoot":"Auto-woot",
-    "autojoin":"Auto-rejoindre la liste d'attente",
+    "autojoin":"Rejoindre Automatiquement",
     "chatlog":"Historique du chat",
     "customchatcolors":"Customisation des couleurs du chat",
     "autorespond":"Réponse automatique lors d'une absence.",
@@ -180,7 +180,7 @@
     "controlpanel":"Panneau de Configuration",
     "showdeletedmessages":"Afficher les Messages Supprimés",
     "visualizers":"Visualiseurs SoundCloud RCS",
-    "inlineuserinfo":"Inline User Info"
+    "inlineuserinfo":"Infos sur l'Utilisateur Alignées"
   },
   "vote":{
     "meh":"Meh",

@@ -93,11 +93,11 @@
     "updates":"Ažuriranja pjesme",
     "history":"Pjesme u povijesti",
     "songUnavailable":"Pjesma nije dostupna.",
-    "boothAlert":"Booth Alert (%1 \/ 50)",
+    "boothAlert":"Upozorenje o redu čekanja (%1\/50)",
     "songLength":"Duljina pjesme (%1 min)",
     "message":{
-      "boothAlertNext":"You are about to DJ!",
-      "boothAlertPos":"You are now %1 in the waitlist",
+      "boothAlertNext":"Vi ćete sljedeći DJ-ati!",
+      "boothAlertPos":"Sada ste %1. na popisu čekanja.",
       "grab":"je dodao\/la %1 - %2.",
       "stats":"Statistika: %1 wootova -- %2 mehova -- %3 dodavanja",
       "updates":"Trenutno se pušta: %1 od izvođača %2.<br>Pušta: %3.",
@@ -180,7 +180,7 @@
     "controlpanel":"Nadzorna ploča",
     "showdeletedmessages":"Prikaz obrisanih poruka",
     "visualizers":"RCS SoundCloud vizualizatori",
-    "inlineuserinfo":"Inline User Info"
+    "inlineuserinfo":"Korisničke informacije u liniji"
   },
   "vote":{
     "meh":"Meh",
