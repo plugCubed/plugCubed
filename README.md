@@ -8,7 +8,7 @@ Find out how to install, and read more about plug&#179; [here](http://plugCubed.
 Please use this repository's Github [issues](https://github.com/plugCubed/plugCubed/issues) to report a bug, feature request or enhancement.
 
 ### Developers
-* [Thomas "TAT" Andresen](https://github.com/TATDK)
+* [Chikachi](https://github.com/chikachi)
 * [Sam "Henchman" Mills](https://github.com/Hunchmun)
 * [Alex "Thedark1337" Pham](https://github.com/thedark1337)
 
