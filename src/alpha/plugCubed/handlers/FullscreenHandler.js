@@ -27,7 +27,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang'], function($, Class, p3Lan
         toggleFullScreen: function() {
             Database.settings.videoOnly = !Database.settings.videoOnly;
             Database.save();
-            Context.trigger('change:videoOnly');
+            Context.trigger('change:videoOnly').trigger('audience:pause', Database.settings.videoOnly);
             fullScreenButton
                 .find('.box')
                 .text(Database.settings.videoOnly ? p3Lang.i18n('fullscreen.shrink') : p3Lang.i18n('fullscreen.enlarge'));
