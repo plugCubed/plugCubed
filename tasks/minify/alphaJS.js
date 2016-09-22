@@ -14,10 +14,15 @@ gulp.task('minify:alphaJS', () => {
         .pipe(bytediff.start())
         .pipe(sourcemaps.init())
         .pipe(uglify({
-            preserveComments: 'all'
+            preserveComments: 'license',
+            compress: {
+                collapse_vars: true,
+                negate_iife: false,
+            }
         }))
         .pipe(bytediff.stop())
         .pipe(rename('plugCubed.min.js'))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('bin/alpha/'));
 });
+

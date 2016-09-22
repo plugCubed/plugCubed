@@ -14,7 +14,11 @@ gulp.task('minify:releaseJS', () => {
         .pipe(bytediff.start())
         .pipe(sourcemaps.init())
         .pipe(uglify({
-            preserveComments: 'all'
+            preserveComments: 'license',
+            compress: {
+                collapse_vars: true,
+                negate_iife: false,
+            }
         }))
         .pipe(bytediff.stop())
         .pipe(rename('plugCubed.min.js'))
