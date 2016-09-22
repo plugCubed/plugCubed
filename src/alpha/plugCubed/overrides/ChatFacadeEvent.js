@@ -10,6 +10,10 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], function(Overr
                 chatFacade._onChatReceived = chatFacade.onChatReceived;
             }
             chatFacade.onChatReceived = function(data, internal, n) {
+                data.originalMessage = data.message;
+                if (data.message.indexOf('/me') === 0 || data.message.indexOf('/em') === 0) {
+                    data.originalMessage = data.originalMessage.substr(4);
+                }
                 if (data.uid === CurrentUser.get('id')) {
                     var latestInputs = p3Utils.getUserData(-1, 'latestInputs', []);
 
@@ -25,6 +29,8 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], function(Overr
                 Context.trigger('p3:chat:pre', data);
                 API.trigger('p3:chat:pre', data);
                 chatFacade._onChatReceived(data, internal, n);
+                Context.trigger('p3:chat:post', data);
+                API.trigger('p3:chat:post', data);
 
             };
 

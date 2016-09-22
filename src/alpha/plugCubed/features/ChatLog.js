@@ -12,18 +12,18 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
 
             var message, name, cid;
 
-            message = p3Utils.html2text(data.message);
+            message = p3Utils.html2text(data.originalMessage);
             if (data.un) {
 
                 // Remove Zero width spaces and collapse whitespace.
                 name = data.un.replace(/\u202e/g, '\\u202e').replace(/[\u00AD\u200B-\u200D\uFEFF]/g, '').replace(/\s+/g, ' ');
-                name = p3Utils.cleanTypedString(p3Utils.repeatString(' ', 24 - name.length) + name);
+                name = p3Utils.cleanTypedString(p3Utils.repeatString(' ', 25 - name.length) + name);
 
                 if (data.cid) {
                     cid = data.cid.replace(/\u202e/g, '\\u202e').replace(/[\u00AD\u200B-\u200D\uFEFF]/g, '').replace(/\s+/g, ' ');
-                    cid = p3Utils.repeatString(' ', 24 - cid.length) + cid;
+                    cid = p3Utils.repeatString(' ', 25 - cid.length) + cid;
 
-                    if (data.type === 'emote') {
+                    if (data.message.indexOf('/em') === 0 || data.message.indexOf('/me') === 0) {
                         console.log(
                             p3Utils.getTimestamp() + ' \uD83D\uDCAC %c ' + cid + '%c' + name + ': %c' + message,
                             '', 'font-weight: bold', 'font-style: italic');
@@ -34,7 +34,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
                     }
                 } else if (data.type.indexOf('moderation') > -1) {
                     console.info(
-                        p3Utils.getTimestamp() + ' \uD83D\uDCAC %c ' + p3Utils.repeatString(' ', 24) + '%c' + name + ': %c' + message,
+                        p3Utils.getTimestamp() + ' \uD83D\uDCAC %c ' + p3Utils.repeatString(' ', 25) + '%c' + name + ': %c' + message,
                             '', 'font-weight: bold', 'color: #ac76ff');
                 }
             } else if (data.type.indexOf('system') > -1) {
