@@ -5,7 +5,7 @@
     "short_name": "plug³",
     "description": "Adding a new dimension to plug.dj",
     "homepage_url": "https://plugCubed.net",
-    "version": "4.3.0.28",
+    "version": "4.3.0.30",
 
     "icons": {
         "48": "icons/48.png",

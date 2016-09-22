@@ -21,7 +21,24 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         Overrides.override();
 
         initBody();
-
+        window.plugCubed.version = Version.getSemver();
+        window.plugCubed.emotes = {
+            twitchEmotes: [],
+            twitchSubEmotes: [],
+            tastyEmotes: [],
+            bttvEmotes: [],
+            customEmotes: [],
+            emoteHash: {},
+            rcsEmotes: []
+        };
+        window.thedark1337 = window.plugCubed.thedark1337 =
+            '\n                                                                                                             ' +
+            '\n_/_/_/_/_/  _/                  _/_/_/                        _/        _/  _/_/_/    _/_/_/    _/_/_/_/_/   ' +
+            '\n   _/      _/_/_/      _/_/    _/    _/    _/_/_/  _/  _/_/  _/  _/  _/_/        _/        _/          _/    ' +
+            '\n  _/      _/    _/  _/_/_/_/  _/    _/  _/    _/  _/_/      _/_/      _/    _/_/      _/_/          _/       ' +
+            '\n _/      _/    _/  _/        _/    _/  _/    _/  _/        _/  _/    _/        _/        _/      _/          ' +
+            '\n_/      _/    _/    _/_/_/  _/_/_/      _/_/_/  _/        _/    _/  _/  _/_/_/    _/_/_/      _/             ' +
+            '\n                                                                                                             ';
         Features.register();
         Notifications.register();
         Tickers.register();
@@ -32,12 +49,13 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         Settings.load();
 
         RoomSettings.update();
+        if (p3Utils.getRoomID() === 'tastycat') RoomSettings.rules.allowShowingMehs = false;
 
         Panels.register();
         DialogHandler.register();
 
         loaded = true;
-        window.plugCubed.version = Version.getSemver();
+
         if (typeof console.timeEnd === 'function') console.timeEnd('[plug³] Loaded');
     }
 
@@ -94,3 +112,4 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
     });
     return Loader;
 });
+
