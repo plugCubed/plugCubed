@@ -171,6 +171,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
             join: '3366FF',
             leave: 'E26728',
             grab: '00FF00',
+            meh: 'FF0000',
             stats: '66FFFF',
             updates: 'FFFF00',
             boothAlert: 'AC76FF',

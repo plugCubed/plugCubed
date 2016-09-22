@@ -6,12 +6,12 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
     names.push('version');
 
     // Features
-    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'chatLog', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'visualizers', 'boothAlert', 'badges');
+    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'chatLog', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'visualizers', 'boothAlert', 'badges', 'emotes');
 
     // Registers
     names.push('registeredSongs', 'alertson', 'colors');
 
-    curVersion = 3.2;
+    curVersion = 3.3;
 
     function upgradeVersion(save) {
         switch (save.version) {
@@ -51,6 +51,12 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     save.colors.boothAlert = 'AC76FF';
                 }
                 break;
+            case 3.2:
+                if (save.twitchEmotes != null) {
+                    save.emotes = {};
+                    save.emotes.twitchEmotes = true;
+                }
+                break;
             default:
                 break;
         }
@@ -70,7 +76,12 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         notify: 0,
         customColors: false,
         chatImages: true,
-        twitchEmotes: false,
+        emotes: {
+            bttvEmotes: false,
+            tastyEmotes: false,
+            twitchEmotes: false,
+            twitchSubEmotes: false
+        },
         songTitle: false,
         registeredSongs: [],
         alertson: [],
@@ -171,6 +182,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
             join: '3366FF',
             leave: 'E26728',
             grab: '00FF00',
+            meh: 'FF0000',
             stats: '66FFFF',
             updates: 'FFFF00',
             boothAlert: 'AC76FF',
@@ -225,8 +237,17 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     })();
                 }
 
-                if (this.twitchEmotes) {
+                if (this.emotes.twitchEmotes) {
                     require('plugCubed/handlers/ChatHandler').loadTwitchEmotes();
+                }
+                if (this.emotes.twitchSubEmotes) {
+                    require('plugCubed/handlers/ChatHandler').loadTwitchSubEmotes();
+                }
+                if (this.emotes.bttvEmotes) {
+                    require('plugCubed/handlers/ChatHandler').loadBttvEmotes();
+                }
+                if (this.emotes.tastyEmotes) {
+                    require('plugCubed/handlers/ChatHandler').loadTastyEmotes();
                 }
 
                 if (!this.badges) {
