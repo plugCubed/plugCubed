@@ -1,6 +1,7 @@
 define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang'], function($, TickerHandler, Settings, p3Utils, p3Lang) {
-    var handler, Lang;
+    var booth, handler, Lang;
 
+    booth = window.plugCubedModules.booth;
     Lang = window.plugCubedModules.Lang;
 
     try {
@@ -63,7 +64,7 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
                     if (waitListPos < 0) {
                         time = p3Utils.formatTime((API.getWaitList().length * timePerSong) + API.getTimeRemaining());
                         this.$span.text(p3Lang.i18n('eta.joinTime', time));
-                        $djButton.html((API.getWaitList().length < 50 ? Lang.dj.waitJoin : Lang.dj.waitFull) + '<br><small class="dark-label">' + time + '</small>');
+                        $djButton.html((booth.attributes && booth.attributes.isLocked ? Lang.dj.boothLocked : (API.getWaitList().length < 50 ? Lang.dj.waitJoin : Lang.dj.waitFull)) + '<br><small class="dark-label">ETA: ' + time + '!</small>');
                         return;
                     }
 
