@@ -35,14 +35,14 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
                     }
                 }
 
-                if (this.$userID == null) {
-                    this.$userID = $('<span>').addClass('p3UserID');
+                if (this.$p3UserID == null) {
+                    this.$p3UserID = $('<span>').addClass('p3UserID');
                 }
                 if (CurrentUser.get('gRole') === 0) {
-                    this.$userID.text('User ID: ' + a.id);
-                    this.$meta.append(this.$userID);
+                    this.$p3UserID.text('User ID: ' + a.id);
+                    this.$meta.append(this.$p3UserID);
                 } else {
-                    this.$userID.remove();
+                    this.$p3UserID.remove();
                 }
 
                 if (p3Utils.havePlugCubedRank(a.id)) {
