@@ -92,7 +92,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
         if (description.indexOf('\n') > -1) {
             description = description.substr(0, description.indexOf('\n'));
         }
-        $.getJSON(p3Utils.html2text(description) + '?=' + Date.now(), function(settings) {
+        $.getJSON(p3Utils.html2text(description), function(settings) {
             roomSettings = settings;
             if (isRCS) {
                 roomSettings = that.convertRCSToPlugCubed(settings);
@@ -114,7 +114,8 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             allowAutowoot: true,
             allowAutorespond: true,
             allowAutojoin: true,
-            allowEmotes: true
+            allowEmotes: true,
+            allowShowingMehs: true
         },
         haveRoomSettings: false,
         chatColors: {},
@@ -334,12 +335,14 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                     this.rules.allowAutojoin = roomSettings.rules.allowAutojoin == null || roomSettings.rules.allowAutojoin === 'true' || roomSettings.rules.allowAutojoin === true;
                     this.rules.allowAutorespond = roomSettings.rules.allowAutorespond == null || roomSettings.rules.allowAutorespond === 'true' || roomSettings.rules.allowAutorespond === true;
                     this.rules.allowEmotes = roomSettings.rules.allowEmotes == null || roomSettings.rules.allowEmotes === 'true' || roomSettings.rules.allowEmotes === true;
+                    this.rules.allowShowingMehs = roomSettings.rules.allowShowingMehs == null || roomSettings.rules.allowShowingMehs === 'true' || roomSettings.rules.allowShowingMehs === true;
 
                 } else {
                     this.rules.allowAutowoot = true;
                     this.rules.allowAutojoin = true;
                     this.rules.allowAutorespond = true;
                     this.rules.allowEmotes = true;
+                    this.rules.allowShowingMehs = true;
                 }
 
                 // roomscript
