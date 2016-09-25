@@ -3,7 +3,9 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
     var Handler = TriggerHandler.extend({
         trigger: API.VOTE_UPDATE,
         handler: function(data) {
-            if (data.vote < 0 && (((Settings.notify & enumNotifications.USER_MEH) === enumNotifications.USER_MEH) && ((CurrentUser.hasPermission(API.ROLE.BOUNCER) || CurrentUser.hasPermission(API.ROLE.BOUNCER, true) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) && RoomSettings.rules.allowShowingMehs))) {
+            var isStaff = (CurrentUser.hasPermission(API.ROLE.BOUNCER) || CurrentUser.hasPermission(API.ROLE.BOUNCER, true) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador());
+
+            if (data.vote < 0 && (((Settings.notify & enumNotifications.USER_MEH) === enumNotifications.USER_MEH) && (isStaff || (!isStaff && RoomSettings.rules.allowShowingMehs)))) {
                 p3Utils.chatLog(undefined, p3Lang.i18n('notify.message.meh'), Settings.colors.meh || Settings.colorInfo.notifications.meh.color, data.user.id);
             }
         }

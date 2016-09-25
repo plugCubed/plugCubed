@@ -13,11 +13,13 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/RoomSettings']
                     this.$icon = $('<i>').addClass('icon');
                     this.$el.append(this.$icon);
                 }
+                var isStaff = (CurrentUser.hasPermission(API.ROLE.BOUNCER) || CurrentUser.hasPermission(API.ROLE.BOUNCER, true) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador());
+
                 if (this.model.get('grab')) {
                     this.$icon.removeClass().addClass('icon icon-grab');
                 } else if (this.model.get('vote') === 1) {
                     this.$icon.removeClass().addClass('icon icon-woot');
-                } else if (this.model.get('vote') === -1 && (RoomSettings.rules.allowShowingMehs && (CurrentUser.hasPermission(API.ROLE.BOUNCER) || CurrentUser.hasPermission(API.ROLE.BOUNCER, true) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()))) {
+                } else if (this.model.get('vote') === -1 && (isStaff || (!isStaff && RoomSettings.rules.allowShowingMehs))) {
                     this.$icon.removeClass().addClass('icon icon-meh');
                 } else {
                     this.$icon.removeClass();
