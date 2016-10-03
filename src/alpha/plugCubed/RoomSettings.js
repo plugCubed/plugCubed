@@ -24,6 +24,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
         if (typeof v === 'string') {
             return i;
         }
+
         return $.map(v, function(v2, i2) {
             return i + '.' + i2;
         });
@@ -49,6 +50,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                 return cur[last];
             }
         }
+
         return '';
     }
 
@@ -87,17 +89,21 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             that.haveRoomSettings = true;
         } else {
             that.haveRoomSettings = false;
+
             return;
         }
         if (description.indexOf('\n') > -1) {
-            description = description.substr(0, description.indexOf('\n'));
+            description = p3Utils.html2text(description.substr(0, description.indexOf('\n')));
         }
-        $.getJSON(p3Utils.html2text(description), function(settings) {
+        $.getJSON(description)
+        .done(function(settings) {
             roomSettings = settings;
             if (isRCS) {
                 roomSettings = that.convertRCSToPlugCubed(settings);
             }
             if (!(Settings.useRoomSettings[p3Utils.getRoomID()] != null ? Settings.useRoomSettings[p3Utils.getRoomID()] : true)) {
+                showMessage = false;
+            } else if (description.toLowerCase().indexOf('rss.plugcubed.net') > -1 && settings.status === -1) {
                 showMessage = false;
             } else {
                 showMessage = true;
@@ -105,6 +111,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             that.execute();
         }).fail(function(jqXHR, textStatus, errorThrown) {
             console.error(jqXHR, textStatus, errorThrown);
+            showMessage = false;
             p3Utils.chatLog(undefined, 'Error loading Room Settings ' + jqXHR.status, -2);
         });
     }
@@ -224,6 +231,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                                                 }
                                             }
                                         }
+
                                         return '@font-face { font-family: "' + this.name + '"; src: ' + sources.join(',') + '; }';
                                     };
                                     roomFonts.push(font.toString());

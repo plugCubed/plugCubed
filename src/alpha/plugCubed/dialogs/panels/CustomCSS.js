@@ -4,17 +4,17 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
     // TODO: add in submit button
     Handler = Class.extend({
         register: function() {
-            panel = ControlPanel.addPanel('Background');
+            panel = ControlPanel.addPanel('Custom CSS');
 
-            $contentDiv = $('<div>').append($('<p>').text('Set your own room background.'));
+            $contentDiv = $('<div>').append($('<p>').text('Set your own room CSS.'));
 
             panel.addContent($contentDiv);
 
             $formDiv = $('<div>').width(500).css('margin', '25px auto auto auto');
-            $localFileInput = ControlPanel.inputField('url', undefined, 'URL To Background').change(function(e) {
+            $localFileInput = ControlPanel.inputField('textbox', undefined, 'Custom CSS to add').change(function(e) {
 
                 if (e.target.value != null) {
-                    Styles.set('room-settings-background-image', '.room-background { background: url(' + e.target.value + ') fixed center center / cover !important; }');
+                    Styles.set('room-settings-custom-css', e.target.value);
                     $clearButton.changeSubmit(true);
 
                     return;

@@ -32,6 +32,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
                 }
             }
             info.skipped = info.pos > -1;
+
             return info;
         },
         onHistoryCheck: function(cid) {

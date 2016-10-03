@@ -3,9 +3,9 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel'], function(Class, Co
 
     Handler = Class.extend({
         register: function() {
-            panel = ControlPanel.addPanel('Notifications');
+            panel = ControlPanel.addPanel('Chat Customizations');
 
-            $contentDiv = $('<div>').append($('<p>').text('Control which notifications you want and how you want them.'));
+            $contentDiv = $('<div>').append($('<p>').text('Customize your chat with emojis, notificaitons, markdown, and other features.'));
 
             panel.addContent($contentDiv);
         },

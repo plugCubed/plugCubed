@@ -22,6 +22,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settin
                     if (this.timeoutId != null) {
                         clearTimeout(this.timeoutId);
                     }
+
                     return;
                 }
             }

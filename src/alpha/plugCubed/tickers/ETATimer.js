@@ -28,6 +28,7 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
 
                     if (API.getDJ() == null) {
                         this.$span.text(p3Lang.i18n('eta.boothAvailable'));
+
                         return;
                     }
 
@@ -58,6 +59,7 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
 
                     if (isDJ) {
                         this.$span.text(p3Lang.i18n('eta.alreadyDJ'));
+
                         return;
                     }
 
@@ -65,6 +67,7 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
                         time = p3Utils.formatTime((API.getWaitList().length * timePerSong) + API.getTimeRemaining());
                         this.$span.text(p3Lang.i18n('eta.joinTime', time));
                         $djButton.html((booth.attributes && booth.attributes.isLocked ? Lang.dj.boothLocked : (API.getWaitList().length < 50 ? Lang.dj.waitJoin : Lang.dj.waitFull)) + '<br><small class="dark-label">ETA: ' + time + '!</small>');
+
                         return;
                     }
 

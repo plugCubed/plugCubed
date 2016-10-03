@@ -967,3 +967,15 @@
 .p3VoteIcon {
     right: 0;
 }
+
+.p3-strike {
+    text-decoration: line-through;
+}
+
+blockquote.p3-blockquote {
+    border-radius: 3px;
+    border-left: 3px solid #3D3D3D;
+    quotes: none;
+    margin: .5em 10px;
+    padding: .5em 10px;
+}
