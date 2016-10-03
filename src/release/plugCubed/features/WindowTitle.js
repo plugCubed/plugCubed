@@ -38,6 +38,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
                 this.intervalID = setInterval(function() {
                     that.onIntervalTick();
                 }, 300);
+
                 return;
             }
             if (this.intervalID) {

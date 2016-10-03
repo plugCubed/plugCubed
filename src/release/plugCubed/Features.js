@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/features/Alertson', 'plugCubed/features/Autojoin', 'plugCubed/features/Automute', 'plugCubed/features/Autorespond', 'plugCubed/features/Autowoot', 'plugCubed/features/Whois', 'plugCubed/features/WindowTitle', 'plugCubed/features/ChatLog', 'plugCubed/features/SoundcloudVisualizers'], function() {
+define(['plugCubed/Class', 'plugCubed/features/Alertson', 'plugCubed/features/Autojoin', 'plugCubed/features/Automute', 'plugCubed/features/Autorespond', 'plugCubed/features/Autowoot', 'plugCubed/features/Whois', 'plugCubed/features/WindowTitle', 'plugCubed/features/ChatLog'], function() {
     var modules, Class, Handler;
 
     modules = _.toArray(arguments);

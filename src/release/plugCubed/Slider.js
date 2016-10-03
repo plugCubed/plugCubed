@@ -27,6 +27,7 @@ define(['jquery', 'plugCubed/Class'], function($, Class) {
             this._min = this.$hit.offset().left;
             this._max = this.$hit.width() - this.$circle.width();
             $(document).on('mouseup', this.stopBind).on('mousemove', this.moveBind);
+
             return this.onUpdate(event);
         },
         onUpdate: function(event) {
@@ -34,12 +35,14 @@ define(['jquery', 'plugCubed/Class'], function($, Class) {
             this.onChange();
             event.preventDefault();
             event.stopPropagation();
+
             return false;
         },
         onStop: function(event) {
             $(document).off('mouseup', this.stopBind).off('mousemove', this.moveBind);
             event.preventDefault();
             event.stopPropagation();
+
             return false;
         },
         onChange: function() {

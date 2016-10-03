@@ -58,6 +58,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
                 response += '<li class="userCommands">' + command + '<br><em>' + p3Lang.i18n(userCommands[i][1]) + '</em></li>';
             }
             response += '</ul>';
+
             return response;
         },
         modCommands: function() {
@@ -88,6 +89,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
                 }
             }
             response += '</ul>';
+
             return response;
         },
         print: function() {

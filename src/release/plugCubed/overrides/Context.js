@@ -31,7 +31,7 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Settings', 'plugCubed/U
                         });
                     deletes = $msg.data('deletes') || {};
 
-                    if (userData = deletes[args.mi]) { //eslint-disable-line no-cond-assign
+                    if (userData = deletes[args.mi]) { // eslint-disable-line no-cond-assign
                         $msg.find('.fromID-' + args.mi).text('deleted by ' + modUser + ' (' + ++userData.count + ')');
                     } else {
                         $deleteMessage

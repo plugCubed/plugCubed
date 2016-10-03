@@ -47,6 +47,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                                     if (videoData.error) {
                                         console.log('error', videoData);
                                         $video.html(videoData.error);
+
                                         return;
                                     }
 
@@ -91,6 +92,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                                     if (imgurData.error) {
                                         console.log('error', imgurData);
                                         $video.html(imgurData.error);
+
                                         return;
                                     }
 
@@ -138,6 +140,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 text = temp.html();
             }
         }
+
         return text;
     }
 
@@ -157,8 +160,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 text = text.replace(new RegExp('(:' + twitchEmote.emote + ':)', 'gi'), temp.html());
 
             }
+
             return (nbspStart ? '&nbsp;' : '') + text.substr(1, text.length - 2);
         }
+
         return text;
     }
 

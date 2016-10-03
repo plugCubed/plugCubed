@@ -6,6 +6,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
                 if (!Settings.alertson.hasOwnProperty(i)) continue;
                 if (data.message.indexOf(Settings.alertson[i]) > -1) {
                     p3Utils.playChatSound();
+
                     return;
                 }
             }

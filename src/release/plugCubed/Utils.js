@@ -23,6 +23,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
         }
         tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
         input = input.split('&#8237;').join('&amp;#8237;').split('&#8238;').join('&amp;#8238;');
+
         return input.replace(tags, function(a, b) {
             return allowed.indexOf(b.toLowerCase()) > -1 ? a : '';
         });
@@ -59,12 +60,14 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (this.startsWithIgnoreCase(url, 'http://')) {
                 return 'https://api.plugCubed.net/proxy/' + url;
             }
+
             return url;
         },
         httpsifyURL: function(url) {
             if (this.startsWithIgnoreCase(url, 'http://')) {
                 return 'https://' + url.substr(7);
             }
+
             return url;
         },
         getHighestRank: function(uid) {
@@ -81,6 +84,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (this.isPlugCubedDonatorGold(uid)) return 'donatorGold';
             if (this.isPlugCubedDonatorSilver(uid)) return 'donatorSilver';
             if (this.isPlugCubedDonatorBronze(uid)) return 'donatorBronze';
+
             return null;
         },
         getHighestRankString: function(uid) {
@@ -90,8 +94,10 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 if (this.isPlugCubedSpecial(uid)) {
                     return p3Lang.i18n('info.specialTitles.special', this.getPlugCubedSpecial(uid).title);
                 }
+
                 return p3Lang.i18n('info.specialTitles.' + highestRank);
             }
+
             return '';
         },
         havePlugCubedRank: function(uid) {
@@ -161,64 +167,75 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return developer.indexOf(uid) > -1;
         },
         isPlugCubedSponsor: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return sponsor.indexOf(uid) > -1;
         },
         isPlugCubedSpecial: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return this.getPlugCubedSpecial(uid) != null;
         },
         isPlugCubedAmbassador: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return ambassador.indexOf(uid) > -1;
         },
         isPlugCubedDonatorDiamond: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return donatorDiamond.indexOf(uid) > -1;
         },
         isPlugCubedDonatorPlatinum: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return donatorPlatinum.indexOf(uid) > -1;
         },
         isPlugCubedDonatorGold: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return donatorGold.indexOf(uid) > -1;
         },
         isPlugCubedDonatorSilver: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return donatorSilver.indexOf(uid) > -1;
         },
         isPlugCubedDonatorBronze: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return donatorBronze.indexOf(uid) > -1;
         },
         getPlugCubedSpecial: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return special[uid];
         },
         html2text: function(html) {
             if (!html) return '';
+
             return $('<div/>').html(html).text();
         },
         cleanHTML: function(msg, disallow, extraAllow) {
@@ -282,6 +299,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                         if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height()) {
                             $chat.scrollTop($chat[0].scrollHeight);
                         }
+
                         return;
                     }
 
@@ -323,6 +341,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                         if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height()) {
                             $chat.scrollTop($chat[0].scrollHeight);
                         }
+
                         return;
                     }
                 } else {
@@ -347,6 +366,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (plugcubedUserData[uid] == null || plugcubedUserData[uid][key] == null) {
                 return defaultValue;
             }
+
             return plugcubedUserData[uid][key];
         },
         setUserData: function(uid, key, value) {
@@ -382,6 +402,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     }
                 }
             }
+
             return null;
         },
         getLastMessageTime: function(uid) {
@@ -391,6 +412,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (IgnoreCollection._byId[uid] === true) {
                 return p3Lang.i18n('error.ignoredUser');
             }
+
             return this.getRoundedTimestamp(time, true);
         },
         getUserInfo: function(data) {
@@ -522,6 +544,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (user && user.id) {
                 return hasGRole ? user.gRole >= permission : user.role >= permission || user.gRole >= permission;
             }
+
             return false;
         },
         getAllUsers: function() {
@@ -664,6 +687,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     }
                 }
             }
+
             return false;
         },
         endsWith: function(a, b) {
@@ -681,6 +705,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     }
                 }
             }
+
             return false;
         },
         startsWithIgnoreCase: function(a, b) {
@@ -698,6 +723,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     }
                 }
             }
+
             return false;
         },
         endsWithIgnoreCase: function(a, b) {
@@ -715,6 +741,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     }
                 }
             }
+
             return false;
         },
         getBaseURL: function(url) {
@@ -728,6 +755,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             for (i = 0; i < length; i++) {
                 ret.push(chars.substr(Math.floor(Math.random() * chars.length), 1));
             }
+
             return ret.join('');
         },
         getRank: function(user) {
@@ -777,74 +805,6 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 }
             });
         },
-        setSoundCloudVisualizer: function() {
-            if (API.getMedia() == null || (API.getMedia().format && API.getMedia().format !== 2)) return;
-
-            // RCS Visualizers. Licensed MIT
-            var visualizers = [
-                'https://cdn.radiant.dj/rcs/visualizers/00-balls',
-                'https://cdn.radiant.dj/rcs/visualizers/00-bromley',
-                'https://cdn.radiant.dj/rcs/visualizers/00-hyperspace',
-                'https://cdn.radiant.dj/rcs/visualizers/00-rainbow1',
-                'https://cdn.radiant.dj/rcs/visualizers/00-rainbow2',
-                'https://cdn.radiant.dj/rcs/visualizers/01-ball-random',
-                'https://cdn.radiant.dj/rcs/visualizers/02-circle-dot',
-                'https://cdn.radiant.dj/rcs/visualizers/03-flower-power',
-                'https://cdn.radiant.dj/rcs/visualizers/04-foo-particles',
-                'https://cdn.radiant.dj/rcs/visualizers/05-particles',
-                'https://cdn.radiant.dj/rcs/visualizers/06-hexagons',
-                'https://cdn.radiant.dj/rcs/visualizers/07-star-pentagon',
-                'https://cdn.radiant.dj/rcs/visualizers/08-black-hole',
-                'https://cdn.radiant.dj/rcs/visualizers/09-trippy-curves',
-                'https://cdn.radiant.dj/rcs/visualizers/10-racing-lines',
-                'https://cdn.radiant.dj/rcs/visualizers/11-particles-background',
-                'https://cdn.radiant.dj/rcs/visualizers/12-pliable-swirl',
-                'https://cdn.radiant.dj/rcs/visualizers/13-paper-boat',
-                'https://cdn.radiant.dj/rcs/visualizers/14-torus-tunnel',
-                'https://cdn.radiant.dj/rcs/visualizers/15-passing-night',
-                'https://cdn.radiant.dj/rcs/visualizers/16-quadratic-wavy',
-                'https://cdn.radiant.dj/rcs/visualizers/17-vintage-wave',
-                'https://cdn.radiant.dj/rcs/visualizers/18-floating-dust',
-                'https://cdn.radiant.dj/rcs/visualizers/19-radial-waves',
-                'https://cdn.radiant.dj/rcs/visualizers/20-rain',
-                'https://cdn.radiant.dj/rcs/visualizers/21-starry-night',
-                'https://cdn.radiant.dj/rcs/visualizers/22-hexagon-particles',
-                'https://cdn.radiant.dj/rcs/visualizers/23-bits-particle',
-                'https://cdn.radiant.dj/rcs/visualizers/24-color-embraced',
-                'https://cdn.radiant.dj/rcs/visualizers/25-hexagon-ripple',
-                'https://cdn.radiant.dj/rcs/visualizers/26-mystify',
-                'https://cdn.radiant.dj/rcs/visualizers/27-neon-bubbles',
-                'https://cdn.radiant.dj/rcs/visualizers/28-random-tile',
-                'https://cdn.radiant.dj/rcs/visualizers/29-stupid-snake-loader',
-                'https://cdn.radiant.dj/rcs/visualizers/30-animated-msv-rocket',
-                'https://cdn.radiant.dj/rcs/visualizers/31-circular-trail',
-                'https://cdn.radiant.dj/rcs/visualizers/33-it-s-been-a-while',
-                'https://cdn.radiant.dj/rcs/visualizers/34-octahedron-corner-spin-pure-css',
-                'https://cdn.radiant.dj/rcs/visualizers/35-particle-mesh-system',
-                'https://cdn.radiant.dj/rcs/visualizers/36-rainbow-grid',
-                'https://cdn.radiant.dj/rcs/visualizers/37-run-stickman-run',
-                'https://cdn.radiant.dj/rcs/visualizers/38-simon-the-jellyfish',
-                'https://cdn.radiant.dj/rcs/visualizers/39-stretching-is-good-for-you-pure-css',
-                'https://cdn.radiant.dj/rcs/visualizers/40-circuits',
-                'https://cdn.radiant.dj/rcs/visualizers/41-cssloop-005-dna',
-                'https://cdn.radiant.dj/rcs/visualizers/42-moar-plasma',
-                'https://cdn.radiant.dj/rcs/visualizers/43-neural-network-visualization',
-                'https://cdn.radiant.dj/rcs/visualizers/44-simple-animating-emotions',
-                'https://cdn.radiant.dj/rcs/visualizers/45-starry-night-background',
-                'https://cdn.radiant.dj/rcs/visualizers/46-turret-of-order',
-                'https://cdn.radiant.dj/rcs/visualizers/47-blobs',
-                'https://cdn.radiant.dj/rcs/visualizers/48-aZzQQz',
-                'https://cdn.radiant.dj/rcs/visualizers/49-dentelle',
-                'https://cdn.radiant.dj/rcs/visualizers/50-flat-design-amusement-park',
-                'https://cdn.radiant.dj/rcs/visualizers/51-ripples',
-                'https://cdn.radiant.dj/rcs/visualizers/52-threejs-gradient',
-                'https://cdn.radiant.dj/rcs/visualizers/53-wave-loader'
-            ];
-            var visualizer = visualizers[~~(Math.random() * visualizers.length)];
-            var scFrame = $('#sc-frame');
-
-            scFrame.attr('src', visualizer);
-        },
         getOrdinal: function(num) {
             var suffixes = ['th', 'st', 'nd', 'rd'];
             var remainder = num % 100;
@@ -868,6 +828,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                         if (att < 3) setTimeout(connect, 500);
                         if (att === 3) call(req.code, req.reason, Date.now() - time);
                         att++;
+
                         return;
                     }
                     call(req.code, req.reason, Date.now() - time);

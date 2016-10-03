@@ -6,7 +6,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
     names.push('version');
 
     // Features
-    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'chatLog', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'visualizers', 'boothAlert', 'badges');
+    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'chatLog', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'boothAlert', 'badges');
 
     // Registers
     names.push('registeredSongs', 'alertson', 'colors');
@@ -56,6 +56,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         }
         console.log('[plug³] Updated save', save.version, '=>', curVersion);
         save.version = curVersion;
+
         return save;
     }
 
@@ -75,7 +76,6 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         registeredSongs: [],
         alertson: [],
         etaTimer: true,
-        visualizers: false,
         moderation: {
             afkTimers: false,
             inlineUserInfo: false,

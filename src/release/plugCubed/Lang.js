@@ -43,6 +43,7 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
                 setTimeout(function() {
                     that.load(callback);
                 }, 500);
+
                 return;
             }
             var lang = API.getUser().language;
@@ -54,8 +55,10 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
                 this.loaded = true;
                 if (typeof callback === 'function') {
                     callback();
+
                     return;
                 }
+
                 return;
             }
             $.getJSON('https://plugcubed.net/scripts/release/langs/lang.' + lang + '.json?v=' + Version.major + '.' + Version.getSemver(), function(languageData) {
@@ -65,6 +68,7 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
                 that.loaded = true;
                 if (typeof callback === 'function') {
                     callback();
+
                     return;
                 }
             }).error(function() {
@@ -75,6 +79,7 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
                 that.loaded = true;
                 if (typeof callback === 'function') {
                     callback();
+
                     return;
                 }
             });
@@ -106,6 +111,7 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
                     a = a.split('%' + i).join(arguments[i]);
                 }
             }
+
             return a;
         },
         allLangs: [{
@@ -113,5 +119,6 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
             name: 'English'
         }]
     });
+
     return new Lang();
 });

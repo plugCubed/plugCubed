@@ -28,6 +28,7 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils'], function($, p3Lang, p3Ut
                 }
             });
             this.onChange();
+
             return this;
         },
         remove: function() {

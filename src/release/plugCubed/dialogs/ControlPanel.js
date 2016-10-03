@@ -7,6 +7,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
     JQueryElementClass = Class.extend({
         getJQueryElement: function() {
             console.error('Missing getJQueryElement');
+
             return null;
         }
     });
@@ -21,10 +22,12 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
             this.$div.click(function() {
                 that1.onClick();
             });
+
             return this;
         },
         changeLabel: function(label) {
             this.$div.text(label);
+
             return this;
         },
         changeSubmit: function(submit) {
@@ -32,6 +35,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
             if (submit) {
                 this.$div.addClass('submit');
             }
+
             return this;
         },
         onClick: function() {
@@ -60,6 +64,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
         },
         changeLabel: function(label) {
             this.$div.text(label);
+
             return this;
         },
         changeSubmit: function(submit) {
@@ -67,12 +72,14 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
             if (submit) {
                 this.$div.addClass('submit');
             }
+
             return this;
         },
         change: function(onChangeFunc) {
             if (typeof onChangeFunc == 'function') {
                 this.$div.change(onChangeFunc);
             }
+
             return this;
         },
         getJQueryElement: function() {
@@ -179,6 +186,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
             if (typeof onClick === 'function') {
                 newButton.onClick = onClick;
             }
+
             return newButton;
         },
         onResize: function() {
@@ -258,6 +266,7 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
             if (tabs[name] != null) return null;
             tabs[name] = new PanelClass(name);
             this.createControlPanel(true);
+
             return tabs[name];
         },
 
@@ -270,8 +279,10 @@ define(['jquery', 'underscore', 'plugCubed/Class'], function($, _, Class) {
             if (!(panel instanceof PanelClass) || tabs[panel.name] == null) return false;
             delete tabs[panel.name];
             this.createControlPanel(true);
+
             return true;
         }
     });
+
     return new ControlPanelClass();
 });

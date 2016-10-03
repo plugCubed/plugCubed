@@ -41,16 +41,12 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             }).mouseout(function() {
                 Context.trigger('tooltip:hide');
             }));
-            $('#playback-controls .button.refresh').on('click.setVisualizer', function() {
-                setTimeout(p3Utils.setSoundCloudVisualizer(), 50);
-            });
             this.onRoomJoin();
 
             Context.on('room:joined', this.onRoomJoin, this);
         },
         onRoomJoin: function() {
             this.setEnabled('stream', Database.settings.streamDisabled);
-            if (!Database.settings.streamDisabled && Settings.visualizers) p3Utils.setSoundCloudVisualizer();
         },
         close: function() {
             menuButton.remove();
@@ -58,7 +54,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 $wrapper.remove();
             }
             $('#room-bar').css('left', 54).find('.favorite').css('right', 0);
-            $('#playback-controls .button-refresh').off('click.setVisualizer');
             streamButton.remove();
             clearChatButton.remove();
 
@@ -162,7 +157,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     Database.settings.streamDisabled = !Database.settings.streamDisabled;
                     Database.save();
                     Context.trigger('change:streamDisabled');
-                    if (!Database.settings.streamDisabled && API.getMedia() && API.getMedia().format === 2) p3Utils.setSoundCloudVisualizer();
                     this.setEnabled('stream', Database.settings.streamDisabled);
                     break;
                 case 'clear':
@@ -218,11 +212,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
 
                         $djButton.html(Lang.dj.waitLeave);
                     }
-                    break;
-                case 'visualizers':
-                    Settings.visualizers = !Settings.visualizers;
-                    if (Settings.visualizers) p3Utils.setSoundCloudVisualizer();
-                    this.setEnabled('visualizers', Settings.visualizers);
                     break;
                 default:
                     API.chatLog(p3Lang.i18n('error.unknownMenuKey', a));
@@ -288,7 +277,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 container.append(guiButton(Settings.twitchEmotes, 'twitchemotes', p3Lang.i18n('menu.twitchemotes')));
             }
             container.append(guiButton(false, 'colors', p3Lang.i18n('menu.customchatcolors') + '...'));
-            container.append(guiButton(Settings.visualizers, 'visualizers', p3Lang.i18n('menu.visualizers')));
 
             if (p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) {
                 container.append(guiButton(false, 'controlpanel', p3Lang.i18n('menu.controlpanel') + '...'));

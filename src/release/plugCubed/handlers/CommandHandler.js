@@ -39,12 +39,14 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             } else if (p3Utils.equalsIgnoreCase(command, 'join')) {
                 if (API.getWaitListPosition() !== -1) return;
                 API.djJoin();
+
                 return;
             } else if (p3Utils.equalsIgnoreCase(command, 'leave')) {
                 if (API.getWaitListPosition() === -1) return;
                 API.djLeave();
             } else if (p3Utils.equalsIgnoreCase(command, 'unload')) {
                 if (typeof window.plugCubed === 'undefined') return;
+
                 return window.plugCubed.close();
             } else if (p3Utils.equalsIgnoreCase(command, 'whoami')) {
                 p3Utils.getUserInfo(API.getUser().id);
@@ -85,6 +87,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
 
                 if (nextSong == null) {
                     commandLog(p3Lang.i18n('error.noNextSong'));
+
                     return;
                 }
                 nextSong = nextSong.media;
@@ -205,6 +208,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                             }
                             if ([60, 1, 1440, 24, -1].indexOf(time) < 0) {
                                 commandLog(p3Lang.i18n('error.invalidBanTime'), time);
+
                                 return;
                             }
                             if (time === 60 || time === 1) time = API.BAN.HOUR;
@@ -225,6 +229,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 } else if (p3Utils.equalsIgnoreCase(command, 'add')) {
                     if (args.length < 1) {
                         commandLog(p3Lang.i18n('error.invalidAddSyntax'));
+
                         return;
                     }
                     user = p3Utils.getUser(args.join(' '));
@@ -240,6 +245,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 } else if (p3Utils.equalsIgnoreCase(command, 'remove')) {
                     if (args.length < 1) {
                         commandLog(p3Lang.i18n('error.invalidRemoveSyntax'));
+
                         return;
                     }
                     user = p3Utils.getUser(args.join(' '));
@@ -259,10 +265,12 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             if (API.hasPermission(undefined, API.ROLE.MANAGER)) {
                 if (p3Utils.equalsIgnoreCase(command, 'lock')) {
                     API.moderateLockWaitList(true, false);
+
                     return;
                 }
                 if (p3Utils.equalsIgnoreCase(command, 'unlock')) {
                     API.moderateLockWaitList(false, false);
+
                     return;
                 }
                 if (p3Utils.equalsIgnoreCase(command, 'lockskip')) {
@@ -276,6 +284,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                         API.moderateAddDJ(userID);
                     });
                     API.moderateForceSkip();
+
                     return;
                 }
             }
@@ -294,5 +303,6 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             }
         }
     });
+
     return new CommandHandler();
 });

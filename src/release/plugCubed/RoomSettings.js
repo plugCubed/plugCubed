@@ -24,6 +24,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
         if (typeof v === 'string') {
             return i;
         }
+
         return $.map(v, function(v2, i2) {
             return i + '.' + i2;
         });
@@ -49,6 +50,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                 return cur[last];
             }
         }
+
         return '';
     }
 
@@ -87,6 +89,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             that.haveRoomSettings = true;
         } else {
             that.haveRoomSettings = false;
+
             return;
         }
         if (description.indexOf('\n') > -1) {
@@ -224,6 +227,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                                                 }
                                             }
                                         }
+
                                         return '@font-face { font-family: "' + this.name + '"; src: ' + sources.join(',') + '; }';
                                     };
                                     roomFonts.push(font.toString());
