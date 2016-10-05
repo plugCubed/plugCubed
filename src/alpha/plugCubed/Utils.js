@@ -17,12 +17,13 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
         if (!extraAllow || !_.isArray(extraAllow)) {
             extraAllow = [];
         }
-        allowed = $(['span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em', 'a'].concat(extraAllow)).not(disallowed).get();
+        allowed = $(['blockquote', 'code', 'span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em', 'a'].concat(extraAllow)).not(disallowed).get();
         if (disallow === '*') {
             allowed = [];
         }
         tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
         input = input.split('&#8237;').join('&amp;#8237;').split('&#8238;').join('&amp;#8238;');
+
         return input.replace(tags, function(a, b) {
             return allowed.indexOf(b.toLowerCase()) > -1 ? a : '';
         });
@@ -59,13 +60,18 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (this.startsWithIgnoreCase(url, 'http://')) {
                 return 'https://api.plugCubed.net/proxy/' + url;
             }
+
             return url;
         },
         httpsifyURL: function(url) {
             if (this.startsWithIgnoreCase(url, 'http://')) {
                 return 'https://' + url.substr(7);
             }
+
             return url;
+        },
+        escapeRegex: function(text) {
+            return text.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
         },
         getHighestRank: function(uid) {
             if (!uid) {
@@ -81,6 +87,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (this.isPlugCubedDonatorGold(uid)) return 'donatorGold';
             if (this.isPlugCubedDonatorSilver(uid)) return 'donatorSilver';
             if (this.isPlugCubedDonatorBronze(uid)) return 'donatorBronze';
+
             return null;
         },
         getHighestRankString: function(uid) {
@@ -90,9 +97,75 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 if (this.isPlugCubedSpecial(uid)) {
                     return p3Lang.i18n('info.specialTitles.special', this.getPlugCubedSpecial(uid).title);
                 }
+
                 return p3Lang.i18n('info.specialTitles.' + highestRank);
             }
+
             return '';
+        },
+        generateEmoteHash: function() {
+            var i, emoteHash, allEmotes, allEmotesLength, firstChar, emoji, Settings;
+
+            Settings = require('plugCubed/Settings');
+            emoteHash = window.plugCubed.emotes.emoteHash = {};
+            allEmotes = $.extend({}, (Settings.emotes.twitchEmotes ? window.plugCubed.emotes.twitchEmotes : {}), (Settings.emotes.twitchSubEmotes ? window.plugCubed.emotes.twitchSubEmotes : {}), (Settings.emotes.tastyEmotes ? window.plugCubed.emotes.tastyEmotes : []), (Settings.emotes.bttvEmotes ? window.plugCubed.emotes.bttvEmotes : {}));
+
+            if (typeof allEmotes === 'object' && allEmotes === null) return {};
+
+            for (i in allEmotes) {
+                if (!allEmotes.hasOwnProperty(i)) continue;
+
+                emoji = allEmotes[i];
+                firstChar = emoji.emote.charAt(0).toLowerCase();
+                if (!emoteHash[firstChar]) {
+                    emoteHash[firstChar] = [];
+                    emoteHash[firstChar].longest = 0;
+                }
+                emoteHash[firstChar].push(emoji.emote.toLowerCase());
+                if (emoji.emote.length > emoteHash[firstChar].longest) {
+                    emoteHash[firstChar].longest = emoji.emote.length;
+                }
+            }
+
+        },
+        merge: function(caseSensitive, key) {
+            var arr, args, argsLength, hash, i, j;
+
+            args = arguments;
+            argsLength = args.length;
+            if (typeof caseSensitive !== 'boolean' && typeof caseSensitive === 'string') {
+                key = caseSensitive;
+                caseSensitive = true;
+            }
+            if (typeof key !== 'string') {
+                throw new TypeError('Second argument needs to be a key string');
+            }
+
+            hash = {};
+            arr = [];
+            for (i = 2; i < argsLength; i++) {
+                var argArr = args[i];
+
+                if (!(Array.isArray(argArr) && argArr.length > 0)) continue;
+
+                var argArrLength = argArr.length;
+
+                for (j = 0; j < argArrLength; j++) {
+                    var argArrItem = argArr[j];
+                    var argArrKey = argArrItem[key];
+
+                    if (!caseSensitive && argArrKey) {
+                        argArrKey = argArrKey.toLowerCase();
+                    }
+
+                    if (argArrKey != null && hash[argArrKey] !== true) {
+                        arr.push(argArrItem);
+                        hash[argArrKey] = true;
+                    }
+                }
+            }
+
+            return arr;
         },
         havePlugCubedRank: function(uid) {
             return this.isPlugCubedDeveloper(uid) || this.isPlugCubedSponsor(uid) || this.isPlugCubedSpecial(uid) || this.isPlugCubedAmbassador(uid) || this.isPlugCubedDonatorDiamond(uid) || this.isPlugCubedDonatorPlatinum(uid) || this.isPlugCubedDonatorGold(uid) || this.isPlugCubedDonatorSilver(uid) || this.isPlugCubedDonatorBronze(uid);
@@ -155,70 +228,81 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return ranks.join(' / ');
         },
         is24Hours: function() {
-            return $('.icon-timestamps-12').length === 1;
+            return $('.icon-timestamps-24').length === 1;
         },
         isPlugCubedDeveloper: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return developer.indexOf(uid) > -1;
         },
         isPlugCubedSponsor: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return sponsor.indexOf(uid) > -1;
         },
         isPlugCubedSpecial: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return this.getPlugCubedSpecial(uid) != null;
         },
         isPlugCubedAmbassador: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return ambassador.indexOf(uid) > -1;
         },
         isPlugCubedDonatorDiamond: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return donatorDiamond.indexOf(uid) > -1;
         },
         isPlugCubedDonatorPlatinum: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return donatorPlatinum.indexOf(uid) > -1;
         },
         isPlugCubedDonatorGold: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return donatorGold.indexOf(uid) > -1;
         },
         isPlugCubedDonatorSilver: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return donatorSilver.indexOf(uid) > -1;
         },
         isPlugCubedDonatorBronze: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return donatorBronze.indexOf(uid) > -1;
         },
         getPlugCubedSpecial: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
             }
+
             return special[uid];
         },
         html2text: function(html) {
             if (!html) return '';
+
             return $('<div/>').html(html).text();
         },
         cleanHTML: function(msg, disallow, extraAllow) {
@@ -282,6 +366,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                         if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height()) {
                             $chat.scrollTop($chat[0].scrollHeight);
                         }
+
                         return;
                     }
 
@@ -323,6 +408,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                         if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height()) {
                             $chat.scrollTop($chat[0].scrollHeight);
                         }
+
                         return;
                     }
                 } else {
@@ -347,6 +433,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (plugcubedUserData[uid] == null || plugcubedUserData[uid][key] == null) {
                 return defaultValue;
             }
+
             return plugcubedUserData[uid][key];
         },
         setUserData: function(uid, key, value) {
@@ -382,6 +469,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     }
                 }
             }
+
             return null;
         },
         getLastMessageTime: function(uid) {
@@ -391,6 +479,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (IgnoreCollection._byId[uid] === true) {
                 return p3Lang.i18n('error.ignoredUser');
             }
+
             return this.getRoundedTimestamp(time, true);
         },
         getUserInfo: function(data) {
@@ -474,6 +563,11 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 // UserID
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.id') + ' ')).append($('<span>').css('color', '#FFFFFF').text(user.id))));
 
+                // Profile
+                if (user.level > 5) {
+                    message.append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.profile') + ' ')).append($('<span>').css('color', '#FFFFFF').html($('<a>').attr('href', '<https://plug.dj/@/' + user.slug))));
+                }
+
                 // Rank / Time Joined
                 message.append($('<tr>').append($('<td>').append($('<strong>').text(p3Lang.i18n('info.rank') + ' ')).append($('<span>').css('color', '#FFFFFF').text(rank))).append($('<td>').append($('<strong>').text(p3Lang.i18n('info.joined') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getTimestamp(this.getUserData(user.id, 'joinTime', Date.now()))))));
 
@@ -522,6 +616,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (user && user.id) {
                 return hasGRole ? user.gRole >= permission : user.role >= permission || user.gRole >= permission;
             }
+
             return false;
         },
         getAllUsers: function() {
@@ -577,17 +672,18 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             minutes = time.getMinutes();
             seconds = time.getSeconds();
 
-            if (this.is24Hours()) {
+            if (!this.is24Hours()) {
                 if (hours < 12) {
-                    postfix = ' am';
+                    postfix = 'am';
                 } else {
-                    postfix = ' pm';
+                    postfix = 'pm';
                     hours -= 12;
                 }
                 if (hours === 0) {
                     hours = 12;
                 }
             }
+            hours = (hours < 10 ? '0' : '') + hours;
             minutes = (minutes < 10 ? '0' : '') + minutes;
             seconds = (seconds < 10 ? '0' : '') + seconds;
 
@@ -599,6 +695,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             }
 
             var units = {
+                year: 31536000,
+                month: 2592000,
                 week: 604800,
                 day: 86400,
                 hour: 3600,
@@ -664,6 +762,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     }
                 }
             }
+
             return false;
         },
         endsWith: function(a, b) {
@@ -681,6 +780,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     }
                 }
             }
+
             return false;
         },
         startsWithIgnoreCase: function(a, b) {
@@ -698,6 +798,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     }
                 }
             }
+
             return false;
         },
         endsWithIgnoreCase: function(a, b) {
@@ -715,6 +816,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     }
                 }
             }
+
             return false;
         },
         getBaseURL: function(url) {
@@ -728,6 +830,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             for (i = 0; i < length; i++) {
                 ret.push(chars.substr(Math.floor(Math.random() * chars.length), 1));
             }
+
             return ret.join('');
         },
         getRank: function(user) {
@@ -800,6 +903,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                         if (att < 3) setTimeout(connect, 500);
                         if (att === 3) call(req.code, req.reason, Date.now() - time);
                         att++;
+
                         return;
                     }
                     call(req.code, req.reason, Date.now() - time);

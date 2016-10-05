@@ -23,13 +23,13 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         initBody();
         window.plugCubed.version = Version.getSemver();
         window.plugCubed.emotes = {
-            twitchEmotes: [],
-            twitchSubEmotes: [],
-            tastyEmotes: [],
-            bttvEmotes: [],
-            customEmotes: [],
+            twitchEmotes: {},
+            twitchSubEmotes: {},
+            tastyEmotes: {},
+            bttvEmotes: {},
+            customEmotes: {},
             emoteHash: {},
-            rcsEmotes: []
+            rcsEmotes: {}
         };
         window.thedark1337 = window.plugCubed.thedark1337 =
             '\n▄▄▄█████▓ ██░ ██ ▓█████ ▓█████▄  ▄▄▄       ██▀███   ██ ▄█▀   ██ ▓▀████▄ ▓▀████▄ ▒▀████▄' +

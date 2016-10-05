@@ -4,9 +4,10 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
     var PopoutView = window.plugCubedModules.PopoutView;
     var start;
 
-    $('#chat-messages').on('mouseover', '.twitch-emote', function() {
+    $('#chat-messages').on('mouseover', '.p3-twitch-emote, .p3-tasty-emote, .p3-bttv-emote, .p3-twitch-sub-emote', function() {
+        console.log($(this), $(this).data());
         Context.trigger('tooltip:show', $(this).data('emote'), $(this), true);
-    }).on('mouseout', '.twitch-emote', function() {
+    }).on('mouseout', '.p3-twitch-emote, .p3-tasty-emote, .p3-bttv-emote, .p3-twitch-sub-emote', function() {
         Context.trigger('tooltip:hide');
     });
 
@@ -218,112 +219,35 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
         }, '');
     }
 
-    function overrideMethods(array) {
-        if (!Array.isArray(array)) return array;
+    function convertEmoteByType(text, type) {
+        if (typeof text !== 'string' || typeof type !== 'string' || ['bttvEmotes', 'twitchEmotes', 'twitchSubEmotes', 'tastyEmotes'].indexOf(type) === -1) return text;
 
-        var methods = ['push', 'pop', 'unshift', 'shift', 'splice'];
+        var temp, image, emoteData, emote, className;
 
-        methods.forEach(function(method) {
-            array[method] = function() {
-                p3Utils.generateEmoteHash();
+        emoteData = window.plugCubed.emotes[type];
+        className = type === 'bttvEmotes' ? 'p3-bttv-emote' : type === 'twitchEmotes' ? 'p3-twitch-emote' : type === 'twitchSubEmotes' ? 'p3-twitch-sub-emote' : type === 'tastyEmotes' ? 'p3-tasty-emote' : '';
+        image = $('<img>');
+        temp = $('<div>');
 
-                return Array.prototype[method].apply(this, arguments);
-            };
+        return text.replace(/:(.*?):/g, function(shortcode) {
+            var lowerCode = shortcode.toLowerCase();
+
+            emote = emoteData[lowerCode] || shortcode;
+
+            if (emote && emote.imageURL) {
+                temp = temp.empty().append(image.removeClass().addClass(className).attr('src', emote.imageURL).attr('data-emote', p3Utils.html2text(emote.emote)));
+
+                return shortcode.replace(emote.emoteRegex, temp.html());
+            }
+
+            return shortcode;
         });
     }
 
     function convertEmotes(text) {
         if (typeof text !== 'string' || RoomSettings.rules.allowEmotes === false || text.indexOf(':') === -1) return text;
-        var nbspStart, temp, image, i, bttvLength, twitchLength, twitchSubLength, tastyLength, bttvEmotes, tastyEmotes, twitchEmotes, twitchSubEmotes;
 
-        bttvEmotes = window.plugCubed.emotes.bttvEmotes;
-        twitchEmotes = window.plugCubed.emotes.twitchEmotes;
-        twitchSubEmotes = window.plugCubed.emotes.twitchSubEmotes;
-        tastyEmotes = window.plugCubed.emotes.tastyEmotes;
-        bttvLength = bttvEmotes.length;
-        twitchLength = twitchEmotes.length;
-        twitchSubLength = twitchSubEmotes.length;
-        tastyLength = tastyEmotes.length;
-
-        if (Settings.emotes.twitchEmotes && Array.isArray(twitchEmotes) && twitchLength > 0) {
-            nbspStart = p3Utils.startsWithIgnoreCase(text, '&nbsp;');
-            text = ' ' + (nbspStart ? text.replace('&nbsp;', '') : text) + ' ';
-
-            for (i = 0; i < twitchLength; i++) {
-
-                var twitchEmote = twitchEmotes[i];
-
-                if (!_.isRegExp(twitchEmote.emoteRegex)) continue;
-
-                if (twitchEmote.emoteRegex.test(text)) {
-                    temp = $('<div>');
-                    image = $('<img>').addClass('p3-twitch-emote').attr('src', twitchEmote.imageURL).data('emote', $('<span>').html(twitchEmote.emote).text());
-                    temp.append(image);
-                    text = text.replace(twitchEmote.emoteRegex, temp.html());
-                }
-
-            }
-        }
-        if (Settings.emotes.twitchSubEmotes && Array.isArray(twitchSubEmotes) && twitchSubLength > 0) {
-            nbspStart = p3Utils.startsWithIgnoreCase(text, '&nbsp;');
-            text = ' ' + (nbspStart ? text.replace('&nbsp;', '') : text) + ' ';
-
-            for (i = 0; i < twitchSubLength; i++) {
-
-                var twitchSubEmote = twitchSubEmotes[i];
-
-                if (!_.isRegExp(twitchSubEmote.emoteRegex)) continue;
-
-                if (twitchSubEmote.emoteRegex.test(text)) {
-                    temp = $('<div>');
-                    image = $('<img>').addClass('p3-twitch-sub-emote').attr('src', twitchSubEmote.imageURL).data('emote', $('<span>').html(twitchSubEmote.emote).text());
-                    temp.append(image);
-                    text = text.replace(twitchSubEmote.emoteRegex, temp.html());
-                }
-
-            }
-        }
-        if (Settings.emotes.tastyEmotes && Array.isArray(tastyEmotes) && tastyLength > 0) {
-            nbspStart = p3Utils.startsWithIgnoreCase(text, '&nbsp;');
-            text = ' ' + (nbspStart ? text.replace('&nbsp;', '') : text) + ' ';
-            for (i = 0; i < tastyLength; i++) {
-
-                var tastyEmote = tastyEmotes[i];
-
-                if (!_.isRegExp(tastyEmote.emoteRegex)) continue;
-
-                if (tastyEmote.emoteRegex.test(text)) {
-                    temp = $('<div>');
-                    image = $('<img>').addClass('p3-tasty-emote').attr('src', tastyEmote.imageURL).css({
-                        height: tastyEmote.height,
-                        width: tastyEmote.width
-                    }).data('emote', $('<span>').html(tastyEmote.emote).text());
-                    temp.append(image);
-                    text = text.replace(tastyEmote.emoteRegex, temp.html());
-                }
-
-            }
-        }
-        if (Settings.emotes.bttvEmotes && Array.isArray(bttvEmotes) && bttvLength > 0) {
-            nbspStart = p3Utils.startsWithIgnoreCase(text, '&nbsp;');
-            text = ' ' + (nbspStart ? text.replace('&nbsp;', '') : text) + ' ';
-            for (i = 0; i < bttvLength; i++) {
-
-                var bttvEmote = bttvEmotes[i];
-
-                if (!_.isRegExp(bttvEmote.emoteRegex)) continue;
-
-                if (bttvEmote.emoteRegex.test(text)) {
-                    temp = $('<div>');
-                    image = $('<img>').addClass('p3-bttv-emote').attr('src', bttvEmote.imageURL).data('emote', $('<span>').html(bttvEmote.emote).text());
-                    temp.append(image);
-                    text = text.replace(bttvEmote.emoteRegex, temp.html());
-                }
-
-            }
-        }
-
-        return text;
+        return convertEmoteByType(convertEmoteByType(convertEmoteByType(convertEmoteByType(text, 'bttvEmotes'), 'tastyEmotes'), 'twitchSubEmotes'), 'twitchEmotes');
     }
 
     function onChatReceived(data) {
@@ -493,19 +417,18 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                     var i, emotes, twitchEmotes;
 
                     emotes = data.emotes;
-                    twitchEmotes = window.plugCubed.emotes.twitchEmotes = [];
+                    twitchEmotes = window.plugCubed.emotes.twitchEmotes = {};
 
                     for (i in emotes) {
                         if (!emotes.hasOwnProperty(i)) continue;
-                        twitchEmotes.push({
-                            emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(i) + ':)', 'gi'),
+                        twitchEmotes[':' + i.toLowerCase() + ':'] = {
                             emote: i,
+                            emoteRegex: new RegExp(':\\b' + p3Utils.escapeRegex(i.toLowerCase()) + '\\b:', 'gi'),
                             imageURL: twitchEmoteTemplate.replace('{image_id}', emotes[i].image_id),
                             type: 'twitchemote'
-                        });
+                        };
                     }
                     twitchEmotes = _.chain(twitchEmotes).indexBy('emote').values().value();
-                    overrideMethods(window.plugCubed.emotes.twitchEmotes);
                     p3Utils.generateEmoteHash();
 
                     console.log('[plug³ Twitch Emotes]', twitchEmotes.length + ' Twitch.TV emoticons loaded in ' + (performance.now() - start) + 'ms');
@@ -522,7 +445,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                 .done(function(data) {
                     var i, j, channels, twitchSubEmotes;
 
-                    twitchSubEmotes = window.plugCubed.emotes.twitchSubEmotes = [];
+                    twitchSubEmotes = window.plugCubed.emotes.twitchSubEmotes = {};
                     channels = data.channels;
 
                     for (i in channels) {
@@ -532,21 +455,22 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                         var emotesLength = emotes.length;
 
                         for (j = 0; j < emotesLength; j++) {
+                            if (emotes[j].code) {
 
-                            // skip this since we already have kappa in twitchEmotes that ignores case.
-                            if (emotes[j].code.toLowerCase() === 'kappa') continue;
-                            twitchSubEmotes.push({
-                                emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(emotes[j].code) + ':)', 'gi'),
-                                emote: emotes[j].code,
-                                imageURL: twitchEmoteTemplate.replace('{image_id}', emotes[j].image_id),
-                                type: 'twitchsubemote'
-                            });
+                                // skip this since we already have kappa, dansgame in twitchEmotes that ignores case.
+                                if (emotes[j].code.toLowerCase() === 'kappa' || emotes[j].code.toLowerCase() === 'dansgame') continue;
+                                twitchSubEmotes[':' + emotes[j].code.toLowerCase() + ':'] = {
+                                    emote: emotes[j].code,
+                                    emoteRegex: new RegExp(':\\b' + p3Utils.escapeRegex(emotes[j].code.toLowerCase()) + '\\b:', 'gi'),
+                                    imageURL: twitchEmoteTemplate.replace('{image_id}', emotes[j].image_id),
+                                    type: 'twitchsubemote'
+                                };
+                            }
                         }
 
                     }
 
                     twitchSubEmotes = _.chain(twitchSubEmotes).indexBy('emote').values().value();
-                    overrideMethods(window.plugCubed.emotes.twitchSubEmote);
                     p3Utils.generateEmoteHash();
 
                     console.log('[plug³ Twitch Subscriber Emotes]', twitchSubEmotes.length + ' Twitch.TV Subscriber emoticons loaded in ' + (performance.now() - start) + 'ms');
@@ -563,23 +487,21 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                 .done(function(data) {
                     var bttvEmotes, i, emote;
 
-                    bttvEmotes = window.plugCubed.emotes.bttvEmotes = [];
+                    bttvEmotes = window.plugCubed.emotes.bttvEmotes = {};
 
                     for (i in data) {
                         if (!data.hasOwnProperty(i)) continue;
                         emote = data[i];
-                        if (emote) {
-                            bttvEmotes.push({
-                                emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(i) + ':)', 'gi'),
+                        if (emote && i.toLowerCase() !== 'dansgame') {
+                            bttvEmotes[':' + i.toLowerCase() + ':'] = {
                                 emote: i,
+                                emoteRegex: new RegExp(':\\b' + p3Utils.escapeRegex(i.toLowerCase()) + '\\b:', 'gi'),
                                 imageURL: 'https://cdn.betterttv.net/emote/' + emote + '/1x',
                                 type: 'bttvemote'
-                            });
-
+                            };
                         }
                     }
                     bttvEmotes = _.chain(bttvEmotes).indexBy('emote').values().value();
-                    overrideMethods(window.plugCubed.emotes.bttvEmotes);
                     p3Utils.generateEmoteHash();
 
                     console.log('[plug³ BetterTTV Emotes]', bttvEmotes.length + ' BetterTTV emoticons loaded in ' + (performance.now() - start) + 'ms');
@@ -597,22 +519,21 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                 .done(function(data) {
                     var i, tastyEmotes;
 
-                    tastyEmotes = window.plugCubed.emotes.tastyEmotes = [];
+                    tastyEmotes = window.plugCubed.emotes.tastyEmotes = {};
 
                     for (i in data.emotes) {
                         if (!data.emotes.hasOwnProperty(i)) continue;
-                        tastyEmotes.push({
-                            emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(i) + ':)', 'gi'),
+                        tastyEmotes[':' + i.toLowerCase() + ':'] = {
                             emote: i,
+                            emoteRegex: new RegExp(':\\b' + p3Utils.escapeRegex(i.toLowerCase()) + '\\b:', 'gi'),
                             imageURL: data.emotes[i].url,
                             height: data.emotes[i].height,
                             width: data.emotes[i].width,
                             type: 'tastyemote'
-                        });
+                        };
                     }
 
                     tastyEmotes = _.chain(tastyEmotes).indexBy('emote').values().value();
-                    overrideMethods(window.plugCubed.emotes.tastyEmotes);
                     p3Utils.generateEmoteHash();
 
                     console.log('[plug³ Tasty Emotes]', tastyEmotes.length + ' Tastycat emoticons loaded in ' + (performance.now() - start) + 'ms');

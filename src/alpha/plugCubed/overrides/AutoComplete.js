@@ -1,6 +1,83 @@
 define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/handlers/ChatHandler', 'plugCubed/RoomSettings', 'plugCubed/Lang', 'plugCubed/dialogs/Commands'], function(OverrideHandler, p3Utils, ChatHandler, RoomSettings, p3Lang, p3Commands) {
-    var Handler, suggestionView, emoji, CurrentUser, templateChatSuggestionItem;
+    var Handler, suggestionView, emoji, CurrentUser, templateChatSuggestionItem, searchBinary;
 
+    searchBinary = function(needle, haystack, caseInsensitive) {
+        if (needle === '') return [];
+
+        var haystackLength, letterNumber, insensitive, searchTerm;
+
+        haystackLength = haystack.length;
+        letterNumber = needle.length;
+        insensitive = typeof caseInsensitive === 'undefined' || caseInsensitive;
+        searchTerm = (insensitive ? needle.toLowerCase() : needle);
+
+        /* start binary search, Get middle position */
+        var getElementPosition = findElement();
+
+        /* get interval and return result array */
+        if (getElementPosition === -1) return [];
+
+        return findRangeElement();
+
+        function findElement() {
+            if (!Array.isArray(haystack) || !haystackLength) return -1;
+            var high, low, mid;
+
+            high = haystack.length - 1;
+            low = 0;
+
+            while (low <= high) {
+                mid = parseInt(((low + high) / 2), 10);
+                var element = haystack[mid].substr(0, letterNumber);
+
+                element = (insensitive) ? element.toLowerCase() : element;
+
+                if (element > searchTerm) {
+                    high = mid - 1;
+                } else if (element < searchTerm) {
+                    low = mid + 1;
+                } else {
+
+                    return mid;
+                }
+            }
+
+            return -1;
+        }
+
+        function findRangeElement() {
+            var i, element, start, end, result;
+
+            for (i = getElementPosition; i > 0; i--) {
+                element = (insensitive ? haystack[i].substr(0, letterNumber).toLowerCase() : haystack[i].substr(0, letterNumber));
+
+                if (element !== searchTerm) {
+                    start = i + 1;
+                    break;
+                } else {
+                    start = 0;
+                }
+            }
+            for (i = getElementPosition; i < haystackLength; i++) {
+                element = (insensitive ? haystack[i].substr(0, letterNumber).toLowerCase() : haystack[i].substr(0, letterNumber));
+
+                if (element !== searchTerm) {
+                    end = i;
+                    break;
+                } else {
+                    end = haystackLength - 1;
+                }
+            }
+            result = [];
+
+            for (i = start; i < end; i++) {
+                result.push(haystack[i]);
+            }
+
+            return result;
+        }
+
+    };
     emoji = window.plugCubedModules.emoji;
     suggestionView = window.plugCubedModules.chat.suggestionView;
     CurrentUser = window.plugCubedModules.CurrentUser;
@@ -20,41 +97,37 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/hand
                     suggestionView._check(message, carat);
                 }
 
-                var p3EmoteHash, firstCharMessage, lookupArr, messageLength, p3EmoteHashArr, lookupHashLength, p3EmoteHashArrItem, pos, lastIndexMessage, i, command, lowerMessage;
+                var p3EmoteHash, firstCharMessage, lookupArr, messageLength, p3EmoteHashArr, pos, lastIndexMessage, i, command, lowerMessage, sortedHashArr;
 
                 lookupArr = [];
                 p3EmoteHash = window.plugCubed.emotes.emoteHash;
                 lowerMessage = message.toLowerCase();
                 messageLength = message.length;
 
-                if (messageLength > 0 && message.indexOf(':') > -1 && RoomSettings.rules.allowEmotes !== false && (typeof p3EmoteHash === 'object' && p3EmoteHash !== null)) {
+                if (messageLength > 0 && lowerMessage.indexOf(':') > -1 && RoomSettings.rules.allowEmotes !== false && (typeof p3EmoteHash === 'object' && p3EmoteHash !== null)) {
                     pos = 2;
-                    lastIndexMessage = message.lastIndexOf(' :');
+                    lastIndexMessage = lowerMessage.lastIndexOf(' :');
 
                     if (lastIndexMessage === -1) {
-                        lastIndexMessage = message.indexOf(':') === 0 ? 0 : -1;
+                        lastIndexMessage = lowerMessage.indexOf(':') === 0 ? 0 : -1;
                     } else {
                         pos = 3;
                     }
                     if (lastIndexMessage > -1 && ((carat - lastIndexMessage) > pos)) {
                         if (lastIndexMessage === 0) {
-                            message = message.substr(lastIndexMessage + 1, carat);
+                            lowerMessage = lowerMessage.substr(lastIndexMessage + 1, carat);
                         } else {
-                            message = message.substr(lastIndexMessage + 2, carat);
+                            lowerMessage = lowerMessage.substr(lastIndexMessage + 2, carat);
                         }
+
                         firstCharMessage = lowerMessage.charAt(0);
                         p3EmoteHashArr = p3EmoteHash[firstCharMessage];
+                        messageLength = lowerMessage.length;
 
-                        messageLength = message.length;
                         if (p3EmoteHashArr && p3EmoteHashArr.length > 0 && messageLength < p3EmoteHashArr.longest) {
-                            lookupHashLength = p3EmoteHashArr.length;
-                            for (i = 0; i < lookupHashLength; i++) {
-                                p3EmoteHashArrItem = p3EmoteHashArr[i];
+                            sortedHashArr = p3EmoteHashArr.slice().sort();
+                            lookupArr = lookupArr.concat(searchBinary(lowerMessage, sortedHashArr, true));
 
-                                if (p3EmoteHashArrItem.indexOf(lowerMessage) === 0 && message.indexOf('::') === -1) {
-                                    lookupArr.push(p3EmoteHashArrItem);
-                                }
-                            }
                         }
                     }
                 } else if (lowerMessage.charAt(0) === '/' && messageLength > 0) {
@@ -76,17 +149,17 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/hand
                     }
 
                 }
-                if (lookupArr.length && lookupArr.length > 0) {
+                if (lookupArr.length > 0) {
                     lookupArr.sort();
-                    lookupArr.length = Math.min(lookupArr.length, 10);
                     this.suggestions = this.suggestions.concat(lookupArr);
+                    this.suggestions.length = Math.min(this.suggestions.length, 10);
                 }
 
                 console.timeEnd('emote lookup');
             };
             suggestionView.updateSuggestions = function() {
                 console.time('updateSuggestions');
-                var suggestion, length, i;
+                var suggestion, length, i, emote, suggestedItem, suggestedItemColons;
 
                 if (this.type !== '/') {
                     suggestionView._updateSuggestions();
@@ -100,10 +173,20 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/hand
                     length = this.suggestions.length;
 
                     for (i = 0; i < length; i++) {
+                        if (typeof this.suggestions[i] !== 'string') continue;
+
+                        suggestedItem = this.suggestions[i];
+                        suggestedItemColons = ':' + suggestedItem + ':';
+
+                        if (emoji && emoji.map && emoji.map.colons && (emoji.map.colons[suggestedItem] || emoji.plugdata.indexOf(suggestedItem) > -1 || emoji.map.emoticons[suggestedItem])) {
+                            emote = emoji.replace_colons(suggestedItemColons, false, false, true);
+                        } else {
+                            emote = ChatHandler.convertEmotes(suggestedItemColons);
+                        }
                         suggestion = $(templateChatSuggestionItem({
-                            value: ':' + this.suggestions[i] + ':',
+                            value: suggestedItemColons,
                             index: i,
-                            image: ChatHandler.convertEmotes(emoji.replace_colons(':' + this.suggestions[i] + ':', false, false, true))
+                            image: emote
                         })).mousedown(this.pressBind).mouseenter(this.overBind);
                         suggestion.addClass('emo');
                         this.$itemContainer.append(suggestion);
@@ -116,7 +199,7 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/hand
                         suggestion = $(templateChatSuggestionItem({
                             value: this.suggestions[i],
                             index: i,
-                            image: '<img src="https://plugcubed.net/scripts/dev/images/icons/command.png" class="p3Command-image" style="height: 16px; width: 16px; margin-top: 2px;">'
+                            image: '<img src="https://plugcubed.net/scripts/alpha/images/icons/command.png" class="p3Command-image" style="height: 16px; width: 16px; margin-top: 2px;">'
                         })).mousedown(this.pressBind).mouseenter(this.overBind);
                         suggestion.addClass('p3Command');
                         suggestion.addClass('emo');
@@ -130,7 +213,7 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/hand
                     this.$el.height(length * 38);
                     _.delay(this.showBind, 10);
                     _.delay(this.showBind, 15);
-                    this.$document.on("mousedown", this.documentClickBind);
+                    this.$document.on('mousedown', this.documentClickBind);
                 }
                 console.timeEnd('updateSuggestions');
             };
