@@ -6,7 +6,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Ut
 
     function update() {
         var a = '';
-        var i;
+        var i, sortedStyles;
 
         for (i = 0; i < imports.length; i++) {
             if (imports[i]) {
@@ -14,11 +14,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Ut
             }
         }
 
-        for (i in styles) {
-            if (styles.hasOwnProperty(i)) {
-                a += styles[i] + '\n';
-            }
-        }
+        sortedStyles = _.sortBy(styles, function(item) {
+            return item.indexOf('@import') === -1;
+        });
+
+        a += sortedStyles.join('\n');
 
         obj.text(a);
         if (PopoutView && PopoutView._window) {
@@ -34,7 +34,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Ut
         getList: function() {
             for (var key in styles) {
                 if (!styles.hasOwnProperty(key)) continue;
-                console.log('[plug³ StyleManager]', key, styles);
+                console.log('[plug³ StyleManager]', key, styles[key]);
             }
         },
         get: function(key) {

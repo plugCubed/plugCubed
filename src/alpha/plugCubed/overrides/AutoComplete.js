@@ -1,6 +1,7 @@
 define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/handlers/ChatHandler', 'plugCubed/RoomSettings', 'plugCubed/Lang', 'plugCubed/dialogs/Commands'], function(OverrideHandler, p3Utils, ChatHandler, RoomSettings, p3Lang, p3Commands) {
     var Handler, suggestionView, emoji, CurrentUser, templateChatSuggestionItem, searchBinary;
 
+    // Adapted from https://github.com/posabsolute/javascript-binary-search-algorithm
     searchBinary = function(needle, haystack, caseInsensitive) {
         if (needle === '') return [];
 
@@ -92,7 +93,6 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/hand
             }
 
             suggestionView.check = function(message, carat) {
-                console.time('emote lookup');
                 if (message.indexOf('@') > -1 || message.indexOf(':') > -1) {
                     suggestionView._check(message, carat);
                 }
@@ -132,7 +132,6 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/hand
                     }
                 } else if (lowerMessage.charAt(0) === '/' && messageLength > 0) {
                     this.type = '/';
-
                     for (i = 0; i < p3Commands.modCommandsList.length; i++) {
                         command = p3Commands.modCommandsList[i];
 
@@ -149,21 +148,17 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/hand
                     }
 
                 }
+                if (lowerMessage.indexOf('@') > -1) this.type = '@';
                 if (lookupArr.length > 0) {
                     lookupArr.sort();
                     this.suggestions = this.suggestions.concat(lookupArr);
                     this.suggestions.length = Math.min(this.suggestions.length, 10);
                 }
-
-                console.timeEnd('emote lookup');
             };
             suggestionView.updateSuggestions = function() {
-                console.time('updateSuggestions');
                 var suggestion, length, i, emote, suggestedItem, suggestedItemColons;
 
-                if (this.type !== '/') {
-                    suggestionView._updateSuggestions();
-                }
+                suggestionView._updateSuggestions();
 
                 if (this.suggestions.length === 0) {
                     this.$el.hide();
@@ -178,13 +173,14 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/hand
                         suggestedItem = this.suggestions[i];
                         suggestedItemColons = ':' + suggestedItem + ':';
 
-                        if (emoji && emoji.map && emoji.map.colons && (emoji.map.colons[suggestedItem] || emoji.plugdata.indexOf(suggestedItem) > -1 || emoji.map.emoticons[suggestedItem])) {
+                        if (emoji && emoji.map && emoji.map.colons && (emoji.map.colons[suggestedItem] || emoji.plugdata.indexOf(suggestedItem) > -1 || emoji.map.emoticons[suggestedItem] || suggestedItem.indexOf('::skin-tone-') > -1)) {
                             emote = emoji.replace_colons(suggestedItemColons, false, false, true);
                         } else {
                             emote = ChatHandler.convertEmotes(suggestedItemColons);
                         }
+
                         suggestion = $(templateChatSuggestionItem({
-                            value: suggestedItemColons,
+                            value: suggestedItemColons.trim(),
                             index: i,
                             image: emote
                         })).mousedown(this.pressBind).mouseenter(this.overBind);
@@ -197,7 +193,7 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/hand
 
                     for (i = 0; i < length; i++) {
                         suggestion = $(templateChatSuggestionItem({
-                            value: this.suggestions[i],
+                            value: this.suggestions[i].trim(),
                             index: i,
                             image: '<img src="https://plugcubed.net/scripts/alpha/images/icons/command.png" class="p3Command-image" style="height: 16px; width: 16px; margin-top: 2px;">'
                         })).mousedown(this.pressBind).mouseenter(this.overBind);
@@ -215,7 +211,6 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/hand
                     _.delay(this.showBind, 15);
                     this.$document.on('mousedown', this.documentClickBind);
                 }
-                console.timeEnd('updateSuggestions');
             };
 
         },

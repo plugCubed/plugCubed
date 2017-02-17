@@ -103,12 +103,16 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
             return '';
         },
+        closePlugMenus: function() {
+            return $('#playlist-button .icon-arrow-down,#history-button .icon-arrow-up,#footer-user.showing .back').click();
+
+        },
         generateEmoteHash: function() {
-            var i, emoteHash, allEmotes, allEmotesLength, firstChar, emoji, Settings;
+            var i, emoteHash, allEmotes, firstChar, emoji, Settings;
 
             Settings = require('plugCubed/Settings');
             emoteHash = window.plugCubed.emotes.emoteHash = {};
-            allEmotes = $.extend({}, (Settings.emotes.twitchEmotes ? window.plugCubed.emotes.twitchEmotes : {}), (Settings.emotes.twitchSubEmotes ? window.plugCubed.emotes.twitchSubEmotes : {}), (Settings.emotes.tastyEmotes ? window.plugCubed.emotes.tastyEmotes : []), (Settings.emotes.bttvEmotes ? window.plugCubed.emotes.bttvEmotes : {}));
+            allEmotes = $.extend({}, (Settings.emotes.twitchEmotes ? window.plugCubed.emotes.twitchEmotes : {}), (Settings.emotes.twitchSubEmotes ? window.plugCubed.emotes.twitchSubEmotes : {}), (Settings.emotes.tastyEmotes ? window.plugCubed.emotes.tastyEmotes : []), (Settings.emotes.bttvEmotes ? window.plugCubed.emotes.bttvEmotes : {}), (Settings.emotes.ffzEmotes ? window.plugCubed.emotes.ffzEmotes : {}));
 
             if (typeof allEmotes === 'object' && allEmotes === null) return {};
 
@@ -565,7 +569,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
                 // Profile
                 if (user.level > 5) {
-                    message.append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.profile') + ' ')).append($('<span>').css('color', '#FFFFFF').html($('<a>').attr('href', '<https://plug.dj/@/' + user.slug))));
+                    message.append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.profile') + ' ')).append($('<span>').css('color', '#FFFFFF').html($('<a>').attr('href', 'https://plug.dj/@/' + user.slug).text('https://plug.dj/@/' + user.slug))));
                 }
 
                 // Rank / Time Joined

@@ -1,7 +1,6 @@
-define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleManager', 'plugCubed/RoomSettings'], function(Class, ControlPanel, Styles, RoomSettings) {
-    var Handler, $contentDiv, $formDiv, $localFileInput, $clearButton, panel;
+define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleManager', 'plugCubed/RoomSettings', 'plugCubed/Settings'], function(Class, ControlPanel, Styles, RoomSettings, Settings) {
+    var Handler, $contentDiv, $formDiv, $localCSSInput, $submitButton, $clearButton, panel;
 
-    // TODO: add in submit button
     Handler = Class.extend({
         register: function() {
             panel = ControlPanel.addPanel('Custom CSS');
@@ -10,33 +9,68 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
 
             panel.addContent($contentDiv);
 
-            $formDiv = $('<div>').width(500).css('margin', '25px auto auto auto');
-            $localFileInput = ControlPanel.inputField('textbox', undefined, 'Custom CSS to add').change(function(e) {
+            $formDiv = $('<p>').width(500).css({
+                margin: '25px auto auto auto',
+                width: '90%'
+            });
+            $localCSSInput = $('<textarea>').attr({
+                autocomplete: 'off',
+                autocorrect: 'off',
+                autocapitalize: 'off',
+                mutliline: true,
+                spellcheck: false,
+                id: 'p3-custom-css-textarea',
+                newlines: 'pasteintact',
+                class: 'p3-textarea'
+            });
 
-                if (e.target.value != null) {
-                    Styles.set('room-settings-custom-css', e.target.value);
-                    $clearButton.changeSubmit(true);
+            $submitButton = ControlPanel.button('Submit', true, function() {
+                var $textarea = $('#p3-custom-css-textarea');
 
-                    return;
+                if (typeof $textarea.val() === 'string' && $textarea.val().length > 0) {
+                    Styles.set('room-settings-custom-css', $textarea.val());
+                    Settings.customCSS = $textarea.val();
+                    Settings.save();
+                    this.changeSubmit(false);
+                } else {
+                    this.changeSubmit(true);
                 }
-                $clearButton.changeSubmit(false);
             });
-
             $clearButton = ControlPanel.button('Clear', false, function() {
-                RoomSettings.execute();
-                $clearButton.changeSubmit(false);
+                var $textarea = $('#p3-custom-css-textarea');
+
+                if (typeof $textarea.val() === 'string' && $textarea.val().length > 0) {
+                    Styles.unset('room-settings-custom-css');
+                    Settings.customCSS = '';
+                    Settings.save();
+                    $textarea.val('');
+                    this.changeSubmit(true);
+                } else {
+                    this.changeSubmit(false);
+                }
             });
 
-            $formDiv.append($localFileInput.getJQueryElement()).append($clearButton.getJQueryElement());
+            if (typeof Settings.customCSS === 'string' && Settings.customCSS.length > 0) {
+                $localCSSInput.val(Settings.customCSS);
+                $submitButton.changeSubmit(true);
+                $clearButton.changeSubmit(true);
+            }
+
+            $formDiv.append($localCSSInput).append($submitButton.getJQueryElement().css({
+                float: 'left'
+            })).append($clearButton.getJQueryElement().css({
+                float: 'right'
+            }));
 
             panel.addContent($formDiv);
         },
         close: function() {
             ControlPanel.removePanel(panel);
 
-            $contentDiv = $formDiv = $localFileInput = panel = null;
+            $contentDiv = $formDiv = $localCSSInput = panel = null;
         }
     });
 
     return new Handler();
 });
+

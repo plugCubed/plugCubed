@@ -6,7 +6,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
     names.push('version');
 
     // Features
-    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'chatLog', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'boothAlert', 'badges', 'emotes');
+    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'chatLog', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'boothAlert', 'badges', 'emotes', 'customCSS', 'markdown');
 
     // Registers
     names.push('registeredSongs', 'alertson', 'colors');
@@ -79,6 +79,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         chatImages: true,
         emotes: {
             bttvEmotes: false,
+            emoteSet: 'apple',
+            ffzEmotes: false,
             tastyEmotes: false,
             twitchEmotes: false,
             twitchSubEmotes: false
@@ -93,6 +95,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
             showDeletedMessages: false
         },
         boothAlert: 1,
+        markdown: false,
+        customCSS: '',
         notifySongLength: 10,
         useRoomSettings: {},
         colorInfo: {
@@ -236,22 +240,37 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                         $('#dj-button').click();
                     })();
                 }
-
+                if (this.emotes.bttvEmotes) {
+                    require('plugCubed/handlers/ChatHandler').loadBttvEmotes();
+                }
+                if (this.emotes.ffzEmotes) {
+                    require('plugCubed/handlers/ChatHandler').loadFfzEmotes();
+                }
+                if (this.emotes.tastyEmotes) {
+                    require('plugCubed/handlers/ChatHandler').loadTastyEmotes();
+                }
                 if (this.emotes.twitchEmotes) {
                     require('plugCubed/handlers/ChatHandler').loadTwitchEmotes();
                 }
                 if (this.emotes.twitchSubEmotes) {
                     require('plugCubed/handlers/ChatHandler').loadTwitchSubEmotes();
                 }
-                if (this.emotes.bttvEmotes) {
-                    require('plugCubed/handlers/ChatHandler').loadBttvEmotes();
-                }
-                if (this.emotes.tastyEmotes) {
-                    require('plugCubed/handlers/ChatHandler').loadTastyEmotes();
-                }
 
                 if (!this.badges) {
                     Styles.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { display: none; }');
+                }
+                if (this.customCSS !== '') {
+                    Styles.set('room-settings-custom-css', this.customCSS);
+                }
+
+                if (this.emotes.emoteSet !== 'apple') {
+                    if (this.emotes.emoteSet === 'google') {
+                        Styles.set('plug-emojiset', "span.emoji-inner:not(.gemoji-plug){background:url('https://i.imgur.com/T0l9HFK.png')}");
+                    } else if (this.emotes.emoteSet === 'emojione') {
+                        Styles.set('plug-emojiset', "span.emoji-inner:not(.gemoji-plug){background:url('https://i.imgur.com/PT0KMtp.png')}");
+                    } else if (this.emotes.emoteSet === 'twitter') {
+                        Styles.set('plug-emojiset', "span.emoji-inner:not(.gemoji-plug){background:url('https://i.imgur.com/gFFWRXH.png')}");
+                    }
                 }
 
                 if (this.registeredSongs.length > 0 && API.getMedia() != null && this.registeredSongs.indexOf(API.getMedia().id) > -1) {

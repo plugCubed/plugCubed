@@ -18,7 +18,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
         ['/commands', 'commands.descriptions.commands'],
         ['/link', 'commands.descriptions.link'],
         ['/unload', 'commands.descriptions.unload'],
-        ['/volume', '(commands.variables.number / + / | / - )','commands.descriptions.volume']
+        ['/volume', '(commands.variables.number / + / | / - )', 'commands.descriptions.volume']
     ];
     var modCmds = [
         ['/whois', '(commands.variables.username)', 'commands.descriptions.whois', API.ROLE.BOUNCER],
@@ -28,7 +28,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
         ['/lock', 'commands.descriptions.lock', API.ROLE.MANAGER],
         ['/unlock', 'commands.descriptions.unlock', API.ROLE.MANAGER],
         ['/add', '(commands.variables.username)', 'commands.descriptions.add', API.ROLE.BOUNCER],
-        ['/remove', '(commands.variables.username)' , 'commands.descriptions.remove', API.ROLE.BOUNCER],
+        ['/remove', '(commands.variables.username)', 'commands.descriptions.remove', API.ROLE.BOUNCER],
         ['/whois all', 'commands.descriptions.whois', API.ROLE.AMBASSADOR]
     ];
     var A = Class.extend({
@@ -45,7 +45,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
                     var commandVars = userCmds[i][1];
                     var argumentTranslationParts = commandVars.split('(')[1].split(')')[0].split('/');
 
-                    command = command + '<em>';
+                    command += '<em>';
 
                     for (var j in argumentTranslationParts) {
                         if (!argumentTranslationParts.hasOwnProperty(j)) continue;
@@ -76,7 +76,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
                         var commandVars = userCmds[i][1];
                         var argumentTranslationParts = commandVars.split('(')[1].split(')')[0].split('/');
 
-                        command = command + '<em>';
+                        command += '<em>';
 
                         for (var j in argumentTranslationParts) {
                             if (!argumentTranslationParts.hasOwnProperty(j)) continue;

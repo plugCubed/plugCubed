@@ -2,13 +2,14 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
     var CommandHandler, user, Context;
 
     Context = window.plugCubedModules.context;
+
     function commandLog(message) {
         p3Utils.chatLog('message', message, undefined, -11);
     }
     CommandHandler = TriggerHandler.extend({
         trigger: API.CHAT_COMMAND,
         handler: function(value) {
-            var i;
+            var i, msg;
             var args = value.split(' ');
             var command = args.shift().substr(1);
 
@@ -36,6 +37,14 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                     commandLog(p3Lang.i18n((Settings.badges ? 'commands.responses.badgeon' : 'commands.responses.badgeoff')));
                 }
                 Settings.save();
+            } else if (p3Utils.equalsIgnoreCase(command, 'export')) {
+                $('.message').each(function(item) {
+                    var $this = $(this);
+
+                    if (!$this.data('cid')) return;
+                    console.log('[' + $this.data('cid') + '] [' + $this.find('.un').text() + '] ' + $this.find('.text').text());
+
+                });
             } else if (p3Utils.equalsIgnoreCase(command, 'join')) {
                 if (API.getWaitListPosition() !== -1) return;
                 API.djJoin();
@@ -50,6 +59,20 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 return window.plugCubed.close();
             } else if (p3Utils.equalsIgnoreCase(command, 'whoami')) {
                 p3Utils.getUserInfo(API.getUser().id);
+            } else if (p3Utils.equalsIgnoreCase(command, 'shrug')) {
+                msg = '¯\\_(ツ)_/¯';
+
+                if (args.length > 0) {
+                    msg += ' ' + args.join(' ');
+                }
+                API.sendChat(msg);
+            } else if (p3Utils.equalsIgnoreCase(command, 'lenny')) {
+                msg = '( ͡° ͜ʖ ͡°)';
+
+                if (args.length > 0) {
+                    msg += ' ' + args.join(' ');
+                }
+                API.sendChat(msg);
             } else if (p3Utils.equalsIgnoreCase(command, 'refresh')) {
                 $('.button.refresh').click();
             } else if (p3Utils.equalsIgnoreCase(command, 'volume')) {
@@ -74,7 +97,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 if (API.getVolume() === 0) return;
                 PlaybackModel.muteOnce();
             } else if (p3Utils.equalsIgnoreCase(command, 'link')) {
-                API.sendChat('plugCubed : http://plugcubed.net');
+                API.sendChat('plugCubed: https://plugcubed.net');
             } else if (p3Utils.equalsIgnoreCase(command, 'status')) {
                 p3Utils.statusREST(function(status, text, time) {
                     p3Utils.chatLog(undefined, p3Lang.i18n('commands.responses.status.rest', status, text, time), status === 200 ? '00FF00' : 'FF0000', -1);
@@ -222,7 +245,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                     }
                 } else if (p3Utils.equalsIgnoreCase(command, 'skip')) {
                     if (API.getDJ() == null) return;
-                    if (value.length > 5) {
+                    if (value.length > 6) {
                         API.sendChat('@' + API.getDJ().username + ' - Reason for skip: ' + value.substr(5).trim());
                     }
                     API.moderateForceSkip();
@@ -306,3 +329,4 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
 
     return new CommandHandler();
 });
+

@@ -13,6 +13,7 @@ define(['jquery', 'plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'pl
                 if (data.media.format === 1) {
                     if (gapi != null) {
                         gapi.client.youtube.videos.list({
+                            fields: 'items(contentDetails(regionRestriction),status(uploadStatus,privacyStatus,embeddable))',
                             id: data.media.cid,
                             part: 'contentDetails,status'
                         })
@@ -21,11 +22,9 @@ define(['jquery', 'plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'pl
                                     if (youtubeData.result && youtubeData.result.items && youtubeData.result.items.length > 0) {
                                         var result = youtubeData.result.items[0];
 
-                                        console.info('Items:', result);
                                         if (result.status) {
                                             var status = result.status;
 
-                                            console.info('Status:', status);
                                             if (!status.embeddable) {
                                                 notify('notify.message.songEmbed');
                                             } else if (status.privacyStatus && status.privacyStatus.toLowerCase() !== 'public') {
@@ -54,8 +53,6 @@ define(['jquery', 'plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'pl
                                     if (err.status) {
                                         if (err.status === 404) {
                                             notify('notify.message.songNotFound');
-                                        } else if (err.status === 403) {
-                                            notify('notify.message.songPrivate');
                                         }
                                     }
                                 }
