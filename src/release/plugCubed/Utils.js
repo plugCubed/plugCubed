@@ -17,7 +17,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
         if (!extraAllow || !_.isArray(extraAllow)) {
             extraAllow = [];
         }
-        allowed = $(['span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em', 'a'].concat(extraAllow)).not(disallowed).get();
+        allowed = $(['blockquote', 'code', 'span', 'div', 'table', 'tr', 'td', 'br', 'br/', 'strong', 'em', 'a'].concat(extraAllow)).not(disallowed).get();
         if (disallow === '*') {
             allowed = [];
         }
@@ -70,6 +70,9 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
             return url;
         },
+        escapeRegex: function(text) {
+            return text.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+        },
         getHighestRank: function(uid) {
             if (!uid) {
                 uid = API.getUser().id;
@@ -99,6 +102,74 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             }
 
             return '';
+        },
+        closePlugMenus: function() {
+            return $('#playlist-button .icon-arrow-down,#history-button .icon-arrow-up,#footer-user.showing .back').click();
+
+        },
+        generateEmoteHash: function() {
+            var i, emoteHash, allEmotes, firstChar, emoji, Settings;
+
+            Settings = require('plugCubed/Settings');
+            emoteHash = window.plugCubed.emotes.emoteHash = {};
+            allEmotes = $.extend({}, (Settings.emotes.twitchEmotes ? window.plugCubed.emotes.twitchEmotes : {}), (Settings.emotes.twitchSubEmotes ? window.plugCubed.emotes.twitchSubEmotes : {}), (Settings.emotes.tastyEmotes ? window.plugCubed.emotes.tastyEmotes : []), (Settings.emotes.bttvEmotes ? window.plugCubed.emotes.bttvEmotes : {}), (Settings.emotes.ffzEmotes ? window.plugCubed.emotes.ffzEmotes : {}));
+
+            if (typeof allEmotes === 'object' && allEmotes === null) return {};
+
+            for (i in allEmotes) {
+                if (!allEmotes.hasOwnProperty(i)) continue;
+
+                emoji = allEmotes[i];
+                firstChar = emoji.emote.charAt(0).toLowerCase();
+                if (!emoteHash[firstChar]) {
+                    emoteHash[firstChar] = [];
+                    emoteHash[firstChar].longest = 0;
+                }
+                emoteHash[firstChar].push(emoji.emote.toLowerCase());
+                if (emoji.emote.length > emoteHash[firstChar].longest) {
+                    emoteHash[firstChar].longest = emoji.emote.length;
+                }
+            }
+
+        },
+        merge: function(caseSensitive, key) {
+            var arr, args, argsLength, hash, i, j;
+
+            args = arguments;
+            argsLength = args.length;
+            if (typeof caseSensitive !== 'boolean' && typeof caseSensitive === 'string') {
+                key = caseSensitive;
+                caseSensitive = true;
+            }
+            if (typeof key !== 'string') {
+                throw new TypeError('Second argument needs to be a key string');
+            }
+
+            hash = {};
+            arr = [];
+            for (i = 2; i < argsLength; i++) {
+                var argArr = args[i];
+
+                if (!(Array.isArray(argArr) && argArr.length > 0)) continue;
+
+                var argArrLength = argArr.length;
+
+                for (j = 0; j < argArrLength; j++) {
+                    var argArrItem = argArr[j];
+                    var argArrKey = argArrItem[key];
+
+                    if (!caseSensitive && argArrKey) {
+                        argArrKey = argArrKey.toLowerCase();
+                    }
+
+                    if (argArrKey != null && hash[argArrKey] !== true) {
+                        arr.push(argArrItem);
+                        hash[argArrKey] = true;
+                    }
+                }
+            }
+
+            return arr;
         },
         havePlugCubedRank: function(uid) {
             return this.isPlugCubedDeveloper(uid) || this.isPlugCubedSponsor(uid) || this.isPlugCubedSpecial(uid) || this.isPlugCubedAmbassador(uid) || this.isPlugCubedDonatorDiamond(uid) || this.isPlugCubedDonatorPlatinum(uid) || this.isPlugCubedDonatorGold(uid) || this.isPlugCubedDonatorSilver(uid) || this.isPlugCubedDonatorBronze(uid);
@@ -161,7 +232,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return ranks.join(' / ');
         },
         is24Hours: function() {
-            return $('.icon-timestamps-12').length === 1;
+            return $('.icon-timestamps-24').length === 1;
         },
         isPlugCubedDeveloper: function(uid) {
             if (!uid) {
@@ -496,6 +567,11 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 // UserID
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.id') + ' ')).append($('<span>').css('color', '#FFFFFF').text(user.id))));
 
+                // Profile
+                if (user.level > 5) {
+                    message.append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.profile') + ' ')).append($('<span>').css('color', '#FFFFFF').html($('<a>').attr('href', 'https://plug.dj/@/' + user.slug).text('https://plug.dj/@/' + user.slug))));
+                }
+
                 // Rank / Time Joined
                 message.append($('<tr>').append($('<td>').append($('<strong>').text(p3Lang.i18n('info.rank') + ' ')).append($('<span>').css('color', '#FFFFFF').text(rank))).append($('<td>').append($('<strong>').text(p3Lang.i18n('info.joined') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getTimestamp(this.getUserData(user.id, 'joinTime', Date.now()))))));
 
@@ -600,17 +676,18 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             minutes = time.getMinutes();
             seconds = time.getSeconds();
 
-            if (this.is24Hours()) {
+            if (!this.is24Hours()) {
                 if (hours < 12) {
-                    postfix = ' am';
+                    postfix = 'am';
                 } else {
-                    postfix = ' pm';
+                    postfix = 'pm';
                     hours -= 12;
                 }
                 if (hours === 0) {
                     hours = 12;
                 }
             }
+            hours = (hours < 10 ? '0' : '') + hours;
             minutes = (minutes < 10 ? '0' : '') + minutes;
             seconds = (seconds < 10 ? '0' : '') + seconds;
 
@@ -622,6 +699,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             }
 
             var units = {
+                year: 31536000,
+                month: 2592000,
                 week: 604800,
                 day: 86400,
                 hour: 3600,

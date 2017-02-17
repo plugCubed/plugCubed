@@ -11,28 +11,23 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
             panel.addContent($contentDiv);
 
             $formDiv = $('<div>').width(500).css('margin', '25px auto auto auto');
+            $localFileInput = ControlPanel.inputField('url', undefined, 'URL To Background').change(function(e) {
 
-            if (window.File && window.FileReader && window.FileList && window.Blob) {
-                $localFileInput = ControlPanel.inputField('url', undefined, 'URL To Background').change(function(e) {
+                if (e.target.value != null) {
+                    Styles.set('room-settings-background-image', '.room-background { background: url(' + e.target.value + ') fixed center center / cover !important; }');
+                    $clearButton.changeSubmit(true);
 
-                    if (e.target.value != null) {
-                        Styles.set('room-settings-background-image', '.room-background { background: url(' + e.target.value + ') fixed center center / cover !important; }');
-                        $clearButton.changeSubmit(true);
+                    return;
+                }
+                $clearButton.changeSubmit(false);
+            });
 
-                        return;
-                    }
-                    $clearButton.changeSubmit(false);
-                });
+            $clearButton = ControlPanel.button('Clear', false, function() {
+                RoomSettings.execute();
+                $clearButton.changeSubmit(false);
+            });
 
-                $clearButton = ControlPanel.button('Clear', false, function() {
-                    RoomSettings.execute();
-                    $clearButton.changeSubmit(false);
-                });
-
-                $formDiv.append($localFileInput.getJQueryElement()).append($clearButton.getJQueryElement());
-            } else {
-                $formDiv.append('Sorry, your browser does not support this');
-            }
+            $formDiv.append($localFileInput.getJQueryElement()).append($clearButton.getJQueryElement());
 
             panel.addContent($formDiv);
         },

@@ -16,22 +16,25 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
             UserRolloverView.showSimple = function(a, b) {
                 this._showSimple(a, b);
                 var specialIconInfo = p3Utils.getPlugCubedSpecial(a.id);
+                var rank = p3Utils.getRank(a.id);
+
+                if (rank === 'dj') rank = 'residentdj';
 
                 if (p3Utils.hasPermission(a.id, API.ROLE.COHOST) && !p3Utils.hasPermission(a.id, API.ROLE.HOST) && !p3Utils.hasPermission(a.id, API.ROLE.BOUNCER, true)) {
                     this.$roleIcon.removeClass().addClass('icon icon-chat-cohost');
                 }
                 if (CurrentUser.hasPermission(API.ROLE.BOUNCER) || CurrentUser.hasPermission(API.ROLE.BOUNCER, true) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) {
-                    if (this.$voteID == null) {
-                        this.$voteID = $('<i>');
+                    if (this.$p3VoteIcon == null) {
+                        this.$p3VoteIcon = $('<i>');
                     }
 
                     if (a.get('vote') && (a.get('vote') === 1 || a.get('vote') === -1)) {
                         var vote = a.get('vote');
 
-                        this.$voteID.removeClass().addClass('p3VoteIcon icon icon-' + (vote === -1 ? 'meh' : 'woot'));
-                        this.$meta.append(this.$voteID);
+                        this.$p3VoteIcon.removeClass().addClass('p3VoteIcon icon icon-' + (vote === -1 ? 'meh' : 'woot'));
+                        this.$meta.append(this.$p3VoteIcon);
                     } else {
-                        this.$voteID.remove();
+                        this.$p3VoteIcon.remove();
                     }
                 }
 
@@ -44,6 +47,8 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
                 } else {
                     this.$p3UserID.remove();
                 }
+
+                this.$meta.removeClass('rank-regular rank-residentdj rank-bouncer rank-manager rank-cohost rank-host rank-ambassador rank-admin id-' + a.id).addClass('rank-' + rank + ' id-' + a.id);
 
                 if (p3Utils.havePlugCubedRank(a.id)) {
                     if (this.$p3Role == null) {
@@ -73,7 +78,7 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
                 if (this.$p3VoteIcon != null) {
                     this.$p3VoteIcon.empty();
                 }
-                this.$meta.removeClass('has-p3Role is-p3developer is-p3sponsor is-p3special is-p3ambassador is-p3donatorDiamond is-p3donatorPlatinum is-p3donatorGold is-p3donatorSilver is-p3donatorBronze');
+                this.$meta.removeClass('has-p3Role is-p3developer is-p3sponsor is-p3special is-p3ambassador is-p3donatorDiamond is-p3donatorPlatinum is-p3donatorGold is-p3donatorSilver is-p3donatorBronze rank-regular rank-residentdj rank-bouncer rank-manager rank-cohost rank--host rank-ambassador rank-admin');
             };
         },
         doRevert: function() {

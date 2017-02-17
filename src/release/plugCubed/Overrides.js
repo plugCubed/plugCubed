@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/overrides/Context', 'plugCubed/overrides/UserRolloverView', 'plugCubed/overrides/WaitListRow', 'plugCubed/overrides/ChatFacadeEvent'], function() {
+define(['plugCubed/Class', 'plugCubed/overrides/Context', 'plugCubed/overrides/UserRolloverView', 'plugCubed/overrides/WaitListRow', 'plugCubed/overrides/ChatFacadeEvent', 'plugCubed/overrides/AutoComplete'], function() {
     var modules, Class, Handler;
 
     modules = _.toArray(arguments);

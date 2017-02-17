@@ -1,6 +1,6 @@
 module.exports = {
     major: 4,
-    minor: 3,
+    minor: 4,
     patch: 0,
-    build: 40
+    build: 1
 };

@@ -8,8 +8,6 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
 
             // Logger adapted from Brinkie Pie https://github.com/JTBrinkmann
 
-            if (!Settings.chatLog) return;
-
             var message, name, cid;
 
             message = p3Utils.html2text(data.originalMessage);
@@ -23,21 +21,26 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
                     cid = data.cid.replace(/\u202e/g, '\\u202e').replace(/[\u00AD\u200B-\u200D\uFEFF]/g, '').replace(/\s+/g, ' ');
                     cid = p3Utils.repeatString(' ', 25 - cid.length) + cid;
 
-                    if (data.message.indexOf('/em') === 0 || data.message.indexOf('/me') === 0) {
-                        console.log(
+                    if (window.plugCubed.chatHistory.push(p3Utils.getTimestamp() + ' ' + cid + ' ' + name + ': ' + message) > 512) {
+                        window.plugCubed.chatHistory.shift();
+                    }
+                    if (Settings.chatLog) {
+                        if (data.message.indexOf('/em') === 0 || data.message.indexOf('/me') === 0) {
+                            console.log(
                             p3Utils.getTimestamp() + ' \uD83D\uDCAC %c ' + cid + '%c' + name + ': %c' + message,
                             '', 'font-weight: bold', 'font-style: italic');
-                    } else {
-                        console.log(
+                        } else {
+                            console.log(
                             p3Utils.getTimestamp() + ' \uD83D\uDCAC %c ' + cid + '%c' + name + ': %c' + message,
                             '', 'font-weight: bold', '');
+                        }
                     }
-                } else if (data.type.indexOf('moderation') > -1) {
+                } else if (data.type.indexOf('moderation') > -1 && Settings.chatLog) {
                     console.info(
                         p3Utils.getTimestamp() + ' \uD83D\uDCAC %c ' + p3Utils.repeatString(' ', 25) + '%c' + name + ': %c' + message,
                             '', 'font-weight: bold', 'color: #ac76ff');
                 }
-            } else if (data.type.indexOf('system') > -1) {
+            } else if (data.type.indexOf('system') > -1 && Settings.chatLog) {
                 var style = 'font-size: 1.2em; font-weight: bold; border: 1px solid #42a5dc';
 
                 console.info(
@@ -45,7 +48,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
                     style + '; color: #42a5dc; border-right: none',
                     style + '; border-left: none'
                 );
-            } else {
+            } else if (Settings.chatLog) {
                 console.log(p3Utils.getTimestamp() + ' \uD83D\uDCAC %c' + message, 'color: #36F');
             }
         }

@@ -12,7 +12,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
     function guiButton(setting, id, text) {
         return $('<div>').addClass('item p3-s-' + id + (setting ? ' selected' : '')).append($('<i>').addClass('icon icon-check-blue')).append($('<span>').text(text)).data('key', id).click(_onClick);
     }
-
     MenuClass = Class.extend({
         init: function() {
             that = this;
@@ -42,11 +41,17 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 Context.trigger('tooltip:hide');
             }));
             this.onRoomJoin();
-
+            Context.on('show:user show:history show:dashboard dashboard:disable', this.onPlugMenuOpen, this);
             Context.on('room:joined', this.onRoomJoin, this);
         },
         onRoomJoin: function() {
             this.setEnabled('stream', Database.settings.streamDisabled);
+        },
+        onPlugMenuOpen: function(isShowing) {
+            if ((typeof isShowing === 'boolean' && isShowing) || typeof isShowing === 'undefined') {
+                this.toggleMenu(false);
+                dialogControlPanel.toggleControlPanel(false);
+            }
         },
         close: function() {
             menuButton.remove();
@@ -56,7 +61,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             $('#room-bar').css('left', 54).find('.favorite').css('right', 0);
             streamButton.remove();
             clearChatButton.remove();
-
+            Context.off('show:user show:history show:dashboard dashboard:disable', this.onPlugMenuOpen, this);
             Context.off('room:joined', this.onRoomJoin, this);
             dialogControlPanel.close();
         },
@@ -109,11 +114,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     this.setEnabled('chatimages', Settings.chatImages);
                     break;
                 case 'twitchemotes':
-                    Settings.twitchEmotes = !Settings.twitchEmotes;
-                    if (Settings.twitchEmotes) {
+                    Settings.emotes.twitchEmotes = !Settings.emotes.twitchEmotes;
+                    if (Settings.emotes.twitchEmotes) {
                         ChatHandler.loadTwitchEmotes();
+                    } else {
+                        p3Utils.generateEmoteHash();
                     }
-                    this.setEnabled('twitchemotes', Settings.twitchEmotes);
+                    this.setEnabled('twitchemotes', Settings.emotes.twitchEmotes);
                     break;
                 case 'colors':
                     dialogColors.render();
@@ -274,7 +281,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             container.append(guiButton(Settings.etaTimer, 'etatimer', p3Lang.i18n('menu.etatimer')));
             container.append(guiButton(Settings.chatImages, 'chatimages', p3Lang.i18n('menu.chatimages')));
             if (RoomSettings.rules.allowEmotes !== false) {
-                container.append(guiButton(Settings.twitchEmotes, 'twitchemotes', p3Lang.i18n('menu.twitchemotes')));
+                container.append(guiButton(Settings.emotes.twitchEmotes, 'twitchemotes', p3Lang.i18n('menu.twitchemotes')));
             }
             container.append(guiButton(false, 'colors', p3Lang.i18n('menu.customchatcolors') + '...'));
 
@@ -334,12 +341,23 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
          */
         toggleMenu: function(shown) {
             if ($menuDiv == null) {
+                if (typeof shown === 'boolean' && !shown) return;
+
                 this.createMenu();
             }
-            this.shown = shown == null ? !this.shown : shown;
+            this.shown = typeof shown === 'boolean' ? shown : !this.shown;
+
             if (!this.shown) {
                 dialogColors.hide();
             }
+
+            if (this.shown) {
+                $('#playlist-button .icon-arrow-down, #footer-user.showing .back').click();
+                if (window.plugCubedModules && window.plugCubedModules.app && window.plugCubedModules.app.room && window.plugCubedModules.app.room.history) {
+                    window.plugCubedModules.app.room.history.hide();
+                }
+            }
+
             $menuDiv.animate({
                 left: this.shown ? 0 : -500
             }, {

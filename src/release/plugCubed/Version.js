@@ -7,7 +7,7 @@ define(function() {
         build: VERSION.BUILD,
         minified: false,
         getSemver: function() {
-            return this.major + '.' + this.minor + '.' + this.patch + '.' + this.build + (this.prerelease != null && this.prerelease !== '' ? '+' + this.prerelease : '') + (this.minified ? '_min' : '');
+            return this.major + '.' + this.minor + '.' + this.patch + '-' + (this.prerelease != null && this.prerelease !== '' ? this.prerelease : '') + '.' + this.build + (this.minified ? '-min' : '');
         },
         toString: function() {
             return this.major + '.' + this.minor + '.' + this.patch + (this.prerelease != null && this.prerelease !== '' ? '-' + this.prerelease : '') + (this.minified ? '_min' : '') + ' (Build ' + this.build + ')';

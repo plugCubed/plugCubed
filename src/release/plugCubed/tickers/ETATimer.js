@@ -36,13 +36,14 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
                         return;
                     }
 
-                    var time;
+                    var time, isDJ, waitListPos, timePerSong, historyArr, $djButton, boothAttributes;
 
-                    var isDJ = API.getDJ() != null && API.getDJ().id === this.myID;
-                    var waitListPos = API.getWaitListPosition();
-                    var timePerSong = 0;
-                    var historyArr = API.getHistory();
-                    var $djButton = $('#dj-button').find('span');
+                    boothAttributes = booth.attributes;
+                    isDJ = boothAttributes && boothAttributes.currentDJ === this.myID;
+                    waitListPos = API.getWaitListPosition();
+                    timePerSong = 0;
+                    historyArr = API.getHistory();
+                    $djButton = $('#dj-button').find('span');
 
                     for (var i = 0; i < historyArr.length; i++) {
                         if (historyArr[i] == null || historyArr[i].media == null || !_.isFinite(historyArr[i].media.duration)) continue;
@@ -66,7 +67,7 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
                     if (waitListPos < 0) {
                         time = p3Utils.formatTime((API.getWaitList().length * timePerSong) + API.getTimeRemaining());
                         this.$span.text(p3Lang.i18n('eta.joinTime', time));
-                        $djButton.html((booth.attributes && booth.attributes.isLocked ? Lang.dj.boothLocked : (API.getWaitList().length < 50 ? Lang.dj.waitJoin : Lang.dj.waitFull)) + '<br><small class="dark-label">ETA: ' + time + '!</small>');
+                        $djButton.html((boothAttributes.isLocked ? Lang.dj.boothLocked : (boothAttributes.waitingDJs.length < 50 ? Lang.dj.waitJoin : Lang.dj.waitFull)) + '<br><small class="dark-label">ETA: ' + time + '!</small>');
 
                         return;
                     }

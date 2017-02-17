@@ -65,7 +65,7 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils'], function($, p3Lang, p3Ut
             var currentVolume = _PlaybackModel.get('volume');
 
             this.$span.text(currentVolume + '%');
-            this.$circle.css('left', parseInt(this.$hit.css('left'), 10) + this.max * (currentVolume / 100) - this.$circle.width() / 2);
+            this.$circle.css('left', (parseInt(this.$hit.css('left'), 10) + (this.max * (currentVolume / 100))) - (this.$circle.width() / 2));
             if (currentVolume > 60 && !this.$icon.hasClass('icon-volume-on')) {
                 this.$icon.removeClass().addClass('icon icon-volume-on');
             } else if (currentVolume > 0 && !this.$icon.hasClass('icon-volume-half')) {

@@ -548,12 +548,61 @@
     height: 1px;
     background: #1c1f25;
 }
+#p3-control-panel .p3-header:first-child {
+    margin:  0 0 8px;
+}
+#p3-control-panel .p3-header {
+    box-shadow: inset 0 1px 0 0 #555D70;
+    -moz-box-shadow: inset 0 1px 0 0 #555D70;
+    -webkit-box-shadow:  inset 0 1px 0 0 #555D70;
+    margin:  35px 0 8px;
+    height:  21px;
+    width:  100%;
+}
+
+#p3-control-panel .p3-header span {
+    position: relative;
+    text-transform: uppercase;
+    top:  4px;
+    color:  #555D70;
+    font-weight: 400;
+}
+
+#p3-control-panel .p3-item i {
+    display: none;
+}
+
+#p3-control-panel .p3-item span {
+    margin-left:  25px;
+}
 
 #p3-settings .container .item.selected i,
+#p3-control-panel .p3-item.selected i,
 #p3-settings-custom-colors .container .item.selected i {
     display: block;
 }
 
+#p3-control-panel-current .p3-control-left,
+#p3-control-panel-current .p3-control-right {
+    position: relative;
+    width: 50%;
+}
+#p3-control-panel-current .p3-control-left {
+    float: left;
+}
+#p3-control-panel-current .p3-control-right {
+    float: right;
+}
+#p3-control-panel-current .p3-text-box {
+    min-height:300px;
+    max-height:500px !important;
+    width:100% !important;
+    font-family: monospace !important;
+    margin-left: 0px !important;
+    text-align:left !important;
+    resize: none;
+    font-size:12px !important;
+}
 .chat-header-button {
     margin-right: 18px;
 }
@@ -737,10 +786,8 @@
 .is-p3ambassador .bdg {
     background-size: cover !important;
     background-position: 0 0;
-    top: 2px;
-    left: 3px;
-    height: 26px;
-    width: 26px;
+    height: 30px;
+    width: 30px;
 }
 
 .is-p3developer .bdg {
@@ -759,13 +806,15 @@
 
 #chat .is-p3developer .un,
 #user-lists .user > .icon.icon-chat-p3developer + .name,
-#user-rollover .meta.is-p3developer .p3Role {
+#user-rollover .meta.is-p3developer .p3Role,
+#user-rollover .meta.is-p3developer .username {
     color: #17B7EF !important;
 }
 
 #chat .is-p3ambassador .un,
 #user-lists .user > .icon.icon-chat-p3ambassador + .name,
-#user-rollover .meta.is-p3ambassador .p3Role {
+#user-rollover .meta.is-p3ambassador .p3Role,
+#user-rollover .meta.is-p3ambassador .username {
     color: #FFC926 !important;
 }
 
@@ -879,6 +928,13 @@
     cursor: pointer;
 }
 
+#p3-control-panel .p3-item {
+    margin-top:  15px;
+    cursor:  pointer;
+    width:  auto;
+    height:  15px;
+}
+
 #p3-control-panel .button.submit {
     background: #00b5e6;
     color: #eeeeee;
@@ -966,4 +1022,16 @@
 }
 .p3VoteIcon {
     right: 0;
+}
+
+.p3-strike {
+    text-decoration: line-through;
+}
+
+blockquote.p3-blockquote {
+    border-radius: 3px;
+    border-left: 3px solid #3D3D3D;
+    quotes: none;
+    margin: .5em 10px;
+    padding: .5em 10px;
 }

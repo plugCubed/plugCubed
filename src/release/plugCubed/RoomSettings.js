@@ -89,6 +89,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             that.haveRoomSettings = true;
         } else {
             that.haveRoomSettings = false;
+            require('plugCubed/CustomChatColors').update();
 
             return;
         }
@@ -347,13 +348,6 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                     this.rules.allowAutorespond = true;
                     this.rules.allowEmotes = true;
                     this.rules.allowShowingMehs = true;
-                }
-
-                // roomscript
-                if (roomSettings.roomscript != null) {
-
-                    // TODO: Make this
-
                 }
 
                 // Update autorespond

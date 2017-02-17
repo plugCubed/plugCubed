@@ -1,13 +1,26 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/RoomSettings'], function($, Class, p3Utils, p3Lang, Settings, RoomSettings) {
+define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/RoomSettings'], function(Class, p3Utils, p3Lang, Settings, RoomSettings) {
+    var twitchEmoteTemplate, Context, PopoutView, plugEmotes, regEmotes, start;
 
-    var twitchEmoteTemplate = '';
-    var twitchEmotes = [];
-    var Context = window.plugCubedModules.context;
-    var PopoutView = window.plugCubedModules.PopoutView;
+    twitchEmoteTemplate = '';
+    Context = window.plugCubedModules.context;
+    PopoutView = window.plugCubedModules.PopoutView;
+    plugEmotes = window.plugCubedModules.emoji;
+    regEmotes = /:([a-zA-Z0-9]+):/g;
+    plugEmotes.include_title = true;
 
-    $('#chat-messages').on('mouseover', '.twitch-emote', function() {
-        Context.trigger('tooltip:show', $(this).data('emote'), $(this), true);
-    }).on('mouseout', '.twitch-emote', function() {
+    $('#chat-messages').on('mouseover', '.p3-twitch-emote, .p3-tasty-emote, .p3-bttv-emote, .p3-twitch-sub-emote, .p3-ffz-emote, .emoji-inner', function() {
+        if ($(this)[0].title != null && $(this)[0].title.length > 0) {
+            $(this)[0].dataset.emote = ' ' + $(this)[0].title;
+            $(this)[0].removeAttribute('title');
+        }
+        if ($(this)[0].className && $(this)[0].className.indexOf('gemoji-plug-') > -1) {
+            $(this)[0].dataset.emote = /gemoji-plug-(.*)/gi.exec($(this)[0].className)[1];
+        }
+
+        if ($(this).data('emote') != null && $(this).data('emote').length > 0) {
+            Context.trigger('tooltip:show', $(this).data('emote'), $(this), true);
+        }
+    }).on('mouseout', '.p3-twitch-emote, .p3-tasty-emote, .p3-bttv-emote, .p3-twitch-sub-emote, .p3-ffz-emote, .emoji-inner', function() {
         Context.trigger('tooltip:hide');
     });
 
@@ -132,7 +145,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
                     // If supported image link
                     if (imageURL !== null) {
-                        var image = $('<img>').attr('src', imageURL).css('display', 'block').css('max-width', '100%').css('height', 'auto').css('margin', '0 auto');
+                        var image = $('<img>').attr('src', imageURL).css('display', 'block').css('max-width', '100%').css('height', 'auto').css('margin', '0 auto').error(function() {
+                            $(this).attr('src', url);
+                        });
 
                         $(this).html(image);
                     }
@@ -144,27 +159,118 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         return text;
     }
 
-    function convertEmotes(text) {
-        if (Settings.twitchEmotes && RoomSettings.rules.allowEmotes !== false) {
-            var nbspStart = p3Utils.startsWithIgnoreCase(text, '&nbsp;');
+    function tokenize(text) {
+        var chunk, i, tokens;
 
-            text = ' ' + (nbspStart ? text.replace('&nbsp;', '') : text) + ' ';
+        i = 0;
+        tokens = [];
 
-            for (var i in twitchEmotes) {
-                if (!twitchEmotes.hasOwnProperty(i)) continue;
-                var twitchEmote = twitchEmotes[i];
-                var temp = $('<div>');
-                var image = $('<img>').addClass('p3-twitch-emote').attr('src', twitchEmoteTemplate.split('{image_id}').join(twitchEmote.image_id)).data('emote', $('<span>').html(twitchEmote.emote).text());
+        function delimited(delim, type) {
+            if (chunk[0] === delim && chunk[1] !== delim) {
+                var end = chunk.indexOf(delim, 1);
 
-                temp.append(image);
-                text = text.replace(new RegExp('(:' + twitchEmote.emote + ':)', 'gi'), temp.html());
+                if (end > -1) {
+                    tokens.push({
+                        type: type,
+                        text: chunk.slice(1, end)
+                    });
+                    i += end + 1;
 
+                    return true;
+                }
             }
-
-            return (nbspStart ? '&nbsp;' : '') + text.substr(1, text.length - 2);
         }
 
-        return text;
+        function space() {
+            var msg = /^\s+/.exec(text.slice(i));
+
+            if (msg) {
+                tokens.push({
+                    type: 'word',
+                    text: msg[0]
+                });
+                i += msg[0].length;
+            }
+        }
+
+        while ((chunk = text.slice(i))) {
+            var found =
+                delimited('_', 'em') ||
+                delimited('*', 'strong') ||
+                delimited('`', 'code') ||
+                delimited('\\', 'quote') ||
+                delimited('~', 'strike');
+
+            if (!found) {
+                var end = chunk.indexOf(' ', 1) + 1;
+
+                if (end === 0) {
+                    end = chunk.length;
+                }
+                tokens.push({
+                    type: 'word',
+                    text: chunk.slice(0, end)
+                });
+                i += end;
+            }
+            space();
+        }
+
+        return tokens;
+    }
+
+    function transform(text) {
+        if (!Settings.markdown) return text;
+
+        return tokenize(text).reduce(function(string, token) {
+            return string + (
+                token.type === 'em' ? '<em>' + transform(token.text) + '</em>' :
+                token.type === 'strong' ? '<strong>' + transform(token.text) + '</strong>' :
+                token.type === 'code' ? '<code>' + token.text + '</code>' :
+                token.type === 'quote' ? '<blockquote class="p3-blockquote">' + token.text + '</blockquote>' :
+                token.type === 'strike' ? '<span class="p3-strike">' + transform(token.text) + '</span>' :
+                token.text
+            );
+        }, '');
+    }
+
+    function convertEmoteByType(text, type) {
+        if (typeof text !== 'string' || typeof type !== 'string' || ['bttvEmotes', 'ffzEmotes', 'twitchEmotes', 'twitchSubEmotes', 'tastyEmotes'].indexOf(type) === -1) return text;
+
+        var temp, image, emoteData, emote, className;
+
+        emoteData = window.plugCubed.emotes[type];
+        className = type === 'bttvEmotes' ? 'p3-bttv-emote' : type === 'twitchEmotes' ? 'p3-twitch-emote' : type === 'twitchSubEmotes' ? 'p3-twitch-sub-emote' : type === 'tastyEmotes' ? 'p3-tasty-emote' : type === 'ffzEmotes' ? 'p3-ffz-emote' : '';
+        image = $('<img>');
+        temp = $('<div>');
+
+        return text.replace(regEmotes, function(shortcode) {
+            var lowerCode = shortcode.toLowerCase();
+
+            emote = emoteData[lowerCode] || shortcode;
+
+            if (emote && emote.imageURL) {
+                temp = temp.empty().append(image.removeClass().addClass(className).attr('src', emote.imageURL).attr('data-emote', p3Utils.html2text(emote.emote)));
+
+                return shortcode.replace(emote.emoteRegex, temp.html());
+            }
+
+            return shortcode;
+        });
+    }
+
+    function convertEmotes(text) {
+        if (typeof text !== 'string' || RoomSettings.rules.allowEmotes === false || text.indexOf(':') === -1) return text;
+
+        return convertEmoteByType(
+            convertEmoteByType(
+                convertEmoteByType(
+                    convertEmoteByType(
+                        convertEmoteByType(text, 'twitchEmotes'),
+                        'tastyEmotes'),
+                    'twitchSubEmotes'),
+                'bttvEmotes'),
+            'ffzEmotes');
     }
 
     function onChatReceived(data) {
@@ -203,25 +309,24 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
             msgClass += ' is-p3' + p3Utils.getHighestRank(data.uid);
         }
 
-        msgClass += ' from';
-        if (p3Utils.hasPermission(data.uid, API.ROLE.DJ)) {
-            msgClass += '-';
-            if (p3Utils.hasPermission(data.uid, API.ROLE.HOST, true)) {
-                msgClass += 'admin';
-            } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER, true)) {
-                msgClass += 'ambassador';
-            } else if (p3Utils.hasPermission(data.uid, API.ROLE.HOST)) {
-                msgClass += 'host';
-            } else if (p3Utils.hasPermission(data.uid, API.ROLE.COHOST)) {
-                $this.find('.icon-chat-host').attr('class', 'icon icon-chat-cohost');
-                msgClass += 'cohost';
-            } else if (p3Utils.hasPermission(data.uid, API.ROLE.MANAGER)) {
-                msgClass += 'manager';
-            } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER)) {
-                msgClass += 'bouncer';
-            } else if (p3Utils.hasPermission(data.uid, API.ROLE.DJ)) {
-                msgClass += 'dj';
-            }
+        msgClass += ' from-';
+        if (p3Utils.hasPermission(data.uid, API.ROLE.HOST, true)) {
+            msgClass += 'admin';
+        } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER, true)) {
+            msgClass += 'ambassador';
+        } else if (p3Utils.hasPermission(data.uid, API.ROLE.HOST)) {
+            msgClass += 'host';
+        } else if (p3Utils.hasPermission(data.uid, API.ROLE.COHOST)) {
+            $this.find('.icon-chat-host').attr('class', 'icon icon-chat-cohost');
+            msgClass += 'cohost';
+        } else if (p3Utils.hasPermission(data.uid, API.ROLE.MANAGER)) {
+            msgClass += 'manager';
+        } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER)) {
+            msgClass += 'bouncer';
+        } else if (p3Utils.hasPermission(data.uid, API.ROLE.DJ)) {
+            msgClass += 'dj';
+        } else if (p3Utils.hasPermission(data.uid, API.ROLE.NONE)) {
+            msgClass += 'regular';
         }
 
         if (data.uid === API.getUser().id) {
@@ -229,6 +334,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
         }
         data.message = convertImageLinks(data.message, $msg);
         data.message = convertEmotes(data.message);
+        if (~['mention', 'message', 'emote'].indexOf(data.type)) {
+            data.message = transform(data.message);
+        }
 
         if (p3Utils.havePlugCubedRank(data.uid) || p3Utils.hasPermission(data.uid, API.ROLE.DJ)) {
             var p3Rank = p3Utils.getHighestRank(data.uid);
@@ -254,12 +362,16 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
         // Delete own chat if Bouncer or above
         if ((p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER, true) || p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER)) && data.uid === API.getUser().id) {
+            if ($this.hasClass('deletable')) return;
+
             var deleteButton = $('<div>').addClass('delete-button').text('Delete');
 
             deleteButton.click(function() {
-                return API.moderateDeleteChat($this.data('cid'));
+                return $.ajax({
+                    type: 'DELETE',
+                    url: '/_/chat/' + $this.data('cid')
+                });
             });
-            if ($this.hasClass('deletable')) return;
 
             $this
                 .addClass('deletable')
@@ -276,15 +388,20 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
                 $this.data('translated', false);
             } else {
                 $msg.html('<em>Translating...</em>');
-                $.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Ftranslate.google.com%2Ftranslate_a%2Ft%3Fclient%3Dp3%26sl%3Dauto%26tl%3D' + API.getUser().language + '%26ie%3DUTF-8%26oe%3DUTF-8%26q%3D' + encodeURIComponent(encodeURIComponent(data.message.replace('&nbsp;', ' '))) + '%22&format=json', function(a) {
-                    if (a.error) {
+                $.getJSON('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20161006T200452Z.20a8f9334badc4dc.03bec1dcee7047013bf54af595d257c5e8fca99d&lang=en&options=1&text=' + encodeURIComponent(data.message.replace('&nbsp;', ' ')))
+                    .done(function(langData) {
+                        if (langData.error) {
+                            $msg.html(previousMessages + convertEmotes(convertImageLinks(data.message)));
+                            $this.data('translated', false);
+                        } else if (langData.detected && langData.detected.lang && langData.detected.lang !== 'en') {
+                            $msg.html(previousMessages + convertEmotes(convertImageLinks((Array.isArray(langData.text) && langData.text.length > 0 ? langData.text[0] : data.message))));
+                            $this.data('translated', true);
+                        }
+                    })
+                    .fail(function() {
                         $msg.html(previousMessages + convertEmotes(convertImageLinks(data.message)));
                         $this.data('translated', false);
-                    } else {
-                        $msg.html(previousMessages + convertEmotes(convertImageLinks(p3Utils.objectSelector(a, 'query.results.json.sentences.trans', data.message))));
-                        $this.data('translated', true);
-                    }
-                }, 'json');
+                    });
             }
             e.stopPropagation();
         });
@@ -322,23 +439,177 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
     var Handler = Class.extend({
         loadTwitchEmotes: function() {
-            if (RoomSettings.rules.allowEmotes === false) return;
-            $.getJSON('https://twitchemotes.com/api_cache/v2/global.json', function(data) {
-                twitchEmoteTemplate = data.template.small;
+            if (RoomSettings.rules.allowEmotes === false || !Settings.emotes.twitchEmotes) return;
+            start = performance.now();
 
-                twitchEmotes = [];
-                for (var i in data.emotes) {
-                    if (!data.emotes.hasOwnProperty(i)) continue;
-                    twitchEmotes.push({
-                        emote: i,
-                        image_id: data.emotes[i].image_id
-                    });
-                }
+            $.getJSON('https://twitchemotes.com/api_cache/v2/global.json')
+                .done(function(data) {
+                    twitchEmoteTemplate = data.template.small;
+                    var i, emotes, twitchEmotes;
 
-                console.log('[plug³ Twitch Emotes]', twitchEmotes.length + ' Twitch.TV emoticons loaded!');
-            });
+                    emotes = data.emotes;
+                    twitchEmotes = window.plugCubed.emotes.twitchEmotes = {};
+
+                    for (i in emotes) {
+                        if (!emotes.hasOwnProperty(i)) continue;
+                        twitchEmotes[':' + i.toLowerCase() + ':'] = {
+                            emote: i,
+                            emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(i.toLowerCase()) + ':)', 'gi'),
+                            imageURL: twitchEmoteTemplate.replace('{image_id}', emotes[i].image_id),
+                            type: 'twitchemote'
+                        };
+                    }
+                    twitchEmotes = _.chain(twitchEmotes).indexBy('emote').values().value();
+                    p3Utils.generateEmoteHash();
+
+                    console.log('[plug³ Twitch Emotes]', twitchEmotes.length + ' Twitch.TV emoticons loaded in ' + (performance.now() - start) + 'ms');
+                })
+                .fail(function() {
+                    console.error('[plug³ Twitch Emotes] Failed to load JSON file');
+                });
+        },
+        loadTwitchSubEmotes: function() {
+            if (RoomSettings.rules.allowEmotes === false || !Settings.emotes.twitchSubEmotes) return;
+            start = performance.now();
+
+            $.getJSON('https://twitchemotes.com/api_cache/v2/subscriber.json')
+                .done(function(data) {
+                    var i, j, channels, twitchSubEmotes;
+
+                    twitchSubEmotes = window.plugCubed.emotes.twitchSubEmotes = {};
+                    channels = data.channels;
+
+                    for (i in channels) {
+                        if (!channels.hasOwnProperty(i)) continue;
+
+                        var emotes = channels[i].emotes;
+                        var emotesLength = emotes.length;
+
+                        for (j = 0; j < emotesLength; j++) {
+                            if (emotes[j].code) {
+
+                                // skip this since we already have kappa, kreygasm, dansgame in twitchEmotes that ignores case.
+                                if (emotes[j].code.toLowerCase() === 'kreygasm' || emotes[j].code.toLowerCase() === 'kappa' || emotes[j].code.toLowerCase() === 'dansgame') continue;
+                                twitchSubEmotes[':' + emotes[j].code.toLowerCase() + ':'] = {
+                                    emote: emotes[j].code,
+                                    emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(emotes[j].code.toLowerCase()) + ':)', 'gi'),
+                                    imageURL: twitchEmoteTemplate.replace('{image_id}', emotes[j].image_id),
+                                    type: 'twitchsubemote'
+                                };
+                            }
+                        }
+
+                    }
+
+                    twitchSubEmotes = _.chain(twitchSubEmotes).indexBy('emote').values().value();
+                    p3Utils.generateEmoteHash();
+
+                    console.log('[plug³ Twitch Subscriber Emotes]', twitchSubEmotes.length + ' Twitch.TV Subscriber emoticons loaded in ' + (performance.now() - start) + 'ms');
+                })
+                .fail(function() {
+                    console.error('[plug³ Twitch Subscriber Emotes] Failed to load JSON file');
+                });
+        },
+        convertEmotes: convertEmotes,
+        loadBttvEmotes: function() {
+            if (RoomSettings.rules.allowEmotes === false || !Settings.emotes.bttvEmotes) return;
+            start = performance.now();
+
+            $.getJSON('https://plugcubed.net/scripts/emojis/bttv.json', {
+                _: new Date().getTime()
+            })
+                .done(function(data) {
+                    var bttvEmotes, i, emote;
+
+                    bttvEmotes = window.plugCubed.emotes.bttvEmotes = {};
+
+                    // eslint-disable-next-line guard-for-in
+                    for (i in data) {
+                        emote = data[i];
+                        if (emote) {
+                            bttvEmotes[':' + i.toLowerCase() + ':'] = {
+                                emote: i,
+                                emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(i.toLowerCase()) + ':)', 'gi'),
+                                imageURL: 'https://cdn.betterttv.net/emote/' + emote + '/1x',
+                                type: 'bttvemote'
+                            };
+                        }
+                    }
+                    bttvEmotes = _.chain(bttvEmotes).indexBy('emote').values().value();
+                    p3Utils.generateEmoteHash();
+
+                    console.log('[plug³ BetterTTV Emotes]', bttvEmotes.length + ' BetterTTV emoticons loaded in ' + (performance.now() - start) + 'ms');
+
+                })
+                .fail(function() {
+                    console.error('[plug³ BetterTTV Emotes] Failed to load JSON file');
+                });
+        },
+        loadFfzEmotes: function() {
+            if (RoomSettings.rules.allowEmotes === false || !Settings.emotes.ffzEmotes) return;
+            start = performance.now();
+
+            $.getJSON('https://plugcubed.net/scripts/emojis/ffz.json', {
+                _: new Date().getTime()
+            })
+                .done(function(data) {
+                    var ffzEmotes, i, emote;
+
+                    ffzEmotes = window.plugCubed.emotes.ffzEmotes = {};
+
+                    // eslint-disable-next-line guard-for-in
+                    for (i in data) {
+                        emote = data[i];
+                        if (emote && i.toLowerCase() !== 'lul') {
+                            ffzEmotes[':' + i.toLowerCase() + ':'] = {
+                                emote: i,
+                                emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(i.toLowerCase()) + ':)', 'gi'),
+                                imageURL: 'https://cdn.frankerfacez.com/emoticon/' + emote + '/1',
+                                type: 'ffzEmote'
+                            };
+                        }
+                    }
+                    ffzEmotes = _.chain(ffzEmotes).indexBy('emote').values().value();
+                    p3Utils.generateEmoteHash();
+
+                    console.log('[plug³ frankerFFZ Emotes]', ffzEmotes.length + ' frankerFFZ emoticons loaded in ' + (performance.now() - start) + 'ms');
+
+                })
+                .fail(function() {
+                    console.error('[plug³ frankerFFZ Emotes] Failed to load JSON file');
+                });
         },
         loadTastyEmotes: function() {
+            if (RoomSettings.rules.allowEmotes === false || !Settings.emotes.tastyEmotes) return;
+            start = performance.now();
+
+            $.getJSON('https://emotes.tastycat.org/emotes-full.json')
+                .done(function(data) {
+                    var i, tastyEmotes;
+
+                    tastyEmotes = window.plugCubed.emotes.tastyEmotes = {};
+
+                    for (i in data.emotes) {
+                        if (!data.emotes.hasOwnProperty(i)) continue;
+                        tastyEmotes[':' + i.toLowerCase() + ':'] = {
+                            emote: i,
+                            emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(i.toLowerCase()) + ':)', 'gi'),
+                            imageURL: data.emotes[i].url,
+                            height: data.emotes[i].height,
+                            width: data.emotes[i].width,
+                            type: 'tastyemote'
+                        };
+                    }
+
+                    tastyEmotes = _.chain(tastyEmotes).indexBy('emote').values().value();
+                    p3Utils.generateEmoteHash();
+
+                    console.log('[plug³ Tasty Emotes]', tastyEmotes.length + ' Tastycat emoticons loaded in ' + (performance.now() - start) + 'ms');
+
+                })
+                .fail(function(data) {
+                    console.error('[plug³ Tasty Emotes] Failed to load JSON file');
+                });
 
         },
         register: function() {
@@ -358,4 +629,3 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugC
 
     return new Handler();
 });
-

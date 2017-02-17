@@ -1,6 +1,6 @@
 define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Lang', 'plugCubed/Utils',
-    'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/handlers/DialogHandler', 'plugCubed/handlers/FullscreenHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/overrides/RoomUserListRow', 'plugCubed/Overrides'
-], function(module, Class, Notifications, Version, Styles, Settings, p3Lang, p3Utils, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, DialogHandler, FullscreenHandler, Features, Tickers, Panels, p3RoomUserListRow, Overrides) {
+    'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/handlers/DialogHandler', 'plugCubed/handlers/FullscreenHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/overrides/RoomUserListRow', 'plugCubed/Overrides', 'plugCubed/Socket'
+], function(module, Class, Notifications, Version, Styles, Settings, p3Lang, p3Utils, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, DialogHandler, FullscreenHandler, Features, Tickers, Panels, p3RoomUserListRow, Overrides, Socket) {
     var Loader;
     var loaded = false;
     var RoomUsersListView = window.plugCubedModules.RoomUsersListView;
@@ -9,7 +9,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
     function __init() {
         p3Utils.chatLog(undefined, p3Lang.i18n('running', Version) + '</span><br><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), Settings.colors.infoMessage1, -10);
 
-        $('head').append('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://plugcubed.net/scripts/release/plugCubed.css?v=' + Version.getSemver() + '"/>');
+        $('head').append('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://plugcubed.net/scripts/release/plugCubed.css?v=' + Date.now() + '"/>');
         var users = API.getUsers();
 
         for (var i = 0; i < users.length; i++) {
@@ -22,14 +22,16 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
 
         initBody();
         window.plugCubed.version = Version.getSemver();
+        window.plugCubed.chatHistory = [];
         window.plugCubed.emotes = {
-            twitchEmotes: [],
-            twitchSubEmotes: [],
-            tastyEmotes: [],
-            bttvEmotes: [],
-            customEmotes: [],
+            twitchEmotes: {},
+            twitchSubEmotes: {},
+            tastyEmotes: {},
+            bttvEmotes: {},
+            customEmotes: {},
             emoteHash: {},
-            rcsEmotes: []
+            ffzEmotes: {},
+            rcsEmotes: {}
         };
         window.thedark1337 = window.plugCubed.thedark1337 =
             '\n▄▄▄█████▓ ██░ ██ ▓█████ ▓█████▄  ▄▄▄       ██▀███   ██ ▄█▀   ██ ▓▀████▄ ▓▀████▄ ▒▀████▄' +
@@ -53,6 +55,9 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         Settings.load();
 
         RoomSettings.update();
+
+        Socket.connect();
+
         if (p3Utils.getRoomID() === 'tastycat') RoomSettings.rules.allowShowingMehs = false;
 
         Panels.register();
@@ -67,7 +72,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         var rank = p3Utils.getRank();
 
         if (rank === 'dj') rank = 'residentdj';
-        $('body').addClass('rank-' + rank).addClass('id-' + API.getUser().id);
+        $('body').addClass('rank-' + rank + ' id-' + API.getUser().id);
     }
 
     Loader = Class.extend({
@@ -87,6 +92,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
 
             Menu.close();
             RoomSettings.close();
+            Socket.disconnect();
             Features.unregister();
             Notifications.unregister();
             Tickers.unregister();
@@ -117,4 +123,3 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
 
     return Loader;
 });
-
