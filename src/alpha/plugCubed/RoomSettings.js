@@ -3,12 +3,12 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
     var Context, Layout, PlugUI, RoomModel, RoomLoader, Handler, showMessage, oriLang, Lang, langKeys, ranks, that;
 
     /**
-     * @property {{ background: String, chat: { admin: String, ambassador: String, bouncer: String, cohost: String, residentdj: String, host: String, manager: String }, footer: String, header: String }} colors
-     * @property {{ font: Array, import: Array, rule: Array }} css
-     * @property {{ background: String, booth: String, icons: { admin: String, ambassador: String, bouncer: String, cohost: String, residentdj: String, host: String, manager: String }, playback: String }} images
-     * @property {{ plugCubed: Object, plugDJ: Object }} text
-     * @property {{ allowAutorespond: Boolean, allowAutojoin: Boolean, allowAutowoot: Boolean }} rules
-     * @property {String|undefined} roomscript
+     * @property {{ background: String, chat: { admin: String, ambassador: String, bouncer: String, cohost: String, residentdj: String, host: String, manager: String }|null, footer: String, header: String }|null} colors
+     * @property {{ font: Array, import: Array, rule: Array }|null} css
+     * @property {{ background: String, booth: String, icons: { admin: String, ambassador: String, bouncer: String, cohost: String, residentdj: String, host: String, manager: String }|null, playback: String }|null} images
+     * @property {{ plugCubed: Object, plugDJ: Object }|null} text
+     * @property {{ allowAutorespond: Boolean|String, allowAutojoin: Boolean|String, allowAutowoot: Boolean|String }|null} rules
+     * @property {String|null} roomscript
      */
     var roomSettings; // eslint-disable-line one-var
 
@@ -55,7 +55,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
     }
 
     function setFooterIcon() {
-        $('#footer-user .name .icon').removeClass().addClass('icon icon-chat-' + p3Utils.getRank());
+        $('#footer-user').find('.name .icon').removeClass().addClass('icon icon-chat-' + p3Utils.getRank());
     }
 
     function setPlugDJLang(key, value) {
@@ -101,11 +101,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             if (isRCS) {
                 roomSettings = that.convertRCSToPlugCubed(settings);
             }
-            if (!(Settings.useRoomSettings[p3Utils.getRoomID()] != null ? Settings.useRoomSettings[p3Utils.getRoomID()] : true)) {
-                showMessage = false;
-            } else {
-                showMessage = true;
-            }
+            showMessage = Settings.useRoomSettings[p3Utils.getRoomID()] != null ? Settings.useRoomSettings[p3Utils.getRoomID()] : true;
             that.execute();
         }).fail(function(jqXHR, textStatus, errorThrown) {
             console.error(jqXHR, textStatus, errorThrown);
@@ -296,7 +292,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                         }
 
                         // images.booth
-                        if (roomSettings.images.booth != null && typeof roomSettings.images.booth === 'string') {
+                        if (roomSettings.images.booth != null && typeof roomSettings.images.booth === 'string' && roomSettings.images.booth.indexOf('http') === 0) {
                             $('#dj-booth').append($('<div id="p3-dj-booth">').css('background-image', 'url("' + p3Utils.proxifyImage(roomSettings.images.booth) + '")'));
                         }
 
@@ -305,7 +301,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                             a = {};
                             for (i in roomSettings.images.icons) {
                                 if (!roomSettings.images.icons.hasOwnProperty(i)) continue;
-                                if (ranks.indexOf(i) > -1 && typeof roomSettings.images.icons[i] === 'string') {
+                                if (ranks.indexOf(i) > -1 && typeof roomSettings.images.icons[i] === 'string' && roomSettings.images.icons[i].indexOf('http') === 0) {
                                     a[i] = p3Utils.proxifyImage(roomSettings.images.icons[i]);
                                 }
                             }
@@ -341,7 +337,6 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                     this.rules.allowAutorespond = roomSettings.rules.allowAutorespond == null || roomSettings.rules.allowAutorespond === 'true' || roomSettings.rules.allowAutorespond === true;
                     this.rules.allowEmotes = roomSettings.rules.allowEmotes == null || roomSettings.rules.allowEmotes === 'true' || roomSettings.rules.allowEmotes === true;
                     this.rules.allowShowingMehs = roomSettings.rules.allowShowingMehs == null || roomSettings.rules.allowShowingMehs === 'true' || roomSettings.rules.allowShowingMehs === true;
-
                 } else {
                     this.rules.allowAutowoot = true;
                     this.rules.allowAutojoin = true;

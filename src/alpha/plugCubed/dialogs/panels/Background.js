@@ -15,17 +15,16 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
 
                 if (e.target.value != null) {
                     var url = e.target.value;
-                    var reg = /\.(jpeg|jpg|gif|png)$/;
 
-                    if (!reg.test(url)) return false;
-                    $.get(url, function(dat, stat) {
-                        if (stat === 'success') {
-                            Styles.set('room-settings-background-image', '.room-background { background: url(' + p3Utils.proxifyImage(url) + ') fixed center center / cover !important; }');
-                            $clearButton.changeSubmit(true);
-
-                            return;
-                        }
-                    });
+                    if (p3Utils.endsWithIgnoreCase(url, ['.gif', '.jpg', '.jpeg', '.png']) || p3Utils.endsWithIgnoreCase(p3Utils.getBaseURL(url), ['.gif', '.jpg', '.jpeg', '.png'])) {
+                        url = p3Utils.proxifyImage(url);
+                        $.get(url, function(dat, stat) {
+                            if (stat === 'success') {
+                                Styles.set('room-settings-background-image', '.room-background { background: url(' + url + ') fixed center center / cover !important; }');
+                                $clearButton.changeSubmit(true);
+                            }
+                        });
+                    }
                 }
                 $clearButton.changeSubmit(false);
             });
