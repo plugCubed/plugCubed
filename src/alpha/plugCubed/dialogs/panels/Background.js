@@ -16,14 +16,15 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
                 if (e.target.value != null) {
                     var url = e.target.value;
                     var reg = /\.(jpeg|jpg|gif|png)$/;
-                    if (!reg.test(url)) return false;
 
+                    if (!reg.test(url)) return false;
                     $.get(url, function (dat, stat) {
-                        if (stat == "success") {
-                          Styles.set('room-settings-background-image', '.room-background { background: url(' + p3Utils.proxifyImage(url) + ') fixed center center / cover !important; }');
-                          $clearButton.changeSubmit(true);
-                          return;
-                        } else return false;
+                        if (stat === 'success') {
+                            Styles.set('room-settings-background-image', '.room-background { background: url(' + p3Utils.proxifyImage(url) + ') fixed center center / cover !important; }');
+                            $clearButton.changeSubmit(true);
+
+                            return;
+                        }
                     });
                 }
                 $clearButton.changeSubmit(false);
