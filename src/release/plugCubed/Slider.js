@@ -24,7 +24,7 @@ define(['jquery', 'plugCubed/Class'], function($, Class) {
             return this;
         },
         onStart: function(event) {
-            this._min = this.$hit.offset().left;
+            this._min = this.$hit.offset().left - this.$circle.width();
             this._max = this.$hit.width() - this.$circle.width();
             $(document).on('mouseup', this.stopBind).on('mousemove', this.moveBind);
 

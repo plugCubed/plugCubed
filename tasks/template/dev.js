@@ -1,7 +1,5 @@
 'use strict';
 
-const path = require('path');
-
 const devVersion = require('../../src/dev/version');
 const fs = require('graceful-fs');
 const gulp = require('gulp');

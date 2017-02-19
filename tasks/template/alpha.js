@@ -1,29 +1,21 @@
 'use strict';
 
 const alphaVersion = require('../../src/alpha/version');
-const data = require('gulp-data');
 const fs = require('graceful-fs');
 const gulp = require('gulp');
 const justReplace = require('gulp-just-replace');
 const rename = require('gulp-rename');
-const template = require('gulp-template');
-const eslint = require('gulp-eslint');
+const exec = require('gulp-exec');
 
 gulp.task('template:alpha', () => {
+    const contents = fs.readFileSync('bin/alpha/plugCubed.src.js', 'utf8');
+
     return gulp
         .src('src/shared/loader.template.js')
-        .pipe(data((file, cb) => {
-            fs.readFile('bin/alpha/plugCubed.src.js', 'utf8', (err, contents) => {
-                if (err) {
-                    return cb(err);
-                }
-                cb(null, {
-                    code: contents
-                });
-            });
-        }))
-        .pipe(template())
         .pipe(justReplace([{
+            search: /\/\/ CODE_TO_REPLACE/,
+            replacement: contents
+        }, {
             search: /%YEAR%/g,
             replacement: new Date().getFullYear()
         }, {
@@ -31,5 +23,6 @@ gulp.task('template:alpha', () => {
             replacement: `${alphaVersion.major}.${alphaVersion.minor}.${alphaVersion.patch}.${alphaVersion.build}+alpha`
         }]))
         .pipe(rename('plugCubed.js'))
+        .pipe(exec('eslint --fix <%= file.path %>'))
         .pipe(gulp.dest('bin/alpha/'));
 });

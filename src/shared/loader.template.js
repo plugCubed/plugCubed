@@ -44,7 +44,8 @@
             plugCubed.close();
         }
 
-        <%= code %>
+        // CODE_TO_REPLACE
+
         require(['plugCubed/Loader'], function(Loader) {
             window.plugCubed = new Loader();
             if  (typeof console.time === 'function') console.time('[plug³] Loaded')
