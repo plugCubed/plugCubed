@@ -57,8 +57,6 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
     var Handler = Class.extend({
         proxifyImage: function(url) {
-            console.trace('Proxify url', url);
-
             if (!this.startsWithIgnoreCase(url, 'https://api.plugCubed.net/proxy/')) {
                 return 'https://api.plugCubed.net/proxy/' + url;
             }
