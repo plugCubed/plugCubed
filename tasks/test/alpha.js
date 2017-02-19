@@ -1,12 +1,16 @@
 'use strict';
 
 const gulp = require('gulp');
-const mocha = require('gulp-mocha');
+const eslint = require('gulp-eslint');
+const gulpIf = require('gulp-if');
 
 gulp.task('test:alpha', () => {
     return gulp
-        .src('test/alpha/**.js')
-        .pipe(mocha({
-            timeout: 5000
-        }));
+        .src('src/alpha/plugCubed/**/*.js')
+        .pipe(eslint({
+            fix: true
+        }))
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError())
+        .pipe(gulpIf((file) => file.eslint && file.eslint.fixed, gulp.dest('src/alpha/plugCubed/')));
 });

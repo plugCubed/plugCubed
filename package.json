@@ -8,20 +8,17 @@
     "email": "1337alexpham@gmail.com"
   },
   "devDependencies": {
-    "del": "^2.2.2",
     "eslint-config-thedark1337": "^3.14.0",
     "graceful-fs": "^4.1.11",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-bytediff": "^1.0.0",
-    "gulp-change": "^1.0.0",
-    "gulp-crx-pack": "^1.0.1",
     "gulp-cssnano": "^2.1.2",
     "gulp-data": "^1.2.1",
+    "gulp-eslint": "^3.0.1",
     "gulp-hub": "frankwallis/gulp-hub#registry-init",
-    "gulp-jsbeautifier": "^2.0.4",
+    "gulp-if": "^2.0.2",
     "gulp-just-replace": "^1.0.2",
-    "gulp-mocha": "3.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.4.1",
     "gulp-template": "^4.0.0",
@@ -29,8 +26,8 @@
     "gulp-zip": "^4.0.0",
     "jpm": "^1.3.0",
     "mkdirp": "^0.5.1",
-    "mocha-eslint": "^3.0.1",
-    "requirejs": "^2.3.2",
+    "requirejs": "^2.3.3",
+    "rimraf": "^2.6.0",
     "try-require": "^1.2.1"
   },
   "homepage": "https://plugcubed.net",
@@ -53,9 +50,5 @@
     "watchAlpha": "gulp watch:alpha",
     "watchDev": "gulp watch:dev",
     "watchRelease": "gulp watch:release"
-  },
-  "dependencies": {
-    "gulp-mocha": "3.0.1",
-    "mocha-eslint": "3.0.1"
   }
 }

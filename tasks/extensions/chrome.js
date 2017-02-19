@@ -7,5 +7,5 @@ gulp.task('extensions:chrome', () => {
     return gulp
         .src('./extensions/Chrome/**')
         .pipe(zip('chrome.zip'))
-        .pipe(gulp.dest('./extensions/'));
+        .pipe(gulp.dest('./extensions/'))
 });

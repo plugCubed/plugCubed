@@ -7,7 +7,7 @@ const gulp = require('gulp');
 const justReplace = require('gulp-just-replace');
 const rename = require('gulp-rename');
 const template = require('gulp-template');
-const prettify = require('gulp-jsbeautifier');
+const eslint = require('gulp-eslint');
 
 gulp.task('template:alpha', () => {
     return gulp
@@ -31,8 +31,5 @@ gulp.task('template:alpha', () => {
             replacement: `${alphaVersion.major}.${alphaVersion.minor}.${alphaVersion.patch}.${alphaVersion.build}+alpha`
         }]))
         .pipe(rename('plugCubed.js'))
-        .pipe(prettify({
-            config: './.jsbeautifyrc'
-        }))
         .pipe(gulp.dest('bin/alpha/'));
 });

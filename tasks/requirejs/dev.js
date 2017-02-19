@@ -5,7 +5,6 @@ const fs = require('graceful-fs');
 const gulp = require('gulp');
 const rjs = require('requirejs');
 
-
 gulp.task('requirejs:dev', (done) => {
 
     return rjs.optimize({

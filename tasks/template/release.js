@@ -6,9 +6,9 @@ const data = require('gulp-data');
 const fs = require('graceful-fs');
 const gulp = require('gulp');
 const justReplace = require('gulp-just-replace');
-const prettify = require('gulp-jsbeautifier');
 const rename = require('gulp-rename');
 const template = require('gulp-template');
+const eslint = require('gulp-eslint');
 
 gulp.task('template:release', () => {
     return gulp
@@ -32,9 +32,6 @@ gulp.task('template:release', () => {
             replacement: `${releaseVersion.major}.${releaseVersion.minor}.${releaseVersion.patch}.${releaseVersion.build}+release`
         }]))
         .pipe(rename('plugCubed.js'))
-        .pipe(prettify({
-            config: './.jsbeautifyrc'
-        }))
         .pipe(gulp.dest('bin/release/'))
         .pipe(gulp.dest('extensions/Chrome/'))
         .pipe(gulp.dest('extensions/Opera/'))
