@@ -149,7 +149,6 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                     if (imageURL !== null) {
                         var image = $('<img>')
                         .on('load', function() {
-                            console.log('[plug³] Image loaded okay');
                             $(this).attr('src', imageURL);
                             $(this).html(image);
                             text = temp.html();
