@@ -664,9 +664,8 @@
 
 .p3slider .hit {
     top: 8px;
-    left: 15px;
     height: 23px;
-    width: 85px;
+    width: 100px;
     z-index: 3;
     cursor: pointer;
 }
@@ -674,7 +673,7 @@
 .p3slider .line {
     left: 8px;
     top: 12px;
-    width: 85px;
+    width: 105px;
     height: 1px;
     background: #808691;
     z-index: 1;

@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleManager', 'plugCubed/RoomSettings'], function(Class, ControlPanel, Styles, RoomSettings) {
+define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleManager', 'plugCubed/RoomSettings'], function(Class, p3Utils, ControlPanel, Styles, RoomSettings) {
     var Handler, $contentDiv, $formDiv, $localFileInput, $clearButton, panel;
 
     // TODO: add in submit button
@@ -14,10 +14,18 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
             $localFileInput = ControlPanel.inputField('url', undefined, 'URL To Background').change(function(e) {
 
                 if (e.target.value != null) {
-                    Styles.set('room-settings-background-image', '.room-background { background: url(' + e.target.value + ') fixed center center / cover !important; }');
-                    $clearButton.changeSubmit(true);
+                    var url = e.target.value;
+                    var reg = /\.(jpeg|jpg|gif|png)$/;
 
-                    return;
+                    if (!reg.test(url)) return false;
+                    $.get(url, function(dat, stat) {
+                        if (stat === 'success') {
+                            Styles.set('room-settings-background-image', '.room-background { background: url(' + p3Utils.proxifyImage(url) + ') fixed center center / cover !important; }');
+                            $clearButton.changeSubmit(true);
+
+                            return;
+                        }
+                    });
                 }
                 $clearButton.changeSubmit(false);
             });

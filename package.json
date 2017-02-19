@@ -21,7 +21,7 @@
     "gulp-hub": "frankwallis/gulp-hub#registry-init",
     "gulp-jsbeautifier": "^2.0.4",
     "gulp-just-replace": "^1.0.2",
-    "gulp-mocha": "^3.0.1",
+    "gulp-mocha": "3.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.4.1",
     "gulp-template": "^4.0.0",
@@ -53,5 +53,9 @@
     "watchAlpha": "gulp watch:alpha",
     "watchDev": "gulp watch:dev",
     "watchRelease": "gulp watch:release"
+  },
+  "dependencies": {
+    "gulp-mocha": "3.0.1",
+    "mocha-eslint": "3.0.1"
   }
 }
