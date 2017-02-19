@@ -651,9 +651,8 @@
 
 .p3slider .hit {
     top: 8px;
-    left: 15px;
     height: 23px;
-    width: 85px;
+    width: 105px;
     z-index: 3;
     cursor: pointer;
 }
