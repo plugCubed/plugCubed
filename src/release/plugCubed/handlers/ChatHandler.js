@@ -147,15 +147,13 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
 
                     // If supported image link
                     if (imageURL !== null) {
-                        var image = $('<img>')
-                        .on('load', function() {
-                            console.log('[plug³] Image loaded okay');
-                            $(this).attr('src', imageURL);
-                            $(this).html(image);
-                            text = temp.html();
+                        var image = $('<img>').attr('src', imageURL).css('display', 'block').css('max-width', '100%').css('height', 'auto').css('margin', '0 auto');
 
-                            return;
-                        }).attr('src', imageURL).css('display', 'block').css('max-width', '100%').css('height', 'auto').css('margin', '0 auto');
+                        $(this).attr('src', imageURL);
+                        $(this).html(image);
+                        text = temp.html();
+
+                        return;
                     }
                 });
             }
