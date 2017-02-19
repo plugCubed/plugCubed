@@ -57,15 +57,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
     var Handler = Class.extend({
         proxifyImage: function(url) {
-            if (this.startsWithIgnoreCase(url, 'http://')) {
+            if (!this.startsWithIgnoreCase(url, 'https://api.plugCubed.net/proxy/')) {
                 return 'https://api.plugCubed.net/proxy/' + url;
-            }
-
-            return url;
-        },
-        httpsifyURL: function(url) {
-            if (this.startsWithIgnoreCase(url, 'http://')) {
-                return 'https://' + url.substr(7);
             }
 
             return url;
@@ -326,7 +319,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 return '';
             }
 
-            return Array(count + 1).join(str);
+            return new Array(count + 1).join(str);
         },
         chatLog: function(type, message, color, fromID, fromName) {
             var $chat, b, $message, $box, $msg, $text, $msgSpan, $timestamp, $from, fromUser, chat;
