@@ -66,9 +66,9 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
 
                                     var webmUrl, mp4Url, imgUrl;
 
-                                    webmUrl = p3Utils.httpsifyURL(videoData.gfyItem.webmUrl);
-                                    mp4Url = p3Utils.httpsifyURL(videoData.gfyItem.mp4Url);
-                                    imgUrl = p3Utils.httpsifyURL(videoData.gfyItem.gifUrl);
+                                    webmUrl = p3Utils.proxifyImage(videoData.gfyItem.webmUrl);
+                                    mp4Url = p3Utils.proxifyImage(videoData.gfyItem.mp4Url);
+                                    imgUrl = p3Utils.proxifyImage(videoData.gfyItem.gifUrl);
 
                                     $video.append($('<source>').attr('type', 'video/webm').attr('src', webmUrl));
                                     $video.append($('<source>').attr('type', 'video/mp4').attr('src', mp4Url));
@@ -109,14 +109,14 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                                         return;
                                     }
 
-                                    if (imgurData.webm != null) $video.append($('<source>').attr('type', 'video/webm').attr('src', p3Utils.httpsifyURL(imgurData.webm)));
+                                    if (imgurData.webm != null) $video.append($('<source>').attr('type', 'video/webm').attr('src', p3Utils.proxifyImage(imgurData.webm)));
 
-                                    if (imgurData.mp4 != null) $video.append($('<source>').attr('type', 'video/mp4').attr('src', p3Utils.httpsifyURL(imgurData.mp4)));
+                                    if (imgurData.mp4 != null) $video.append($('<source>').attr('type', 'video/mp4').attr('src', p3Utils.proxifyImage(imgurData.mp4)));
 
-                                    if (imgurData.gifv != null) $video.append($('<source>').attr('type', 'video/mp4').attr('src', p3Utils.httpsifyURL(imgurData.gifv)));
+                                    if (imgurData.gifv != null) $video.append($('<source>').attr('type', 'video/mp4').attr('src', p3Utils.proxifyImage(imgurData.gifv)));
 
-                                    $video.attr('poster', p3Utils.httpsifyURL(imgurData.link));
-                                    $video.append($('<img>').attr('src', p3Utils.httpsifyURL(imgurData.link)));
+                                    $video.attr('poster', p3Utils.proxifyImage(imgurData.link));
+                                    $video.append($('<img>').attr('src', p3Utils.proxifyImage(imgurData.link)));
                                 });
                             }
                         }
@@ -146,17 +146,21 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                     }
 
                     // If supported image link
-                    if (imageURL !== null) {
+                    if (imageURL != null) {
                         var image = $('<img>')
-                        .on('load', function() {
-                            $(this).attr('src', imageURL);
-                            $(this).html(image);
-                            text = temp.html();
+                        .attr('src', imageURL)
+                        .css({
+                            display: 'block',
+                            'max-width': '100%',
+                            height: 'auto',
+                            margin: '0 auto'
+                        });
 
-                            return;
-                        }).attr('src', imageURL).css('display', 'block').css('max-width', '100%').css('height', 'auto').css('margin', '0 auto');
+                        $(this).html(image);
                     }
                 });
+
+                text = temp.html();
 
             }
         }
