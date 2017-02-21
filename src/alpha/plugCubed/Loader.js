@@ -1,6 +1,6 @@
 define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Lang', 'plugCubed/Utils',
-    'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/handlers/DialogHandler', 'plugCubed/handlers/FullscreenHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/overrides/RoomUserListRow', 'plugCubed/Overrides', 'plugCubed/Socket'
-], function(module, Class, Notifications, Version, Styles, Settings, p3Lang, p3Utils, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, DialogHandler, FullscreenHandler, Features, Tickers, Panels, p3RoomUserListRow, Overrides, Socket) {
+    'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/handlers/DialogHandler', 'plugCubed/handlers/FullscreenHandler', 'plugCubed/handlers/VolumeSliderHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/overrides/RoomUserListRow', 'plugCubed/Overrides', 'plugCubed/Socket'
+], function(module, Class, Notifications, Version, Styles, Settings, p3Lang, p3Utils, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, DialogHandler, FullscreenHandler, VolumeSliderHandler, Features, Tickers, Panels, p3RoomUserListRow, Overrides, Socket) {
     var Loader;
     var loaded = false;
     var RoomUsersListView = window.plugCubedModules.RoomUsersListView;
@@ -51,6 +51,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         CommandHandler.register();
         ChatHandler.register();
         FullscreenHandler.create();
+        VolumeSliderHandler.register();
 
         Settings.load();
 
@@ -102,6 +103,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
             FullscreenHandler.close();
             CommandHandler.close();
             DialogHandler.close();
+            VolumeSliderHandler.close();
 
             RoomUsersListView.prototype.RowClass = original;
             Overrides.revert();

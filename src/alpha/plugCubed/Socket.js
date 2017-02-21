@@ -1,7 +1,10 @@
 define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Version'], function(Class, p3Utils, p3Lang, Version) {
-    var socket, tries, socketReconnecting, SocketHandler;
+    var socket, tries, socketReconnecting, SocketHandler, Context, roomInitSent;
 
     tries = 0;
+
+    Context = window.plugCubedModules.context;
+    roomInitSent = true;
 
     SocketHandler = Class.extend({
         connect: function() {
@@ -11,6 +14,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Versi
             socket.onopen = this.onOpen.bind(this);
             socket.onmessage = this.onMessage.bind(this);
             socket.onclose = this.onClose.bind(this);
+            Context.on('room:joined', this.changeRoom, this);
         },
         reconnect: function() {
             if (socket == null || socket.readyState !== WebSocket.OPEN) {
@@ -54,6 +58,14 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Versi
                 case 'user:validate':
                     if (data.status === 1) {
                         console.log('[plug³] Socket Server', 'User validated');
+                    }
+
+                    return;
+                case 'user:changeroom':
+                    if (data.status === 1) {
+                        console.log('[plug³] Socket Server', 'User changed room successfully');
+                    } else {
+                        console.log('[plug³] Socket Server', 'Room change failed');
                     }
 
                     return;
@@ -104,6 +116,18 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Versi
         },
         getState: function() {
             return socket.readyState;
+        },
+        changeRoom: function() {
+            if (!roomInitSent) {
+                this.send(JSON.stringify({
+                    type: 'user:changeroom',
+                    room: {
+                        name: window.plugCubedModules.room.attributes.name,
+                        slug: window.plugCubedModules.room.attributes.slug
+                    }
+                }));
+            }
+            roomInitSent = false;
         },
         send: function(msg) {
             if (typeof msg === 'string') {

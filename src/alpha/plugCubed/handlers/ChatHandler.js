@@ -259,7 +259,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
             emote = emoteData[lowerCode] || shortcode;
 
             if (emote && emote.imageURL) {
-                temp = temp.empty().append(image.removeClass().addClass(className).attr('src', emote.imageURL).attr('data-emote', p3Utils.html2text(emote.emote)));
+                temp = temp.empty().append(image.removeClass().addClass(className).addClass('p3-emote').attr('src', emote.imageURL).attr('data-emote', p3Utils.html2text(emote.emote)));
 
                 return shortcode.replace(emote.emoteRegex, temp.html());
             }

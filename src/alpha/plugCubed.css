@@ -1044,6 +1044,10 @@
     text-decoration: line-through;
 }
 
+.p3-emote {
+    height: 100%;
+}
+
 blockquote.p3-blockquote {
     border-radius: 3px;
     border-left: 3px solid #3D3D3D;
