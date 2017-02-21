@@ -44,7 +44,7 @@
             plugCubed.close();
         }
 
-        // CODE_TO_REPLACE
+        <%= code %>
 
         require(['plugCubed/Loader'], function(Loader) {
             window.plugCubed = new Loader();
