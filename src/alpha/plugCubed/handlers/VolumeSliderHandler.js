@@ -3,13 +3,18 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang'], function($, Class, p3Lan
 
     Handler = Class.extend({
         register: function() {
-            $('#volume').on('mousewheel', $.proxy(this.onScroll, this));
+            $('#volume').on('DOMMouseScroll mousewheel', $.proxy(this.onScroll, this));
         },
         onScroll: function(scrollEvent) {
-            API.setVolume(API.getVolume() - (scrollEvent.originalEvent.wheelDelta > 0 ? -5 : 5));
+            if (scrollEvent.originalEvent.wheelDelta !== undefined) {
+                API.setVolume(API.getVolume() + (scrollEvent.originalEvent.wheelDelta > 0 ? 5 : -5));
+            }
+            else if (scrollEvent.originalEvent.detail !== undefined && scrollEvent.originalEvent.detail != 0) {
+                API.setVolume(API.getVolume() + (scrollEvent.originalEvent.detail < 0 ? 5 : -5));
+            }
         },
         close: function() {
-            $('#volume').off('mousewheel', $.proxy(this.onScroll, this));
+            $('#volume').off('DOMMouseScroll mousewheel', $.proxy(this.onScroll, this));
         }
     });
 
