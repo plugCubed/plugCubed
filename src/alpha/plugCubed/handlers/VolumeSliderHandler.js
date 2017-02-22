@@ -8,8 +8,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang'], function($, Class, p3Lan
         onScroll: function(scrollEvent) {
             if (scrollEvent.originalEvent.wheelDelta !== undefined) {
                 API.setVolume(API.getVolume() + (scrollEvent.originalEvent.wheelDelta > 0 ? 5 : -5));
-            }
-            else if (scrollEvent.originalEvent.detail !== undefined && scrollEvent.originalEvent.detail != 0) {
+            } else if (scrollEvent.originalEvent.detail !== undefined && scrollEvent.originalEvent.detail !== 0) {
                 API.setVolume(API.getVolume() + (scrollEvent.originalEvent.detail < 0 ? 5 : -5));
             }
         },
