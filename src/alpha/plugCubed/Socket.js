@@ -1,10 +1,13 @@
 define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Version'], function(Class, p3Utils, p3Lang, Version) {
-    var socket, tries, socketReconnecting, SocketHandler, Context, roomInitSent;
+    var socket, tries, socketReconnecting, SocketHandler, Context, roomInitSent, currentRoomContext;
 
     tries = 0;
 
     Context = window.plugCubedModules.context;
     roomInitSent = true;
+    currentRoomContext = {
+        slug: null
+    };
 
     SocketHandler = Class.extend({
         connect: function() {
@@ -118,7 +121,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Versi
             return socket.readyState;
         },
         changeRoom: function() {
-            if (!roomInitSent) {
+            if (!roomInitSent && window.plugCubedModules.room.attributes.slug !== currentRoomContext.slug) {
                 this.send(JSON.stringify({
                     type: 'user:changeroom',
                     room: {
@@ -126,6 +129,9 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Versi
                         slug: window.plugCubedModules.room.attributes.slug
                     }
                 }));
+                currentRoomContext = {
+                    slug: window.plugCubedModules.room.attributes.slug
+                };
             }
             roomInitSent = false;
         },
