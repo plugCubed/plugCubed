@@ -244,7 +244,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
     }
 
     function convertEmoteByType(text, type) {
-        if (typeof text !== 'string' || typeof type !== 'string' || ['bttvEmotes', 'ffzEmotes', 'twitchEmotes', 'twitchSubEmotes', 'tastyEmotes'].indexOf(type) === -1) return text;
+        if (typeof text !== 'string' || typeof type !== 'string' || ['bttvEmotes', 'ffzEmotes', 'twitchEmotes', 'twitchSubEmotes', 'tastyEmotes'].indexOf(type) === -1 || !Settings.emotes[type]) return text;
 
         var temp, image, emoteData, emote, className;
 
@@ -259,7 +259,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
             emote = emoteData[lowerCode] || shortcode;
 
             if (emote && emote.imageURL) {
-                temp = temp.empty().append(image.removeClass().addClass(className).attr('src', emote.imageURL).attr('data-emote', p3Utils.html2text(emote.emote)));
+                temp = temp.empty().append(image.removeClass().addClass(className).addClass('p3-emote').attr('src', emote.imageURL).attr('data-emote', p3Utils.html2text(emote.emote)));
 
                 return shortcode.replace(emote.emoteRegex, temp.html());
             }

@@ -244,7 +244,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
     }
 
     function convertEmoteByType(text, type) {
-        if (typeof text !== 'string' || typeof type !== 'string' || ['bttvEmotes', 'ffzEmotes', 'twitchEmotes', 'twitchSubEmotes', 'tastyEmotes'].indexOf(type) === -1) return text;
+        if (typeof text !== 'string' || typeof type !== 'string' || ['bttvEmotes', 'ffzEmotes', 'twitchEmotes', 'twitchSubEmotes', 'tastyEmotes'].indexOf(type) === -1 || !Settings.emotes[type]) return text;
 
         var temp, image, emoteData, emote, className;
 
