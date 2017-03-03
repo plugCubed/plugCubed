@@ -1,7 +1,13 @@
 define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Version'], function(Class, p3Utils, p3Lang, Version) {
-    var socket, tries, socketReconnecting, SocketHandler;
+    var socket, tries, socketReconnecting, SocketHandler, Context, roomInitSent, currentRoomContext, reconnectTimer;
 
     tries = 0;
+
+    Context = window.plugCubedModules.context;
+    roomInitSent = true;
+    currentRoomContext = {
+        slug: null
+    };
 
     SocketHandler = Class.extend({
         connect: function() {
@@ -11,6 +17,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Versi
             socket.onopen = this.onOpen.bind(this);
             socket.onmessage = this.onMessage.bind(this);
             socket.onclose = this.onClose.bind(this);
+            Context.on('room:joined', this.changeRoom, this);
         },
         reconnect: function() {
             if (socket == null || socket.readyState !== WebSocket.OPEN) {
@@ -24,6 +31,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Versi
             socket.onclose = function() {
                 console.log('[plug³] Socket Server', 'Closed');
             };
+            if (reconnectTimer != null) clearTimeout(reconnectTimer);
             socket.close();
         },
         onOpen: function() {
@@ -54,6 +62,14 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Versi
                 case 'user:validate':
                     if (data.status === 1) {
                         console.log('[plug³] Socket Server', 'User validated');
+                    }
+
+                    return;
+                case 'user:changeroom':
+                    if (data.status === 1) {
+                        console.log('[plug³] Socket Server', 'User changed room successfully');
+                    } else {
+                        console.log('[plug³] Socket Server', 'Room change failed');
                     }
 
                     return;
@@ -98,12 +114,27 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Versi
                     break;
             }
 
-            setTimeout(function() {
+            reconnectTimer = setTimeout(function() {
                 this.connect();
             }.bind(this), (delay * 1E3) + (Math.ceil(Math.random() * 5000)));
         },
         getState: function() {
             return socket.readyState;
+        },
+        changeRoom: function() {
+            if (!roomInitSent && window.plugCubedModules.room.attributes.slug !== currentRoomContext.slug) {
+                this.send(JSON.stringify({
+                    type: 'user:changeroom',
+                    room: {
+                        name: window.plugCubedModules.room.attributes.name,
+                        slug: window.plugCubedModules.room.attributes.slug
+                    }
+                }));
+                currentRoomContext = {
+                    slug: window.plugCubedModules.room.attributes.slug
+                };
+            }
+            roomInitSent = false;
         },
         send: function(msg) {
             if (typeof msg === 'string') {
