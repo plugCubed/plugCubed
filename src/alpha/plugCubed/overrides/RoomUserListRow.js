@@ -54,7 +54,7 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/RoomSettings']
                 });
 
                 if (specialIconInfo != null) {
-                    $icon.css('background-image', 'url("https://plugcubed.net/scripts/alpha/icons.p3special.' + specialIconInfo.icon + '.png")');
+                    $icon.css('background-image', 'url("https://plugcubed.net/scripts/alpha/images/ranks/p3special.' + specialIconInfo.icon + '.png")');
                 }
             }
 

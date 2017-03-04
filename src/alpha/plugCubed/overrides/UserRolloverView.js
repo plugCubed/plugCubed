@@ -59,7 +59,7 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
                     this.$meta.addClass('has-p3Role is-p3' + p3Utils.getHighestRank(a.id));
                     if (specialIconInfo != null) {
                         this.$p3Role.text($('<span>').html(specialIconInfo.title).text()).css({
-                            'background-image': 'url("https://plugcubed.net/scripts/alpha/images/icons.p3special.' + specialIconInfo.icon + '.png")'
+                            'background-image': 'url("https://plugcubed.net/scripts/alpha/images/ranks/p3special.' + specialIconInfo.icon + '.png")'
                         });
                     } else {
                         this.$p3Role.text($('<span>').html(p3Utils.getHighestRankString(a.id)).text());
