@@ -3,4 +3,7 @@ language: node_js
 node_js:
   - '4'
 notifications:
-  webhooks: https://webhooks.tfle.xyz/travis
+  webhooks:
+    urls:
+      - https://webhooks.tfle.xyz/travis
+    on_start: always
