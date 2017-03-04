@@ -690,23 +690,49 @@
 }
 
 .is-p3developer .from .icon,
-.icon.icon-is-p3developer,
+i.icon.icon-is-p3developer,
+.meta i.icon.icon.is-p3developer,
+.user i.icon.icon.is-p3developer
 .is-p3sponsor .from .icon,
-.icon.icon-is-p3sponsor,
+.name .has-p3Role.is-p3sponsor.icon,
+i.icon.icon-chat-p3sponsor,
+.meta i.icon.icon-chat-p3sponsor,
+.user i.icon.icon-chat-p3sponsor,
 .is-p3special .from .icon,
-.icon.icon-is-p3special,
+.name .has-p3Role.is-p3special.icon,
+i.icon.icon-is-p3special,
+.meta i.icon.icon-is-p3special,
+.user i.icon.icon-is-p3special,
 .is-p3ambassador .from .icon,
-.icon.icon-is-p3ambassador,
+.name .has-p3Role.is-p3ambassador.icon,
+i.icon.icon-is-p3ambassador,
+.meta i.icon-icon-is-p3ambassador,
+.user i.icon-icon-is-p3ambassador,
 .is-p3donatorDiamond .from .icon,
-.icon.icon-is-p3donatorDiamond,
+.name .has-p3Role.is-p3donatorDiamond.icon,
+i.icon.icon-is-p3donatorDiamond,
+.meta i.icon.icon-is-p3donatorDiamond,
+.user i.icon.icon-is-p3donatorDiamond,
 .is-p3donatorPlatinum .from .icon,
-.icon.icon-is-p3donatorPlatinum,
+.name .has-p3Role.is-p3donatorPlatinum.icon,
+i.icon.icon-is-p3donatorPlatinum,
+.meta i.icon.icon-is-p3donatorPlatinum,
+.user i.icon.icon-is-p3donatorPlatinum,
 .is-p3donatorGold .from .icon,
-.icon.icon-is-p3donatorGold,
+.name .has-p3Role.is-p3donatorGold.icon,
+i.icon.icon-is-p3donatorGold,
+.meta i.icon.icon-is-p3donatorGold,
+.user i.icon.icon-is-p3donatorGold,
 .is-p3donatorSilver .from .icon,
-.icon.icon-is-p3donatorSilver,
+.name .has-p3Role.is-p3donatorSilver.icon,
+i.icon.icon-is-p3donatorSilver,
+.meta i.icon.icon-is-p3donatorSilver,
+.user i.icon.icon-is-p3donatorSilver,
 .is-p3donatorBronze .from .icon,
-.icon.icon-is-p3donatorBronze {
+.name .has-p3Role.is-p3donatorBronze.icon,
+i.icon.icon-is-p3donatorBronze,
+.meta i.icon.icon-is-p3donatorBronze,
+.user i.icon.icon-is-p3donatorBronze {
     width: 16px;
     height: 16px;
 }
@@ -746,48 +772,80 @@
 }
 
 .icon.icon-chat-p3developer,
+i.icon.icon-chat-p3developer,
+.meta i.icon.icon.chat-p3developer,
+.user i.icon.icon.chat-p3developer,
+.name .has-p3Role.is-p3developer.icon,
 #user-rollover .meta.has-p3Role.is-p3developer .p3Role {
     background-image: url('https://plugcubed.net/scripts/release/images/ranks/p3dev.png') !important;
     background-position: 0, 0;
 }
 
 .icon.icon-chat-p3sponsor,
+i.icon.icon-chat-p3sponsor,
+.meta i.icon.icon-chat-p3sponsor,
+.user i.icon.icon-chat-p3sponsor,
+.name .has-p3Role.is-p3sponsor.icon,
 #user-rollover .meta.has-p3Role.is-p3sponsor .p3Role {
     background-image: url('https://plugcubed.net/scripts/release/images/ranks/p3sponsor.png') !important;
     background-position: 0, 0;
 }
 
 .icon.icon-chat-p3ambassador,
+i.icon.icon-chat-p3ambassador,
+.meta i.icon.icon.chat-p3ambassador,
+.user i.icon.icon.chat-p3ambassador,
+.name .has-p3Role.is-p3ambassador.icon,
 #user-rollover .meta.has-p3Role.is-p3ambassador .p3Role {
     background-image: url('https://plugcubed.net/scripts/release/images/ranks/p3ambassador.png') !important;
     background-position: 0, 0;
 }
 
 .icon.icon-chat-p3donatorDiamond,
+i.icon.icon-chat-p3donatorDiamond,
+.meta i.icon.icon-chat-p3donatorDiamond,
+.user i.icon.icon-chat-p3donatorDiamond,
+.name .has-p3Role.is-p3donatorDiamond.icon,
 #user-rollover .meta.has-p3Role.is-p3donatorDiamond .p3Role {
     background-image: url('https://plugcubed.net/scripts/release/images/ranks/p3donator.diamond.png') !important;
     background-position: 0, 0;
 }
 
 .icon.icon-chat-p3donatorPlatinum,
+i.icon.icon-chat-p3donatorPlatinum,
+.meta i.icon.icon-chat-p3donatorPlatinum,
+.user i.icon.icon-chat-p3donatorPlatinum,
+.name .has-p3Role.is-p3donatorPlatinum.icon,
 #user-rollover .meta.has-p3Role.is-p3donatorPlatinum .p3Role {
     background-image: url('https://plugcubed.net/scripts/release/images/ranks/p3donator.platinum.png') !important;
     background-position: 0, 0;
 }
 
 .icon.icon-chat-p3donatorGold,
+i.icon.icon-chat-p3donatorGold,
+.meta i.icon.icon-chat-p3donatorGold,
+.user i.icon.icon-chat-p3donatorGold,
+.name .has-p3Role.is-p3donatorGold.icon,
 #user-rollover .meta.has-p3Role.is-p3donatorGold .p3Role {
     background-image: url('https://plugcubed.net/scripts/release/images/ranks/p3donator.gold.png') !important;
     background-position: 0, 0;
 }
 
 .icon.icon-chat-p3donatorSilver,
+i.icon.icon-chat-p3donatorSilver,
+.meta i.icon.icon-chat-p3donatorSilver,
+.user i.icon.icon-chat-p3donatorSilver,
+.name .has-p3Role.is-p3donatorSilver.icon,
 #user-rollover .meta.has-p3Role.is-p3donatorSilver .p3Role {
     background-image: url('https://plugcubed.net/scripts/release/images/ranks/p3donator.silver.png') !important;
     background-position: 0, 0;
 }
 
 .icon.icon-chat-p3donatorBronze,
+i.icon.icon-chat-p3donatorBronze,
+.meta i.icon.icon-chat-p3donatorBronze,
+.user i.icon.icon-chat-p3donatorBronze,
+.name .has-p3Role.is-p3donatorBronze.icon,
 #user-rollover .meta.has-p3Role.is-p3donatorBronze .p3Role {
     background-image: url('https://plugcubed.net/scripts/release/images/ranks/p3donator.bronze.png') !important;
     background-position: 0, 0;
@@ -816,6 +874,7 @@
 }
 
 #chat .is-p3developer .un,
+#waitlist .user .name .has-p3Role.is-p3developer + span,
 #user-lists .user > .icon.icon-chat-p3developer + .name,
 #user-rollover .meta.is-p3developer .p3Role,
 #user-rollover .meta.is-p3developer .username {
@@ -823,6 +882,7 @@
 }
 
 #chat .is-p3ambassador .un,
+#waitlist .user .name .has-p3Role.is-p3ambassador + span,
 #user-lists .user > .icon.icon-chat-p3ambassador + .name,
 #user-rollover .meta.is-p3ambassador .p3Role,
 #user-rollover .meta.is-p3ambassador .username {
