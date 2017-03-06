@@ -47,8 +47,12 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
                 } else {
                     this.$p3UserID.remove();
                 }
-
-                this.$meta.removeClass('rank-regular rank-residentdj rank-bouncer rank-manager rank-cohost rank-host rank-ambassador rank-admin id-' + a.id).addClass('rank-' + rank + ' id-' + a.id);
+                this.$el.attr('class', function(pos, classes) {
+                    return classes.replace(/\bid-\S+/g, '');
+                }).addClass('id-' + a.id);
+                this.$meta.attr('class', function(pos, classes) {
+                    return classes.replace(/\bid-\S+/g, '');
+                }).removeClass('rank-regular rank-residentdj rank-bouncer rank-manager rank-cohost rank-host rank-ambassador rank-admin').addClass('rank-' + rank + ' id-' + a.id);
 
                 if (p3Utils.havePlugCubedRank(a.id)) {
                     if (this.$p3Role == null) {
