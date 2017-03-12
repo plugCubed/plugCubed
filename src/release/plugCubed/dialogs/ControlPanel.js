@@ -136,8 +136,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils'], function(
             }
         },
         print: function() {
-            for (var i in this._content) {
-                if (!this._content.hasOwnProperty(i)) continue;
+            for (var i = 0; i < this._content.length; i++) {
                 var $content = this._content[i];
 
                 if ($content instanceof JQueryElementClass) {

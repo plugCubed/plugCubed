@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/dialogs/panels/Background', 'plugCubed/dialogs/panels/CustomCSS', 'plugCubed/dialogs/panels/ChatCustomization'], function() {
+define(['plugCubed/Class', 'plugCubed/dialogs/panels/About', 'plugCubed/dialogs/panels/Background', 'plugCubed/dialogs/panels/ChatCustomization', 'plugCubed/dialogs/panels/CustomCSS'], function() {
     var modules, Class, Handler;
 
     modules = _.toArray(arguments);
@@ -7,15 +7,15 @@ define(['plugCubed/Class', 'plugCubed/dialogs/panels/Background', 'plugCubed/dia
     Handler = Class.extend({
         register: function() {
             this.unregister();
-            for (var i in modules) {
-                if (modules.hasOwnProperty(i) && !modules[i].registered) {
+            for (var i = 0; i < modules.length; i++) {
+                if (!modules[i].registered) {
                     modules[i].register();
                 }
             }
         },
         unregister: function() {
-            for (var i in modules) {
-                if (modules.hasOwnProperty(i) && modules[i].registered) {
+            for (var i = 0; i < modules.length; i++) {
+                if (modules[i].registered) {
                     modules[i].close();
                 }
             }

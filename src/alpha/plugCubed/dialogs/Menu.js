@@ -127,6 +127,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     break;
                 case 'controlpanel':
                     dialogControlPanel.toggleControlPanel(true);
+                    dialogControlPanel.openTab('About');
                     this.toggleMenu(false);
                     break;
                 case 'autorespond':

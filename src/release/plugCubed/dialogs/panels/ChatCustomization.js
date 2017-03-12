@@ -1,5 +1,5 @@
 define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/StyleManager'], function(Class, ControlPanel, Settings, p3Utils, Styles) {
-    var Handler, $contentDiv, panel, $twitchItem, $twitchSubItem, $bttvItem, $tastyItem, $ffzItem, $markdownItem, $emojiSetGoogle, $emojiSetApple, $emojiSetEmojione, $emojiSetTwitter, chatHandler, emoji, $examples;
+    var Handler, $contentDiv, panel, $twitchItem, $twitchSubItem, $bttvItem, $tastyItem, $ffzItem, $p3EmotesItem, $markdownItem, $emojiSetGoogle, $emojiSetApple, $emojiSetEmojione, $emojiSetTwitter, chatHandler, emoji, $examples;
 
     emoji = window.plugCubedModules.emoji;
     $examples = $('<span class="p3-emoji-samples">').html(emoji.replacement('1f604') + '' + emoji.replacement('1f44d') + '' + emoji.replacement('1f44b') + '' + emoji.replacement('1f494') + '' + emoji.replacement('1f680'));
@@ -62,6 +62,11 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
                 } else {
                     p3Utils.generateEmoteHash();
                 }
+                Settings.save();
+            });
+            $p3EmotesItem = ControlPanel.item('RoomSettings Emotes', function() {
+                Settings.emotes.customEmotes = !Settings.emotes.customEmotes;
+                this.changeCheckmark(Settings.emotes.customEmotes);
                 Settings.save();
             });
             $markdownItem = ControlPanel.item('Chat Markdown', function() {
@@ -136,6 +141,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
             $twitchItem.changeCheckmark(Settings.emotes.twitchEmotes);
             $twitchSubItem.changeCheckmark(Settings.emotes.twitchSubEmotes);
             $bttvItem.changeCheckmark(Settings.emotes.bttvEmotes);
+            $p3EmotesItem.changeCheckmark(Settings.emotes.customEmotes);
             $tastyItem.changeCheckmark(Settings.emotes.tastyEmotes);
             $ffzItem.changeCheckmark(Settings.emotes.ffzEmotes);
             $markdownItem.changeCheckmark(Settings.markdown);
@@ -147,6 +153,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
                     .append($tastyItem.getJQueryElement())
                     .append($twitchItem.getJQueryElement())
                     .append($twitchSubItem.getJQueryElement())
+                    .append($p3EmotesItem.getJQueryElement())
                     .append(ControlPanel.header('Emoji Sets').getJQueryElement())
                     .append($examples)
                     .append($emojiSetApple.getJQueryElement())
@@ -157,7 +164,6 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
                 .append($('<div>').addClass('p3-control-right')
                     .append(ControlPanel.header('Chat Enhancements').getJQueryElement())
                     .append($markdownItem.getJQueryElement())
-
                 );
 
             panel.addContent($contentDiv);
@@ -169,4 +175,3 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
 
     return new Handler();
 });
-

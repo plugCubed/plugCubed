@@ -127,6 +127,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     break;
                 case 'controlpanel':
                     dialogControlPanel.toggleControlPanel(true);
+                    dialogControlPanel.openTab('About');
                     this.toggleMenu(false);
                     break;
                 case 'autorespond':
@@ -284,10 +285,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 container.append(guiButton(Settings.emotes.twitchEmotes, 'twitchemotes', p3Lang.i18n('menu.twitchemotes')));
             }
             container.append(guiButton(false, 'colors', p3Lang.i18n('menu.customchatcolors') + '...'));
-
-            if (p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) {
-                container.append(guiButton(false, 'controlpanel', p3Lang.i18n('menu.controlpanel') + '...'));
-            }
+            container.append(guiButton(false, 'controlpanel', p3Lang.i18n('menu.controlpanel') + '...'));
 
             // Divider
             container.append($('<div class="spacer">').append($('<div class="divider">')));
