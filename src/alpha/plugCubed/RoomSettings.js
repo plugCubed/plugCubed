@@ -125,6 +125,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             Context.on('change:role', setFooterIcon);
             Context.on('room:joining', this.clear, this);
             Context.on('room:joined', this.update, this);
+            Context.on('chat:receive', this.checkModUpdate, this);
             setFooterIcon();
         },
         update: function() {
@@ -389,10 +390,22 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             RoomLoader.frameWidth = 490;
             RoomLoader.onVideoResize(Layout.getSize());
         },
+
+        // RCS compatibility--reload room settings if a moderator chats
+        // "!rcsreload ccs".
+        checkModUpdate: function(message) {
+            var sender = API.getUser(message.uid);
+
+            if (sender.role >= API.ROLE.COHOST && p3Utils.startsWith(message.message, '!rcsreload ccs')) {
+                this.update();
+            }
+        },
+
         close: function() {
             Context.off('change:role', setFooterIcon);
             Context.off('room:joining', this.clear, this);
             Context.off('room:joined', this.update, this);
+            Context.off('chat:receive', this.checkModUpdate, this);
             this.clear();
         }
     });
