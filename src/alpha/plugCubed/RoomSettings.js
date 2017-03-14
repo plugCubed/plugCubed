@@ -394,9 +394,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
         // RCS compatibility--reload room settings if a moderator chats
         // "!rcsreload ccs".
         checkModUpdate: function(message) {
-            var sender = API.getUser(message.uid);
-
-            if (sender.role >= API.ROLE.COHOST && p3Utils.startsWith(message.message, '!rcsreload ccs')) {
+            if (API.hasPermission(message.uid, API.ROLE.COHOST) && p3Utils.startsWith(message.message, '!rcsreload ccs')) {
                 this.update();
             }
         },
