@@ -1,45 +1,50 @@
+/* eslint-env node */
+
 'use strict';
 
+const fs = require('graceful-fs');
 const path = require('path');
 const gulp = require('gulp');
 const HubRegistry = require('gulp-hub');
-const tryRequire = require('try-require');
+let devVersionExists;
 
-const devVersion = tryRequire(path.resolve('src', 'dev', 'version.js'));
-const devVersionExists = devVersion != null && typeof devVersion === 'object';
-const regex = devVersionExists ? ['tasks/**/*.js'] : 'tasks/**/+(*?(a|A)lpha*|*?(c|C)hrome*|*?(m|M)axthon*|*?(f|F)irefox*|*?(o|O)pera*|*?(r|R)elease*).js';
+try {
+    fs.accessSync(path.resolve('src', 'dev', 'version.js')); // eslint-disable-line no-sync
+    devVersionExists = true;
+} catch (err) {
+    devVersionExists = false;
+}
+
+Object.defineProperties(global, {
+    devVersionExists: {
+        value: devVersionExists
+    },
+    versions: {
+        value: ['alpha', devVersionExists && 'dev', 'release']
+    }
+});
+
+const regex = ['tasks/**/*.js'];
 const hub = new HubRegistry(regex);
 
 gulp.registry(hub);
 
-gulp.task('minify:alpha', gulp.parallel('minify:alphaJS', 'minify:alphaCSS', (done) => {
-    done();
-}));
+gulp.task('minify:alpha', gulp.parallel('minify:alphaJS', 'minify:alphaCSS', (done) => done()));
 
-gulp.task('minify:release', gulp.parallel('minify:releaseJS', 'minify:releaseCSS', (done) => {
-    done();
-}));
+gulp.task('minify:release', gulp.parallel('minify:releaseJS', 'minify:releaseCSS', (done) => done()));
 
-gulp.task('build:alpha', gulp.series('clean:alpha', 'replace:linksAlpha', 'requirejs:alpha', 'replace:versionAlpha', 'autoprefixer:alpha', 'template:alpha', 'minify:alpha', (done) => {
-    done();
-}));
+gulp.task('build:alpha', gulp.series('test:alpha', 'clean:alpha', 'replace:linksalpha', 'requirejs:alpha', 'autoprefixer:alpha', 'template:alpha', 'minify:alpha', (done) => done()));
 
-gulp.task('build:extensions', gulp.parallel(['replace:extensionChrome', 'replace:extensionFirefox', 'replace:extensionMaxthon'], ['extensions:chrome', 'extensions:firefox', 'extensions:opera', 'extensions:maxthon'], (done) => {
-    done();
-}));
+gulp.task('build:extensions', gulp.parallel(['replace:extensionChrome', 'replace:extensionFirefox', 'replace:extensionMaxthon'], ['extensions:chrome', 'extensions:firefox', 'extensions:opera', 'extensions:maxthon'], (done) => done()));
 
-gulp.task('build:release', gulp.series('clean:release', 'replace:linksRelease', 'requirejs:release', 'replace:versionRelease', 'autoprefixer:release', 'template:release', ['build:extensions', 'minify:release'], (done) => {
-    done();
-}));
+gulp.task('build:release', gulp.series('test:release', 'clean:release', 'replace:linksrelease', 'requirejs:release', 'autoprefixer:release', 'template:release', ['build:extensions', 'minify:release'], (done) => done()));
 
 if (devVersionExists) {
-    gulp.task('build:all', gulp.series('build:alpha', 'build:dev', 'build:release', (done) => {
-        done();
-    }));
+    gulp.task('build:all', gulp.parallel('build:alpha', 'build:dev', 'build:release', (done) => done()));
 
-    gulp.task('build:dev', gulp.series('clean:dev', 'replace:linksDev', 'requirejs:dev', 'replace:versionDev', 'autoprefixer:dev', 'template:dev', (done) => {
-        done();
-    }));
+    gulp.task('test:all', gulp.parallel('test:alpha', 'test:dev', 'test:release', (done) => done()));
+
+    gulp.task('build:dev', gulp.series('test:dev', 'clean:dev', 'replace:linksdev', 'requirejs:dev', 'autoprefixer:dev', 'template:dev', (done) => done()));
 
     gulp.task('watch:dev', (done) => {
         const devWatcher = gulp.watch('**/*.{css,js}', {
@@ -61,7 +66,6 @@ gulp.task('watch:alpha', (done) => {
         console.log(`File ${event.path} was ${event.type} running build:alpha task...`);
     });
 });
-
 
 gulp.task('watch:release', (done) => {
     const releaseWatcher = gulp.watch('**/*.{css,js}', {

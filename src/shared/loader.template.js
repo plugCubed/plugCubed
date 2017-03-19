@@ -5,7 +5,7 @@
  * @author  ReAnna
  * @author  Thedark1337
  *
- * @version VERSION.MAJOR.VERSION.MINOR.VERSION.PATCH-VERSION.BUILD+VERSION.PRERELEASE
+ * @version VERSION.MAJOR.VERSION.MINOR.VERSION.PATCH-VERSION.PRERELEASE.VERSION.BUILD
  *
  * @license Copyright © 2012-%YEAR% The plug³ Team and other contributors
  * This program is free software: you can redistribute it and/or modify
@@ -29,6 +29,9 @@
 ;(function loading() {
     if (!(~window.location.hostname.indexOf('plug.dj'))) return alert('Loading plug³ outside of plug.dj is not supported.');
 
+    // only load in rooms on plug.dj
+    if (!window.jQuery || (window.jQuery && !window.jQuery('.room-background').length)) return;
+
     // Fixes some analytics issues when using tracking / ad blockers
     window.Intercom = window.Intercom || {};
     window.amplitude = window.amplitude || { __VERSION__: 1337 };
@@ -43,9 +46,7 @@
         if (typeof plugCubed !== 'undefined') {
             plugCubed.close();
         }
-
         <%= code %>
-
         require(['plugCubed/Loader'], function(Loader) {
             window.plugCubed = new Loader();
             if  (typeof console.time === 'function') console.time('[plug³] Loaded')

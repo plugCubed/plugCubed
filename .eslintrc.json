@@ -27,6 +27,10 @@
         "no-implicit-coercion": 0,
         "no-loop-func": 0,
         "no-negated-condition": 0,
+        "no-unused-expressions": [2, {
+          "allowShortCircuit": true,
+          "allowTernary": true
+          }],
         "no-useless-escape": 0,
         "no-var": 0,
         "object-shorthand": 0,
