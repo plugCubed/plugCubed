@@ -64,7 +64,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return url;
         },
         escapeRegex: function(text) {
-            return text.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+            return text.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
         },
         getHighestRank: function(uid) {
             if (!uid) {
@@ -912,4 +912,3 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
     return new Handler();
 });
-
