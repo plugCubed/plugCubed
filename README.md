@@ -31,7 +31,7 @@ We welcome all contributions to this project.
 * Make a fork of this repository.
 * Clone the forked repository to an empty folder.
 * Cd to the folder through command prompt or bash
-* Run `npm install` to set up the environment.
+* Run `npm install --only=dev` to set up the environment.
 * Make your changes in the src/alpha folder and please make sure you follow our [Code Style](https://github.com/plugCubed/Code-Style).
 * Run `gulp build:alpha` to compile the code and test with `gulp test:alpha`. (If `gulp` doesn't work, please install it by typing `npm install -g gulp-cli` in commandline)
 * Submit your changes as a Pull Requests [here](https://github.com/plugCubed/plugCubed/pulls).
