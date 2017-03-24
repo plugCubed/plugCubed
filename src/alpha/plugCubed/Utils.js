@@ -1,5 +1,5 @@
 define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function(Class, p3Lang) {
-    var cleanHTMLMessage, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PlugUI, PopoutView;
+    var cleanHTMLMessage, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PlugUI, PopoutView, sandbox, html2text;
 
     if (typeof window.plugCubedUserData === 'undefined') {
         window.plugCubedUserData = {};
@@ -54,6 +54,19 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 donatorBronze = data.donator.bronze ? data.donator.bronze : [];
             }
         });
+
+    html2text = function(html) {
+        if (!html) return '';
+
+        if (!sandbox) {
+            sandbox = document.implementation.createHTMLDocument('p3-sandbox');
+        }
+        var tmp = sandbox.createElement('div');
+
+        tmp.innerHTML = html;
+
+        return tmp.textContent || tmp.text || tmp.innerText;
+    };
 
     var Handler = Class.extend({
         proxifyImage: function(url) {
@@ -298,9 +311,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return special[uid];
         },
         html2text: function(html) {
-            if (!html) return '';
-
-            return $('<div/>').html(html).text();
+            return html2text(html);
         },
         cleanHTML: function(msg, disallow, extraAllow) {
             return cleanHTMLMessage(msg, disallow, extraAllow);
