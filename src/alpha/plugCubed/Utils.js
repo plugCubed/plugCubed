@@ -1,5 +1,5 @@
 define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function(Class, p3Lang) {
-    var cleanHTMLMessage, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PlugUI, PopoutView;
+    var cleanHTMLMessage, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PlugUI, PopoutView, html2text;
 
     if (typeof window.plugCubedUserData === 'undefined') {
         window.plugCubedUserData = {};
@@ -54,6 +54,36 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 donatorBronze = data.donator.bronze ? data.donator.bronze : [];
             }
         });
+
+    html2text = function(html) {
+        if (!html) return '';
+
+        var doc;
+
+        // use DOMParser for html
+        try {
+            var parser = new DOMParser();
+
+            doc = parser.parseFromString(html, 'text/html');
+        } catch (ex) { /* noop */ }
+
+        // fallback to document.implementation
+        if (!doc) {
+            try {
+                doc = document.implementation.createHTMLDocument('');
+                if (/<\/?(html|head|body)[>]*>/gi.test(html)) {
+                    doc.documentElement.innerHTML = html;
+                } else {
+                    doc.body.innerHTML = html;
+                }
+            } catch (ex2) { /* noop */ }
+        }
+
+        if (doc) return doc.body.textContent || doc.body.text || doc.body.innerText;
+
+        // fallback to old method (warnings on mixed content)
+        return $('<div/>').html(html).text();
+    };
 
     var Handler = Class.extend({
         proxifyImage: function(url) {
@@ -298,9 +328,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return special[uid];
         },
         html2text: function(html) {
-            if (!html) return '';
-
-            return $('<div/>').html(html).text();
+            return html2text(html);
         },
         cleanHTML: function(msg, disallow, extraAllow) {
             return cleanHTMLMessage(msg, disallow, extraAllow);
