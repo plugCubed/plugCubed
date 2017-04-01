@@ -1,6 +1,6 @@
 {
   "running":"מריץ plug&#179; גרסא %1",
-  "commandsHelp":"הקלד 'commands\/' לראות רשימת פקודות.",
+  "commandsHelp":"הקלד 'commands/' על מנת לראות את רשימת הפקודות.",
   "autorespond":{
     "default":"אני לא נמצא ליד המחשב כעת. (AFK)",
     "disable":"בטל פניה אוטומטית של \"AFK\" בצ'אט.",
@@ -41,7 +41,7 @@
       "alertson":"play sound whenever defined words are written in chat",
       "alertsoff":"stop playing sound when defined words are written in chat",
       "grab":"add current song to your selected playlist",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"show/hide the user badges in chat",
       "getpos":"get current waitlist position",
       "version":"displays version number",
       "commands":"shows this list",
@@ -52,8 +52,8 @@
       "lockskip":"locks DJ booth, skip and unlocks afterwards",
       "lock":"locks DJ booth",
       "unlock":"unlocks DJ booth",
-      "add":"adds targeted user to dj booth\/waitlist",
-      "remove":"removes targeted user from dj booth\/waitlist",
+      "add":"adds targeted user to dj booth/waitlist",
+      "remove":"removes targeted user from dj booth/waitlist",
       "whois all":"gives userid and username of all users in the room",
       "banall":"bans all users in the room",
       "status":"shows status of plug servers",
@@ -93,7 +93,7 @@
     "updates":"Song Updates",
     "history":"Songs in history",
     "songUnavailable":"Song Unavailable",
-    "boothAlert":"Booth Alert (%1 \/ 50)",
+    "boothAlert":"Booth Alert (%1 / 50)",
     "songLength":"Song Length (%1 min)",
     "message":{
       "boothAlertNext":"You are about to DJ!",
@@ -137,10 +137,10 @@
     "points":"נקודות",
     "wootCount":"Woot Count",
     "mehCount":"Meh Count",
-    "ratio":"Woot\/Meh Ratio",
+    "ratio":"Woot/Meh Ratio",
     "djing":"DJing",
     "notInList":"Not in waitlist nor booth",
-    "inWaitlist":"%1\/%2 in waitlist",
+    "inWaitlist":"%1/%2 in waitlist",
     "userDjing":"%1 are currently DJing",
     "userNextDJ":"%1 are DJing next",
     "disconnects":"Disconnects",
@@ -190,7 +190,7 @@
     "djing":"DJing"
   },
   "tooltip":{
-    "stream":"Toggle Video\/Audio Stream",
+    "stream":"Toggle Video/Audio Stream",
     "clear":"Clear Chat",
     "afk":"AFK Message",
     "reset":"Reset to default",
@@ -202,14 +202,14 @@
     "alreadyInWaitList":"User %1 is already in waitlist",
     "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Unknown menu key: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: /add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: /ban @user or /ban @user::time::reason",
     "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: /remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: /whois @user",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
+    "yourActivePlaylistIsFull":"רשימת ההשמעה הפעילה שלך מלאה",
     "noNextSong":"You have no queued song"
   }
 }

@@ -1,6 +1,6 @@
 {
   "running":"Corriendo plug&#179; versión %1",
-  "commandsHelp":"Usa '\/commands' para ver todos los comandos",
+  "commandsHelp":"Usa '/commands' para ver todos los comandos",
   "autorespond":{
     "default":"Estoy Lejos del Teclado.",
     "disable":"Desactiva la Autorespuesta AFK",
@@ -41,7 +41,7 @@
       "alertson":"reproducir sonido cuando las palabras definidas sean escritas en el chat",
       "alertsoff":"para la reproducción cuando las palabras definidas aparecen en el chat.",
       "grab":"agregar canción actual a tu lista de reproducción seleccionada",
-      "badges":"mostrar\/ocultar las medallas de usuario en el chat",
+      "badges":"mostrar/ocultar las medallas de usuario en el chat",
       "getpos":"posición actual en la lista de espera",
       "version":"muestra el numero de versión",
       "commands":"muestra esta lista",
@@ -52,8 +52,8 @@
       "lockskip":"bloquea la mesa del DJ, salta, y después desbloquea",
       "lock":"bloquea la mesa de DJ",
       "unlock":"desbloquea la mesa de DJ",
-      "add":"agrega el usuario seleccionado a la mesa de dj\/lista de espera",
-      "remove":"elimina el usuario seleccionado a la mesa de dj\/lista de espera",
+      "add":"agrega el usuario seleccionado a la mesa de dj/lista de espera",
+      "remove":"elimina el usuario seleccionado a la mesa de dj/lista de espera",
       "whois all":"da el userid y el username de todos los usuarios en la sala",
       "banall":"banea todos los usuarios en la sala",
       "status":"mostrar el estado de los servidores de plug",
@@ -62,8 +62,8 @@
     "responses":{
       "alertson":"Reproduciendo sonido en las siguientes palabras: %1",
       "alertsoff":"Dejando de reproducir sonido en palabras especificas",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
+      "badgeon":"Las Insignias se han activado",
+      "badgeoff":"Las Insignias se han desactivado",
       "nextsong":"Tu siguiente canción en espera es %1 por %2",
       "isHistory":"Atención: Esta canción aún esta en el historial (%1 de %2)",
       "automute":{
@@ -78,10 +78,10 @@
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "boothAvailable":"¡Si te unes a la lista de espera ahora, seras el DJ!",
+    "alreadyDJ":"¡Ya eres el DJ!",
+    "waitListTime":"Estás en la lista de espera %1 de %2, seras el DJ en %3!",
+    "joinTime":"¡Si te unes a la lista de espera ahora, seras el DJ en %1!"
   },
   "notify":{
     "header":"Comandos plugCubed",
@@ -92,25 +92,25 @@
     "stats":"Estadísticas de la canción",
     "updates":"Actualizaciones de la canción",
     "history":"Canciones en el historial",
-    "songUnavailable":"Song Unavailable",
-    "boothAlert":"Booth Alert (%1 \/ 50)",
+    "songUnavailable":"Canción no disponible",
+    "boothAlert":"Booth Alert (%1 / 50)",
     "songLength":"Longitud de la canción (%1min)",
     "message":{
-      "boothAlertNext":"You are about to DJ!",
-      "boothAlertPos":"You are now %1 in the waitlist",
+      "boothAlertNext":"¡Estas a punto de ser el DJ!",
+      "boothAlertPos":"Eres el %1 en la lista de espera",
       "grab":"grabbed %1 - %2",
       "stats":"Estadísticas:  %1 ¡Genial! -- %2 Aburrido -- %3 Favoritos",
-      "updates":"Ahora Tocando: %1 por %2<br \/>Canción Tocada por: %3",
+      "updates":"Ahora Tocando: %1 por %2<br />Canción Tocada por: %3",
       "meh":"%1 meh's ha conseguido esta canción",
-      "join":"joined the room",
-      "leave":"left the room",
+      "join":"se unió a la sala",
+      "leave":"dejó la sala",
       "history":"Canción en el historial (%1 de %2)",
       "historySkipped":"Canción en el historial (%1 de %2), pero se saltó en la ultima reproducción",
       "songLength":"Canción más larga que %1 minutos",
-      "songPrivate":"Song is private",
-      "songNotFound":"Song not found",
+      "songPrivate":"La canción es privada",
+      "songNotFound":"Canción no encontrada",
       "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
+      "songStreamable":"La canción no soporta streaming"
     }
   },
   "info":{
@@ -137,17 +137,17 @@
     "points":"Puntos",
     "wootCount":"Conteo de Woot",
     "mehCount":"Conteo de Meh",
-    "ratio":"Índice de Genial\/Aburrido",
+    "ratio":"Índice de Genial/Aburrido",
     "djing":"DJing",
     "notInList":"Ni en la lista de espera ni en el stand",
-    "inWaitlist":"%1\/%2 en lista de espera",
+    "inWaitlist":"%1/%2 en lista de espera",
     "userDjing":"%1 esta de DJ",
     "userNextDJ":"%1 Es el Proximo DJ",
     "disconnects":"Desconecta",
     "lastDisconnect":"Última desconexión",
     "lastPosition":"Posición",
     "time":"Tiempo",
-    "lastMessage":"Last Message"
+    "lastMessage":"Último mensaje"
   },
   "ranks":{
     "you":"Tú",
@@ -177,8 +177,8 @@
     "roomsettings":"Configuracion de la Sala",
     "chatimages":"Imagenes de chat",
     "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel",
-    "showdeletedmessages":"Show Deleted Messages",
+    "controlpanel":"Panel de control",
+    "showdeletedmessages":"Mostrar mensajes eliminados",
     "visualizers":"RCS SoundCloud Visualizers",
     "inlineuserinfo":"Inline User Info"
   },
@@ -199,15 +199,15 @@
   },
   "error":{
     "userNotFound":"Usuario no encontrado",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
+    "alreadyInWaitList":"El usuario %1 ua esta en la lista de espera",
+    "notInWaitList":"El usuario %1 no esta en la lista de espera",
     "unknownMenuKey":"Tecla de menú desconocida",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: /add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: /ban @user or /ban @user::time::reason",
     "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: /remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: /whois @user",
+    "errorGettingPlaylistInfo":"Error al obtener información de la lista de reproducción",
     "noPlaylistsFound":"No se encontraron listas de reproducción",
     "yourActivePlaylistIsFull":"Tu lista de reproduccion activa esta llena",
     "noNextSong":"No tienes ninguna canción en lista de espera"

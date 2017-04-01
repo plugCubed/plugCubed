@@ -1,6 +1,6 @@
 {
   "running":"plug&#179; byl spuštěn, verze %1",
-  "commandsHelp":"Použijte „\/commands“ k zobrazení příkazů.",
+  "commandsHelp":"Použijte „/commands“ k zobrazení příkazů.",
   "autorespond":{
     "default":"Jsem nepřítomen.",
     "disable":"Abyste mohl psát, vypněte automatickou AFK odpověď",
@@ -27,11 +27,11 @@
       "on":"zapnuto",
       "off":"vypnuto",
       "reason":"důvod",
-      "number":"číslo"
+      "number":" číslo"
     },
     "descriptions":{
       "join":"připojit se do fronty",
-      "leave":"opustí DJ stolek \/ frontu",
+      "leave":"opustí DJ pult / frontu",
       "whoami":"získá vaše informace",
       "mute":"nastaví hlasitost na 0",
       "automute":"přidá aktuální skladbu do seznamu pro příští automatické ztlumení",
@@ -41,7 +41,7 @@
       "alertson":"přehraje zvuk vždy, když jsou definovaná slovo napsána do chatu",
       "alertsoff":"přestane přehrávat zvuk, když jsou definovaná slova napsána v chatu",
       "grab":"přidá aktuální skladbu do vybraného seznamu skladeb",
-      "badges":"zobrazí \/ skryje uživatelské odznaky v chatu",
+      "badges":"zobrazí / skryje odznaky v chatu",
       "getpos":"zjistí současnou pozici ve frontě",
       "version":"zobrazí číslo verze",
       "commands":"zobrazí tento seznam",
@@ -53,7 +53,7 @@
       "lock":"zamkne DJ pult",
       "unlock":"odemkne DJ pult",
       "add":"přidá označeného uživatele do DJ listu",
-      "remove":"odstraní označeného uživatele z DJ pultu \/ fronty",
+      "remove":"odstraní označeného uživatele z DJ pultu / fronty",
       "whois all":"zobrazí uživatelská ID a jména všech uživatelů v této místnosti",
       "banall":"zabanuje všechny uživatele v této místnosti",
       "status":"zobrazí stav plug.dj serverů",
@@ -62,8 +62,8 @@
     "responses":{
       "alertson":"Zvuk se přehraje při následujících slovech: %1",
       "alertsoff":"Zvuk již nebude při určených slovech přehráván",
-      "badgeon":"Uživatelské odznaky zapnuty",
-      "badgeoff":"Uživatelské odznaky vypnuty",
+      "badgeon":"Odznaky byly zapnuty",
+      "badgeoff":"Odznaky byly vypnuty",
       "nextsong":"Vaše další skladba bude %1 od %2",
       "isHistory":"Pozor: Tato skladba je stále v historii (%1 z %2)",
       "automute":{
@@ -72,36 +72,36 @@
         "unregistered":"Skladba %1 byla odebrána ze seznamu pro automatické ztlumení."
       },
       "status":{
-        "rest":"REST: %1 %2 [%3 ms]",
+        "rest":"REST: %1 %2 [%3ms]",
         "socket":"Socket: %1 %2 [%3 ms]"
       }
     }
   },
   "eta":{
     "boothAvailable":"Pokud byste se přidal do DJ fronty, byl byste na řadě!",
-    "alreadyDJ":"Již jste DJ!",
+    "alreadyDJ":"Již hrajete!",
     "waitListTime":"Ve frontě jste %1 z %2, k DJ pultu se dostanete během %3!",
     "joinTime":"Pokud by ses přidal do DJ fronty, byl bys u DJ pultu během %1!"
   },
   "notify":{
     "header":"Upozornění chatu",
-    "join":"Připojování uživatelů",
-    "leave":"Odpojování uživatelů",
-    "grab":"Přidání uživetelů",
-    "meh":"Mehy uživatelů",
+    "join":"Uživatel se připojí",
+    "leave":"Uživatel odejde",
+    "grab":"Uživatel si přidá skladbu",
+    "meh":"Uživatel dá Meh",
     "stats":"Statistiky skladeb",
     "updates":"Aktualizace skladeb",
     "history":"Skladby v historii",
-    "songUnavailable":"Nedostupná skladba",
-    "boothAlert":"Booth Alert (%1 \/ 50)",
+    "songUnavailable":"Skladba je nedostupná",
+    "boothAlert":"Upozornění na hraní (%1 / 50)",
     "songLength":"Délka skladby (%1 min)",
     "message":{
-      "boothAlertNext":"You are about to DJ!",
-      "boothAlertPos":"You are now %1 in the waitlist",
+      "boothAlertNext":"Brzy budete hrát!",
+      "boothAlertPos":"Nyní jste %1 ve frontě",
       "grab":"přidáno %1 - %2",
-      "stats":"Statistiky: %1 Wootů -- %2 Mehů -- %3 Přidaní",
+      "stats":"Statistiky: %1 Wootů -- %2 Mehů -- %3 Přidaných",
       "updates":"Právě hraje: %1 od %2<br> DJ: %3",
-      "meh":"%1 mehnul tuto skladbu",
+      "meh":"%1 dal Meh",
       "join":"se připojil do místnosti",
       "leave":"opustil místnost",
       "history":"Skladba je v historii (%1 z %2)",
@@ -137,10 +137,10 @@
     "points":"Bodů",
     "wootCount":"Počet Wootů",
     "mehCount":"Počet Mehů",
-    "ratio":"Poměr Woot \/ Meh ",
+    "ratio":"Poměr Woot / Meh ",
     "djing":"Právě hraje",
     "notInList":"Není ve frontě nebo u pultu",
-    "inWaitlist":"%1 \/ %2 ve frontě",
+    "inWaitlist":"%1 / %2 ve frontě",
     "userDjing":"%1 právě hraje",
     "userNextDJ":"%1 hraje jako další",
     "disconnects":"Odpojení",
@@ -150,7 +150,7 @@
     "lastMessage":"Poslední zpráva"
   },
   "ranks":{
-    "you":"Ty",
+    "you":"Vy",
     "regular":"Normální",
     "residentdj":"Rezidentní DJ",
     "bouncer":"Vyhazovač",
@@ -173,14 +173,14 @@
     "autorespond":"AFK automatická odpověď",
     "notify":"Upozornění",
     "afktimers":"Statistika AFK uživatelů",
-    "etatimer":"Časovač zbývajícího času",
+    "etatimer":"Zbývající čas",
     "roomsettings":"Nastavení místnosti",
     "chatimages":"Obrázky v chatu",
     "twitchemotes":"Twitch smajlíky",
     "controlpanel":"Ovládací panel",
     "showdeletedmessages":"Zobrazit odstraněné zprávy",
-    "visualizers":"RCS SoundCloud vizualizéry",
-    "inlineuserinfo":"Inline User Info"
+    "visualizers":"RCS SoundCloud vizulace",
+    "inlineuserinfo":"Mini info uživatele v chatu"
   },
   "vote":{
     "meh":"Meh",
@@ -190,7 +190,7 @@
     "djing":"Hraje"
   },
   "tooltip":{
-    "stream":"Zapnout nebo vypnout video \/ audio stream",
+    "stream":"Zapnout nebo vypnout video / audio stream",
     "clear":"Vyčistit chat",
     "afk":"AFK zpráva",
     "reset":"Resetovat do původního stavu",
@@ -202,11 +202,11 @@
     "alreadyInWaitList":"Uživatel %1 je již ve frontě",
     "notInWaitList":"Uživatel %1 není ve frontě",
     "unknownMenuKey":"Neznámý klíč menu: %1",
-    "invalidAddSyntax":"Syntaxe příkazu pro přidání uživatele není platná. Použití: \/add @uživatel",
-    "invalidBanSyntax":"Syntaxe příkazu banování uživatele není platná. Použití: \/ban @uživatel nebo \/ban @uživatel::doba::důvod",
+    "invalidAddSyntax":"Syntaxe příkazu pro přidání uživatele není platná. Použití: /add @uživatel",
+    "invalidBanSyntax":"Syntaxe příkazu zabanování uživatele není platná. Použití: /ban @uživatel nebo /ban @uživatel::doba::důvod",
     "invalidBanTime":"Zadaný čas %1 je neplatný. Platné hodnoty jsou 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Syntaxe příkazu pro odstranění uživatele není platná. Použití: \/remove @uživatel",
-    "invalidWhoisSyntax":"Syntaxe whois příkazu není platná. Použití: \/whois @uživatel",
+    "invalidRemoveSyntax":"Syntaxe příkazu pro odstranění uživatele není platná. Použití: /remove @uživatel",
+    "invalidWhoisSyntax":"Syntaxe whois příkazu není platná. Použití: /whois @uživatel",
     "errorGettingPlaylistInfo":"Chyba při získávání informací o playlistu",
     "noPlaylistsFound":"Nebyl nalezen žádný playlist",
     "yourActivePlaylistIsFull":"Váš aktivní seznam skladeb je plný",
