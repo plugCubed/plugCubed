@@ -28,16 +28,13 @@
 
 ;(function loading() {
     if (!(~window.location.hostname.indexOf('plug.dj'))) return alert('Loading plug³ outside of plug.dj is not supported.');
-
-    // only load in rooms on plug.dj
-    if (!window.jQuery || (window.jQuery && !window.jQuery('.room-background').length)) return;
+    if (window.location.href && !/(?:https?:\/\/(?:[a-z]+.)*plug\.dj)\/(?!about$|ba$|dashboard$|giftsub$|jobs$|legal$|plot$|press$|privacy$|purchase$|subscribe$|team$|terms$|!\/|_\/|@\/)(.+)/i.test(window.location.href)) return;
 
     // Fixes some analytics issues when using tracking / ad blockers
     window.Intercom = window.Intercom || {};
     window.amplitude = window.amplitude || { __VERSION__: 1337 };
 
     if (isLoaded()) {
-
         var requirejs = window.requirejs;
         var require = window.require;
         var define = window.define;

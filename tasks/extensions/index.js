@@ -8,6 +8,15 @@ const spawn = require('child_process').spawn;
 const jpm = path.resolve('node_modules', '.bin', process.platform === 'win32' ? 'jpm.cmd' : 'jpm');
 const maxPath = path.resolve('extensions', 'Maxthon');
 
+gulp.task('extensions:copy', () => {
+    return gulp
+        .src('bin/release/plugCubed.js')
+        .pipe(gulp.dest('extensions/Chrome'))
+        .pipe(gulp.dest('extensions/Firefox/data'))
+        .pipe(gulp.dest('extensions/Edge'))
+        .pipe(gulp.dest('extensions/Opera'));
+
+});
 gulp.task('extensions:firefox', () => {
     return spawn(jpm, ['xpi', '--addon-dir', path.resolve('extensions', 'Firefox')], {
         stdio: 'inherit'

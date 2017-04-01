@@ -119,6 +119,7 @@
     "info": {
         "header": "User Information",
         "name": "Name",
+        "profile": "User Profile",
         "title": "Title",
         "specialTitles": {
             "developer": "plug&#179; Developer",

@@ -15,24 +15,6 @@
 
     "content_scripts": [{
         "matches": ["https://*.plug.dj/*"],
-        "exclude_matches": [
-            "*://*/",
-            "*://*/*@*/*",
-            "*://*/*_*/*",
-            "*://*/*about*",
-            "*://*/*ba*",
-            "*://*/*dashboard*",
-            "*://*/*jobs*",
-            "*://*/*logout*",
-            "*://*/*partners*",
-            "*://*/*plot*",
-            "*://*/*press*",
-            "*://*/*privacy*",
-            "*://*/*purchase*",
-            "*://*/*subscribe*",
-            "*://*/*team*",
-            "*://*/*terms*"
-        ],
         "js": ["loader.js"]
     }],
 

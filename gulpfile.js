@@ -35,7 +35,7 @@ gulp.task('minify:release', gulp.parallel('minify:releaseJS', 'minify:releaseCSS
 
 gulp.task('build:alpha', gulp.series('test:alpha', 'clean:alpha', 'replace:linksalpha', 'requirejs:alpha', 'autoprefixer:alpha', 'template:alpha', 'minify:alpha', (done) => done()));
 
-gulp.task('build:extensions', gulp.parallel(['replace:extensionChrome', 'replace:extensionFirefox', 'replace:extensionMaxthon'], ['extensions:chrome', 'extensions:firefox', 'extensions:opera', 'extensions:maxthon'], (done) => done()));
+gulp.task('build:extensions', gulp.series('extensions:copy', [ 'replace:extensionChrome', 'replace:extensionFirefox', 'replace:extensionMaxthon'], ['extensions:chrome', 'extensions:firefox', 'extensions:opera', 'extensions:maxthon'], (done) => done()));
 
 gulp.task('build:release', gulp.series('test:release', 'clean:release', 'replace:linksrelease', 'requirejs:release', 'autoprefixer:release', 'template:release', ['build:extensions', 'minify:release'], (done) => done()));
 

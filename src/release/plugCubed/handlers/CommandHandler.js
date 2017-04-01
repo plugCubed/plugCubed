@@ -37,7 +37,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                     commandLog(p3Lang.i18n((Settings.badges ? 'commands.responses.badgeon' : 'commands.responses.badgeoff')));
                 }
                 Settings.save();
-            } else if (p3Utils.equalsIgnoreCase(command, 'export')) {
+            } else if (p3Utils.equalsIgnoreCase(command, 'exportchat')) {
                 $('.message').each(function(item) {
                     var $this = $(this);
 
