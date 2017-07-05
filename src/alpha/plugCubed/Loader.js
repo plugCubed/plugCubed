@@ -1,6 +1,5 @@
-define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Lang', 'plugCubed/Utils',
-    'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/handlers/DialogHandler', 'plugCubed/handlers/FullscreenHandler', 'plugCubed/handlers/VolumeSliderHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/overrides/RoomUserListRow', 'plugCubed/Overrides', 'plugCubed/Socket'
-], function(module, Class, Notifications, Version, Styles, Settings, p3Lang, p3Utils, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, DialogHandler, FullscreenHandler, VolumeSliderHandler, Features, Tickers, Panels, p3RoomUserListRow, Overrides, Socket) {
+define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/handlers/DialogHandler', 'plugCubed/handlers/FullscreenHandler', 'plugCubed/handlers/HideVideoHandler', 'plugCubed/handlers/VolumeSliderHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/overrides/RoomUserListRow', 'plugCubed/Overrides', 'plugCubed/Socket'
+], function(module, Class, Notifications, Version, Styles, Settings, p3Lang, p3Utils, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, DialogHandler, FullscreenHandler, HideVideoHandler, VolumeSliderHandler, Features, Tickers, Panels, p3RoomUserListRow, Overrides, Socket) {
     var Loader;
     var loaded = false;
     var RoomUsersListView = window.plugCubedModules.RoomUsersListView;
@@ -51,6 +50,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         CommandHandler.register();
         ChatHandler.register();
         FullscreenHandler.create();
+        HideVideoHandler.create();
         VolumeSliderHandler.register();
 
         Settings.load();
@@ -101,6 +101,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
             Styles.destroy();
             ChatHandler.close();
             FullscreenHandler.close();
+            HideVideoHandler.close();
             CommandHandler.close();
             DialogHandler.close();
             VolumeSliderHandler.close();

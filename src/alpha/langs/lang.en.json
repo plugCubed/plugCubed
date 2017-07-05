@@ -92,6 +92,7 @@
         "meh": "User Mehs",
         "stats": "Song Stats",
         "updates": "Song Updates",
+        "updatesLink": "Song Link",
         "history": "Songs in history",
         "songUnavailable": "Song Unavailable",
         "boothAlert": "Booth Alert (%1 / 50)",
@@ -184,7 +185,12 @@
         "controlpanel": "Control Panel",
         "showdeletedmessages": "Show Deleted Messages",
         "visualizers": "RCS SoundCloud Visualizers",
-        "inlineuserinfo": "Inline User Info"
+        "inlineuserinfo": "Inline User Info",
+        "about": "About plugCubed",
+        "background": "Change background",
+        "chatcustomizations": "Chat Customizations",
+        "customcss": "Custom CSS",
+        "mentions": "Custom Mention Sound"
     },
     "vote": {
         "meh": "Meh",
@@ -215,5 +221,11 @@
         "noPlaylistsFound": "No playlists found",
         "yourActivePlaylistIsFull": "Your active playlist is full",
         "noNextSong": "You have no queued song"
+    },
+    "video": {
+        "show": "Show",
+        "hide": "Hide",
+        "menushow": "Show Video",
+        "menuhide": "Hide Video"
     }
 }
