@@ -189,8 +189,7 @@
         "about": "About plugCubed",
         "background": "Change background",
         "chatcustomizations": "Chat Customizations",
-        "customcss": "Custom CSS",
-        "mentions": "Custom Mention Sound"
+        "customcss": "Custom CSS"
     },
     "vote": {
         "meh": "Meh",
