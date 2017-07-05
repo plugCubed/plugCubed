@@ -383,7 +383,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             container.append(guiButton(false, 'background', p3Lang.i18n('menu.background')));
             container.append(guiButton(false, 'chatcustomizations', p3Lang.i18n('menu.chatcustomizations')));
             container.append(guiButton(false, 'customcss', p3Lang.i18n('menu.customcss')));
-            container.append(guiButton(false, 'custommentions', p3Lang.i18n('menu.mentions')));
 
             if ($wrapper == null) {
                 $wrapper = $('<div>').attr('id', 'p3-settings-wrapper');
