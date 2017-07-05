@@ -6,7 +6,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
     names.push('version');
 
     // Features
-    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'chatLog', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'boothAlert', 'badges', 'emotes', 'customCSS', 'markdown');
+    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'chatLog', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'boothAlert', 'badges', 'emotes', 'customCSS', 'markdown', 'hideVideo', 'mentionSound');
 
     // Registers
     names.push('registeredSongs', 'alertson', 'colors');
@@ -79,12 +79,14 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         chatImages: true,
         emotes: {
             bttvEmotes: false,
+            customEmotes: true,
             emoteSet: 'apple',
             ffzEmotes: false,
             tastyEmotes: false,
             twitchEmotes: false,
             twitchSubEmotes: false
         },
+        mentionSound: window.plugCubedModules.plugUrls.sfx,
         songTitle: false,
         registeredSongs: [],
         alertson: [],
@@ -97,6 +99,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         boothAlert: 1,
         markdown: false,
         customCSS: '',
+        hideVideo: false,
+        notifyUpdatesLink: false,
         notifySongLength: 10,
         useRoomSettings: {},
         colorInfo: {
@@ -195,6 +199,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         load: function() {
             try {
                 var save = JSON.parse(localStorage.getItem('plugCubed')) || {};
+                var i;
 
                 // Upgrade if needed
                 if (save.version == null || save.version !== curVersion) {
@@ -203,7 +208,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 }
 
                 // Get the settings
-                for (var i = 0; i < names.length; i++) {
+                for (i = 0; i < names.length; i++) {
                     if (!names[i]) continue;
                     if (save[names[i]] != null && typeof this[names[i]] == typeof save[names[i]]) {
                         if ($.isPlainObject(this[names[i]])) {
@@ -254,6 +259,9 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 }
                 if (this.emotes.twitchSubEmotes) {
                     require('plugCubed/handlers/ChatHandler').loadTwitchSubEmotes();
+                }
+                if (this.hideVideo) {
+                    $('#playback-container').hide();
                 }
 
                 if (!this.badges) {

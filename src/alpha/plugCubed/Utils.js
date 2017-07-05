@@ -1,5 +1,5 @@
 define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function(Class, p3Lang) {
-    var cleanHTMLMessage, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PlugUI, PopoutView, html2text;
+    var cleanHTMLMessage, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PlugUI, PopoutView, html2text, Settings;
 
     if (typeof window.plugCubedUserData === 'undefined') {
         window.plugCubedUserData = {};
@@ -131,7 +131,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
         },
         generateEmoteHash: function() {
-            var i, emoteHash, allEmotes, firstChar, emoji, Settings;
+            var i, emoteHash, allEmotes, firstChar, emoji;
 
             Settings = require('plugCubed/Settings');
             emoteHash = window.plugCubed.emotes.emoteHash = {};
@@ -350,7 +350,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return new Array(count + 1).join(str);
         },
         chatLog: function(type, message, color, fromID, fromName) {
-            var $chat, b, $message, $box, $msg, $text, $msgSpan, $timestamp, $from, fromUser, chat;
+            var $chat, b, $message, $box, $msg, $text, $msgSpan, $timestamp, $from, fromUser, chat, lastMessage, lastMessageData;
 
             chat = window.plugCubedModules.chat;
 
@@ -371,6 +371,18 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             $msg = $('<div>').addClass('msg').append($from);
             $text = $('<span>').addClass('text').append($msgSpan);
 
+            $box.click(function() {
+                $(this).parent().remove();
+            }).mouseover(function() {
+                $(this).find('.icon').removeClass().addClass('icon icon-x-grey').css({
+                    cursor: 'pointer'
+                });
+            }).mouseout(function() {
+                $(this).find('.icon').removeClass().addClass('icon icon-plugcubed').css({
+                    cursor: 'default'
+                });
+            });
+
             chat.lastText = chat.lastID = chat.lastType = chat.lastTime = null;
 
             if ($('.icon-timestamps-off').length === 0) {
@@ -387,15 +399,32 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
                 if (fromUser != null && fromUser.username != null) {
                     if (lastSender === fromUser.id) {
-                        lastMessageContainer.find('.text').append('<br>').append($msgSpan);
+                        lastMessage = lastMessageContainer.find('.text');
+                        lastMessageData = lastMessageContainer.data('lastMessageData') || {};
+
+                        if (lastMessageData[fromUser.id]) {
+                            lastMessage.html($msgSpan.append(' (' + ++lastMessageData[fromUser.id].count + 'x)'));
+                        } else {
+                            lastMessageData[fromUser.id] = {
+                                count: 1
+                            };
+                        }
+
                         if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height()) {
                             $chat.scrollTop($chat[0].scrollHeight);
                         }
 
+                        lastMessageContainer.data({
+                            lastMessageData: lastMessageData
+                        });
+
                         return;
                     }
-
-                    $from.find('.un').html(cleanHTMLMessage(fromUser.username));
+                    if (fromName && fromName.indexOf('(friend)') !== -1) {
+                        $from.find('.un').html(cleanHTMLMessage(fromName));
+                    } else {
+                        $from.find('.un').html(cleanHTMLMessage(fromUser.username));
+                    }
 
                     if (this.hasPermission(fromUser.id, API.ROLE.HOST, true)) {
                         $message.addClass('from-admin');
@@ -429,10 +458,28 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 } else if (fromID < 0) {
                     $from.find('.un').html('plug&#179;');
                     if (lastSender === fromID && type === lastType) {
-                        lastMessageContainer.find('.text').append('<br>').append($msgSpan);
+                        lastMessage = lastMessageContainer.find('.text');
+                        lastMessageData = lastMessageContainer.data('lastMessageData') || {};
+
+                        if (lastMessageData[fromID]) {
+                            lastMessage.html($msgSpan.append(' (' + ++lastMessageData[fromUser.id].count + 'x)'));
+                        } else {
+                            lastMessageData[fromID] = {
+                                count: 1
+                            };
+                        }
+
                         if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height()) {
                             $chat.scrollTop($chat[0].scrollHeight);
                         }
+
+                        lastMessageContainer.data({
+                            lastMessageData: lastMessageData
+                        });
+
+                        $box.click(function() {
+                            $(this).parent().remove();
+                        });
 
                         return;
                     }
@@ -449,10 +496,14 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             }
         },
         getRoomID: function() {
-            return document.location.pathname.split('/')[1];
+            var defaultID = document.location.pathname.split('/')[1];
+
+            return this.objectSelector(window.plugCubedModules, 'room.attributes.slug', defaultID).trim();
         },
         getRoomName: function() {
-            return $('#room-name').text().trim();
+            var $roomName = $('#room-name').text().trim();
+
+            return this.objectSelector(window.plugCubedModules, 'room.attributes.name', $roomName).trim();
         },
         getUserData: function(uid, key, defaultValue) {
             if (plugcubedUserData[uid] == null || plugcubedUserData[uid][key] == null) {
@@ -589,9 +640,16 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.id') + ' ')).append($('<span>').css('color', '#FFFFFF').text(user.id))));
 
                 // Profile
-                if (user.level > 5) {
-                    message.append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.profile') + ' ')).append($('<span>').css('color', '#FFFFFF').html($('<a>').attr('href', 'https://plug.dj/@/' + user.slug).text('https://plug.dj/@/' + user.slug))));
+                if (user.level > 5 && typeof user.slug === 'string' && user.slug.length > 0) {
+                    message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text('Slug ')).append($('<span>').css('color', '#FFFFFF').text(user.slug))));
+                    message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.profile') + ' ')).append($('<span>').css('color', '#FFFFFF').html($('<a>').attr('href', 'https://plug.dj/@/' + user.slug).text('https://plug.dj/@/' + user.slug)))));
                 }
+
+                // joined
+                message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text('Joined ')).append($('<span>').css('color', '#FFFFFF').text(user.joined))));
+
+                // Last Seen
+                message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.lastSeen') + ' ')).append($('<span>').css('color', '#FFFFFF').text(user.last_seen))));
 
                 // Rank / Time Joined
                 message.append($('<tr>').append($('<td>').append($('<strong>').text(p3Lang.i18n('info.rank') + ' ')).append($('<span>').css('color', '#FFFFFF').text(rank))).append($('<td>').append($('<strong>').text(p3Lang.i18n('info.joined') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getTimestamp(this.getUserData(user.id, 'joinTime', Date.now()))))));
@@ -626,7 +684,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 if (disconnectInfo.count > 0) {
 
                     // Last Position
-                    message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.lastPosition') + ' ')).append($('<span>').css('color', '#FFFFFF').text(disconnectInfo.position < 0 ? 'Wasn\'t in booth nor waitlist' : (disconnectInfo.position === 0 ? 'Was DJing' : 'Was ' + disconnectInfo.position + ' in waitlist')))));
+                    message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.lastPosition') + ' ')).append($('<span>').css('color', '#FFFFFF').text(disconnectInfo.position < 0 ? "Wasn't in booth nor waitlist" : (disconnectInfo.position === 0 ? 'Was DJing' : 'Was ' + disconnectInfo.position + ' in waitlist')))));
 
                     // Last Disconnect Time
                     message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.lastDisconnect') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getTimestamp(disconnectInfo.time)))));
@@ -651,12 +709,10 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             });
             var users = API.getUsers();
 
-            for (var i in users) {
-                if (users.hasOwnProperty(i)) {
-                    var user = users[i];
+            for (var i = 0; i < users.length; i++) {
+                var user = users[i];
 
-                    table.append($('<tr>').append($('<td>').append(user.username)).append($('<td>').append(user.id)));
-                }
+                table.append($('<tr>').append($('<td>').append(user.username)).append($('<td>').append(user.id)));
             }
             this.chatLog(undefined, $('<div>').append(table).html());
         },
@@ -671,7 +727,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             var count = 0;
 
             if (Database.settings.chatSound) {
-                var mentionSound = new Audio(PlugUI.sfx);
+                var mentionSound = new Audio(Settings.mentionSound);
 
                 mentionSound.addEventListener('ended', function() {
                     count++;
@@ -876,10 +932,11 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
         objectSelector: function(obj, selector, defaultValue) {
             var a = obj;
 
+            if (typeof a === 'object' && a == null) return defaultValue;
+
             var key = selector.split('.');
 
-            for (var i in key) {
-                if (!key.hasOwnProperty(i)) continue;
+            for (var i = 0; i < key.length; i++) {
                 if (a[key[i]] == null) {
                     return defaultValue;
                 }
@@ -911,6 +968,128 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
             return num + (suffixes[(remainder - 20) % 10] || suffixes[remainder] || suffixes[0]);
 
+        },
+        banUser: function(userID, duration, reason) {
+            if (!userID || !_.contains(API.BAN, duration) || !(API.getUser().role > 2 || API.getUser().gRole > 0)) return;
+            if (!_.contains([1, 2, 3, 4, 5, 6], reason)) reason = 1;
+
+            var user = API.getUser(userID);
+
+            if (user && (user.role > API.getUser().role || user.gRole > 0)) return;
+
+            $.ajax({
+                contentType: 'application/json',
+                type: 'POST',
+                url: '/_/bans/add',
+                data: JSON.stringify({
+                    userID: userID,
+                    duration: duration,
+                    reason: reason
+                })
+            });
+        },
+        unbanUser: function(userID) {
+            if (!userID) return;
+
+            $.ajax({
+                contentType: 'application/json',
+                type: 'DELETE',
+                url: '/_/bans' + userID
+            });
+
+        },
+        moveUser: function(userID, position) {
+            if (!userID || !(API.getUser().role > 3 || API.getUser().gRole > 0) || (API.getDJ() && API.getDJ().id === userID)) return;
+            var waitlistPosition = API.getWaitListPosition(userID);
+            var inWaitlist = waitlistPosition > -1;
+
+            if (position > 50) position = 50;
+            if (position < 1) position = 1;
+
+            if (inWaitlist) {
+                $.ajax({
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        userID: userID,
+                        position: position
+                    }),
+                    type: 'POST',
+                    url: '/_/booth/move'
+                });
+            } else {
+                $.ajax({
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        id: userID
+                    }),
+                    url: '/_/booth/add'
+                }).done(function(body) {
+                    if (body.status === 'ok') {
+                        $.ajax({
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                                userID: userID,
+                                position: position
+                            }),
+                            type: 'POST',
+                            url: '/_/booth/move'
+                        });
+                    }
+                });
+            }
+        },
+        muteUser: function(userID, duration, reason) {
+            if (!userID || !_.contains(API.MUTE, duration) || !(API.getUser().role > 2 || API.getUser().gRole > 0)) return;
+            if (!_.contains([1, 2, 3, 4, 5, 6], reason)) reason = 1;
+
+            var role;
+            var user = API.getUser(userID);
+
+            if (user && user.gRole > 0) return;
+            if (user && user.role > 0) {
+                role = user.role;
+                $.ajax({
+                    contentType: 'application/json',
+                    type: 'DELETE',
+                    url: '/_/staff/' + userID
+                }).done(function(body) {
+                    if (body.status === 'ok') {
+                        $.ajax({
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                                userID: userID,
+                                duration: duration,
+                                reason: reason
+                            }),
+                            type: 'POST',
+                            url: '/_/mutes'
+                        }).done(function(body2) {
+                            if (body2.status === 'ok') {
+                                $.ajax({
+                                    contentType: 'application/json',
+                                    data: JSON.stringify({
+                                        userID: userID,
+                                        roleID: role
+                                    }),
+                                    type: 'POST',
+                                    url: '/_/staff/update'
+                                });
+                            }
+                        });
+                    }
+                });
+            } else {
+                $.ajax({
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        userID: userID,
+                        duration: duration,
+                        reason: reason
+                    }),
+                    type: 'POST',
+                    url: '/_/mutes'
+                });
+            }
         },
         statusSocket: function(call) {
             var att = 0;

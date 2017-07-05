@@ -1019,8 +1019,6 @@ i.icon.icon-chat-p3donatorBronze,
     z-index: 100;
     cursor: pointer;
     background: #FF5CDE;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FF5CDE), color-stop(100%, #5700FF));
-    background: -webkit-linear-gradient(top, #FF5CDE 0, #5700FF 100%);
     background: linear-gradient(to bottom, #FF5CDE 0, #5700FF 100%);
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='$purple2', endColorstr='$purple1', GradientType=0);
 }
@@ -1111,3 +1109,41 @@ blockquote.p3-blockquote {
     margin: .5em 10px;
     padding: .5em 10px;
 }
+
+.p3-dropbtn {
+    background-color: inherit;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.p3-mention-dropdown {
+    position: relative;
+    display: inline-block;
+    padding-top: 10px;
+}
+
+.p3-mention-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 181, 230, 0.34);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+
+.p3-mention-dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.p3-mention-dropdown-content a:hover {background-color: #00b5e6;}
+
+.p3-mention-dropdown:hover .p3-mention-dropdown-content {display: block;}
+
+.p3-mention-dropdown:hover .p3-dropbtn {background-color: #3e8e41}

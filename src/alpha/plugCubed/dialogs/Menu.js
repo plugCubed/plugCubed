@@ -121,6 +121,15 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                         p3Utils.generateEmoteHash();
                     }
                     this.setEnabled('twitchemotes', Settings.emotes.twitchEmotes);
+                    if (Settings.emotes.twitchEmotes) {
+                        dialogControlPanel.openTab('Chat Customizations');
+                        $('div#p3-control-panel-current div.jspContainer div.jspPane div.p3-control-left div.p3-item.twitch-emotes').addClass('selected');
+                        $('div#p3-control-panel-close').click();
+                    } else {
+                        dialogControlPanel.openTab('Chat Customizations');
+                        $('div#p3-control-panel-current div.jspContainer div.jspPane div.p3-control-left div.p3-item.twitch-emotes').removeClass('selected');
+                        $('div#p3-control-panel-close').click();
+                    }
                     break;
                 case 'colors':
                     dialogColors.render();
@@ -221,6 +230,40 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                         $djButton.html(Lang.dj.waitLeave);
                     }
                     break;
+                case 'notifyUpdatesLink':
+                    Settings.notifyUpdatesLink = !Settings.notifyUpdatesLink;
+                    this.setEnabled('notifyUpdatesLink', Settings.notifyUpdatesLink);
+                    break;
+                case 'hidevideo':
+                    Settings.hideVideo = !Settings.hideVideo;
+                    this.setEnabled('hidevideo', Settings.hideVideo);
+                    $('div.p3-hideplayback').find('.box').text(Settings.hideVideo ? p3Lang.i18n('video.show') : p3Lang.i18n('video.hide'));
+                    if (Settings.hideVideo) {
+                        $('#playback-container').hide();
+                    } else {
+                        $('#playback-container').show();
+                    }
+                    break;
+                case 'about':
+                    dialogControlPanel.toggleControlPanel(true);
+                    dialogControlPanel.openTab('About');
+                    this.toggleMenu(false);
+                    break;
+                case 'background':
+                    dialogControlPanel.toggleControlPanel(true);
+                    dialogControlPanel.openTab('Background');
+                    this.toggleMenu(false);
+                    break;
+                case 'chatcustomizations':
+                    dialogControlPanel.toggleControlPanel(true);
+                    dialogControlPanel.openTab('Chat Customizations');
+                    this.toggleMenu(false);
+                    break;
+                case 'customcss':
+                    dialogControlPanel.toggleControlPanel(true);
+                    dialogControlPanel.openTab('Custom CSS');
+                    this.toggleMenu(false);
+                    break;
                 default:
                     API.chatLog(p3Lang.i18n('error.unknownMenuKey', a));
                     break;
@@ -286,6 +329,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             }
             container.append(guiButton(false, 'colors', p3Lang.i18n('menu.customchatcolors') + '...'));
             container.append(guiButton(false, 'controlpanel', p3Lang.i18n('menu.controlpanel') + '...'));
+            container.append(guiButton(false, 'hidevideo', p3Lang.i18n('video.menuhide')));
 
             // Divider
             container.append($('<div class="spacer">').append($('<div class="divider">')));
@@ -299,6 +343,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             container.append(guiButton((Settings.notify & enumNotifications.USER_MEH) === enumNotifications.USER_MEH, 'notify-meh', p3Lang.i18n('notify.meh')).data('bit', enumNotifications.USER_MEH));
             container.append(guiButton((Settings.notify & enumNotifications.SONG_STATS) === enumNotifications.SONG_STATS, 'notify-stats', p3Lang.i18n('notify.stats')).data('bit', enumNotifications.SONG_STATS));
             container.append(guiButton((Settings.notify & enumNotifications.SONG_UPDATE) === enumNotifications.SONG_UPDATE, 'notify-updates', p3Lang.i18n('notify.updates')).data('bit', enumNotifications.SONG_UPDATE));
+            container.append(guiButton(Settings.notifyUpdatesLink, 'notifyUpdatesLink', p3Lang.i18n('notify.updatesLink')));
             var boothAlertSlider = new Slider(1, 50, Settings.boothAlert, function(v) {
                 Settings.boothAlert = v;
                 Settings.save();
@@ -326,6 +371,20 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 }
 
             }
+
+            // Divider
+            container.append($('<div class="spacer">').append($('<div class="divider">')));
+
+            // ControlPanel
+            container.append($('<div>').addClass('section').text('Control Panel'));
+
+            // Tabs
+            container.append(guiButton(false, 'about', p3Lang.i18n('menu.about')));
+            container.append(guiButton(false, 'background', p3Lang.i18n('menu.background')));
+            container.append(guiButton(false, 'chatcustomizations', p3Lang.i18n('menu.chatcustomizations')));
+            container.append(guiButton(false, 'customcss', p3Lang.i18n('menu.customcss')));
+            container.append(guiButton(false, 'custommentions', p3Lang.i18n('menu.mentions')));
+
             if ($wrapper == null) {
                 $wrapper = $('<div>').attr('id', 'p3-settings-wrapper');
                 $('body').append($wrapper);

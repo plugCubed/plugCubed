@@ -5,7 +5,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
         register: function() {
             panel = ControlPanel.addPanel('Custom CSS');
 
-            $contentDiv = $('<div>').append($('<p>').text('Set your own room CSS.'));
+            $contentDiv = $('<div>').append($('<p>').text('Set your own room CSS.')).width('20%').css('margin', '25px auto auto auto');
 
             panel.addContent($contentDiv);
 
@@ -32,8 +32,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
                     Settings.customCSS = $textarea.val();
                     Settings.save();
                     this.changeSubmit(false);
-                } else {
-                    this.changeSubmit(true);
+                    $clearButton.changeSubmit(true);
                 }
             });
             $clearButton = ControlPanel.button('Clear', false, function() {
@@ -44,16 +43,13 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
                     Settings.customCSS = '';
                     Settings.save();
                     $textarea.val('');
-                    this.changeSubmit(true);
-                } else {
                     this.changeSubmit(false);
+                    $submitButton.changeSubmit(true);
                 }
             });
 
             if (typeof Settings.customCSS === 'string' && Settings.customCSS.length > 0) {
                 $localCSSInput.val(Settings.customCSS);
-                $submitButton.changeSubmit(true);
-                $clearButton.changeSubmit(true);
             }
 
             $formDiv.append($localCSSInput).append($submitButton.getJQueryElement().css({
@@ -73,4 +69,3 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
 
     return new Handler();
 });
-
