@@ -204,11 +204,10 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                     if (roomSettings.css != null) {
 
                         // css.font
-                        if (roomSettings.css.font != null && _.isArray(roomSettings.css.font)) {
+                        if (roomSettings.css.font != null && Array.isArray(roomSettings.css.font)) {
                             var roomFonts = [];
 
-                            for (i in roomSettings.css.font) {
-                                if (!roomSettings.css.font.hasOwnProperty(i)) continue;
+                            for (i = 0; i < roomSettings.css.font.length; i++) {
                                 var font = roomSettings.css.font[i];
 
                                 if (font.name != null && font.url != null) {
@@ -235,11 +234,15 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                         }
 
                         // css.import
-                        if (roomSettings.css.import != null && _.isArray(roomSettings.css.import)) {
-                            for (i in roomSettings.css.import) {
-                                if (roomSettings.css.import.hasOwnProperty(i) && typeof roomSettings.css.import[i] === 'string') {
-                                    Styles.addImport(roomSettings.css.import[i]);
+                        if (roomSettings.css.import != null) {
+                            if (Array.isArray(roomSettings.css.import)) {
+                                for (i = 0; i < roomSettings.css.import.length; i++) {
+                                    if (typeof roomSettings.css.import[i] === 'string') {
+                                        Styles.addImport(roomSettings.css.import[i]);
+                                    }
                                 }
+                            } else if (typeof roomSettings.css.import === 'string') {
+                                Styles.addImport(roomSettings.css.import);
                             }
                         }
 
@@ -259,6 +262,33 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                             }
                             Styles.set('room-settings-rules', roomCSSRules.join('\n'));
                         }
+                    }
+
+                    // emotes
+                    if ((roomSettings.emotes != null || roomSettings.emoji != null || roomSettings.emoticons != null) && (roomSettings.rules.allowEmotes == null || roomSettings.rules.allowEmotes === 'true' || roomSettings.rules.allowEmotes === true)) {
+                        roomSettings.emotes || (roomSettings.emotes = roomSettings.emoticons || roomSettings.emoji);
+                        delete roomSettings.emoticons;
+                        delete roomSettings.emoji;
+
+                        for (i in roomSettings.emotes) {
+                            if (!roomSettings.emotes.hasOwnProperty(i) || roomSettings.emotes[i] == null) continue;
+
+                            var emote = roomSettings.emotes[i];
+
+                            if (typeof emote === 'string') {
+                                window.plugCubed.emotes.customEmotes[':' + i + ':'] = {
+                                    url: emote,
+                                    size: 'auto'
+                                };
+                            } else if (emote != null && typeof emote === 'object' && emote.hasOwnProperty('url')) {
+                                if (!('size' in emote) && (!('width' in emote) || !('height' in emote))) {
+                                    emote.size = 'auto';
+                                }
+                                window.plugCubed.emotes.customEmotes[':' + i + ':'] = emote;
+                            }
+
+                        }
+
                     }
 
                     // images
@@ -394,11 +424,10 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
         // RCS compatibility--reload room settings if a moderator chats
         // "!rcsreload ccs".
         checkModUpdate: function(message) {
-            if (API.hasPermission(message.uid, API.ROLE.COHOST) && p3Utils.startsWith(message.message, '!rcsreload ccs')) {
+            if ((API.hasPermission(message.uid, API.ROLE.COHOST) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) && (p3Utils.startsWith(message.message, '!rcsreload ccs') || p3Utils.startsWith(message.message, '!p3reload ccs'))) {
                 this.update();
             }
         },
-
         close: function() {
             Context.off('change:role', setFooterIcon);
             Context.off('room:joining', this.clear, this);

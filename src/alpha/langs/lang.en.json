@@ -6,12 +6,10 @@
         "disable": "Disable AFK Autorespond to chat",
         "nextIn": "Next AFK Autorespond will be sent from %1",
         "next": "AFK Autorespond on next mention",
-        "commandDisable": "%1 AFK message disabled",
-        "commandNotEnabled": "%1 AFK message was not enabled"
+        "commandDisable": "%1 AFK message disabled"
     },
     "autojoin": {
-        "commandDisable": "%1 autojoin disabled",
-        "commandNotEnabled": "%1 autojoin was not enabled"
+        "commandDisable": "%1 autojoin disabled"
     },
     "fullscreen": {
         "shrink": "Shrink",

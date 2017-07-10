@@ -1,5 +1,5 @@
 define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/StyleManager', 'plugCubed/dialogs/Menu'], function(Class, ControlPanel, Settings, p3Utils, Styles, Menu) {
-    var Handler, $contentDiv, panel, $twitchItem, $twitchSubItem, $bttvItem, $tastyItem, $ffzItem, $p3EmotesItem, $markdownItem, $emojiSetGoogle, $emojiSetApple, $emojiSetEmojione, $emojiSetTwitter, $dropdown, chatHandler, emoji, $examples;
+    var Handler, $contentDiv, panel, $twitchItem, $twitchSubItem, $bttvItem, $tastyItem, $ffzItem, $p3EmotesItem, $markdownItem, $emojiSetGoogle, $emojiSetApple, $emojiSetEmojione, $emojiSetTwitter, $dropdown, $dropdownOptions, chatHandler, emoji, $examples, mentionChange, mentionNames;
 
     emoji = window.plugCubedModules.emoji;
     $examples = $('<span class="p3-emoji-samples">').html(emoji.replacement('1f604') + '' + emoji.replacement('1f44d') + '' + emoji.replacement('1f44b') + '' + emoji.replacement('1f494') + '' + emoji.replacement('1f680'));
@@ -134,27 +134,66 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
                 Settings.save();
 
             });
+            mentionNames = ['Boink', 'Bubble', 'Click', 'Coins', 'Drops', 'Hiccup', 'Poke', 'R2D2', 'Spring', 'System Fault', 'WellDone', 'What', 'Default'];
+            mentionChange = function(event) {
 
-            $('<script>')
-                .attr('type', 'text/javascript')
-                .text('function mentionChange(name){var Settings=require("plugCubed/Settings");$("div.p3-mention-dropdown button.p3-dropbtn").text("Mention Sound -- "+name);switch(name){case "Boink":Settings.mentionSound="https://plugcubed.net/scripts/audio/mentions/boink.mp3";Settings.save();break;case "Bubble":Settings.mentionSound="https://plugcubed.net/scripts/audio/mentions/bubble.mp3";Settings.save();break;case "Click":Settings.mentionSound="https://plugcubed.net/scripts/audio/mentions/click.mp3";Settings.save();break;case "Coins":Settings.mentionSound="https://plugcubed.net/scripts/audio/mentions/coins.mp3";Settings.save();break;case "Drops":Settings.mentionSound="https://plugcubed.net/scripts/audio/mentions/drops.mp3";Settings.save();break;case "Hiccup":Settings.mentionSound="https://plugcubed.net/scripts/audio/mentions/hiccup.mp3";Settings.save();break;case "Poke":Settings.mentionSound="https://plugcubed.net/scripts/audio/mentions/poke.mp3";Settings.save();break;case "R2D2":Settings.mentionSound="https://plugcubed.net/scripts/audio/mentions/r2d2.mp3";Settings.save();break;case "Spring":Settings.mentionSound="https://plugcubed.net/scripts/audio/mentions/spring.mp3";Settings.save();break;case "System-Fault":Settings.mentionSound="https://plugcubed.net/scripts/audio/mentions/system-fault.mp3";Settings.save();break;case "Well Done":Settings.mentionSound="https://plugcubed.net/scripts/audio/mentions/well-done.mp3";Settings.save();break;case "What":Settings.mentionSound="https://plugcubed.net/scripts/audio/mentions/what.mp3";Settings.save();break;case "Default":default:Settings.mentionSound=p3Utils.PlugUI.sfx;Settings.save();break}}')
-                .appendTo('head');
+                var number = parseInt(event.target.id.split('mention')[1], 10);
+
+                $('div.p3-mention-dropdown button.p3-dropbtn').text('Mention Sound -- ' + mentionNames[number]);
+                switch (number) {
+                    case 0:
+                        Settings.mentionSound = 'https://plugcubed.net/scripts/audio/mentions/boink.mp3';
+                        break;
+                    case 1:
+                        Settings.mentionSound = 'https://plugcubed.net/scripts/audio/mentions/bubble.mp3';
+                        break;
+                    case 2:
+                        Settings.mentionSound = 'https://plugcubed.net/scripts/audio/mentions/click.mp3';
+                        break;
+                    case 3:
+                        Settings.mentionSound = 'https://plugcubed.net/scripts/audio/mentions/coins.mp3';
+                        break;
+                    case 4:
+                        Settings.mentionSound = 'https://plugcubed.net/scripts/audio/mentions/drops.mp3';
+                        break;
+                    case 5:
+                        Settings.mentionSound = 'https://plugcubed.net/scripts/audio/mentions/hiccup.mp3';
+                        break;
+                    case 6:
+                        Settings.mentionSound = 'https://plugcubed.net/scripts/audio/mentions/poke.mp3';
+                        break;
+                    case 7:
+                        Settings.mentionSound = 'https://plugcubed.net/scripts/audio/mentions/r2d2.mp3';
+                        break;
+                    case 8:
+                        Settings.mentionSound = 'https://plugcubed.net/scripts/audio/mentions/spring.mp3';
+                        break;
+                    case 9:
+                        Settings.mentionSound = 'https://plugcubed.net/scripts/audio/mentions/system-fault.mp3';
+                        break;
+                    case 10:
+                        Settings.mentionSound = 'https://plugcubed.net/scripts/audio/mentions/well-done.mp3';
+                        break;
+                    case 11:
+                        Settings.mentionSound = 'https://plugcubed.net/scripts/audio/mentions/what.mp3';
+                        break;
+                    case 12:
+                    default:
+                        Settings.mentionSound = window.plugCubedModules.plugUrls.sfx;
+                        break;
+                }
+                Settings.save();
+
+            };
+            $dropdownOptions = $('<div>').addClass('p3-mention-dropdown-content');
+
+            for (var i = 0; i < mentionNames.length; i++) {
+                $dropdownOptions.append($('<a>').click(mentionChange).attr('href', '#').attr('id', 'mention' + i).text(mentionNames[i]));
+            }
             $dropdown = $('<div class="p3-mention-dropdown">')
                 .append($('<button class="p3-dropbtn">').text('Mention Sounds -- Default'))
-                .append($('<div class="p3-mention-dropdown-content">')
-                    .append($('<a href="#" onClick="mentionChange(document.getElementById(\'mention1\').text)">').attr('id', 'mention1').text('Boink'))
-                    .append($('<a href="#" onClick="mentionChange(document.getElementById(\'mention2\').text)">').attr('id', 'mention2').text('Bubble'))
-                    .append($('<a href="#" onClick="mentionChange(document.getElementById(\'mention3\').text)">').attr('id', 'mention3').text('Click'))
-                    .append($('<a href="#" onClick="mentionChange(document.getElementById(\'mention4\').text)">').attr('id', 'mention4').text('Coins'))
-                    .append($('<a href="#" onClick="mentionChange(document.getElementById(\'mention5\').text)">').attr('id', 'mention5').text('Drops'))
-                    .append($('<a href="#" onClick="mentionChange(document.getElementById(\'mention6\').text)">').attr('id', 'mention6').text('Hiccup'))
-                    .append($('<a href="#" onClick="mentionChange(document.getElementById(\'mention7\').text)">').attr('id', 'mention7').text('Poke'))
-                    .append($('<a href="#" onClick="mentionChange(document.getElementById(\'mention8\').text)">').attr('id', 'mention8').text('R2D2'))
-                    .append($('<a href="#" onClick="mentionChange(document.getElementById(\'mention9\').text)">').attr('id', 'mention9').text('Spring'))
-                    .append($('<a href="#" onClick="mentionChange(document.getElementById(\'mention10\').text)">').attr('id', 'mention10').text('System Fault'))
-                    .append($('<a href="#" onClick="mentionChange(document.getElementById(\'mention11\').text)">').attr('id', 'mention11').text('WellDone'))
-                    .append($('<a href="#" onClick="mentionChange(document.getElementById(\'mention12\').text)">').attr('id', 'mention12').text('What'))
-                    .append($('<a href="#" onClick="mentionChange(document.getElementById(\'mention13\').text)">').attr('id', 'mention13').text('Default')));
+                .append($dropdownOptions);
+
             $emojiSetGoogle.changeCheckmark((Settings.emotes.emoteSet === 'google'));
             $emojiSetApple.changeCheckmark((Settings.emotes.emoteSet === 'apple'));
             $emojiSetEmojione.changeCheckmark((Settings.emotes.emoteSet === 'emojione'));

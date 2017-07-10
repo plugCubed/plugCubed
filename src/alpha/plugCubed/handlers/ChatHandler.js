@@ -133,12 +133,14 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                     } else {
 
                         // DeviantArt links
-                        var daTests = [/http:\/\/[a-z\-\.]+\.deviantart.com\/art\/[0-9a-zA-Z:\-]+/,
+                        var daTests = [
+                            /http:\/\/[a-z\-\.]+\.deviantart.com\/art\/[0-9a-zA-Z:\-]+/,
                             /http:\/\/[a-z\-\.]+\.deviantart.com\/[0-9a-zA-Z:\-]+#\/[0-9a-zA-Z:\-]+/,
-                            /http:\/\/fav.me\/[0-9a-zA-Z]+/, /http:\/\/sta.sh\/[0-9a-zA-Z]+/];
+                            /http:\/\/fav.me\/[0-9a-zA-Z]+/, /http:\/\/sta.sh\/[0-9a-zA-Z]+/
+                        ];
 
-                        for (var i in daTests) {
-                            if (daTests.hasOwnProperty(i) && daTests[i].test(url)) {
+                        for (var i = 0; i < daTests.length; i++) {
+                            if (daTests[i].test(url)) {
                                 imageURL = 'https://api.plugCubed.net/redirect/da/' + url;
                                 break;
                             }
@@ -148,13 +150,13 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                     // If supported image link
                     if (imageURL != null) {
                         var image = $('<img>')
-                        .attr('src', imageURL)
-                        .css({
-                            display: 'block',
-                            'max-width': '100%',
-                            height: 'auto',
-                            margin: '0 auto'
-                        });
+                            .attr('src', imageURL)
+                            .css({
+                                display: 'block',
+                                'max-width': '100%',
+                                height: 'auto',
+                                margin: '0 auto'
+                            });
 
                         $(this).html(image);
                     }
@@ -234,22 +236,22 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
         return tokenize(text).reduce(function(string, token) {
             return string + (
                 token.type === 'em' ? '<em>' + transform(token.text) + '</em>' :
-                token.type === 'strong' ? '<strong>' + transform(token.text) + '</strong>' :
-                token.type === 'code' ? '<code>' + token.text + '</code>' :
-                token.type === 'quote' ? '<blockquote class="p3-blockquote">' + token.text + '</blockquote>' :
-                token.type === 'strike' ? '<span class="p3-strike">' + transform(token.text) + '</span>' :
-                token.text
+                    token.type === 'strong' ? '<strong>' + transform(token.text) + '</strong>' :
+                        token.type === 'code' ? '<code>' + token.text + '</code>' :
+                            token.type === 'quote' ? '<blockquote class="p3-blockquote">' + token.text + '</blockquote>' :
+                                token.type === 'strike' ? '<span class="p3-strike">' + transform(token.text) + '</span>' :
+                                    token.text
             );
         }, '');
     }
 
     function convertEmoteByType(text, type) {
-        if (typeof text !== 'string' || typeof type !== 'string' || ['bttvEmotes', 'ffzEmotes', 'twitchEmotes', 'twitchSubEmotes', 'tastyEmotes'].indexOf(type) === -1 || !Settings.emotes[type]) return text;
+        if (typeof text !== 'string' || typeof type !== 'string' || ['bttvEmotes', 'customEmotes', 'ffzEmotes', 'twitchEmotes', 'twitchSubEmotes', 'tastyEmotes'].indexOf(type) === -1 || !Settings.emotes[type]) return text;
 
         var temp, image, emoteData, emote, className;
 
         emoteData = window.plugCubed.emotes[type];
-        className = type === 'bttvEmotes' ? 'p3-bttv-emote' : type === 'twitchEmotes' ? 'p3-twitch-emote' : type === 'twitchSubEmotes' ? 'p3-twitch-sub-emote' : type === 'tastyEmotes' ? 'p3-tasty-emote' : type === 'ffzEmotes' ? 'p3-ffz-emote' : '';
+        className = type === 'bttvEmotes' ? 'p3-bttv-emote' : type === 'twitchEmotes' ? 'p3-twitch-emote' : type === 'twitchSubEmotes' ? 'p3-twitch-sub-emote' : type === 'tastyEmotes' ? 'p3-tasty-emote' : type === 'ffzEmotes' ? 'p3-ffz-emote' : type === 'customEmotes' ? 'p3-custom-emote' : '';
         image = $('<img>');
         temp = $('<div>');
 
@@ -271,15 +273,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
     function convertEmotes(text) {
         if (typeof text !== 'string' || RoomSettings.rules.allowEmotes === false || text.indexOf(':') === -1) return text;
 
-        return convertEmoteByType(
-            convertEmoteByType(
-                convertEmoteByType(
-                    convertEmoteByType(
-                        convertEmoteByType(text, 'twitchEmotes'),
-                        'tastyEmotes'),
-                    'twitchSubEmotes'),
-                'bttvEmotes'),
-            'ffzEmotes');
+        return convertEmoteByType(convertEmoteByType(convertEmoteByType(convertEmoteByType(convertEmoteByType(convertEmoteByType(text, 'customEmotes'), 'twitchEmotes'), 'tastyEmotes'), 'twitchSubEmotes'), 'bttvEmotes'), 'ffzEmotes');
     }
 
     function onChatReceived(data) {
@@ -303,7 +297,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
             previousMessages = innerHTML.substr(0, innerHTML.lastIndexOf('<br>') + 4);
         }
 
-        if (Settings.moderation.inlineUserInfo && (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) && $this.find('.p3-user-info').length === 0) {
+        if (Settings.moderation.inlineUserInfo && (p3Utils.hasPermission(undefined, API.ROLE.BOUNCER, true) || p3Utils.hasPermission(undefined, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) && $this.find('.p3-user-info').length === 0) {
             var $userInfo = $('<span>').addClass('p3-user-info');
 
             $userInfo.html('<strong>LVL:</strong> ' + API.getUser(data.uid).level + ' <strong>|</strong><strong>ID:</strong> ' + API.getUser(data.uid).id);
@@ -405,6 +399,9 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                         } else if (langData.detected && langData.detected.lang && langData.detected.lang !== 'en') {
                             $msg.html(previousMessages + convertEmotes(convertImageLinks((Array.isArray(langData.text) && langData.text.length > 0 ? langData.text[0] : data.message))));
                             $this.data('translated', true);
+                        } else {
+                            $msg.html(previousMessages + convertEmotes(convertImageLinks(data.message)));
+                            $this.data('translated', false);
                         }
                     })
                     .fail(function() {

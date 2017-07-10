@@ -30,8 +30,4 @@ extensions/*.pem
 extensions/*.crx
 extensions/*.zip
 extensions/*.mxaddon
-extensions/promotionalSmall.png
-extensions/Chrome/plugCubed.js
-extensions/Opera/plugCubed.js
-extensions/Firefox/data/plugCubed.js
-extensions/Firefox/*.xpi
+extensions/**/plugCubed.js

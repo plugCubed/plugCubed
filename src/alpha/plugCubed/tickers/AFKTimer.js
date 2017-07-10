@@ -1,7 +1,7 @@
 define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang'], function($, TickerHandler, Settings, p3Utils, p3Lang) {
     var IgnoreCollection = window.plugCubedModules.ignoreCollection;
     var handler = TickerHandler.extend({
-        tickTime: 1E3,
+        tickTime: 1000,
         tick: function() {
             if (Settings.moderation.afkTimers && (p3Utils.isPlugCubedDeveloper() || API.hasPermission(undefined, API.ROLE.BOUNCER)) && $('#waitlist-button').hasClass('selected')) {
                 var a = API.getWaitList();

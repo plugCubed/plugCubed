@@ -223,7 +223,8 @@
     height: 54px;
     cursor: pointer;
     background: #282C35;
-    box-shadow: inset 0 -2px 0 -1px #0a0a0a;
+    -webkit-box-shadow: inset 0 -2px 0 -1px #0a0a0a;
+            box-shadow: inset 0 -2px 0 -1px #0a0a0a;
     border-right: 1px solid #0A0A0A;
 }
 
@@ -1019,6 +1020,10 @@ i.icon.icon-chat-p3donatorBronze,
     z-index: 100;
     cursor: pointer;
     background: #FF5CDE;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FF5CDE), color-stop(100%, #5700FF));
+    background: -webkit-linear-gradient(top, #FF5CDE 0, #5700FF 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FF5CDE), to(#5700FF));
+    background: -o-linear-gradient(top, #FF5CDE 0, #5700FF 100%);
     background: linear-gradient(to bottom, #FF5CDE 0, #5700FF 100%);
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='$purple2', endColorstr='$purple1', GradientType=0);
 }
@@ -1059,7 +1064,8 @@ i.icon.icon-chat-p3donatorBronze,
     left: 108px;
     overflow: hidden;
     width: 170px;
-    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 13px;
     background-repeat: no-repeat;
@@ -1089,7 +1095,19 @@ i.icon.icon-chat-p3donatorBronze,
     margin-left: 5px;
     font-size: 10px;
 }
+#user-rollover .actions .action.p3-qmute, #user-rollover .actions .action.p3-qinfo, #user-rollover .actions .action.p3-qban {
+    display:  block;
+}
 
+.p3-qban {
+    width:  33%;
+}
+.p3-qmute {
+    width:  34%;
+}
+.p3-qinfo {
+    width:  33%;
+}
 .p3-user-info strong {
     color: #a5a5a5;
 }
@@ -1130,7 +1148,8 @@ blockquote.p3-blockquote {
     position: absolute;
     background-color: rgba(0, 181, 230, 0.34);
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -1147,3 +1166,25 @@ blockquote.p3-blockquote {
 .p3-mention-dropdown:hover .p3-mention-dropdown-content {display: block;}
 
 .p3-mention-dropdown:hover .p3-dropbtn {background-color: #3e8e41}
+
+.p3-command {
+    cursor: pointer;
+    text-decoration:  underline;
+}
+.p3-command:hover {
+    text-decoration: none;
+}
+.p3-command-args, .p3-command-description {
+    color:  #FFF;
+    font-size: 13px;
+}
+table.p3-commands-list {
+    border-collapse: collapse;
+    font-size: 15px;
+    width: 100%;
+    color: #f7f723
+}
+table.p3-commands-list th, table.p3-commands-list td {
+    padding: 8px;
+    border-bottom: 1px solid #232529;
+}

@@ -371,6 +371,13 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             $msg = $('<div>').addClass('msg').append($from);
             $text = $('<span>').addClass('text').append($msgSpan);
 
+            chat.lastText = chat.lastID = chat.lastType = chat.lastTime = null;
+
+            if ($('.icon-timestamps-off').length === 0) {
+                $timestamp.show();
+            }
+            $msgSpan.css('color', this.toRGB(color && this.isRGB(color) ? color : 'd1d1d1'));
+            $box.append('<i class="icon icon-plugcubed"></i>');
             $box.click(function() {
                 $(this).parent().remove();
             }).mouseover(function() {
@@ -382,14 +389,6 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     cursor: 'default'
                 });
             });
-
-            chat.lastText = chat.lastID = chat.lastType = chat.lastTime = null;
-
-            if ($('.icon-timestamps-off').length === 0) {
-                $timestamp.show();
-            }
-            $msgSpan.css('color', this.toRGB(color && this.isRGB(color) ? color : 'd1d1d1'));
-            $box.append('<i class="icon icon-plugcubed"></i>');
 
             if (fromID) {
                 fromUser = API.getUser(fromID);
@@ -475,10 +474,6 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
                         lastMessageContainer.data({
                             lastMessageData: lastMessageData
-                        });
-
-                        $box.click(function() {
-                            $(this).parent().remove();
                         });
 
                         return;
@@ -727,6 +722,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             var count = 0;
 
             if (Database.settings.chatSound) {
+                Settings = require('plugCubed/Settings');
+
                 var mentionSound = new Audio(Settings.mentionSound);
 
                 mentionSound.addEventListener('ended', function() {

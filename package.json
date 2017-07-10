@@ -3,28 +3,32 @@
   "description": "Gulp Build System for PlugCubed",
   "version": "1.0.0",
   "author": "The plugCubed Team",
+  "browserslist": [
+    "> 1%",
+    "ie >= 9",
+    "last 5 versions"
+  ],
   "bugs": {
     "url": "https://github.com/plugcubed/plugcubed/issues",
     "email": "1337alexpham@gmail.com"
   },
   "devDependencies": {
-    "eslint-config-thedark1337": "^3.17.0",
+    "eslint-config-thedark1337": "^4.11.0",
     "graceful-fs": "^4.1.11",
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-autoprefixer": "^3.1.1",
+    "gulp-autoprefixer": "^4.0.0",
     "gulp-bytediff": "^1.0.0",
     "gulp-cssnano": "^2.1.2",
     "gulp-data": "^1.2.1",
-    "gulp-eslint": "^3.0.1",
-    "gulp-hub": "frankwallis/gulp-hub#registry-init",
+    "gulp-eslint": "^4.0.0",
+    "gulp-hub": "github:frankwallis/gulp-hub#registry-init",
     "gulp-if": "^2.0.2",
     "gulp-just-replace": "^1.0.2",
     "gulp-rename": "^1.2.2",
-    "gulp-sourcemaps": "^2.5.0",
+    "gulp-sourcemaps": "^2.6.0",
     "gulp-template": "^4.0.0",
-    "gulp-uglify": "^2.1.2",
+    "gulp-uglify": "^3.0.0",
     "gulp-zip": "^4.0.0",
-    "jpm": "^1.3.1",
     "mkdirp": "^0.5.1",
     "requirejs": "^2.3.3",
     "rimraf": "^2.6.1",
@@ -50,5 +54,6 @@
     "watchAlpha": "gulp watch:alpha",
     "watchDev": "gulp watch:dev",
     "watchRelease": "gulp watch:release"
-  }
+  },
+  "dependencies": {}
 }

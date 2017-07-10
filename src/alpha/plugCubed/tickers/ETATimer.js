@@ -6,7 +6,7 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
 
     try {
         handler = TickerHandler.extend({
-            tickTime: 1E3,
+            tickTime: 1000,
             init: function() {
                 this.myID = API.getUser().id;
                 this.$span = null;

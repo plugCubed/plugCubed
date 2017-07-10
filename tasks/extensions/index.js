@@ -4,42 +4,30 @@ const gulp = require('gulp');
 const zip = require('gulp-zip');
 const path = require('path');
 const spawn = require('child_process').spawn;
-
-const jpm = path.resolve('node_modules', '.bin', process.platform === 'win32' ? 'jpm.cmd' : 'jpm');
 const maxPath = path.resolve('extensions', 'Maxthon');
+const browsers = ['Chrome', 'Firefox', 'Opera'];
 
 gulp.task('extensions:copy', () => {
     return gulp
         .src('bin/release/plugCubed.js')
         .pipe(gulp.dest('extensions/Chrome'))
-        .pipe(gulp.dest('extensions/Firefox/data'))
-        .pipe(gulp.dest('extensions/Edge'))
+        .pipe(gulp.dest('extensions/Firefox'))
         .pipe(gulp.dest('extensions/Opera'));
-
 });
-gulp.task('extensions:firefox', () => {
-    return spawn(jpm, ['xpi', '--addon-dir', path.resolve('extensions', 'Firefox')], {
-        stdio: 'inherit'
+
+for (let i = 0; i < browsers.length; i++) {
+    gulp.task(`extensions:${browsers[i]}`, () => {
+        return gulp
+            .src(`./extensions/${browsers[i]}/**`)
+            .pipe(zip(`${browsers[i]}.zip`))
+            .pipe(gulp.dest('./extensions/'));
     });
-});
-gulp.task('extensions:chrome', () => {
-    return gulp
-        .src('./extensions/Chrome/**')
-        .pipe(zip('chrome.zip'))
-        .pipe(gulp.dest('./extensions/'));
-});
+}
 
-gulp.task('extensions:maxthon', (done) => {
+gulp.task('extensions:Maxthon', (done) => {
     const maxCmd = spawn('python', [path.resolve('scripts', 'mxpacker.py'), maxPath, path.resolve('extensions', 'plugcubed.mxaddon')], {
         stdio: 'inherit'
     });
 
     maxCmd.on('close', done);
-});
-
-gulp.task('extensions:opera', () => {
-    return gulp
-        .src('./extensions/opera/**')
-        .pipe(zip('opera.zip'))
-        .pipe(gulp.dest('./extensions/'));
 });

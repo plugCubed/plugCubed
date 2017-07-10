@@ -1,4 +1,6 @@
-define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/handlers/DialogHandler', 'plugCubed/handlers/FullscreenHandler', 'plugCubed/handlers/HideVideoHandler', 'plugCubed/handlers/VolumeSliderHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/overrides/RoomUserListRow', 'plugCubed/Overrides', 'plugCubed/Socket'
+define([
+    'module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/Settings', 'plugCubed/Lang', 'plugCubed/Utils',
+    'plugCubed/RoomSettings', 'plugCubed/dialogs/Menu', 'plugCubed/CustomChatColors', 'plugCubed/handlers/ChatHandler', 'plugCubed/handlers/CommandHandler', 'plugCubed/handlers/DialogHandler', 'plugCubed/handlers/FullscreenHandler', 'plugCubed/handlers/HideVideoHandler', 'plugCubed/handlers/VolumeSliderHandler', 'plugCubed/Features', 'plugCubed/Tickers', 'plugCubed/dialogs/panels/Panels', 'plugCubed/overrides/RoomUserListRow', 'plugCubed/Overrides', 'plugCubed/Socket'
 ], function(module, Class, Notifications, Version, Styles, Settings, p3Lang, p3Utils, RoomSettings, Menu, CustomChatColors, ChatHandler, CommandHandler, DialogHandler, FullscreenHandler, HideVideoHandler, VolumeSliderHandler, Features, Tickers, Panels, p3RoomUserListRow, Overrides, Socket) {
     var Loader;
     var loaded = false;
@@ -9,10 +11,46 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         p3Utils.chatLog(undefined, p3Lang.i18n('running', Version) + '</span><br><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), Settings.colors.infoMessage1, -10);
 
         $('head').append('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://plugcubed.net/scripts/alpha/plugCubed.css?v=' + Date.now() + '"/>');
+
+        /*
+         * Fix user data consistency. As plug.dj only grabs users at first with /_/rooms/state.
+         * /_/rooms/state is not in line with /_/users/bulk, /_/users/me and /_/users/:id in that it is missing the user's slug, language, last_seen, and various other properties.
+         */
+        var requireUsers = window.plugCubedModules.users;
+
+        if (requireUsers && requireUsers._byId) {
+            var ids = Object.keys(requireUsers._byId).filter(function(item) {
+                return _.isFinite(item);
+            });
+
+            $.ajax({
+                dataType: 'json',
+                contentType: 'application/json',
+                type: 'POST',
+                url: '/_/users/bulk',
+                data: JSON.stringify({
+                    ids: ids
+                })
+            }).then(function(data) {
+                if (data.status === 'ok' && data.data.length > 0) {
+                    var userData = data.data;
+
+                    for (var i = 0; i < userData.length; i++) {
+                        var userDataItem = userData[i];
+
+                        if (requireUsers.get(userDataItem.id) != null) {
+                            requireUsers.get(userDataItem.id).set(userDataItem);
+                        }
+                    }
+                }
+            });
+        }
+
         var users = API.getUsers();
 
         for (var i = 0; i < users.length; i++) {
             if (p3Utils.getUserData(users[i].id, 'joinTime', -1) < 0) {
+                p3Utils.setUserData(users[i].id, 'inRoom', true);
                 p3Utils.setUserData(users[i].id, 'joinTime', Date.now());
             }
         }

@@ -1,10 +1,10 @@
 var load = function() {
-    console.log('plugCubed Firefox Loader v2 enabled!');
+    console.log('plugCubed Chrome Loader v2 enabled!');
     var plug = document.createElement('script');
 
     plug.type = 'text/javascript';
     plug.id = 'plugCubed-loader';
-    plug.src = self.options.mainJS;
+    plug.src = browser.extension.getURL('plugCubed.js');
     document.head.appendChild(plug);
 };
 

@@ -1,5 +1,5 @@
 define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Version'], function(Class, p3Utils, p3Lang, Version) {
-    var socket, tries, socketReconnecting, SocketHandler, Context, roomInitSent, currentRoomContext, reconnectTimer;
+    var socket, tries, socketReconnecting, SocketHandler, Context, roomInitSent, currentRoomContext, reconnectTimer, sendTimer;
 
     tries = 0;
 
@@ -32,6 +32,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Versi
                 console.log('[plug³] Socket Server', 'Closed');
             };
             if (reconnectTimer != null) clearTimeout(reconnectTimer);
+            if (sendTimer != null) clearTimeout(sendTimer);
             socket.close();
         },
         onOpen: function() {
@@ -39,15 +40,19 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Versi
             console.log('[plug³] Socket Server', socketReconnecting ? 'Reconnected' : 'Connected');
             var userData = API.getUser();
 
-            this.send(JSON.stringify({
-                type: 'user:validate',
-                userData: userData,
-                room: {
-                    name: window.plugCubedModules.room.attributes.name,
-                    slug: window.plugCubedModules.room.attributes.slug
-                },
-                version: Version.getSemver()
-            }));
+            if (sendTimer != null) clearTimeout(sendTimer);
+
+            sendTimer = setTimeout(function() {
+                this.send(JSON.stringify({
+                    type: 'user:validate',
+                    userData: userData,
+                    room: {
+                        name: p3Utils.getRoomName(),
+                        slug: p3Utils.getRoomID()
+                    },
+                    version: Version.getSemver()
+                }));
+            }.bind(this), 5000);
 
             // $('.plugcubed-status').text(p3Lang.i18n('footer.socket', p3Lang.i18n('footer.online')));
         },
@@ -122,16 +127,16 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Versi
             return socket.readyState;
         },
         changeRoom: function() {
-            if (!roomInitSent && window.plugCubedModules.room.attributes.slug !== currentRoomContext.slug) {
+            if (!roomInitSent && p3Utils.getRoomID() !== currentRoomContext.slug) {
                 this.send(JSON.stringify({
                     type: 'user:changeroom',
                     room: {
-                        name: window.plugCubedModules.room.attributes.name,
-                        slug: window.plugCubedModules.room.attributes.slug
+                        name: p3Utils.getRoomName(),
+                        slug: p3Utils.getRoomID()
                     }
                 }));
                 currentRoomContext = {
-                    slug: window.plugCubedModules.room.attributes.slug
+                    slug: p3Utils.getRoomID()
                 };
             }
             roomInitSent = false;

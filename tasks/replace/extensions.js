@@ -14,19 +14,8 @@ gulp.task('replace:extensionChrome', () => {
         }]))
         .pipe(rename('manifest.json'))
         .pipe(gulp.dest('extensions/Chrome'))
-        .pipe(gulp.dest('extensions/Edge'))
+        .pipe(gulp.dest('extensions/Firefox'))
         .pipe(gulp.dest('extensions/Opera'));
-});
-
-gulp.task('replace:extensionFirefox', () => {
-    return gulp
-        .src('extensions/shared/package.src.json')
-        .pipe(justReplace([{
-            search: /VERSION\.MAJOR\.VERSION\.MINOR\.VERSION\.PATCH-VERSION\.BUILD/g,
-            replacement: `${releaseVersion.major}.${releaseVersion.minor}.${releaseVersion.patch}-${releaseVersion.build}`
-        }]))
-        .pipe(rename('package.json'))
-        .pipe(gulp.dest('extensions/Firefox'));
 });
 
 gulp.task('replace:extensionMaxthon', () => {

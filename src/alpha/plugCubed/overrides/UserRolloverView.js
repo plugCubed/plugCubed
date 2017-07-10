@@ -1,6 +1,7 @@
 define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], function($, OverrideHandler, p3Utils) {
-    var CurrentUser, Handler, UserRolloverView;
+    var Context, CurrentUser, Handler, UserRolloverView, quickBan, quickMute, quickInfo;
 
+    Context = window.plugCubedModules.context;
     CurrentUser = window.plugCubedModules.CurrentUser;
     UserRolloverView = window.plugCubedModules.userRollover;
     Handler = OverrideHandler.extend({
@@ -17,6 +18,7 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
                 this._showSimple(a, b);
                 var specialIconInfo = p3Utils.getPlugCubedSpecial(a.id);
                 var rank = p3Utils.getRank(a.id);
+                var actions = this.$el.find('.actions');
 
                 if (rank === 'dj') rank = 'residentdj';
 
@@ -26,6 +28,60 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
                 if (CurrentUser.hasPermission(API.ROLE.BOUNCER) || CurrentUser.hasPermission(API.ROLE.BOUNCER, true) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) {
                     if (this.$p3VoteIcon == null) {
                         this.$p3VoteIcon = $('<i>');
+                    }
+                    if ((CurrentUser.get('role') > a.get('role')) || CurrentUser.get('gRole') > 0) {
+                        quickBan = $('<div>').addClass('action p3-qban');
+                        quickMute = $('<div>').addClass('action p3-qmute');
+                        quickInfo = $('<div>').addClass('action p3-qinfo').append($('<i>').addClass('icon icon-user-white'));
+
+                        quickBan.on({
+                            click: function() {
+                                Context.trigger('tooltip:hide', 'Ban user forever', $(this), true);
+                                p3Utils.banUser(a.id, API.BAN.PERMA);
+                                this.cleanup();
+                            }.bind(this),
+                            mouseenter: function() {
+                                Context.trigger('tooltip:show', 'Ban user forever', $(this), true);
+                            },
+                            mouseleave: function() {
+                                Context.trigger('tooltip:hide', 'Ban user forever', $(this), true);
+                            }
+                        });
+                        quickInfo.on({
+                            click: function() {
+                                Context.trigger('tooltip:hide', 'User Info', $(this), true);
+                                p3Utils.getUserInfo(a.id);
+                                this.cleanup();
+                            }.bind(this),
+                            mouseenter: function() {
+                                Context.trigger('tooltip:show', 'User Info', $(this), true);
+                            },
+                            mouseleave: function() {
+                                Context.trigger('tooltip:hide', 'User Info', $(this), true);
+                            }
+                        });
+                        quickMute.on({
+                            click: function() {
+                                Context.trigger('tooltip:hide', 'Mute user for 45 Mins', $(this), true);
+                                p3Utils.muteUser(a.id, API.MUTE.LONG);
+                                this.cleanup();
+                            }.bind(this),
+                            mouseenter: function() {
+                                Context.trigger('tooltip:show', 'Mute user for 45 Mins', $(this), true);
+                            },
+                            mouseleave: function() {
+                                Context.trigger('tooltip:hide', 'Mute user for 45 Mins', $(this), true);
+                            }
+                        });
+                        if (!this.$el.find('.actions .p3-qban').length && !this.$el.find('.actions .rcs-qban').length) {
+                            actions.append(quickBan);
+                        }
+                        if (!this.$el.find('.actions .p3-qmute').length && !this.$el.find('.actions .rcs-qmute').length) {
+                            actions.append(quickMute);
+                        }
+                        if (!this.$el.find('.actions .p3-qinfo').length && !this.$el.find('.actions .rcs-qinfo').length) {
+                            actions.append(quickInfo);
+                        }
                     }
 
                     if (a.get('vote') && (a.get('vote') === 1 || a.get('vote') === -1)) {
@@ -81,6 +137,15 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
                 }
                 if (this.$p3VoteIcon != null) {
                     this.$p3VoteIcon.empty();
+                }
+                if (quickBan != null) {
+                    quickBan.remove();
+                }
+                if (quickInfo != null) {
+                    quickInfo.remove();
+                }
+                if (quickMute != null) {
+                    quickMute.remove();
                 }
                 this.$meta.removeClass('has-p3Role is-p3developer is-p3sponsor is-p3special is-p3ambassador is-p3donatorDiamond is-p3donatorPlatinum is-p3donatorGold is-p3donatorSilver is-p3donatorBronze rank-regular rank-residentdj rank-bouncer rank-manager rank-cohost rank--host rank-ambassador rank-admin');
             };

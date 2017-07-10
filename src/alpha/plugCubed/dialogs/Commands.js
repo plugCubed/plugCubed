@@ -29,6 +29,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
         ['/unlock', 'commands.descriptions.unlock', API.ROLE.MANAGER],
         ['/add', '(commands.variables.username)', 'commands.descriptions.add', API.ROLE.BOUNCER],
         ['/remove', '(commands.variables.username)', 'commands.descriptions.remove', API.ROLE.BOUNCER],
+        ['/unban', '(commands.variables.username)', 'commands.descriptions.unban', API.ROLE.BOUNCER],
         ['/whois all', 'commands.descriptions.whois', API.ROLE.AMBASSADOR]
     ];
     var A = Class.extend({
@@ -45,7 +46,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
                     var commandVars = userCmds[i][1];
                     var argumentTranslationParts = commandVars.split('(')[1].split(')')[0].split('/');
 
-                    command += '<em>';
+                    command += ' <em>';
 
                     for (var j in argumentTranslationParts) {
                         if (!argumentTranslationParts.hasOwnProperty(j)) continue;
@@ -69,14 +70,14 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
 
             for (var i = 0; i < modCmds.length; i++) {
                 if (!modCmds[i]) continue;
-                if ((modCmds[i].length === 3 && API.hasPermission(undefined, modCmds[i][2])) || (modCmds.length === 4 && API.hasPermission(undefined, modCmds[i][3]))) {
+                if (API.hasPermission(undefined, modCmds[i][modCmds[i].length - 1])) {
                     var command = modCmds[i][0];
 
-                    if (modCmds.length === 4) {
-                        var commandVars = userCmds[i][1];
+                    if (modCmds[i].length === 4) {
+                        var commandVars = modCmds[i][1];
                         var argumentTranslationParts = commandVars.split('(')[1].split(')')[0].split('/');
 
-                        command += '<em>';
+                        command += ' <em>';
 
                         for (var j in argumentTranslationParts) {
                             if (!argumentTranslationParts.hasOwnProperty(j)) continue;
@@ -89,6 +90,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
 
                         command += '</em>';
                     }
+
                     response += '<li class="modCommands">' + command + '<br><em>' + p3Lang.i18n(modCmds[i][(modCmds[i].length === 4 ? 2 : 1)]) + '</em></li>';
                 }
             }

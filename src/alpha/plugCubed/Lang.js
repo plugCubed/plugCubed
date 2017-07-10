@@ -61,7 +61,7 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
 
                 return;
             }
-            $.getJSON('https://plugcubed.net/scripts/alpha/langs/lang.' + lang + '.json?v=' + Version.major + '.' + Version.getSemver(), function(languageData) {
+            $.getJSON('https://plugcubed.net/scripts/alpha/langs/lang.' + lang + '.json?v=' + Version.getSemver(), function(languageData) {
                 language = {};
                 _.extend(language, defaultLanguage, languageData);
                 that.curLang = lang;
@@ -99,8 +99,7 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
             }
             var key = selector.split('.');
 
-            for (i in key) {
-                if (!key.hasOwnProperty(i)) continue;
+            for (i = 0; i < key.length; i++) {
                 if (a[key[i]] == null) {
                     return '{' + _.toArray(arguments).join(', ') + '}';
                 }
@@ -114,10 +113,12 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
 
             return a;
         },
-        allLangs: [{
-            file: 'en',
-            name: 'English'
-        }]
+        allLangs: [
+            {
+                file: 'en',
+                name: 'English'
+            }
+        ]
     });
 
     return new Lang();

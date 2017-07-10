@@ -2,6 +2,9 @@
     "env": {
         "node": true
     },
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
     "globals": {
       "devVersionExists": false,
       "versions": false

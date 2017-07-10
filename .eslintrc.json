@@ -1,7 +1,10 @@
 {
     "extends": "thedark1337/browser",
-    "ecmaFeatures": {
-        "modules": false
+    "parserOptions": {
+        "ecmaVersion": 5,
+        "ecmaFeatures": {
+            "modules": false
+        }
     },
     "env": {
         "amd": true

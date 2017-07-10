@@ -64,8 +64,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Utils'], function($, Class, p3Ut
 
             var doUpdate = false;
 
-            for (var i in key) {
-                if (key.hasOwnProperty(i) && this.has(key[i])) {
+            for (var i = 0; i < key.length; i++) {
+                if (this.has(key[i])) {
                     delete styles[key[i]];
                     doUpdate = true;
                 }

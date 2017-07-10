@@ -17,7 +17,9 @@ versions.forEach((version) => {
             .pipe(bytediff.start())
             .pipe(sourcemaps.init())
             .pipe(uglify({
-                preserveComments: 'license',
+                output: {
+                    comments: 'some'
+                },
                 compress: {
                     collapse_vars: true,
                     negate_iife: false
