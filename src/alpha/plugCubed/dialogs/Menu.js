@@ -254,6 +254,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     dialogControlPanel.openTab('Background');
                     this.toggleMenu(false);
                     break;
+                case 'commands':
+                    dialogControlPanel.toggleControlPanel(true);
+                    dialogControlPanel.openTab('Commands');
+                    this.toggleMenu(false);
+                    break;
                 case 'chatcustomizations':
                     dialogControlPanel.toggleControlPanel(true);
                     dialogControlPanel.openTab('Chat Customizations');
@@ -381,6 +386,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             // Tabs
             container.append(guiButton(false, 'about', p3Lang.i18n('menu.about')));
             container.append(guiButton(false, 'background', p3Lang.i18n('menu.background')));
+            container.append(guiButton(false, 'Commands', p3Lang.i18n('menu.commands')));
             container.append(guiButton(false, 'chatcustomizations', p3Lang.i18n('menu.chatcustomizations')));
             container.append(guiButton(false, 'customcss', p3Lang.i18n('menu.customcss')));
 

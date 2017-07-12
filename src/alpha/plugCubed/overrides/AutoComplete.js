@@ -187,6 +187,15 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/hand
                         suggestion.addClass('emo');
                         this.$itemContainer.append(suggestion);
                     }
+                    if (this.index === -1 || this.index >= length) {
+                        this.index = 0;
+                    }
+
+                    this.updateSelectedSuggestion();
+                    this.$el.height(length * 38);
+                    _.delay(this.showBind, 10);
+                    _.delay(this.showBind, 15);
+                    this.$document.on('mousedown', this.documentClickBind);
                 } else if (this.type === '/') {
                     this.$itemContainer.html('');
                     length = this.suggestions.length;
@@ -227,4 +236,3 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/hand
 
     return new Handler();
 });
-
