@@ -462,7 +462,9 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                         lastMessage = lastMessageContainer.find('.text');
                         lastMessageData = lastMessageContainer.data('lastMessageData') || {};
 
-                        if (lastMessageData[fromID]) {
+                        if (lastMessage.text().indexOf('Stats:') > -1) {
+                            $chat.append($message.append($box).append($msg.append($text)));
+                        } else if (lastMessageData[fromID]) {
                             lastMessage.html($msgSpan.append(' (' + ++lastMessageData[fromUser.id].count + 'x)'));
                         } else {
                             lastMessageData[fromID] = {
