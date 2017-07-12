@@ -236,11 +236,11 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
         return tokenize(text).reduce(function(string, token) {
             return string + (
                 token.type === 'em' ? '<em>' + transform(token.text) + '</em>' :
-                    token.type === 'strong' ? '<strong>' + transform(token.text) + '</strong>' :
-                        token.type === 'code' ? '<code>' + token.text + '</code>' :
-                            token.type === 'quote' ? '<blockquote class="p3-blockquote">' + token.text + '</blockquote>' :
-                                token.type === 'strike' ? '<span class="p3-strike">' + transform(token.text) + '</span>' :
-                                    token.text
+                token.type === 'strong' ? '<strong>' + transform(token.text) + '</strong>' :
+                token.type === 'code' ? '<code>' + token.text + '</code>' :
+                token.type === 'quote' ? '<blockquote class="p3-blockquote">' + token.text + '</blockquote>' :
+                token.type === 'strike' ? '<span class="p3-strike">' + transform(token.text) + '</span>' :
+                token.text
             );
         }, '');
     }
@@ -422,6 +422,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
     }
 
     function onInputMove(up, $this) {
+        if ($('#chat-input-field').val().indexOf('@') > -1 || $('#chat-input-field').val().indexOf(':') > -1 || $('#chat-input-field').val().indexOf('/') > -1) return;
         var latestInputs = p3Utils.getUserData(-1, 'latestInputs', []);
 
         if (latestInputs.length === 0) return;
@@ -623,7 +624,9 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
             Context._events['chat:receive'].unshift(Context._events['chat:receive'].pop());
             Context.on('chat:receive', onChatReceivedLate);
 
-            $('#chat-input-field').on('keyup', onInputKeyUp);
+            if ($('#chat-input-field').val().indexOf('@') === -1 || $('#chat-input-field').val().indexOf(':') === -1 || $('#chat-input-field').val().indexOf('/') === -1) {
+                $('#chat-input-field').on('keyup', onInputKeyUp);
+            }
         },
         close: function() {
             Context.off('chat:receive', onChatReceived);

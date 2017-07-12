@@ -401,7 +401,9 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                         lastMessage = lastMessageContainer.find('.text');
                         lastMessageData = lastMessageContainer.data('lastMessageData') || {};
 
-                        if (lastMessageData[fromUser.id]) {
+                        if (lastMessage.text().indexOf('Stats:') > -1) {
+                            $chat.append($message.append($box).append($msg.append($text)));
+                        } else if (lastMessageData[fromUser.id]) {
                             lastMessage.html($msgSpan.append(' (' + ++lastMessageData[fromUser.id].count + 'x)'));
                         } else {
                             lastMessageData[fromUser.id] = {
@@ -642,9 +644,6 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
                 // joined
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text('Joined ')).append($('<span>').css('color', '#FFFFFF').text(user.joined))));
-
-                // Last Seen
-                message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.lastSeen') + ' ')).append($('<span>').css('color', '#FFFFFF').text(user.last_seen))));
 
                 // Rank / Time Joined
                 message.append($('<tr>').append($('<td>').append($('<strong>').text(p3Lang.i18n('info.rank') + ' ')).append($('<span>').css('color', '#FFFFFF').text(rank))).append($('<td>').append($('<strong>').text(p3Lang.i18n('info.joined') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getTimestamp(this.getUserData(user.id, 'joinTime', Date.now()))))));

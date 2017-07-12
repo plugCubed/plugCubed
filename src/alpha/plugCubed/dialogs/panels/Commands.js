@@ -1,5 +1,5 @@
 define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Lang'], function(Class, p3Utils, ControlPanel, p3Lang) {
-    var Handler, $contentDiv, $table, panel;
+    var Handler, $contentDiv, $table, panel, commandClick;
     var userCmds = [
         ['/badges', '(commands.variables.on / | /commands.variables.off)', 'commands.descriptions.badges'],
         ['/join', 'commands.descriptions.join'],
@@ -127,6 +127,21 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
 
             $contentDiv.append($('<br>')).append($table);
 
+            commandClick = function(item) {
+                var command = item.target.textContent;
+                var text = $('#chat-input-field').val();
+
+                if ($('#chat-input-field').val()) {
+                    if (text.indexOf('/') > -1) {
+                        $('#chat-input-field').val(command);
+                    } else {
+                        $('#chat-input-field').val(command + ' ' + text);
+                    }
+                } else {
+                    $('#chat-input-field').val(command);
+                }
+            };
+            $contentDiv.click(commandClick);
             panel.addContent($contentDiv);
 
         },
