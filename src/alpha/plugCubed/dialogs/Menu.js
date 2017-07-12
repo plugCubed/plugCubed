@@ -122,12 +122,12 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     }
                     this.setEnabled('twitchemotes', Settings.emotes.twitchEmotes);
                     if (Settings.emotes.twitchEmotes) {
-                        dialogControlPanel.openTab('Chat Customizations');
-                        $('div#p3-control-panel-current div.jspContainer div.jspPane div.p3-control-left div.p3-item.twitch-emotes').addClass('selected');
+                        dialogControlPanel.openTab(p3Lang.i18n('menu.chatcustomizations'));
+                        $('.p3-control-left div.p3-item.twitch-emotes').addClass('selected');
                         $('div#p3-control-panel-close').click();
                     } else {
-                        dialogControlPanel.openTab('Chat Customizations');
-                        $('div#p3-control-panel-current div.jspContainer div.jspPane div.p3-control-left div.p3-item.twitch-emotes').removeClass('selected');
+                        dialogControlPanel.openTab(p3Lang.i18n('menu.chatcustomizations'));
+                        $('.p3-control-left div.p3-item.twitch-emotes').removeClass('selected');
                         $('div#p3-control-panel-close').click();
                     }
                     break;
@@ -246,27 +246,27 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     break;
                 case 'about':
                     dialogControlPanel.toggleControlPanel(true);
-                    dialogControlPanel.openTab('About');
+                    dialogControlPanel.openTab(p3Lang.i18n('menu.about'));
                     this.toggleMenu(false);
                     break;
                 case 'background':
                     dialogControlPanel.toggleControlPanel(true);
-                    dialogControlPanel.openTab('Background');
-                    this.toggleMenu(false);
-                    break;
-                case 'commands':
-                    dialogControlPanel.toggleControlPanel(true);
-                    dialogControlPanel.openTab('Commands');
+                    dialogControlPanel.openTab(p3Lang.i18n('menu.background'));
                     this.toggleMenu(false);
                     break;
                 case 'chatcustomizations':
                     dialogControlPanel.toggleControlPanel(true);
-                    dialogControlPanel.openTab('Chat Customizations');
+                    dialogControlPanel.openTab(p3Lang.i18n('menu.chatcustomizations'));
+                    this.toggleMenu(false);
+                    break;
+                case 'commands':
+                    dialogControlPanel.toggleControlPanel(true);
+                    dialogControlPanel.openTab(p3Lang.i18n('menu.commands'));
                     this.toggleMenu(false);
                     break;
                 case 'customcss':
                     dialogControlPanel.toggleControlPanel(true);
-                    dialogControlPanel.openTab('Custom CSS');
+                    dialogControlPanel.openTab(p3Lang.i18n('menu.customcss'));
                     this.toggleMenu(false);
                     break;
                 default:
@@ -388,6 +388,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             container.append(guiButton(false, 'background', p3Lang.i18n('menu.background')));
             container.append(guiButton(false, 'Commands', p3Lang.i18n('menu.commands')));
             container.append(guiButton(false, 'chatcustomizations', p3Lang.i18n('menu.chatcustomizations')));
+            container.append(guiButton(false, 'commands', p3Lang.i18n('menu.commands')));
             container.append(guiButton(false, 'customcss', p3Lang.i18n('menu.customcss')));
 
             if ($wrapper == null) {

@@ -1,9 +1,9 @@
-define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Version'], function(Class, p3Utils, ControlPanel, Version) {
+define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Version', 'plugCubed/Lang'], function(Class, p3Utils, ControlPanel, Version, p3Lang) {
     var Handler, $contentDiv, $table, panel;
 
     Handler = Class.extend({
         register: function() {
-            panel = ControlPanel.addPanel('About');
+            panel = ControlPanel.addPanel(p3Lang.i18n('menu.about'));
 
             $contentDiv = $('<div>').append($('<h1>').text('Information about plug³').css({
                 'text-align': 'center'

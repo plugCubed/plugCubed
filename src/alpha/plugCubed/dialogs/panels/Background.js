@@ -1,11 +1,11 @@
-define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleManager', 'plugCubed/RoomSettings'], function(Class, p3Utils, ControlPanel, Styles, RoomSettings) {
+define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleManager', 'plugCubed/RoomSettings', 'plugCubed/Lang'], function(Class, p3Utils, ControlPanel, Styles, RoomSettings, p3Lang) {
     var Handler, $contentDiv, $formDiv, $localFileInput, $clearButton, $submitButton, panel, value;
 
     Handler = Class.extend({
         register: function() {
-            panel = ControlPanel.addPanel('Background');
+            panel = ControlPanel.addPanel(p3Lang.i18n('menu.background'));
 
-            $contentDiv = $('<div>').append($('<p>').text('Set your own room background.')).width(430).css('margin', '25px auto auto auto');
+            $contentDiv = $('<div>').append($('<p>').text(p3Lang.i18n('panels.background.description')).width(430).css('margin', '25px auto auto auto'));
 
             panel.addContent($contentDiv);
 
@@ -13,7 +13,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
             $localFileInput = ControlPanel.inputField('url', undefined, 'URL To Background').change(function(e) {
                 value = e.target.value;
             });
-            $submitButton = ControlPanel.button('Submit', true, function() {
+            $submitButton = ControlPanel.button(p3Lang.i18n('panels.buttons.submit'), true, function() {
                 if (value != null) {
                     var url = value;
 
@@ -29,7 +29,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
                     }
                 }
             });
-            $clearButton = ControlPanel.button('Clear', false, function() {
+            $clearButton = ControlPanel.button(p3Lang.i18n('panels.buttons.clear'), false, function() {
                 RoomSettings.execute();
                 this.changeSubmit(false);
                 $submitButton.changeSubmit(true);

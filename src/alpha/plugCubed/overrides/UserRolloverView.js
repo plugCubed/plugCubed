@@ -30,8 +30,8 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
                         this.$p3VoteIcon = $('<i>');
                     }
                     if ((CurrentUser.get('role') > a.get('role')) || CurrentUser.get('gRole') > 0) {
-                        quickBan = $('<div>').addClass('action p3-qban');
-                        quickMute = $('<div>').addClass('action p3-qmute');
+                        quickBan = $('<div>').addClass('action p3-qban').append($('<i>').addClass('icon-p3-qban'));
+                        quickMute = $('<div>').addClass('action p3-qmute').append($('<i>').addClass('icon-p3-qmute'));
                         quickInfo = $('<div>').addClass('action p3-qinfo').append($('<i>').addClass('icon icon-user-white'));
 
                         quickBan.on({

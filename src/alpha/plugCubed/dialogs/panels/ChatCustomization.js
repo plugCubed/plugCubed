@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/StyleManager', 'plugCubed/dialogs/Menu'], function(Class, ControlPanel, Settings, p3Utils, Styles, Menu) {
+define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/StyleManager', 'plugCubed/dialogs/Menu', 'plugCubed/Lang'], function(Class, ControlPanel, Settings, p3Utils, Styles, Menu, p3Lang) {
     var Handler, $contentDiv, panel, $twitchItem, $twitchSubItem, $bttvItem, $tastyItem, $ffzItem, $p3EmotesItem, $markdownItem, $emojiSetGoogle, $emojiSetApple, $emojiSetEmojione, $emojiSetTwitter, $dropdown, $dropdownOptions, chatHandler, emoji, $examples, mentionChange, mentionNames;
 
     emoji = window.plugCubedModules.emoji;
@@ -6,9 +6,9 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
     chatHandler = require('plugCubed/handlers/ChatHandler');
     Handler = Class.extend({
         register: function() {
-            panel = ControlPanel.addPanel('Chat Customizations');
+            panel = ControlPanel.addPanel(p3Lang.i18n('menu.chatcustomizations'));
 
-            $contentDiv = $('<div>').append($('<p>').text('Customize your chat with emojis, notifications, markdown, and other features.')).width(500).css('margin', '25px auto auto auto');
+            $contentDiv = $('<div>').append($('<p>').text(p3Lang.i18n('panels.chatcustomizations.description'))).width(500).css('margin', '25px auto auto auto');
             $twitchItem = ControlPanel.item('Twitch Emotes', function() {
                 Settings.emotes.twitchEmotes = !Settings.emotes.twitchEmotes;
                 this.changeCheckmark(Settings.emotes.twitchEmotes);
@@ -139,7 +139,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
 
                 var number = parseInt(event.target.id.split('mention')[1], 10);
 
-                $('div.p3-mention-dropdown button.p3-dropbtn').text('Mention Sound -- ' + mentionNames[number]);
+                $('div.p3-mention-dropdown button.p3-dropbtn').text(p3Lang.i18n('panels.chatcustomizations.mentionSoundTitle', '-- ' + mentionNames[number]));
                 switch (number) {
                     case 0:
                         Settings.mentionSound = 'https://plugcubed.net/scripts/audio/mentions/boink.mp3';
@@ -190,8 +190,8 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
             for (var i = 0; i < mentionNames.length; i++) {
                 $dropdownOptions.append($('<a>').click(mentionChange).attr('href', '#').attr('id', 'mention' + i).text(mentionNames[i]));
             }
-            $dropdown = $('<div class="p3-mention-dropdown">')
-                .append($('<button class="p3-dropbtn">').text('Mention Sounds -- Default'))
+            $dropdown = $('<div>').addClass('p3-mention-dropdown')
+                .append($('<button>').addClass('p3-dropbtn').text(p3Lang.i18n('panels.chatcustomizations.mentionSoundTitle', '-- Default')))
                 .append($dropdownOptions);
 
             $emojiSetGoogle.changeCheckmark((Settings.emotes.emoteSet === 'google'));

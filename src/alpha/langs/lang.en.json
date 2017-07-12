@@ -186,8 +186,8 @@
         "inlineuserinfo": "Inline User Info",
         "about": "About plugCubed",
         "background": "Change background",
-        "commands": "Commands",
         "chatcustomizations": "Chat Customizations",
+        "commands": "Chat commands",
         "customcss": "Custom CSS"
     },
     "vote": {
@@ -196,6 +196,23 @@
         "grab": "Grab",
         "undecided": "Undecided",
         "djing": "DJing"
+    },
+    "panels": {
+        "background": {
+            "description": "Set your own room background"
+        },
+        "buttons": {
+            "cancel": "Cancel",
+            "clear": "Clear",
+            "submit": "Submit"
+        },
+        "chatcustomizations": {
+            "description": "Customize your chat with emojis, notifications, markdown, and other features",
+            "mentionSoundTitle": "Mention Sound %1"
+        },
+        "customcss": {
+            "description": "Set your own room CSS"
+        }
     },
     "tooltip": {
         "stream": "Toggle Video/Audio Stream",

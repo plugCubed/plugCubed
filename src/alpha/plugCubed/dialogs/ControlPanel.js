@@ -308,6 +308,8 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils'], function(
         },
         openTab: function(id) {
             this.toggleControlPanel(true);
+            id = id.trim();
+
             var tab = tabs[id];
 
             if (tab == null || !(tab instanceof PanelClass)) return;
@@ -338,6 +340,18 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils'], function(
             if (tabs[name] != null) return null;
             tabs[name] = new PanelClass(name);
             this.createControlPanel(true);
+
+            return tabs[name];
+        },
+
+        /**
+         * Get tab, if it already exists
+         * @param {string} panel Name of tab
+         * @returns {PanelClass|null} Returns new tab
+         */
+        getPanel: function(panel) {
+            panel = panel.trim();
+            if (!(panel instanceof PanelClass) || tabs[panel.name] == null) return null;
 
             return tabs[name];
         },
