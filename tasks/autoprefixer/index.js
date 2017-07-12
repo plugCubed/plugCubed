@@ -16,7 +16,9 @@ versions.forEach((version) => {
                 search: /https?:\/\/plugcubed\.net\/scripts\/(alpha|dev|release)\//gi,
                 replacement: `https://plugcubed.net/scripts/${version}/`
             }]))
-            .pipe(autoprefixer())
+            .pipe(autoprefixer({
+                browsers: ['> 1%', 'ie >= 9', 'last 5 versions']
+            }))
             .pipe(gulpIf((file) => file.path && file.path.includes('dev'), gulp.dest('bin/dev'), gulp.dest(`src/${version}`)));
     });
 });

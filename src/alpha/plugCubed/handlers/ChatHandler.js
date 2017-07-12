@@ -236,11 +236,11 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
         return tokenize(text).reduce(function(string, token) {
             return string + (
                 token.type === 'em' ? '<em>' + transform(token.text) + '</em>' :
-                token.type === 'strong' ? '<strong>' + transform(token.text) + '</strong>' :
-                token.type === 'code' ? '<code>' + token.text + '</code>' :
-                token.type === 'quote' ? '<blockquote class="p3-blockquote">' + token.text + '</blockquote>' :
-                token.type === 'strike' ? '<span class="p3-strike">' + transform(token.text) + '</span>' :
-                token.text
+                    token.type === 'strong' ? '<strong>' + transform(token.text) + '</strong>' :
+                        token.type === 'code' ? '<code>' + token.text + '</code>' :
+                            token.type === 'quote' ? '<blockquote class="p3-blockquote">' + token.text + '</blockquote>' :
+                                token.type === 'strike' ? '<span class="p3-strike">' + transform(token.text) + '</span>' :
+                                    token.text
             );
         }, '');
     }

@@ -110,7 +110,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
 
     Handler = Class.extend({
         register: function() {
-            panel = ControlPanel.addPanel('Commands');
+            panel = ControlPanel.addPanel(p3Lang.i18n('menu.commands'));
 
             $contentDiv = $('<div>').append($('<h2>').text('plug³ Commands').css({
                 'text-align': 'center'
