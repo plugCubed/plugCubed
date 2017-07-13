@@ -1,4 +1,4 @@
-define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], function($, OverrideHandler, p3Utils) {
+define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/Lang'], function($, OverrideHandler, p3Utils, p3Lang) {
     var Context, CurrentUser, Handler, UserRolloverView, quickBan, quickMute, quickInfo;
 
     Context = window.plugCubedModules.context;
@@ -36,41 +36,41 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
 
                         quickBan.on({
                             click: function() {
-                                Context.trigger('tooltip:hide', 'Ban user forever', $(this), true);
+                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickBan'), $(this), true);
                                 p3Utils.banUser(a.id, API.BAN.PERMA);
                                 this.cleanup();
                             }.bind(this),
                             mouseenter: function() {
-                                Context.trigger('tooltip:show', 'Ban user forever', $(this), true);
+                                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.quickBan'), $(this), true);
                             },
                             mouseleave: function() {
-                                Context.trigger('tooltip:hide', 'Ban user forever', $(this), true);
+                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickBan'), $(this), true);
                             }
                         });
                         quickInfo.on({
                             click: function() {
-                                Context.trigger('tooltip:hide', 'User Info', $(this), true);
+                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.userInfo'), $(this), true);
                                 p3Utils.getUserInfo(a.id);
                                 this.cleanup();
                             }.bind(this),
                             mouseenter: function() {
-                                Context.trigger('tooltip:show', 'User Info', $(this), true);
+                                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.userInfo'), $(this), true);
                             },
                             mouseleave: function() {
-                                Context.trigger('tooltip:hide', 'User Info', $(this), true);
+                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.userInfo'), $(this), true);
                             }
                         });
                         quickMute.on({
                             click: function() {
-                                Context.trigger('tooltip:hide', 'Mute user for 45 Mins', $(this), true);
+                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickMute'), $(this), true);
                                 p3Utils.muteUser(a.id, API.MUTE.LONG);
                                 this.cleanup();
                             }.bind(this),
                             mouseenter: function() {
-                                Context.trigger('tooltip:show', 'Mute user for 45 Mins', $(this), true);
+                                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.quickMute'), $(this), true);
                             },
                             mouseleave: function() {
-                                Context.trigger('tooltip:hide', 'Mute user for 45 Mins', $(this), true);
+                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickMute'), $(this), true);
                             }
                         });
                         if (!this.$el.find('.actions .p3-qban').length && !this.$el.find('.actions .rcs-qban').length) {

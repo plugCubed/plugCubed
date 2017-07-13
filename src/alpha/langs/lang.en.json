@@ -83,7 +83,7 @@
         "joinTime": "If you join the waitlist now, you would be DJing in about %1!"
     },
     "notify": {
-        "header": "Chat Notifications",
+        "deletedMessages": "deleted by ",
         "join": "User Join",
         "leave": "User Leave",
         "grab": "User Grab",
@@ -168,6 +168,11 @@
         "infoHeaderCredits": "This room is using special settings by %1",
         "infoDisable": "You can disable them in the menu"
     },
+    "menuHeaders": {
+        "features": "Features",
+        "chatnotifs": "Chat Notifications",
+        "controlpanel": "Control Panel"
+    },
     "menu": {
         "autowoot": "Autowoot",
         "autojoin": "Autojoin",
@@ -197,7 +202,20 @@
         "undecided": "Undecided",
         "djing": "DJing"
     },
+    "customchatcolors": {
+      "userRanksHeader": "User Ranks",
+      "chatnotifs": "Chat Notifications"
+    },
     "panels": {
+        "about": {
+            "header": "Information about plug³",
+            "version": "Version",
+            "website": "Website",
+            "websiteText": "plug&#179; Website",
+            "translations": "Translations",
+            "translationsText": "plug&#179; Translations",
+            "websitetranslationsText": "plug&#179; Website Translations"
+        },
         "background": {
             "description": "Set your own room background"
         },
@@ -208,7 +226,10 @@
         },
         "chatcustomizations": {
             "description": "Customize your chat with emojis, notifications, markdown, and other features",
-            "mentionSoundTitle": "Mention Sound %1"
+            "mentionSoundTitle": "Mention Sound %1",
+            "emotesHeader": "Emotes",
+            "chatenhancementHeader": "Chat Enhancements",
+            "emotesSetHeader": "Emoji Set"
         },
         "customcss": {
             "description": "Set your own room CSS"
@@ -220,7 +241,10 @@
         "afk": "AFK Message",
         "reset": "Reset to default",
         "muted": "All songs are muted",
-        "mutedOnce": "Current song is muted"
+        "mutedOnce": "Current song is muted",
+        "quickBan": "Ban user forever",
+        "quickMute": "Mute user for 45 mins",
+        "userInfo": "User Info"
     },
     "error": {
         "userNotFound": "User not found",

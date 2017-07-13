@@ -295,7 +295,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             header.append($('<div>').addClass('title').append($('<i>').addClass('icon icon-settings-white')).append($('<span>plug&#179;</span>')).append($('<span>').addClass('version').text(Version)));
 
             // Features
-            container.append($('<div>').addClass('section').text('Features'));
+            container.append($('<div>').addClass('section').text(p3Lang.i18n('menuHeaders.features')));
             if (RoomSettings.rules.allowAutowoot !== false) {
                 container.append(guiButton(Settings.autowoot, 'woot', p3Lang.i18n('menu.autowoot')));
             }
@@ -340,7 +340,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             container.append($('<div class="spacer">').append($('<div class="divider">')));
 
             // Notification
-            container.append($('<div class="section">' + p3Lang.i18n('notify.header') + '</div>'));
+            container.append($('<div class="section">' + p3Lang.i18n('menuHeaders.chatnotifs') + '</div>'));
 
             container.append(guiButton((Settings.notify & enumNotifications.USER_JOIN) === enumNotifications.USER_JOIN, 'notify-join', p3Lang.i18n('notify.join')).data('bit', enumNotifications.USER_JOIN));
             container.append(guiButton((Settings.notify & enumNotifications.USER_LEAVE) === enumNotifications.USER_LEAVE, 'notify-leave', p3Lang.i18n('notify.leave')).data('bit', enumNotifications.USER_LEAVE));
@@ -381,7 +381,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             container.append($('<div class="spacer">').append($('<div class="divider">')));
 
             // ControlPanel
-            container.append($('<div>').addClass('section').text('Control Panel'));
+            container.append($('<div>').addClass('section').text(p3Lang.i18n('menuHeaders.controlpanel')));
 
             // Tabs
             container.append(guiButton(false, 'about', p3Lang.i18n('menu.about')));
