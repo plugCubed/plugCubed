@@ -1188,3 +1188,15 @@ table.p3-commands-list th, table.p3-commands-list td {
     padding: 8px;
     border-bottom: 1px solid #232529;
 }
+
+i.icon-p3-qban {
+    background-image: url(https://plugcubed.net/scripts/alpha/images/icons/quick-ban.png);
+    height: 30px;
+    width: 30px;
+}
+
+i.icon-p3-qmute {
+    background-image: url(https://plugcubed.net/scripts/alpha/images/icons/quick-mute.png);
+    height: 30px;
+    width: 30px;
+}
