@@ -63,7 +63,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
                     container.append(guiInput(i, p3Lang.i18n(Settings.colorInfo.ranks[i].title), Settings.colorInfo.ranks[i].color));
                 }
             }
-            container.append($('<div class="spacer">').append($('<div class="divider">'))).append($('<div class="section">').text(p3Lang.i18n('customchatcolors.chatenhanmentHeader')));
+            container.append($('<div class="spacer">').append($('<div class="divider">'))).append($('<div class="section">').text(p3Lang.i18n('customchatcolors.chatenhancementHeader')));
             for (i in Settings.colorInfo.notifications) {
                 if (Settings.colorInfo.notifications.hasOwnProperty(i)) {
                     if (i === 'songLength') {

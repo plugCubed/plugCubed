@@ -215,11 +215,7 @@
             "websiteText": "plug&#179; Website",
             "translations": "Translations",
             "translationsText": "plug&#179; Translations",
-            "websitetranslationsText": "plug&#179; Website Translations",
-            "discord": "Discord",
-            "discordText": "plug&#179; Discord",
-            "twitter": "Twitter",
-            "twitterText": "plug&#179; Twitter"
+            "websitetranslationsText": "plug&#179; Website Translations"
         },
         "background": {
             "description": "Set your own room background"
@@ -233,7 +229,7 @@
             "description": "Customize your chat with emojis, notifications, markdown, and other features",
             "mentionSoundTitle": "Mention Sound %1",
             "emotesHeader": "Emotes",
-            "chatenhanmentHeader": "Chat Enhancements",
+            "chatenhancementHeader": "Chat Enhancements",
             "emotessetHeader": "Emoji Set"
         },
         "customcss": {

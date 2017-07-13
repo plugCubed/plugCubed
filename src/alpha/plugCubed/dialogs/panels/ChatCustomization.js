@@ -222,7 +222,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
                     .append($emojiSetTwitter.getJQueryElement())
                 )
                 .append($('<div>').addClass('p3-control-right')
-                    .append(ControlPanel.header(p3Lang.i18n('panels.chatcustomizations.chatenhanmentHeader')).getJQueryElement())
+                    .append(ControlPanel.header(p3Lang.i18n('panels.chatcustomizations.chatenhancementHeader')).getJQueryElement())
                     .append($markdownItem.getJQueryElement())
                     .append($dropdown)
                 );
