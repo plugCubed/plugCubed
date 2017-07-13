@@ -207,14 +207,14 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
             $markdownItem.changeCheckmark(Settings.markdown);
             $contentDiv
                 .append($('<div>').addClass('p3-control-left')
-                    .append(ControlPanel.header('Emotes').getJQueryElement())
+                    .append(ControlPanel.header(p3Lang.i18n('panels.chatcustomizations.emotesHeader')).getJQueryElement())
                     .append($bttvItem.getJQueryElement())
                     .append($ffzItem.getJQueryElement())
                     .append($tastyItem.getJQueryElement())
                     .append($twitchItem.getJQueryElement())
                     .append($twitchSubItem.getJQueryElement())
                     .append($p3EmotesItem.getJQueryElement())
-                    .append(ControlPanel.header('Emoji Sets').getJQueryElement())
+                    .append(ControlPanel.header(p3Lang.i18n('panels.chatcustomizations.emotesetHeader')).getJQueryElement())
                     .append($examples)
                     .append($emojiSetApple.getJQueryElement())
                     .append($emojiSetGoogle.getJQueryElement())
@@ -222,7 +222,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
                     .append($emojiSetTwitter.getJQueryElement())
                 )
                 .append($('<div>').addClass('p3-control-right')
-                    .append(ControlPanel.header('Chat Enhancements').getJQueryElement())
+                    .append(ControlPanel.header(p3Lang.i18n('panels.chatcustomizations.chatenhancementHeader')).getJQueryElement())
                     .append($markdownItem.getJQueryElement())
                     .append($dropdown)
                 );
