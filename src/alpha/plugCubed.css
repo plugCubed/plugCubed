@@ -1095,19 +1095,36 @@ i.icon.icon-chat-p3donatorBronze,
     margin-left: 5px;
     font-size: 10px;
 }
+
 #user-rollover .actions .action.p3-qmute, #user-rollover .actions .action.p3-qinfo, #user-rollover .actions .action.p3-qban {
     display:  block;
+    -webkit-box-shadow: inset 1px 1px 0 0 #1c1f25;
+    box-shadow: inset 1px 1px 0 0 #1c1f25;
 }
 
 .p3-qban {
     width:  33%;
 }
+i.icon-p3-qban {
+    background-image: url(https://plugcubed.net/scripts/alpha/images/icons/quick-ban.png);
+    height: 30px;
+    width: 30px;
+}
+
 .p3-qmute {
     width:  34%;
 }
+
+i.icon-p3-qmute {
+    background-image: url(https://plugcubed.net/scripts/alpha/images/icons/quick-mute.png);
+    height: 30px;
+    width: 30px;
+}
+
 .p3-qinfo {
     width:  33%;
 }
+
 .p3-user-info strong {
     color: #a5a5a5;
 }
@@ -1171,13 +1188,16 @@ blockquote.p3-blockquote {
     cursor: pointer;
     text-decoration:  underline;
 }
+
 .p3-command:hover {
     text-decoration: none;
 }
+
 .p3-command-args, .p3-command-description {
     color:  #FFF;
     font-size: 13px;
 }
+
 table.p3-commands-list {
     border-collapse: collapse;
     font-size: 15px;
@@ -1187,16 +1207,4 @@ table.p3-commands-list {
 table.p3-commands-list th, table.p3-commands-list td {
     padding: 8px;
     border-bottom: 1px solid #232529;
-}
-
-i.icon-p3-qban {
-    background-image: url(https://plugcubed.net/scripts/alpha/images/icons/quick-ban.png);
-    height: 30px;
-    width: 30px;
-}
-
-i.icon-p3-qmute {
-    background-image: url(https://plugcubed.net/scripts/alpha/images/icons/quick-mute.png);
-    height: 30px;
-    width: 30px;
 }
