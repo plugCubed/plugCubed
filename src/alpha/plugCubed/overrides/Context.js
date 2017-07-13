@@ -1,4 +1,4 @@
-define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Settings', 'plugCubed/Utils'], function(OverrideHandler, Settings, p3Utils) {
+define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang'], function(OverrideHandler, Settings, p3Utils, p3Lang) {
     var Context, Handler, PopoutView;
 
     PopoutView = window.plugCubedModules.PopoutView;
@@ -32,10 +32,10 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Settings', 'plugCubed/U
                     deletes = $msg.data('deletes') || {};
 
                     if (userData = deletes[args.mi]) { // eslint-disable-line no-cond-assign
-                        $msg.find('.fromID-' + args.mi).text('deleted by ' + modUser + ' (' + ++userData.count + ')');
+                        $msg.find('.fromID-' + args.mi).text(p3Lang.i18n('notify.deletedMessages') + modUser + ' (' + ++userData.count + ')');
                     } else {
                         $deleteMessage
-                            .text('deleted by ' + modUser)
+                            .text(p3Lang.i18n('notify.deletedMessages') + modUser)
                             .appendTo($msg);
                         deletes[args.mi] = {
                             count: 1
@@ -76,4 +76,3 @@ define(['plugCubed/handlers/OverrideHandler', 'plugCubed/Settings', 'plugCubed/U
 
     return new Handler();
 });
-
