@@ -1,4 +1,4 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColors', 'plugCubed/Settings', 'plugCubed/Utils'], function($, Class, p3Lang, CCC, Settings, p3Utils) {
+define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColors', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang'], function($, Class, p3Lang, CCC, Settings, p3Utils) {
     var Context = window.plugCubedModules.context;
 
     function guiInput(id, text, defaultColor) {
@@ -56,14 +56,14 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
 
                 return;
             }
-            var container = $('<div class="container">').append($('<div class="section">').text('User Ranks'));
+            var container = $('<div class="container">').append($('<div class="section">').text(p3Lang.i18n('customchatcolors.userranksHeader')));
 
             for (i in Settings.colorInfo.ranks) {
                 if (Settings.colorInfo.ranks.hasOwnProperty(i)) {
                     container.append(guiInput(i, p3Lang.i18n(Settings.colorInfo.ranks[i].title), Settings.colorInfo.ranks[i].color));
                 }
             }
-            container.append($('<div class="spacer">').append($('<div class="divider">'))).append($('<div class="section">').text(p3Lang.i18n('notify.header')));
+            container.append($('<div class="spacer">').append($('<div class="divider">'))).append($('<div class="section">').text(p3Lang.i18n('customchatcolors.chatenhanmentHeader')));
             for (i in Settings.colorInfo.notifications) {
                 if (Settings.colorInfo.notifications.hasOwnProperty(i)) {
                     if (i === 'songLength') {

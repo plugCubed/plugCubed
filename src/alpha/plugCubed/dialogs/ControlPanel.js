@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils'], function($, _, Class, p3Utils) {
+define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang'], function($, _, Class, p3Utils, p3Lang) {
 
     var ControlPanelClass, JQueryElementClass, HeaderClass, ItemClass, PanelClass, ButtonClass, InputClass, $controlPanelDiv, $topBarDiv, $menuDiv, $currentDiv, $closeDiv, scrollPane, shownHeight, _onResize, _onTabClick;
     var tabs = {};
@@ -178,7 +178,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils'], function(
                 }
             }
 
-            $topBarDiv = $('<div>').attr('id', 'p3-control-panel-top').append($('<span>').text('Control Panel'));
+            $topBarDiv = $('<div>').attr('id', 'p3-control-panel-top').append($('<span>').text(p3Lang.i18n('menu.controlpanel')));
 
             $controlPanelDiv.append($topBarDiv).append($menuDiv);
 
