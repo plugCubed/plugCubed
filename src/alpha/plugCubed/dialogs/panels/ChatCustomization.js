@@ -134,7 +134,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
                 Settings.save();
 
             });
-            mentionNames = ['Boink', 'Bubble', 'Click', 'Coins', 'Drops', 'Hiccup', 'Poke', 'R2D2', 'Spring', 'System Fault', 'WellDone', 'What', 'Default'];
+            mentionNames = ['Boink', 'Bubble', 'Click', 'Coins', 'Drops', 'Hiccup', 'Poke', 'R2D2', 'Spring', 'System Fault', 'Well Done', 'What', 'Default'];
             mentionChange = function(event) {
 
                 var number = parseInt(event.target.id.split('mention')[1], 10);
@@ -182,6 +182,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
                         Settings.mentionSound = window.plugCubedModules.plugUrls.sfx;
                         break;
                 }
+                Settings.mentionSoundTitle = mentionNames[number];
                 Settings.save();
 
             };
@@ -191,7 +192,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
                 $dropdownOptions.append($('<a>').click(mentionChange).attr('href', '#').attr('id', 'mention' + i).text(mentionNames[i]));
             }
             $dropdown = $('<div>').addClass('p3-mention-dropdown')
-                .append($('<button>').addClass('p3-dropbtn').text(p3Lang.i18n('panels.chatcustomizations.mentionSoundTitle', '-- Default')))
+                .append($('<button>').addClass('p3-dropbtn').text(p3Lang.i18n('panels.chatcustomizations.mentionSoundTitle', '-- ' + Settings.mentionSoundTitle)))
                 .append($dropdownOptions);
 
             $emojiSetGoogle.changeCheckmark((Settings.emotes.emoteSet === 'google'));
