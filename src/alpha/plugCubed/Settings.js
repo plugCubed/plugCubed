@@ -6,7 +6,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
     names.push('version');
 
     // Features
-    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'chatLog', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'notifyUpdatesLink', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'boothAlert', 'badges', 'emotes', 'customCSS', 'markdown', 'hideVideo', 'mentionSound', 'mentionSoundTitle');
+    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'chatLog', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'notifyUpdatesLink', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'boothAlert', 'badges', 'emotes', 'customCSS', 'markdown', 'hideVideo', 'mentionSound', 'mentionSoundTitle', 'lowLagMode', 'workMode');
 
     // Registers
     names.push('registeredSongs', 'alertson', 'colors');
@@ -101,6 +101,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         markdown: false,
         customCSS: '',
         hideVideo: false,
+        lowLagMode: false,
+        workMode: false,
         notifyUpdatesLink: false,
         notifySongLength: 10,
         useRoomSettings: {},
@@ -261,10 +263,6 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 if (this.emotes.twitchSubEmotes) {
                     require('plugCubed/handlers/ChatHandler').loadTwitchSubEmotes();
                 }
-                if (this.hideVideo) {
-                    $('#playback-container').hide();
-                }
-
                 if (!this.badges) {
                     Styles.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { display: none; }');
                 }
