@@ -267,7 +267,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     $('#playback-container').hide();
                 }
                 if (!this.badges) {
-                    Styles.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { display: none; }');
+                    Styles.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { visibility: none; width: 0px; }');
                 }
                 if (this.customCSS !== '') {
                     Styles.set('room-settings-custom-css', this.customCSS);
