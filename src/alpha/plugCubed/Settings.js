@@ -263,6 +263,9 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 if (this.emotes.twitchSubEmotes) {
                     require('plugCubed/handlers/ChatHandler').loadTwitchSubEmotes();
                 }
+                if (this.hideVideo) {
+                    $('#playback-container').hide();
+                }
                 if (!this.badges) {
                     Styles.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { display: none; }');
                 }
