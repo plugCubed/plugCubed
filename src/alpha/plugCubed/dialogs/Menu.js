@@ -12,6 +12,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
     function guiButton(setting, id, text) {
         return $('<div>').addClass('item p3-s-' + id + (setting ? ' selected' : '')).append($('<i>').addClass('icon icon-check-blue')).append($('<span>').text(text)).data('key', id).click(_onClick);
     }
+
+    function toggleEmotes(toggle) {
+        window.plugCubedModules.database.settings.emoji = toggle;
+        window.plugCubedModules.context.trigger('ChatFacadeEvent:emoji', window.plugCubedModules.database.settings.emoji);
+    }
     MenuClass = Class.extend({
         init: function() {
             that = this;
@@ -244,6 +249,38 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                         $('#playback-container').show();
                     }
                     break;
+                case 'lowLagMode':
+                    Settings.lowLagMode = !Settings.lowLagMode;
+                    this.setEnabled('lowLagMode', Settings.lowLagMode);
+                    if (Settings.lowLagMode) {
+                        Database.settings.videoOnly = !Database.settings.videoOnly;
+                        Database.save();
+                        Context.trigger('change:videoOnly').trigger('audience:pause', Database.settings.videoOnly);
+                        Styles.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { display: none; }');
+                        Settings.badges = false;
+                        toggleEmotes(false);
+                    } else {
+                        Database.settings.videoOnly = !Database.settings.videoOnly;
+                        Database.save();
+                        Context.trigger('change:videoOnly').trigger('audience:pause', Database.settings.videoOnly);
+                        Styles.unset('hide-badges');
+                        Settings.badges = true;
+                        toggleEmotes(true);
+                    }
+                    break;
+                case 'workMode':
+                    Settings.workMode = !Settings.workMode;
+                    this.setEnabled('workMode', Settings.workMode);
+                    if (Settings.workMode) {
+                        Styles.set('workMode', '#user-rollover .meta .user-id { left: 15px !important; }\n#avatars-container { display: none; }\n#playback .background {display: none; }\n#chat .emote, #chat .mention, #chat .message, #chat .moderation, #chat .skip, #chat .system, #chat .update, #chat .welcome { min-height: 0px !important; }\n#chat .badge-box { display: none; }\n#chat .msg { padding: 5px 8px 6px 16px !important; }\n#footer-user .image { display: none !important; }\n#footer-user .meta { display: none !important }\n#footer-user .points { display: none !important }\n#footer-user .info .name { top: 8px !important; font-size: 26px !important; text-align: center !important; left: -60px !important; width: 100% !important; left: 0px !important; }\n#footer-user .info .icon {display: none !important }\n#user-rollover .meta .thumb { display: none !important }\n#user-rollover .meta .username { left: 15px !important }\n#user-rollover .meta .status { left: 15px !important }\n#user-rollover .meta .joined { left: 15px !important }\n#user-rollover .meta .p3UserID { left: 15px !important }\n#user-rollover .meta .p3Role { left: 15px !important}\n#waitlist .list .user .image { display: none!important }\n#footer-user .buttons .inventory.button { display: none !important; }\n#footer-user .buttons .badge.button { display: none !important; }\n#footer-user .buttons .store.button { display: none !important; }\n#footer-user .buttons .profile.button { display: none !important; }\n#footer-user .buttons .settings.button { float: right !important; width: 54px !important; }\n#footer #footer-user .info { display: block !important; z-index: -1 !important; width: 290px !important; top: 0px !important; background: none; }\n#footer-user .info .name { width: 100% !important; }\n#footer-user .info .meta { width: 170px !important; }\n#footer-user .info .meta div.bar { width: 100px !important; }\ndiv.room-background { background-image: url("https://plugcubed.net/scripts/alpha/images/p3WorkMode.png") !important; background-size: cover !important; }\n.app-right .friends .list .row .image { display: none!important }\n.social-menu { display: none !important; }');
+                        $('#playback').hide();
+                        toggleEmotes(false);
+                    } else {
+                        Styles.unset('workMode');
+                        $('#playback').show();
+                        toggleEmotes(true);
+                    }
+                    break;
                 case 'about':
                     dialogControlPanel.toggleControlPanel(true);
                     dialogControlPanel.openTab(p3Lang.i18n('menu.about'));
@@ -332,9 +369,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             if (RoomSettings.rules.allowEmotes !== false) {
                 container.append(guiButton(Settings.emotes.twitchEmotes, 'twitchemotes', p3Lang.i18n('menu.twitchemotes')));
             }
+            container.append(guiButton(Settings.hideVideo, 'hidevideo', p3Lang.i18n('video.menuhide')));
+            container.append(guiButton(Settings.lowLagMode, 'lowLagMode', p3Lang.i18n('menu.lowlagMode')));
+            container.append(guiButton(Settings.workMode, 'workMode', p3Lang.i18n('menu.workMode')));
             container.append(guiButton(false, 'colors', p3Lang.i18n('menu.customchatcolors') + '...'));
             container.append(guiButton(false, 'controlpanel', p3Lang.i18n('menu.controlpanel') + '...'));
-            container.append(guiButton(false, 'hidevideo', p3Lang.i18n('video.menuhide')));
 
             // Divider
             container.append($('<div class="spacer">').append($('<div class="divider">')));

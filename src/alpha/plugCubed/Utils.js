@@ -365,7 +365,11 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             b = $chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - 20;
 
             $message = $('<div>').addClass('message');
-            $box = $('<div>').addClass('badge-box').data('uid', fromID ? fromID : 'p3').data('type', type);
+            if (require('plugCubed/Settings').badges) {
+                $box = $('<div>').addClass('badge-box').data('uid', fromID ? fromID : 'p3').data('type', type);
+            } else {
+                $box = $('<div style="display: inline !important;">').addClass('badge-box').data('uid', fromID ? fromID : 'p3').data('type', type);
+            }
             $timestamp = $('<span>').addClass('timestamp').text(this.getTimestamp());
             $from = $('<div>').addClass('from').append($('<span>').addClass('un')).append($timestamp);
             $msg = $('<div>').addClass('msg').append($from);

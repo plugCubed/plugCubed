@@ -236,11 +236,11 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
         return tokenize(text).reduce(function(string, token) {
             return string + (
                 token.type === 'em' ? '<em>' + transform(token.text) + '</em>' :
-                    token.type === 'strong' ? '<strong>' + transform(token.text) + '</strong>' :
-                        token.type === 'code' ? '<code>' + token.text + '</code>' :
-                            token.type === 'quote' ? '<blockquote class="p3-blockquote">' + token.text + '</blockquote>' :
-                                token.type === 'strike' ? '<span class="p3-strike">' + transform(token.text) + '</span>' :
-                                    token.text
+                token.type === 'strong' ? '<strong>' + transform(token.text) + '</strong>' :
+                token.type === 'code' ? '<code>' + token.text + '</code>' :
+                token.type === 'quote' ? '<blockquote class="p3-blockquote">' + token.text + '</blockquote>' :
+                token.type === 'strike' ? '<span class="p3-strike">' + transform(token.text) + '</span>' :
+                token.text
             );
         }, '');
     }
@@ -272,8 +272,9 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
 
     function convertEmotes(text) {
         if (typeof text !== 'string' || RoomSettings.rules.allowEmotes === false || text.indexOf(':') === -1) return text;
-
-        return convertEmoteByType(convertEmoteByType(convertEmoteByType(convertEmoteByType(convertEmoteByType(convertEmoteByType(text, 'customEmotes'), 'twitchEmotes'), 'tastyEmotes'), 'twitchSubEmotes'), 'bttvEmotes'), 'ffzEmotes');
+        if (window.plugCubedModules.database.settings.emoji) {
+            return convertEmoteByType(convertEmoteByType(convertEmoteByType(convertEmoteByType(convertEmoteByType(convertEmoteByType(text, 'customEmotes'), 'twitchEmotes'), 'tastyEmotes'), 'twitchSubEmotes'), 'bttvEmotes'), 'ffzEmotes');
+        }
     }
 
     function onChatReceived(data) {
@@ -336,7 +337,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
             msgClass += ' from-you';
         }
         data.message = convertImageLinks(data.message, $msg);
-        data.message = convertEmotes(data.message);
+        if (window.plugCubedModules.database.settings.emoji) data.message = convertEmotes(data.message);
         if (~['mention', 'message', 'emote'].indexOf(data.type)) {
             data.message = transform(data.message);
         }
@@ -523,8 +524,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
             start = performance.now();
 
             $.getJSON('https://plugcubed.net/scripts/emojis/bttv.json', {
-                _: new Date().getTime()
-            })
+                    _: new Date().getTime()
+                })
                 .done(function(data) {
                     var bttvEmotes, i, emote;
 
@@ -557,8 +558,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
             start = performance.now();
 
             $.getJSON('https://plugcubed.net/scripts/emojis/ffz.json', {
-                _: new Date().getTime()
-            })
+                    _: new Date().getTime()
+                })
                 .done(function(data) {
                     var ffzEmotes, i, emote;
 

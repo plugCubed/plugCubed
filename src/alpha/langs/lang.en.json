@@ -193,7 +193,9 @@
         "background": "Change background",
         "chatcustomizations": "Chat Customizations",
         "commands": "Chat commands",
-        "customcss": "Custom CSS"
+        "customcss": "Custom CSS",
+        "lowlagMode": "Low Lag Mode",
+        "workMode": "Work Mode"
     },
     "vote": {
         "meh": "Meh",
@@ -203,8 +205,8 @@
         "djing": "DJing"
     },
     "customchatcolors": {
-      "userRanksHeader": "User Ranks",
-      "chatnotifs": "Chat Notifications"
+        "userRanksHeader": "User Ranks",
+        "chatnotifs": "Chat Notifications"
     },
     "panels": {
         "about": {
