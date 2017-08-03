@@ -30,7 +30,7 @@
     "gulp-uglify": "^3.0.0",
     "gulp-zip": "^4.0.0",
     "mkdirp": "^0.5.1",
-    "requirejs": "^2.3.3",
+    "requirejs": "^2.3.4",
     "rimraf": "^2.6.1",
     "try-require": "^1.2.1"
   },
