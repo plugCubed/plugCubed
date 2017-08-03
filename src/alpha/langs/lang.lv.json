@@ -1,17 +1,15 @@
 {
   "running":"Ieslēdz plug&#179; versija %1",
-  "commandsHelp":"Raksti '\/commands' lai redzētu vairākas čata komandas.",
+  "commandsHelp":"Raksti '/commands' lai redzētu vairākas čata komandas.",
   "autorespond":{
     "default":"Esmu prom no klaviatūras.",
     "disable":"Izslēdzat automātisko AFK atbildi, lai čatotu",
     "nextIn":"Nākamā automātiskā AFK atbildes ziņa tiks sūtīta %1",
     "next":"AFK automātiskā atbilde kad tevi piemin",
-    "commandDisable":"%1 AFK ziņa atspējota",
-    "commandNotEnabled":"%1 AFK ziņa nebija iespējota"
+    "commandDisable":"%1 AFK ziņa atspējota"
   },
   "autojoin":{
-    "commandDisable":"%1 automātiskā pievienošanās DJ sarakstam izslēgta",
-    "commandNotEnabled":"%1 Automātiskā Pieslēgšanās nav ieslēgta"
+    "commandDisable":"%1 automātiskā pievienošanās DJ sarakstam izslēgta"
   },
   "fullscreen":{
     "shrink":"Samazināt",
@@ -30,8 +28,8 @@
       "number":"numurs"
     },
     "descriptions":{
-      "join":"pievienoties skatuvei\/rindai",
-      "leave":"Aiziet no skatuves\/rindas",
+      "join":"pievienoties skatuvei/rindai",
+      "leave":"Aiziet no skatuves/rindas",
       "whoami":"saņem informāciju par sevi",
       "mute":"iestatīt skaļumu uz 0",
       "automute":"piefiksēt pašreizējo dziesmu lai nākotnē to automātiski ignorētu",
@@ -41,7 +39,7 @@
       "alertson":"atskaņot skaņu kad noteiktais vārds tiek uzrakstīts čatā",
       "alertsoff":"beigt atskaņot skaņas kad noteiktais vārds tiek uzrakstīts čatā",
       "grab":"pievienot esošo dziesmu izvēlētajam sarakstam",
-      "badges":"Paslēpt\/Rādīt lietotāja nozīmes čatā",
+      "badges":"Paslēpt/Rādīt lietotāja nozīmes čatā",
       "getpos":"paskatīties pašreizējo rindas pozīciju",
       "version":"parāda versijas numuru",
       "commands":"parādīt šo sarakstu",
@@ -57,7 +55,8 @@
       "whois all":"parādīt visu lietotāju id un to lietotājvārdus kas atrodas šajā istabā",
       "banall":"liegt pieeju visiem lietotājiem kas ir šajā istabā",
       "status":"parāda statusu no plug serveriem",
-      "unload":"Closes plug&#179;"
+      "unload":"Closes plug&#179;",
+      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
     },
     "responses":{
       "alertson":"Atskaņot skaņu uz šādiem vārdiem: %1",
@@ -84,30 +83,33 @@
     "joinTime":"Ja pievienosies rindai tagad, būsi DJ pēc aptuveni %1!"
   },
   "notify":{
-    "header":"Lietotāja informācija",
+    "deletedMessages":"deleted by ",
     "join":"Lietotājs pievienojās!",
     "leave":"Lietotājs aizgāja",
     "grab":"Lietotājs Paņēma",
     "meh":"Lietotāju Meh'i",
     "stats":"Dziesmu Stati",
     "updates":"Dziesmu Atjauninājumi",
+    "updatesLink":"Song Link",
     "history":"Dziesmas Vēsturē",
     "songUnavailable":"Dziesma Nav Pieejama",
-    "boothAlert":"Booth Alert (%1 \/ 50)",
+    "boothAlert":"Booth Alert (%1 / 50)",
     "songLength":"Dziesmu Garums (%1 min)",
     "message":{
       "boothAlertNext":"You are about to DJ!",
       "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"paņēma %1 - %2",
       "stats":"Stati: %1 Woot'i -- %2 Meh'i -- %3 Paņēma",
-      "updates":"Tagad skan: %1  %2<br \/>Dj: %3",
+      "updates":"Tagad skan: %1  %2<br />Dj: %3",
       "meh":"meh'oja šo dziesmu",
       "join":"pievienojās kopienai",
       "leave":"pameta kopienu",
       "history":"Dziesma vēsturē (%1 no %2)",
       "historySkipped":"Dziesma ir vēsturē (%1 no %2), bet tika izlaista",
       "songLength":"Dziesma ir garāka par %1 minūtem",
+      "songDeleted":"Song is deleted",
       "songPrivate":"Dziesma ir privāta",
+      "songRejected":"Song is rejected due to %1",
       "songNotFound":"Dziesma nav atrasta",
       "songEmbed":"Dziesmas iekļaušana ir izslēgta",
       "songStreamable":"Dziesmai nevar ieslēgt straumēšanu"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Lietotāja informācija",
     "name":"Vārds",
+    "profile":"User Profile",
     "title":"Tituls",
     "specialTitles":{
       "developer":"plug&#179; Izstrādātājs",
@@ -137,10 +140,10 @@
     "points":"Punkti",
     "wootCount":"Woot'u Skaits",
     "mehCount":"Meh'u Skaits",
-    "ratio":"Woot\/Meh Attiecība",
+    "ratio":"Woot/Meh Attiecība",
     "djing":"Pašlaik Dj",
     "notInList":"Nav Rindā",
-    "inWaitlist":"%1\/%2 iekš rindas",
+    "inWaitlist":"%1/%2 iekš rindas",
     "userDjing":"%1 pašlaik Dj",
     "userNextDJ":"%1 būs nākamais Dj",
     "disconnects":"Atvienojās",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Šī kopiena lieto speciālus iestatījumus pēc %1",
     "infoDisable":"Tu viņus vari atspējot izvelnē"
   },
+  "menuHeaders":{
+    "features":"Features",
+    "chatnotifs":"Chat Notifications",
+    "controlpanel":"Vadības Panelis"
+  },
   "menu":{
     "autowoot":"Auto-Woot",
     "autojoin":"Auto-Join",
@@ -180,7 +188,14 @@
     "controlpanel":"Vadības Panelis",
     "showdeletedmessages":"Rādīt dzēstos ziņojumus",
     "visualizers":"RCS SoundCloud Visualizers",
-    "inlineuserinfo":"Inline User Info"
+    "inlineuserinfo":"Inline User Info",
+    "about":"About plugCubed",
+    "background":"Change background",
+    "chatcustomizations":"Chat Customizations",
+    "commands":"Chat commands",
+    "customcss":"Custom CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Meh",
@@ -189,27 +204,69 @@
     "undecided":"Neizlēmis",
     "djing":"DJ"
   },
+  "customchatcolors":{
+    "userRanksHeader":"User Ranks",
+    "chatnotifs":"Chat Notifications"
+  },
+  "panels":{
+    "about":{
+      "header":"Information about plug³",
+      "version":"Version",
+      "website":"Website",
+      "websiteText":"plug&#179; Website",
+      "translations":"Translations",
+      "translationsText":"plug&#179; Translations",
+      "websitetranslationsText":"plug&#179; Website Translations"
+    },
+    "background":{
+      "description":"Set your own room background"
+    },
+    "buttons":{
+      "cancel":"Cancel",
+      "clear":"Clear",
+      "submit":"Submit"
+    },
+    "chatcustomizations":{
+      "description":"Customize your chat with emojis, notifications, markdown, and other features",
+      "mentionSoundTitle":"Mention Sound %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat Enhancements",
+      "emotesSetHeader":"Emoji Set"
+    },
+    "customcss":{
+      "description":"Set your own room CSS"
+    }
+  },
   "tooltip":{
-    "stream":"Pārslēgt Video\/Audio Straumēšanu",
+    "stream":"Pārslēgt Video/Audio Straumēšanu",
     "clear":"Iztīrīt Čatu",
     "afk":"AFK Ziņojums",
     "reset":"Atiestatīt uz noklusējumu",
     "muted":"Visas dziesmas ir apklusinātas",
-    "mutedOnce":"Pašreizējā dziesma ir apklusināta"
+    "mutedOnce":"Pašreizējā dziesma ir apklusināta",
+    "quickBan":"Ban user forever",
+    "quickMute":"Mute user for 45 mins",
+    "userInfo":"User Info"
   },
   "error":{
     "userNotFound":"Lietotājs netika atrasts",
     "alreadyInWaitList":"User %1 is already in waitlist",
     "notInWaitList":"Lietotājs %1 nav gaidāmo sarakstā",
     "unknownMenuKey":"Nezināma izvēlne; %1",
-    "invalidAddSyntax":"Nederīga sintakse komandai add. Lietojums: \/add @Lietotājs",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidAddSyntax":"Nederīga sintakse komandai add. Lietojums: /add @Lietotājs",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: /ban @user or /ban @user::time::reason",
     "invalidBanTime":"Norādītais laiks %1 ir nederīgs. Derīgi laiki ir 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Nederīga sintakse komandai remove. Lietojums: \/remove @Lietotājs",
-    "invalidWhoisSyntax":"Nederīga sintakse komandai whois. Lietojums: \/whois @Lietotājs",
+    "invalidRemoveSyntax":"Nederīga sintakse komandai remove. Lietojums: /remove @Lietotājs",
+    "invalidWhoisSyntax":"Nederīga sintakse komandai whois. Lietojums: /whois @Lietotājs",
     "errorGettingPlaylistInfo":"Kļūda iegūstot saraksta informāciju",
     "noPlaylistsFound":"Atskaņošanas Saraksti nav atrasti",
     "yourActivePlaylistIsFull":"Tavs aktīvais atskaņošanas saraksts ir pilns",
     "noNextSong":"Tev nav ierindotas dziesmas"
+  },
+  "video":{
+    "show":"Show",
+    "hide":"Hide",
+    "menushow":"Show Video",
+    "menuhide":"Hide Video"
   }
 }

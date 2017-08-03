@@ -4,14 +4,12 @@
   "autorespond":{
     "default":"Bin mal AFK.",
     "disable":"Deaktiviere die AFK-Autoantwort, um zu Chatten",
-    "nextIn":"Die nächste AFK Autoantwort wird von %1 gesendet werden",
+    "nextIn":"Die nächste AFK Autoantwort wird in %1 gesendet werden",
     "next":"AFK-Autoantwort bei nächster Erwähnung",
-    "commandDisable":"%1 AFK Nachricht deaktiviert",
-    "commandNotEnabled":"%1 AFK Nachricht war nicht aktiviert"
+    "commandDisable":"%1 AFK Nachricht deaktiviert"
   },
   "autojoin":{
-    "commandDisable":"%1 Automatisch Beitreten deaktiviert",
-    "commandNotEnabled":"%1 Automatisches Beitreten war nicht aktiviert"
+    "commandDisable":"%1 Automatisch Beitreten deaktiviert"
   },
   "fullscreen":{
     "shrink":"Verkleinern",
@@ -57,7 +55,8 @@
       "whois all":"Zeigt die ID und Benutzernamen aller Benutzer im Raum an",
       "banall":"Bannt alle Benutzer im Raum",
       "status":"Zeigt den Status der plug.dj-Server",
-      "unload":"Schließt plug&#179;"
+      "unload":"Schließt plug&#179;",
+      "volume":"Setze die Lautstärke mit einer Zahl (0 - 100), erhöhe sie um 1 mit +, verringere sie um 1 mit -"
     },
     "responses":{
       "alertson":"Ein Ton wird bei folgenden Wörtern abgespielt: %1",
@@ -67,7 +66,7 @@
       "nextsong":"Dein nächster ausgewählter Song ist %1 von %2",
       "isHistory":"Achtung: Dieser Song ist noch im Verlauf (%1 von %2)",
       "automute":{
-        "automuted":"%1 automatisch stumm geschaltet.",
+        "automuted":"%1 wurde automatisch stumm geschaltet.",
         "registered":"%1 für automatisches Stumm schalten bei zukünftigem abspielen registriert.",
         "unregistered":"%1 wurde von der Automatisch-Stumm schalten Liste entfernt."
       },
@@ -84,13 +83,14 @@
     "joinTime":"Wenn du jetzt der Warteliste beitrittst. würdest du in ungefähr %1 am DJ-Pult stehen!"
   },
   "notify":{
-    "header":"Chat-Benachrichtigungen",
+    "deletedMessages":"Entfernt von ",
     "join":"Nutzer betritt den Raum",
     "leave":"Nutzer verlässt den Raum",
-    "grab":"Benutzer schnappt sich lied",
-    "meh":"Benutzer Mehs",
+    "grab":"Nutzer Grabs",
+    "meh":"Nutzer Mehs",
     "stats":"Song-Statistiken",
     "updates":"Song-Updates",
+    "updatesLink":"Song-Link",
     "history":"Songs im Verlauf",
     "songUnavailable":"Song nicht verfügbar",
     "boothAlert":"Pult-Alarm (%1 / 50)",
@@ -98,16 +98,18 @@
     "message":{
       "boothAlertNext":"Du bist als Nächstes an der Reihe!",
       "boothAlertPos":"Du bist jetzt auf Position %1 in der Warteliste",
-      "grab":"schnappte %1 - %2",
+      "grab":"grabbed %1 - %2",
       "stats":"Statistiken: %1 Woots -- %2 Mehs -- %3 Grabs",
       "updates":"Jetzt läuft: %1 von %2<br/>Gespielt von: %3",
-      "meh":"meh'd dieses lied",
+      "meh":"meh'd diesen Song",
       "join":"ist dem Raum beigetreten",
       "leave":"hat den Raum verlassen",
       "history":"Song ist im Verlauf (%1 von %2)",
       "historySkipped":"Song ist im Verlauf (%1 von %2), wurde aber beim letzten Mal übersprungen",
       "songLength":"Song ist länger als %1 Minuten ",
+      "songDeleted":"Song wurde entfernt",
       "songPrivate":"Dieser Song ist Privat",
+      "songRejected":"Der Song wurde abgelehnt. Grund: ",
       "songNotFound":"Dieser Song konnte nicht gefunden werden",
       "songEmbed":"Dieser Song kann nicht eingebettet werden",
       "songStreamable":"Dieser Song unterstützt Streaming nicht"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Nutzerinformationen",
     "name":"Name:",
+    "profile":"Benutzerprofil",
     "title":"Titel:",
     "specialTitles":{
       "developer":"plug&#179;-Entwickler",
@@ -140,7 +143,7 @@
     "ratio":"Woot/Meh-Verhältnis:",
     "djing":"Aktueller DJ",
     "notInList":"Nicht in der Warteliste",
-    "inWaitlist":"%1/%2 in der Wateliste",
+    "inWaitlist":"Position %1/%2 in der Warteliste",
     "userDjing":"%1 spielt gerade",
     "userNextDJ":"%1 spielt als nächstes",
     "disconnects":"Verbindungsabbrüche:",
@@ -151,7 +154,7 @@
   },
   "ranks":{
     "you":"Du:",
-    "regular":"Regulär",
+    "regular":"Regular",
     "residentdj":"Resident-DJ",
     "bouncer":"Bouncer",
     "manager":"Manager",
@@ -164,6 +167,11 @@
     "infoHeader":"Dieser Raum hat besondere Einstellungen",
     "infoHeaderCredits":"Dieser Raum hat besondere Einstellungen von %1",
     "infoDisable":"Du kannst sie im Menü deaktivieren"
+  },
+  "menuHeaders":{
+    "features":"Funktionen",
+    "chatnotifs":"Chat-Benachrichtigungen",
+    "controlpanel":"Einstellungen"
   },
   "menu":{
     "autowoot":"Autowoot",
@@ -180,7 +188,14 @@
     "controlpanel":"Einstellungen",
     "showdeletedmessages":"Gelöschte Nachrichten anzeigen",
     "visualizers":"RCS SoundCloud Visualizer",
-    "inlineuserinfo":"Inline Benutzer Info"
+    "inlineuserinfo":"Inline Benutzer Info",
+    "about":"Über plugCubed",
+    "background":"Hintergrund ändern",
+    "chatcustomizations":"Chat-Anpassungen",
+    "commands":"Chat-Befehle",
+    "customcss":"Benutzerdefiniertes CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Meh",
@@ -189,13 +204,49 @@
     "undecided":"Unentschlossen",
     "djing":"Selbst am DJ-Pult"
   },
+  "customchatcolors":{
+    "userRanksHeader":"Benutzer Ränge",
+    "chatnotifs":"Chat-Benachrichtigungen"
+  },
+  "panels":{
+    "about":{
+      "header":"Informationen über plug³",
+      "version":"Version",
+      "website":"Webseite",
+      "websiteText":"plug&#179; Webseite",
+      "translations":"Übersetzungen",
+      "translationsText":"plug&#179; Übersetzungen",
+      "websitetranslationsText":"plug&#179; Webseiten-Übersetzungen"
+    },
+    "background":{
+      "description":"Setze deinen eigenen Raum-Hintergrund"
+    },
+    "buttons":{
+      "cancel":"Abbrechen",
+      "clear":"Eingabe löschen",
+      "submit":"Absenden"
+    },
+    "chatcustomizations":{
+      "description":"Passe deinen Chat mit Emojis, Benachrichtigungen, Markdown und weiteren Funktionen an",
+      "mentionSoundTitle":"Erwähnungs-Ton %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat-Verbesserungen",
+      "emotesSetHeader":"Emoji-Set"
+    },
+    "customcss":{
+      "description":"Setze dein eigenes Raum-CSS"
+    }
+  },
   "tooltip":{
     "stream":"Video/Audio-Stream ein-/ausschalten",
     "clear":"Chat leeren",
     "afk":"AFK-Nachricht",
     "reset":"Standardeinstellungen wiederherstellen",
     "muted":"Alle Songs sind stumm geschaltet",
-    "mutedOnce":"Laufender Song ist Stumm geschaltet"
+    "mutedOnce":"Laufender Song ist Stumm geschaltet",
+    "quickBan":"Sperre einen Nutzer für immer",
+    "quickMute":"Schalte einen Nutzer für 45 Minuten stumm",
+    "userInfo":"Nutzer-Info"
   },
   "error":{
     "userNotFound":"Benutzer konnte nicht gefunden werden",
@@ -211,5 +262,11 @@
     "noPlaylistsFound":"Keine Playlists gefunden",
     "yourActivePlaylistIsFull":"Deine aktive Playlist ist voll",
     "noNextSong":"Du hast keinen Song in der Warteliste"
+  },
+  "video":{
+    "show":"Anzeigen",
+    "hide":"Ausblenden",
+    "menushow":"Video Anzeigen",
+    "menuhide":"Video ausblenden"
   }
 }

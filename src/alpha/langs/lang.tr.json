@@ -1,17 +1,15 @@
 {
   "running":"Plug&#179; %1 sürümünde çalışıyor",
-  "commandsHelp":"Genişletilmiş sohbet komutları görmek için '\/commands' kullanın",
+  "commandsHelp":"Genişletilmiş sohbet komutları görmek için '/commands' kullanın",
   "autorespond":{
     "default":"Ben klavye başında değilim.",
     "disable":"AFK otocevabı devre dışı bırak",
     "nextIn":"Sonraki AFK otocevap %1 de gönderilicektir",
     "next":"AFK çalışmamasının sonraki anma üstünde",
-    "commandDisable":"%1 AFK mesajı devre dışı",
-    "commandNotEnabled":"%1 AFK ileti etkin değil"
+    "commandDisable":"%1 AFK mesajı devre dışı"
   },
   "autojoin":{
-    "commandDisable":"%1 otomatik giriş devre dışı",
-    "commandNotEnabled":"%1 Otomatik giriş kullanılamaz"
+    "commandDisable":"%1 otomatik giriş devre dışı"
   },
   "fullscreen":{
     "shrink":"Küçült",
@@ -41,7 +39,7 @@
       "alertson":"tanımlı kelimeleri sohbette yazılan her ses çalmak",
       "alertsoff":"tanımlanan sözcükleri yazılır zaman sesi oynatmayı durdurmak sohbet",
       "grab":"Şu an ki şarkıyı seçili oynatma listenize ekleyin",
-      "badges":"Kullanıcı rozetlerini sohbette göster\/gizle",
+      "badges":"Kullanıcı rozetlerini sohbette göster/gizle",
       "getpos":"Geçerli bekleme konumuna getir",
       "version":"sürüm numarasını görüntüle",
       "commands":"Liste olarak göster",
@@ -52,12 +50,13 @@
       "lockskip":"kilitleri DJ kabini, atlayabilir ve daha sonra kilidini açar",
       "lock":"Dj kabinini kilitler",
       "unlock":"DJ kabininin kilidini açar",
-      "add":"hedeflenen kullanıcıyı dj kabini\/bekleme listesine ekler",
-      "remove":"hedeflenen kullanıcıyı dj kabin\/bekleme listesinden kaldırır",
+      "add":"hedeflenen kullanıcıyı dj kabini/bekleme listesine ekler",
+      "remove":"hedeflenen kullanıcıyı dj kabin/bekleme listesinden kaldırır",
       "whois all":"Odadaki bütün kullanıcıların kullanıcı kimliklerini ve kullanıcı adlarını verir",
       "banall":"Odadaki tüm kullanıcıları yasaklar",
       "status":"Plug sunucularının durumunu gösterir",
-      "unload":"Closes plug&#179;"
+      "unload":"Closes plug&#179;",
+      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
     },
     "responses":{
       "alertson":"Aşağıdaki sözcükleri ses çalma: %1",
@@ -84,30 +83,33 @@
     "joinTime":"Eğer bekleme sırasına şimdi katılırsan %1 içinde Djlik yapıyor olucaksın!"
   },
   "notify":{
-    "header":"Sohbet bildirimleri",
+    "deletedMessages":"deleted by ",
     "join":"Kullanıcı Girdi.",
     "leave":"Kullanıcı Odayı terk etti.",
     "grab":"Kullanıcının kaptıkları",
     "meh":"Kullanıcı Iyyları",
     "stats":"Şarkı istatistikleri",
     "updates":"Şarkı güncellemeleri",
+    "updatesLink":"Song Link",
     "history":"Oynatılan şarkılar",
     "songUnavailable":"Şarkı kullanılamaz",
-    "boothAlert":"Booth Alert (%1 \/ 50)",
+    "boothAlert":"Booth Alert (%1 / 50)",
     "songLength":"Şarkı %1 dakikadan daha uzun",
     "message":{
       "boothAlertNext":"You are about to DJ!",
       "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"Kapıldı %1-%2",
       "stats":"İstatistikler: %1 Begenilme -- %2 Beğenilmeme --%3 listeye eklenme",
-      "updates":"Şimdi Yürütülüyor: %1 by %2 < br \/ > şarkıyı acan: %3",
+      "updates":"Şimdi Yürütülüyor: %1 by %2 < br / > şarkıyı acan: %3",
       "meh":"%1 meh bu parçada vardı",
       "join":"odaya katıldı",
       "leave":"odadan ayrıldı",
       "history":"Şarkı geçmiş (%1 of %2) ",
       "historySkipped":"Şarkı tarihinin (%1 of %2), ama son şarkıda atlandı",
       "songLength":"Şarkı %1 dakikadan daha uzun",
+      "songDeleted":"Song is deleted",
       "songPrivate":"şarkı gizlidir",
+      "songRejected":"Song is rejected due to %1",
       "songNotFound":"şarkı bulunamadı",
       "songEmbed":"Şarkı devre dışı katıştırma etti",
       "songStreamable":"şarkı yayınlanmayı desteklemiyor"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Kullanıcı bilgileri",
     "name":"Isim",
+    "profile":"User Profile",
     "title":"Başlık",
     "specialTitles":{
       "developer":"plug³ geliştirici",
@@ -137,10 +140,10 @@
     "points":"Puan",
     "wootCount":"Begenme sayısı",
     "mehCount":"begenilmeme sayısı",
-    "ratio":"begeneilme\/begenilmeme oranı",
+    "ratio":"begeneilme/begenilmeme oranı",
     "djing":"DJlik",
     "notInList":"Değil bekleme listesine ne standı",
-    "inWaitlist":"%1\/ %2 'bekleme listesinde",
+    "inWaitlist":"%1/ %2 'bekleme listesinde",
     "userDjing":"%1 şu anda DJlik",
     "userNextDJ":"%1 Bir sonraki DJ",
     "disconnects":"Bağlantı kesintisi",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Bu oda özel ayarlar %1 tarafından kullanıyor",
     "infoDisable":"Siz menüden bunları devre dışı bırakabilirsiniz"
   },
+  "menuHeaders":{
+    "features":"Features",
+    "chatnotifs":"Chat Notifications",
+    "controlpanel":"Kontrol paneli"
+  },
   "menu":{
     "autowoot":"OtomatikBegen",
     "autojoin":"OtomatikKatıl",
@@ -180,7 +188,14 @@
     "controlpanel":"Kontrol paneli",
     "showdeletedmessages":"Silinen mesajları göster",
     "visualizers":"RCS SoundCloud Visualizers",
-    "inlineuserinfo":"Inline User Info"
+    "inlineuserinfo":"Inline User Info",
+    "about":"About plugCubed",
+    "background":"Change background",
+    "chatcustomizations":"Chat Customizations",
+    "commands":"Chat commands",
+    "customcss":"Custom CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Kötü",
@@ -189,27 +204,69 @@
     "undecided":"Kararsız",
     "djing":"DJlik"
   },
+  "customchatcolors":{
+    "userRanksHeader":"User Ranks",
+    "chatnotifs":"Chat Notifications"
+  },
+  "panels":{
+    "about":{
+      "header":"Information about plug³",
+      "version":"Version",
+      "website":"Website",
+      "websiteText":"plug&#179; Website",
+      "translations":"Translations",
+      "translationsText":"plug&#179; Translations",
+      "websitetranslationsText":"plug&#179; Website Translations"
+    },
+    "background":{
+      "description":"Set your own room background"
+    },
+    "buttons":{
+      "cancel":"Cancel",
+      "clear":"Clear",
+      "submit":"Submit"
+    },
+    "chatcustomizations":{
+      "description":"Customize your chat with emojis, notifications, markdown, and other features",
+      "mentionSoundTitle":"Mention Sound %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat Enhancements",
+      "emotesSetHeader":"Emoji Set"
+    },
+    "customcss":{
+      "description":"Set your own room CSS"
+    }
+  },
   "tooltip":{
-    "stream":"Toggle Video\/ses akışı",
+    "stream":"Toggle Video/ses akışı",
     "clear":"sohbet temizle",
     "afk":"AFK mesaj",
     "reset":"Varsayılanlara sıfırla",
     "muted":"Tüm şarkılar sessizdir",
-    "mutedOnce":"Şuanki şarkı sessizleşir"
+    "mutedOnce":"Şuanki şarkı sessizleşir",
+    "quickBan":"Ban user forever",
+    "quickMute":"Mute user for 45 mins",
+    "userInfo":"User Info"
   },
   "error":{
     "userNotFound":"Kullanıcı bulunamadı",
     "alreadyInWaitList":"Kullanıcı %1 zaten bekleme listesinde",
     "notInWaitList":"Kullanıcı %1 bekleme listesinde değil",
     "unknownMenuKey":"Bilinmeyen menü tuşu: %1",
-    "invalidAddSyntax":"Komut eklemek için geçersiz sözdizimi. Kullanımı: \/ add @user",
-    "invalidBanSyntax":"Engelleme komutu için geçersiz sözdizimi. Kullanımı: \/ ban @user ya da \/ban @user::time::reason",
+    "invalidAddSyntax":"Komut eklemek için geçersiz sözdizimi. Kullanımı: / add @user",
+    "invalidBanSyntax":"Engelleme komutu için geçersiz sözdizimi. Kullanımı: / ban @user ya da /ban @user::time::reason",
     "invalidBanTime":"Belirtilen %1 zamanı geçerli değildir. Geçerli olan zamanlar 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Kaldırmak için geçersiz sözdizimi. Kullanımı: \/remove @user",
-    "invalidWhoisSyntax":"Whois komutu için geçersiz sözdizimi. Kullanımı \/whois @user",
+    "invalidRemoveSyntax":"Kaldırmak için geçersiz sözdizimi. Kullanımı: /remove @user",
+    "invalidWhoisSyntax":"Whois komutu için geçersiz sözdizimi. Kullanımı /whois @user",
     "errorGettingPlaylistInfo":"Çalma listesi bilgisi alınırken hata oluştu",
     "noPlaylistsFound":"Hiç bir çalma listesi bulunamadı",
     "yourActivePlaylistIsFull":"Aktif çalma listen dolu",
     "noNextSong":"Sıraya eklediğiniz şarkınız yok"
+  },
+  "video":{
+    "show":"Show",
+    "hide":"Hide",
+    "menushow":"Show Video",
+    "menuhide":"Hide Video"
   }
 }

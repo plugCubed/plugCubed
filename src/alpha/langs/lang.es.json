@@ -6,12 +6,10 @@
     "disable":"Desactiva la Autorespuesta AFK",
     "nextIn":"La próxima auto-respuesta sera enviada de %1",
     "next":"Auto-responder en la próxima mención",
-    "commandDisable":"%1 Mensaje AFK desactivado",
-    "commandNotEnabled":"%1 Mensaje Automático AFK no estaba habilitado"
+    "commandDisable":"%1 Mensaje AFK desactivado"
   },
   "autojoin":{
-    "commandDisable":"%1 Auto Unirse desactivado",
-    "commandNotEnabled":"%1 Auto Unirse está deshabilitado"
+    "commandDisable":"%1 Auto Unirse desactivado"
   },
   "fullscreen":{
     "shrink":"Contraer",
@@ -57,7 +55,8 @@
       "whois all":"da el userid y el username de todos los usuarios en la sala",
       "banall":"banea todos los usuarios en la sala",
       "status":"mostrar el estado de los servidores de plug",
-      "unload":"Closes plug&#179;"
+      "unload":"Closes plug&#179;",
+      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
     },
     "responses":{
       "alertson":"Reproduciendo sonido en las siguientes palabras: %1",
@@ -84,13 +83,14 @@
     "joinTime":"¡Si te unes a la lista de espera ahora, seras el DJ en %1!"
   },
   "notify":{
-    "header":"Comandos plugCubed",
+    "deletedMessages":"deleted by ",
     "join":"Conexión de usuario",
     "leave":"Desconexion de usuario",
     "grab":"User Grab",
     "meh":"Meh's del usuario",
     "stats":"Estadísticas de la canción",
     "updates":"Actualizaciones de la canción",
+    "updatesLink":"Song Link",
     "history":"Canciones en el historial",
     "songUnavailable":"Canción no disponible",
     "boothAlert":"Booth Alert (%1 / 50)",
@@ -107,7 +107,9 @@
       "history":"Canción en el historial (%1 de %2)",
       "historySkipped":"Canción en el historial (%1 de %2), pero se saltó en la ultima reproducción",
       "songLength":"Canción más larga que %1 minutos",
+      "songDeleted":"Song is deleted",
       "songPrivate":"La canción es privada",
+      "songRejected":"Song is rejected due to %1",
       "songNotFound":"Canción no encontrada",
       "songEmbed":"Song has embedding disabled",
       "songStreamable":"La canción no soporta streaming"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Comandos plugCubed",
     "name":"Nombre",
+    "profile":"User Profile",
     "title":"Título",
     "specialTitles":{
       "developer":"plug&#179; Desarollador",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Esta sala está usando ajustes especiales por %1",
     "infoDisable":"Las puedes desactivar en el menú"
   },
+  "menuHeaders":{
+    "features":"Features",
+    "chatnotifs":"Chat Notifications",
+    "controlpanel":"Panel de control"
+  },
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Autoentrar",
@@ -180,7 +188,14 @@
     "controlpanel":"Panel de control",
     "showdeletedmessages":"Mostrar mensajes eliminados",
     "visualizers":"RCS SoundCloud Visualizers",
-    "inlineuserinfo":"Inline User Info"
+    "inlineuserinfo":"Inline User Info",
+    "about":"About plugCubed",
+    "background":"Change background",
+    "chatcustomizations":"Chat Customizations",
+    "commands":"Chat commands",
+    "customcss":"Custom CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Pesado",
@@ -189,13 +204,49 @@
     "undecided":"Sin decidir",
     "djing":"Tocando"
   },
+  "customchatcolors":{
+    "userRanksHeader":"User Ranks",
+    "chatnotifs":"Chat Notifications"
+  },
+  "panels":{
+    "about":{
+      "header":"Information about plug³",
+      "version":"Version",
+      "website":"Website",
+      "websiteText":"plug&#179; Website",
+      "translations":"Translations",
+      "translationsText":"plug&#179; Translations",
+      "websitetranslationsText":"plug&#179; Website Translations"
+    },
+    "background":{
+      "description":"Set your own room background"
+    },
+    "buttons":{
+      "cancel":"Cancel",
+      "clear":"Clear",
+      "submit":"Submit"
+    },
+    "chatcustomizations":{
+      "description":"Customize your chat with emojis, notifications, markdown, and other features",
+      "mentionSoundTitle":"Mention Sound %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat Enhancements",
+      "emotesSetHeader":"Emoji Set"
+    },
+    "customcss":{
+      "description":"Set your own room CSS"
+    }
+  },
   "tooltip":{
     "stream":"Emisión",
     "clear":"Limpiar Chat",
     "afk":"Mensage AFK",
     "reset":"Restablecer valores por defecto",
     "muted":"Todas las canciones estan silenciadas",
-    "mutedOnce":"La cancion actual esta silenciada"
+    "mutedOnce":"La cancion actual esta silenciada",
+    "quickBan":"Ban user forever",
+    "quickMute":"Mute user for 45 mins",
+    "userInfo":"User Info"
   },
   "error":{
     "userNotFound":"Usuario no encontrado",
@@ -211,5 +262,11 @@
     "noPlaylistsFound":"No se encontraron listas de reproducción",
     "yourActivePlaylistIsFull":"Tu lista de reproduccion activa esta llena",
     "noNextSong":"No tienes ninguna canción en lista de espera"
+  },
+  "video":{
+    "show":"Show",
+    "hide":"Hide",
+    "menushow":"Show Video",
+    "menuhide":"Hide Video"
   }
 }

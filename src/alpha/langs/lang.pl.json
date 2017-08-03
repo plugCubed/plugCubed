@@ -4,14 +4,12 @@
   "autorespond":{
     "default":"Nie ma mnie przy komputerze.",
     "disable":"Wyłącz automatyczne odpowiedzi AFK aby pisać",
-    "nextIn":"Następna autoodpowiedź AFK zostanie wysłana za %1",
+    "nextIn":"Następna autoodpowiedź AFK zostanie wysłana o %1",
     "next":"Autoodpowiedź AFK przy następnej wzmiance",
-    "commandDisable":"%1 wiadomości AFK wyłączone",
-    "commandNotEnabled":"%1 wiadomości AFK nie były włączone"
+    "commandDisable":"%1 wiadomości AFK wyłączone"
   },
   "autojoin":{
-    "commandDisable":"%1 autojoin wyłączony",
-    "commandNotEnabled":"%1 automatyczne dołączanie nie było włączone"
+    "commandDisable":"%1 autojoin wyłączony"
   },
   "fullscreen":{
     "shrink":"Zmniejsz",
@@ -57,7 +55,8 @@
       "whois all":"pokazuje id oraz nazwy wszystkich użytkowników znajdujących się w pokoju",
       "banall":"zbanuj wszystkich użytkowników w tym pokoju",
       "status":"pokaż status serwerów plug.dj",
-      "unload":"Wyłącz plug&#179;"
+      "unload":"Wyłącz plug&#179;",
+      "volume":"Ustaw głośność liczbą z przedziału 0 - 100, zwiększ o jeden poprzez +, zmniejsz o 1 poprzez -"
     },
     "responses":{
       "alertson":"Odtwarzanie dźwięku na następujące słowa: %1",
@@ -78,25 +77,26 @@
     }
   },
   "eta":{
-    "boothAvailable":"Dołącz do listy oczekujących, by być DJ'em!",
-    "alreadyDJ":"Jesteś już DJ'em!",
-    "waitListTime":"Zajmujesz pozycję %1 z %2 na liście oczekiwania, będziesz DJ'em za około %3!",
-    "joinTime":"Jeśli dołączysz teraz do listy oczekiwania, będziesz DJ'em za około %1!"
+    "boothAvailable":"Dołącz do listy oczekujących, by być DJ-em!",
+    "alreadyDJ":"Jesteś już DJ-em!",
+    "waitListTime":"Zajmujesz pozycję %1 z %2 na liście oczekiwania, będziesz DJ-em za około %3!",
+    "joinTime":"Jeśli dołączysz teraz do listy oczekiwania, będziesz DJ-em za około %1!"
   },
   "notify":{
-    "header":"Powiadomienia na czacie",
+    "deletedMessages":"usunięte przez ",
     "join":"Wejścia użytkowników",
     "leave":"Wyjścia użytkowników",
     "grab":"Graby użytkowników",
     "meh":"Mehy użytkowników",
     "stats":"Statystyki utworów",
     "updates":"Następny utwór",
+    "updatesLink":"Link do utworu",
     "history":"Utwory w historii",
     "songUnavailable":"Utwór niedostępny",
     "boothAlert":"Alarm konsoli (%1 / 50)",
     "songLength":"Długość piosenki (%1 min)",
     "message":{
-      "boothAlertNext":"Za chwilę zostaniesz DJ'em!",
+      "boothAlertNext":"Za chwilę zostaniesz DJ-em!",
       "boothAlertPos":"Jesteś %1 na liście oczekiwania",
       "grab":"zgrabowano %1 - %2",
       "stats":"Statystyki: %1 wooty -- %2 mehy -- %3 graby",
@@ -107,7 +107,9 @@
       "history":"Ten utwór jest w historii (%1 z %2)",
       "historySkipped":"Utwór jest w historii (%1 z %2), został pominięty przy poprzednim odtworzeniu",
       "songLength":"Piosenka jest dłuższa niż %1 minut",
+      "songDeleted":"Utwór nie istnieje",
       "songPrivate":"Ten utwór jest prywatny",
+      "songRejected":"Utwór został odrzucony z powodu %1",
       "songNotFound":"Utwór nie znaleziony",
       "songEmbed":"Nie można odtwarzać tego utworu na stronach zewnętrznych",
       "songStreamable":"Ten utwór nie wspiera odtwarzania na żywo"
@@ -116,15 +118,16 @@
   "info":{
     "header":"Informacje o użytkowniku",
     "name":"Nazwa użytkownika",
+    "profile":"Profil",
     "title":"Tytuł",
     "specialTitles":{
-      "developer":"plug&#179; Developer",
-      "sponsor":"plug&#179; Sponsor",
-      "ambassador":"plug&#179; Ambasador",
-      "donatorDiamond":"plug³ Diamentowy sponsor",
-      "donatorPlatinum":"plug&#179; Platynowy sponsor",
-      "donatorGold":"plug&#179; Złoty sponsor",
-      "donatorSilver":"plug&#179; Srebrny sponsor",
+      "developer":"Developer plug&#179;",
+      "sponsor":"Sponsor plug&#179;",
+      "ambassador":"Ambasador plug&#179;",
+      "donatorDiamond":"Diamentowy sponsor plug&#179;",
+      "donatorPlatinum":" Platynowy sponsor plug&#179;",
+      "donatorGold":"Złoty sponsor plug&#179;",
+      "donatorSilver":"Srebrny sponsor plug&#179;",
       "donatorBronze":"plug&#179; Brązowy sponsor",
       "special":"Specjalny użytkownik plug&#179; - %1"
     },
@@ -138,10 +141,10 @@
     "wootCount":"Wooty:",
     "mehCount":"Mehy:",
     "ratio":"Stosunek Woot/Meh",
-    "djing":"Aktualnie jest DJem",
+    "djing":"Aktualnie jest DJ-em",
     "notInList":"poza kolejką",
     "inWaitlist":"%1/%2 na liście oczekiwania",
-    "userDjing":"%1 jest aktualnie DJem",
+    "userDjing":"%1 jest aktualnie DJ-em",
     "userNextDJ":"%1 jest następnym Dj-em",
     "disconnects":"Rozłączenia",
     "lastDisconnect":"Ostatnie rozłączenie",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Ten pokój używa specjalnych ustawień napisanych przez %1",
     "infoDisable":"Możesz je wyłączyć w menu"
   },
+  "menuHeaders":{
+    "features":"Funkcje",
+    "chatnotifs":"Powiadomienia czatu",
+    "controlpanel":"Panel sterowania"
+  },
   "menu":{
     "autowoot":"AutoWoot",
     "autojoin":"Automatyczne dołączanie",
@@ -180,14 +188,54 @@
     "controlpanel":"Panel sterowania",
     "showdeletedmessages":"Pokaż usunięte wiadomości",
     "visualizers":"Wizualizacje SoundCloud (RCS)",
-    "inlineuserinfo":"Dane użytkownika obok nazwy"
+    "inlineuserinfo":"Dane użytkownika obok nazwy",
+    "about":"O plugCubed",
+    "background":"Zmień tło",
+    "chatcustomizations":"Ustawienia czatu",
+    "commands":"Komendy czatu",
+    "customcss":"Niestandardowy CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Meh",
     "woot":"Woot",
     "grab":"Grab",
     "undecided":"Niezdecydowany",
-    "djing":"Jest teraz DJ'em"
+    "djing":"Jest teraz DJ-em"
+  },
+  "customchatcolors":{
+    "userRanksHeader":"Rangi użytkowników",
+    "chatnotifs":"Powiadomienia czatu"
+  },
+  "panels":{
+    "about":{
+      "header":"Informacje o plug³",
+      "version":"Wersja",
+      "website":"Strona",
+      "websiteText":"Strona plug&#179;",
+      "translations":"Tłumaczenia",
+      "translationsText":"Tłumaczenia plug&#179;",
+      "websitetranslationsText":"Tłumaczenia strony plug&#179;"
+    },
+    "background":{
+      "description":"Ustaw swoje własne tło pokoju"
+    },
+    "buttons":{
+      "cancel":"Anuluj",
+      "clear":"Wyczyść",
+      "submit":"Zatwierdź"
+    },
+    "chatcustomizations":{
+      "description":"Personalizuj swój czat za pomocą emoji, powiadomień, formatowania tekstu i innych funkcji",
+      "mentionSoundTitle":"Dźwięk wzmianki %1",
+      "emotesHeader":"Emotikony",
+      "chatenhancementHeader":"Usprawnienia czatu",
+      "emotesSetHeader":"Zestaw emoji"
+    },
+    "customcss":{
+      "description":"Ustaw swój własny CSS pokoju"
+    }
   },
   "tooltip":{
     "stream":"Przełącz strumień wideo/audio",
@@ -195,7 +243,10 @@
     "afk":"Auto odpowiedź AFK",
     "reset":"Zresetuj do ustawień domyślnych",
     "muted":"Wszystkie utwory są wyciszone",
-    "mutedOnce":"Aktualna piosenka jest wyciszona"
+    "mutedOnce":"Aktualna piosenka jest wyciszona",
+    "quickBan":"Zbanuj użytkownika na zawsze",
+    "quickMute":"Wycisz użytkownika na 45 minut",
+    "userInfo":"Informacje o użytkowniku"
   },
   "error":{
     "userNotFound":"Nie znaleziono użytkownika",
@@ -211,5 +262,11 @@
     "noPlaylistsFound":"Nie znaleziono żadnej listy odtwarzania",
     "yourActivePlaylistIsFull":"Twoja aktywna lista odtwarzania jest pełna",
     "noNextSong":"Nie masz w kolejce żadnych utworów"
+  },
+  "video":{
+    "show":"Pokaż",
+    "hide":"Ukryj",
+    "menushow":"Pokaż wideo",
+    "menuhide":"Ukryj wideo"
   }
 }

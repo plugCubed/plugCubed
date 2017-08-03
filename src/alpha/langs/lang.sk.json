@@ -6,12 +6,10 @@
     "disable":"Zakázať AFK Odpoveď v chate",
     "nextIn":"Ďalšia AFK Odpoveď bude odoslaná %1",
     "next":"Automaticky odpovedať s AFK správou na dalšie označenie",
-    "commandDisable":"%1 AFK správa vypnutá",
-    "commandNotEnabled":"%1 AFK správa nebola povolená"
+    "commandDisable":"%1 AFK správa vypnutá"
   },
   "autojoin":{
-    "commandDisable":"%1 Automatické pripojenie vypnuté",
-    "commandNotEnabled":"Automatické pripojenie %1 nebolo povolené"
+    "commandDisable":"%1 Automatické pripojenie vypnuté"
   },
   "fullscreen":{
     "shrink":"Zmenšiť",
@@ -57,7 +55,8 @@
       "whois all":"dáva userid a užívateľské meno všetkých používateľov v miestnosti",
       "banall":"zabanovať všetkých užívateľov v miestnosti",
       "status":"zobrazí stav plug.dj serverov",
-      "unload":"Zavrieť plug&#179;"
+      "unload":"Zavrieť plug&#179;",
+      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
     },
     "responses":{
       "alertson":"Zvuk sa prehrá pri následujúcich slovách: %1",
@@ -84,13 +83,14 @@
     "joinTime":"Ak by ste sa pridali do waitlistu teraz, boli by ste na rade za %1!"
   },
   "notify":{
-    "header":"Oznamy Chatu",
+    "deletedMessages":"deleted by ",
     "join":"Užívateľ sa pripojil",
     "leave":"Užívateľ sa odpojil",
     "grab":"Pridanie užívateľom",
     "meh":"Užívateľ Mehs",
     "stats":"Štatistiky skladieb",
     "updates":"Oznamy skladieb",
+    "updatesLink":"Song Link",
     "history":"Skladby v histórií",
     "songUnavailable":"Skladba nedostupná",
     "boothAlert":"Upozornenie umiestnenia v zozname",
@@ -107,7 +107,9 @@
       "history":"Skladba je v histórii (%1 z %2)",
       "historySkipped":"Pesnička je v histórii (%1 z %2), ale bola preskočená pretože dnes hrala",
       "songLength":"Pesnička je dlhšia ako %1 minút/a",
+      "songDeleted":"Song is deleted",
       "songPrivate":"Skladba je súkromná",
+      "songRejected":"Song is rejected due to %1",
       "songNotFound":"Skladba nenájdená",
       "songEmbed":"Skladba nemá povolené vkladanie",
       "songStreamable":"Skladba nepodporuje streamovanie"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Užívateľské informácie",
     "name":"Meno",
+    "profile":"User Profile",
     "title":"Názov",
     "specialTitles":{
       "developer":"plug&#179; Vývojár",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Táto miestnosť obsahuje špeciálne nastavenia používateľom %1",
     "infoDisable":"V menu ich môžeš vypnúť"
   },
+  "menuHeaders":{
+    "features":"Features",
+    "chatnotifs":"Chat Notifications",
+    "controlpanel":"Ovládací panel"
+  },
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Automatické pripojenie",
@@ -180,7 +188,14 @@
     "controlpanel":"Ovládací panel",
     "showdeletedmessages":"Zobraziť odstránené správy",
     "visualizers":"RCS SoundCloud Vizualizátory",
-    "inlineuserinfo":"Informácie o užívateľovi"
+    "inlineuserinfo":"Informácie o užívateľovi",
+    "about":"About plugCubed",
+    "background":"Change background",
+    "chatcustomizations":"Chat Customizations",
+    "commands":"Chat commands",
+    "customcss":"Custom CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Meh",
@@ -189,13 +204,49 @@
     "undecided":"Nerozhodný",
     "djing":"DJovanie"
   },
+  "customchatcolors":{
+    "userRanksHeader":"User Ranks",
+    "chatnotifs":"Chat Notifications"
+  },
+  "panels":{
+    "about":{
+      "header":"Information about plug³",
+      "version":"Version",
+      "website":"Website",
+      "websiteText":"plug&#179; Website",
+      "translations":"Translations",
+      "translationsText":"plug&#179; Translations",
+      "websitetranslationsText":"plug&#179; Website Translations"
+    },
+    "background":{
+      "description":"Set your own room background"
+    },
+    "buttons":{
+      "cancel":"Cancel",
+      "clear":"Clear",
+      "submit":"Submit"
+    },
+    "chatcustomizations":{
+      "description":"Customize your chat with emojis, notifications, markdown, and other features",
+      "mentionSoundTitle":"Mention Sound %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat Enhancements",
+      "emotesSetHeader":"Emoji Set"
+    },
+    "customcss":{
+      "description":"Set your own room CSS"
+    }
+  },
   "tooltip":{
     "stream":"Povoliť Video / Audio vysielanie",
     "clear":"Vymazať Chat",
     "afk":"AFK správu",
     "reset":"Obnoviť do pôvodného stavu",
     "muted":"Všetky pesničky sú stlmené",
-    "mutedOnce":"Aktuálne pesnička je stlmená"
+    "mutedOnce":"Aktuálne pesnička je stlmená",
+    "quickBan":"Ban user forever",
+    "quickMute":"Mute user for 45 mins",
+    "userInfo":"User Info"
   },
   "error":{
     "userNotFound":"Užívateľ nebol nájdený",
@@ -211,5 +262,11 @@
     "noPlaylistsFound":"Nebol nájdený žiadny playlist",
     "yourActivePlaylistIsFull":"Váš aktívny playlist je plný",
     "noNextSong":"Nemáte žiadnu skladbu v poradí"
+  },
+  "video":{
+    "show":"Show",
+    "hide":"Hide",
+    "menushow":"Show Video",
+    "menuhide":"Hide Video"
   }
 }

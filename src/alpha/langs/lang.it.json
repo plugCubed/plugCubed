@@ -1,17 +1,15 @@
 {
   "running":"Sto eseguendo plug&#179; versione %1",
-  "commandsHelp":"Usa \"\/commands\" per estendere la lista dei comandi eseguibili in chat.",
+  "commandsHelp":"Usa \"/commands\" per estendere la lista dei comandi eseguibili in chat.",
   "autorespond":{
     "default":"Sono assente",
     "disable":"Disattiva la Risposta automatica in chat durante l'assenza",
     "nextIn":"La prossima Risposta automatica per assenza sarà inviata tra %1",
     "next":"Risposta automatica per assenza nella prossima menzione",
-    "commandDisable":"%1 autojoin disabled",
-    "commandNotEnabled":"%1 autojoin was not enabled"
+    "commandDisable":"%1 autojoin disabled"
   },
   "autojoin":{
-    "commandDisable":"%1 autojoin disattivato",
-    "commandNotEnabled":"autojoin %1 non è stato abilitato"
+    "commandDisable":"%1 autojoin disattivato"
   },
   "fullscreen":{
     "shrink":"Rimpicciolisci",
@@ -41,7 +39,7 @@
       "alertson":"riproduce il suono ogni volta che le parole definite sono scritte in chat",
       "alertsoff":"interrompe la riproduzione del suono quando le parole definite sono scritte in chat",
       "grab":"aggiunge il brano corrente alla tua playlist selezionata",
-      "badges":"Mostra\/Nascondi i distintivi utente nella chat",
+      "badges":"Mostra/Nascondi i distintivi utente nella chat",
       "getpos":"mostra la posizione attuale nella lista d'attesa",
       "version":"mostra il numero di versione",
       "commands":"mostra questa lista",
@@ -57,7 +55,8 @@
       "whois all":"dà userid e username di tutti gli utenti nella stanza",
       "banall":"banna tutti gli utenti nella stanza",
       "status":"mostra lo stato dei server di plug",
-      "unload":"Chiude plug&#179;"
+      "unload":"Chiude plug&#179;",
+      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
     },
     "responses":{
       "alertson":"Riproduzione del suono alle seguenti parole: %1",
@@ -84,16 +83,17 @@
     "joinTime":"Se ti iscrivi adesso alla lista d'attesa, saresti DJing in circa %1!"
   },
   "notify":{
-    "header":"Notifiche chat",
+    "deletedMessages":"deleted by ",
     "join":"Quando entra un utente",
     "leave":"Quando esce un utente",
     "grab":"Quando un utente salva una canzone",
     "meh":"Quando ad un utente non piace una canzone",
     "stats":"Statistiche della canzone",
     "updates":"Aggiornamenti della canzone",
+    "updatesLink":"Song Link",
     "history":"Canzoni nello storico",
     "songUnavailable":"Canzone non disponibile",
-    "boothAlert":"Booth Alert (%1 \/ 50)",
+    "boothAlert":"Booth Alert (%1 / 50)",
     "songLength":"Lunghezza della Canzone (%1 min)",
     "message":{
       "boothAlertNext":"You are about to DJ!",
@@ -107,7 +107,9 @@
       "history":"La canzone è nello storico (%1 di %2)",
       "historySkipped":"La canzone è nello storico (%1 di %2), ma è stata saltata l'ultima volta",
       "songLength":"La canzone è più lunga di %1 minuti",
+      "songDeleted":"Song is deleted",
       "songPrivate":"La canzone è privata",
+      "songRejected":"Song is rejected due to %1",
       "songNotFound":"Canzone non trovata",
       "songEmbed":"La canzone ha l'incorporamento disattivato",
       "songStreamable":"La canzone non supporta lo streaming"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Informazioni utente",
     "name":"Nome",
+    "profile":"User Profile",
     "title":"Titolo",
     "specialTitles":{
       "developer":"sviluppatore plug&#179;",
@@ -137,10 +140,10 @@
     "points":"Punti",
     "wootCount":"Conteggio Woot",
     "mehCount":"Conteggio Meh",
-    "ratio":"Rapporto tra Woot\/Meh",
+    "ratio":"Rapporto tra Woot/Meh",
     "djing":"DJing attuale",
     "notInList":"Non è ne in lista di attesa ne in booth",
-    "inWaitlist":"%1\/%2 in lista d'attesa",
+    "inWaitlist":"%1/%2 in lista d'attesa",
     "userDjing":"%1 è attualmente DJing",
     "userNextDJ":"%1 sarà DJing successivamente",
     "disconnects":"Disconnessioni",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Questa camera sta utilizzando le impostazioni speciali di %1",
     "infoDisable":"Puoi disattivarle dal menú"
   },
+  "menuHeaders":{
+    "features":"Features",
+    "chatnotifs":"Chat Notifications",
+    "controlpanel":"Pannello di Controllo"
+  },
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Join Automatico",
@@ -180,7 +188,14 @@
     "controlpanel":"Pannello di Controllo",
     "showdeletedmessages":"Visualizza i messaggi eliminati",
     "visualizers":"Visualizzatore RCS SoundCloud",
-    "inlineuserinfo":"Inline User Info"
+    "inlineuserinfo":"Inline User Info",
+    "about":"About plugCubed",
+    "background":"Change background",
+    "chatcustomizations":"Chat Customizations",
+    "commands":"Chat commands",
+    "customcss":"Custom CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Meh",
@@ -189,27 +204,69 @@
     "undecided":"Indeciso",
     "djing":"DJing"
   },
+  "customchatcolors":{
+    "userRanksHeader":"User Ranks",
+    "chatnotifs":"Chat Notifications"
+  },
+  "panels":{
+    "about":{
+      "header":"Information about plug³",
+      "version":"Version",
+      "website":"Website",
+      "websiteText":"plug&#179; Website",
+      "translations":"Translations",
+      "translationsText":"plug&#179; Translations",
+      "websitetranslationsText":"plug&#179; Website Translations"
+    },
+    "background":{
+      "description":"Set your own room background"
+    },
+    "buttons":{
+      "cancel":"Cancel",
+      "clear":"Clear",
+      "submit":"Submit"
+    },
+    "chatcustomizations":{
+      "description":"Customize your chat with emojis, notifications, markdown, and other features",
+      "mentionSoundTitle":"Mention Sound %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat Enhancements",
+      "emotesSetHeader":"Emoji Set"
+    },
+    "customcss":{
+      "description":"Set your own room CSS"
+    }
+  },
   "tooltip":{
-    "stream":"Attiva\/Disattiva streaming Audio\/Video",
+    "stream":"Attiva/Disattiva streaming Audio/Video",
     "clear":"Pulisce la conversazione",
     "afk":"Messaggio di AFK",
     "reset":"Ripristinare le impostazioni",
     "muted":"Tutte le canzoni sono silenziate",
-    "mutedOnce":"Il brano corrente è silenziato"
+    "mutedOnce":"Il brano corrente è silenziato",
+    "quickBan":"Ban user forever",
+    "quickMute":"Mute user for 45 mins",
+    "userInfo":"User Info"
   },
   "error":{
     "userNotFound":"Utente non trovato",
     "alreadyInWaitList":"L'utente %1 è già in lista d'attesa",
     "notInWaitList":"L'utente %1 non è in lista d'attesa",
     "unknownMenuKey":"Tasto menu sconosciuto: %1",
-    "invalidAddSyntax":"Sintassi non valida per il comando \"add\". Uso: \/add @utente",
-    "invalidBanSyntax":"Sintassi non valida per il comando \"ban\". Uso: \/ ban @utente o \/ban @utente::tempo::motivo",
+    "invalidAddSyntax":"Sintassi non valida per il comando \"add\". Uso: /add @utente",
+    "invalidBanSyntax":"Sintassi non valida per il comando \"ban\". Uso: / ban @utente o /ban @utente::tempo::motivo",
     "invalidBanTime":"Il tempo specificato, %1 non è valido. Orari validi sono 1, 24, 60, 1440, -1",
-    "invalidRemoveSyntax":"Sintassi non valida per il comando \"rimuovi\". Uso: \/remove @user",
-    "invalidWhoisSyntax":"Sintassi non valida per il comando \"whois\". Uso: \/whois @user",
+    "invalidRemoveSyntax":"Sintassi non valida per il comando \"rimuovi\". Uso: /remove @user",
+    "invalidWhoisSyntax":"Sintassi non valida per il comando \"whois\". Uso: /whois @user",
     "errorGettingPlaylistInfo":"Errore durante il recupero info playlist",
     "noPlaylistsFound":"Nessuna playlist trovata",
     "yourActivePlaylistIsFull":"La tua playlist attiva è piena",
     "noNextSong":"Non hai canzoni in coda"
+  },
+  "video":{
+    "show":"Show",
+    "hide":"Hide",
+    "menushow":"Show Video",
+    "menuhide":"Hide Video"
   }
 }

@@ -1,17 +1,15 @@
 {
   "running":"Usando plug&#179; versão %1",
-  "commandsHelp":"Use '\/commands' para ver os comandos.",
+  "commandsHelp":"Use '/commands' para ver os comandos.",
   "autorespond":{
     "default":"Estou ausente",
     "disable":"Desativar resposta automática de AFK no chat",
     "nextIn":"Sua próxima mensagem automática de AFK será enviada em %1",
     "next":"Mensagem de AFK será enviada na próxima menção",
-    "commandDisable":"%1 Mensagem de AFK desativada",
-    "commandNotEnabled":"%1 Mensagem AFK não estava ativada"
+    "commandDisable":"%1 Mensagem de AFK desativada"
   },
   "autojoin":{
-    "commandDisable":"%1 Auto-Join desativado",
-    "commandNotEnabled":"%1 Auto-Join não estava ativado"
+    "commandDisable":"%1 Auto-Join desativado"
   },
   "fullscreen":{
     "shrink":"Diminuir",
@@ -30,8 +28,8 @@
       "number":"número"
     },
     "descriptions":{
-      "join":"Junte-se a cabine de dj\/lista de espera",
-      "leave":"Deixa a cabine de dj\/lista de espera",
+      "join":"Junte-se a cabine de dj/lista de espera",
+      "leave":"Deixa a cabine de dj/lista de espera",
       "whoami":"obter a sua própria informação",
       "mute":"define volume para 0",
       "automute":"registrar a música que está tocando para silenciar automaticamente nas próximas vezes",
@@ -41,7 +39,7 @@
       "alertson":"alertar sempre que palavras pré-definidas aparecerem no chat",
       "alertsoff":"parar de alertar quando palavras pré-definidas aparecerem no chat",
       "grab":"adicionar música atual à sua playlist selecionada",
-      "badges":"mostrar\/esconder os emblemas no chat",
+      "badges":"mostrar/esconder os emblemas no chat",
       "getpos":"mostrar minha posição na lista",
       "version":"exibe o número de versão",
       "commands":"mostra esta lista",
@@ -52,12 +50,13 @@
       "lockskip":"feche a cabine, pula e desbloqueia depois",
       "lock":"trava a cabine de Dj",
       "unlock":"destrava a cabine de DJ",
-      "add":"adiciona o usuário selecionado à cabine\/lista de espera",
-      "remove":"remove o usuário selecionado da cabine\/lista de espera",
+      "add":"adiciona o usuário selecionado à cabine/lista de espera",
+      "remove":"remove o usuário selecionado da cabine/lista de espera",
       "whois all":"fornece id e usuário de todos na sala",
       "banall":"bane todos na sala",
       "status":"mostrar o status dos servidores do plug",
-      "unload":"Desativa o plug&#179;"
+      "unload":"Desativa o plug&#179;",
+      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
     },
     "responses":{
       "alertson":"Tocando Alerta para as seguintes palavras: %1",
@@ -84,16 +83,17 @@
     "joinTime":"Se você se juntar a lista de espera agora, você seria o dj em %1!"
   },
   "notify":{
-    "header":"Notificações do Chat",
+    "deletedMessages":"deleted by ",
     "join":"Entrada de Usuário",
     "leave":"Saída de Usuário",
     "grab":"Add de Usuário",
     "meh":"Chatos de Usuário",
     "stats":"Estatísticas da Música",
     "updates":"Atualizações da Música",
+    "updatesLink":"Song Link",
     "history":"Músicas no Histórico",
     "songUnavailable":"Música Indisponível",
-    "boothAlert":"Alerta de Cabine (%1 \/ 50)",
+    "boothAlert":"Alerta de Cabine (%1 / 50)",
     "songLength":"Duração da Música (%1 min)",
     "message":{
       "boothAlertNext":"Você está prestes a tocar!",
@@ -107,7 +107,9 @@
       "history":"A música está no histórico (%1 of %2)",
       "historySkipped":"A música está no histórico (%1 of %2), mas foi pulada na última vez",
       "songLength":"A música tem mais de %1 minutos",
+      "songDeleted":"Song is deleted",
       "songPrivate":"Música privada",
+      "songRejected":"Song is rejected due to %1",
       "songNotFound":"Música não encontrada",
       "songEmbed":"Música tem incorporação desativada",
       "songStreamable":"Música não dá suporte a streaming"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Informações do Usuário",
     "name":"Nome",
+    "profile":"User Profile",
     "title":"Título",
     "specialTitles":{
       "developer":"Desenvolvedor do plug&#179;",
@@ -137,10 +140,10 @@
     "points":"Pontos",
     "wootCount":"Contagem de Legais",
     "mehCount":"Quantidade de Chatos",
-    "ratio":"Média de Legais\/Chatos",
+    "ratio":"Média de Legais/Chatos",
     "djing":"Tocando Agora",
     "notInList":"Não está na lista de espera ou na cabine de Dj",
-    "inWaitlist":"%1\/%2 na lista de espera",
+    "inWaitlist":"%1/%2 na lista de espera",
     "userDjing":"%1 está tocando no momento",
     "userNextDJ":"%1 será o próximo a tocar",
     "disconnects":"Desconexões",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Esta sala está usando configurações especiais por %1",
     "infoDisable":"Você pode desativá-las no menu"
   },
+  "menuHeaders":{
+    "features":"Features",
+    "chatnotifs":"Chat Notifications",
+    "controlpanel":"Painel de Controle"
+  },
   "menu":{
     "autowoot":"Auto Woot",
     "autojoin":"Auto Join",
@@ -180,7 +188,14 @@
     "controlpanel":"Painel de Controle",
     "showdeletedmessages":"Mostrar Mensagens Deletadas",
     "visualizers":"Visualizadores de SoundCloud do RCS",
-    "inlineuserinfo":"Informação de Usuário"
+    "inlineuserinfo":"Informação de Usuário",
+    "about":"About plugCubed",
+    "background":"Change background",
+    "chatcustomizations":"Chat Customizations",
+    "commands":"Chat commands",
+    "customcss":"Custom CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Chato",
@@ -189,27 +204,69 @@
     "undecided":"Indeciso",
     "djing":"Tocando Agora"
   },
+  "customchatcolors":{
+    "userRanksHeader":"User Ranks",
+    "chatnotifs":"Chat Notifications"
+  },
+  "panels":{
+    "about":{
+      "header":"Information about plug³",
+      "version":"Version",
+      "website":"Website",
+      "websiteText":"plug&#179; Website",
+      "translations":"Translations",
+      "translationsText":"plug&#179; Translations",
+      "websitetranslationsText":"plug&#179; Website Translations"
+    },
+    "background":{
+      "description":"Set your own room background"
+    },
+    "buttons":{
+      "cancel":"Cancel",
+      "clear":"Clear",
+      "submit":"Submit"
+    },
+    "chatcustomizations":{
+      "description":"Customize your chat with emojis, notifications, markdown, and other features",
+      "mentionSoundTitle":"Mention Sound %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat Enhancements",
+      "emotesSetHeader":"Emoji Set"
+    },
+    "customcss":{
+      "description":"Set your own room CSS"
+    }
+  },
   "tooltip":{
-    "stream":"Ativar Video\/Audio",
+    "stream":"Ativar Video/Audio",
     "clear":"Limpar Chat",
     "afk":"Mensagem AFK",
     "reset":"Redefinir para o padrão",
     "muted":"Todas as músicas estão mutadas",
-    "mutedOnce":"Esta música está mutada"
+    "mutedOnce":"Esta música está mutada",
+    "quickBan":"Ban user forever",
+    "quickMute":"Mute user for 45 mins",
+    "userInfo":"User Info"
   },
   "error":{
     "userNotFound":"Usuário não encontrado",
     "alreadyInWaitList":"O usuário %1 já está na lista de espera",
     "notInWaitList":"O usuário %1 não está na lista de espera",
     "unknownMenuKey":"Atalho desconhecido: %1",
-    "invalidAddSyntax":"Sintaxe inválida para o comando de adicionar. Utilize: \/add @usuário",
-    "invalidBanSyntax":"Sintaxe inválida para o comando de banir. Utilize: \/ban @usuário ou \/ban @usuário::duração::motivo",
+    "invalidAddSyntax":"Sintaxe inválida para o comando de adicionar. Utilize: /add @usuário",
+    "invalidBanSyntax":"Sintaxe inválida para o comando de banir. Utilize: /ban @usuário ou /ban @usuário::duração::motivo",
     "invalidBanTime":"O tempo especificado, %1 é inválido. Os tempos válidos são 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Sintaxe inválida para o comando de remover. Utilize: \/remove @usuário",
-    "invalidWhoisSyntax":"Sintaxe inválida para o comando whois. Utilize: \/whois @usuário",
+    "invalidRemoveSyntax":"Sintaxe inválida para o comando de remover. Utilize: /remove @usuário",
+    "invalidWhoisSyntax":"Sintaxe inválida para o comando whois. Utilize: /whois @usuário",
     "errorGettingPlaylistInfo":"Erro ao obter informações da playlist",
     "noPlaylistsFound":"Nenhuma playlist encontrada",
     "yourActivePlaylistIsFull":"Sua playlist ativa está cheia",
     "noNextSong":"Você não tem uma música pronta para tocar"
+  },
+  "video":{
+    "show":"Show",
+    "hide":"Hide",
+    "menushow":"Show Video",
+    "menuhide":"Hide Video"
   }
 }

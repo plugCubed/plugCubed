@@ -3,15 +3,13 @@
   "commandsHelp":"'/commands'로 채팅 명령어 목록을 볼 수 있습니다.",
   "autorespond":{
     "default":"현재 자리비움 상태입니다.",
-    "disable":"Disable AFK Autorespond to chat",
+    "disable":"자리비움 메시지 기능 끄기",
     "nextIn":"%1초 후 자리비움 메시지를 다시 전송합니다.",
-    "next":"AFK Autorespond on next mention",
-    "commandDisable":"%1 AFK message disabled",
-    "commandNotEnabled":"%1 AFK message was not enabled"
+    "next":"다음 멘션 시 자리비움 메시지 전송",
+    "commandDisable":"%1 사용자의 자리비움 메시지 기능을 사용하지 않도록 설정했습니다."
   },
   "autojoin":{
-    "commandDisable":"%1 autojoin disabled",
-    "commandNotEnabled":"%1 autojoin was not enabled"
+    "commandDisable":"%1 사용자의 자동으로 대기열 들어가기 기능을 사용하지 않도록 설정했습니다."
   },
   "fullscreen":{
     "shrink":"축소",
@@ -57,14 +55,15 @@
       "whois all":"현재 커뮤니티 내 모든 사용자의 사용자 이름과 사용자 ID를 표시합니다.",
       "banall":"현재 커뮤니티 내 모든 사용자를 차단합니다.",
       "status":"plug.dj 서버 상태를 표시합니다.",
-      "unload":"plug&#179;를 종료합니다."
+      "unload":"plug&#179;를 종료합니다.",
+      "volume":"지정한 숫자(0 - 100)로 음량을 설정하거나, + 또는 -로 음량을 1씩 증가 또는 감소시킵니다."
     },
     "responses":{
       "alertson":"단어 %1(이)가 채팅에서 멘션될 시 알림음을 재생하도록 설정했습니다.",
       "alertsoff":"멘션 알림음 기능을 사용하지 않도록 설정했습니다.",
       "badgeon":"뱃지를 표시하도록 설정했습니다.",
       "badgeoff":"뱃지를 표시하지 않도록 설정했습니다.",
-      "nextsong":"Your next queued song is %1 by %2",
+      "nextsong":"현재 재생 목록의 다음 곡은 %2 - %1입니다.",
       "isHistory":"주의: 이 항목이 최근에 이미 플레이된 적이 있습니다. (%1/%2)",
       "automute":{
         "automuted":"%1 항목이 자동으로 음소거되었습니다.",
@@ -80,34 +79,37 @@
   "eta":{
     "boothAvailable":"지금 대기열에 들어가면 바로 디제잉을 시작할 수 있습니다.",
     "alreadyDJ":"현재 디제잉 중입니다.",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
+    "waitListTime":"현재 대기열 %2명 중 %1번째에 위치해 있으며 약 %3 이후 디제잉을 시작할 수 있습니다.",
     "joinTime":"지금 대기열에 들어가면 약 %1 이후 디제잉을 시작할 수 있습니다."
   },
   "notify":{
-    "header":"알림 설정",
+    "deletedMessages":"삭제됨 - ",
     "join":"사용자 입장",
     "leave":"사용자 퇴장",
     "grab":"북마크",
     "meh":"싫어요",
     "stats":"디제잉 결과",
-    "updates":"Song Updates",
+    "updates":"디제잉 시작",
+    "updatesLink":"링크",
     "history":"이미 플레이된 곡 알림",
     "songUnavailable":"항목 재생 가능 여부 확인",
     "boothAlert":"디제잉 임박 (%1 / 50)",
     "songLength":"재생시간 제한 초과 경고 (%1분)",
     "message":{
       "boothAlertNext":"다음 차례에 당신의 디제잉 순서가 시작됩니다.",
-      "boothAlertPos":"You are now %1 in the waitlist",
+      "boothAlertPos":"현재 대기열 위치 %1번째에 있습니다.",
       "grab":"%1 - %2 항목을 북마크했습니다.",
       "stats":"디제잉 결과: 좋아요 %1개 -- 싫어요 %2개 -- 북마크 %3개",
       "updates":"%3 사용자가 플레이하고 있습니다.<br>%2 - %1",
       "meh":"현재 곡에 싫어요 표시를 했습니다.",
       "join":"커뮤니티에 들어왔습니다.",
       "leave":"커뮤니티에서 퇴장했습니다.",
-      "history":"Song is in history (%1 of %2)",
-      "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
+      "history":"현재 곡이 최근에 이미 플레이된 적이 있습니다. (최근 %2개 항목 중 %1번째)",
+      "historySkipped":"현재 곡이 최근에 이미 플레이되었지만 건너뛰어진 적이 있습니다. (최근 %2개 항목 중 %1번째)",
       "songLength":"현재 곡이 지정된 재생 시간 제한(%1분)을 초과합니다.",
+      "songDeleted":"현재 곡이 삭제되어 재생할 수 없습니다.",
       "songPrivate":"현재 곡은 비공개로 설정되어 있어 재생할 수 없습니다.",
+      "songRejected":"\"%1\" 사유로 인해 현재 곡을 재생할 수 없습니다.",
       "songNotFound":"현재 곡을 불러올 수 없습니다.",
       "songEmbed":"현재 곡은 외부 웹사이트에서의 재생이 차단되어 있습니다.",
       "songStreamable":"현재 곡이 스트림 기능을 지원하지 않습니다."
@@ -116,6 +118,7 @@
   "info":{
     "header":"사용자 정보",
     "name":"사용자 이름",
+    "profile":"사용자 프로필",
     "title":"제목",
     "specialTitles":{
       "developer":"plug&#179; 개발자",
@@ -130,28 +133,28 @@
     },
     "id":"ID",
     "rank":"권한",
-    "joined":"Time Joined",
+    "joined":"접속 시각",
     "status":"상태",
     "vote":"투표",
-    "position":"Position",
-    "points":"Points",
+    "position":"대기열 위치",
+    "points":"포인트",
     "wootCount":"좋아요 수",
     "mehCount":"싫어요 수",
     "ratio":"좋아요/싫어요 비율",
     "djing":"디제잉 중",
     "notInList":"대기열에 없음",
-    "inWaitlist":"%1/%2 in waitlist",
-    "userDjing":"%1 are currently DJing",
-    "userNextDJ":"%1 are DJing next",
+    "inWaitlist":"%2명 중 %1번째",
+    "userDjing":"현재 디제잉 중입니다.",
+    "userNextDJ":"다음 차례에 디제잉을 시작할 예정입니다.",
     "disconnects":"연결 끊긴 횟수",
-    "lastDisconnect":"Last Disconnect",
-    "lastPosition":"Position",
-    "time":"Time",
-    "lastMessage":"Last Message"
+    "lastDisconnect":"최근 연결 끊긴 시각",
+    "lastPosition":"대기열",
+    "time":"시각",
+    "lastMessage":"최근 메시지"
   },
   "ranks":{
-    "you":"You",
-    "regular":"Regular",
+    "you":"당신",
+    "regular":"일반 사용자",
     "residentdj":"고정 DJ",
     "bouncer":"바운서",
     "manager":"매니저",
@@ -162,17 +165,22 @@
   },
   "roomSpecificSettings":{
     "infoHeader":"이 커뮤니티는 커뮤니티 지정 설정을 사용하고 있습니다.",
-    "infoHeaderCredits":"이 커뮤니티는 커뮤니티 지정 설정을 사용하고 있습니다. - 설정 스크립트 작성자: %1",
+    "infoHeaderCredits":"이 커뮤니티는 커뮤니티 지정 설정을 사용하고 있습니다. (설정 스크립트 작성자: %1)",
     "infoDisable":"커뮤니티 지정 설정은 설정 메뉴에서 비활성화할 수 있습니다."
+  },
+  "menuHeaders":{
+    "features":"기능",
+    "chatnotifs":"알림 설정",
+    "controlpanel":"제어판"
   },
   "menu":{
     "autowoot":"자동 [좋아요]",
     "autojoin":"자동으로 대기열 들어가기",
-    "chatlog":"ChatLog",
+    "chatlog":"채팅 로그",
     "customchatcolors":"채팅 메시지 꾸미기",
     "autorespond":"자리비움 메시지",
     "notify":"알림",
-    "afktimers":"AFK Timers",
+    "afktimers":"자리비움 타이머",
     "etatimer":"예상 소요 시간",
     "roomsettings":"커뮤니티 지정 설정",
     "chatimages":"채팅창에 이미지 표시",
@@ -180,7 +188,14 @@
     "controlpanel":"제어판",
     "showdeletedmessages":"삭제된 메시지 보기",
     "visualizers":"RCS SoundCloud 시각화 사용",
-    "inlineuserinfo":"Inline User Info"
+    "inlineuserinfo":"닉네임 옆에 추가 사용자 정보 표시",
+    "about":"plugCubed 정보",
+    "background":"배경화면 바꾸기",
+    "chatcustomizations":"채팅 설정",
+    "commands":"채팅 명령어",
+    "customcss":"사용자 지정 CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"싫어요",
@@ -189,19 +204,55 @@
     "undecided":"투표하지 않음",
     "djing":"디제잉 중"
   },
+  "customchatcolors":{
+    "userRanksHeader":"사용자 권한",
+    "chatnotifs":"알림 설정"
+  },
+  "panels":{
+    "about":{
+      "header":"plug³ 정보",
+      "version":"버전",
+      "website":"웹사이트",
+      "websiteText":"plug&#179; 웹사이트",
+      "translations":"번역",
+      "translationsText":"plug&#179; 번역",
+      "websitetranslationsText":"plug&#179; 웹사이트 번역"
+    },
+    "background":{
+      "description":"배경화면을 직접 설정할 수 있습니다"
+    },
+    "buttons":{
+      "cancel":"취소",
+      "clear":"초기화",
+      "submit":"확인"
+    },
+    "chatcustomizations":{
+      "description":"이모티콘 테마, 알림 설정, 마크다운 설정 등을 변경할 수 있습니다",
+      "mentionSoundTitle":"멘션 알림음 %1",
+      "emotesHeader":"이모티콘",
+      "chatenhancementHeader":"고급 채팅 기능",
+      "emotesSetHeader":"이모티콘 테마"
+    },
+    "customcss":{
+      "description":"CSS를 직접 설정할 수 있습니다"
+    }
+  },
   "tooltip":{
     "stream":"동영상/소리 스트림",
     "clear":"채팅 기록 지우기",
     "afk":"자리비움 메시지",
     "reset":"기본 설정으로 되돌리기",
     "muted":"모든 곡 음소거 중",
-    "mutedOnce":"현재 곡 음소거 중"
+    "mutedOnce":"현재 곡 음소거 중",
+    "quickBan":"무기한 차단",
+    "quickMute":"45분 채팅 차단",
+    "userInfo":"사용자 정보"
   },
   "error":{
-    "userNotFound":"User not found",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
-    "unknownMenuKey":"Unknown menu key: %1",
+    "userNotFound":"사용자를 찾을 수 없습니다.",
+    "alreadyInWaitList":"%1 사용자는 이미 대기열에 존재합니다.",
+    "notInWaitList":"%1 사용자가 대기열에 존재하지 않습니다.",
+    "unknownMenuKey":"메뉴 키 %1는 등록되어 있지 않습니다.",
     "invalidAddSyntax":"명령어 구문이 올바르지 않습니다. 사용법: /add @사용자_이름",
     "invalidBanSyntax":"명령어 구문이 올바르지 않습니다. 사용법: /ban @사용자_이름 또는 /ban @사용자_이름:시간:사유",
     "invalidBanTime":"지정된 시간 %1이(가) 올바르지 않습니다. 60, 1, 24, 1440, -1 중 하나를 지정해 주세요.",
@@ -211,5 +262,11 @@
     "noPlaylistsFound":"재생 목록을 찾을 수 없습니다.",
     "yourActivePlaylistIsFull":"재생 목록의 최대 항목 수 제한을 초과했습니다.",
     "noNextSong":"재생 목록에 곡이 존재하지 않습니다."
+  },
+  "video":{
+    "show":"표시",
+    "hide":"숨기기",
+    "menushow":"비디오 표시",
+    "menuhide":"비디오 숨기기"
   }
 }

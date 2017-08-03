@@ -6,12 +6,10 @@
     "disable":"Abyste mohl psát, vypněte automatickou AFK odpověď",
     "nextIn":"Další automatická AFK odpověď bude poslána z %1",
     "next":"Při dalším zmínění automaticky AFK odpovědět",
-    "commandDisable":"%1 Zpráva o nepřítomnosti vypnuta",
-    "commandNotEnabled":"%1 Zpráva o nepřítomnosti nebyla zapnuta"
+    "commandDisable":"%1 Zpráva o nepřítomnosti vypnuta"
   },
   "autojoin":{
-    "commandDisable":"%1 Autojoin vypnut",
-    "commandNotEnabled":"%1 Autojoin nebyl zapnut"
+    "commandDisable":"%1 Autojoin vypnut"
   },
   "fullscreen":{
     "shrink":"Zmenšit",
@@ -57,7 +55,8 @@
       "whois all":"zobrazí uživatelská ID a jména všech uživatelů v této místnosti",
       "banall":"zabanuje všechny uživatele v této místnosti",
       "status":"zobrazí stav plug.dj serverů",
-      "unload":"Vypne plug&#179;"
+      "unload":"Vypne plug&#179;",
+      "volume":"Nastaví hlasitost s číslem (0 - 100), zvýší o 1 použitím +, sníží použitím -"
     },
     "responses":{
       "alertson":"Zvuk se přehraje při následujících slovech: %1",
@@ -84,13 +83,14 @@
     "joinTime":"Pokud by ses přidal do DJ fronty, byl bys u DJ pultu během %1!"
   },
   "notify":{
-    "header":"Upozornění chatu",
+    "deletedMessages":"smazal ",
     "join":"Uživatel se připojí",
     "leave":"Uživatel odejde",
     "grab":"Uživatel si přidá skladbu",
     "meh":"Uživatel dá Meh",
     "stats":"Statistiky skladeb",
     "updates":"Aktualizace skladeb",
+    "updatesLink":"Odkaz na skladbu",
     "history":"Skladby v historii",
     "songUnavailable":"Skladba je nedostupná",
     "boothAlert":"Upozornění na hraní (%1 / 50)",
@@ -107,7 +107,9 @@
       "history":"Skladba je v historii (%1 z %2)",
       "historySkipped":"Skladba je v historii (%1 z %2), ale při minulém přehrávání byla přeskočena",
       "songLength":"Skladba je delší než %1 minut",
+      "songDeleted":"Skladba je odstraněna",
       "songPrivate":"Skladba je soukromá",
+      "songRejected":"Skladba byla zamítnuta z důvodu %1",
       "songNotFound":"Skladba nenalezena",
       "songEmbed":"Skladba nemá povolené vkládání",
       "songStreamable":"Skladba nepodporuje streamování"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Uživatelské informace",
     "name":"Jméno",
+    "profile":"Profil uživatele",
     "title":"Název",
     "specialTitles":{
       "developer":"plug&#179; Vývojář",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Tato místnost používá speciální nastavení od %1",
     "infoDisable":"Může být vypnuto v menu"
   },
+  "menuHeaders":{
+    "features":"Funkce",
+    "chatnotifs":"Upozornění chatu",
+    "controlpanel":"Ovládací panel"
+  },
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Autojoin",
@@ -180,7 +188,14 @@
     "controlpanel":"Ovládací panel",
     "showdeletedmessages":"Zobrazit odstraněné zprávy",
     "visualizers":"RCS SoundCloud vizulace",
-    "inlineuserinfo":"Mini info uživatele v chatu"
+    "inlineuserinfo":"Mini info uživatele v chatu",
+    "about":"O plugCubed",
+    "background":"Změnit pozadí",
+    "chatcustomizations":"Vlastní nastavení chatu",
+    "commands":"Příkazy chatu",
+    "customcss":"Vlastní CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Meh",
@@ -189,13 +204,49 @@
     "undecided":"Nerozhodnutý",
     "djing":"Hraje"
   },
+  "customchatcolors":{
+    "userRanksHeader":"Uživatelské hodnosti",
+    "chatnotifs":"Upozornění chatu"
+  },
+  "panels":{
+    "about":{
+      "header":"Informace o plug³",
+      "version":"Verze",
+      "website":"Webová stránka",
+      "websiteText":"plug&#179; Webová stránka",
+      "translations":"Překlady",
+      "translationsText":"plug&#179; Překlady",
+      "websitetranslationsText":"plug&#179; Web s překlady"
+    },
+    "background":{
+      "description":"Nastavte si vlastní pozadí komunity"
+    },
+    "buttons":{
+      "cancel":"Zrušit",
+      "clear":"Smazat",
+      "submit":"Potvrdit"
+    },
+    "chatcustomizations":{
+      "description":"Přizpůsobte si chat s vlastními smajlíky, upozorněním, velikosti textu a dalšími funkcemi",
+      "mentionSoundTitle":"Zvuk zmíněním %1",
+      "emotesHeader":"Smajlíky",
+      "chatenhancementHeader":"Vylepšení chatu",
+      "emotesSetHeader":"Sada smajlíků"
+    },
+    "customcss":{
+      "description":"Nastavte si vlastní místnost CSS"
+    }
+  },
   "tooltip":{
     "stream":"Zapnout nebo vypnout video / audio stream",
     "clear":"Vyčistit chat",
     "afk":"AFK zpráva",
     "reset":"Resetovat do původního stavu",
     "muted":"Všechny skladby jsou ztlumené",
-    "mutedOnce":"Tato skladba je ztlumená"
+    "mutedOnce":"Tato skladba je ztlumená",
+    "quickBan":"Zabanovat uživatele navždy",
+    "quickMute":"Ztlumit uživatele na 45 minut",
+    "userInfo":"Info o uživateli"
   },
   "error":{
     "userNotFound":"Uživatel nenalezen",
@@ -211,5 +262,11 @@
     "noPlaylistsFound":"Nebyl nalezen žádný playlist",
     "yourActivePlaylistIsFull":"Váš aktivní seznam skladeb je plný",
     "noNextSong":"Nemáte žádnou skladbu ve frontě"
+  },
+  "video":{
+    "show":"Zobrazit",
+    "hide":"Skrýt",
+    "menushow":"Zobrazit video",
+    "menuhide":"Skrýt video"
   }
 }

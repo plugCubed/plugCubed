@@ -6,12 +6,10 @@
     "disable":"Onesposobi avtomatski AFK odziv v klepet",
     "nextIn":"Naslednji AFK odziv bo poslan v %1",
     "next":"AFK avtomatski odziv ob naslednji omembi",
-    "commandDisable":"%1 AFK sporočilo onemogočeno",
-    "commandNotEnabled":"%1 AFK sporočilo ni bilo omogočeno"
+    "commandDisable":"%1 AFK sporočilo onemogočeno"
   },
   "autojoin":{
-    "commandDisable":"%1 samodejna pridružitev onemogočena",
-    "commandNotEnabled":"%1 samodejna pridružitev ni bila omogočena"
+    "commandDisable":"%1 samodejna pridružitev onemogočena"
   },
   "fullscreen":{
     "shrink":"Skrči",
@@ -57,7 +55,8 @@
       "whois all":"da id in uporabniško ime vseh uporabnikov v sobi",
       "banall":"prepovej vstop u sobo vsem uporabnikom",
       "status":"pokaži stanje plug strežnikov",
-      "unload":"Zapre plug&#179;"
+      "unload":"Zapre plug&#179;",
+      "volume":"Nastavi glasnost s številko (0 - 100), povečaj za 1 z +, zmanjšaj za 1 z -"
     },
     "responses":{
       "alertson":"Predvajanje zvok na naslednje besede: %1",
@@ -84,13 +83,14 @@
     "joinTime":"Če se pridružite čakalnemu seznamu zdaj, boste DJ v približno %1!"
   },
   "notify":{
-    "header":"Obvestila klepeta",
+    "deletedMessages":"izbrisal ",
     "join":"Uporabnik pridruži",
     "leave":"Uporabnik odšel",
     "grab":"Uporabnik shrani",
     "meh":"Uporabnik Meha",
     "stats":"Statistika pesmi",
     "updates":"Posodobitve pesmi",
+    "updatesLink":"Povezava pesmi",
     "history":"Pesem v zgodovini",
     "songUnavailable":"Pesem ni na voljo",
     "boothAlert":"Opozotilo Dj mesta (%1 / 50)",
@@ -107,7 +107,9 @@
       "history":"Pesem je v zgodovini (%1 od %2)",
       "historySkipped":"Pesem je v zgodovini (%1 %2), vendar je bila nazadje preskočena",
       "songLength":"Pesem je daljša kot %1 minut",
+      "songDeleted":"Pesem je izbrisana",
       "songPrivate":"Pesem je zasebna",
+      "songRejected":"Pesem je zavrnjena zaradi %1",
       "songNotFound":"Pesmi ni mogoče najti",
       "songEmbed":"Pesem ima onemogoče reklame",
       "songStreamable":"Pesem ne podpira videa"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Informacije o uporabniku",
     "name":"Ime",
+    "profile":"Uporabniški profil",
     "title":"Naslov",
     "specialTitles":{
       "developer":"plug&#179; razvijalec",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Ta soba uporablja posebne nastavitve od %1",
     "infoDisable":"Lahko jih onemogočiš v meniju"
   },
+  "menuHeaders":{
+    "features":"Značilnosti",
+    "chatnotifs":"Obvestila v klepetu",
+    "controlpanel":"Nadzorna Plošča"
+  },
   "menu":{
     "autowoot":"Samodejni Woot",
     "autojoin":"Samodejna pridružitev",
@@ -180,7 +188,14 @@
     "controlpanel":"Nadzorna Plošča",
     "showdeletedmessages":"Pokaži izbrisana sporočila",
     "visualizers":"RCS SoundCloud Vizualizacija",
-    "inlineuserinfo":"Informacije uporabnika v vrsti"
+    "inlineuserinfo":"Informacije uporabnika v vrsti",
+    "about":"O plugCubed",
+    "background":"Spremeni ozadje",
+    "chatcustomizations":"Prilagoditve klepeta",
+    "commands":"Ukazi v klepetu",
+    "customcss":"CSS po želji",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Meh",
@@ -189,13 +204,49 @@
     "undecided":"Neodločeni",
     "djing":"DJ-a"
   },
+  "customchatcolors":{
+    "userRanksHeader":"Čini uporabnikov",
+    "chatnotifs":"Obvestila v klepetu"
+  },
+  "panels":{
+    "about":{
+      "header":"Informacije o plug³",
+      "version":"Različica",
+      "website":"Spletna stran",
+      "websiteText":"plug&#179; spletna stran",
+      "translations":"Prevodi",
+      "translationsText":"plug&#179; prevodi",
+      "websitetranslationsText":"plug&#179; prevodi strani"
+    },
+    "background":{
+      "description":"Nastavi ozadje sobe"
+    },
+    "buttons":{
+      "cancel":"Prekliči",
+      "clear":"Počisti",
+      "submit":"Pošlji"
+    },
+    "chatcustomizations":{
+      "description":"Prilagodite vaš klepet z smeški, obvestili, in druge funkcije",
+      "mentionSoundTitle":"Zvok omembe %1",
+      "emotesHeader":"Smeški",
+      "chatenhancementHeader":"Izboljšave klepeta",
+      "emotesSetHeader":"Set smeškov"
+    },
+    "customcss":{
+      "description":"Nastavite svoj CSS sobe"
+    }
+  },
   "tooltip":{
     "stream":"Preklop Video/Audio Tok",
     "clear":"Počisti klepet",
     "afk":"AFK sporočilo",
     "reset":"Ponastavi na privzeto",
     "muted":"Vse pesmi so utišane",
-    "mutedOnce":"Trenutna skladba je utišana"
+    "mutedOnce":"Trenutna skladba je utišana",
+    "quickBan":"Prepoved uporabnika zavedno",
+    "quickMute":"Utišaj uporabnika za 45 minut",
+    "userInfo":"Podatki o uporabniku"
   },
   "error":{
     "userNotFound":"Uporabnika ni bilo mogoče najti",
@@ -211,5 +262,11 @@
     "noPlaylistsFound":"Ni seznamov predvajanj",
     "yourActivePlaylistIsFull":"Tvoj aktivni seznam predvajanja je poln",
     "noNextSong":"Nimate pesni v čakalni vrsti"
+  },
+  "video":{
+    "show":"Prikaži",
+    "hide":"Skrij",
+    "menushow":"Prikaži video",
+    "menuhide":"Skrij video"
   }
 }

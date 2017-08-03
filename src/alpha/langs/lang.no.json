@@ -6,12 +6,10 @@
     "disable":"Deaktiver AFK autorespons for å chatte",
     "nextIn":"Neste AFK autorespons kommer til å bli sendt fra %1",
     "next":"AFK Autosvar på neste omtale",
-    "commandDisable":"%1 AFK melding deaktivert",
-    "commandNotEnabled":"%1 AFK melding var ikke aktivert"
+    "commandDisable":"%1 AFK melding deaktivert"
   },
   "autojoin":{
-    "commandDisable":"%1 autojoin deaktivert",
-    "commandNotEnabled":"%1 autojoin var ikke aktivert"
+    "commandDisable":"%1 autojoin deaktivert"
   },
   "fullscreen":{
     "shrink":"Reduser",
@@ -57,7 +55,8 @@
       "whois all":"Gir brukerID og brukernavn på alle brukere i rommet",
       "banall":"bannlys alle brukere i rommet",
       "status":"Viser status for plug servere",
-      "unload":"Kukker plug&#179;"
+      "unload":"Kukker plug&#179;",
+      "volume":"Sett volumet (0 - 100), øk med 1 ved å bruke +, reduser med 1 ved å bruke -"
     },
     "responses":{
       "alertson":"Spiller av lyd på følgende ord: %1",
@@ -84,13 +83,14 @@
     "joinTime":"Hvis du joiner ventelisten nå, vil du bli DJ om %1!"
   },
   "notify":{
-    "header":"Bruker informasjon",
+    "deletedMessages":"slettet av ",
     "join":"Brukeren koble seg til",
     "leave":"Brukeren logget av",
     "grab":"Bruker Grabbet",
     "meh":"Bruker 'Meh'-et sangen",
     "stats":"Sang Stastikk",
     "updates":"sang Oppdateringer",
+    "updatesLink":"Sang Kobling",
     "history":"Sanger i historie-listen",
     "songUnavailable":"Sang utilgjengelig",
     "boothAlert":"Kø-varsel (%1 / 50)",
@@ -107,7 +107,9 @@
       "history":"Sang i loggen (%1 av %2)",
       "historySkipped":"Sang i loggen (%1 av %2), men ble hoppet over på forrige avspilling",
       "songLength":"Sangen er lengre enn %1 minutter",
+      "songDeleted":"Sangen er slettet",
       "songPrivate":"Sangen er privat",
+      "songRejected":"Sangen er avvist på grunn av %1",
       "songNotFound":"Sangen ble ikke funnet",
       "songEmbed":"Sangen er ikke tilgjengelig",
       "songStreamable":"Sangen støtter ikke direkteavspilling"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Bruker informasjon",
     "name":"Navn",
+    "profile":"Bruker Profil",
     "title":"Titel",
     "specialTitles":{
       "developer":"plug&#179; Utvikler",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Dette rommet bruker spesielle innstillinger av %1",
     "infoDisable":"Du kan deaktivere de i menyen"
   },
+  "menuHeaders":{
+    "features":"Funksjoner",
+    "chatnotifs":"Varsler",
+    "controlpanel":"Kontrollpanel"
+  },
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Autojoin",
@@ -180,7 +188,14 @@
     "controlpanel":"Kontrollpanel",
     "showdeletedmessages":"Vis slettede meldinger",
     "visualizers":"RCS SoundCloud Visualizers",
-    "inlineuserinfo":"Bruker Informasjon"
+    "inlineuserinfo":"Bruker Informasjon",
+    "about":"Om plugcubed",
+    "background":"Bytt bakgrunn",
+    "chatcustomizations":"Chat Tilpasninger",
+    "commands":"Chat kommandoer",
+    "customcss":"Egendefinert CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Meh",
@@ -189,13 +204,49 @@
     "undecided":"Ubestemt",
     "djing":"Djer"
   },
+  "customchatcolors":{
+    "userRanksHeader":"Bruker Roller",
+    "chatnotifs":"Varsler"
+  },
+  "panels":{
+    "about":{
+      "header":"Informasjon om plug³",
+      "version":"Versjon",
+      "website":"Nettside",
+      "websiteText":"plug&#179; Nettside",
+      "translations":"Oversettelser",
+      "translationsText":"plug&#179; Oversettelser",
+      "websitetranslationsText":"plug&#179; Nettside Oversettelser"
+    },
+    "background":{
+      "description":"Sett din egen bakgrunn til rommet"
+    },
+    "buttons":{
+      "cancel":"Avbryt",
+      "clear":"Rens",
+      "submit":"Send"
+    },
+    "chatcustomizations":{
+      "description":"Tilpass chat med emojis, varsler, formattering, og andre funksjoner",
+      "mentionSoundTitle":"Varslingslyd %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat Forbedringer",
+      "emotesSetHeader":"Emoji Sett"
+    },
+    "customcss":{
+      "description":"Sett din egen CSS for rommet ditt"
+    }
+  },
   "tooltip":{
     "stream":"Bytt Video/Audio Stream",
     "clear":"Fjern Chat",
     "afk":"AFK melding",
     "reset":"Tilbakestille til standard ",
     "muted":"Alle sanger er dempet",
-    "mutedOnce":"Denne sangen er dempet"
+    "mutedOnce":"Denne sangen er dempet",
+    "quickBan":"Utesteng bruker permanent",
+    "quickMute":"Demp bruker for 45 minutter",
+    "userInfo":"Bruker Info"
   },
   "error":{
     "userNotFound":"Bruker ble ikke funnet",
@@ -211,5 +262,11 @@
     "noPlaylistsFound":"Ingen spillelister funnet",
     "yourActivePlaylistIsFull":"Din aktive spilleliste er full",
     "noNextSong":"Du har ingen sang klar i køen din"
+  },
+  "video":{
+    "show":"Vis",
+    "hide":"Skjul",
+    "menushow":"Vis Video",
+    "menuhide":"Skjul Video"
   }
 }
