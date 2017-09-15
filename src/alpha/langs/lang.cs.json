@@ -194,8 +194,8 @@
     "chatcustomizations":"Vlastní nastavení chatu",
     "commands":"Příkazy chatu",
     "customcss":"Vlastní CSS",
-    "lowlagMode":"Low Lag Mode",
-    "workMode":"Work Mode"
+    "lowlagMode":"Režim nízkého zatížení",
+    "workMode":"Pracovní režim"
   },
   "vote":{
     "meh":"Meh",

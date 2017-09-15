@@ -5,92 +5,92 @@
     "default":"離席中です",
     "disable":"AFKを無効にするチャットに自動応答する",
     "nextIn":"次はAFKの自動応答が送信されます %1",
-    "next":"AFK Autorespond on next mention",
-    "commandDisable":"%1 AFK message disabled",
-    "commandNotEnabled":"%1 AFK message was not enabled"
+    "next":"次の言及についてAFK自動応答",
+    "commandDisable":"%1 AFKメッセージはオフになっています"
   },
   "autojoin":{
-    "commandDisable":"%1 autojoin disabled",
-    "commandNotEnabled":"%1 autojoin was not enabled"
+    "commandDisable":"%1 自動参加なし"
   },
   "fullscreen":{
-    "shrink":"Shrink",
-    "enlarge":"Enlarge"
+    "shrink":"縮小する",
+    "enlarge":"拡大する"
   },
   "commands":{
-    "header":"plug&#179; Commands",
-    "userCommands":"User Commands",
-    "modCommands":"Moderation Commands",
+    "header":"plug&#179; コマンド",
+    "userCommands":"ユーザーコマンド",
+    "modCommands":"モデレーションコマンド",
     "variables":{
       "username":"ユーザー名",
-      "word":"word",
-      "on":"on",
-      "off":"off",
-      "reason":"reason",
-      "number":"number"
+      "word":"ワード",
+      "on":"オン",
+      "off":"オフ",
+      "reason":"理由",
+      "number":"番号"
     },
     "descriptions":{
-      "join":"join dj booth/waitlist",
-      "leave":"leaves dj booth/waitlist",
-      "whoami":"get your own information",
-      "mute":"set volume to 0",
-      "automute":"register currently playing song to automatically mute on future plays",
-      "unmute":"set volume to last volume",
-      "nextsong":"display next song in playlist and if it's in history",
-      "refresh":"refresh the video",
-      "alertson":"play sound whenever defined words are written in chat",
-      "alertsoff":"stop playing sound when defined words are written in chat",
-      "grab":"add current song to your selected playlist",
-      "badges":"show/hide the user badges in chat",
-      "getpos":"get current waitlist position",
-      "version":"displays version number",
-      "commands":"shows this list",
-      "link":"paste link to plugCubed website in chat",
-      "whois":"gives general information about user",
-      "skip":"skip current song",
-      "ban":"kicks targeted user",
-      "lockskip":"locks DJ booth, skip and unlocks afterwards",
-      "lock":"locks DJ booth",
-      "unlock":"unlocks DJ booth",
-      "add":"adds targeted user to dj booth/waitlist",
-      "remove":"removes targeted user from dj booth/waitlist",
-      "whois all":"gives userid and username of all users in the room",
-      "banall":"bans all users in the room",
-      "status":"shows status of plug servers",
-      "unload":"Closes plug&#179;"
+      "join":"DJブース/ウェイトリストに参加",
+      "leave":"DJブース/ウェイトリストを残す",
+      "whoami":"自分の情報を入手する",
+      "mute":"音量：0",
+      "automute":"将来の演奏で自動的にミュートするために現在再生中の曲を登録する",
+      "unmute":"音量を最後の音量に設定する",
+      "nextsong":"次の曲がプレイリストに表示され、曲が履歴に含まれているかどうかを確認します",
+      "refresh":"ビデオをリフレッシュする",
+      "alertson":"定義された単語がチャットに書き込まれるたびに音を出す",
+      "alertsoff":"定義された単語がチャットに書き込まれたときに音を止める",
+      "grab":"選択したプレイリストに現在の曲を追加する",
+      "badges":"チャットでユーザーのバッジを表示/非表示する",
+      "getpos":"現在の待機リストの位置を取得する",
+      "version":"バージョン番号を表示する",
+      "commands":"このリストを表示する",
+      "link":"チャットでplugCubedウェブサイトへのリンクを貼り付ける",
+      "whois":"ユーザーに関する一般的な情報を提供する",
+      "skip":"現在の曲をスキップする",
+      "ban":"目標ユーザーをキックする",
+      "lockskip":"DJブースをロックし、後でスキップしてロックを解除する",
+      "lock":"DJブースをロックする",
+      "unlock":"DJブースのロックを解除する",
+      "add":"ターゲットユーザーをdjブース/待機リストに追加する",
+      "remove":"djブース/待機リストから対象ユーザーを削除する",
+      "whois all":"部屋の全ユーザのユーザIDとユーザ名を与える",
+      "banall":"部屋のすべてのユーザーを禁止する",
+      "status":"プラグサーバーの状態を表示します。",
+      "unload":"クローズプラグ&#179;",
+      "volume":"音量を数字（0〜100）で設定し、+で1ずつ増加させ、 - で1ずつ減少させます。"
     },
     "responses":{
-      "alertson":"Playing sound on the following words: %1",
-      "alertsoff":"No longer playing sound on specific words",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
-      "nextsong":"Your next queued song is %1 by %2",
-      "isHistory":"Warning: This song is still in the history (%1 of %2)",
+      "alertson":"次の言葉で音を出す：%1",
+      "alertsoff":"特定の単語の音を再生しない",
+      "badgeon":"バッジがオンになっています",
+      "badgeoff":"私のバッジはオフです",
+      "nextsong":"次のキューに入れられた曲は%1で%2です",
+      "isHistory":"警告：この曲はまだ履歴にあります (%1 / %2)",
       "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 registered to automute on future plays.",
-        "unregistered":"%1 removed from automute registry."
+        "automuted":"%1 を静かにしました。",
+        "registered":"%1 は、将来の再生で自動ミュートに登録されました。",
+        "unregistered":"%1 は自動ミュートレジストリから削除されました。"
       },
       "status":{
-        "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
+        "rest":"REST：%1 %2 [%3ms]",
+        "socket":"ソケット: %1 %2 [%3ms]"
       }
     }
   },
   "eta":{
-    "boothAvailable":"If you join the waitlist now, you would be DJing!",
-    "alreadyDJ":"You are already DJing!",
-    "waitListTime":"You are in the waitlist %1 of %2, you will be DJing in about %3!",
-    "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
+    "boothAvailable":"あなたが今ウェイトリストに参加すれば、あなたはDJです！",
+    "alreadyDJ":"あなたはすでにDJをしています!",
+    "waitListTime":"あなたは%2の待機リスト%1にいます。あなたは約%3でDJしています！",
+    "joinTime":"あなたが今ウェイトリストに参加すれば、あなたは約%1でDJしています！"
   },
   "notify":{
-    "header":"Chat Notifications",
-    "join":"User Join",
-    "leave":"User Leave",
-    "grab":"User Grab",
-    "meh":"User Mehs",
-    "stats":"Song Stats",
+    "deletedMessages":"削除者 ",
+    "join":"参加したユーザー",
+    "leave":"ユーザーからの離脱",
+    "grab":"ユーザーグラブ",
+    "meh":"ユーザーMehs",
+    "stats":"歌の統計",
     "updates":"Song Updates",
+    "updatesLink":"Song Link",
     "history":"Songs in history",
     "songUnavailable":"Song Unavailable",
     "boothAlert":"Booth Alert (%1 / 50)",
@@ -107,7 +107,9 @@
       "history":"Song is in history (%1 of %2)",
       "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
       "songLength":"Song is longer than %1 minutes",
+      "songDeleted":"Song is deleted",
       "songPrivate":"Song is private",
+      "songRejected":"Song is rejected due to %1",
       "songNotFound":"Song not found",
       "songEmbed":"Song has embedding disabled",
       "songStreamable":"Song doesn't support streaming"
@@ -116,6 +118,7 @@
   "info":{
     "header":"User Information",
     "name":"Name",
+    "profile":"User Profile",
     "title":"Title",
     "specialTitles":{
       "developer":"plug&#179; Developer",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"This room is using special settings by %1",
     "infoDisable":"You can disable them in the menu"
   },
+  "menuHeaders":{
+    "features":"Features",
+    "chatnotifs":"Chat Notifications",
+    "controlpanel":"Control Panel"
+  },
   "menu":{
     "autowoot":"自動 Woot!",
     "autojoin":"自動結合",
@@ -180,7 +188,14 @@
     "controlpanel":"Control Panel",
     "showdeletedmessages":"削除されたメッセージを表示",
     "visualizers":"RCS SoundCloud Visualizers",
-    "inlineuserinfo":"Inline User Info"
+    "inlineuserinfo":"Inline User Info",
+    "about":"About plugCubed",
+    "background":"Change background",
+    "chatcustomizations":"Chat Customizations",
+    "commands":"Chat commands",
+    "customcss":"Custom CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Meh",
@@ -189,13 +204,49 @@
     "undecided":"Undecided",
     "djing":"DJing"
   },
+  "customchatcolors":{
+    "userRanksHeader":"User Ranks",
+    "chatnotifs":"Chat Notifications"
+  },
+  "panels":{
+    "about":{
+      "header":"Information about plug³",
+      "version":"Version",
+      "website":"Website",
+      "websiteText":"plug&#179; Website",
+      "translations":"Translations",
+      "translationsText":"plug&#179; Translations",
+      "websitetranslationsText":"plug&#179; Website Translations"
+    },
+    "background":{
+      "description":"Set your own room background"
+    },
+    "buttons":{
+      "cancel":"Cancel",
+      "clear":"Clear",
+      "submit":"Submit"
+    },
+    "chatcustomizations":{
+      "description":"Customize your chat with emojis, notifications, markdown, and other features",
+      "mentionSoundTitle":"Mention Sound %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat Enhancements",
+      "emotesSetHeader":"Emoji Set"
+    },
+    "customcss":{
+      "description":"Set your own room CSS"
+    }
+  },
   "tooltip":{
     "stream":"Toggle Video/Audio Stream",
     "clear":"Clear Chat",
     "afk":"離席メッセージ",
     "reset":"Reset to default",
     "muted":"All songs are muted",
-    "mutedOnce":"Current song is muted"
+    "mutedOnce":"Current song is muted",
+    "quickBan":"Ban user forever",
+    "quickMute":"Mute user for 45 mins",
+    "userInfo":"User Info"
   },
   "error":{
     "userNotFound":"User not found",
@@ -211,5 +262,11 @@
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
     "noNextSong":"You have no queued song"
+  },
+  "video":{
+    "show":"Show",
+    "hide":"Hide",
+    "menushow":"Show Video",
+    "menuhide":"Hide Video"
   }
 }

@@ -6,12 +6,10 @@
     "disable":"Désactivez la réponse automatique d'absence pour pouvoir discuter",
     "nextIn":"La prochaine réponse automatique d'absence sera envoyée dans %1",
     "next":"Réponse automatique d'absence à la prochaine mention.",
-    "commandDisable":"%1 réponse automatique d'absence désactivée",
-    "commandNotEnabled":"%1 la réponse automatique d'absence n'était pas activée"
+    "commandDisable":"%1 réponse automatique d'absence désactivée"
   },
   "autojoin":{
-    "commandDisable":"%1 rejoindre automatiquement la file d'attente désactivé",
-    "commandNotEnabled":"%1 rejoindre automatiquement la file d'attente n'était pas activé"
+    "commandDisable":"%1 rejoindre automatiquement la file d'attente désactivé"
   },
   "fullscreen":{
     "shrink":"Rétrécir",
@@ -57,7 +55,8 @@
       "whois all":"Donne l'ID et le pseudonyme de tous les utilisateurs présents dans la communauté.",
       "banall":"Banni tous les membres dans la communauté",
       "status":"affiche l'état des serveurs de plug",
-      "unload":"Ferme plug&#179;"
+      "unload":"Ferme plug&#179;",
+      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
     },
     "responses":{
       "alertson":"Émet un son sur les mots suivants: %1",
@@ -84,13 +83,14 @@
     "joinTime":"Si vous joignez la liste d'attente, vous accéderez aux platines dans environ %1!"
   },
   "notify":{
-    "header":"Notifications de Chat",
+    "deletedMessages":"supprimé par ",
     "join":"Un utilisateur rejoint la communauté",
     "leave":"Un utilisateur part de la communauté",
     "grab":"Ajout par un utilisateur",
     "meh":"Un utilisateur a meh",
     "stats":"Statistiques de la musique",
     "updates":"Changements de musique",
+    "updatesLink":"Song Link",
     "history":"Musiques dans l'historique des DJs",
     "songUnavailable":"Musique indisponible",
     "boothAlert":"Alerte de passage (%1 / 50)",
@@ -107,7 +107,9 @@
       "history":"Musique dans l'historique des DJs (%1 de %2)",
       "historySkipped":"La musique est dans l'historique des DJs (%1 sur %2) mais a été sautée la dernière fois qu'elle a été jouée",
       "songLength":"La musique est plus longue que %1 minutes",
+      "songDeleted":"Song is deleted",
       "songPrivate":"La musique est privée",
+      "songRejected":"Song is rejected due to %1",
       "songNotFound":"Musique introuvable",
       "songEmbed":"L'intégration du son est désactivé",
       "songStreamable":"La musique ne supporte pas le streaming"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Informations sur l'utilisateur",
     "name":"Nom",
+    "profile":"Profil Utilisateur",
     "title":"Titre",
     "specialTitles":{
       "developer":"Développeur de Plug&#179;",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Cette communauté utilise des paramètres spéciaux de %1",
     "infoDisable":"Vous pouvez les désactiver dans le menu"
   },
+  "menuHeaders":{
+    "features":"Fonctionnalités",
+    "chatnotifs":"Chat Notifications",
+    "controlpanel":"Panneau de Configuration"
+  },
   "menu":{
     "autowoot":"Auto-woot",
     "autojoin":"Rejoindre Automatiquement",
@@ -180,7 +188,14 @@
     "controlpanel":"Panneau de Configuration",
     "showdeletedmessages":"Afficher les Messages Supprimés",
     "visualizers":"Visualiseurs SoundCloud RCS",
-    "inlineuserinfo":"Infos sur l'Utilisateur Alignées"
+    "inlineuserinfo":"Infos sur l'Utilisateur Alignées",
+    "about":"À propos de plugCubed",
+    "background":"Modifier l'arrière plan",
+    "chatcustomizations":"Chat Customizations",
+    "commands":"Chat commands",
+    "customcss":"Custom CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Mode Travail"
   },
   "vote":{
     "meh":"Meh",
@@ -189,13 +204,49 @@
     "undecided":"Non décidé",
     "djing":"En train de jouer"
   },
+  "customchatcolors":{
+    "userRanksHeader":"User Ranks",
+    "chatnotifs":"Chat Notifications"
+  },
+  "panels":{
+    "about":{
+      "header":"Information à propos de plug³",
+      "version":"Version",
+      "website":"Site internet",
+      "websiteText":"Site internet plug&#179;",
+      "translations":"Traductions",
+      "translationsText":"plug&#179; Translations",
+      "websitetranslationsText":"plug&#179; Website Translations"
+    },
+    "background":{
+      "description":"Set your own room background"
+    },
+    "buttons":{
+      "cancel":"Annuler",
+      "clear":"Effacer",
+      "submit":"Submit"
+    },
+    "chatcustomizations":{
+      "description":"Customize your chat with emojis, notifications, markdown, and other features",
+      "mentionSoundTitle":"Mention Sound %1",
+      "emotesHeader":"Emojis",
+      "chatenhancementHeader":"Chat Enhancements",
+      "emotesSetHeader":"Emoji Set"
+    },
+    "customcss":{
+      "description":"Set your own room CSS"
+    }
+  },
   "tooltip":{
     "stream":"Activer/Désactiver le stream Audio ou Vidéo",
     "clear":"Supprimer l'historique du tchat.",
     "afk":"Message d'absence.",
     "reset":"Redéfinir les valeurs par défaut",
     "muted":"Toutes les musiques sont désactivées",
-    "mutedOnce":"Le son de la musique actuelle est désactivé"
+    "mutedOnce":"Le son de la musique actuelle est désactivé",
+    "quickBan":"Bannir l'utilisateur pour toujours",
+    "quickMute":"Rendre muet l'utilisateur pour 45 mins",
+    "userInfo":"User Info"
   },
   "error":{
     "userNotFound":"Utilisateur non trouvé",
@@ -211,5 +262,11 @@
     "noPlaylistsFound":"Aucune playlist trouvée",
     "yourActivePlaylistIsFull":"Votre playlist active est pleine",
     "noNextSong":"Vous n'avez aucune musique en attente"
+  },
+  "video":{
+    "show":"Afficher",
+    "hide":"Masquer",
+    "menushow":"Afficher la vidéo",
+    "menuhide":"Masquer la vidéo"
   }
 }

@@ -35,7 +35,7 @@
       "automute":"zapamiętaj obecnie odtwarzany utwór, by automatycznie go wyciszać w przyszłości",
       "unmute":"ustaw głośność na wartość sprzed wyciszenia",
       "nextsong":"wyświetla następny utwór z listy odtwarzania oraz czy jest on w historii",
-      "refresh":"odśwież film",
+      "refresh":"odśwież wideo",
       "alertson":"odtwarza dźwięk, gdy określone wyrazy zostaną napisane na czacie",
       "alertsoff":"wyłącza odtwarzanie dźwięku, gdy dane słowa zostaną napisane na czacie",
       "grab":"dodaj bieżący utwór do aktywnej playlisty",
@@ -99,7 +99,7 @@
       "boothAlertNext":"Za chwilę zostaniesz DJ-em!",
       "boothAlertPos":"Jesteś %1 na liście oczekiwania",
       "grab":"zgrabowano %1 - %2",
-      "stats":"Statystyki: %1 wooty -- %2 mehy -- %3 graby",
+      "stats":"Statystyki: %1 woot(ów) -- %2 meh(ów) -- %3 grab(ów)",
       "updates":"Obecnie odtwarzane: %1 - %2 <br>grane przez: %3",
       "meh":"dał meh",
       "join":"dołączył do pokoju",
@@ -138,7 +138,7 @@
     "vote":"Głos",
     "position":"Pozycja",
     "points":"Punkty",
-    "wootCount":"Wooty:",
+    "wootCount":"Woot(ów)",
     "mehCount":"Mehy:",
     "ratio":"Stosunek Woot/Meh",
     "djing":"Aktualnie jest DJ-em",
@@ -194,8 +194,8 @@
     "chatcustomizations":"Ustawienia czatu",
     "commands":"Komendy czatu",
     "customcss":"Niestandardowy CSS",
-    "lowlagMode":"Low Lag Mode",
-    "workMode":"Work Mode"
+    "lowlagMode":"Tryb wydajności",
+    "workMode":"Tryb pracy"
   },
   "vote":{
     "meh":"Meh",
@@ -205,8 +205,8 @@
     "djing":"Jest teraz DJ-em"
   },
   "customchatcolors":{
-    "userRanksHeader":"Rangi użytkowników",
-    "chatnotifs":"Powiadomienia czatu"
+    "userRanksHeader":"Rang użytkowników:",
+    "chatnotifs":"Powiadomień czatu:"
   },
   "panels":{
     "about":{
@@ -219,7 +219,7 @@
       "websitetranslationsText":"Tłumaczenia strony plug&#179;"
     },
     "background":{
-      "description":"Ustaw swoje własne tło pokoju"
+      "description":"Ustaw swoje własne tło"
     },
     "buttons":{
       "cancel":"Anuluj",

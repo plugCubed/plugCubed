@@ -6,12 +6,10 @@
     "disable":"Isključi automatsko odgovaranje u četu",
     "nextIn":"Sledeća automaska poruka biće u %1",
     "next":"Automatska poruka biće na sledećem tagu",
-    "commandDisable":"%1 automatsko pridruživanje je isključeno",
-    "commandNotEnabled":"%1 automatsko pridruživanje nije bilo uključeno"
+    "commandDisable":"%1 automatsko pridruživanje je isključeno"
   },
   "autojoin":{
-    "commandDisable":"%1 automatsko pridruživanje je isključeno",
-    "commandNotEnabled":"%1 automatsko pridruživanje nije bilo uključeno"
+    "commandDisable":"%1 automatsko pridruživanje je isključeno"
   },
   "fullscreen":{
     "shrink":"Smanji",
@@ -57,7 +55,8 @@
       "whois all":"daje ID korisnika kao i korisničko ime svih korisnika u sobi",
       "banall":"banuje sve korisnike u sobi",
       "status":"Pokaži statuse plug servera",
-      "unload":"Closes plug&#179;"
+      "unload":"Closes plug&#179;",
+      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
     },
     "responses":{
       "alertson":"Reprodukcija zvuka na sledeće reči: %1",
@@ -84,13 +83,14 @@
     "joinTime":"Ako uđeš u listu čekanja sad, puštaćeš za otprilike %1!"
   },
   "notify":{
-    "header":"Informacije o korisniku",
+    "deletedMessages":"deleted by ",
     "join":"Korisnik uđe",
     "leave":"Korisnik ode",
     "grab":"Korisnik Grab-ovao",
     "meh":"Korianik Meh-ovao",
     "stats":"Statistike pesme",
     "updates":"Ažuriranja Pesme",
+    "updatesLink":"Song Link",
     "history":"Pesma u istoriji",
     "songUnavailable":"Pesma Nedostupna",
     "boothAlert":"Booth Alert (%1 / 50)",
@@ -107,7 +107,9 @@
       "history":"Pesma je u istoriji (%1 od %2)",
       "historySkipped":"Pesma je u istoriji (%1 od %2),ali je bila skipovana",
       "songLength":"Pesma je duža od %1 minuta",
+      "songDeleted":"Song is deleted",
       "songPrivate":"Pesma je privatna",
+      "songRejected":"Song is rejected due to %1",
       "songNotFound":"Pesma nije pronađena",
       "songEmbed":"Pesma je onemogućena",
       "songStreamable":"Pesma ne podržava Stream-ovanje"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Informacije o korisniku",
     "name":"Ime",
+    "profile":"User Profile",
     "title":"Naslov",
     "specialTitles":{
       "developer":"plug&#179; Autor",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Ova zajednica koristi specijalne efekte od %1",
     "infoDisable":"Možeš ih isključiti u Meni-u"
   },
+  "menuHeaders":{
+    "features":"Features",
+    "chatnotifs":"Chat Notifications",
+    "controlpanel":"Kontrolna Tabla"
+  },
   "menu":{
     "autowoot":"AutoWoot",
     "autojoin":"Automatsko pridruživanje",
@@ -180,7 +188,14 @@
     "controlpanel":"Kontrolna Tabla",
     "showdeletedmessages":"Prikaži izbrisane poruke",
     "visualizers":"RCS SoundCloud Visualizers",
-    "inlineuserinfo":"Inline User Info"
+    "inlineuserinfo":"Inline User Info",
+    "about":"About plugCubed",
+    "background":"Change background",
+    "chatcustomizations":"Chat Customizations",
+    "commands":"Chat commands",
+    "customcss":"Custom CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Ne sviđa mi se",
@@ -189,13 +204,49 @@
     "undecided":"Neodlučan",
     "djing":"je DJ"
   },
+  "customchatcolors":{
+    "userRanksHeader":"User Ranks",
+    "chatnotifs":"Chat Notifications"
+  },
+  "panels":{
+    "about":{
+      "header":"Information about plug³",
+      "version":"Version",
+      "website":"Website",
+      "websiteText":"plug&#179; Website",
+      "translations":"Translations",
+      "translationsText":"plug&#179; Translations",
+      "websitetranslationsText":"plug&#179; Website Translations"
+    },
+    "background":{
+      "description":"Set your own room background"
+    },
+    "buttons":{
+      "cancel":"Cancel",
+      "clear":"Clear",
+      "submit":"Submit"
+    },
+    "chatcustomizations":{
+      "description":"Customize your chat with emojis, notifications, markdown, and other features",
+      "mentionSoundTitle":"Mention Sound %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat Enhancements",
+      "emotesSetHeader":"Emoji Set"
+    },
+    "customcss":{
+      "description":"Set your own room CSS"
+    }
+  },
   "tooltip":{
     "stream":"Uključi Audio/Video",
     "clear":"Očisti čet",
     "afk":"AFK poruka",
     "reset":"Vrati na podrazumevano",
     "muted":"Sve pesme su mutirane",
-    "mutedOnce":"Trenutna pesma je mutirana"
+    "mutedOnce":"Trenutna pesma je mutirana",
+    "quickBan":"Ban user forever",
+    "quickMute":"Mute user for 45 mins",
+    "userInfo":"User Info"
   },
   "error":{
     "userNotFound":"Korisnik nije pronađen",
@@ -211,5 +262,11 @@
     "noPlaylistsFound":"Play lista nije pronađena",
     "yourActivePlaylistIsFull":"Tvoja aktivirana Play lista je puna",
     "noNextSong":"Nemaš pesmu na čekanju"
+  },
+  "video":{
+    "show":"Show",
+    "hide":"Hide",
+    "menushow":"Show Video",
+    "menuhide":"Hide Video"
   }
 }

@@ -1,17 +1,15 @@
 {
   "running":"Naudojama plug&#179; versija %1",
-  "commandsHelp":"Rašykite \"\/commands\", kad pamatytumėte paaiškintas pokalbio komandas.",
+  "commandsHelp":"Rašykite \"/commands\", kad pamatytumėte paaiškintas pokalbio komandas.",
   "autorespond":{
     "default":"Aš nesu prie klaviatūros.",
     "disable":"Išjunkite AFK Auto-atsakymą pokalbyje",
     "nextIn":"Kitas AFK Auto-atsakymas bus išsiųstas nuo %1",
     "next":"AFK Auto-atsakymas kitame paminėjime",
-    "commandDisable":"%1 AFK pranešimas išjungtas",
-    "commandNotEnabled":"%1 AFK pranešimas nebuvo įjungtas"
+    "commandDisable":"%1 AFK pranešimas išjungtas"
   },
   "autojoin":{
-    "commandDisable":"%1 autojoin išjungtas",
-    "commandNotEnabled":"%1 autojoin nebuvo įjungtas"
+    "commandDisable":"%1 autojoin išjungtas"
   },
   "fullscreen":{
     "shrink":"Suspausti",
@@ -41,7 +39,7 @@
       "alertson":"sugroti garsą, kai būna parašomas paminėtas žodis pokalbyje",
       "alertsoff":"nebegroti garso, kai būna parašomas paminėtas žodis pokalbyje",
       "grab":"pridėti dabartinę dainą į pasirinktą grojaraštį",
-      "badges":"slėpti\/rodyti narių ženklelius pokalbyje",
+      "badges":"slėpti/rodyti narių ženklelius pokalbyje",
       "getpos":"gauti dabartinę poziciją laukimo eilėje",
       "version":"rodo versijos numerį",
       "commands":"parodo šį sąrašą",
@@ -57,7 +55,8 @@
       "whois all":"parodo visų vartotojų, esančių kambaryje ID ir vardus",
       "banall":"užblokuoja visus vartotojus, esančius kambaryje",
       "status":"rodo plug.dj serverių informaciją",
-      "unload":"Išjungia plug&#179;"
+      "unload":"Išjungia plug&#179;",
+      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
     },
     "responses":{
       "alertson":"Grojamas garsas, naudojant šiuos žodžius: %1",
@@ -84,16 +83,17 @@
     "joinTime":"Jei prisijugsite į eilę dabar, grosite po maždaug %1!"
   },
   "notify":{
-    "header":"Pokalbio pranešimai",
+    "deletedMessages":"deleted by ",
     "join":"Vartotojo Prisijungimas",
     "leave":"Vartotojo Išėjimas",
     "grab":"Vartotojo Pridėjimas",
     "meh":"Vartotojo Mehs",
     "stats":"Dainos statistika",
     "updates":"Dainos atnaujinimai",
+    "updatesLink":"Song Link",
     "history":"Dainos istorijoje",
     "songUnavailable":"Daina negalima",
-    "boothAlert":"Eilės pranešimas (%1 \/ 50)",
+    "boothAlert":"Eilės pranešimas (%1 / 50)",
     "songLength":"Dainos trukmė (%1 min)",
     "message":{
       "boothAlertNext":"Netrukus tavo eilė groti!",
@@ -107,7 +107,9 @@
       "history":"Daina yra istorijoje (%1 iš %2)",
       "historySkipped":"Daina yra istorijoje (%1 iš %2), bet buvo praleista",
       "songLength":"Daina ilgesnė nei %1 minutės",
+      "songDeleted":"Song is deleted",
       "songPrivate":"Daina privati",
+      "songRejected":"Song is rejected due to %1",
       "songNotFound":"Daina nerasta",
       "songEmbed":"Daina buvo išjungta",
       "songStreamable":"Daina nepalaikoma"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Vartotojo informacija",
     "name":"Vardas",
+    "profile":"User Profile",
     "title":"Pavadinimas",
     "specialTitles":{
       "developer":"plug&#179; Kūrėjas",
@@ -137,10 +140,10 @@
     "points":"Taškai",
     "wootCount":"Woot Skaičius",
     "mehCount":"Meh Skaičius",
-    "ratio":"Woot\/Meh Santykis",
+    "ratio":"Woot/Meh Santykis",
     "djing":"Šiuo metu groja",
     "notInList":"Ne eilėje ir negroja",
-    "inWaitlist":"%1\/%2 eilėje",
+    "inWaitlist":"%1/%2 eilėje",
     "userDjing":"%1 šiuo metu groja",
     "userNextDJ":"%1 netrukus gros",
     "disconnects":"Atsijungimai",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Šis kambarys naudoja specialius nustatymus pagal %1",
     "infoDisable":"Juos galite išjungti meniu"
   },
+  "menuHeaders":{
+    "features":"Features",
+    "chatnotifs":"Chat Notifications",
+    "controlpanel":"Valdymo skydas"
+  },
   "menu":{
     "autowoot":"AutoWoot",
     "autojoin":"Auto Prisijungimas",
@@ -180,7 +188,14 @@
     "controlpanel":"Valdymo skydas",
     "showdeletedmessages":"Rodyti ištrintus pranešimus",
     "visualizers":"RCS SoundCloud Vizualizacijos",
-    "inlineuserinfo":"Papildoma Vartotojo Informacija"
+    "inlineuserinfo":"Papildoma Vartotojo Informacija",
+    "about":"About plugCubed",
+    "background":"Change background",
+    "chatcustomizations":"Chat Customizations",
+    "commands":"Chat commands",
+    "customcss":"Custom CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Meh",
@@ -189,27 +204,69 @@
     "undecided":"Nenuspręsta",
     "djing":"Groja"
   },
+  "customchatcolors":{
+    "userRanksHeader":"User Ranks",
+    "chatnotifs":"Chat Notifications"
+  },
+  "panels":{
+    "about":{
+      "header":"Information about plug³",
+      "version":"Version",
+      "website":"Website",
+      "websiteText":"plug&#179; Website",
+      "translations":"Translations",
+      "translationsText":"plug&#179; Translations",
+      "websitetranslationsText":"plug&#179; Website Translations"
+    },
+    "background":{
+      "description":"Set your own room background"
+    },
+    "buttons":{
+      "cancel":"Cancel",
+      "clear":"Clear",
+      "submit":"Submit"
+    },
+    "chatcustomizations":{
+      "description":"Customize your chat with emojis, notifications, markdown, and other features",
+      "mentionSoundTitle":"Mention Sound %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat Enhancements",
+      "emotesSetHeader":"Emoji Set"
+    },
+    "customcss":{
+      "description":"Set your own room CSS"
+    }
+  },
   "tooltip":{
-    "stream":"Perjungti Vaizdą\/Garsą",
+    "stream":"Perjungti Vaizdą/Garsą",
     "clear":"Išvalyti pokalbį",
     "afk":"AFK Pranešimas",
     "reset":"Atkurti numatytuosius nustatymus",
     "muted":"Visos dainos užtildytos",
-    "mutedOnce":"Šiuo metu grojanti daina yra užtildyta"
+    "mutedOnce":"Šiuo metu grojanti daina yra užtildyta",
+    "quickBan":"Ban user forever",
+    "quickMute":"Mute user for 45 mins",
+    "userInfo":"User Info"
   },
   "error":{
     "userNotFound":"Vartotojas nerastas",
     "alreadyInWaitList":"Vartotojas %1 jau yra eilėje",
     "notInWaitList":"Vartotojas %1 nėra eilėje",
     "unknownMenuKey":"Nežinomas meniu mygtukas: %1",
-    "invalidAddSyntax":"Neteisingai naudojama pridėjimo komanda. Naudojimas: \/add @user",
-    "invalidBanSyntax":"Neteisingai naudojama blokavimo komanda. Naudojimas: \/ban @user arba \/ban @user::time::reason",
+    "invalidAddSyntax":"Neteisingai naudojama pridėjimo komanda. Naudojimas: /add @user",
+    "invalidBanSyntax":"Neteisingai naudojama blokavimo komanda. Naudojimas: /ban @user arba /ban @user::time::reason",
     "invalidBanTime":"Nustatytas laikas %1 yra neleistinas. Galimi laikai yra 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Neteisingai naudojama šalinimo komanda. Naudojimas: \/remove @user",
-    "invalidWhoisSyntax":"Neteisingai naudojama whois komanda. Naudojimas: \/whois @user",
+    "invalidRemoveSyntax":"Neteisingai naudojama šalinimo komanda. Naudojimas: /remove @user",
+    "invalidWhoisSyntax":"Neteisingai naudojama whois komanda. Naudojimas: /whois @user",
     "errorGettingPlaylistInfo":"Klaida gaunant grojaraščio informaciją",
     "noPlaylistsFound":"Grojaraštis nerastas",
     "yourActivePlaylistIsFull":"Jūsų grojaraštis pilnas",
     "noNextSong":"Jūs neturite jokios dainos eilėje"
+  },
+  "video":{
+    "show":"Show",
+    "hide":"Hide",
+    "menushow":"Show Video",
+    "menuhide":"Hide Video"
   }
 }

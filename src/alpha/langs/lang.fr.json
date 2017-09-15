@@ -83,7 +83,7 @@
     "joinTime":"Si vous joignez la liste d'attente, vous accéderez aux platines dans environ %1!"
   },
   "notify":{
-    "deletedMessages":"deleted by ",
+    "deletedMessages":"supprimé par ",
     "join":"Un utilisateur rejoint la communauté",
     "leave":"Un utilisateur part de la communauté",
     "grab":"Ajout par un utilisateur",
@@ -118,7 +118,7 @@
   "info":{
     "header":"Informations sur l'utilisateur",
     "name":"Nom",
-    "profile":"User Profile",
+    "profile":"Profil Utilisateur",
     "title":"Titre",
     "specialTitles":{
       "developer":"Développeur de Plug&#179;",
@@ -169,7 +169,7 @@
     "infoDisable":"Vous pouvez les désactiver dans le menu"
   },
   "menuHeaders":{
-    "features":"Features",
+    "features":"Fonctionnalités",
     "chatnotifs":"Chat Notifications",
     "controlpanel":"Panneau de Configuration"
   },
@@ -189,13 +189,13 @@
     "showdeletedmessages":"Afficher les Messages Supprimés",
     "visualizers":"Visualiseurs SoundCloud RCS",
     "inlineuserinfo":"Infos sur l'Utilisateur Alignées",
-    "about":"About plugCubed",
-    "background":"Change background",
+    "about":"À propos de plugCubed",
+    "background":"Modifier l'arrière plan",
     "chatcustomizations":"Chat Customizations",
     "commands":"Chat commands",
     "customcss":"Custom CSS",
     "lowlagMode":"Low Lag Mode",
-    "workMode":"Work Mode"
+    "workMode":"Mode Travail"
   },
   "vote":{
     "meh":"Meh",
@@ -210,11 +210,11 @@
   },
   "panels":{
     "about":{
-      "header":"Information about plug³",
+      "header":"Information à propos de plug³",
       "version":"Version",
-      "website":"Website",
-      "websiteText":"plug&#179; Website",
-      "translations":"Translations",
+      "website":"Site internet",
+      "websiteText":"Site internet plug&#179;",
+      "translations":"Traductions",
       "translationsText":"plug&#179; Translations",
       "websitetranslationsText":"plug&#179; Website Translations"
     },
@@ -222,14 +222,14 @@
       "description":"Set your own room background"
     },
     "buttons":{
-      "cancel":"Cancel",
-      "clear":"Clear",
+      "cancel":"Annuler",
+      "clear":"Effacer",
       "submit":"Submit"
     },
     "chatcustomizations":{
       "description":"Customize your chat with emojis, notifications, markdown, and other features",
       "mentionSoundTitle":"Mention Sound %1",
-      "emotesHeader":"Emotes",
+      "emotesHeader":"Emojis",
       "chatenhancementHeader":"Chat Enhancements",
       "emotesSetHeader":"Emoji Set"
     },
@@ -244,8 +244,8 @@
     "reset":"Redéfinir les valeurs par défaut",
     "muted":"Toutes les musiques sont désactivées",
     "mutedOnce":"Le son de la musique actuelle est désactivé",
-    "quickBan":"Ban user forever",
-    "quickMute":"Mute user for 45 mins",
+    "quickBan":"Bannir l'utilisateur pour toujours",
+    "quickMute":"Rendre muet l'utilisateur pour 45 mins",
     "userInfo":"User Info"
   },
   "error":{
@@ -264,9 +264,9 @@
     "noNextSong":"Vous n'avez aucune musique en attente"
   },
   "video":{
-    "show":"Show",
-    "hide":"Hide",
-    "menushow":"Show Video",
-    "menuhide":"Hide Video"
+    "show":"Afficher",
+    "hide":"Masquer",
+    "menushow":"Afficher la vidéo",
+    "menuhide":"Masquer la vidéo"
   }
 }

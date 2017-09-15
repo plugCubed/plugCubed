@@ -83,7 +83,7 @@
     "joinTime":"Se você se juntar a lista de espera agora, você seria o dj em %1!"
   },
   "notify":{
-    "deletedMessages":"deleted by ",
+    "deletedMessages":"apagado por ",
     "join":"Entrada de Usuário",
     "leave":"Saída de Usuário",
     "grab":"Add de Usuário",
@@ -118,7 +118,7 @@
   "info":{
     "header":"Informações do Usuário",
     "name":"Nome",
-    "profile":"User Profile",
+    "profile":"Perfil do usuário",
     "title":"Título",
     "specialTitles":{
       "developer":"Desenvolvedor do plug&#179;",
@@ -169,8 +169,8 @@
     "infoDisable":"Você pode desativá-las no menu"
   },
   "menuHeaders":{
-    "features":"Features",
-    "chatnotifs":"Chat Notifications",
+    "features":"Funções",
+    "chatnotifs":"Notificações do Chat",
     "controlpanel":"Painel de Controle"
   },
   "menu":{
@@ -189,13 +189,13 @@
     "showdeletedmessages":"Mostrar Mensagens Deletadas",
     "visualizers":"Visualizadores de SoundCloud do RCS",
     "inlineuserinfo":"Informação de Usuário",
-    "about":"About plugCubed",
-    "background":"Change background",
-    "chatcustomizations":"Chat Customizations",
-    "commands":"Chat commands",
-    "customcss":"Custom CSS",
+    "about":"Sobre o plugCubed",
+    "background":"Mudar fundo",
+    "chatcustomizations":"Personalizações de Chat",
+    "commands":"Comandos de Chat",
+    "customcss":"CSS Personalizado",
     "lowlagMode":"Low Lag Mode",
-    "workMode":"Work Mode"
+    "workMode":"Modo de trabalho"
   },
   "vote":{
     "meh":"Chato",
@@ -206,25 +206,25 @@
   },
   "customchatcolors":{
     "userRanksHeader":"User Ranks",
-    "chatnotifs":"Chat Notifications"
+    "chatnotifs":"Notificações do Chat"
   },
   "panels":{
     "about":{
-      "header":"Information about plug³",
-      "version":"Version",
-      "website":"Website",
-      "websiteText":"plug&#179; Website",
-      "translations":"Translations",
-      "translationsText":"plug&#179; Translations",
-      "websitetranslationsText":"plug&#179; Website Translations"
+      "header":"Informações sobre plug3",
+      "version":"Versão",
+      "website":"Site",
+      "websiteText":"plug&#179; Site",
+      "translations":"Traduções",
+      "translationsText":"plug&#179; Traduções",
+      "websitetranslationsText":"plug&#179; Traduções do Site"
     },
     "background":{
       "description":"Set your own room background"
     },
     "buttons":{
-      "cancel":"Cancel",
-      "clear":"Clear",
-      "submit":"Submit"
+      "cancel":"Cancelar",
+      "clear":"Limpar",
+      "submit":"Enviar"
     },
     "chatcustomizations":{
       "description":"Customize your chat with emojis, notifications, markdown, and other features",
@@ -244,9 +244,9 @@
     "reset":"Redefinir para o padrão",
     "muted":"Todas as músicas estão mutadas",
     "mutedOnce":"Esta música está mutada",
-    "quickBan":"Ban user forever",
+    "quickBan":"Banir usuário para sempre",
     "quickMute":"Mute user for 45 mins",
-    "userInfo":"User Info"
+    "userInfo":"Informação do usuário"
   },
   "error":{
     "userNotFound":"Usuário não encontrado",
@@ -264,9 +264,9 @@
     "noNextSong":"Você não tem uma música pronta para tocar"
   },
   "video":{
-    "show":"Show",
-    "hide":"Hide",
-    "menushow":"Show Video",
-    "menuhide":"Hide Video"
+    "show":"Mostrar",
+    "hide":"Ocultar",
+    "menushow":"Mostrar Video",
+    "menuhide":"Ocultar Video"
   }
 }

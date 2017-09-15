@@ -1,17 +1,15 @@
 {
   "running":"Töötab plug&#179; versioon %1",
-  "commandsHelp":"Kasuta '\/commands' et näha käske.",
+  "commandsHelp":"Kasuta '/commands' et näha käske.",
   "autorespond":{
     "default":"Ma olen klaviatuurist eemal.",
     "disable":"Keela AFKis Vastaja, et rääkida",
     "nextIn":"%1 saadetakse järgmisele AFK s",
     "next":"AFK s next mainida",
-    "commandDisable":"%1 AFK sõnumi blokeeritud",
-    "commandNotEnabled":"%1 AFK sõnum ei olnud lubatud"
+    "commandDisable":"%1 AFK sõnumi blokeeritud"
   },
   "autojoin":{
-    "commandDisable":"%1 autojoin keelatud",
-    "commandNotEnabled":"%1 autojoin ei olnud lubatud"
+    "commandDisable":"%1 autojoin keelatud"
   },
   "fullscreen":{
     "shrink":"Kahanda",
@@ -31,7 +29,7 @@
     },
     "descriptions":{
       "join":"Ühine ootejärjekorraga",
-      "leave":"lehed dj booth\/waitlist",
+      "leave":"lehed dj booth/waitlist",
       "whoami":"saa oma info",
       "mute":"sea helitugevuseks 0",
       "automute":"praegu esitatava Loo automaatseks summutamiseks tulevikus mängib registreerida",
@@ -41,7 +39,7 @@
       "alertson":"Esita heli, kui määratletud sõnu kirjutatakse",
       "alertsoff":"Lõpetage mängimine heli määratletud sõnu kirjutada chat",
       "grab":"praeguse Loo lisamiseks valitud esitusloendi",
-      "badges":"Kuva\/peida vestlus rinnamärgid kasutaja",
+      "badges":"Kuva/peida vestlus rinnamärgid kasutaja",
       "getpos":"saada praegusest waitlist",
       "version":"Sellel väljal kuvatakse versiooni number",
       "commands":"näitab seda nimekirja",
@@ -52,12 +50,13 @@
       "lockskip":"lukud DJ booth vahele ja avab hiljem",
       "lock":"lukud DJ putka",
       "unlock":"avab DJ putka",
-      "add":"lisab suunatud kasutaja dj booth\/waitlist",
-      "remove":"eemaldab suunatud kasutaja: dj booth\/waitlist",
+      "add":"lisab suunatud kasutaja dj booth/waitlist",
+      "remove":"eemaldab suunatud kasutaja: dj booth/waitlist",
       "whois all":"annab kasutajatunnus ja kõik kasutajad toas kasutajanimi",
       "banall":"keelab kõik kasutajad toas",
       "status":"näitab staatust plug serverid",
-      "unload":"Suleb plug³"
+      "unload":"Suleb plug³",
+      "volume":"Määra helitugevus numbri (0-100), suurendage 1 võrra + väärtusega, vähendage 1 võrra -"
     },
     "responses":{
       "alertson":"Mängib heli järgmised sõnad: %1",
@@ -65,7 +64,7 @@
       "badgeon":"Märgid on sisse lülitatud",
       "badgeoff":"Märgid on välja lülitatud",
       "nextsong":"Oma järgmises järjekorras olevad laul on %1 poolt %2",
-      "isHistory":"Hoiatus: See laul on ajaloos (%1 \/ %2)",
+      "isHistory":"Hoiatus: See laul on ajaloos (%1 / %2)",
       "automute":{
         "automuted":"%1 automaatselt vaigistatud.",
         "registered":"%1 on registreeritud automute-i seadetesse.",
@@ -84,16 +83,17 @@
     "joinTime":"Kui liitute selle waitlist nüüd, sa oleks DJing linnas umbes %1!"
   },
   "notify":{
-    "header":"Vestlus teated",
+    "deletedMessages":"kustutatud",
     "join":"Kasutaja liitumine",
     "leave":"Kasutaja Lahkumine",
     "grab":"Kasutaja haarata",
     "meh":"Kasutaja Mehs",
     "stats":"Laul Stats",
     "updates":"Laul uuendused",
+    "updatesLink":"Laulu Link",
     "history":"Laulude ajaloos",
     "songUnavailable":"Laul pole saadaval",
-    "boothAlert":"Putka Alert (%1 \/ 50)",
+    "boothAlert":"Putka Alert (%1 / 50)",
     "songLength":"Laulu pikkus (%1 min)",
     "message":{
       "boothAlertNext":"Olete muutmas DJ!",
@@ -107,7 +107,9 @@
       "history":"Laul on ajalugu (%1 %2)",
       "historySkipped":"laul on ajalugu (% 1% 2), aga jäeti vahele viimase mäng",
       "songLength":"\nlaul on pikem kui% 1 minut",
+      "songDeleted":"laul on kustutatud",
       "songPrivate":"Laul on privaatne",
+      "songRejected":"Laul lükatakse tagasi tõttu %1",
       "songNotFound":"Laul ei leitud",
       "songEmbed":"Laul on manustamine keelatud",
       "songStreamable":"Laul ei toeta streaming"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Kasutaja Info",
     "name":"Nimi",
+    "profile":"Kasutaja profiil",
     "title":"Pealkiri",
     "specialTitles":{
       "developer":"plug&#179; Arendaja",
@@ -137,10 +140,10 @@
     "points":"Punktid",
     "wootCount":"Meeldimisi",
     "mehCount":"Vihkamisi",
-    "ratio":"Meeldimise\/Vihkamise vahekord",
+    "ratio":"Meeldimise/Vihkamise vahekord",
     "djing":"DJ-imas",
     "notInList":"Pole ootamas ega laval",
-    "inWaitlist":"%1\/%2 ootavad",
+    "inWaitlist":"%1/%2 ootavad",
     "userDjing":"%1 on DJ-imas",
     "userNextDJ":"%1 on DJ-imas järgmisena",
     "disconnects":"\nkatkestab",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"%1",
     "infoDisable":"\nVõite keelata neid menüü"
   },
+  "menuHeaders":{
+    "features":"Funktsioonid",
+    "chatnotifs":"Vestlus teated",
+    "controlpanel":"juhtpaneel"
+  },
   "menu":{
     "autowoot":"Autohääletus",
     "autojoin":"Autoühinemine",
@@ -180,7 +188,14 @@
     "controlpanel":"juhtpaneel",
     "showdeletedmessages":"Kuva kustutatud sõnumid",
     "visualizers":"RCS SoundCloud Visuaalid",
-    "inlineuserinfo":"Tekstisiseseid Kasutajateave"
+    "inlineuserinfo":"Tekstisiseseid Kasutajateave",
+    "about":"Kohta plugCubed",
+    "background":"Tausta muutmine",
+    "chatcustomizations":"Vestlus kohandused",
+    "commands":"Jututuba käsud",
+    "customcss":"Kohandatud CSS",
+    "lowlagMode":"Madal Lag Režiim",
+    "workMode":"Töö Režiim"
   },
   "vote":{
     "meh":"Kehv lugu",
@@ -189,27 +204,69 @@
     "undecided":"Pole otsustanud",
     "djing":"DJ-imas"
   },
+  "customchatcolors":{
+    "userRanksHeader":"Kasutaja Auastmed",
+    "chatnotifs":"Vestlus teated"
+  },
+  "panels":{
+    "about":{
+      "header":"Informatsioon kohta plug³",
+      "version":"Versioon",
+      "website":"Veebisait",
+      "websiteText":"plug&#179; Veebisait",
+      "translations":"Tõlked",
+      "translationsText":"plug&#179; tõlked",
+      "websitetranslationsText":"plug&#179; Veebisait tõlked"
+    },
+    "background":{
+      "description":"Seadista oma toa tausta"
+    },
+    "buttons":{
+      "cancel":"Tühista",
+      "clear":"Puhasta",
+      "submit":"Esita"
+    },
+    "chatcustomizations":{
+      "description":"Kohandada oma vestelda emojis, teatised, allahindlusest ja muid Omadusi",
+      "mentionSoundTitle":"Mainimine Heli %1",
+      "emotesHeader":"Emotikonid",
+      "chatenhancementHeader":"Vestlus täiustused",
+      "emotesSetHeader":"Emoji komplekt"
+    },
+    "customcss":{
+      "description":"Määra oma toa CSS"
+    }
+  },
   "tooltip":{
     "stream":"Vool",
     "clear":"selge chat",
     "afk":"afk sõnum",
     "reset":"Taasta vaikesätted",
     "muted":"Kõik laulud on välja lülitatud",
-    "mutedOnce":"Aktiivse pala on välja lülitatud"
+    "mutedOnce":"Aktiivse pala on välja lülitatud",
+    "quickBan":"Ban igavesti kasutaja",
+    "quickMute":"Vaigista kasutaja 45 minutit",
+    "userInfo":"Kasutaja Info"
   },
   "error":{
     "userNotFound":"Kasutajat ei leitud",
     "alreadyInWaitList":"Kasutaja %1 on juba waitlist",
     "notInWaitList":"Kasutaja %1 ei ole waitlist",
     "unknownMenuKey":"Tundmatu nupp %1",
-    "invalidAddSyntax":"Käsu lisamine kehtetu süntaks. Kasutamine: \/ lisa @user",
-    "invalidBanSyntax":"Sobimatu süntaks ban käsk. Kasutamine: \/ keeld @user või \/ban @user::time::reason",
+    "invalidAddSyntax":"Käsu lisamine kehtetu süntaks. Kasutamine: / lisa @user",
+    "invalidBanSyntax":"Sobimatu süntaks ban käsk. Kasutamine: / keeld @user või /ban @user::time::reason",
     "invalidBanTime":"Määratud, %1 ei sobi. Kehtiv ajad on 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Sobimatu süntaks Eemalda käsk. Kasutamine: \/remove @user",
-    "invalidWhoisSyntax":"Sobimatu süntaks whois käsk. Kasutamine: \/whois @user",
+    "invalidRemoveSyntax":"Sobimatu süntaks Eemalda käsk. Kasutamine: /remove @user",
+    "invalidWhoisSyntax":"Sobimatu süntaks whois käsk. Kasutamine: /whois @user",
     "errorGettingPlaylistInfo":"Esitusloendi info toomisel ilmnes tõrge",
     "noPlaylistsFound":"Leitud esitusloendid",
     "yourActivePlaylistIsFull":"Teie aktiivne playlist on täis",
     "noNextSong":"Teil on rivistatud laul"
+  },
+  "video":{
+    "show":"Näita",
+    "hide":"Peida",
+    "menushow":"Näita video",
+    "menuhide":"Peida video"
   }
 }

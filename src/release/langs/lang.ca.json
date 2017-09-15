@@ -1,17 +1,15 @@
 {
   "running":"Corrent plug&#179; versió %1",
-  "commandsHelp":"Fes servir '\/commands' per veure les comades de chat",
+  "commandsHelp":"Fes servir '/commands' per veure les comades de chat",
   "autorespond":{
     "default":"Estic lluny del teclat",
     "disable":"Disable AFK Autorespond to chat",
     "nextIn":"Next AFK Autorespond will be sent from %1",
     "next":"AFK Autorespond on next mention",
-    "commandDisable":"%1 autojoin disabled",
-    "commandNotEnabled":"%1 autojoin was not enabled"
+    "commandDisable":"%1 autojoin disabled"
   },
   "autojoin":{
-    "commandDisable":"%1 autojoin disabled",
-    "commandNotEnabled":"%1 autojoin was not enabled"
+    "commandDisable":"%1 autojoin disabled"
   },
   "fullscreen":{
     "shrink":"Shrink",
@@ -41,7 +39,7 @@
       "alertson":"reprodueix so quan les paraules definides s'escriguin al chat",
       "alertsoff":"atura la reproducció de so quan les paraules definides s'escriguin al chat",
       "grab":"add current song to your selected playlist",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"show/hide the user badges in chat",
       "getpos":"get current waitlist position",
       "version":"mostra el nombre de versió",
       "commands":"mostra aquesta llista",
@@ -52,12 +50,13 @@
       "lockskip":"bloqueja la taula de DJ, salta i després desbloqueja",
       "lock":"bloqueja la taula de DJ",
       "unlock":"desbloqueja la taula de DJ",
-      "add":"afegeix l'usuari seleccionat a la taula de DJ\/llista d'espera",
-      "remove":"elimina l'usuari seleccionat a la taula de DJ\/llista d'espera",
+      "add":"afegeix l'usuari seleccionat a la taula de DJ/llista d'espera",
+      "remove":"elimina l'usuari seleccionat a la taula de DJ/llista d'espera",
       "whois all":"gives userid and username of all users in the room",
       "banall":"bans all users in the room",
       "status":"shows status of plug servers",
-      "unload":"Closes plug&#179;"
+      "unload":"Closes plug&#179;",
+      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
@@ -84,30 +83,33 @@
     "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
-    "header":"Comandes plugCubed",
+    "deletedMessages":"deleted by ",
     "join":"Usuari s'uneix",
     "leave":"Usuari marxa",
     "grab":"User Grab",
     "meh":"User Mehs",
     "stats":"Estadístiques de la cançó",
     "updates":"Actualitzacions de cançó",
+    "updatesLink":"Song Link",
     "history":"Cançons a l'historial",
     "songUnavailable":"Song Unavailable",
-    "boothAlert":"Booth Alert (%1 \/ 50)",
+    "boothAlert":"Booth Alert (%1 / 50)",
     "songLength":"Longitud de la cançó (%1 min)",
     "message":{
       "boothAlertNext":"You are about to DJ!",
       "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"grabbed %1 - %2",
       "stats":"Estadístiques:   %1 woots -- %2 mehs -- %3 curates",
-      "updates":"Ara Reproduint: %1 per %2<br \/>Reproduit per: %3",
+      "updates":"Ara Reproduint: %1 per %2<br />Reproduit per: %3",
       "meh":"meh'd this track",
       "join":"joined the room",
       "leave":"left the room",
       "history":"Cançó a l'istóric (%1 de %2)",
       "historySkipped":"Cançó a l'istóric (%1 de %2), però es va saltar la útlima vegada",
       "songLength":"La cançó és més llarga que %1 minuts",
+      "songDeleted":"Song is deleted",
       "songPrivate":"Song is private",
+      "songRejected":"Song is rejected due to %1",
       "songNotFound":"Song not found",
       "songEmbed":"Song has embedding disabled",
       "songStreamable":"Song doesn't support streaming"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Comandes plugCubed",
     "name":"Nom",
+    "profile":"User Profile",
     "title":"Títol",
     "specialTitles":{
       "developer":"plugCubed Programador",
@@ -137,10 +140,10 @@
     "points":"Punts",
     "wootCount":"Woot Count",
     "mehCount":"Meh Count",
-    "ratio":"Woot\/Meh Ratio",
+    "ratio":"Woot/Meh Ratio",
     "djing":"Ara fent de DJ",
     "notInList":"Ni a la llista d'espera ni a l'escenari",
-    "inWaitlist":"%1\/%2 en la llista d'espera",
+    "inWaitlist":"%1/%2 en la llista d'espera",
     "userDjing":"%1 esta fent de DJ",
     "userNextDJ":"%1 fara de DJ a continuació",
     "disconnects":"Desconecta",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"This room is using special settings by %1",
     "infoDisable":"You can disable them in the menu"
   },
+  "menuHeaders":{
+    "features":"Features",
+    "chatnotifs":"Chat Notifications",
+    "controlpanel":"Control Panel"
+  },
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Autojoin",
@@ -180,7 +188,14 @@
     "controlpanel":"Control Panel",
     "showdeletedmessages":"Show Deleted Messages",
     "visualizers":"RCS SoundCloud Visualizers",
-    "inlineuserinfo":"Inline User Info"
+    "inlineuserinfo":"Inline User Info",
+    "about":"About plugCubed",
+    "background":"Change background",
+    "chatcustomizations":"Chat Customizations",
+    "commands":"Chat commands",
+    "customcss":"Custom CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Meh",
@@ -189,27 +204,69 @@
     "undecided":"No decidit",
     "djing":"Ara fent de DJ"
   },
+  "customchatcolors":{
+    "userRanksHeader":"User Ranks",
+    "chatnotifs":"Chat Notifications"
+  },
+  "panels":{
+    "about":{
+      "header":"Information about plug³",
+      "version":"Version",
+      "website":"Website",
+      "websiteText":"plug&#179; Website",
+      "translations":"Translations",
+      "translationsText":"plug&#179; Translations",
+      "websitetranslationsText":"plug&#179; Website Translations"
+    },
+    "background":{
+      "description":"Set your own room background"
+    },
+    "buttons":{
+      "cancel":"Cancel",
+      "clear":"Clear",
+      "submit":"Submit"
+    },
+    "chatcustomizations":{
+      "description":"Customize your chat with emojis, notifications, markdown, and other features",
+      "mentionSoundTitle":"Mention Sound %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat Enhancements",
+      "emotesSetHeader":"Emoji Set"
+    },
+    "customcss":{
+      "description":"Set your own room CSS"
+    }
+  },
   "tooltip":{
-    "stream":"Toggle Video\/Audio Stream",
+    "stream":"Toggle Video/Audio Stream",
     "clear":"Neteja el Chat",
     "afk":"AFK Message",
     "reset":"Reverteix les configuracions per defecte",
     "muted":"Totes les cançóns estan silenciades",
-    "mutedOnce":"La cançó actual esta silenciada"
+    "mutedOnce":"La cançó actual esta silenciada",
+    "quickBan":"Ban user forever",
+    "quickMute":"Mute user for 45 mins",
+    "userInfo":"User Info"
   },
   "error":{
     "userNotFound":"Usuari no trobat",
     "alreadyInWaitList":"User %1 is already in waitlist",
     "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Tecla de menú desconeguda",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: /add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: /ban @user or /ban @user::time::reason",
     "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: /remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: /whois @user",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
     "noNextSong":"You have no queued song"
+  },
+  "video":{
+    "show":"Show",
+    "hide":"Hide",
+    "menushow":"Show Video",
+    "menuhide":"Hide Video"
   }
 }

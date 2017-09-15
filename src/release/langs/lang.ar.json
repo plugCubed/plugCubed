@@ -1,17 +1,15 @@
 {
   "running":"جـاري تشغيل الـ plug&#179; version %1",
-  "commandsHelp":"استخدم \"\" \/الأوامر \" لرؤية و مشاهده الأوامر فـي الدردشة.",
+  "commandsHelp":"استخدم \"\" /الأوامر \" لرؤية و مشاهده الأوامر فـي الدردشة.",
   "autorespond":{
     "default":"غير متوفر حـاليا.",
     "disable":"تعطيل \"غير متواجد حاليا\" في المحادثة",
     "nextIn":"سيتم ارسال \"غير متواجد حاليا\" من %1",
     "next":"AFK Autorespond on next mention",
-    "commandDisable":"%1 AFK message disabled",
-    "commandNotEnabled":"%1 AFK message was not enabled"
+    "commandDisable":"%1 AFK message disabled"
   },
   "autojoin":{
-    "commandDisable":"%1 autojoin disabled",
-    "commandNotEnabled":"%1 autojoin was not enabled"
+    "commandDisable":"%1 autojoin disabled"
   },
   "fullscreen":{
     "shrink":"تصغير",
@@ -30,8 +28,8 @@
       "number":"الرقم"
     },
     "descriptions":{
-      "join":"join dj booth\/waitlist",
-      "leave":"leaves dj booth\/waitlist",
+      "join":"join dj booth/waitlist",
+      "leave":"leaves dj booth/waitlist",
       "whoami":"الحصول على المعلومات الخاصة بك",
       "mute":"ظبط الصوت على 0",
       "automute":"register currently playing song to automatically mute on future plays",
@@ -41,7 +39,7 @@
       "alertson":"play sound whenever defined words are written in chat",
       "alertsoff":"stop playing sound when defined words are written in chat",
       "grab":"add current song to your selected playlist",
-      "badges":"show\/hide the user badges in chat",
+      "badges":"show/hide the user badges in chat",
       "getpos":"get current waitlist position",
       "version":"displays version number",
       "commands":"shows this list",
@@ -57,7 +55,8 @@
       "whois all":"gives userid and username of all users in the room",
       "banall":"حظر كافة المستخدمين في الغرفة",
       "status":"shows status of plug servers",
-      "unload":"Closes plug&#179;"
+      "unload":"Closes plug&#179;",
+      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
@@ -84,16 +83,17 @@
     "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
-    "header":"Chat Notifications",
+    "deletedMessages":"deleted by ",
     "join":"دخول المستخدم",
     "leave":"خروج المستخدم",
     "grab":"User Grab",
     "meh":"User Mehs",
     "stats":"إحصائيات الأغنية",
     "updates":"تحديثات الاغنية",
+    "updatesLink":"Song Link",
     "history":"Songs in history",
     "songUnavailable":"الأغنية غير متوفرة",
-    "boothAlert":"Booth Alert (%1 \/ 50)",
+    "boothAlert":"Booth Alert (%1 / 50)",
     "songLength":"طول الأغنية (%1 دقيقة)",
     "message":{
       "boothAlertNext":"You are about to DJ!",
@@ -107,7 +107,9 @@
       "history":"Song is in history (%1 of %2)",
       "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
       "songLength":"Song is longer than %1 minutes",
+      "songDeleted":"Song is deleted",
       "songPrivate":"Song is private",
+      "songRejected":"Song is rejected due to %1",
       "songNotFound":"Song not found",
       "songEmbed":"Song has embedding disabled",
       "songStreamable":"Song doesn't support streaming"
@@ -116,6 +118,7 @@
   "info":{
     "header":"معلومات عن المستخدم",
     "name":"الاسم",
+    "profile":"User Profile",
     "title":"إسم الأغنية",
     "specialTitles":{
       "developer":"plug&#179; Developer",
@@ -137,10 +140,10 @@
     "points":"النقاط",
     "wootCount":"Woot Count",
     "mehCount":"Meh Count",
-    "ratio":"Woot\/Meh Ratio",
+    "ratio":"Woot/Meh Ratio",
     "djing":"Currently DJing",
     "notInList":"Not in waitlist nor booth",
-    "inWaitlist":"%1\/%2 in waitlist",
+    "inWaitlist":"%1/%2 in waitlist",
     "userDjing":"%1 are currently DJing",
     "userNextDJ":"%1 are DJing next",
     "disconnects":"Disconnects",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"This room is using special settings by %1",
     "infoDisable":"You can disable them in the menu"
   },
+  "menuHeaders":{
+    "features":"Features",
+    "chatnotifs":"Chat Notifications",
+    "controlpanel":"لوحة التحكم"
+  },
   "menu":{
     "autowoot":"Autowoot",
     "autojoin":"Autojoin",
@@ -180,7 +188,14 @@
     "controlpanel":"لوحة التحكم",
     "showdeletedmessages":"إظهار الرسائل المحذوفة",
     "visualizers":"RCS SoundCloud Visualizers",
-    "inlineuserinfo":"Inline User Info"
+    "inlineuserinfo":"Inline User Info",
+    "about":"About plugCubed",
+    "background":"Change background",
+    "chatcustomizations":"Chat Customizations",
+    "commands":"Chat commands",
+    "customcss":"Custom CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Meh",
@@ -189,27 +204,69 @@
     "undecided":"Undecided",
     "djing":"DJing"
   },
+  "customchatcolors":{
+    "userRanksHeader":"User Ranks",
+    "chatnotifs":"Chat Notifications"
+  },
+  "panels":{
+    "about":{
+      "header":"Information about plug³",
+      "version":"Version",
+      "website":"Website",
+      "websiteText":"plug&#179; Website",
+      "translations":"Translations",
+      "translationsText":"plug&#179; Translations",
+      "websitetranslationsText":"plug&#179; Website Translations"
+    },
+    "background":{
+      "description":"Set your own room background"
+    },
+    "buttons":{
+      "cancel":"Cancel",
+      "clear":"Clear",
+      "submit":"Submit"
+    },
+    "chatcustomizations":{
+      "description":"Customize your chat with emojis, notifications, markdown, and other features",
+      "mentionSoundTitle":"Mention Sound %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat Enhancements",
+      "emotesSetHeader":"Emoji Set"
+    },
+    "customcss":{
+      "description":"Set your own room CSS"
+    }
+  },
   "tooltip":{
-    "stream":"Toggle Video\/Audio Stream",
+    "stream":"Toggle Video/Audio Stream",
     "clear":"Clear Chat",
     "afk":"AFK Message",
     "reset":"Reset to default",
     "muted":"All songs are muted",
-    "mutedOnce":"Current song is muted"
+    "mutedOnce":"Current song is muted",
+    "quickBan":"Ban user forever",
+    "quickMute":"Mute user for 45 mins",
+    "userInfo":"User Info"
   },
   "error":{
     "userNotFound":"إسم المستخدم غير موجود",
     "alreadyInWaitList":"User %1 is already in waitlist",
     "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Unknown menu key: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: /add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: /ban @user or /ban @user::time::reason",
     "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: /remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: /whois @user",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"قائمة الأغاني الخاصة بك ممتلئة",
     "noNextSong":"ليس لديك أي أغاني فـي القائمة"
+  },
+  "video":{
+    "show":"Show",
+    "hide":"Hide",
+    "menushow":"Show Video",
+    "menuhide":"Hide Video"
   }
 }

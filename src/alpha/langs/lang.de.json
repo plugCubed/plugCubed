@@ -194,8 +194,8 @@
     "chatcustomizations":"Chat-Anpassungen",
     "commands":"Chat-Befehle",
     "customcss":"Benutzerdefiniertes CSS",
-    "lowlagMode":"Low Lag Mode",
-    "workMode":"Work Mode"
+    "lowlagMode":"Geringer-Lag-Modus",
+    "workMode":"Arbeitsmodus"
   },
   "vote":{
     "meh":"Meh",

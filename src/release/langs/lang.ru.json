@@ -1,17 +1,15 @@
 {
   "running":"Работает plug&#179; версии %1",
-  "commandsHelp":"Для просмотра доступных команд чата используйте '\/commands' ",
+  "commandsHelp":"Для просмотра доступных команд чата используйте '/commands' ",
   "autorespond":{
     "default":"Я отошёл от клавиатуры.",
     "disable":"Отключить автоматическое оповещение об отсутствии в чате",
     "nextIn":"Следующее автоматическое оповещение об отсутствии будет отправлено через %1",
     "next":"Автоматическое оповещение об отсутствии при следующем упоминании о вас",
-    "commandDisable":"%1 оповещение о вашем отсутствии отключено",
-    "commandNotEnabled":"%1 оповещение о вашем отсутствии не работает"
+    "commandDisable":"%1 оповещение о вашем отсутствии отключено"
   },
   "autojoin":{
-    "commandDisable":"%1 автодобавление отключено",
-    "commandNotEnabled":"%1 автодобавление недоступно"
+    "commandDisable":"%1 автодобавление отключено"
   },
   "fullscreen":{
     "shrink":"Растянуть",
@@ -41,7 +39,7 @@
       "alertson":"воспроизводить звук, когда указанные слова будут написаны в чате",
       "alertsoff":"останавливать воспроизведение звука, когда определённые слова пишутся в чате",
       "grab":"добавить данную песню в выбраный плейлист",
-      "badges":"показать\/скрыть пользовательские значки в чате",
+      "badges":"показать/скрыть пользовательские значки в чате",
       "getpos":"узнать свою положение в очереди",
       "version":"отобразить номер текущей версии",
       "commands":"показать этот список",
@@ -57,7 +55,8 @@
       "whois all":"предоставить идентификатор пользователя, или имя пользователя, или всех пользователей в комнате",
       "banall":"забанить всех пользователей в этой комнате",
       "status":"показывает статус подключаемых серверов",
-      "unload":"Closes plug&#179;"
+      "unload":"Closes plug&#179;",
+      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
     },
     "responses":{
       "alertson":"Playing sound on the following words: %1",
@@ -84,30 +83,33 @@
     "joinTime":"If you join the waitlist now, you would be DJing in about %1!"
   },
   "notify":{
-    "header":"уведомления в чате",
+    "deletedMessages":"deleted by ",
     "join":"Пользователь вошел",
     "leave":"Пользователь вышел",
     "grab":"User Grab",
     "meh":"не понравившееся пользователю",
     "stats":"Статистика трека",
     "updates":"Обновления треков",
+    "updatesLink":"Song Link",
     "history":"Треки в истории",
     "songUnavailable":"Song Unavailable",
-    "boothAlert":"Booth Alert (%1 \/ 50)",
+    "boothAlert":"Booth Alert (%1 / 50)",
     "songLength":"Продолжительность песни (%1 мин)",
     "message":{
       "boothAlertNext":"You are about to DJ!",
       "boothAlertPos":"You are now %1 in the waitlist",
       "grab":"grabbed %1 - %2",
       "stats":"Статистика: %1 вутов -- %2 мехов -- %3 грабов",
-      "updates":"Сейчас играет: %1 - %2<br \/> Поставил: %3",
+      "updates":"Сейчас играет: %1 - %2<br /> Поставил: %3",
       "meh":"%1 людям не понравился этот трек",
       "join":"joined the room",
       "leave":"left the room",
       "history":"Песня в истории (%1 из %2)",
       "historySkipped":"Песня в истории (%1 из %2), но была пропущена в последнем проигрывании",
       "songLength":"Песня длиннее, чем %1 минут",
+      "songDeleted":"Song is deleted",
       "songPrivate":"Song is private",
+      "songRejected":"Song is rejected due to %1",
       "songNotFound":"Song not found",
       "songEmbed":"Song has embedding disabled",
       "songStreamable":"Song doesn't support streaming"
@@ -116,6 +118,7 @@
   "info":{
     "header":"Команды plugCubed",
     "name":"Имя",
+    "profile":"User Profile",
     "title":"Название",
     "specialTitles":{
       "developer":"Разработчик plugCubed",
@@ -137,10 +140,10 @@
     "points":"Баллы",
     "wootCount":"Количество Woot",
     "mehCount":"Количество Meh",
-    "ratio":"Соотношение Woot\/Meh",
+    "ratio":"Соотношение Woot/Meh",
     "djing":"Играет",
     "notInList":"Не на сцене, и не в списке",
-    "inWaitlist":"%1\/%2 в списке ожидания",
+    "inWaitlist":"%1/%2 в списке ожидания",
     "userDjing":"Сейчас играет %1 ",
     "userNextDJ":"Следующим играет %1 ",
     "disconnects":"Отключает",
@@ -165,6 +168,11 @@
     "infoHeaderCredits":"Эта комната использует специальные параметры %1",
     "infoDisable":"Вы можете отключить их в меню"
   },
+  "menuHeaders":{
+    "features":"Features",
+    "chatnotifs":"Chat Notifications",
+    "controlpanel":"Control Panel"
+  },
   "menu":{
     "autowoot":"Авто-woot",
     "autojoin":"Авто вход",
@@ -180,7 +188,14 @@
     "controlpanel":"Control Panel",
     "showdeletedmessages":"Show Deleted Messages",
     "visualizers":"RCS SoundCloud Visualizers",
-    "inlineuserinfo":"Inline User Info"
+    "inlineuserinfo":"Inline User Info",
+    "about":"About plugCubed",
+    "background":"Change background",
+    "chatcustomizations":"Chat Customizations",
+    "commands":"Chat commands",
+    "customcss":"Custom CSS",
+    "lowlagMode":"Low Lag Mode",
+    "workMode":"Work Mode"
   },
   "vote":{
     "meh":"Не нравится",
@@ -189,27 +204,69 @@
     "undecided":"Нерешенные",
     "djing":"Играет"
   },
+  "customchatcolors":{
+    "userRanksHeader":"User Ranks",
+    "chatnotifs":"Chat Notifications"
+  },
+  "panels":{
+    "about":{
+      "header":"Information about plug³",
+      "version":"Version",
+      "website":"Website",
+      "websiteText":"plug&#179; Website",
+      "translations":"Translations",
+      "translationsText":"plug&#179; Translations",
+      "websitetranslationsText":"plug&#179; Website Translations"
+    },
+    "background":{
+      "description":"Set your own room background"
+    },
+    "buttons":{
+      "cancel":"Cancel",
+      "clear":"Clear",
+      "submit":"Submit"
+    },
+    "chatcustomizations":{
+      "description":"Customize your chat with emojis, notifications, markdown, and other features",
+      "mentionSoundTitle":"Mention Sound %1",
+      "emotesHeader":"Emotes",
+      "chatenhancementHeader":"Chat Enhancements",
+      "emotesSetHeader":"Emoji Set"
+    },
+    "customcss":{
+      "description":"Set your own room CSS"
+    }
+  },
   "tooltip":{
     "stream":"Видео",
     "clear":"Очистить чат",
     "afk":"AFK сообщение",
     "reset":"Сбросить настройки",
     "muted":"Пропустить все песни",
-    "mutedOnce":"Пропустить текущую песню"
+    "mutedOnce":"Пропустить текущую песню",
+    "quickBan":"Ban user forever",
+    "quickMute":"Mute user for 45 mins",
+    "userInfo":"User Info"
   },
   "error":{
     "userNotFound":"Пользователь не найден",
     "alreadyInWaitList":"User %1 is already in waitlist",
     "notInWaitList":"User %1 is not in waitlist",
     "unknownMenuKey":"Неизвестный элемент меню: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: \/add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: \/ban @user or \/ban @user::time::reason",
+    "invalidAddSyntax":"Invalid syntax for add command. Usage: /add @user",
+    "invalidBanSyntax":"Invalid syntax for ban command. Usage: /ban @user or /ban @user::time::reason",
     "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: \/remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: \/whois @user",
+    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: /remove @user",
+    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: /whois @user",
     "errorGettingPlaylistInfo":"Error getting playlist info",
     "noPlaylistsFound":"No playlists found",
     "yourActivePlaylistIsFull":"Your active playlist is full",
     "noNextSong":"You have no queued song"
+  },
+  "video":{
+    "show":"Show",
+    "hide":"Hide",
+    "menushow":"Show Video",
+    "menuhide":"Hide Video"
   }
 }

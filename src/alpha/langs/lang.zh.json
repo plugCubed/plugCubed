@@ -194,8 +194,8 @@
     "chatcustomizations":"聊天自訂項",
     "commands":"聊天指令",
     "customcss":"自訂義 CSS",
-    "lowlagMode":"Low Lag Mode",
-    "workMode":"Work Mode"
+    "lowlagMode":"低遲滯模式",
+    "workMode":"工作模式"
   },
   "vote":{
     "meh":"負評",

@@ -194,8 +194,8 @@
     "chatcustomizations":"Prilagoditve klepeta",
     "commands":"Ukazi v klepetu",
     "customcss":"CSS po želji",
-    "lowlagMode":"Low Lag Mode",
-    "workMode":"Work Mode"
+    "lowlagMode":"Način majhnega zaostajanja",
+    "workMode":"Delovni način"
   },
   "vote":{
     "meh":"Meh",

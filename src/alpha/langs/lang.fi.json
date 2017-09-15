@@ -194,8 +194,8 @@
     "chatcustomizations":"Chatin mukauttaminen",
     "commands":"Chatin komennot",
     "customcss":"Mukautettu CSS",
-    "lowlagMode":"Low Lag Mode",
-    "workMode":"Work Mode"
+    "lowlagMode":"Pienen lagin tila",
+    "workMode":"Työtila"
   },
   "vote":{
     "meh":"Meh",
