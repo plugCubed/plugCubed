@@ -201,13 +201,13 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
             // plug.dj ranks
             if (!onlyP3) {
-                if (this.hasPermission(uid, 5, true)) {
+                if (this.hasPermission(uid, API.ROLE.HOST, true)) {
                     ranks.push(Lang.roles.admin);
-                } else if (this.hasPermission(uid, 4, true)) {
+                } else if (this.hasPermission(uid, API.ROLE.COHOST, true)) {
                     ranks.push(Lang.roles.leader);
-                } else if (this.hasPermission(uid, 3, true)) {
+                } else if (this.hasPermission(uid, API.ROLE.MANAGER, true)) {
                     ranks.push(Lang.roles.ambassador);
-                } else if (this.hasPermission(uid, 2, true)) {
+                } else if (this.hasPermission(uid, API.ROLE.BOUNCER, true)) {
                     ranks.push(Lang.roles.volunteer);
                 } else if (this.hasPermission(uid, API.ROLE.HOST)) {
                     ranks.push(Lang.roles.host);
@@ -495,13 +495,13 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     count: 0
                 });
 
-                if (this.hasPermission(user.id, 5, true)) {
+                if (this.hasPermission(user.id, API.ROLE.HOST, true)) {
                     rank = Lang.roles.admin;
-                } else if (this.hasPermission(user.id, 4, true)) {
+                } else if (this.hasPermission(user.id, API.ROLE.COHOST, true)) {
                     rank = Lang.roles.leader;
-                } else if (this.hasPermission(user.id, 3, true)) {
+                } else if (this.hasPermission(user.id, API.ROLE.MANAGER, true)) {
                     rank = Lang.roles.ambassador;
-                } else if (this.hasPermission(user.id, 2, true)) {
+                } else if (this.hasPermission(user.id, API.ROLE.BOUNCER, true)) {
                     rank = Lang.roles.volunteer;
                 } else if (this.hasPermission(user.id, API.ROLE.HOST)) {
                     rank = Lang.roles.host;
@@ -834,7 +834,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             user = API.getUser(user);
 
             if (user.gRole) {
-                return user.gRole === 5 ? 'admin' : 'ambassador';
+                return user.gRole === API.ROLE.HOST ? 'admin' : 'ambassador';
             }
 
             return ['regular', 'dj', 'bouncer', 'manager', 'cohost', 'host'][user.role || 0];

@@ -18,7 +18,7 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
                         this.$('.name i').css('background-image', 'url("https://plugcubed.net/scripts/alpha/images/ranks/p3special.' + specialIconInfo.icon + '.png")');
                     }
                 }
-                if (this.model.get('role') === 4) {
+                if (this.model.get('role') === API.ROLE.COHOST) {
                     this.$('.name i').removeClass('icon icon.chat-host').addClass('icon icon-chat-cohost');
                 }
             };
