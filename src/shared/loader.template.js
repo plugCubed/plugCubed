@@ -40,13 +40,26 @@
         var define = window.define;
         var plugCubed = window.plugCubed;
 
+        require.config({
+            paths:{
+                raven:'https://cdn.ravenjs.com/3.17.0/raven.min'
+            }
+        });
+
         if (typeof plugCubed !== 'undefined') {
             plugCubed.close();
         }
         <%= code %>
-        require(['plugCubed/Loader'], function(Loader) {
+        require(['plugCubed/Loader', 'raven', 'plugCubed/Version'], function(Loader, Raven, Version) {
+
+            if (typeof Raven !== 'undefined') {
+                Raven.config('https://a0f31a6f42e14b42a0eb5383f1bf7647@sentry.tfle.xyz/5', {
+                    debug: true,
+                    release: Version.getSemver()
+                }).install().noConflict();
+            }
             window.plugCubed = new Loader();
-            if  (typeof console.time === 'function') console.time('[plug³] Loaded')
+            if (typeof console.time === 'function') console.time('[plug³] Loaded')
         });
     } else {
         setTimeout(loading, 20);
