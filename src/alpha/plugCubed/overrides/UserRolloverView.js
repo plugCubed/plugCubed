@@ -1,5 +1,5 @@
 define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/Lang'], function($, OverrideHandler, p3Utils, p3Lang) {
-    var Context, CurrentUser, Handler, UserRolloverView, quickBan, quickMute, quickInfo;
+    var Context, CurrentUser, Handler, UserRolloverView;
 
     Context = window.plugCubedModules.context;
     CurrentUser = window.plugCubedModules.CurrentUser;
@@ -29,15 +29,15 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
                     if (this.$p3VoteIcon == null) {
                         this.$p3VoteIcon = $('<i>');
                     }
-                    if ((CurrentUser.get('role') > a.get('role')) || CurrentUser.get('gRole') > 0) {
-                        quickBan = $('<div>').addClass('action p3-qban').append($('<i>').addClass('icon-p3-qban'));
-                        quickMute = $('<div>').addClass('action p3-qmute').append($('<i>').addClass('icon-p3-qmute'));
-                        quickInfo = $('<div>').addClass('action p3-qinfo').append($('<i>').addClass('icon icon-user-white'));
+                    if (((CurrentUser.get('role') > this.user.get('role')) || CurrentUser.get('gRole') > 0) && this.user.get('gRole') === 0) {
+                        this.$quickBan = $('<div>').addClass('action p3-qban').append($('<i>').addClass('icon-p3-qban'));
+                        this.$quickMute = $('<div>').addClass('action p3-qmute').append($('<i>').addClass('icon-p3-qmute'));
+                        this.$quickInfo = $('<div>').addClass('action p3-qinfo').append($('<i>').addClass('icon icon-user-white'));
 
-                        quickBan.on({
+                        this.$quickBan.on({
                             click: function() {
                                 Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickBan'), $(this), true);
-                                p3Utils.banUser(a.id, API.BAN.PERMA);
+                                p3Utils.banUser(this.user.get('id'), API.BAN.PERMA);
                                 this.cleanup();
                             }.bind(this),
                             mouseenter: function() {
@@ -47,10 +47,10 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
                                 Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickBan'), $(this), true);
                             }
                         });
-                        quickInfo.on({
+                        this.$quickInfo.on({
                             click: function() {
                                 Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.userInfo'), $(this), true);
-                                p3Utils.getUserInfo(a.id);
+                                p3Utils.getUserInfo(this.user.get('id'));
                                 this.cleanup();
                             }.bind(this),
                             mouseenter: function() {
@@ -60,10 +60,10 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
                                 Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.userInfo'), $(this), true);
                             }
                         });
-                        quickMute.on({
+                        this.$quickMute.on({
                             click: function() {
                                 Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickMute'), $(this), true);
-                                p3Utils.muteUser(a.id, API.MUTE.LONG);
+                                p3Utils.muteUser(this.user.get('id'), API.MUTE.LONG);
                                 this.cleanup();
                             }.bind(this),
                             mouseenter: function() {
@@ -74,13 +74,13 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
                             }
                         });
                         if (!this.$el.find('.actions .p3-qban').length && !this.$el.find('.actions .rcs-qban').length) {
-                            actions.append(quickBan);
+                            actions.append(this.$quickBan);
                         }
                         if (!this.$el.find('.actions .p3-qmute').length && !this.$el.find('.actions .rcs-qmute').length) {
-                            actions.append(quickMute);
+                            actions.append(this.$quickMute);
                         }
                         if (!this.$el.find('.actions .p3-qinfo').length && !this.$el.find('.actions .rcs-qinfo').length) {
-                            actions.append(quickInfo);
+                            actions.append(this.$quickInfo);
                         }
                     }
 
@@ -138,14 +138,14 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
                 if (this.$p3VoteIcon != null) {
                     this.$p3VoteIcon.empty();
                 }
-                if (quickBan != null) {
-                    quickBan.remove();
+                if (this.$quickBan != null) {
+                    this.$quickBan.remove();
                 }
-                if (quickInfo != null) {
-                    quickInfo.remove();
+                if (this.$quickInfo != null) {
+                    this.$quickInfo.remove();
                 }
-                if (quickMute != null) {
-                    quickMute.remove();
+                if (this.$quickMute != null) {
+                    this.$quickMute.remove();
                 }
                 this.$meta.removeClass('has-p3Role is-p3developer is-p3sponsor is-p3special is-p3ambassador is-p3donatorDiamond is-p3donatorPlatinum is-p3donatorGold is-p3donatorSilver is-p3donatorBronze rank-regular rank-residentdj rank-bouncer rank-manager rank-cohost rank--host rank-ambassador rank-admin');
             };
