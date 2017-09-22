@@ -133,9 +133,11 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                     } else {
 
                         // DeviantArt links
-                        var daTests = [/http:\/\/[a-z\-\.]+\.deviantart.com\/art\/[0-9a-zA-Z:\-]+/,
+                        var daTests = [
+                            /http:\/\/[a-z\-\.]+\.deviantart.com\/art\/[0-9a-zA-Z:\-]+/,
                             /http:\/\/[a-z\-\.]+\.deviantart.com\/[0-9a-zA-Z:\-]+#\/[0-9a-zA-Z:\-]+/,
-                            /http:\/\/fav.me\/[0-9a-zA-Z]+/, /http:\/\/sta.sh\/[0-9a-zA-Z]+/];
+                            /http:\/\/fav.me\/[0-9a-zA-Z]+/, /http:\/\/sta.sh\/[0-9a-zA-Z]+/
+                        ];
 
                         for (var i in daTests) {
                             if (daTests.hasOwnProperty(i) && daTests[i].test(url)) {
@@ -148,13 +150,13 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                     // If supported image link
                     if (imageURL != null) {
                         var image = $('<img>')
-                        .attr('src', imageURL)
-                        .css({
-                            display: 'block',
-                            'max-width': '100%',
-                            height: 'auto',
-                            margin: '0 auto'
-                        });
+                            .attr('src', imageURL)
+                            .css({
+                                display: 'block',
+                                'max-width': '100%',
+                                height: 'auto',
+                                margin: '0 auto'
+                            });
 
                         $(this).html(image);
                     }
@@ -234,11 +236,11 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
         return tokenize(text).reduce(function(string, token) {
             return string + (
                 token.type === 'em' ? '<em>' + transform(token.text) + '</em>' :
-                token.type === 'strong' ? '<strong>' + transform(token.text) + '</strong>' :
-                token.type === 'code' ? '<code>' + token.text + '</code>' :
-                token.type === 'quote' ? '<blockquote class="p3-blockquote">' + token.text + '</blockquote>' :
-                token.type === 'strike' ? '<span class="p3-strike">' + transform(token.text) + '</span>' :
-                token.text
+                    token.type === 'strong' ? '<strong>' + transform(token.text) + '</strong>' :
+                        token.type === 'code' ? '<code>' + token.text + '</code>' :
+                            token.type === 'quote' ? '<blockquote class="p3-blockquote">' + token.text + '</blockquote>' :
+                                token.type === 'strike' ? '<span class="p3-strike">' + transform(token.text) + '</span>' :
+                                    token.text
             );
         }, '');
     }
@@ -276,10 +278,14 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                 convertEmoteByType(
                     convertEmoteByType(
                         convertEmoteByType(text, 'twitchEmotes'),
-                        'tastyEmotes'),
-                    'twitchSubEmotes'),
-                'bttvEmotes'),
-            'ffzEmotes');
+                        'tastyEmotes'
+                    ),
+                    'twitchSubEmotes'
+                ),
+                'bttvEmotes'
+            ),
+            'ffzEmotes'
+        );
     }
 
     function onChatReceived(data) {

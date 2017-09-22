@@ -2,5 +2,5 @@ module.exports = {
     major: 4,
     minor: 5,
     patch: 1,
-    build: 7
+    build: 8
 };

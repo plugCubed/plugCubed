@@ -220,13 +220,11 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
                     .append($emojiSetApple.getJQueryElement())
                     .append($emojiSetGoogle.getJQueryElement())
                     .append($emojiSetEmojione.getJQueryElement())
-                    .append($emojiSetTwitter.getJQueryElement())
-                )
+                    .append($emojiSetTwitter.getJQueryElement()))
                 .append($('<div>').addClass('p3-control-right')
                     .append(ControlPanel.header(p3Lang.i18n('panels.chatcustomizations.chatenhancementHeader')).getJQueryElement())
                     .append($markdownItem.getJQueryElement())
-                    .append($dropdown)
-                );
+                    .append($dropdown));
 
             panel.addContent($contentDiv);
         },

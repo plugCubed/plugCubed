@@ -837,7 +837,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 return user.gRole === API.ROLE.HOST ? 'admin' : 'ambassador';
             }
 
-            return ['regular', 'dj', 'bouncer', 'manager', 'cohost', 'host'][user.role || 0];
+            return ['regular', 'dj', 'bouncer', 'manager', 'cohost', 'host'][(user.role > 999 ? user.role / 1000 : user.role) || 0];
         },
         logColors: {
             userCommands: '66FFFF',

@@ -92,7 +92,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                         (function() {
                             var dj = API.getDJ();
 
-                            if (dj === null || dj.id === API.getUser().id) return;
+                            if (dj == null || dj.id === API.getUser().id) return;
                             $('#woot').click();
                         })();
                     }

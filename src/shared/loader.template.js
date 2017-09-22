@@ -55,7 +55,11 @@
             if (typeof Raven !== 'undefined') {
                 Raven.config('https://a0f31a6f42e14b42a0eb5383f1bf7647@sentry.tfle.xyz/5', {
                     debug: true,
-                    release: Version.getSemver()
+                    release: Version.getSemver(),
+                    user: {
+                        id: API.getUser().id,
+                        username: API.getUser().username
+                    }
                 }).install().noConflict();
             }
             window.plugCubed = new Loader();

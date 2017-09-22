@@ -67,7 +67,9 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
             }
         },
         onSkip: function() {
-            history[1].wasSkipped = true;
+            if (history[1]) {
+                history[1].wasSkipped = true;
+            }
         },
         getHistory: function() {
             history = [];

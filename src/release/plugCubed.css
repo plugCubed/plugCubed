@@ -223,7 +223,8 @@
     height: 54px;
     cursor: pointer;
     background: #282C35;
-    box-shadow: inset 0 -2px 0 -1px #0a0a0a;
+    -webkit-box-shadow: inset 0 -2px 0 -1px #0a0a0a;
+            box-shadow: inset 0 -2px 0 -1px #0a0a0a;
     border-right: 1px solid #0A0A0A;
 }
 
@@ -1021,6 +1022,8 @@ i.icon.icon-chat-p3donatorBronze,
     background: #FF5CDE;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FF5CDE), color-stop(100%, #5700FF));
     background: -webkit-linear-gradient(top, #FF5CDE 0, #5700FF 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FF5CDE), to(#5700FF));
+    background: -o-linear-gradient(top, #FF5CDE 0, #5700FF 100%);
     background: linear-gradient(to bottom, #FF5CDE 0, #5700FF 100%);
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='$purple2', endColorstr='$purple1', GradientType=0);
 }
@@ -1061,7 +1064,8 @@ i.icon.icon-chat-p3donatorBronze,
     left: 108px;
     overflow: hidden;
     width: 170px;
-    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 13px;
     background-repeat: no-repeat;

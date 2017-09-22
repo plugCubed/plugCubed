@@ -28,17 +28,20 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
                         if (data.message.indexOf('/em') === 0 || data.message.indexOf('/me') === 0) {
                             console.log(
                                 p3Utils.getTimestamp() + ' \uD83D\uDCAC %c ' + cid + '%c' + name + ': %c' + message,
-                                '', 'font-weight: bold', 'font-style: italic');
+                                '', 'font-weight: bold', 'font-style: italic'
+                            );
                         } else {
                             console.log(
                                 p3Utils.getTimestamp() + ' \uD83D\uDCAC %c ' + cid + '%c' + name + ': %c' + message,
-                                '', 'font-weight: bold', '');
+                                '', 'font-weight: bold', ''
+                            );
                         }
                     }
                 } else if (data.type.indexOf('moderation') > -1 && Settings.chatLog) {
                     console.info(
                         p3Utils.getTimestamp() + ' \uD83D\uDCAC %c ' + p3Utils.repeatString(' ', 25) + '%c' + name + ': %c' + message,
-                        '', 'font-weight: bold', 'color: #ac76ff');
+                        '', 'font-weight: bold', 'color: #ac76ff'
+                    );
                 }
             } else if (data.type.indexOf('system') > -1 && Settings.chatLog) {
                 var style = 'font-size: 1.2em; font-weight: bold; border: 1px solid #42a5dc';
