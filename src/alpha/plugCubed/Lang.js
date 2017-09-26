@@ -9,29 +9,32 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
         loaded: false,
         init: function() {
             that = this;
-            $.getJSON('https://plugcubed.net/scripts/alpha/lang.json?v=' + Version.getSemver(), function(a) {
-                that.allLangs = a;
-            }).done(function() {
-                if (that.allLangs.length === 1) API.chatLog('Error loading language info for plug³');
-                that.loadDefault();
-            }).fail(function() {
-                API.chatLog('Error loading language info for plug³');
-                that.loadDefault();
-            });
+            $.getJSON('https://plugcubed.net/scripts/alpha/lang.json?v=' + Version.getSemver())
+                .done(function(data) {
+                    that.allLangs = data;
+                    if (that.allLangs.length === 1) API.chatLog('Error loading language info for plug³');
+                    that.loadDefault();
+                })
+                .fail(function() {
+                    API.chatLog('Error loading language info for plug³');
+                    that.loadDefault();
+                });
         },
 
         /**
          * Load default language (English) from server.
          */
         loadDefault: function() {
-            $.getJSON('https://plugcubed.net/scripts/alpha/langs/lang.en.json?v=' + Version.getSemver(), function(languageData) {
-                defaultLanguage = languageData;
-                that.defaultLoaded = true;
-            }).error(function() {
-                setTimeout(function() {
-                    that.loadDefault();
-                }, 500);
-            });
+            $.getJSON('https://plugcubed.net/scripts/alpha/langs/lang.en.json?v=' + Version.getSemver())
+                .done(function(languageData) {
+                    defaultLanguage = languageData;
+                    that.defaultLoaded = true;
+                })
+                .fail(function() {
+                    setTimeout(function() {
+                        that.loadDefault();
+                    }, 500);
+                });
         },
 
         /**
@@ -54,35 +57,37 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
                 this.curLang = 'en';
                 this.loaded = true;
                 if (typeof callback === 'function') {
-                    callback();
+                    setTimeout(callback, 0);
 
                     return;
                 }
 
                 return;
             }
-            $.getJSON('https://plugcubed.net/scripts/alpha/langs/lang.' + lang + '.json?v=' + Version.getSemver(), function(languageData) {
-                language = {};
-                _.extend(language, defaultLanguage, languageData);
-                that.curLang = lang;
-                that.loaded = true;
-                if (typeof callback === 'function') {
-                    callback();
+            $.getJSON('https://plugcubed.net/scripts/alpha/langs/lang.' + lang + '.json?v=' + Version.getSemver())
+                .done(function(languageData) {
+                    language = {};
+                    _.extend(language, defaultLanguage, languageData);
+                    that.curLang = lang;
+                    that.loaded = true;
+                    if (typeof callback === 'function') {
+                        setTimeout(callback, 0);
 
-                    return;
-                }
-            }).error(function() {
-                console.log('[plug³ Lang] Couldn\'t load language file for ' + lang);
-                language = {};
-                _.extend(language, defaultLanguage);
-                that.curLang = 'en';
-                that.loaded = true;
-                if (typeof callback === 'function') {
-                    callback();
+                        return;
+                    }
+                })
+                .fail(function() {
+                    console.log('[plug³ Lang] Couldn\'t load language file for ' + lang);
+                    language = {};
+                    _.extend(language, defaultLanguage);
+                    that.curLang = 'en';
+                    that.loaded = true;
+                    if (typeof callback === 'function') {
+                        setTimeout(callback, 0);
 
-                    return;
-                }
-            });
+                        return;
+                    }
+                });
         },
 
         /**
@@ -113,12 +118,10 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
 
             return a;
         },
-        allLangs: [
-            {
-                file: 'en',
-                name: 'English'
-            }
-        ]
+        allLangs: [{
+            file: 'en',
+            name: 'English'
+        }]
     });
 
     return new Lang();
