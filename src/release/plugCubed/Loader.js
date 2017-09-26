@@ -9,7 +9,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
     function __init() {
         p3Utils.chatLog(undefined, p3Lang.i18n('running', Version) + '</span><br><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), Settings.colors.infoMessage1, -10);
 
-        $('head').append('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://plugcubed.net/scripts/release/plugCubed.css?v=' + Date.now() + '"/>');
+        $('head').append('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://plugcubed.net/scripts/release/plugCubed.css?v=' + Version.getSemver() + '"/>');
 
         /*
          * Fix user data consistency. As plug.dj only grabs users at first with /_/rooms/state.
@@ -37,7 +37,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
                     for (var i = 0; i < userData.length; i++) {
                         var userDataItem = userData[i];
 
-                        if (requireUsers.get(userDataItem.id) != null) {
+                        if (requireUsers.get(userDataItem.id) != null && userDataItem.lang !== null) {
                             requireUsers.get(userDataItem.id).set(userDataItem);
                         }
                     }
