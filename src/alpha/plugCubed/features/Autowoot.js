@@ -11,7 +11,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
     Handler = TriggerHandler.extend({
         trigger: 'advance',
         handler: function(data) {
-            if (!data.media || !Settings.autowoot || !RoomSettings.rules.allowAutowoot) return;
+            if (!data.media || !Settings.autowoot || !RoomSettings.rules.allowAutowoot || Settings.registeredSongs.indexOf(data.media.id) > -1) return;
             setTimeout(function() {
                 woot();
             }, p3Utils.randomRange(1, 10) * 1000);
