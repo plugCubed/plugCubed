@@ -31,7 +31,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
 
                 lastIndex = messageData.args.toLowerCase().indexOf(user.username.toLowerCase());
                 if (lastIndex > -1) {
-                    messageData.args = messageData.args.substr(0, lastIndex).replace('@', '') + '%MENTION-' + random + '-' + messageData.mentions.length + '% ' + messageData.args.substr(lastIndex + user.username.length + 1);
+                    messageData.args = messageData.args.substr(0, lastIndex) + '%MENTION-' + random + '-' + messageData.mentions.length + '% ' + messageData.args.substr(lastIndex + user.username.length + 1);
                     messageData.mentions.push(user);
                 }
             }
@@ -42,14 +42,21 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 if (isFinite(Number(messageData.args[i])) && messageData.args[i] !== '') {
                     messageData.args[i] = Number(messageData.args[i]);
                 }
-                if (messageData.args[i] === '') delete messageData.args[i];
             }
         }
 
         // Mention placeholder => User object
         if (messageData.mentions.length > 0) {
             for (i = 0; i < messageData.mentions.length; i++) {
-                messageData.args[messageData.args.indexOf('%MENTION-' + random + '-' + i + '%')] = messageData.mentions[i];
+                var normalIndex = messageData.args.indexOf('%MENTION-' + random + '-' + i + '%');
+                var atIndex = messageData.args.indexOf('@%MENTION-' + random + '-' + i + '%');
+
+                if (normalIndex > -1) {
+                    messageData.args[normalIndex] = messageData.mentions[i];
+                }
+                if (atIndex > -1) {
+                    messageData.args[atIndex] = messageData.mentions[i];
+                }
             }
         }
         messageData.mappedArgs = messageData.args.map(function(item) {
@@ -59,7 +66,6 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
 
             return item;
         });
-        console.log(messageData);
 
         return messageData;
     }
