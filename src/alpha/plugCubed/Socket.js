@@ -142,7 +142,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Versi
             roomInitSent = false;
         },
         send: function(msg) {
-            if (typeof msg === 'string') {
+            if (typeof msg === 'string' && this.getState() === WebSocket.OPEN) {
                 socket.send(msg);
             }
         }
