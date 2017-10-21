@@ -207,8 +207,14 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     ranks.push(Lang.roles.leader);
                 } else if (this.hasPermission(uid, API.ROLE.MANAGER, true)) {
                     ranks.push(Lang.roles.ambassador);
+                } else if (this.hasPermission(uid, 2500, true)) {
+                    ranks.push(Lang.roles.sitemod);
                 } else if (this.hasPermission(uid, API.ROLE.BOUNCER, true)) {
                     ranks.push(Lang.roles.volunteer);
+                } else if (this.hasPermission(uid, 750, true)) {
+                    ranks.push(Lang.roles.plot);
+                } else if (this.hasPermission(uid, 500, true)) {
+                    ranks.push(Lang.roles.promoter);
                 } else if (this.hasPermission(uid, API.ROLE.HOST)) {
                     ranks.push(Lang.roles.host);
                 } else if (this.hasPermission(uid, API.ROLE.COHOST)) {
@@ -372,9 +378,18 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     if (this.hasPermission(fromUser.id, API.ROLE.HOST, true)) {
                         $message.addClass('from-admin');
                         $from.addClass('admin').append('<i class="icon icon-chat-admin"></i>');
+                    } else if (this.hasPermission(fromUser.id, 2500, true)) {
+                        $message.addClass('from-sitemod');
+                        $from.addClass('sitemod').append('<i class="icon icon-chat-sitemod"></i>');
                     } else if (this.hasPermission(fromUser.id, API.ROLE.BOUNCER, true)) {
                         $message.addClass('from-ambassador');
                         $from.addClass('ambassador').append('<i class="icon icon-chat-ambassador"></i>');
+                    } else if (this.hasPermission(fromUser.id, 750, true)) {
+                        $message.addClass('from-plot');
+                        $from.addClass('plot').append('<i class="icon icon-chat-plot"></i>');
+                    } else if (this.hasPermission(fromUser.id, 500, true)) {
+                        $message.addClass('from-promoter');
+                        $from.addClass('plot').append('<i class="icon icon-chat-promoter"></i>');
                     } else if (this.hasPermission(fromUser.id, API.ROLE.BOUNCER)) {
                         $from.addClass('staff');
                         if (this.hasPermission(fromUser.id, API.ROLE.HOST)) {
@@ -421,10 +436,14 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             }
         },
         getRoomID: function() {
-            return document.location.pathname.split('/')[1];
+            var defaultID = document.location.pathname.split('/')[1];
+
+            return this.objectSelector(window.plugCubedModules, 'room.attributes.slug', defaultID).trim();
         },
         getRoomName: function() {
-            return $('#room-name').text().trim();
+            var $roomName = $('#room-name').text().trim();
+
+            return this.objectSelector(window.plugCubedModules, 'room.attributes.name', $roomName).trim();
         },
         getUserData: function(uid, key, defaultValue) {
             if (plugcubedUserData[uid] == null || plugcubedUserData[uid][key] == null) {
@@ -501,8 +520,14 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     rank = Lang.roles.leader;
                 } else if (this.hasPermission(user.id, API.ROLE.MANAGER, true)) {
                     rank = Lang.roles.ambassador;
+                } else if (this.hasPermission(user.id, 2500, true)) {
+                    rank = Lang.roles.sitemod;
                 } else if (this.hasPermission(user.id, API.ROLE.BOUNCER, true)) {
                     rank = Lang.roles.volunteer;
+                } else if (this.hasPermission(user.id, 750, true)) {
+                    rank = Lang.roles.plot;
+                } else if (this.hasPermission(user.id, 500, true)) {
+                    rank = Lang.roles.promoter;
                 } else if (this.hasPermission(user.id, API.ROLE.HOST)) {
                     rank = Lang.roles.host;
                 } else if (this.hasPermission(user.id, API.ROLE.COHOST)) {
@@ -834,7 +859,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             user = API.getUser(user);
 
             if (user.gRole) {
-                return user.gRole === API.ROLE.HOST ? 'admin' : 'ambassador';
+                return user.gRole === API.ROLE.HOST ? 'admin' : user.gRole === API.ROLE.COHOST ? 'leader' : user.gRole === API.ROLE.MANAGER ? 'ambassador' : user.gRole === 2500 ? 'sitemod' : user.gRole === API.ROLE.BOUNCER ? 'volunteer' : user.gRole === 750 ? 'plot' : user.grole === 500 ? 'promoter' : 'none';
             }
 
             return ['regular', 'dj', 'bouncer', 'manager', 'cohost', 'host'][(user.role > 999 ? user.role / 1000 : user.role) || 0];
@@ -848,10 +873,11 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
         objectSelector: function(obj, selector, defaultValue) {
             var a = obj;
 
+            if (typeof a === 'object' && a == null) return defaultValue;
+
             var key = selector.split('.');
 
-            for (var i in key) {
-                if (!key.hasOwnProperty(i)) continue;
+            for (var i = 0; i < key.length; i++) {
                 if (a[key[i]] == null) {
                     return defaultValue;
                 }
