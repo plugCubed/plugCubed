@@ -1,7 +1,7 @@
 define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/RoomSettings'], function(Class, p3Utils, p3Lang, Settings, RoomSettings) {
     var twitchEmoteTemplate, Context, PopoutView, plugEmotes, regEmotes, start;
 
-    twitchEmoteTemplate = '';
+    twitchEmoteTemplate = 'https:\/\/static-cdn.jtvnw.net\/emoticons\/v1\/{image_id}\/1.0';
     Context = window.plugCubedModules.context;
     PopoutView = window.plugCubedModules.PopoutView;
     plugEmotes = window.plugCubedModules.emoji;
@@ -450,12 +450,11 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
             if (RoomSettings.rules.allowEmotes === false || !Settings.emotes.twitchEmotes) return;
             start = performance.now();
 
-            $.getJSON('https://twitchemotes.com/api_cache/v2/global.json')
+            $.getJSON('https://api.plugcubed.net/twitchemotes')
                 .done(function(data) {
-                    twitchEmoteTemplate = data.template.small;
                     var i, emotes, twitchEmotes;
 
-                    emotes = data.emotes;
+                    emotes = data;
                     twitchEmotes = window.plugCubed.emotes.twitchEmotes = {};
 
                     for (i in emotes) {
@@ -463,7 +462,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                         twitchEmotes[':' + i.toLowerCase() + ':'] = {
                             emote: i,
                             emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(i.toLowerCase()) + ':)', 'gi'),
-                            imageURL: twitchEmoteTemplate.replace('{image_id}', emotes[i].image_id),
+                            imageURL: twitchEmoteTemplate.replace('{image_id}', emotes[i].id),
                             type: 'twitchemote'
                         };
                     }
@@ -480,12 +479,12 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
             if (RoomSettings.rules.allowEmotes === false || !Settings.emotes.twitchSubEmotes) return;
             start = performance.now();
 
-            $.getJSON('https://twitchemotes.com/api_cache/v2/subscriber.json')
+            $.getJSON('https://api.plugcubed.net/twitchsubscriberemotes')
                 .done(function(data) {
                     var i, j, channels, twitchSubEmotes;
 
                     twitchSubEmotes = window.plugCubed.emotes.twitchSubEmotes = {};
-                    channels = data.channels;
+                    channels = data;
 
                     for (i in channels) {
                         if (!channels.hasOwnProperty(i)) continue;
@@ -501,7 +500,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                                 twitchSubEmotes[':' + emotes[j].code.toLowerCase() + ':'] = {
                                     emote: emotes[j].code,
                                     emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(emotes[j].code.toLowerCase()) + ':)', 'gi'),
-                                    imageURL: twitchEmoteTemplate.replace('{image_id}', emotes[j].image_id),
+                                    imageURL: twitchEmoteTemplate.replace('{image_id}', emotes[j].id),
                                     type: 'twitchsubemote'
                                 };
                             }
