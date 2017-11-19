@@ -291,7 +291,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             container.append($('<div class="spacer">').append($('<div class="divider">')));
 
             // Notification
-            container.append($('<div class="section">' + p3Lang.i18n('notify.header') + '</div>'));
+            container.append($('<div class="section">' + p3Lang.i18n('menuHeaders.chatnotifs') + '</div>'));
 
             container.append(guiButton((Settings.notify & enumNotifications.USER_JOIN) === enumNotifications.USER_JOIN, 'notify-join', p3Lang.i18n('notify.join')).data('bit', enumNotifications.USER_JOIN));
             container.append(guiButton((Settings.notify & enumNotifications.USER_LEAVE) === enumNotifications.USER_LEAVE, 'notify-leave', p3Lang.i18n('notify.leave')).data('bit', enumNotifications.USER_LEAVE));
