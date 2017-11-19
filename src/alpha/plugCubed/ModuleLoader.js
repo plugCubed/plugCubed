@@ -158,6 +158,9 @@ define(['plugCubed/Class'], function(Class) {
                                             break;
                                         case !m.prototype:
                                             switch (false) {
+                                                case !(m.prototype.defaults && 'avatarID' in m.prototype.defaults && 'role' in m.prototype.defaults):
+                                                    moduleName = 'User';
+                                                    break;
                                                 case m.prototype.id !== 'user-inventory':
                                                     moduleName = 'userInventory';
                                                     break;
@@ -245,6 +248,13 @@ define(['plugCubed/Class'], function(Class) {
                 }
             }
             window.plugCubedModules.Lang = require('lang/Lang');
+            window.plugCubedModules.GROLE = {
+                ADMIN: (window.plugCubedModules.User && window.plugCubedModules.User.ADMIN) || 5000,
+                AMBASSADOR: (window.plugCubedModules.User && window.plugCubedModules.User.AMBASSADOR) || 3000,
+                PLOT: (window.plugCubedModules.User && window.plugCubedModules.User.PLOT) || 750,
+                PROMOTER: (window.plugCubedModules.User && window.plugCubedModules.User.PROMOTER) || 500,
+                SITEMOD: (window.plugCubedModules.User && window.plugCubedModules.User.SITEMOD) || 2500
+            };
             for (i = 0; i < (ref2 = window.plugCubedModules.room._events['change:name'] || window.plugCubedModules.context._events['show:room'] || window.plugCubedModules.Layout._events.resize || []).length; i++) {
                 cb = ref2[i];
                 if (cb.ctx.room) {

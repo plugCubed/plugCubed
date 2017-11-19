@@ -1,5 +1,5 @@
 define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function(Class, p3Lang) {
-    var cleanHTMLMessage, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PlugUI, PopoutView;
+    var cleanHTMLMessage, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PlugUI, PopoutView, html2text, Settings;
 
     if (typeof window.plugCubedUserData === 'undefined') {
         window.plugCubedUserData = {};
@@ -55,6 +55,36 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             }
         });
 
+    html2text = function(html) {
+        if (!html) return '';
+
+        var doc;
+
+        // use DOMParser for html
+        try {
+            var parser = new DOMParser();
+
+            doc = parser.parseFromString(html, 'text/html');
+        } catch (ex) { /* noop */ }
+
+        // fallback to document.implementation
+        if (!doc) {
+            try {
+                doc = document.implementation.createHTMLDocument('');
+                if (/<\/?(html|head|body)[>]*>/gi.test(html)) {
+                    doc.documentElement.innerHTML = html;
+                } else {
+                    doc.body.innerHTML = html;
+                }
+            } catch (ex2) { /* noop */ }
+        }
+
+        if (doc) return doc.body.textContent || doc.body.text || doc.body.innerText;
+
+        // fallback to old method (warnings on mixed content)
+        return $('<div/>').html(html).text();
+    };
+
     var Handler = Class.extend({
         proxifyImage: function(url) {
             if (!this.startsWithIgnoreCase(url, 'https://api.plugCubed.net/proxy/')) {
@@ -64,7 +94,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return url;
         },
         escapeRegex: function(text) {
-            return text.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+            return text.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
         },
         getHighestRank: function(uid) {
             if (!uid) {
@@ -101,7 +131,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
         },
         generateEmoteHash: function() {
-            var i, emoteHash, allEmotes, firstChar, emoji, Settings;
+            var i, emoteHash, allEmotes, firstChar, emoji;
 
             Settings = require('plugCubed/Settings');
             emoteHash = window.plugCubed.emotes.emoteHash = {};
@@ -201,19 +231,19 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
             // plug.dj ranks
             if (!onlyP3) {
-                if (this.hasPermission(uid, API.ROLE.HOST, true)) {
+                if (this.hasPermission(uid, window.plugCubedModules.GROLE.ADMIN, true)) {
                     ranks.push(Lang.roles.admin);
                 } else if (this.hasPermission(uid, API.ROLE.COHOST, true)) {
                     ranks.push(Lang.roles.leader);
-                } else if (this.hasPermission(uid, API.ROLE.MANAGER, true)) {
+                } else if (this.hasPermission(uid, window.plugCubedModules.GROLE.AMBASSADOR, true)) {
                     ranks.push(Lang.roles.ambassador);
-                } else if (this.hasPermission(uid, 2500, true)) {
+                } else if (this.hasPermission(uid, window.plugCubedModules.GROLE.SITEMOD, true)) {
                     ranks.push(Lang.roles.sitemod);
                 } else if (this.hasPermission(uid, API.ROLE.BOUNCER, true)) {
                     ranks.push(Lang.roles.volunteer);
-                } else if (this.hasPermission(uid, 750, true)) {
+                } else if (this.hasPermission(uid, window.plugCubedModules.GROLE.PLOT, true)) {
                     ranks.push(Lang.roles.plot);
-                } else if (this.hasPermission(uid, 500, true)) {
+                } else if (this.hasPermission(uid, window.plugCubedModules.GROLE.PROMOTER, true)) {
                     ranks.push(Lang.roles.promoter);
                 } else if (this.hasPermission(uid, API.ROLE.HOST)) {
                     ranks.push(Lang.roles.host);
@@ -304,9 +334,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return special[uid];
         },
         html2text: function(html) {
-            if (!html) return '';
-
-            return $('<div/>').html(html).text();
+            return html2text(html);
         },
         cleanHTML: function(msg, disallow, extraAllow) {
             return cleanHTMLMessage(msg, disallow, extraAllow);
@@ -328,7 +356,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return new Array(count + 1).join(str);
         },
         chatLog: function(type, message, color, fromID, fromName) {
-            var $chat, b, $message, $box, $msg, $text, $msgSpan, $timestamp, $from, fromUser, chat;
+            var $chat, b, $message, $box, $msg, $text, $msgSpan, $timestamp, $from, fromUser, chat, lastMessage, lastMessageData;
 
             chat = window.plugCubedModules.chat;
 
@@ -343,7 +371,11 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             b = $chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - 20;
 
             $message = $('<div>').addClass('message');
-            $box = $('<div>').addClass('badge-box').data('uid', fromID ? fromID : 'p3').data('type', type);
+            if (require('plugCubed/Settings').badges) {
+                $box = $('<div>').addClass('badge-box').data('uid', fromID ? fromID : 'p3').data('type', type);
+            } else {
+                $box = $('<div style="display: inline !important;">').addClass('badge-box').data('uid', fromID ? fromID : 'p3').data('type', type);
+            }
             $timestamp = $('<span>').addClass('timestamp').text(this.getTimestamp());
             $from = $('<div>').addClass('from').append($('<span>').addClass('un')).append($timestamp);
             $msg = $('<div>').addClass('msg').append($from);
@@ -356,6 +388,17 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             }
             $msgSpan.css('color', this.toRGB(color && this.isRGB(color) ? color : 'd1d1d1'));
             $box.append('<i class="icon icon-plugcubed"></i>');
+            $box.click(function() {
+                $(this).parent().remove();
+            }).mouseover(function() {
+                $(this).find('.icon').removeClass().addClass('icon icon-x-grey').css({
+                    cursor: 'pointer'
+                });
+            }).mouseout(function() {
+                $(this).find('.icon').removeClass().addClass('icon icon-plugcubed').css({
+                    cursor: 'default'
+                });
+            });
 
             if (fromID) {
                 fromUser = API.getUser(fromID);
@@ -365,29 +408,48 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
                 if (fromUser != null && fromUser.username != null) {
                     if (lastSender === fromUser.id) {
-                        lastMessageContainer.find('.text').append('<br>').append($msgSpan);
+                        lastMessage = lastMessageContainer.find('.text');
+                        lastMessageData = lastMessageContainer.data('lastMessageData') || {};
+
+                        if (lastMessage.text().indexOf('Stats:') > -1) {
+                            $chat.append($message.append($box).append($msg.append($text)));
+                        } else if (lastMessageData[fromUser.id] && lastMessageData[fromUser.id].count) {
+                            lastMessage.html($msgSpan.append(' (' + ++lastMessageData[fromUser.id].count + 'x)'));
+                        } else {
+                            lastMessageData[fromUser.id] = {
+                                count: 1
+                            };
+                        }
+
                         if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height()) {
                             $chat.scrollTop($chat[0].scrollHeight);
                         }
 
+                        lastMessageContainer.data({
+                            lastMessageData: lastMessageData
+                        });
+
                         return;
                     }
+                    if (fromName && fromName.indexOf('(friend)') !== -1) {
+                        $from.find('.un').html(cleanHTMLMessage(fromName));
+                    } else {
+                        $from.find('.un').html(cleanHTMLMessage(fromUser.username));
+                    }
 
-                    $from.find('.un').html(cleanHTMLMessage(fromUser.username));
-
-                    if (this.hasPermission(fromUser.id, API.ROLE.HOST, true)) {
+                    if (this.hasPermission(fromUser.id, window.plugCubedModules.GROLE.ADMIN, true)) {
                         $message.addClass('from-admin');
                         $from.addClass('admin').append('<i class="icon icon-chat-admin"></i>');
-                    } else if (this.hasPermission(fromUser.id, 2500, true)) {
-                        $message.addClass('from-sitemod');
-                        $from.addClass('sitemod').append('<i class="icon icon-chat-sitemod"></i>');
-                    } else if (this.hasPermission(fromUser.id, API.ROLE.BOUNCER, true)) {
+                    } else if (this.hasPermission(fromUser.id, window.plugCubedModules.GROLE.AMBASSADOR, true)) {
                         $message.addClass('from-ambassador');
                         $from.addClass('ambassador').append('<i class="icon icon-chat-ambassador"></i>');
-                    } else if (this.hasPermission(fromUser.id, 750, true)) {
+                    } else if (this.hasPermission(fromUser.id, window.plugCubedModules.GROLE.SITEMOD, true)) {
+                        $message.addClass('from-sitemod');
+                        $from.addClass('sitemod').append('<i class="icon icon-chat-sitemod"></i>');
+                    } else if (this.hasPermission(fromUser.id, window.plugCubedModules.PLOT, true)) {
                         $message.addClass('from-plot');
                         $from.addClass('plot').append('<i class="icon icon-chat-plot"></i>');
-                    } else if (this.hasPermission(fromUser.id, 500, true)) {
+                    } else if (this.hasPermission(fromUser.id, window.plugCubedModules.GROLE.PROMOTER, true)) {
                         $message.addClass('from-promoter');
                         $from.addClass('plot').append('<i class="icon icon-chat-promoter"></i>');
                     } else if (this.hasPermission(fromUser.id, API.ROLE.BOUNCER)) {
@@ -416,10 +478,26 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 } else if (fromID < 0) {
                     $from.find('.un').html('plug&#179;');
                     if (lastSender === fromID && type === lastType) {
-                        lastMessageContainer.find('.text').append('<br>').append($msgSpan);
+                        lastMessage = lastMessageContainer.find('.text');
+                        lastMessageData = lastMessageContainer.data('lastMessageData') || {};
+
+                        if (lastMessage.text().indexOf('Stats:') > -1) {
+                            $chat.append($message.append($box).append($msg.append($text)));
+                        } else if (lastMessageData[fromID]) {
+                            lastMessage.html($msgSpan.append(' (' + ++lastMessageData[fromUser.id].count + 'x)'));
+                        } else {
+                            lastMessageData[fromID] = {
+                                count: 1
+                            };
+                        }
+
                         if ($chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - lastMessageContainer.find('.text').height()) {
                             $chat.scrollTop($chat[0].scrollHeight);
                         }
+
+                        lastMessageContainer.data({
+                            lastMessageData: lastMessageData
+                        });
 
                         return;
                     }
@@ -514,19 +592,19 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     count: 0
                 });
 
-                if (this.hasPermission(user.id, API.ROLE.HOST, true)) {
+                if (this.hasPermission(user.id, window.plugCubedModules.GROLE.ADMIN, true)) {
                     rank = Lang.roles.admin;
                 } else if (this.hasPermission(user.id, API.ROLE.COHOST, true)) {
                     rank = Lang.roles.leader;
-                } else if (this.hasPermission(user.id, API.ROLE.MANAGER, true)) {
+                } else if (this.hasPermission(user.id, window.plugCubedModules.GROLE.AMBASSADOR, true)) {
                     rank = Lang.roles.ambassador;
-                } else if (this.hasPermission(user.id, 2500, true)) {
+                } else if (this.hasPermission(user.id, window.plugCubedModules.GROLE.SITEMOD, true)) {
                     rank = Lang.roles.sitemod;
                 } else if (this.hasPermission(user.id, API.ROLE.BOUNCER, true)) {
                     rank = Lang.roles.volunteer;
-                } else if (this.hasPermission(user.id, 750, true)) {
+                } else if (this.hasPermission(user.id, window.plugCubedModules.GROLE.PLOT, true)) {
                     rank = Lang.roles.plot;
-                } else if (this.hasPermission(user.id, 500, true)) {
+                } else if (this.hasPermission(user.id, window.plugCubedModules.GROLE.PROMOTER, true)) {
                     rank = Lang.roles.promoter;
                 } else if (this.hasPermission(user.id, API.ROLE.HOST)) {
                     rank = Lang.roles.host;
@@ -586,9 +664,13 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.id') + ' ')).append($('<span>').css('color', '#FFFFFF').text(user.id))));
 
                 // Profile
-                if (user.level > 5) {
-                    message.append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.profile') + ' ')).append($('<span>').css('color', '#FFFFFF').html($('<a>').attr('href', 'https://plug.dj/@/' + user.slug).text('https://plug.dj/@/' + user.slug))));
+                if (user.level > 5 && typeof user.slug === 'string' && user.slug.length > 0) {
+                    message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text('Slug ')).append($('<span>').css('color', '#FFFFFF').text(user.slug))));
+                    message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.profile') + ' ')).append($('<span>').css('color', '#FFFFFF').html($('<a>').attr('href', 'https://plug.dj/@/' + user.slug).text('https://plug.dj/@/' + user.slug)))));
                 }
+
+                // joined
+                message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text('Joined ')).append($('<span>').css('color', '#FFFFFF').text(user.joined))));
 
                 // Rank / Time Joined
                 message.append($('<tr>').append($('<td>').append($('<strong>').text(p3Lang.i18n('info.rank') + ' ')).append($('<span>').css('color', '#FFFFFF').text(rank))).append($('<td>').append($('<strong>').text(p3Lang.i18n('info.joined') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getTimestamp(this.getUserData(user.id, 'joinTime', Date.now()))))));
@@ -623,7 +705,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 if (disconnectInfo.count > 0) {
 
                     // Last Position
-                    message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.lastPosition') + ' ')).append($('<span>').css('color', '#FFFFFF').text(disconnectInfo.position < 0 ? 'Wasn\'t in booth nor waitlist' : (disconnectInfo.position === 0 ? 'Was DJing' : 'Was ' + disconnectInfo.position + ' in waitlist')))));
+                    message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.lastPosition') + ' ')).append($('<span>').css('color', '#FFFFFF').text(disconnectInfo.position < 0 ? "Wasn't in booth nor waitlist" : (disconnectInfo.position === 0 ? 'Was DJing' : 'Was ' + disconnectInfo.position + ' in waitlist')))));
 
                     // Last Disconnect Time
                     message.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('info.lastDisconnect') + ' ')).append($('<span>').css('color', '#FFFFFF').text(this.getTimestamp(disconnectInfo.time)))));
@@ -648,12 +730,10 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             });
             var users = API.getUsers();
 
-            for (var i in users) {
-                if (users.hasOwnProperty(i)) {
-                    var user = users[i];
+            for (var i = 0; i < users.length; i++) {
+                var user = users[i];
 
-                    table.append($('<tr>').append($('<td>').append(user.username)).append($('<td>').append(user.id)));
-                }
+                table.append($('<tr>').append($('<td>').append(user.username)).append($('<td>').append(user.id)));
             }
             this.chatLog(undefined, $('<div>').append(table).html());
         },
@@ -857,9 +937,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
         },
         getRank: function(user) {
             user = API.getUser(user);
-
             if (user.gRole) {
-                return user.gRole === API.ROLE.HOST ? 'admin' : user.gRole === API.ROLE.COHOST ? 'leader' : user.gRole === API.ROLE.MANAGER ? 'ambassador' : user.gRole === 2500 ? 'sitemod' : user.gRole === API.ROLE.BOUNCER ? 'volunteer' : user.gRole === 750 ? 'plot' : user.grole === 500 ? 'promoter' : 'none';
+                return user.gRole === window.plugCubedModules.GROLE.ADMIN ? 'admin' : user.gRole === API.ROLE.COHOST ? 'leader' : user.gRole === window.plugCubedModules.GROLE.AMBASSADOR ? 'ambassador' : user.gRole === window.plugCubedModules.GROLE.SITEMOD ? 'sitemod' : user.gRole === API.ROLE.BOUNCER ? 'volunteer' : user.gRole === window.plugCubedModules.GROLE.PLOT ? 'plot' : user.grole === window.plugCubedModules.GROLE.PROMOTER ? 'promoter' : 'none';
             }
 
             return ['regular', 'dj', 'bouncer', 'manager', 'cohost', 'host'][(user.role > 999 ? user.role / 1000 : user.role) || 0];
@@ -938,4 +1017,3 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
     return new Handler();
 });
-

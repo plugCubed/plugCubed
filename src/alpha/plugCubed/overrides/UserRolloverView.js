@@ -29,7 +29,7 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
                     if (this.$p3VoteIcon == null) {
                         this.$p3VoteIcon = $('<i>');
                     }
-                    if (((CurrentUser.get('role') > this.user.get('role')) || CurrentUser.get('gRole') > 0) && this.user.get('gRole') === 0) {
+                    if (((CurrentUser.get('role') > this.user.get('role')) || CurrentUser.get('gRole') > window.plugCubedModules.GROLE.PLOT) && this.user.get('gRole') < window.plugCubedModules.GROLE.SITEMOD) {
                         this.$quickBan = $('<div>').addClass('action p3-qban').append($('<i>').addClass('icon-p3-qban'));
                         this.$quickMute = $('<div>').addClass('action p3-qmute').append($('<i>').addClass('icon-p3-qmute'));
                         this.$quickInfo = $('<div>').addClass('action p3-qinfo').append($('<i>').addClass('icon icon-user-white'));
@@ -97,7 +97,7 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
                 if (this.$p3UserID == null) {
                     this.$p3UserID = $('<span>').addClass('p3UserID');
                 }
-                if (CurrentUser.get('gRole') === 0) {
+                if (CurrentUser.get('gRole') < window.plugCubedModules.GROLE.SITEMOD) {
                     this.$p3UserID.text('User ID: ' + a.id);
                     this.$meta.append(this.$p3UserID);
                 } else {

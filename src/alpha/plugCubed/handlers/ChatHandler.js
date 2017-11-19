@@ -314,10 +314,16 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
         }
 
         msgClass += ' from-';
-        if (p3Utils.hasPermission(data.uid, API.ROLE.HOST, true)) {
+        if (p3Utils.hasPermission(data.uid, window.plugCubedModules.GROLE.ADMIN, true)) {
             msgClass += 'admin';
-        } else if (p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER, true)) {
+        } else if (p3Utils.hasPermission(data.uid, window.plugCubedModules.GROLE.AMBASSADOR, true)) {
             msgClass += 'ambassador';
+        } else if (p3Utils.hasPermission(data.uid, window.plugCubedModules.GROLE.SITEMOD, true)) {
+            msgClass += 'site-mod';
+        } else if (p3Utils.hasPermission(data.uid, window.plugCubedModules.GROLE.PLOT, true)) {
+            msgClass += 'plot';
+        } else if (p3Utils.hasPermission(data.uid, window.plugCubedModules.GROLE.PROMOTER, true)) {
+            msgClass += 'promoter';
         } else if (p3Utils.hasPermission(data.uid, API.ROLE.HOST)) {
             msgClass += 'host';
         } else if (p3Utils.hasPermission(data.uid, API.ROLE.COHOST)) {
@@ -452,17 +458,18 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
 
             $.getJSON('https://api.plugcubed.net/twitchemotes')
                 .done(function(data) {
-                    var i, emotes, twitchEmotes;
+                    var i, emotes, emote, twitchEmotes;
 
                     emotes = data;
                     twitchEmotes = window.plugCubed.emotes.twitchEmotes = {};
 
-                    for (i in emotes) {
-                        if (!emotes.hasOwnProperty(i)) continue;
-                        twitchEmotes[':' + i.toLowerCase() + ':'] = {
-                            emote: i,
-                            emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(i.toLowerCase()) + ':)', 'gi'),
-                            imageURL: twitchEmoteTemplate.replace('{image_id}', emotes[i].id),
+                    for (i = 0; i < emotes.length; i++) {
+                        emote = emotes[i];
+
+                        twitchEmotes[':' + emote.code.toLowerCase() + ':'] = {
+                            emote: emote.code,
+                            emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(emote.code.toLowerCase()) + ':)', 'gi'),
+                            imageURL: twitchEmoteTemplate.replace('{image_id}', emote.id),
                             type: 'twitchemote'
                         };
                     }
@@ -481,30 +488,23 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
 
             $.getJSON('https://api.plugcubed.net/twitchsubscriberemotes')
                 .done(function(data) {
-                    var i, j, channels, twitchSubEmotes;
+                    var i, emotes, emote, twitchSubEmotes;
 
                     twitchSubEmotes = window.plugCubed.emotes.twitchSubEmotes = {};
-                    channels = data;
+                    emotes = data;
 
-                    for (i in channels) {
-                        if (!channels.hasOwnProperty(i)) continue;
+                    for (i = 0; i < emotes.length; i++) {
+                        emote = emotes[i];
 
-                        var emotes = channels[i].emotes;
-                        var emotesLength = emotes.length;
+                        // skip this since we already have kappa, kreygasm, dansgame in twitchEmotes that ignores case.
+                        if (emote.code.toLowerCase() === 'kreygasm' || emote.code.toLowerCase() === 'kappa' || emote.code.toLowerCase() === 'dansgame') continue;
 
-                        for (j = 0; j < emotesLength; j++) {
-                            if (emotes[j].code) {
-
-                                // skip this since we already have kappa, kreygasm, dansgame in twitchEmotes that ignores case.
-                                if (emotes[j].code.toLowerCase() === 'kreygasm' || emotes[j].code.toLowerCase() === 'kappa' || emotes[j].code.toLowerCase() === 'dansgame') continue;
-                                twitchSubEmotes[':' + emotes[j].code.toLowerCase() + ':'] = {
-                                    emote: emotes[j].code,
-                                    emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(emotes[j].code.toLowerCase()) + ':)', 'gi'),
-                                    imageURL: twitchEmoteTemplate.replace('{image_id}', emotes[j].id),
-                                    type: 'twitchsubemote'
-                                };
-                            }
-                        }
+                        twitchSubEmotes[':' + emote.code.toLowerCase() + ':'] = {
+                            emote: emote.code,
+                            emoteRegex: new RegExp('(?::' + p3Utils.escapeRegex(emote.code.toLowerCase()) + ':)', 'gi'),
+                            imageURL: twitchEmoteTemplate.replace('{image_id}', emote.id),
+                            type: 'twitchsubemote'
+                        };
 
                     }
 

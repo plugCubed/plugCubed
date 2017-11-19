@@ -231,19 +231,19 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
             // plug.dj ranks
             if (!onlyP3) {
-                if (this.hasPermission(uid, API.ROLE.HOST, true)) {
+                if (this.hasPermission(uid, window.plugCubedModules.GROLE.ADMIN, true)) {
                     ranks.push(Lang.roles.admin);
                 } else if (this.hasPermission(uid, API.ROLE.COHOST, true)) {
                     ranks.push(Lang.roles.leader);
-                } else if (this.hasPermission(uid, API.ROLE.MANAGER, true)) {
+                } else if (this.hasPermission(uid, window.plugCubedModules.GROLE.AMBASSADOR, true)) {
                     ranks.push(Lang.roles.ambassador);
-                } else if (this.hasPermission(uid, 2500, true)) {
+                } else if (this.hasPermission(uid, window.plugCubedModules.GROLE.SITEMOD, true)) {
                     ranks.push(Lang.roles.sitemod);
                 } else if (this.hasPermission(uid, API.ROLE.BOUNCER, true)) {
                     ranks.push(Lang.roles.volunteer);
-                } else if (this.hasPermission(uid, 750, true)) {
+                } else if (this.hasPermission(uid, window.plugCubedModules.GROLE.PLOT, true)) {
                     ranks.push(Lang.roles.plot);
-                } else if (this.hasPermission(uid, 500, true)) {
+                } else if (this.hasPermission(uid, window.plugCubedModules.GROLE.PROMOTER, true)) {
                     ranks.push(Lang.roles.promoter);
                 } else if (this.hasPermission(uid, API.ROLE.HOST)) {
                     ranks.push(Lang.roles.host);
@@ -413,7 +413,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
                         if (lastMessage.text().indexOf('Stats:') > -1) {
                             $chat.append($message.append($box).append($msg.append($text)));
-                        } else if (lastMessageData[fromUser.id]) {
+                        } else if (lastMessageData[fromUser.id] && lastMessageData[fromUser.id].count) {
                             lastMessage.html($msgSpan.append(' (' + ++lastMessageData[fromUser.id].count + 'x)'));
                         } else {
                             lastMessageData[fromUser.id] = {
@@ -437,19 +437,19 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                         $from.find('.un').html(cleanHTMLMessage(fromUser.username));
                     }
 
-                    if (this.hasPermission(fromUser.id, API.ROLE.HOST, true)) {
+                    if (this.hasPermission(fromUser.id, window.plugCubedModules.GROLE.ADMIN, true)) {
                         $message.addClass('from-admin');
                         $from.addClass('admin').append('<i class="icon icon-chat-admin"></i>');
-                    } else if (this.hasPermission(fromUser.id, 2500, true)) {
-                        $message.addClass('from-sitemod');
-                        $from.addClass('sitemod').append('<i class="icon icon-chat-sitemod"></i>');
-                    } else if (this.hasPermission(fromUser.id, API.ROLE.BOUNCER, true)) {
+                    } else if (this.hasPermission(fromUser.id, window.plugCubedModules.GROLE.AMBASSADOR, true)) {
                         $message.addClass('from-ambassador');
                         $from.addClass('ambassador').append('<i class="icon icon-chat-ambassador"></i>');
-                    } else if (this.hasPermission(fromUser.id, 750, true)) {
+                    } else if (this.hasPermission(fromUser.id, window.plugCubedModules.GROLE.SITEMOD, true)) {
+                        $message.addClass('from-sitemod');
+                        $from.addClass('sitemod').append('<i class="icon icon-chat-sitemod"></i>');
+                    } else if (this.hasPermission(fromUser.id, window.plugCubedModules.PLOT, true)) {
                         $message.addClass('from-plot');
                         $from.addClass('plot').append('<i class="icon icon-chat-plot"></i>');
-                    } else if (this.hasPermission(fromUser.id, 500, true)) {
+                    } else if (this.hasPermission(fromUser.id, window.plugCubedModules.GROLE.PROMOTER, true)) {
                         $message.addClass('from-promoter');
                         $from.addClass('plot').append('<i class="icon icon-chat-promoter"></i>');
                     } else if (this.hasPermission(fromUser.id, API.ROLE.BOUNCER)) {
@@ -592,14 +592,20 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                     count: 0
                 });
 
-                if (this.hasPermission(user.id, API.ROLE.HOST, true)) {
+                if (this.hasPermission(user.id, window.plugCubedModules.GROLE.ADMIN, true)) {
                     rank = Lang.roles.admin;
                 } else if (this.hasPermission(user.id, API.ROLE.COHOST, true)) {
                     rank = Lang.roles.leader;
-                } else if (this.hasPermission(user.id, API.ROLE.MANAGER, true)) {
+                } else if (this.hasPermission(user.id, window.plugCubedModules.GROLE.AMBASSADOR, true)) {
                     rank = Lang.roles.ambassador;
+                } else if (this.hasPermission(user.id, window.plugCubedModules.GROLE.SITEMOD, true)) {
+                    rank = Lang.roles.sitemod;
                 } else if (this.hasPermission(user.id, API.ROLE.BOUNCER, true)) {
                     rank = Lang.roles.volunteer;
+                } else if (this.hasPermission(user.id, window.plugCubedModules.GROLE.PLOT, true)) {
+                    rank = Lang.roles.plot;
+                } else if (this.hasPermission(user.id, window.plugCubedModules.GROLE.PROMOTER, true)) {
+                    rank = Lang.roles.promoter;
                 } else if (this.hasPermission(user.id, API.ROLE.HOST)) {
                     rank = Lang.roles.host;
                 } else if (this.hasPermission(user.id, API.ROLE.COHOST)) {
@@ -933,9 +939,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
         },
         getRank: function(user) {
             user = API.getUser(user);
-
             if (user.gRole) {
-                return user.gRole === API.ROLE.HOST ? 'admin' : user.gRole === API.ROLE.COHOST ? 'leader' : user.gRole === API.ROLE.MANAGER ? 'ambassador' : user.gRole === 2500 ? 'sitemod' : user.gRole === API.ROLE.BOUNCER ? 'volunteer' : user.gRole === 750 ? 'plot' : user.grole === 500 ? 'promoter' : 'none';
+                return user.gRole === window.plugCubedModules.GROLE.ADMIN ? 'admin' : user.gRole === API.ROLE.COHOST ? 'leader' : user.gRole === window.plugCubedModules.GROLE.AMBASSADOR ? 'ambassador' : user.gRole === window.plugCubedModules.GROLE.SITEMOD ? 'sitemod' : user.gRole === API.ROLE.BOUNCER ? 'volunteer' : user.gRole === window.plugCubedModules.GROLE.PLOT ? 'plot' : user.grole === window.plugCubedModules.GROLE.PROMOTER ? 'promoter' : 'none';
             }
 
             return ['regular', 'dj', 'bouncer', 'manager', 'cohost', 'host'][(user.role > 999 ? user.role / 1000 : user.role) || 0];
@@ -987,12 +992,12 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
         },
         banUser: function(userID, duration, reason) {
-            if (!userID || !_.contains(API.BAN, duration) || !(API.getUser().role > API.ROLE.BOUNCER || API.getUser().gRole > 0)) return;
+            if (!userID || !_.contains(API.BAN, duration) || !(API.getUser().role > API.ROLE.BOUNCER || API.getUser().gRole > window.plugCubedModules.GROLE.PLOT)) return;
             if (!_.contains([1, 2, 3, 4, 5, 6], reason)) reason = 1;
 
             var user = API.getUser(userID);
 
-            if (user && (user.role > API.getUser().role || user.gRole > 0)) return;
+            if (user && (user.role > API.getUser().role || user.gRole > window.plugCubedModules.GROLE.PLOT)) return;
 
             $.ajax({
                 contentType: 'application/json',
@@ -1016,7 +1021,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
         },
         moveUser: function(userID, position) {
-            if (!userID || !(API.getUser().role > API.ROLE.MANAGER || API.getUser().gRole > 0) || (API.getDJ() && API.getDJ().id === userID)) return;
+            if (!userID || !(API.getUser().role > API.ROLE.MANAGER || API.getUser().gRole > window.plugCubedModules.GROLE.PLOT) || (API.getDJ() && API.getDJ().id === userID)) return;
             var waitlistPosition = API.getWaitListPosition(userID);
             var inWaitlist = waitlistPosition > -1;
 
@@ -1056,13 +1061,13 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             }
         },
         muteUser: function(userID, duration, reason) {
-            if (!userID || !_.contains(API.MUTE, duration) || !(API.getUser().role > API.ROLE.BOUNCER || API.getUser().gRole > 0)) return;
+            if (!userID || !_.contains(API.MUTE, duration) || !(API.getUser().role > API.ROLE.BOUNCER || API.getUser().gRole > window.plugCubedModules.GROLE.PLOT)) return;
             if (!_.contains([1, 2, 3, 4, 5, 6], reason)) reason = 1;
 
             var role;
             var user = API.getUser(userID);
 
-            if (user && user.gRole > 0) return;
+            if (user && user.gRole > window.plugCubedModules.GROLE.PLOT) return;
             if (user && user.role > 0) {
                 role = user.role;
                 $.ajax({

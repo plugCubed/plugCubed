@@ -1,4 +1,4 @@
-define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], function($, OverrideHandler, p3Utils) {
+define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/Lang'], function($, OverrideHandler, p3Utils, p3Lang) {
     var CurrentUser, Handler, UserRolloverView;
 
     CurrentUser = window.plugCubedModules.CurrentUser;
@@ -41,7 +41,7 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils'], func
                 if (this.$p3UserID == null) {
                     this.$p3UserID = $('<span>').addClass('p3UserID');
                 }
-                if (CurrentUser.get('gRole') === 0) {
+                if (CurrentUser.get('gRole') < window.plugCubedModules.GROLE.SITEMOD) {
                     this.$p3UserID.text('User ID: ' + a.id);
                     this.$meta.append(this.$p3UserID);
                 } else {
