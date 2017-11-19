@@ -1,11 +1,11 @@
-define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleManager', 'plugCubed/RoomSettings', 'plugCubed/Settings'], function(Class, ControlPanel, Styles, RoomSettings, Settings) {
+define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleManager', 'plugCubed/RoomSettings', 'plugCubed/Settings', 'plugCubed/Lang'], function(Class, ControlPanel, Styles, RoomSettings, Settings, p3Lang) {
     var Handler, $contentDiv, $formDiv, $localCSSInput, $submitButton, $clearButton, panel;
 
     Handler = Class.extend({
         register: function() {
-            panel = ControlPanel.addPanel('Custom CSS');
+            panel = ControlPanel.addPanel(p3Lang.i18n('menu.customcss'));
 
-            $contentDiv = $('<div>').append($('<p>').text('Set your own room CSS.'));
+            $contentDiv = $('<div>').append($('<p>').text(p3Lang.i18n('panels.customcss.description')).width('20%').css('margin', '25px auto auto auto'));
 
             panel.addContent($contentDiv);
 
@@ -24,7 +24,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
                 class: 'p3-textarea'
             });
 
-            $submitButton = ControlPanel.button('Submit', true, function() {
+            $submitButton = ControlPanel.button(p3Lang.i18n('panels.buttons.submit'), true, function() {
                 var $textarea = $('#p3-custom-css-textarea');
 
                 if (typeof $textarea.val() === 'string' && $textarea.val().length > 0) {
@@ -32,11 +32,10 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
                     Settings.customCSS = $textarea.val();
                     Settings.save();
                     this.changeSubmit(false);
-                } else {
-                    this.changeSubmit(true);
+                    $clearButton.changeSubmit(true);
                 }
             });
-            $clearButton = ControlPanel.button('Clear', false, function() {
+            $clearButton = ControlPanel.button(p3Lang.i18n('panels.buttons.cancel'), false, function() {
                 var $textarea = $('#p3-custom-css-textarea');
 
                 if (typeof $textarea.val() === 'string' && $textarea.val().length > 0) {
@@ -44,16 +43,13 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
                     Settings.customCSS = '';
                     Settings.save();
                     $textarea.val('');
-                    this.changeSubmit(true);
-                } else {
                     this.changeSubmit(false);
+                    $submitButton.changeSubmit(true);
                 }
             });
 
             if (typeof Settings.customCSS === 'string' && Settings.customCSS.length > 0) {
                 $localCSSInput.val(Settings.customCSS);
-                $submitButton.changeSubmit(true);
-                $clearButton.changeSubmit(true);
             }
 
             $formDiv.append($localCSSInput).append($submitButton.getJQueryElement().css({
@@ -73,4 +69,3 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
 
     return new Handler();
 });
-

@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils'], function($, _, Class, p3Utils) {
+define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang'], function($, _, Class, p3Utils, p3Lang) {
 
     var ControlPanelClass, JQueryElementClass, HeaderClass, ItemClass, PanelClass, ButtonClass, InputClass, $controlPanelDiv, $topBarDiv, $menuDiv, $currentDiv, $closeDiv, scrollPane, shownHeight, _onResize, _onTabClick;
     var tabs = {};
@@ -178,7 +178,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils'], function(
                 }
             }
 
-            $topBarDiv = $('<div>').attr('id', 'p3-control-panel-top').append($('<span>').text('Control Panel'));
+            $topBarDiv = $('<div>').attr('id', 'p3-control-panel-top').append($('<span>').text(p3Lang.i18n('menu.controlpanel')));
 
             $controlPanelDiv.append($topBarDiv).append($menuDiv);
 
@@ -308,6 +308,8 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils'], function(
         },
         openTab: function(id) {
             this.toggleControlPanel(true);
+            id = id.trim();
+
             var tab = tabs[id];
 
             if (tab == null || !(tab instanceof PanelClass)) return;
@@ -338,6 +340,18 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils'], function(
             if (tabs[name] != null) return null;
             tabs[name] = new PanelClass(name);
             this.createControlPanel(true);
+
+            return tabs[name];
+        },
+
+        /**
+         * Get tab, if it already exists
+         * @param {string} panel Name of tab
+         * @returns {PanelClass|null} Returns new tab
+         */
+        getPanel: function(panel) {
+            panel = panel.trim();
+            if (!(panel instanceof PanelClass) || tabs[panel.name] == null) return null;
 
             return tabs[name];
         },

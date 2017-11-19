@@ -1,11 +1,11 @@
-define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Version'], function(Class, p3Utils, ControlPanel, Version) {
+define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Version', 'plugCubed/Lang'], function(Class, p3Utils, ControlPanel, Version, p3Lang) {
     var Handler, $contentDiv, $table, panel;
 
     Handler = Class.extend({
         register: function() {
-            panel = ControlPanel.addPanel('About');
+            panel = ControlPanel.addPanel(p3Lang.i18n('menu.about'));
 
-            $contentDiv = $('<div>').append($('<h1>').text('Information about plug³').css({
+            $contentDiv = $('<div>').append($('<h1>').text(p3Lang.i18n('panels.about.header')).css({
                 'text-align': 'center'
             })).css({
                 width: '500px',
@@ -18,13 +18,13 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
                 'font-size': '1.02em'
             });
 
-            $table.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text('Version: ')).append($('<span>').css('color', '#FFFFFF').text(Version.getSemver()))));
+            $table.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('panels.about.version') + ': ')).append($('<span>').css('color', '#FFFFFF').text(Version.getSemver()))));
 
-            $table.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text('Website: ')).append($('<span>').css('color', '#FFFFFF').html('<a href="https://plugcubed.net" target="_blank" style="color:#FFFFFF;">plug³ Website</a>'))));
+            $table.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('panels.about.website') + ': ')).append($('<span>').css('color', '#FFFFFF').html('<a href="https://plugcubed.net" target="_blank" style="color:#FFFFFF;">' + p3Lang.i18n('panels.about.websiteText') + '</a>'))));
 
-            $table.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text('Translations: ')).append($('<span>').css('color', '#FFFFFF').html('<a href="https://crowdin.com/project/plug3" target="_blank" style="color:#FFFFFF;">plug³ Translations</a>'))));
+            $table.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('panels.about.translations') + ': ')).append($('<span>').css('color', '#FFFFFF').html('<a href="https://crowdin.com/project/plug3" target="_blank" style="color:#FFFFFF;">' + p3Lang.i18n('panels.about.translationsText') + '</a>'))));
 
-            $table.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text('Translations: ')).append($('<span>').css('color', '#FFFFFF').html('<a href="https://crowdin.com/project/plugcubed-website" target="_blank" style="color:#FFFFFF;">plug³ Website Translations</a>'))));
+            $table.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text(p3Lang.i18n('panels.about.translations') + ': ')).append($('<span>').css('color', '#FFFFFF').html('<a href="https://crowdin.com/project/plugcubed-website" target="_blank" style="color:#FFFFFF;">' + p3Lang.i18n('panels.about.websitetranslationsText') + '</a>'))));
 
             $table.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text('Discord: ')).append($('<span>').css('color', '#FFFFFF').html('<a href="https://plugcubed.net/discord" target="_blank" style="color:#FFFFFF;">plug³ Discord</a>'))));
 
