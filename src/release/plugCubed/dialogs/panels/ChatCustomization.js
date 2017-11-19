@@ -97,7 +97,7 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
                     $emojiSetGoogle.changeCheckmark(false);
                     $emojiSetEmojione.changeCheckmark(false);
                     $emojiSetTwitter.changeCheckmark(false);
-                    Styles.set('plug-emojiset', "span.emoji-inner:not(.gemoji-plug) { background:url('https://i.imgur.com/4YeIpli.jpg') }");
+                    Styles.set('plug-emojiset', "span.emoji-inner:not(.gemoji-plug) { background:url('" + emoji.img_sets.apple.sheet + "') }");
                 }
                 Settings.save();
 
