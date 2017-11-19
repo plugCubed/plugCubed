@@ -2,7 +2,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
     var history = [];
     var Handler = TriggerHandler.extend({
         trigger: {
-            advance: 'onDjAdvance',
+            historyUpdate: 'onHistoryUpdate',
             modSkip: 'onSkip',
             userSkip: 'onSkip',
             voteSkip: 'onSkip'
@@ -48,17 +48,17 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
                 }
             }
         },
-        onDjAdvance: function(data) {
-            if (data.media == null) return;
-            this.onHistoryCheck(data.media.cid);
+        onHistoryUpdate: function(data) {
+            if (data[0] == null || data[0].media == null || data[0].user == null) return;
+            this.onHistoryCheck(data[0].media.cid);
             var obj = {
-                id: data.media.cid,
-                author: data.media.author,
-                title: data.media.title,
+                id: data[0].media.cid,
+                author: data[0].media.author,
+                title: data[0].media.title,
                 wasSkipped: false,
                 user: {
-                    id: data.dj.id,
-                    username: data.dj.username
+                    id: data[0].user.id,
+                    username: data[0].user.username
                 }
             };
 
@@ -83,7 +83,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ut
                     author: a.media.author,
                     title: a.media.title,
                     wasSkipped: false,
-                    dj: {
+                    user: {
                         id: a.user.id.toString(),
                         username: a.user.username
                     }
