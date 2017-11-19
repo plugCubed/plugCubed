@@ -5,7 +5,6 @@ const autoprefixer = require('gulp-autoprefixer');
 const justReplace = require('gulp-just-replace');
 const gulpIf = require('gulp-if');
 
-
 versions.forEach((version) => {
     if (version == null) return;
 
@@ -19,6 +18,7 @@ versions.forEach((version) => {
             .pipe(autoprefixer({
                 browsers: ['> 1%', 'ie >= 9', 'last 5 versions']
             }))
-            .pipe(gulpIf((file) => file.path && file.path.includes('dev'), gulp.dest('bin/dev'), gulp.dest(`src/${version}`)));
+            .pipe(gulp.dest(`src/${version}`))
+            .pipe(gulpIf((file) => file.path && file.path.includes('dev'), gulp.dest('bin/dev')));
     });
 });
