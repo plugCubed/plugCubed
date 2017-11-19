@@ -37,7 +37,7 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
                     for (var i = 0; i < userData.length; i++) {
                         var userDataItem = userData[i];
 
-                        if (requireUsers.get(userDataItem.id) != null && userDataItem.lang !== null) {
+                        if (requireUsers.get(userDataItem.id) != null && userDataItem.language != null) {
                             requireUsers.get(userDataItem.id).set(userDataItem);
                         }
                     }
