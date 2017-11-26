@@ -483,8 +483,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
                         if (lastMessage.text().indexOf('Stats:') > -1) {
                             $chat.append($message.append($box).append($msg.append($text)));
-                        } else if (lastMessageData[fromID]) {
-                            lastMessage.html($msgSpan.append(' (' + ++lastMessageData[fromUser.id].count + 'x)'));
+                        } else if (lastMessageData[fromID] && lastMessageData[fromID].count) {
+                            lastMessage.html($msgSpan.append(' (' + ++lastMessageData[fromID].count + 'x)'));
                         } else {
                             lastMessageData[fromID] = {
                                 count: 1
