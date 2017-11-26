@@ -5,6 +5,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
         register: function() {
             panel = ControlPanel.addPanel(p3Lang.i18n('menu.background'));
 
+            if (panel === null) return; // This happens if the panel already exists.
+
             $contentDiv = $('<div>').append($('<p>').text(p3Lang.i18n('panels.background.description')).width(430).css('margin', '25px auto auto auto'));
 
             panel.addContent($contentDiv);

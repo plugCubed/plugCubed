@@ -5,6 +5,8 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleMan
         register: function() {
             panel = ControlPanel.addPanel(p3Lang.i18n('menu.customcss'));
 
+            if (panel === null) return; // This happens if the panel already exists.
+
             $contentDiv = $('<div>').append($('<p>').text(p3Lang.i18n('panels.customcss.description')).width('20%').css('margin', '25px auto auto auto'));
 
             panel.addContent($contentDiv);

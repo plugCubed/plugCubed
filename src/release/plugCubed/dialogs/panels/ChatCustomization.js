@@ -8,6 +8,8 @@ define(['plugCubed/Class', 'plugCubed/dialogs/ControlPanel', 'plugCubed/Settings
         register: function() {
             panel = ControlPanel.addPanel('Chat Customizations');
 
+            if (panel === null) return; // This happens if the panel already exists.
+
             $contentDiv = $('<div>').append($('<p>').text('Customize your chat with emojis, notifications, markdown, and other features.')).width(500).css('margin', '25px auto auto auto');
             $twitchItem = ControlPanel.item('Twitch Emotes', function() {
                 Settings.emotes.twitchEmotes = !Settings.emotes.twitchEmotes;
