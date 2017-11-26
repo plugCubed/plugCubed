@@ -2,6 +2,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
 
     var ControlPanelClass, JQueryElementClass, HeaderClass, ItemClass, PanelClass, ButtonClass, InputClass, $controlPanelDiv, $topBarDiv, $menuDiv, $currentDiv, $closeDiv, scrollPane, shownHeight, _onResize, _onTabClick;
     var tabs = {};
+    var index = 0;
 
     JQueryElementClass = Class.extend({
         getJQueryElement: function() {
@@ -126,9 +127,10 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
     });
 
     PanelClass = Class.extend({
-        init: function(name) {
+        init: function(name, tabIndex) {
             this._content = [];
             this.name = name;
+            this.cssName = 'tab-' + tabIndex;
         },
         addContent: function(content) {
             if (content instanceof $) {
@@ -171,10 +173,9 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             $controlPanelDiv = $('<div>').attr('id', 'p3-control-panel');
 
             $menuDiv = $('<div>').attr('id', 'p3-control-panel-menu');
-
             for (var i in tabs) {
                 if (tabs.hasOwnProperty(i)) {
-                    $menuDiv.append($('<div>').addClass('p3-control-panel-menu-tab tab-' + i.replace(/ /g, '-')).data('id', i).text(i).click(_onTabClick));
+                    $menuDiv.append($('<div>').addClass('p3-control-panel-menu-tab tab-' + tabs[i].cssName).data('id', i).text(i).click(_onTabClick));
                 }
             }
 
@@ -315,7 +316,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             if (tab == null || !(tab instanceof PanelClass)) return;
 
             $menuDiv.find('.current').removeClass('current');
-            $('.p3-control-panel-menu-tab.tab-' + id.replace(/ /g, '-')).addClass('current');
+            $('.p3-control-panel-menu-tab.tab-' + tab.cssName).addClass('current');
 
             if (scrollPane == null) {
                 $currentDiv.jScrollPane({
@@ -338,7 +339,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
         addPanel: function(name) {
             name = name.trim();
             if (tabs[name] != null) return null;
-            tabs[name] = new PanelClass(name);
+            tabs[name] = new PanelClass(name, ++index);
             this.createControlPanel(true);
 
             return tabs[name];
@@ -364,6 +365,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
         removePanel: function(panel) {
             if (!(panel instanceof PanelClass) || tabs[panel.name] == null) return false;
             delete tabs[panel.name];
+            --index;
             this.createControlPanel(true);
 
             return true;
