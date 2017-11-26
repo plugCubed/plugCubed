@@ -5,34 +5,23 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
 
     Lang = Class.extend({
         curLang: 'en',
-        defaultLoaded: false,
-        loaded: false,
-        init: function() {
-            that = this;
-            $.getJSON('https://plugcubed.net/scripts/alpha/lang.json?v=' + Version.getSemver())
-                .done(function(data) {
-                    that.allLangs = data;
-                    if (that.allLangs.length === 1) API.chatLog('Error loading language info for plug³');
-                    that.loadDefault();
-                })
-                .fail(function() {
-                    API.chatLog('Error loading language info for plug³');
-                    that.loadDefault();
-                });
-        },
 
         /**
          * Load default language (English) from server.
+         * @param {Function} [callback] Optional callback that will be called on success and failure.
          */
-        loadDefault: function() {
+        loadDefault: function(callback) {
+            that = this;
+
             $.getJSON('https://plugcubed.net/scripts/alpha/langs/lang.en.json?v=' + Version.getSemver())
                 .done(function(languageData) {
                     defaultLanguage = languageData;
-                    that.defaultLoaded = true;
+
+                    return callback();
                 })
                 .fail(function() {
                     setTimeout(function() {
-                        that.loadDefault();
+                        that.loadDefault(callback);
                     }, 500);
                 });
         },
@@ -42,51 +31,51 @@ define('plugCubed/Lang', ['jquery', 'plugCubed/Class', 'plugCubed/Version'], fun
          * @param {Function} [callback] Optional callback that will be called on success and failure.
          */
         load: function(callback) {
-            if (!this.defaultLoaded) {
-                setTimeout(function() {
-                    that.load(callback);
-                }, 500);
+            that = this;
+            var defaultCallback = function() {
+                var lang = API.getUser().language;
 
-                return;
-            }
-            var lang = API.getUser().language;
-
-            if (!lang || lang === 'en' || this.allLangs.indexOf(lang) < 0) {
-                language = {};
-                _.extend(language, defaultLanguage);
-                this.curLang = 'en';
-                this.loaded = true;
-                if (typeof callback === 'function') {
-                    setTimeout(callback, 0);
-
-                    return;
-                }
-
-                return;
-            }
-            $.getJSON('https://plugcubed.net/scripts/alpha/langs/lang.' + lang + '.json?v=' + Version.getSemver())
-                .done(function(languageData) {
-                    language = {};
-                    _.extend(language, defaultLanguage, languageData);
-                    that.curLang = lang;
-                    that.loaded = true;
-                    if (typeof callback === 'function') {
-                        setTimeout(callback, 0);
-
-                        return;
-                    }
-                })
-                .fail(function() {
-                    console.log('[plug³ Lang] Couldn\'t load language file for ' + lang);
+                if (!lang || lang === 'en' || that.allLangs.indexOf(lang) < 0) {
                     language = {};
                     _.extend(language, defaultLanguage);
                     that.curLang = 'en';
-                    that.loaded = true;
-                    if (typeof callback === 'function') {
-                        setTimeout(callback, 0);
 
-                        return;
+                    if (typeof callback === 'function') {
+                        return callback();
                     }
+
+                    return;
+                }
+                $.getJSON('https://plugcubed.net/scripts/alpha/langs/lang.' + lang + '.json?v=' + Version.getSemver())
+                    .done(function(languageData) {
+                        language = {};
+                        _.extend(language, defaultLanguage, languageData);
+                        that.curLang = lang;
+                        if (typeof callback === 'function') {
+                            return callback();
+                        }
+                    })
+                    .fail(function() {
+                        console.log('[plug³ Lang] Couldn\'t load language file for ' + lang);
+                        language = {};
+                        _.extend(language, defaultLanguage);
+                        that.curLang = 'en';
+
+                        if (typeof callback === 'function') {
+                            return callback();
+                        }
+                    });
+            };
+
+            $.getJSON('https://plugcubed.net/scripts/alpha/lang.json?v=' + Version.getSemver())
+                .done(function(data) {
+                    that.allLangs = data;
+                    if (that.allLangs.length === 1) API.chatLog('Error loading language info for plug³');
+                    that.loadDefault(defaultCallback);
+                })
+                .fail(function() {
+                    API.chatLog('Error loading language info for plug³');
+                    that.loadDefault(defaultCallback);
                 });
         },
 
