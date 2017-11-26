@@ -31,8 +31,7 @@
     "gulp-zip": "^4.0.0",
     "mkdirp": "^0.5.1",
     "requirejs": "^2.3.5",
-    "rimraf": "^2.6.2",
-    "try-require": "^1.2.1"
+    "rimraf": "^2.6.2"
   },
   "homepage": "https://plugcubed.net",
   "license": "GPL-3.0",
