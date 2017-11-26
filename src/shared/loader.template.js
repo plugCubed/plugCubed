@@ -42,7 +42,7 @@
 
         require.config({
             paths:{
-                raven:'https://cdn.ravenjs.com/3.19.1/raven.min'
+                raven:'https://cdn.ravenjs.com/3.20.1/raven.min'
             }
         });
 
@@ -55,8 +55,16 @@
             if (typeof Raven !== 'undefined') {
                 Raven.config('https://a0f31a6f42e14b42a0eb5383f1bf7647@sentry.tfle.xyz/5', {
                     debug: true,
+                    ignoreErrors: [
+                        'adsbygoogle',
+                        'bscbot',
+                        'basicbot',
+                        'googletag',
+                        'nbot',
+                        'out of memory'
+                    ],
                     ignoreUrls: [
-                        '/.*firstimpression.io.*/'
+                        '.firstimpression.io.*'
                     ],
                     release: Version.getSemver(),
                     user: {
