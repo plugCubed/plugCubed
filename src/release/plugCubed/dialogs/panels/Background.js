@@ -7,11 +7,11 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
 
             if (panel === null) return; // This happens if the panel already exists.
 
-            $contentDiv = $('<div>').append($('<p>').text(p3Lang.i18n('panels.background.description')).width(430).css('margin', '25px auto auto auto'));
+            $contentDiv = $('<div>').append($('<p>').text(p3Lang.i18n('panels.background.description')).width(207).css('margin', '25px auto auto auto'));
 
             panel.addContent($contentDiv);
 
-            $formDiv = $('<div>').width(500).css('margin', '25px auto auto auto');
+            $formDiv = $('<div>').width(280).css('margin', '25px auto auto auto');
             $localFileInput = ControlPanel.inputField('url', undefined, 'URL To Background').change(function(e) {
                 value = e.target.value;
             });
