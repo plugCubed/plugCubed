@@ -267,10 +267,16 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     $('#playback-container').hide();
                 }
                 if (!this.badges) {
-                    Styles.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { visibility: none; width: 0px; }');
+                    p3Utils.toggleBadges(true);
                 }
                 if (this.customCSS !== '') {
                     Styles.set('room-settings-custom-css', this.customCSS);
+                }
+                if (this.lowLagMode) {
+                    p3Utils.toggleLowLagMode();
+                }
+                if (this.workMode) {
+                    p3Utils.toggleWorkMode();
                 }
 
                 if (this.emotes.emoteSet !== 'apple') {
@@ -292,7 +298,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     Styles.set('etaTimer', '#your-next-media .song { top: 8px!important; }');
                 }
             } catch (e) {
-                console.error('[plug³ Settings] Error loading settings', e.stack);
+                console.error('[plug³ Settings] Error loading settings', e, e.stack);
                 p3Utils.chatLog('system', 'Error loading settings');
             }
         },

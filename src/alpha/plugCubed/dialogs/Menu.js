@@ -13,10 +13,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
         return $('<div>').addClass('item p3-s-' + id + (setting ? ' selected' : '')).append($('<i>').addClass('icon icon-check-blue')).append($('<span>').text(text)).data('key', id).click(_onClick);
     }
 
-    function toggleEmotes(toggle) {
-        window.plugCubedModules.database.settings.emoji = toggle;
-        window.plugCubedModules.context.trigger('ChatFacadeEvent:emoji', window.plugCubedModules.database.settings.emoji);
-    }
     MenuClass = Class.extend({
         init: function() {
             that = this;
@@ -250,36 +246,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     }
                     break;
                 case 'lowLagMode':
-                    Settings.lowLagMode = !Settings.lowLagMode;
+                    p3Utils.toggleLowLagMode();
                     this.setEnabled('lowLagMode', Settings.lowLagMode);
-                    if (Settings.lowLagMode) {
-                        Database.settings.videoOnly = !Database.settings.videoOnly;
-                        Database.save();
-                        Context.trigger('change:videoOnly').trigger('audience:pause', Database.settings.videoOnly);
-                        Styles.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { visibility: none; width: 0px; }');
-                        Settings.badges = false;
-                        toggleEmotes(false);
-                    } else {
-                        Database.settings.videoOnly = !Database.settings.videoOnly;
-                        Database.save();
-                        Context.trigger('change:videoOnly').trigger('audience:pause', Database.settings.videoOnly);
-                        Styles.unset('hide-badges');
-                        Settings.badges = true;
-                        toggleEmotes(true);
-                    }
                     break;
                 case 'workMode':
-                    Settings.workMode = !Settings.workMode;
+                    p3Utils.toggleWorkMode();
                     this.setEnabled('workMode', Settings.workMode);
-                    if (Settings.workMode) {
-                        Styles.set('workMode', '#user-rollover .meta .user-id { left: 15px !important; } #avatars-container { display: none; } #playback .background { display: none; } #chat .emote, #chat .mention, #chat .message, #chat .moderation, #chat .skip, #chat .system, #chat .update, #chat .welcome { min-height: 0px !important; } #chat .badge-box { visibility: hidden; width: 0px;} #chat .msg { padding: 5px 8px 6px 16px !important; } #footer-user .image { display: none !important; } #footer-user .meta {  display: none !important; } #footer-user .points { display: none !important; } #footer-user .info .name {top: 8px !important; font-size: 26px !important; text-align: center !important; left: -60px !important; width: 100% !important; left: 0px !important;} #footer-user .info .icon { display: none !important; } #user-rollover .meta .thumb { display: none !important; } #user-rollover .meta .username { left: 15px !important; } #user-rollover .meta .status { left: 15px !important; } #user-rollover .meta .joined { left: 15px !important; } #user-rollover .meta .p3UserID { left: 15px !important; } #user-rollover .meta .p3Role { left: 15px !important; } #waitlist .list .user .image { display: none !important; } #footer-user .buttons .inventory.button { display: none !important; } #footer-user .buttons .badge.button { display: none !important; } #footer-user .buttons .store.button { display: none !important; } #footer-user .buttons .profile.button { display: none !important; } #footer-user .buttons .settings.button { float: right !important; width: 54px !important;} #footer #footer-user .info { display: block !important; z-index: -1 !important; width: 290px !important; top: 0px !important; background: none; } #footer-user .info .name { width: 100% !important; } #footer-user .info .meta { width: 170px !important; } #footer-user .info .meta div.bar { width: 100px !important; } div.room-background { background-image: url("https://plugcubed.net/scripts/alpha/images/p3WorkMode.png") !important; background-size: cover !important; } .app-right .friends .list .row .image { display: none !important; } .social-menu { display: none !important; }');
-                        $('#playback').hide();
-                        toggleEmotes(false);
-                    } else {
-                        Styles.unset('workMode');
-                        $('#playback').show();
-                        toggleEmotes(true);
-                    }
+
                     break;
                 case 'about':
                     dialogControlPanel.toggleControlPanel(true);

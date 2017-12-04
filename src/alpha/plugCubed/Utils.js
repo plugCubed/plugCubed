@@ -1,5 +1,5 @@
 define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function(Class, p3Lang) {
-    var cleanHTMLMessage, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PlugUI, PopoutView, html2text, Settings;
+    var cleanHTMLMessage, Context, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PopoutView, html2text, Settings, Styles;
 
     if (typeof window.plugCubedUserData === 'undefined') {
         window.plugCubedUserData = {};
@@ -28,13 +28,12 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return allowed.indexOf(b.toLowerCase()) > -1 ? a : '';
         });
     };
+    Context = window.plugCubedModules.context;
     Database = window.plugCubedModules.database;
     Lang = window.plugCubedModules.Lang;
     PopoutView = window.plugCubedModules.PopoutView;
     developer = sponsor = ambassador = donatorDiamond = donatorPlatinum = donatorGold = donatorSilver = donatorBronze = [];
     special = {};
-
-    PlugUI = window.plugCubedModules.plugUrls;
 
     $.getJSON('https://plugcubed.net/scripts/titles.json',
 
@@ -126,14 +125,62 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
             return '';
         },
+        toggleBadges: function(toggle) {
+            Settings = require('plugCubed/Settings');
+            Styles = require('plugCubed/StyleManager');
+            if ((toggle && !Settings.badges) || !Settings.badges) {
+                Styles.unset('hide-badges');
+                Settings.badges = true;
+            } else if ((toggle && Settings.badges) || Settings.badges) {
+                Styles.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { visibility: none; width: 0px; }');
+                Settings.badges = false;
+            }
+            Settings.save();
+        },
+        toggleEmotes: function(toggle) {
+            if (typeof toggle !== 'boolean') return;
+            Database.settings.emoji = toggle;
+            Context.trigger('ChatFacadeEvent:emoji', Database.settings.emoji);
+            Database.save();
+        },
+        toggleLowLagMode: function() {
+            Settings = require('plugCubed/Settings');
+            if (Settings.lowLagMode) {
+                Database.settings.videoOnly = false;
+                Database.save();
+                Context.trigger('change:videoOnly').trigger('audience:pause', Database.settings.videoOnly);
+                Settings.lowLagMode = false;
+            } else {
+                Database.settings.videoOnly = true;
+                Database.save();
+                Context.trigger('change:videoOnly').trigger('audience:pause', Database.settings.videoOnly);
+                Settings.lowLagMode = true;
+            }
+            this.toggleBadges(true);
+            Settings.save();
+        },
+        toggleWorkMode: function() {
+            Settings = require('plugCubed/Settings');
+            Styles = require('plugCubed/StyleManager');
+            if (Settings.workMode) {
+                Styles.unset('workMode');
+                $('#playback').show();
+                Settings.workMode = false;
+            } else {
+                Styles.set('workMode', '#user-rollover .meta .user-id { left: 15px !important; } #avatars-container { display: none; } #playback .background { display: none; } #chat .emote, #chat .mention, #chat .message, #chat .moderation, #chat .skip, #chat .system, #chat .update, #chat .welcome { min-height: 0px !important; } #chat .badge-box { visibility: hidden; width: 0px;} #chat .msg { padding: 5px 8px 6px 16px !important; } #footer-user .image { display: none !important; } #footer-user .meta {  display: none !important; } #footer-user .points { display: none !important; } #footer-user .info .name {top: 8px !important; font-size: 26px !important; text-align: center !important; left: -60px !important; width: 100% !important; left: 0px !important;} #footer-user .info .icon { display: none !important; } #user-rollover .meta .thumb { display: none !important; } #user-rollover .meta .username { left: 15px !important; } #user-rollover .meta .status { left: 15px !important; } #user-rollover .meta .joined { left: 15px !important; } #user-rollover .meta .p3UserID { left: 15px !important; } #user-rollover .meta .p3Role { left: 15px !important; } #waitlist .list .user .image { display: none !important; } #footer-user .buttons .inventory.button { display: none !important; } #footer-user .buttons .badge.button { display: none !important; } #footer-user .buttons .store.button { display: none !important; } #footer-user .buttons .profile.button { display: none !important; } #footer-user .buttons .settings.button { float: right !important; width: 54px !important;} #footer #footer-user .info { display: block !important; z-index: -1 !important; width: 290px !important; top: 0px !important; background: none; } #footer-user .info .name { width: 100% !important; } #footer-user .info .meta { width: 170px !important; } #footer-user .info .meta div.bar { width: 100px !important; } div.room-background { background-image: url("https://plugcubed.net/scripts/alpha/images/p3WorkMode.png") !important; background-size: cover !important; } .app-right .friends .list .row .image { display: none !important; } .social-menu { display: none !important; }');
+                $('#playback').hide();
+                Settings.workMode = true;
+            }
+            this.toggleEmotes(!Settings.workMode);
+            Settings.save();
+        },
         closePlugMenus: function() {
             return $('#playlist-button .icon-arrow-down,#history-button .icon-arrow-up,#footer-user.showing .back').click();
-
         },
         generateEmoteHash: function() {
+            Settings = require('plugCubed/Settings');
             var i, emoteHash, allEmotes, firstChar, emoji;
 
-            Settings = require('plugCubed/Settings');
             emoteHash = window.plugCubed.emotes.emoteHash = {};
             allEmotes = $.extend({}, (Settings.emotes.twitchEmotes ? window.plugCubed.emotes.twitchEmotes : {}), (Settings.emotes.twitchSubEmotes ? window.plugCubed.emotes.twitchSubEmotes : {}), (Settings.emotes.tastyEmotes ? window.plugCubed.emotes.tastyEmotes : []), (Settings.emotes.bttvEmotes ? window.plugCubed.emotes.bttvEmotes : {}), (Settings.emotes.ffzEmotes ? window.plugCubed.emotes.ffzEmotes : {}));
 
@@ -361,6 +408,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             var $chat, b, $message, $box, $msg, $text, $msgSpan, $timestamp, $from, fromUser, chat, lastMessage, lastMessageData;
 
             chat = window.plugCubedModules.chat;
+            Settings = require('plugCubed/Settings');
 
             if (!message) return;
             if (typeof message !== 'string') {
@@ -373,7 +421,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             b = $chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - 20;
 
             $message = $('<div>').addClass('message');
-            if (require('plugCubed/Settings').badges) {
+            if (Settings.badges) {
                 $box = $('<div>').addClass('badge-box').data('uid', fromID ? fromID : 'p3').data('type', type);
             } else {
                 $box = $('<div style="display: inline !important;">').addClass('badge-box').data('uid', fromID ? fromID : 'p3').data('type', type);
@@ -750,8 +798,6 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             var count = 0;
 
             if (Database.settings.chatSound) {
-                Settings = require('plugCubed/Settings');
-
                 var mentionSound = new Audio(Settings.mentionSound);
 
                 mentionSound.addEventListener('ended', function() {

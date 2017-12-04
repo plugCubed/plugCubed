@@ -83,25 +83,16 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             } else if (p3Utils.equalsIgnoreCase(command, 'badges')) {
                 if (args.length > 0) {
                     if (p3Utils.equalsIgnoreCase(args[0], p3Lang.i18n('commands.variables.off')) && Settings.badges) {
-                        StyleManager.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { display: none; }');
-                        Settings.badges = false;
+                        p3Utils.toggleBadges(true);
                         commandLog(p3Lang.i18n('commands.responses.badgeoff'));
                     } else if (p3Utils.equalsIgnoreCase(args[0], p3Lang.i18n('commands.variables.on')) && !Settings.badges) {
-                        StyleManager.unset('hide-badges');
-                        Settings.badges = true;
+                        p3Utils.toggleBadges(true);
                         commandLog(p3Lang.i18n('commands.responses.badgeon'));
                     }
                 } else {
-                    Settings.badges = !Settings.badges;
-                    if (Settings.badges) {
-                        StyleManager.unset('hide-badges');
-                    } else {
-                        StyleManager.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { display: none; }');
-
-                    }
+                    p3Utils.toggleBadges(true);
                     commandLog(p3Lang.i18n((Settings.badges ? 'commands.responses.badgeon' : 'commands.responses.badgeoff')));
                 }
-                Settings.save();
             } else if (p3Utils.equalsIgnoreCase(command, 'export')) {
                 $('.message').each(function(item) {
                     var $this = $(this);
