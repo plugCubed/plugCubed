@@ -11,6 +11,9 @@ define(['plugCubed/Class'], function(Class) {
             if (typeof window.plugCubedModules === 'undefined') {
                 window.plugCubedModules = {};
             }
+            if (typeof window.plugCubedModules.cells === 'undefined') {
+                window.plugCubedModules.cells = [];
+            }
             for (var id in modules) {
                 if (!modules.hasOwnProperty(id)) continue;
 
@@ -44,7 +47,7 @@ define(['plugCubed/Class'], function(Class) {
                         case !m.getAvatarUrl:
                             moduleName = 'avatarAuxiliaries';
                             break;
-                        case !m.Events:
+                        case !(m.Events && m.Router):
                             moduleName = 'backbone';
                             break;
                         case !m.mutes:
@@ -176,8 +179,8 @@ define(['plugCubed/Class'], function(Class) {
                                                 case !(m.prototype.className === 'list room'):
                                                     moduleName = 'RoomUsersListView';
                                                     break;
-                                                case !(m.prototype.className === 'cell' && m.prototype.getBlinkFrame):
-                                                    moduleName = 'AvatarCell';
+                                                case !(m.prototype.className === 'cell' && typeof m.prototype.getBlinkFrame === 'function'):
+                                                    window.plugCubedModules.cells[window.plugCubedModules.cells.length] = m;
                                                     break;
                                                 case !m.prototype.scrollToBottom:
                                                     moduleName = 'PopoutChat';
@@ -185,7 +188,7 @@ define(['plugCubed/Class'], function(Class) {
                                                 case !m.prototype.onFromClick:
                                                     moduleName = 'Chat';
                                                     break;
-                                                case m.prototype.id !== 'dialog-alert':
+                                                case !(m.prototype.id === 'dialog-alert' && typeof m.prototype.doAction === 'function'):
                                                     moduleName = 'DialogAlert';
                                                     break;
                                                 case !(m.prototype.defaults && 'title' in m.prototype.defaults && 'duration' in m.prototype.defaults):
