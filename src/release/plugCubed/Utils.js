@@ -143,14 +143,16 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
                 if (!allEmotes.hasOwnProperty(i)) continue;
 
                 emoji = allEmotes[i];
-                firstChar = emoji.emote.charAt(0).toLowerCase();
-                if (!emoteHash[firstChar]) {
-                    emoteHash[firstChar] = [];
-                    emoteHash[firstChar].longest = 0;
-                }
-                emoteHash[firstChar].push(emoji.emote.toLowerCase());
-                if (emoji.emote.length > emoteHash[firstChar].longest) {
-                    emoteHash[firstChar].longest = emoji.emote.length;
+                if (emoji && emoji.emote) {
+                    firstChar = emoji.emote.charAt(0).toLowerCase();
+                    if (!emoteHash[firstChar]) {
+                        emoteHash[firstChar] = [];
+                        emoteHash[firstChar].longest = 0;
+                    }
+                    emoteHash[firstChar].push(emoji.emote.toLowerCase());
+                    if (emoji.emote.length > emoteHash[firstChar].longest) {
+                        emoteHash[firstChar].longest = emoji.emote.length;
+                    }
                 }
             }
 
