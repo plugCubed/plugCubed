@@ -1,9 +1,9 @@
 /**
- Simple JavaScript Inheritance
- By John Resig http://ejohn.org/
- MIT Licensed.
-
- Modified by Plug DJ, Inc.
+ * Simple JavaScript Inheritance
+ * By John Resig http://ejohn.org/
+ * MIT Licensed.
+ *
+ * Modified by Plug DJ, Inc.
  */
 define(function() {
     /* eslint-disable */

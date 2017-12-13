@@ -1,6 +1,7 @@
 /**
  * Thank you to Brinkie Pie https://github.com/jtbrinkmann
- **/
+ *
+ */
 
 define(['plugCubed/Class'], function(Class) {
 

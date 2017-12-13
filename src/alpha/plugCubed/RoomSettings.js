@@ -421,8 +421,10 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             RoomLoader.onVideoResize(Layout.getSize());
         },
 
-        // RCS compatibility--reload room settings if a moderator chats
-        // "!rcsreload ccs".
+        /*
+         * RCS compatibility--reload room settings if a moderator chats
+         * "!rcsreload ccs".
+         */
         checkModUpdate: function(message) {
             if ((API.hasPermission(message.uid, API.ROLE.COHOST) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) && (p3Utils.startsWith(message.message, '!rcsreload ccs') || p3Utils.startsWith(message.message, '!p3reload ccs'))) {
                 this.update();

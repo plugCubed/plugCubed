@@ -1,6 +1,6 @@
 /**
- Modified version of plug.dj's VolumeView
- VolumeView copyright (C) 2014 by Plug DJ, Inc.
+ * Modified version of plug.dj's VolumeView
+ * VolumeView copyright (C) 2014 by Plug DJ, Inc.
  */
 define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils'], function($, p3Lang, p3Utils) {
     var Context = window.plugCubedModules.context;
