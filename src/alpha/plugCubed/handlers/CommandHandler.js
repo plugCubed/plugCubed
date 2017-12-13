@@ -26,6 +26,14 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
             var lastIndex = -1;
             var allUsers = API.getUsers();
 
+            allUsers = allUsers.sort(function(a, b) {
+                if (a.username.length === b.username.length) {
+                    return 0;
+                }
+
+                return a.username.length < b.username.length ? -1 : 1;
+            });
+
             for (i = 0; i < allUsers.length; i++) {
                 user = allUsers[i];
 
