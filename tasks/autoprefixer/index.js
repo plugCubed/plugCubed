@@ -1,7 +1,9 @@
 'use strict';
 
 const gulp = require('gulp');
-const autoprefixer = require('gulp-autoprefixer');
+const postcss = require('gulp-postcss');
+const unprefix = require('postcss-unprefix');
+const autoprefixer = require('autoprefixer');
 const justReplace = require('gulp-just-replace');
 const gulpIf = require('gulp-if');
 
@@ -15,9 +17,12 @@ versions.forEach((version) => {
                 search: /https?:\/\/plugcubed\.net\/scripts\/(alpha|dev|release)\//gi,
                 replacement: `https://plugcubed.net/scripts/${version}/`
             }]))
-            .pipe(autoprefixer({
-                browsers: ['> 1%', 'ie >= 9', 'last 5 versions']
-            }))
+            .pipe(postcss([
+                unprefix,
+                autoprefixer({
+                    cascade: false
+                })
+            ]))
             .pipe(gulp.dest(`src/${version}`))
             .pipe(gulpIf((file) => file.path && file.path.includes('dev'), gulp.dest('bin/dev')));
     });

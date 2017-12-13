@@ -1,7 +1,8 @@
 'use strict';
 
 const gulp = require('gulp');
-const cssnano = require('gulp-cssnano');
+const cssnano = require('cssnano');
+const postcss = require('gulp-postcss');
 const bytediff = require('gulp-bytediff');
 const sourcemaps = require('gulp-sourcemaps');
 
@@ -13,11 +14,13 @@ versions.forEach((version) => {
             .src(`src/${version}/plugCubed.css`)
             .pipe(sourcemaps.init())
             .pipe(bytediff.start())
-            .pipe(cssnano({
-                autoprefixer: false,
-                zindex: false,
-                normalizeCharset: false
-            }))
+            .pipe(postcss([
+                cssnano({
+                    preset: ['default', {
+                        normalizeCharset: false
+                    }]
+                })
+            ]))
             .pipe(bytediff.stop())
             .pipe(sourcemaps.write('./'))
             .pipe(gulp.dest(`bin/${version}/`));

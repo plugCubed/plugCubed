@@ -7,7 +7,7 @@ const path = require('path');
 const rimraf = require('rimraf');
 const fs = require('graceful-fs');
 const gulp = require('gulp');
-const mkdirp = require('mkdirp');
+const mkdirp = require('make-dir');
 
 versions.forEach((version) => {
     if (version == null) return;
@@ -16,7 +16,11 @@ versions.forEach((version) => {
         rimraf(`bin/${version}/**`, fs, () => {
             mkdirp(path.join('bin', version), {
                 fs
-            }, done);
+            }).then(() => {
+                done();
+            }).catch((err) => {
+                done(err);
+            });
         });
     });
 });

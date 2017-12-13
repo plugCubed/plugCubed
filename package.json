@@ -5,7 +5,6 @@
   "author": "The plugCubed Team",
   "browserslist": [
     "> 1%",
-    "ie >= 9",
     "last 5 versions"
   ],
   "bugs": {
@@ -13,23 +12,25 @@
     "email": "1337alexpham@gmail.com"
   },
   "devDependencies": {
-    "eslint-config-thedark1337": "^4.11.1",
+    "autoprefixer": "^7.2.3",
+    "cssnano": "^4.0.0-rc.2",
+    "eslint-config-thedark1337": "^4.13.1",
     "graceful-fs": "^4.1.11",
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-autoprefixer": "^4.0.0",
     "gulp-bytediff": "^1.0.0",
-    "gulp-cssnano": "^2.1.2",
     "gulp-data": "^1.2.1",
     "gulp-eslint": "^4.0.0",
-    "gulp-hub": "github:frankwallis/gulp-hub#registry-init",
+    "gulp-hub": "^4.1.0",
     "gulp-if": "^2.0.2",
     "gulp-just-replace": "^1.0.2",
+    "gulp-postcss": "^7.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-template": "^4.0.0",
     "gulp-uglify": "^3.0.0",
     "gulp-zip": "^4.0.0",
-    "mkdirp": "^0.5.1",
+    "make-dir": "^1.1.0",
+    "postcss-unprefix": "^2.1.1",
     "requirejs": "^2.3.5",
     "rimraf": "^2.6.2"
   },
