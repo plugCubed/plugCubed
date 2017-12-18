@@ -61,10 +61,14 @@
                         'basicbot',
                         'googletag',
                         'nbot',
-                        'out of memory'
+                        'ns_error_*',
+                        'out of memory',
+                        'plugdj_pixel_playlist'
                     ],
                     ignoreUrls: [
-                        '.firstimpression.io.*'
+                        'github.com',
+                        'firstimpression.io',
+                        'nbot'
                     ],
                     release: Version.getSemver(),
                     user: {
