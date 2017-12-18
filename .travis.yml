@@ -1,9 +1,12 @@
 sudo: false
 language: node_js
 node_js:
-  - '8'
+  - 'lts/*'
 notifications:
   webhooks:
     urls:
       - https://webhooks.tfle.xyz/travis
     on_start: always
+cache:
+  directories:
+    - "node_modules"
