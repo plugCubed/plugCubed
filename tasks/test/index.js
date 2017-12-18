@@ -3,6 +3,7 @@
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const gulpIf = require('gulp-if');
+const isCI = require('is-ci');
 
 versions.forEach((version) => {
     if (version == null) return;
@@ -11,7 +12,7 @@ versions.forEach((version) => {
         return gulp
             .src(`src/${version}/plugCubed/**/*.js`)
             .pipe(eslint({
-                fix: true
+                fix: !isCI
             }))
             .pipe(eslint.format())
             .pipe(eslint.failAfterError())
