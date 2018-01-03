@@ -34,7 +34,7 @@ We welcome all contributions to this project.
 * Run `npm install --only=dev` to set up the environment.
 * Make your changes in the src/alpha folder and please make sure you follow our [Code Style](https://github.com/plugCubed/Code-Style).
 * Run `gulp build:alpha` to compile the code and test with `gulp test:alpha`. (If `gulp` doesn't work, please install it by typing `npm install -g gulp-cli` in commandline)
-* Submit your changes as a Pull Requests [here](https://github.com/plugCubed/plugCubed/pulls).
+* Submit your changes as a Pull Request [here](https://github.com/plugCubed/plugCubed/pulls).
 
 ### Credits
 We would like to thank the following people
@@ -44,7 +44,7 @@ We would like to thank the following people
 * [plug.dj](https://plug.dj) - for creating an awesome website
 
 ### License
-Copyright &copy; 2012-2016 The plug&#179; Team and other contributors
+Copyright &copy; 2012-2018 The plug&#179; Team and other contributors
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
