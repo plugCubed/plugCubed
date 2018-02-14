@@ -241,8 +241,20 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     $('div.p3-hideplayback').find('.box').text(Settings.hideVideo ? p3Lang.i18n('video.show') : p3Lang.i18n('video.hide'));
                     if (Settings.hideVideo) {
                         $('#playback-container').hide();
+                        $('#playback')
+                            .find('.background')
+                            .find('img')
+                            .after(
+                                $('<div>')
+                                    .text(p3Lang.i18n('video.hidden'))
+                                    .css({
+                                        'text-align': 'center', position: 'absolute', 'font-size': '100px'
+                                    })
+                                    .attr('id', 'p3-videoHidden')
+                            );
                     } else {
                         $('#playback-container').show();
+                        $('#p3-videoHidden').remove();
                     }
                     break;
                 case 'lowLagMode':

@@ -265,6 +265,17 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 }
                 if (this.hideVideo) {
                     $('#playback-container').hide();
+                    $('#playback')
+                        .find('.background')
+                        .find('img')
+                        .after(
+                            $('<div>')
+                                .text(p3Lang.i18n('video.hidden'))
+                                .css({
+                                    'text-align': 'center', position: 'absolute', 'font-size': '100px'
+                                })
+                                .attr('id', 'p3-videoHidden')
+                        );
                 }
                 if (!this.badges) {
                     p3Utils.toggleBadges(true);
