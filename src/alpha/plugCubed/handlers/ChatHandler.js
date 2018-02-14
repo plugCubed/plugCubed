@@ -390,33 +390,51 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
 
         $msg.html(previousMessages + p3Utils.cleanHTML(data.message, ['div', 'table', 'tr', 'td'], ['img', 'video', 'source']));
 
-        $this.data('translated', false);
         $this.dblclick(function(e) {
             if (!e.ctrlKey) return;
-            if ($this.data('translated')) {
-                $msg.html(previousMessages + convertEmotes(convertImageLinks(data.message)));
-                $this.data('translated', false);
+            if (!/message|mention|emote/i.test(e.currentTarget.className)) return;
+
+            var element = $(e.currentTarget);
+            var url = 'https://translate.yandex.net/api/v1.5/tr.json/translate';
+            var apiKey = 'trnsl.1.1.20180213T120107Z.45d63416cc4229dc.58d28e5eba318bc498d2723cb08edca39a80ab82';
+            var xhr = new XMLHttpRequest();
+            var text = element.find('.text').html().replace(/<br\s*\/*>/gi, '\n');
+            var lang = API.getUser().language;
+            var msgBeforeTranslate = element.data('msgBeforeTranslate');
+            var translate;
+
+            if (element.data('translated')) {
+                element.find('.text').html(msgBeforeTranslate.replace(/\n/gi, '<br>'));
+                element.data({
+                    msgBeforeTranslate: null, translated: false
+                });
+
             } else {
-                $msg.html('<em>Translating...</em>');
-                $.getJSON('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20161006T200452Z.20a8f9334badc4dc.03bec1dcee7047013bf54af595d257c5e8fca99d&lang=en&options=1&text=' + encodeURIComponent(data.message.replace('&nbsp;', ' ')))
-                    .done(function(langData) {
-                        if (langData.error) {
-                            $msg.html(previousMessages + convertEmotes(convertImageLinks(data.message)));
-                            $this.data('translated', false);
-                        } else if (langData.detected && langData.detected.lang && langData.detected.lang !== 'en') {
-                            $msg.html(previousMessages + convertEmotes(convertImageLinks((Array.isArray(langData.text) && langData.text.length > 0 ? langData.text[0] : data.message))));
-                            $this.data('translated', true);
-                        } else {
-                            $msg.html(previousMessages + convertEmotes(convertImageLinks(data.message)));
-                            $this.data('translated', false);
+                translate = 'key=' + apiKey + '&text=' + text + '&lang=' + lang;
+                xhr.open('POST', url, true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.send(translate);
+                xhr.onreadystatechange = function() {
+                    if (this.readyState === 4 && this.status === 200) {
+                        var res = this.responseText;
+                        var json = JSON.parse(res);
+
+                        if (json.code === 200) {
+                            element.data({
+                                msgBeforeTranslate: text, translated: true
+                            });
+
+                            return element.find('.text').html(json.text[0].replace(/\n/gi, '<br>'));
                         }
-                    })
-                    .fail(function() {
-                        $msg.html(previousMessages + convertEmotes(convertImageLinks(data.message)));
-                        $this.data('translated', false);
-                    });
+                    }
+                };
             }
-            e.stopPropagation();
+        });
+
+        $this.on('mouseover', function() {
+            if ($this.data('translated')) Context.trigger('tooltip:show', 'Translated', $(this), true);
+        }).on('mouseout', function() {
+            Context.trigger('tooltip:hide');
         });
     }
 
