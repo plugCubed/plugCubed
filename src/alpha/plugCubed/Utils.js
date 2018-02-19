@@ -126,6 +126,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return '';
         },
         toggleBadges: function(toggle) {
+            if (!requirejs.defined('plugCubed/Settings') || !requirejs.defined('plugCubed/StyleManager')) return;
+
             Settings = require('plugCubed/Settings');
             Styles = require('plugCubed/StyleManager');
             if ((toggle && !Settings.badges) || !Settings.badges) {
@@ -144,6 +146,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             Database.save();
         },
         toggleLowLagMode: function() {
+            if (!requirejs.defined('plugCubed/Settings')) return;
+
             Settings = require('plugCubed/Settings');
             if (Settings.lowLagMode) {
                 Database.settings.videoOnly = false;
@@ -160,6 +164,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             Settings.save();
         },
         toggleWorkMode: function() {
+            if (!requirejs.defined('plugCubed/Settings') || !requirejs.defined('plugCubed/StyleManager')) return;
+
             Settings = require('plugCubed/Settings');
             Styles = require('plugCubed/StyleManager');
             if (Settings.workMode) {
@@ -178,6 +184,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return $('#playlist-button .icon-arrow-down,#history-button .icon-arrow-up,#footer-user.showing .back').click();
         },
         generateEmoteHash: function() {
+            if (!requirejs.defined('plugCubed/Settings')) return;
+
             Settings = require('plugCubed/Settings');
             var i, emoteHash, allEmotes, firstChar, emoji;
 
@@ -405,6 +413,8 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return new Array(count + 1).join(str);
         },
         chatLog: function(type, message, color, fromID, fromName) {
+            if (!requirejs.defined('plugCubed/Settings')) return;
+
             var $chat, b, $message, $box, $msg, $text, $msgSpan, $timestamp, $from, fromUser, chat, lastMessage, lastMessageData;
 
             chat = window.plugCubedModules.chat;
