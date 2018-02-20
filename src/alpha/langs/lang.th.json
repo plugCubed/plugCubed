@@ -1,272 +1,276 @@
 {
-  "running":"กำลังรันplug&#179; เวอร์ชัน %1",
-  "commandsHelp":"ใช้คำสั่ง '/commands' เพื่อดูคำสั่งแชทเพิ่มเติม.",
-  "autorespond":{
-    "default":"ฉันไม่อยู่ (AFK).",
-    "disable":"ปิดโหมด AFK เพื่อตอบโต้แชทข้อความ",
-    "nextIn":"ข้อความ AFK ตอบโต้อัตโนมัติ จะถูกส่งอีกใน %1",
-    "next":"ข้อความตอบโต้อัตโนมัติจะถูกส่งในข้อความต่อไป",
-    "commandDisable":"%1 autojoin disabled"
-  },
-  "autojoin":{
-    "commandDisable":"%1 ระบบเข้าดีเจอัตโนมัติ ยกเลิก"
-  },
-  "fullscreen":{
-    "shrink":"ลดขนาด",
-    "enlarge":"ขยาย"
-  },
-  "commands":{
-    "header":"User Information",
-    "userCommands":"คำสั่งของผู้ใช้",
-    "modCommands":"คำสั่งของผู้ดูแล",
-    "variables":{
-      "username":"ชื่อผู้ใช้",
-      "word":"คำ",
-      "on":"เปิด",
-      "off":"ปิด",
-      "reason":"เหตุผล",
-      "number":"หมายเลข"
+    "running": "กำลังรันplug&#179; เวอร์ชัน %1",
+    "commandsHelp": "ใช้คำสั่ง '/commands' เพื่อดูคำสั่งแชทเพิ่มเติม.",
+    "autorespond": {
+        "default": "ฉันไม่อยู่ (AFK).",
+        "disable": "ปิดโหมด AFK เพื่อตอบโต้แชทข้อความ",
+        "nextIn": "ข้อความ AFK ตอบโต้อัตโนมัติ จะถูกส่งอีกใน %1",
+        "next": "ข้อความตอบโต้อัตโนมัติจะถูกส่งในข้อความต่อไป",
+        "commandDisable": "%1 autojoin disabled"
     },
-    "descriptions":{
-      "join":"User Join",
-      "leave":"User Leave",
-      "whoami":"ดึงข้อมูลส่วนตัวของคุณ",
-      "mute":"ตั้งค่าเสียงเป็น 0",
-      "automute":"แบนเพลงที่กำลังเล่นอยู่เพื่อออโต้แบนในครั้งหน้า",
-      "unmute":"ตั้งค่าเสียงเป็นครั้งล่าสุด",
-      "nextsong":"แสดงเพลงถัดไปในรายการที่เล่นและในรายเพลงที่เล่นแล้ว(ถ้ามี)",
-      "refresh":"ฟื้นฟูวิดีโอ",
-      "alertson":"เล่นเสียงเมื่อใดก็ ตามที่เขียนคำที่กำหนดในการแชท",
-      "alertsoff":"หยุดเล่นเสียงเมื่อมีเขียนคำกำหนดในแชท",
-      "grab":"เพิ่มปัจจุบันเพลงที่จะเล่นของคุณเลือก",
-      "badges":"แสดง/ซ่อนป้ายผู้ใช้ในแชท",
-      "getpos":"รับตำแหน่ง waitlist",
-      "version":"แสดงหมายเลขรุ่น",
-      "commands":"แสดงรายการนี้",
-      "link":"วางการเชื่อมโยงไปยังเว็บไซต์ plugCubed ในแชท",
-      "whois":"ให้ข้อมูลทั่วไปเกี่ยวกับผู้ใช้",
-      "skip":"ข้ามเพลงปัจจุบัน",
-      "ban":"เตะผู้ใช้ที่เลือกไว้",
-      "lockskip":"ล็อค DJ บูธ ข้ามเพลง และปลดล็อคหลังจากนั้น",
-      "lock":"ล็อคบูธ DJ",
-      "unlock":"ปลดล็อกบูธ DJ",
-      "add":"เพิ่มผู้ใช้ที่เลือกไว้ไปยังบูธ ดีเจ/waitlist",
-      "remove":"ลบผู้ใช้ที่เลือกไว้จากบูธ ดีเจ/waitlist",
-      "whois all":"ให้ไอดีผู้ใช้และชื่อผู้ใช้ของผู้ใช้ทั้งหมดในห้อง",
-      "banall":"แบนผู้ใช้ทั้งหมดในห้อง",
-      "status":"แสดงสถานะของเซิร์ฟเวอร์ปลั๊ก",
-      "unload":"ปิด plug³",
-      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
+    "autojoin": {
+        "commandDisable": "%1 ระบบเข้าดีเจอัตโนมัติ ยกเลิก"
     },
-    "responses":{
-      "alertson":"เล่นเสียงจากคำต่อไปนี้: %1",
-      "alertsoff":"ไม่เล่นเสียงเฉพาะคำ",
-      "badgeon":"ป้ายเปิดอยู่แล้ว",
-      "badgeoff":"ป้ายปิดอยู่แล้ว",
-      "nextsong":"เพลงอยู่ในคิวต่อไปเป็น %1 โดย %2",
-      "isHistory":"คำเตือน: เพลงนี้ยังอยู่ในรายการเพลงที่เล่นแล้วในประวัติ (%1 จาก %2)",
-      "automute":{
-        "automuted":"%1 ปิดเสียงโดยอัตโนมัติ.",
-        "registered":"%1 ลงทะเบียนเพื่อ automute ในการเล่นในอนาคต.",
-        "unregistered":"เอาออกจากรีจิสทรี automute %1."
-      },
-      "status":{
-        "rest":"เหลือ: %1 %2 [%3ms]",
-        "socket":"ซ็อกเก็ต: %1 %2 [%3ms]"
-      }
+    "fullscreen": {
+        "shrink": "ลดขนาด",
+        "enlarge": "ขยาย"
+    },
+    "commands": {
+        "header": "User Information",
+        "userCommands": "คำสั่งของผู้ใช้",
+        "modCommands": "คำสั่งของผู้ดูแล",
+        "variables": {
+            "username": "ชื่อผู้ใช้",
+            "word": "คำ",
+            "on": "เปิด",
+            "off": "ปิด",
+            "reason": "เหตุผล",
+            "number": "หมายเลข"
+        },
+        "descriptions": {
+            "join": "User Join",
+            "leave": "User Leave",
+            "whoami": "ดึงข้อมูลส่วนตัวของคุณ",
+            "mute": "ตั้งค่าเสียงเป็น 0",
+            "automute": "แบนเพลงที่กำลังเล่นอยู่เพื่อออโต้แบนในครั้งหน้า",
+            "unmute": "ตั้งค่าเสียงเป็นครั้งล่าสุด",
+            "nextsong": "แสดงเพลงถัดไปในรายการที่เล่นและในรายเพลงที่เล่นแล้ว(ถ้ามี)",
+            "refresh": "ฟื้นฟูวิดีโอ",
+            "alertson": "เล่นเสียงเมื่อใดก็ ตามที่เขียนคำที่กำหนดในการแชท",
+            "alertsoff": "หยุดเล่นเสียงเมื่อมีเขียนคำกำหนดในแชท",
+            "grab": "เพิ่มปัจจุบันเพลงที่จะเล่นของคุณเลือก",
+            "badges": "แสดง/ซ่อนป้ายผู้ใช้ในแชท",
+            "getpos": "รับตำแหน่ง waitlist",
+            "version": "แสดงหมายเลขรุ่น",
+            "commands": "แสดงรายการนี้",
+            "link": "วางการเชื่อมโยงไปยังเว็บไซต์ plugCubed ในแชท",
+            "whois": "ให้ข้อมูลทั่วไปเกี่ยวกับผู้ใช้",
+            "skip": "ข้ามเพลงปัจจุบัน",
+            "ban": "เตะผู้ใช้ที่เลือกไว้",
+            "lockskip": "ล็อค DJ บูธ ข้ามเพลง และปลดล็อคหลังจากนั้น",
+            "lock": "ล็อคบูธ DJ",
+            "unlock": "ปลดล็อกบูธ DJ",
+            "add": "เพิ่มผู้ใช้ที่เลือกไว้ไปยังบูธ ดีเจ/waitlist",
+            "remove": "ลบผู้ใช้ที่เลือกไว้จากบูธ ดีเจ/waitlist",
+            "whois all": "ให้ไอดีผู้ใช้และชื่อผู้ใช้ของผู้ใช้ทั้งหมดในห้อง",
+            "banall": "แบนผู้ใช้ทั้งหมดในห้อง",
+            "status": "แสดงสถานะของเซิร์ฟเวอร์ปลั๊ก",
+            "unload": "ปิด plug³",
+            "unban": "Unbans targeted user.",
+            "volume": "Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
+        },
+        "responses": {
+            "alertson": "เล่นเสียงจากคำต่อไปนี้: %1",
+            "alertsoff": "ไม่เล่นเสียงเฉพาะคำ",
+            "badgeon": "ป้ายเปิดอยู่แล้ว",
+            "badgeoff": "ป้ายปิดอยู่แล้ว",
+            "nextsong": "เพลงอยู่ในคิวต่อไปเป็น %1 โดย %2",
+            "isHistory": "คำเตือน: เพลงนี้ยังอยู่ในรายการเพลงที่เล่นแล้วในประวัติ (%1 จาก %2)",
+            "automute": {
+                "automuted": "%1 ปิดเสียงโดยอัตโนมัติ.",
+                "registered": "%1 ลงทะเบียนเพื่อ automute ในการเล่นในอนาคต.",
+                "unregistered": "เอาออกจากรีจิสทรี automute %1."
+            },
+            "status": {
+                "rest": "เหลือ: %1 %2 [%3ms]",
+                "socket": "ซ็อกเก็ต: %1 %2 [%3ms]"
+            }
+        }
+    },
+    "eta": {
+        "boothAvailable": "ถ้าคุณเข้า waitlist คุณจะเป็น DJing ทันที",
+        "alreadyDJ": "คุณกำลัง DJing",
+        "waitListTime": "คุณกำลังอยู่ใน %1 waitlist ของ %2 คุณจะ DJing ใน %3",
+        "joinTime": "ถ้าคุณเข้า waitlist ตอนนี้ คุณจะเป็น DJing ใน %1"
+    },
+    "notify": {
+        "deletedMessages": "deleted by ",
+        "join": "ผู้เข้าร่วม",
+        "leave": "ผู้ใช้ที่ออกจากห้อง",
+        "grab": "ผู้ใช้ที่นำเพลงไปใช้",
+        "meh": "ผู้ใช้ที่ปฏิเสธเพลงนี้",
+        "stats": "สถิติของเพลง",
+        "updates": "ปรับปรุงเพลง",
+        "updatesLink": "Song Link",
+        "history": "เพลงในรายการที่เล่นแล้ว",
+        "songUnavailable": "เพลงไม่พร้อมใช้งาน",
+        "boothAlert": "เตือนบูธ (%1 / 50)",
+        "songLength": "เพลงยาว (%1 นาที)",
+        "message": {
+            "boothAlertNext": "คุณกำลังจะเล่น",
+            "boothAlertPos": "ขณะนี้คุณกำลังอยู่ใน %1 ของคิวดีเจ",
+            "grab": "Grabbed  %1 - %2",
+            "stats": "สถิติ:  %1 woots - %2 mehs - %3 grabs",
+            "updates": "เพลงที่กำลังเล่น: %1 โดย %2 <br>เล่นโดย: %3",
+            "meh": "meh แทร็กนี้",
+            "join": "เข้าร่วมห้อง",
+            "leave": "ออกจากห้อง",
+            "history": "เพลงในประวัติการเล่นแล้ว (%1 of %2)",
+            "historySkipped": "เพลงอยู่ในประวัติศาสตร์ (%1 of %2), แต่ถูกข้ามในการเล่นล่าสุด",
+            "songLength": "เพลงมีความยาวมากกว่า %1 นาที",
+            "songDeleted": "Song is deleted",
+            "songPrivate": "เพลงส่วนตัว",
+            "songRejected": "Song is rejected due to %1",
+            "songNotFound": "ไม่เจอเพลง",
+            "songEmbed": "มีเพลงฝังปิดใช้งาน",
+            "songStreamable": "เพลงไม่รองรับสตรีมมิ่ง"
+        }
+    },
+    "info": {
+        "header": "ข้อมูลผู้ใช้",
+        "name": "ชื่อ",
+        "profile": "User Profile",
+        "title": "ชื่อเพลง",
+        "specialTitles": {
+            "developer": "plug&#179; ผู้พัฒนา",
+            "sponsor": "ผู้สนับสนุน plug&#179;",
+            "ambassador": "แอมบาสซาเดอร์ plug&#179;",
+            "donatorDiamond": "Donator เพชร plug&#179;",
+            "donatorPlatinum": "plug&#179; แพลตินัม Donator",
+            "donatorGold": "Donator ทอง plug&#179;",
+            "donatorSilver": "plug&#179;  ซิลเวอร์ Donator",
+            "donatorBronze": "plug&#179; บรอนซ์ Donator",
+            "special": "plug&#179; ผู้สนับสนุนพิเศษ - %1"
+        },
+        "id": "รหัส",
+        "rank": "อันดับ",
+        "joined": "เวลาที่เข้าร่วม",
+        "status": "สถานะ",
+        "vote": "ลงคะแนนเสียง",
+        "position": "ตำแหน่ง",
+        "points": "คะแนน",
+        "wootCount": "จำนวน Woot",
+        "mehCount": "จำนวน Meh ",
+        "ratio": "อัตรา Woot/Meh ",
+        "djing": "DJing",
+        "notInList": "ไม่อยู่ใน waitlist หรือบูธ",
+        "inWaitlist": "%1/%2 ใน waitlist",
+        "userDjing": "%1 กำลัง DJing",
+        "userNextDJ": "%1 กำลัง DJing ถัดไป",
+        "disconnects": "ยกเลิกการเชื่อมต่อ",
+        "lastDisconnect": "ยกเลิกการเชื่อมต่อครั้งที่แล้ว",
+        "lastPosition": "ตำแหน่ง",
+        "time": "เวลา",
+        "lastMessage": "ข้อความล่าสุด"
+    },
+    "ranks": {
+        "you": "คุณ",
+        "regular": "ปกติ",
+        "residentdj": "DJ ประจำ",
+        "bouncer": "ผู้ดูแล",
+        "manager": "ผู้จัดการ",
+        "cohost": "ผู้ช่วยเจ้าของ",
+        "host": "เจ้าของ",
+        "ambassador": "แอมบาสเดอร์",
+        "admin": "แอดมิน"
+    },
+    "roomSpecificSettings": {
+        "infoHeader": "ห้องนี้ใช้การตั้งค่าพิเศษ",
+        "infoHeaderCredits": "ห้องนี้ใช้การตั้งค่าพิเศษ โดย %1",
+        "infoDisable": "คุณสามารถปิดใช้งานได้ในเมนู"
+    },
+    "menuHeaders": {
+        "features": "Features",
+        "chatnotifs": "Chat Notifications",
+        "controlpanel": "'แผงควบคุม'"
+    },
+    "menu": {
+        "autowoot": "ถูกใจโดยอัตโนมัติ",
+        "autojoin": "เข้ารอโดยอัตโนมัติ",
+        "chatlog": "ChatLog",
+        "customchatcolors": "สีการสนทนา",
+        "autorespond": "AFK Autorespond",
+        "notify": "แจ้งให้ทราบ",
+        "afktimers": "ตัวจับเวลา AFK",
+        "etatimer": "เวลา ETA",
+        "roomsettings": "ตั้งค่าห้อง",
+        "chatimages": "รูปแชท",
+        "twitchemotes": "อีโมติคอน Twitch",
+        "controlpanel": "'แผงควบคุม'",
+        "showdeletedmessages": "แสดงข้อความที่ถูกลบ",
+        "visualizers": "RCS SoundCloud Visualizers",
+        "inlineuserinfo": "ข้อมูลผู้ใช้แบบอินไลน์",
+        "about": "About plugCubed",
+        "background": "Change background",
+        "chatcustomizations": "Chat Customizations",
+        "commands": "Chat commands",
+        "customcss": "Custom CSS",
+        "lowlagMode": "Low Lag Mode",
+        "workMode": "Work Mode"
+    },
+    "vote": {
+        "meh": "ไม่ชอบ",
+        "woot": "ชอบ",
+        "grab": "ใช้ต่อ",
+        "undecided": "Undecided",
+        "djing": "DJing"
+    },
+    "customchatcolors": {
+        "userRanksHeader": "User Ranks",
+        "chatnotifs": "Chat Notifications"
+    },
+    "panels": {
+        "about": {
+            "header": "Information about plug³",
+            "version": "Version",
+            "website": "Website",
+            "websiteText": "plug&#179; Website",
+            "translations": "Translations",
+            "translationsText": "plug&#179; Translations",
+            "websitetranslationsText": "plug&#179; Website Translations"
+        },
+        "background": {
+            "description": "Set your own room background"
+        },
+        "buttons": {
+            "cancel": "Cancel",
+            "clear": "Clear",
+            "submit": "Submit"
+        },
+        "chatcustomizations": {
+            "description": "Customize your chat with emojis, notifications, markdown, and other features",
+            "mentionSoundTitle": "Mention Sound %1",
+            "emotesHeader": "Emotes",
+            "chatenhancementHeader": "Chat Enhancements",
+            "emotesSetHeader": "Emoji Set"
+        },
+        "customcss": {
+            "description": "Set your own room CSS"
+        }
+    },
+    "tooltip": {
+        "stream": "ปรับโหมด วิดีโอ/เสียง ",
+        "clear": "ลบสนทนา",
+        "afk": "ข้อความAFK",
+        "reset": "ตั้งค่าเริ่มต้น",
+        "muted": "เพลงทั้งหมดจะไม่ออกเสียง",
+        "mutedOnce": "เพลงปัจจุบันถูกปิดเสียง",
+        "quickBan": "Ban user forever",
+        "quickMute": "Mute user for 45 mins",
+        "userInfo": "User Info"
+    },
+    "error": {
+        "userNotFound": "ผู้ใช้ไม่พบ",
+        "alreadyInWaitList": "ผู้ใช้ %1 อยู่ในคิวแล้ว",
+        "notInWaitList": "ผู้ใช้ %1 ไม่อยู่ในคิว",
+        "unknownMenuKey": "คีย์เมนูที่ไม่รู้จัก: %1",
+        "invalidAddSyntax": "ไวยากรณ์ไม่ถูกต้องสำหรับเพิ่มคำสั่ง ใช้ /add @user",
+        "invalidBanSyntax": "ไวยากรณ์ไม่ถูกต้องสำหรับคำสั่งแบน ใช้ /ban @user หรือ /ban @user::time::เหตุผล",
+        "invalidBanTime": "ระบุเวลา %1 ไม่สมบูรณ์ เวลาที่สมบูรณ์ คือ 60, 1, 24, 1440, -1",
+        "invalidRemoveSyntax": "ไวยากรณ์ไม่ถูกต้องสำหรับการลบคำสั้ง ใช้ /remove @user",
+        "invalidWhoisSyntax": "ไวยากรณ์ไม่ถูกต้องสำหรับคำสั่ง whois ใช้ /whois @user",
+        "errorGettingPlaylistInfo": "ข้อผิดพลาดในการรับข้อมูลรายการที่เล่น",
+        "noPlaylistsFound": "ไม่พบรายการที่เล่น",
+        "yourActivePlaylistIsFull": "รายการที่เล่นของคุณเต็ม",
+        "noNextSong": "คุณมีไม่มีเพลงอยู่ในคิว"
+    },
+    "video": {
+        "show": "Show",
+        "hide": "Hide",
+        "menushow": "Show Video",
+        "menuhide": "Hide Video",
+        "hidden": "Video Hidden",
+        "disabled": "Video Disabled",
+        "snooze": "Video Snoozed"
     }
-  },
-  "eta":{
-    "boothAvailable":"ถ้าคุณเข้า waitlist คุณจะเป็น DJing ทันที",
-    "alreadyDJ":"คุณกำลัง DJing",
-    "waitListTime":"คุณกำลังอยู่ใน %1 waitlist ของ %2 คุณจะ DJing ใน %3",
-    "joinTime":"ถ้าคุณเข้า waitlist ตอนนี้ คุณจะเป็น DJing ใน %1"
-  },
-  "notify":{
-    "deletedMessages":"deleted by ",
-    "join":"ผู้เข้าร่วม",
-    "leave":"ผู้ใช้ที่ออกจากห้อง",
-    "grab":"ผู้ใช้ที่นำเพลงไปใช้",
-    "meh":"ผู้ใช้ที่ปฏิเสธเพลงนี้",
-    "stats":"สถิติของเพลง",
-    "updates":"ปรับปรุงเพลง",
-    "updatesLink":"Song Link",
-    "history":"เพลงในรายการที่เล่นแล้ว",
-    "songUnavailable":"เพลงไม่พร้อมใช้งาน",
-    "boothAlert":"เตือนบูธ (%1 / 50)",
-    "songLength":"เพลงยาว (%1 นาที)",
-    "message":{
-      "boothAlertNext":"คุณกำลังจะเล่น",
-      "boothAlertPos":"ขณะนี้คุณกำลังอยู่ใน %1 ของคิวดีเจ",
-      "grab":"Grabbed  %1 - %2",
-      "stats":"สถิติ:  %1 woots - %2 mehs - %3 grabs",
-      "updates":"เพลงที่กำลังเล่น: %1 โดย %2 <br>เล่นโดย: %3",
-      "meh":"meh แทร็กนี้",
-      "join":"เข้าร่วมห้อง",
-      "leave":"ออกจากห้อง",
-      "history":"เพลงในประวัติการเล่นแล้ว (%1 of %2)",
-      "historySkipped":"เพลงอยู่ในประวัติศาสตร์ (%1 of %2), แต่ถูกข้ามในการเล่นล่าสุด",
-      "songLength":"เพลงมีความยาวมากกว่า %1 นาที",
-      "songDeleted":"Song is deleted",
-      "songPrivate":"เพลงส่วนตัว",
-      "songRejected":"Song is rejected due to %1",
-      "songNotFound":"ไม่เจอเพลง",
-      "songEmbed":"มีเพลงฝังปิดใช้งาน",
-      "songStreamable":"เพลงไม่รองรับสตรีมมิ่ง"
-    }
-  },
-  "info":{
-    "header":"ข้อมูลผู้ใช้",
-    "name":"ชื่อ",
-    "profile":"User Profile",
-    "title":"ชื่อเพลง",
-    "specialTitles":{
-      "developer":"plug&#179; ผู้พัฒนา",
-      "sponsor":"ผู้สนับสนุน plug&#179;",
-      "ambassador":"แอมบาสซาเดอร์ plug&#179;",
-      "donatorDiamond":"Donator เพชร plug&#179;",
-      "donatorPlatinum":"plug&#179; แพลตินัม Donator",
-      "donatorGold":"Donator ทอง plug&#179;",
-      "donatorSilver":"plug&#179;  ซิลเวอร์ Donator",
-      "donatorBronze":"plug&#179; บรอนซ์ Donator",
-      "special":"plug&#179; ผู้สนับสนุนพิเศษ - %1"
-    },
-    "id":"รหัส",
-    "rank":"อันดับ",
-    "joined":"เวลาที่เข้าร่วม",
-    "status":"สถานะ",
-    "vote":"ลงคะแนนเสียง",
-    "position":"ตำแหน่ง",
-    "points":"คะแนน",
-    "wootCount":"จำนวน Woot",
-    "mehCount":"จำนวน Meh ",
-    "ratio":"อัตรา Woot/Meh ",
-    "djing":"DJing",
-    "notInList":"ไม่อยู่ใน waitlist หรือบูธ",
-    "inWaitlist":"%1/%2 ใน waitlist",
-    "userDjing":"%1 กำลัง DJing",
-    "userNextDJ":"%1 กำลัง DJing ถัดไป",
-    "disconnects":"ยกเลิกการเชื่อมต่อ",
-    "lastDisconnect":"ยกเลิกการเชื่อมต่อครั้งที่แล้ว",
-    "lastPosition":"ตำแหน่ง",
-    "time":"เวลา",
-    "lastMessage":"ข้อความล่าสุด"
-  },
-  "ranks":{
-    "you":"คุณ",
-    "regular":"ปกติ",
-    "residentdj":"DJ ประจำ",
-    "bouncer":"ผู้ดูแล",
-    "manager":"ผู้จัดการ",
-    "cohost":"ผู้ช่วยเจ้าของ",
-    "host":"เจ้าของ",
-    "ambassador":"แอมบาสเดอร์",
-    "admin":"แอดมิน"
-  },
-  "roomSpecificSettings":{
-    "infoHeader":"ห้องนี้ใช้การตั้งค่าพิเศษ",
-    "infoHeaderCredits":"ห้องนี้ใช้การตั้งค่าพิเศษ โดย %1",
-    "infoDisable":"คุณสามารถปิดใช้งานได้ในเมนู"
-  },
-  "menuHeaders":{
-    "features":"Features",
-    "chatnotifs":"Chat Notifications",
-    "controlpanel":"'แผงควบคุม'"
-  },
-  "menu":{
-    "autowoot":"ถูกใจโดยอัตโนมัติ",
-    "autojoin":"เข้ารอโดยอัตโนมัติ",
-    "chatlog":"ChatLog",
-    "customchatcolors":"สีการสนทนา",
-    "autorespond":"AFK Autorespond",
-    "notify":"แจ้งให้ทราบ",
-    "afktimers":"ตัวจับเวลา AFK",
-    "etatimer":"เวลา ETA",
-    "roomsettings":"ตั้งค่าห้อง",
-    "chatimages":"รูปแชท",
-    "twitchemotes":"อีโมติคอน Twitch",
-    "controlpanel":"'แผงควบคุม'",
-    "showdeletedmessages":"แสดงข้อความที่ถูกลบ",
-    "visualizers":"RCS SoundCloud Visualizers",
-    "inlineuserinfo":"ข้อมูลผู้ใช้แบบอินไลน์",
-    "about":"About plugCubed",
-    "background":"Change background",
-    "chatcustomizations":"Chat Customizations",
-    "commands":"Chat commands",
-    "customcss":"Custom CSS",
-    "lowlagMode":"Low Lag Mode",
-    "workMode":"Work Mode"
-  },
-  "vote":{
-    "meh":"ไม่ชอบ",
-    "woot":"ชอบ",
-    "grab":"ใช้ต่อ",
-    "undecided":"Undecided",
-    "djing":"DJing"
-  },
-  "customchatcolors":{
-    "userRanksHeader":"User Ranks",
-    "chatnotifs":"Chat Notifications"
-  },
-  "panels":{
-    "about":{
-      "header":"Information about plug³",
-      "version":"Version",
-      "website":"Website",
-      "websiteText":"plug&#179; Website",
-      "translations":"Translations",
-      "translationsText":"plug&#179; Translations",
-      "websitetranslationsText":"plug&#179; Website Translations"
-    },
-    "background":{
-      "description":"Set your own room background"
-    },
-    "buttons":{
-      "cancel":"Cancel",
-      "clear":"Clear",
-      "submit":"Submit"
-    },
-    "chatcustomizations":{
-      "description":"Customize your chat with emojis, notifications, markdown, and other features",
-      "mentionSoundTitle":"Mention Sound %1",
-      "emotesHeader":"Emotes",
-      "chatenhancementHeader":"Chat Enhancements",
-      "emotesSetHeader":"Emoji Set"
-    },
-    "customcss":{
-      "description":"Set your own room CSS"
-    }
-  },
-  "tooltip":{
-    "stream":"ปรับโหมด วิดีโอ/เสียง ",
-    "clear":"ลบสนทนา",
-    "afk":"ข้อความAFK",
-    "reset":"ตั้งค่าเริ่มต้น",
-    "muted":"เพลงทั้งหมดจะไม่ออกเสียง",
-    "mutedOnce":"เพลงปัจจุบันถูกปิดเสียง",
-    "quickBan":"Ban user forever",
-    "quickMute":"Mute user for 45 mins",
-    "userInfo":"User Info"
-  },
-  "error":{
-    "userNotFound":"ผู้ใช้ไม่พบ",
-    "alreadyInWaitList":"ผู้ใช้ %1 อยู่ในคิวแล้ว",
-    "notInWaitList":"ผู้ใช้ %1 ไม่อยู่ในคิว",
-    "unknownMenuKey":"คีย์เมนูที่ไม่รู้จัก: %1",
-    "invalidAddSyntax":"ไวยากรณ์ไม่ถูกต้องสำหรับเพิ่มคำสั่ง ใช้ /add @user",
-    "invalidBanSyntax":"ไวยากรณ์ไม่ถูกต้องสำหรับคำสั่งแบน ใช้ /ban @user หรือ /ban @user::time::เหตุผล",
-    "invalidBanTime":"ระบุเวลา %1 ไม่สมบูรณ์ เวลาที่สมบูรณ์ คือ 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"ไวยากรณ์ไม่ถูกต้องสำหรับการลบคำสั้ง ใช้ /remove @user",
-    "invalidWhoisSyntax":"ไวยากรณ์ไม่ถูกต้องสำหรับคำสั่ง whois ใช้ /whois @user",
-    "errorGettingPlaylistInfo":"ข้อผิดพลาดในการรับข้อมูลรายการที่เล่น",
-    "noPlaylistsFound":"ไม่พบรายการที่เล่น",
-    "yourActivePlaylistIsFull":"รายการที่เล่นของคุณเต็ม",
-    "noNextSong":"คุณมีไม่มีเพลงอยู่ในคิว"
-  },
-  "video":{
-    "show":"Show",
-    "hide":"Hide",
-    "menushow":"Show Video",
-    "menuhide":"Hide Video"
-  }
 }

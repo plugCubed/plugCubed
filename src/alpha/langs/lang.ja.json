@@ -1,272 +1,276 @@
 {
-  "running":"実行中の plug³ バージョン %1",
-  "commandsHelp":"使用して '/command ' 拡張チャット コマンドを参照します。",
-  "autorespond":{
-    "default":"離席中です",
-    "disable":"AFKを無効にするチャットに自動応答する",
-    "nextIn":"次はAFKの自動応答が送信されます %1",
-    "next":"次の言及についてAFK自動応答",
-    "commandDisable":"%1 AFKメッセージはオフになっています"
-  },
-  "autojoin":{
-    "commandDisable":"%1 自動参加なし"
-  },
-  "fullscreen":{
-    "shrink":"縮小する",
-    "enlarge":"拡大する"
-  },
-  "commands":{
-    "header":"plug&#179; コマンド",
-    "userCommands":"ユーザーコマンド",
-    "modCommands":"モデレーションコマンド",
-    "variables":{
-      "username":"ユーザー名",
-      "word":"ワード",
-      "on":"オン",
-      "off":"オフ",
-      "reason":"理由",
-      "number":"番号"
+    "running": "実行中の plug³ バージョン %1",
+    "commandsHelp": "使用して '/command ' 拡張チャット コマンドを参照します。",
+    "autorespond": {
+        "default": "離席中です",
+        "disable": "AFKを無効にするチャットに自動応答する",
+        "nextIn": "次はAFKの自動応答が送信されます %1",
+        "next": "次の言及についてAFK自動応答",
+        "commandDisable": "%1 AFKメッセージはオフになっています"
     },
-    "descriptions":{
-      "join":"DJブース/ウェイトリストに参加",
-      "leave":"DJブース/ウェイトリストを残す",
-      "whoami":"自分の情報を入手する",
-      "mute":"音量：0",
-      "automute":"将来の演奏で自動的にミュートするために現在再生中の曲を登録する",
-      "unmute":"音量を最後の音量に設定する",
-      "nextsong":"次の曲がプレイリストに表示され、曲が履歴に含まれているかどうかを確認します",
-      "refresh":"ビデオをリフレッシュする",
-      "alertson":"定義された単語がチャットに書き込まれるたびに音を出す",
-      "alertsoff":"定義された単語がチャットに書き込まれたときに音を止める",
-      "grab":"選択したプレイリストに現在の曲を追加する",
-      "badges":"チャットでユーザーのバッジを表示/非表示する",
-      "getpos":"現在の待機リストの位置を取得する",
-      "version":"バージョン番号を表示する",
-      "commands":"このリストを表示する",
-      "link":"チャットでplugCubedウェブサイトへのリンクを貼り付ける",
-      "whois":"ユーザーに関する一般的な情報を提供する",
-      "skip":"現在の曲をスキップする",
-      "ban":"目標ユーザーをキックする",
-      "lockskip":"DJブースをロックし、後でスキップしてロックを解除する",
-      "lock":"DJブースをロックする",
-      "unlock":"DJブースのロックを解除する",
-      "add":"ターゲットユーザーをdjブース/待機リストに追加する",
-      "remove":"djブース/待機リストから対象ユーザーを削除する",
-      "whois all":"部屋の全ユーザのユーザIDとユーザ名を与える",
-      "banall":"部屋のすべてのユーザーを禁止する",
-      "status":"プラグサーバーの状態を表示します。",
-      "unload":"クローズプラグ&#179;",
-      "volume":"音量を数字（0〜100）で設定し、+で1ずつ増加させ、 - で1ずつ減少させます。"
+    "autojoin": {
+        "commandDisable": "%1 自動参加なし"
     },
-    "responses":{
-      "alertson":"次の言葉で音を出す：%1",
-      "alertsoff":"特定の単語の音を再生しない",
-      "badgeon":"バッジがオンになっています",
-      "badgeoff":"私のバッジはオフです",
-      "nextsong":"次のキューに入れられた曲は%1で%2です",
-      "isHistory":"警告：この曲はまだ履歴にあります (%1 / %2)",
-      "automute":{
-        "automuted":"%1 を静かにしました。",
-        "registered":"%1 は、将来の再生で自動ミュートに登録されました。",
-        "unregistered":"%1 は自動ミュートレジストリから削除されました。"
-      },
-      "status":{
-        "rest":"REST：%1 %2 [%3ms]",
-        "socket":"ソケット: %1 %2 [%3ms]"
-      }
+    "fullscreen": {
+        "shrink": "縮小する",
+        "enlarge": "拡大する"
+    },
+    "commands": {
+        "header": "plug&#179; コマンド",
+        "userCommands": "ユーザーコマンド",
+        "modCommands": "モデレーションコマンド",
+        "variables": {
+            "username": "ユーザー名",
+            "word": "ワード",
+            "on": "オン",
+            "off": "オフ",
+            "reason": "理由",
+            "number": "番号"
+        },
+        "descriptions": {
+            "join": "DJブース/ウェイトリストに参加",
+            "leave": "DJブース/ウェイトリストを残す",
+            "whoami": "自分の情報を入手する",
+            "mute": "音量：0",
+            "automute": "将来の演奏で自動的にミュートするために現在再生中の曲を登録する",
+            "unmute": "音量を最後の音量に設定する",
+            "nextsong": "次の曲がプレイリストに表示され、曲が履歴に含まれているかどうかを確認します",
+            "refresh": "ビデオをリフレッシュする",
+            "alertson": "定義された単語がチャットに書き込まれるたびに音を出す",
+            "alertsoff": "定義された単語がチャットに書き込まれたときに音を止める",
+            "grab": "選択したプレイリストに現在の曲を追加する",
+            "badges": "チャットでユーザーのバッジを表示/非表示する",
+            "getpos": "現在の待機リストの位置を取得する",
+            "version": "バージョン番号を表示する",
+            "commands": "このリストを表示する",
+            "link": "チャットでplugCubedウェブサイトへのリンクを貼り付ける",
+            "whois": "ユーザーに関する一般的な情報を提供する",
+            "skip": "現在の曲をスキップする",
+            "ban": "目標ユーザーをキックする",
+            "lockskip": "DJブースをロックし、後でスキップしてロックを解除する",
+            "lock": "DJブースをロックする",
+            "unlock": "DJブースのロックを解除する",
+            "add": "ターゲットユーザーをdjブース/待機リストに追加する",
+            "remove": "djブース/待機リストから対象ユーザーを削除する",
+            "whois all": "部屋の全ユーザのユーザIDとユーザ名を与える",
+            "banall": "部屋のすべてのユーザーを禁止する",
+            "status": "プラグサーバーの状態を表示します。",
+            "unload": "クローズプラグ&#179;",
+            "unban": "Unbans targeted user.",
+            "volume": "音量を数字（0〜100）で設定し、+で1ずつ増加させ、 - で1ずつ減少させます。"
+        },
+        "responses": {
+            "alertson": "次の言葉で音を出す：%1",
+            "alertsoff": "特定の単語の音を再生しない",
+            "badgeon": "バッジがオンになっています",
+            "badgeoff": "私のバッジはオフです",
+            "nextsong": "次のキューに入れられた曲は%1で%2です",
+            "isHistory": "警告：この曲はまだ履歴にあります (%1 / %2)",
+            "automute": {
+                "automuted": "%1 を静かにしました。",
+                "registered": "%1 は、将来の再生で自動ミュートに登録されました。",
+                "unregistered": "%1 は自動ミュートレジストリから削除されました。"
+            },
+            "status": {
+                "rest": "REST：%1 %2 [%3ms]",
+                "socket": "ソケット: %1 %2 [%3ms]"
+            }
+        }
+    },
+    "eta": {
+        "boothAvailable": "あなたが今ウェイトリストに参加すれば、あなたはDJです！",
+        "alreadyDJ": "あなたはすでにDJをしています!",
+        "waitListTime": "あなたは%2の待機リスト%1にいます。あなたは約%3でDJしています！",
+        "joinTime": "あなたが今ウェイトリストに参加すれば、あなたは約%1でDJしています！"
+    },
+    "notify": {
+        "deletedMessages": "削除者 ",
+        "join": "参加したユーザー",
+        "leave": "ユーザーからの離脱",
+        "grab": "ユーザーグラブ",
+        "meh": "ユーザーMehs",
+        "stats": "歌の統計",
+        "updates": "Song Updates",
+        "updatesLink": "Song Link",
+        "history": "Songs in history",
+        "songUnavailable": "Song Unavailable",
+        "boothAlert": "Booth Alert (%1 / 50)",
+        "songLength": "Song Length (%1 min)",
+        "message": {
+            "boothAlertNext": "You are about to DJ!",
+            "boothAlertPos": "You are now %1 in the waitlist",
+            "grab": "grabbed %1 - %2",
+            "stats": "Stats: %1 woots -- %2 mehs -- %3 grabs",
+            "updates": "Now Playing: %1 by %2<br>Played by: %3",
+            "meh": "meh'd this track",
+            "join": "joined the room",
+            "leave": "left the room",
+            "history": "Song is in history (%1 of %2)",
+            "historySkipped": "Song is in history (%1 of %2), but was skipped on the last play",
+            "songLength": "Song is longer than %1 minutes",
+            "songDeleted": "Song is deleted",
+            "songPrivate": "Song is private",
+            "songRejected": "Song is rejected due to %1",
+            "songNotFound": "Song not found",
+            "songEmbed": "Song has embedding disabled",
+            "songStreamable": "Song doesn't support streaming"
+        }
+    },
+    "info": {
+        "header": "User Information",
+        "name": "Name",
+        "profile": "User Profile",
+        "title": "Title",
+        "specialTitles": {
+            "developer": "plug&#179; Developer",
+            "sponsor": "plug&#179; Sponsor",
+            "ambassador": "plug&#179; Ambassador",
+            "donatorDiamond": "plug&#179; Diamond Donator",
+            "donatorPlatinum": "plug&#179; Platinum Donator",
+            "donatorGold": "plug&#179; Gold Donator",
+            "donatorSilver": "plug&#179; Silver Donator",
+            "donatorBronze": "plug&#179; Bronze Donator",
+            "special": "plug&#179; Special Supporter - %1"
+        },
+        "id": "ID",
+        "rank": "Rank",
+        "joined": "Time Joined",
+        "status": "Status",
+        "vote": "Vote",
+        "position": "Position",
+        "points": "Points",
+        "wootCount": "Woot Count",
+        "mehCount": "Meh Count",
+        "ratio": "Woot/Meh Ratio",
+        "djing": "Currently DJing",
+        "notInList": "Not in waitlist nor booth",
+        "inWaitlist": "%1/%2 in waitlist",
+        "userDjing": "%1 are currently DJing",
+        "userNextDJ": "%1 are DJing next",
+        "disconnects": "Disconnects",
+        "lastDisconnect": "Last Disconnect",
+        "lastPosition": "Position",
+        "time": "Time",
+        "lastMessage": "Last Message"
+    },
+    "ranks": {
+        "you": "You",
+        "regular": "Regular",
+        "residentdj": "Resident DJ",
+        "bouncer": "Bouncer",
+        "manager": "Manager",
+        "cohost": "Co-Host",
+        "host": "Host",
+        "ambassador": "Ambassador",
+        "admin": "Admin"
+    },
+    "roomSpecificSettings": {
+        "infoHeader": "This room is using special settings",
+        "infoHeaderCredits": "This room is using special settings by %1",
+        "infoDisable": "You can disable them in the menu"
+    },
+    "menuHeaders": {
+        "features": "Features",
+        "chatnotifs": "Chat Notifications",
+        "controlpanel": "Control Panel"
+    },
+    "menu": {
+        "autowoot": "自動 Woot!",
+        "autojoin": "自動結合",
+        "chatlog": "ChatLog",
+        "customchatcolors": "チャット色変更",
+        "autorespond": "自動離席メッセージ",
+        "notify": "Notifications",
+        "afktimers": "離席タイマー",
+        "etatimer": "ETA タイマー",
+        "roomsettings": "Room Settings",
+        "chatimages": "チャット画像",
+        "twitchemotes": "Twitch Emotes",
+        "controlpanel": "Control Panel",
+        "showdeletedmessages": "削除されたメッセージを表示",
+        "visualizers": "RCS SoundCloud Visualizers",
+        "inlineuserinfo": "Inline User Info",
+        "about": "About plugCubed",
+        "background": "Change background",
+        "chatcustomizations": "Chat Customizations",
+        "commands": "Chat commands",
+        "customcss": "Custom CSS",
+        "lowlagMode": "Low Lag Mode",
+        "workMode": "Work Mode"
+    },
+    "vote": {
+        "meh": "Meh",
+        "woot": "Woot",
+        "grab": "Grab",
+        "undecided": "Undecided",
+        "djing": "DJing"
+    },
+    "customchatcolors": {
+        "userRanksHeader": "User Ranks",
+        "chatnotifs": "Chat Notifications"
+    },
+    "panels": {
+        "about": {
+            "header": "Information about plug³",
+            "version": "Version",
+            "website": "Website",
+            "websiteText": "plug&#179; Website",
+            "translations": "Translations",
+            "translationsText": "plug&#179; Translations",
+            "websitetranslationsText": "plug&#179; Website Translations"
+        },
+        "background": {
+            "description": "Set your own room background"
+        },
+        "buttons": {
+            "cancel": "Cancel",
+            "clear": "Clear",
+            "submit": "Submit"
+        },
+        "chatcustomizations": {
+            "description": "Customize your chat with emojis, notifications, markdown, and other features",
+            "mentionSoundTitle": "Mention Sound %1",
+            "emotesHeader": "Emotes",
+            "chatenhancementHeader": "Chat Enhancements",
+            "emotesSetHeader": "Emoji Set"
+        },
+        "customcss": {
+            "description": "Set your own room CSS"
+        }
+    },
+    "tooltip": {
+        "stream": "Toggle Video/Audio Stream",
+        "clear": "Clear Chat",
+        "afk": "離席メッセージ",
+        "reset": "Reset to default",
+        "muted": "All songs are muted",
+        "mutedOnce": "Current song is muted",
+        "quickBan": "Ban user forever",
+        "quickMute": "Mute user for 45 mins",
+        "userInfo": "User Info"
+    },
+    "error": {
+        "userNotFound": "User not found",
+        "alreadyInWaitList": "User %1 is already in waitlist",
+        "notInWaitList": "User %1 is not in waitlist",
+        "unknownMenuKey": "Unknown menu key: %1",
+        "invalidAddSyntax": "Invalid syntax for add command. Usage: /add @user",
+        "invalidBanSyntax": "Invalid syntax for ban command. Usage: /ban @user or /ban @user::time::reason",
+        "invalidBanTime": "The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+        "invalidRemoveSyntax": "Invalid syntax for remove command. Usage: /remove @user",
+        "invalidWhoisSyntax": "Invalid syntax for whois command. Usage: /whois @user",
+        "errorGettingPlaylistInfo": "Error getting playlist info",
+        "noPlaylistsFound": "No playlists found",
+        "yourActivePlaylistIsFull": "Your active playlist is full",
+        "noNextSong": "You have no queued song"
+    },
+    "video": {
+        "show": "Show",
+        "hide": "Hide",
+        "menushow": "Show Video",
+        "menuhide": "Hide Video",
+        "hidden": "Video Hidden",
+        "disabled": "Video Disabled",
+        "snooze": "Video Snoozed"
     }
-  },
-  "eta":{
-    "boothAvailable":"あなたが今ウェイトリストに参加すれば、あなたはDJです！",
-    "alreadyDJ":"あなたはすでにDJをしています!",
-    "waitListTime":"あなたは%2の待機リスト%1にいます。あなたは約%3でDJしています！",
-    "joinTime":"あなたが今ウェイトリストに参加すれば、あなたは約%1でDJしています！"
-  },
-  "notify":{
-    "deletedMessages":"削除者 ",
-    "join":"参加したユーザー",
-    "leave":"ユーザーからの離脱",
-    "grab":"ユーザーグラブ",
-    "meh":"ユーザーMehs",
-    "stats":"歌の統計",
-    "updates":"Song Updates",
-    "updatesLink":"Song Link",
-    "history":"Songs in history",
-    "songUnavailable":"Song Unavailable",
-    "boothAlert":"Booth Alert (%1 / 50)",
-    "songLength":"Song Length (%1 min)",
-    "message":{
-      "boothAlertNext":"You are about to DJ!",
-      "boothAlertPos":"You are now %1 in the waitlist",
-      "grab":"grabbed %1 - %2",
-      "stats":"Stats: %1 woots -- %2 mehs -- %3 grabs",
-      "updates":"Now Playing: %1 by %2<br>Played by: %3",
-      "meh":"meh'd this track",
-      "join":"joined the room",
-      "leave":"left the room",
-      "history":"Song is in history (%1 of %2)",
-      "historySkipped":"Song is in history (%1 of %2), but was skipped on the last play",
-      "songLength":"Song is longer than %1 minutes",
-      "songDeleted":"Song is deleted",
-      "songPrivate":"Song is private",
-      "songRejected":"Song is rejected due to %1",
-      "songNotFound":"Song not found",
-      "songEmbed":"Song has embedding disabled",
-      "songStreamable":"Song doesn't support streaming"
-    }
-  },
-  "info":{
-    "header":"User Information",
-    "name":"Name",
-    "profile":"User Profile",
-    "title":"Title",
-    "specialTitles":{
-      "developer":"plug&#179; Developer",
-      "sponsor":"plug&#179; Sponsor",
-      "ambassador":"plug&#179; Ambassador",
-      "donatorDiamond":"plug&#179; Diamond Donator",
-      "donatorPlatinum":"plug&#179; Platinum Donator",
-      "donatorGold":"plug&#179; Gold Donator",
-      "donatorSilver":"plug&#179; Silver Donator",
-      "donatorBronze":"plug&#179; Bronze Donator",
-      "special":"plug&#179; Special Supporter - %1"
-    },
-    "id":"ID",
-    "rank":"Rank",
-    "joined":"Time Joined",
-    "status":"Status",
-    "vote":"Vote",
-    "position":"Position",
-    "points":"Points",
-    "wootCount":"Woot Count",
-    "mehCount":"Meh Count",
-    "ratio":"Woot/Meh Ratio",
-    "djing":"Currently DJing",
-    "notInList":"Not in waitlist nor booth",
-    "inWaitlist":"%1/%2 in waitlist",
-    "userDjing":"%1 are currently DJing",
-    "userNextDJ":"%1 are DJing next",
-    "disconnects":"Disconnects",
-    "lastDisconnect":"Last Disconnect",
-    "lastPosition":"Position",
-    "time":"Time",
-    "lastMessage":"Last Message"
-  },
-  "ranks":{
-    "you":"You",
-    "regular":"Regular",
-    "residentdj":"Resident DJ",
-    "bouncer":"Bouncer",
-    "manager":"Manager",
-    "cohost":"Co-Host",
-    "host":"Host",
-    "ambassador":"Ambassador",
-    "admin":"Admin"
-  },
-  "roomSpecificSettings":{
-    "infoHeader":"This room is using special settings",
-    "infoHeaderCredits":"This room is using special settings by %1",
-    "infoDisable":"You can disable them in the menu"
-  },
-  "menuHeaders":{
-    "features":"Features",
-    "chatnotifs":"Chat Notifications",
-    "controlpanel":"Control Panel"
-  },
-  "menu":{
-    "autowoot":"自動 Woot!",
-    "autojoin":"自動結合",
-    "chatlog":"ChatLog",
-    "customchatcolors":"チャット色変更",
-    "autorespond":"自動離席メッセージ",
-    "notify":"Notifications",
-    "afktimers":"離席タイマー",
-    "etatimer":"ETA タイマー",
-    "roomsettings":"Room Settings",
-    "chatimages":"チャット画像",
-    "twitchemotes":"Twitch Emotes",
-    "controlpanel":"Control Panel",
-    "showdeletedmessages":"削除されたメッセージを表示",
-    "visualizers":"RCS SoundCloud Visualizers",
-    "inlineuserinfo":"Inline User Info",
-    "about":"About plugCubed",
-    "background":"Change background",
-    "chatcustomizations":"Chat Customizations",
-    "commands":"Chat commands",
-    "customcss":"Custom CSS",
-    "lowlagMode":"Low Lag Mode",
-    "workMode":"Work Mode"
-  },
-  "vote":{
-    "meh":"Meh",
-    "woot":"Woot",
-    "grab":"Grab",
-    "undecided":"Undecided",
-    "djing":"DJing"
-  },
-  "customchatcolors":{
-    "userRanksHeader":"User Ranks",
-    "chatnotifs":"Chat Notifications"
-  },
-  "panels":{
-    "about":{
-      "header":"Information about plug³",
-      "version":"Version",
-      "website":"Website",
-      "websiteText":"plug&#179; Website",
-      "translations":"Translations",
-      "translationsText":"plug&#179; Translations",
-      "websitetranslationsText":"plug&#179; Website Translations"
-    },
-    "background":{
-      "description":"Set your own room background"
-    },
-    "buttons":{
-      "cancel":"Cancel",
-      "clear":"Clear",
-      "submit":"Submit"
-    },
-    "chatcustomizations":{
-      "description":"Customize your chat with emojis, notifications, markdown, and other features",
-      "mentionSoundTitle":"Mention Sound %1",
-      "emotesHeader":"Emotes",
-      "chatenhancementHeader":"Chat Enhancements",
-      "emotesSetHeader":"Emoji Set"
-    },
-    "customcss":{
-      "description":"Set your own room CSS"
-    }
-  },
-  "tooltip":{
-    "stream":"Toggle Video/Audio Stream",
-    "clear":"Clear Chat",
-    "afk":"離席メッセージ",
-    "reset":"Reset to default",
-    "muted":"All songs are muted",
-    "mutedOnce":"Current song is muted",
-    "quickBan":"Ban user forever",
-    "quickMute":"Mute user for 45 mins",
-    "userInfo":"User Info"
-  },
-  "error":{
-    "userNotFound":"User not found",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
-    "unknownMenuKey":"Unknown menu key: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: /add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: /ban @user or /ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: /remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: /whois @user",
-    "errorGettingPlaylistInfo":"Error getting playlist info",
-    "noPlaylistsFound":"No playlists found",
-    "yourActivePlaylistIsFull":"Your active playlist is full",
-    "noNextSong":"You have no queued song"
-  },
-  "video":{
-    "show":"Show",
-    "hide":"Hide",
-    "menushow":"Show Video",
-    "menuhide":"Hide Video"
-  }
 }

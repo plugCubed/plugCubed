@@ -1,272 +1,276 @@
 {
-  "running":"En cours d’exécution: plug&#179; version %1",
-  "commandsHelp":"Utilisez '/commands' pour voir les commandes de chat avancées.",
-  "autorespond":{
-    "default":"Je suis absent.",
-    "disable":"Désactivez la réponse automatique d'absence pour pouvoir discuter",
-    "nextIn":"La prochaine réponse automatique d'absence sera envoyée dans %1",
-    "next":"Réponse automatique d'absence à la prochaine mention.",
-    "commandDisable":"%1 réponse automatique d'absence désactivée"
-  },
-  "autojoin":{
-    "commandDisable":"%1 rejoindre automatiquement la file d'attente désactivé"
-  },
-  "fullscreen":{
-    "shrink":"Rétrécir",
-    "enlarge":"Élargir"
-  },
-  "commands":{
-    "header":"Commandes de Plug&#179;",
-    "userCommands":"Commandes d'utilisateur",
-    "modCommands":"Commandes de modération",
-    "variables":{
-      "username":"Pseudonyme",
-      "word":"mot",
-      "on":"Activé",
-      "off":"Désactivé",
-      "reason":"raison",
-      "number":"nombre"
+    "running": "En cours d’exécution: plug&#179; version %1",
+    "commandsHelp": "Utilisez '/commands' pour voir les commandes de chat avancées.",
+    "autorespond": {
+        "default": "Je suis absent.",
+        "disable": "Désactivez la réponse automatique d'absence pour pouvoir discuter",
+        "nextIn": "La prochaine réponse automatique d'absence sera envoyée dans %1",
+        "next": "Réponse automatique d'absence à la prochaine mention.",
+        "commandDisable": "%1 réponse automatique d'absence désactivée"
     },
-    "descriptions":{
-      "join":"Rejoindre la cabine ou la liste d'attente de DJ",
-      "leave":"Quitte la liste d'attente ou la cabine de DJ",
-      "whoami":"Obtenir vos propres informations",
-      "mute":"Mettre le volume à 0",
-      "automute":"Ajouter cette musique/vidéo à la liste noire pour ne pas l'entendre lors de futurs passages",
-      "unmute":"Remettre le volume à la précédente valeur",
-      "nextsong":"Afficher la prochaine musique dans la liste de lecture et si elle se trouve dans l'historique",
-      "refresh":"Rafraîchir la vidéo",
-      "alertson":"Émettre un son lorsque les mots définis sont écrits dans le chat",
-      "alertsoff":"Arrêter de jouer les sons quand les mots définis sont écrits dans le chat",
-      "grab":"Ajouter la musique actuelle à une de vos playlist",
-      "badges":"afficher/masquer les badges des utilisateurs dans le chat",
-      "getpos":"Afficher votre position actuelle dans la file d'attente",
-      "version":"Affiche la version actuelle de Plug³",
-      "commands":"Montrer cette liste",
-      "link":"Affiche un lien vers le site de PlugCubed dans le chat",
-      "whois":"Donne les informations générales à propos d'un utilisateur.",
-      "skip":"Saute la musique actuelle.",
-      "ban":"Banni l'utilisateur sélectionné.",
-      "lockskip":"Verrouille la cabine de DJ, passe le dj en cours et déverrouille ensuite",
-      "lock":"Verrouille la cabine de DJ.",
-      "unlock":"Déverrouille la cabine de DJ.",
-      "add":"Ajoute l'utilisateur sélectionné à la cabine de DJ ou la liste d'attente.",
-      "remove":"Retire l'utilisateur de la cabine de DJ ou de la liste d'attente.",
-      "whois all":"Donne l'ID et le pseudonyme de tous les utilisateurs présents dans la communauté.",
-      "banall":"Banni tous les membres dans la communauté",
-      "status":"affiche l'état des serveurs de plug",
-      "unload":"Ferme plug&#179;",
-      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
+    "autojoin": {
+        "commandDisable": "%1 rejoindre automatiquement la file d'attente désactivé"
     },
-    "responses":{
-      "alertson":"Émet un son sur les mots suivants: %1",
-      "alertsoff":"N'émet plus de sons sur des mots spécifiques",
-      "badgeon":"Les badges ont été activés",
-      "badgeoff":"Les badges ont été désactivés",
-      "nextsong":"Votre prochaine musique est %1 de %2",
-      "isHistory":"Attention: Cette musique est déjà dans l'historique (%1 de %2)",
-      "automute":{
-        "automuted":"%1 est mis en silencieux automatiquement.",
-        "registered":"%1 enregistré dans la liste noire pour les prochaines fois.",
-        "unregistered":"%1 a été retiré de la liste noire."
-      },
-      "status":{
-        "rest":"RESTE: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
-      }
+    "fullscreen": {
+        "shrink": "Rétrécir",
+        "enlarge": "Élargir"
+    },
+    "commands": {
+        "header": "Commandes de Plug&#179;",
+        "userCommands": "Commandes d'utilisateur",
+        "modCommands": "Commandes de modération",
+        "variables": {
+            "username": "Pseudonyme",
+            "word": "mot",
+            "on": "Activé",
+            "off": "Désactivé",
+            "reason": "raison",
+            "number": "nombre"
+        },
+        "descriptions": {
+            "join": "Rejoindre la cabine ou la liste d'attente de DJ",
+            "leave": "Quitte la liste d'attente ou la cabine de DJ",
+            "whoami": "Obtenir vos propres informations",
+            "mute": "Mettre le volume à 0",
+            "automute": "Ajouter cette musique/vidéo à la liste noire pour ne pas l'entendre lors de futurs passages",
+            "unmute": "Remettre le volume à la précédente valeur",
+            "nextsong": "Afficher la prochaine musique dans la liste de lecture et si elle se trouve dans l'historique",
+            "refresh": "Rafraîchir la vidéo",
+            "alertson": "Émettre un son lorsque les mots définis sont écrits dans le chat",
+            "alertsoff": "Arrêter de jouer les sons quand les mots définis sont écrits dans le chat",
+            "grab": "Ajouter la musique actuelle à une de vos playlist",
+            "badges": "afficher/masquer les badges des utilisateurs dans le chat",
+            "getpos": "Afficher votre position actuelle dans la file d'attente",
+            "version": "Affiche la version actuelle de Plug³",
+            "commands": "Montrer cette liste",
+            "link": "Affiche un lien vers le site de PlugCubed dans le chat",
+            "whois": "Donne les informations générales à propos d'un utilisateur.",
+            "skip": "Saute la musique actuelle.",
+            "ban": "Banni l'utilisateur sélectionné.",
+            "lockskip": "Verrouille la cabine de DJ, passe le dj en cours et déverrouille ensuite",
+            "lock": "Verrouille la cabine de DJ.",
+            "unlock": "Déverrouille la cabine de DJ.",
+            "add": "Ajoute l'utilisateur sélectionné à la cabine de DJ ou la liste d'attente.",
+            "remove": "Retire l'utilisateur de la cabine de DJ ou de la liste d'attente.",
+            "whois all": "Donne l'ID et le pseudonyme de tous les utilisateurs présents dans la communauté.",
+            "banall": "Banni tous les membres dans la communauté",
+            "status": "affiche l'état des serveurs de plug",
+            "unload": "Ferme plug&#179;",
+            "unban": "Unbans targeted user.",
+            "volume": "Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
+        },
+        "responses": {
+            "alertson": "Émet un son sur les mots suivants: %1",
+            "alertsoff": "N'émet plus de sons sur des mots spécifiques",
+            "badgeon": "Les badges ont été activés",
+            "badgeoff": "Les badges ont été désactivés",
+            "nextsong": "Votre prochaine musique est %1 de %2",
+            "isHistory": "Attention: Cette musique est déjà dans l'historique (%1 de %2)",
+            "automute": {
+                "automuted": "%1 est mis en silencieux automatiquement.",
+                "registered": "%1 enregistré dans la liste noire pour les prochaines fois.",
+                "unregistered": "%1 a été retiré de la liste noire."
+            },
+            "status": {
+                "rest": "RESTE: %1 %2 [%3ms]",
+                "socket": "Socket: %1 %2 [%3ms]"
+            }
+        }
+    },
+    "eta": {
+        "boothAvailable": "SI vous rejoignez la liste d'attente maintenant, vous accéderez aux platines tout de suite!",
+        "alreadyDJ": "Vous êtes déjà aux platines!",
+        "waitListTime": "Vous êtes en position %1 sur %2 de la liste d'attente, vous allez accéder aux platines dans environ %3!",
+        "joinTime": "Si vous joignez la liste d'attente, vous accéderez aux platines dans environ %1!"
+    },
+    "notify": {
+        "deletedMessages": "supprimé par ",
+        "join": "Un utilisateur rejoint la communauté",
+        "leave": "Un utilisateur part de la communauté",
+        "grab": "Ajout par un utilisateur",
+        "meh": "Un utilisateur a meh",
+        "stats": "Statistiques de la musique",
+        "updates": "Changements de musique",
+        "updatesLink": "Song Link",
+        "history": "Musiques dans l'historique des DJs",
+        "songUnavailable": "Musique indisponible",
+        "boothAlert": "Alerte de passage (%1 / 50)",
+        "songLength": "Durée de la chanson (%1 min)",
+        "message": {
+            "boothAlertNext": "Vous êtes sur le point d'être DJ!",
+            "boothAlertPos": "Vous êtes maintenant %1 dans la liste d'attente",
+            "grab": "ajouté %1 - %2",
+            "stats": "Statistiques: %1 Woot(s) -- %2 Meh(s) -- %3 ajout(s)",
+            "updates": "Actuellement en train d'être joué: %1 de %2<br>Joué par: %3",
+            "meh": "%1 a Meh cette musique/vidéo",
+            "join": "a rejoint la salle",
+            "leave": "a quitté la salle",
+            "history": "Musique dans l'historique des DJs (%1 de %2)",
+            "historySkipped": "La musique est dans l'historique des DJs (%1 sur %2) mais a été sautée la dernière fois qu'elle a été jouée",
+            "songLength": "La musique est plus longue que %1 minutes",
+            "songDeleted": "Song is deleted",
+            "songPrivate": "La musique est privée",
+            "songRejected": "Song is rejected due to %1",
+            "songNotFound": "Musique introuvable",
+            "songEmbed": "L'intégration du son est désactivé",
+            "songStreamable": "La musique ne supporte pas le streaming"
+        }
+    },
+    "info": {
+        "header": "Informations sur l'utilisateur",
+        "name": "Nom",
+        "profile": "Profil Utilisateur",
+        "title": "Titre",
+        "specialTitles": {
+            "developer": "Développeur de Plug&#179;",
+            "sponsor": "Sponsor de Plug&#179;",
+            "ambassador": "Ambassadeur de plug&#179;",
+            "donatorDiamond": "plug&#179; Donateur de diamant",
+            "donatorPlatinum": "plug&#179; Donateur de Platine",
+            "donatorGold": "plug&#179; Donateur d'Or",
+            "donatorSilver": "plug&#179; Donateur d'Argent",
+            "donatorBronze": "plug&#179; Donateur de Bronze",
+            "special": "plug&#179; Supporter Spécial - %1"
+        },
+        "id": "Identifiant",
+        "rank": "Rang",
+        "joined": "Heure de connexion",
+        "status": "Statut",
+        "vote": "Vote",
+        "position": "Position",
+        "points": "Points",
+        "wootCount": "Total de Woots",
+        "mehCount": "Total de Mehs",
+        "ratio": "Ratio Woots/Mehs",
+        "djing": "Actuellement en train de jouer",
+        "notInList": "Ni dans la liste d'attente, ni dans la cabine de DJ",
+        "inWaitlist": "%1/%2 dans la file d'attente",
+        "userDjing": "%1 est en train de jouer",
+        "userNextDJ": "%1 est le prochain DJ",
+        "disconnects": "Déconnexions",
+        "lastDisconnect": "Dernière déconnexion",
+        "lastPosition": "Position",
+        "time": "Heure",
+        "lastMessage": "Dernier Message"
+    },
+    "ranks": {
+        "you": "Vous",
+        "regular": "Membre",
+        "residentdj": "DJ Résident",
+        "bouncer": "Videur",
+        "manager": "Gestionnaire",
+        "cohost": "Hôte adjoint",
+        "host": "Hôte",
+        "ambassador": "Ambassadeur",
+        "admin": "Administrateur"
+    },
+    "roomSpecificSettings": {
+        "infoHeader": "Cette communauté utilise des paramètres spéciaux",
+        "infoHeaderCredits": "Cette communauté utilise des paramètres spéciaux de %1",
+        "infoDisable": "Vous pouvez les désactiver dans le menu"
+    },
+    "menuHeaders": {
+        "features": "Fonctionnalités",
+        "chatnotifs": "Chat Notifications",
+        "controlpanel": "Panneau de Configuration"
+    },
+    "menu": {
+        "autowoot": "Auto-woot",
+        "autojoin": "Rejoindre Automatiquement",
+        "chatlog": "Historique du chat",
+        "customchatcolors": "Customisation des couleurs du chat",
+        "autorespond": "Réponse automatique lors d'une absence.",
+        "notify": "Notifications",
+        "afktimers": "Minuteurs d'absence.",
+        "etatimer": "Minuteur ETA",
+        "roomsettings": "Paramètres de la communauté",
+        "chatimages": "Images du chat",
+        "twitchemotes": "Emoticones de Twitch",
+        "controlpanel": "Panneau de Configuration",
+        "showdeletedmessages": "Afficher les Messages Supprimés",
+        "visualizers": "Visualiseurs SoundCloud RCS",
+        "inlineuserinfo": "Infos sur l'Utilisateur Alignées",
+        "about": "À propos de plugCubed",
+        "background": "Modifier l'arrière plan",
+        "chatcustomizations": "Chat Customizations",
+        "commands": "Chat commands",
+        "customcss": "Custom CSS",
+        "lowlagMode": "Low Lag Mode",
+        "workMode": "Mode Travail"
+    },
+    "vote": {
+        "meh": "Meh",
+        "woot": "Woot",
+        "grab": "Ajouter",
+        "undecided": "Non décidé",
+        "djing": "En train de jouer"
+    },
+    "customchatcolors": {
+        "userRanksHeader": "User Ranks",
+        "chatnotifs": "Chat Notifications"
+    },
+    "panels": {
+        "about": {
+            "header": "Information à propos de plug³",
+            "version": "Version",
+            "website": "Site internet",
+            "websiteText": "Site internet plug&#179;",
+            "translations": "Traductions",
+            "translationsText": "plug&#179; Translations",
+            "websitetranslationsText": "plug&#179; Website Translations"
+        },
+        "background": {
+            "description": "Set your own room background"
+        },
+        "buttons": {
+            "cancel": "Annuler",
+            "clear": "Effacer",
+            "submit": "Submit"
+        },
+        "chatcustomizations": {
+            "description": "Customize your chat with emojis, notifications, markdown, and other features",
+            "mentionSoundTitle": "Mention Sound %1",
+            "emotesHeader": "Emojis",
+            "chatenhancementHeader": "Chat Enhancements",
+            "emotesSetHeader": "Emoji Set"
+        },
+        "customcss": {
+            "description": "Set your own room CSS"
+        }
+    },
+    "tooltip": {
+        "stream": "Activer/Désactiver le stream Audio ou Vidéo",
+        "clear": "Supprimer l'historique du tchat.",
+        "afk": "Message d'absence.",
+        "reset": "Redéfinir les valeurs par défaut",
+        "muted": "Toutes les musiques sont désactivées",
+        "mutedOnce": "Le son de la musique actuelle est désactivé",
+        "quickBan": "Bannir l'utilisateur pour toujours",
+        "quickMute": "Rendre muet l'utilisateur pour 45 mins",
+        "userInfo": "User Info"
+    },
+    "error": {
+        "userNotFound": "Utilisateur non trouvé",
+        "alreadyInWaitList": "L'utilisateur %1 est déjà dans la liste d'attente",
+        "notInWaitList": "L'utilisateur %1 n'est pas dans la liste d'attente",
+        "unknownMenuKey": "Touche de menu inconnue : %1",
+        "invalidAddSyntax": "Syntaxe invalide pour la commande d'ajout. Utilisation: /add @user",
+        "invalidBanSyntax": "Syntaxe invalide pour la commande de ban. Utilisation: /ban @utilisateur ou /ban @utilisateur::durée::raison",
+        "invalidBanTime": "Le temps spécifié, %1 est invalide. Les durées valides sont 60, 1, 24, 1440, -1",
+        "invalidRemoveSyntax": "Syntaxe invalide pour la commande de suppression. Utilisation: /remove @utilisateur",
+        "invalidWhoisSyntax": "Syntaxe invalide pour la commande /whois. Utilisation: /whois @utilisateur",
+        "errorGettingPlaylistInfo": "Erreur lors de l'obtention des informations de la playlist",
+        "noPlaylistsFound": "Aucune playlist trouvée",
+        "yourActivePlaylistIsFull": "Votre playlist active est pleine",
+        "noNextSong": "Vous n'avez aucune musique en attente"
+    },
+    "video": {
+        "show": "Afficher",
+        "hide": "Masquer",
+        "menushow": "Afficher la vidéo",
+        "menuhide": "Masquer la vidéo",
+        "hidden": "Video Hidden",
+        "disabled": "Video Disabled",
+        "snooze": "Video Snoozed"
     }
-  },
-  "eta":{
-    "boothAvailable":"SI vous rejoignez la liste d'attente maintenant, vous accéderez aux platines tout de suite!",
-    "alreadyDJ":"Vous êtes déjà aux platines!",
-    "waitListTime":"Vous êtes en position %1 sur %2 de la liste d'attente, vous allez accéder aux platines dans environ %3!",
-    "joinTime":"Si vous joignez la liste d'attente, vous accéderez aux platines dans environ %1!"
-  },
-  "notify":{
-    "deletedMessages":"supprimé par ",
-    "join":"Un utilisateur rejoint la communauté",
-    "leave":"Un utilisateur part de la communauté",
-    "grab":"Ajout par un utilisateur",
-    "meh":"Un utilisateur a meh",
-    "stats":"Statistiques de la musique",
-    "updates":"Changements de musique",
-    "updatesLink":"Song Link",
-    "history":"Musiques dans l'historique des DJs",
-    "songUnavailable":"Musique indisponible",
-    "boothAlert":"Alerte de passage (%1 / 50)",
-    "songLength":"Durée de la chanson (%1 min)",
-    "message":{
-      "boothAlertNext":"Vous êtes sur le point d'être DJ!",
-      "boothAlertPos":"Vous êtes maintenant %1 dans la liste d'attente",
-      "grab":"ajouté %1 - %2",
-      "stats":"Statistiques: %1 Woot(s) -- %2 Meh(s) -- %3 ajout(s)",
-      "updates":"Actuellement en train d'être joué: %1 de %2<br>Joué par: %3",
-      "meh":"%1 a Meh cette musique/vidéo",
-      "join":"a rejoint la salle",
-      "leave":"a quitté la salle",
-      "history":"Musique dans l'historique des DJs (%1 de %2)",
-      "historySkipped":"La musique est dans l'historique des DJs (%1 sur %2) mais a été sautée la dernière fois qu'elle a été jouée",
-      "songLength":"La musique est plus longue que %1 minutes",
-      "songDeleted":"Song is deleted",
-      "songPrivate":"La musique est privée",
-      "songRejected":"Song is rejected due to %1",
-      "songNotFound":"Musique introuvable",
-      "songEmbed":"L'intégration du son est désactivé",
-      "songStreamable":"La musique ne supporte pas le streaming"
-    }
-  },
-  "info":{
-    "header":"Informations sur l'utilisateur",
-    "name":"Nom",
-    "profile":"Profil Utilisateur",
-    "title":"Titre",
-    "specialTitles":{
-      "developer":"Développeur de Plug&#179;",
-      "sponsor":"Sponsor de Plug&#179;",
-      "ambassador":"Ambassadeur de plug&#179;",
-      "donatorDiamond":"plug&#179; Donateur de diamant",
-      "donatorPlatinum":"plug&#179; Donateur de Platine",
-      "donatorGold":"plug&#179; Donateur d'Or",
-      "donatorSilver":"plug&#179; Donateur d'Argent",
-      "donatorBronze":"plug&#179; Donateur de Bronze",
-      "special":"plug&#179; Supporter Spécial - %1"
-    },
-    "id":"Identifiant",
-    "rank":"Rang",
-    "joined":"Heure de connexion",
-    "status":"Statut",
-    "vote":"Vote",
-    "position":"Position",
-    "points":"Points",
-    "wootCount":"Total de Woots",
-    "mehCount":"Total de Mehs",
-    "ratio":"Ratio Woots/Mehs",
-    "djing":"Actuellement en train de jouer",
-    "notInList":"Ni dans la liste d'attente, ni dans la cabine de DJ",
-    "inWaitlist":"%1/%2 dans la file d'attente",
-    "userDjing":"%1 est en train de jouer",
-    "userNextDJ":"%1 est le prochain DJ",
-    "disconnects":"Déconnexions",
-    "lastDisconnect":"Dernière déconnexion",
-    "lastPosition":"Position",
-    "time":"Heure",
-    "lastMessage":"Dernier Message"
-  },
-  "ranks":{
-    "you":"Vous",
-    "regular":"Membre",
-    "residentdj":"DJ Résident",
-    "bouncer":"Videur",
-    "manager":"Gestionnaire",
-    "cohost":"Hôte adjoint",
-    "host":"Hôte",
-    "ambassador":"Ambassadeur",
-    "admin":"Administrateur"
-  },
-  "roomSpecificSettings":{
-    "infoHeader":"Cette communauté utilise des paramètres spéciaux",
-    "infoHeaderCredits":"Cette communauté utilise des paramètres spéciaux de %1",
-    "infoDisable":"Vous pouvez les désactiver dans le menu"
-  },
-  "menuHeaders":{
-    "features":"Fonctionnalités",
-    "chatnotifs":"Chat Notifications",
-    "controlpanel":"Panneau de Configuration"
-  },
-  "menu":{
-    "autowoot":"Auto-woot",
-    "autojoin":"Rejoindre Automatiquement",
-    "chatlog":"Historique du chat",
-    "customchatcolors":"Customisation des couleurs du chat",
-    "autorespond":"Réponse automatique lors d'une absence.",
-    "notify":"Notifications",
-    "afktimers":"Minuteurs d'absence.",
-    "etatimer":"Minuteur ETA",
-    "roomsettings":"Paramètres de la communauté",
-    "chatimages":"Images du chat",
-    "twitchemotes":"Emoticones de Twitch",
-    "controlpanel":"Panneau de Configuration",
-    "showdeletedmessages":"Afficher les Messages Supprimés",
-    "visualizers":"Visualiseurs SoundCloud RCS",
-    "inlineuserinfo":"Infos sur l'Utilisateur Alignées",
-    "about":"À propos de plugCubed",
-    "background":"Modifier l'arrière plan",
-    "chatcustomizations":"Chat Customizations",
-    "commands":"Chat commands",
-    "customcss":"Custom CSS",
-    "lowlagMode":"Low Lag Mode",
-    "workMode":"Mode Travail"
-  },
-  "vote":{
-    "meh":"Meh",
-    "woot":"Woot",
-    "grab":"Ajouter",
-    "undecided":"Non décidé",
-    "djing":"En train de jouer"
-  },
-  "customchatcolors":{
-    "userRanksHeader":"User Ranks",
-    "chatnotifs":"Chat Notifications"
-  },
-  "panels":{
-    "about":{
-      "header":"Information à propos de plug³",
-      "version":"Version",
-      "website":"Site internet",
-      "websiteText":"Site internet plug&#179;",
-      "translations":"Traductions",
-      "translationsText":"plug&#179; Translations",
-      "websitetranslationsText":"plug&#179; Website Translations"
-    },
-    "background":{
-      "description":"Set your own room background"
-    },
-    "buttons":{
-      "cancel":"Annuler",
-      "clear":"Effacer",
-      "submit":"Submit"
-    },
-    "chatcustomizations":{
-      "description":"Customize your chat with emojis, notifications, markdown, and other features",
-      "mentionSoundTitle":"Mention Sound %1",
-      "emotesHeader":"Emojis",
-      "chatenhancementHeader":"Chat Enhancements",
-      "emotesSetHeader":"Emoji Set"
-    },
-    "customcss":{
-      "description":"Set your own room CSS"
-    }
-  },
-  "tooltip":{
-    "stream":"Activer/Désactiver le stream Audio ou Vidéo",
-    "clear":"Supprimer l'historique du tchat.",
-    "afk":"Message d'absence.",
-    "reset":"Redéfinir les valeurs par défaut",
-    "muted":"Toutes les musiques sont désactivées",
-    "mutedOnce":"Le son de la musique actuelle est désactivé",
-    "quickBan":"Bannir l'utilisateur pour toujours",
-    "quickMute":"Rendre muet l'utilisateur pour 45 mins",
-    "userInfo":"User Info"
-  },
-  "error":{
-    "userNotFound":"Utilisateur non trouvé",
-    "alreadyInWaitList":"L'utilisateur %1 est déjà dans la liste d'attente",
-    "notInWaitList":"L'utilisateur %1 n'est pas dans la liste d'attente",
-    "unknownMenuKey":"Touche de menu inconnue : %1",
-    "invalidAddSyntax":"Syntaxe invalide pour la commande d'ajout. Utilisation: /add @user",
-    "invalidBanSyntax":"Syntaxe invalide pour la commande de ban. Utilisation: /ban @utilisateur ou /ban @utilisateur::durée::raison",
-    "invalidBanTime":"Le temps spécifié, %1 est invalide. Les durées valides sont 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Syntaxe invalide pour la commande de suppression. Utilisation: /remove @utilisateur",
-    "invalidWhoisSyntax":"Syntaxe invalide pour la commande /whois. Utilisation: /whois @utilisateur",
-    "errorGettingPlaylistInfo":"Erreur lors de l'obtention des informations de la playlist",
-    "noPlaylistsFound":"Aucune playlist trouvée",
-    "yourActivePlaylistIsFull":"Votre playlist active est pleine",
-    "noNextSong":"Vous n'avez aucune musique en attente"
-  },
-  "video":{
-    "show":"Afficher",
-    "hide":"Masquer",
-    "menushow":"Afficher la vidéo",
-    "menuhide":"Masquer la vidéo"
-  }
 }

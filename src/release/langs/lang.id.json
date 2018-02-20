@@ -1,272 +1,276 @@
 {
-  "running":"Menjalankan plug&#179; versi %1",
-  "commandsHelp":"Gunakan '/commands' untuk melihat perintah yang lebih banyak.",
-  "autorespond":{
-    "default":"Saya sedang jauh dari keyboard.",
-    "disable":"Nonaktfikan AFK Autorespond untuk mengobrol",
-    "nextIn":"AFK Autorespond berikutnya akan dikirim dari %1",
-    "next":"AFK Autorespond untuk sebutan berikutnya",
-    "commandDisable":"%1 pesan AFK dinonafktifkan"
-  },
-  "autojoin":{
-    "commandDisable":"%1 Autojoin dinonaktifkan"
-  },
-  "fullscreen":{
-    "shrink":"Menyusut",
-    "enlarge":"Memperbesar"
-  },
-  "commands":{
-    "header":"perintah plug&#179",
-    "userCommands":"Perintah pengguna",
-    "modCommands":"Perintah moderasi",
-    "variables":{
-      "username":"nama pengguna",
-      "word":"kata",
-      "on":"aktif",
-      "off":"tidak aktif",
-      "reason":"alasan",
-      "number":"nomor"
+    "running": "Menjalankan plug&#179; versi %1",
+    "commandsHelp": "Gunakan '/commands' untuk melihat perintah yang lebih banyak.",
+    "autorespond": {
+        "default": "Saya sedang jauh dari keyboard.",
+        "disable": "Nonaktfikan AFK Autorespond untuk mengobrol",
+        "nextIn": "AFK Autorespond berikutnya akan dikirim dari %1",
+        "next": "AFK Autorespond untuk sebutan berikutnya",
+        "commandDisable": "%1 pesan AFK dinonafktifkan"
     },
-    "descriptions":{
-      "join":"bergabung dengan dj booth/waitlist",
-      "leave":"meninggalkan dj booth/waitlist",
-      "whoami":"cari informasimu sendiri",
-      "mute":"set volume ke 0",
-      "automute":"daftar lagu yang sedang diputar akan otomatis dimute pada pemutaran selanjutnya",
-      "unmute":"set volume ke volume terakhir",
-      "nextsong":"menampilkan lagu berikutnya di playlist dan di riwayat",
-      "refresh":"refresh videonya",
-      "alertson":"memainkan suara setiap kali ada kata yang tertulis di chat",
-      "alertsoff":"berhenti memainkan suara ketika ada kata-kata yang tertulis di chat",
-      "grab":"menambahkan lagu saat ini ke playlist pilihan anda",
-      "badges":"tampilkan/sembunyikan lencana pengguna di chat",
-      "getpos":"mendapatkan posisi daftar tunggu",
-      "version":"menampikan nomor versi",
-      "commands":"menampilkan daftar ini",
-      "link":"sisipkan link ke plugCubed website di chat",
-      "whois":"memberikan informasi umum tentang pengguna",
-      "skip":"melewati lagu saat ini",
-      "ban":"menendang pengguna yang di target",
-      "lockskip":"mengunci DJ booth, melewati dan membuka sesudahnya",
-      "lock":"mengunci Dj booth",
-      "unlock":"membuka Dj booth",
-      "add":"menambahkan pengguna yang di target ke dj booth/daftar tunggu",
-      "remove":"menghapus pengguna yang ditarget dari dj booth/daftar tunggu",
-      "whois all":"memberikan id pengguna dan nama pengguna ke semua pengguna di dalam ruangan",
-      "banall":"melarang semua pengguna di dalam ruangan",
-      "status":"menunjukkan status server plug",
-      "unload":"Closes plug&#179;",
-      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
+    "autojoin": {
+        "commandDisable": "%1 Autojoin dinonaktifkan"
     },
-    "responses":{
-      "alertson":"Memainkan suara pada kata-kata berikut: %1",
-      "alertsoff":"Tidak lagi bisa memainkan suara pada kata-kata tertentu",
-      "badgeon":"Lencana telah diaktifkan",
-      "badgeoff":"Lencana telah dinonaktifkan",
-      "nextsong":"Lagu antrian anda berikutnya adalah %1 dari %2",
-      "isHistory":"Peringatan: Lagu ini masih ada di riwayat (%1 dari %2)",
-      "automute":{
-        "automuted":"%1 automuted.",
-        "registered":"%1 terdafar untuk automute pada pemutaran berikutnya.",
-        "unregistered":"%1 dihapus dari registri automute."
-      },
-      "status":{
-        "rest":"SISANYA: %1 %2 [%3ms]",
-        "socket":"Soket: %1 %2 [%3ms]"
-      }
+    "fullscreen": {
+        "shrink": "Menyusut",
+        "enlarge": "Memperbesar"
+    },
+    "commands": {
+        "header": "perintah plug&#179",
+        "userCommands": "Perintah pengguna",
+        "modCommands": "Perintah moderasi",
+        "variables": {
+            "username": "nama pengguna",
+            "word": "kata",
+            "on": "aktif",
+            "off": "tidak aktif",
+            "reason": "alasan",
+            "number": "nomor"
+        },
+        "descriptions": {
+            "join": "bergabung dengan dj booth/waitlist",
+            "leave": "meninggalkan dj booth/waitlist",
+            "whoami": "cari informasimu sendiri",
+            "mute": "set volume ke 0",
+            "automute": "daftar lagu yang sedang diputar akan otomatis dimute pada pemutaran selanjutnya",
+            "unmute": "set volume ke volume terakhir",
+            "nextsong": "menampilkan lagu berikutnya di playlist dan di riwayat",
+            "refresh": "refresh videonya",
+            "alertson": "memainkan suara setiap kali ada kata yang tertulis di chat",
+            "alertsoff": "berhenti memainkan suara ketika ada kata-kata yang tertulis di chat",
+            "grab": "menambahkan lagu saat ini ke playlist pilihan anda",
+            "badges": "tampilkan/sembunyikan lencana pengguna di chat",
+            "getpos": "mendapatkan posisi daftar tunggu",
+            "version": "menampikan nomor versi",
+            "commands": "menampilkan daftar ini",
+            "link": "sisipkan link ke plugCubed website di chat",
+            "whois": "memberikan informasi umum tentang pengguna",
+            "skip": "melewati lagu saat ini",
+            "ban": "menendang pengguna yang di target",
+            "lockskip": "mengunci DJ booth, melewati dan membuka sesudahnya",
+            "lock": "mengunci Dj booth",
+            "unlock": "membuka Dj booth",
+            "add": "menambahkan pengguna yang di target ke dj booth/daftar tunggu",
+            "remove": "menghapus pengguna yang ditarget dari dj booth/daftar tunggu",
+            "whois all": "memberikan id pengguna dan nama pengguna ke semua pengguna di dalam ruangan",
+            "banall": "melarang semua pengguna di dalam ruangan",
+            "status": "menunjukkan status server plug",
+            "unload": "Closes plug&#179;",
+            "unban": "Unbans targeted user.",
+            "volume": "Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
+        },
+        "responses": {
+            "alertson": "Memainkan suara pada kata-kata berikut: %1",
+            "alertsoff": "Tidak lagi bisa memainkan suara pada kata-kata tertentu",
+            "badgeon": "Lencana telah diaktifkan",
+            "badgeoff": "Lencana telah dinonaktifkan",
+            "nextsong": "Lagu antrian anda berikutnya adalah %1 dari %2",
+            "isHistory": "Peringatan: Lagu ini masih ada di riwayat (%1 dari %2)",
+            "automute": {
+                "automuted": "%1 automuted.",
+                "registered": "%1 terdafar untuk automute pada pemutaran berikutnya.",
+                "unregistered": "%1 dihapus dari registri automute."
+            },
+            "status": {
+                "rest": "SISANYA: %1 %2 [%3ms]",
+                "socket": "Soket: %1 %2 [%3ms]"
+            }
+        }
+    },
+    "eta": {
+        "boothAvailable": "Jika anda bergabung dengan daftar tunggu sekarang, anda akan Djing!",
+        "alreadyDJ": "Anda sudah DJing!",
+        "waitListTime": "Anda berada di daftar tunggu %1 dari %2, anda akan DJing kurang lebih %3!",
+        "joinTime": "Jika anda ikut daftar tunggu sekarang, anda akan DJing kurang lebih %1!"
+    },
+    "notify": {
+        "deletedMessages": "deleted by ",
+        "join": "Pengguna ikut",
+        "leave": "Pengguna meninggalkan",
+        "grab": "Pengguna mengambil",
+        "meh": "Pengguna Mehs",
+        "stats": "Statistik Lagu",
+        "updates": "Update lagu",
+        "updatesLink": "Song Link",
+        "history": "Lagu-lagu dalam riwayat",
+        "songUnavailable": "Lagu tidak tersedia",
+        "boothAlert": "Booth Alert (%1 / 50)",
+        "songLength": "Lama lagu (%1 menit)",
+        "message": {
+            "boothAlertNext": "You are about to DJ!",
+            "boothAlertPos": "You are now %1 in the waitlist",
+            "grab": "diambil %1 - %2",
+            "stats": "Statistik: %1 woots -- %2 mehs -- %3 grabs",
+            "updates": "Sekarang memutar: %1 oleh %2<br>Diputar oleh: %3",
+            "meh": "meh'd lagu ini",
+            "join": "mengikuti ruangan",
+            "leave": "meninggalkan ruangan",
+            "history": "Lagu dalam riwayat ( %1 dari %2)",
+            "historySkipped": "Lagu dalam riwayat(%1 dari %2), tetapi dilewati pada pemutaran selanjutnya",
+            "songLength": "Lagu ini lebh dari %1 menit",
+            "songDeleted": "Song is deleted",
+            "songPrivate": "Lagu pribadi",
+            "songRejected": "Song is rejected due to %1",
+            "songNotFound": "Lagu tidak ditemukan",
+            "songEmbed": "Lagu memiliki embedding yang dinonaktfikan",
+            "songStreamable": "Lagu tidak mendukung streaming"
+        }
+    },
+    "info": {
+        "header": "Informasi pengguna",
+        "name": "Nama",
+        "profile": "User Profile",
+        "title": "Judul",
+        "specialTitles": {
+            "developer": "Pengembang plug&#179;",
+            "sponsor": "Sponsor plug&#179;",
+            "ambassador": "Duta besar plug&#179;",
+            "donatorDiamond": "Donatur Diamond plug&#179;",
+            "donatorPlatinum": "Donatur Platinum plug&#179;",
+            "donatorGold": "Donatur Emas plug&#179;",
+            "donatorSilver": "Donatur Perak plug&#179;",
+            "donatorBronze": "Donatur Perunggu plug&#179;",
+            "special": "Supporter Spesial plug&#179; - %1"
+        },
+        "id": "ID",
+        "rank": "Peringkat",
+        "joined": "Waktu bergabung",
+        "status": "Status",
+        "vote": "Vote",
+        "position": "Posisi",
+        "points": "Poin",
+        "wootCount": "Woot Count",
+        "mehCount": "Meh Count",
+        "ratio": "Rasio Woot/Meh",
+        "djing": "Saat ini DJing",
+        "notInList": "Tidak ada didalam daftar tunggu atau booth",
+        "inWaitlist": "%1/%2 di daftar tunggu",
+        "userDjing": "%1 sedang DJing",
+        "userNextDJ": "%1 akan DJing selanjutnya",
+        "disconnects": "Terputus",
+        "lastDisconnect": "Terakhir terputus",
+        "lastPosition": "Posisi",
+        "time": "Waktu",
+        "lastMessage": "Pesan Terakhir"
+    },
+    "ranks": {
+        "you": "Kamu",
+        "regular": "Reguler",
+        "residentdj": "Resident DJ",
+        "bouncer": "Bouncer",
+        "manager": "Manajer",
+        "cohost": "Co-host",
+        "host": "Host",
+        "ambassador": "Duta besar",
+        "admin": "Admin"
+    },
+    "roomSpecificSettings": {
+        "infoHeader": "Ruangan ini menggunakan pengaturan khusus",
+        "infoHeaderCredits": "Ruangan ini menggunakan pengaturan khusus oleh %1",
+        "infoDisable": "Anda dapat menonaktifkan mereka dalam menu"
+    },
+    "menuHeaders": {
+        "features": "Features",
+        "chatnotifs": "Chat Notifications",
+        "controlpanel": "Panel kontrol"
+    },
+    "menu": {
+        "autowoot": "Autowoot",
+        "autojoin": "Autojoin",
+        "chatlog": "ChatLog",
+        "customchatcolors": "Kustom warna chat",
+        "autorespond": "AFK Autorespond",
+        "notify": "Pemberitahuan",
+        "afktimers": "AFK timer",
+        "etatimer": "ETA Timer",
+        "roomsettings": "Pengaturan Ruangan",
+        "chatimages": "Chat gambar",
+        "twitchemotes": "Emote Twitch",
+        "controlpanel": "Panel kontrol",
+        "showdeletedmessages": "Tampilkan pesan dihapus",
+        "visualizers": "RCS SoundCloud Visualizers",
+        "inlineuserinfo": "Inline User Info",
+        "about": "About plugCubed",
+        "background": "Change background",
+        "chatcustomizations": "Chat Customizations",
+        "commands": "Chat commands",
+        "customcss": "Custom CSS",
+        "lowlagMode": "Low Lag Mode",
+        "workMode": "Work Mode"
+    },
+    "vote": {
+        "meh": "Meh",
+        "woot": "Woot",
+        "grab": "Ambil",
+        "undecided": "Ragu-ragu",
+        "djing": "DJing"
+    },
+    "customchatcolors": {
+        "userRanksHeader": "User Ranks",
+        "chatnotifs": "Chat Notifications"
+    },
+    "panels": {
+        "about": {
+            "header": "Information about plug³",
+            "version": "Version",
+            "website": "Website",
+            "websiteText": "plug&#179; Website",
+            "translations": "Translations",
+            "translationsText": "plug&#179; Translations",
+            "websitetranslationsText": "plug&#179; Website Translations"
+        },
+        "background": {
+            "description": "Set your own room background"
+        },
+        "buttons": {
+            "cancel": "Cancel",
+            "clear": "Clear",
+            "submit": "Submit"
+        },
+        "chatcustomizations": {
+            "description": "Customize your chat with emojis, notifications, markdown, and other features",
+            "mentionSoundTitle": "Mention Sound %1",
+            "emotesHeader": "Emotes",
+            "chatenhancementHeader": "Chat Enhancements",
+            "emotesSetHeader": "Emoji Set"
+        },
+        "customcss": {
+            "description": "Set your own room CSS"
+        }
+    },
+    "tooltip": {
+        "stream": "Toggle Video/Audio Stream",
+        "clear": "Hapus obrolan",
+        "afk": "Pesan AFK",
+        "reset": "Reset ke Pengaturan Asal",
+        "muted": "Semua lagu ini dimatikan",
+        "mutedOnce": "Lagu saat ini dinonaktifkan",
+        "quickBan": "Ban user forever",
+        "quickMute": "Mute user for 45 mins",
+        "userInfo": "User Info"
+    },
+    "error": {
+        "userNotFound": "Pengguna tidak ditemukan",
+        "alreadyInWaitList": "%1 pengguna sudah di daftar tunggu",
+        "notInWaitList": "%1 pengguna tidak berada di daftar tunggu",
+        "unknownMenuKey": "Tombol menu tidak diketahui: %1",
+        "invalidAddSyntax": "Sintaks tidak valid untuk menambahkan perintah. Penggunaan: /add @user",
+        "invalidBanSyntax": "Sintaks tidak valik untuk perintah ban. Penggunaan: /ban @user atau /ban @user::time::reason",
+        "invalidBanTime": "Waktu yang ditentukan, %1 tidak valid. Waktu yang berlaku adalah 60, 1, 24, 1440, -1",
+        "invalidRemoveSyntax": "Sintaks yang tidak valik untuk perintah menghapus. Penggunaan: /remove @user",
+        "invalidWhoisSyntax": "Sintaks yang tidak valik untuk perintah whois. Penggunaan: /whois @user",
+        "errorGettingPlaylistInfo": "Kesalahan dalam mendapatkan info playlist",
+        "noPlaylistsFound": "Tidak ada playlist yang ditemukan",
+        "yourActivePlaylistIsFull": "Playlist yang aktif penuh",
+        "noNextSong": "Anda tidak punya antrian lagu"
+    },
+    "video": {
+        "show": "Show",
+        "hide": "Hide",
+        "menushow": "Show Video",
+        "menuhide": "Hide Video",
+        "hidden": "Video Hidden",
+        "disabled": "Video Disabled",
+        "snooze": "Video Snoozed"
     }
-  },
-  "eta":{
-    "boothAvailable":"Jika anda bergabung dengan daftar tunggu sekarang, anda akan Djing!",
-    "alreadyDJ":"Anda sudah DJing!",
-    "waitListTime":"Anda berada di daftar tunggu %1 dari %2, anda akan DJing kurang lebih %3!",
-    "joinTime":"Jika anda ikut daftar tunggu sekarang, anda akan DJing kurang lebih %1!"
-  },
-  "notify":{
-    "deletedMessages":"deleted by ",
-    "join":"Pengguna ikut",
-    "leave":"Pengguna meninggalkan",
-    "grab":"Pengguna mengambil",
-    "meh":"Pengguna Mehs",
-    "stats":"Statistik Lagu",
-    "updates":"Update lagu",
-    "updatesLink":"Song Link",
-    "history":"Lagu-lagu dalam riwayat",
-    "songUnavailable":"Lagu tidak tersedia",
-    "boothAlert":"Booth Alert (%1 / 50)",
-    "songLength":"Lama lagu (%1 menit)",
-    "message":{
-      "boothAlertNext":"You are about to DJ!",
-      "boothAlertPos":"You are now %1 in the waitlist",
-      "grab":"diambil %1 - %2",
-      "stats":"Statistik: %1 woots -- %2 mehs -- %3 grabs",
-      "updates":"Sekarang memutar: %1 oleh %2<br>Diputar oleh: %3",
-      "meh":"meh'd lagu ini",
-      "join":"mengikuti ruangan",
-      "leave":"meninggalkan ruangan",
-      "history":"Lagu dalam riwayat ( %1 dari %2)",
-      "historySkipped":"Lagu dalam riwayat(%1 dari %2), tetapi dilewati pada pemutaran selanjutnya",
-      "songLength":"Lagu ini lebh dari %1 menit",
-      "songDeleted":"Song is deleted",
-      "songPrivate":"Lagu pribadi",
-      "songRejected":"Song is rejected due to %1",
-      "songNotFound":"Lagu tidak ditemukan",
-      "songEmbed":"Lagu memiliki embedding yang dinonaktfikan",
-      "songStreamable":"Lagu tidak mendukung streaming"
-    }
-  },
-  "info":{
-    "header":"Informasi pengguna",
-    "name":"Nama",
-    "profile":"User Profile",
-    "title":"Judul",
-    "specialTitles":{
-      "developer":"Pengembang plug&#179;",
-      "sponsor":"Sponsor plug&#179;",
-      "ambassador":"Duta besar plug&#179;",
-      "donatorDiamond":"Donatur Diamond plug&#179;",
-      "donatorPlatinum":"Donatur Platinum plug&#179;",
-      "donatorGold":"Donatur Emas plug&#179;",
-      "donatorSilver":"Donatur Perak plug&#179;",
-      "donatorBronze":"Donatur Perunggu plug&#179;",
-      "special":"Supporter Spesial plug&#179; - %1"
-    },
-    "id":"ID",
-    "rank":"Peringkat",
-    "joined":"Waktu bergabung",
-    "status":"Status",
-    "vote":"Vote",
-    "position":"Posisi",
-    "points":"Poin",
-    "wootCount":"Woot Count",
-    "mehCount":"Meh Count",
-    "ratio":"Rasio Woot/Meh",
-    "djing":"Saat ini DJing",
-    "notInList":"Tidak ada didalam daftar tunggu atau booth",
-    "inWaitlist":"%1/%2 di daftar tunggu",
-    "userDjing":"%1 sedang DJing",
-    "userNextDJ":"%1 akan DJing selanjutnya",
-    "disconnects":"Terputus",
-    "lastDisconnect":"Terakhir terputus",
-    "lastPosition":"Posisi",
-    "time":"Waktu",
-    "lastMessage":"Pesan Terakhir"
-  },
-  "ranks":{
-    "you":"Kamu",
-    "regular":"Reguler",
-    "residentdj":"Resident DJ",
-    "bouncer":"Bouncer",
-    "manager":"Manajer",
-    "cohost":"Co-host",
-    "host":"Host",
-    "ambassador":"Duta besar",
-    "admin":"Admin"
-  },
-  "roomSpecificSettings":{
-    "infoHeader":"Ruangan ini menggunakan pengaturan khusus",
-    "infoHeaderCredits":"Ruangan ini menggunakan pengaturan khusus oleh %1",
-    "infoDisable":"Anda dapat menonaktifkan mereka dalam menu"
-  },
-  "menuHeaders":{
-    "features":"Features",
-    "chatnotifs":"Chat Notifications",
-    "controlpanel":"Panel kontrol"
-  },
-  "menu":{
-    "autowoot":"Autowoot",
-    "autojoin":"Autojoin",
-    "chatlog":"ChatLog",
-    "customchatcolors":"Kustom warna chat",
-    "autorespond":"AFK Autorespond",
-    "notify":"Pemberitahuan",
-    "afktimers":"AFK timer",
-    "etatimer":"ETA Timer",
-    "roomsettings":"Pengaturan Ruangan",
-    "chatimages":"Chat gambar",
-    "twitchemotes":"Emote Twitch",
-    "controlpanel":"Panel kontrol",
-    "showdeletedmessages":"Tampilkan pesan dihapus",
-    "visualizers":"RCS SoundCloud Visualizers",
-    "inlineuserinfo":"Inline User Info",
-    "about":"About plugCubed",
-    "background":"Change background",
-    "chatcustomizations":"Chat Customizations",
-    "commands":"Chat commands",
-    "customcss":"Custom CSS",
-    "lowlagMode":"Low Lag Mode",
-    "workMode":"Work Mode"
-  },
-  "vote":{
-    "meh":"Meh",
-    "woot":"Woot",
-    "grab":"Ambil",
-    "undecided":"Ragu-ragu",
-    "djing":"DJing"
-  },
-  "customchatcolors":{
-    "userRanksHeader":"User Ranks",
-    "chatnotifs":"Chat Notifications"
-  },
-  "panels":{
-    "about":{
-      "header":"Information about plug³",
-      "version":"Version",
-      "website":"Website",
-      "websiteText":"plug&#179; Website",
-      "translations":"Translations",
-      "translationsText":"plug&#179; Translations",
-      "websitetranslationsText":"plug&#179; Website Translations"
-    },
-    "background":{
-      "description":"Set your own room background"
-    },
-    "buttons":{
-      "cancel":"Cancel",
-      "clear":"Clear",
-      "submit":"Submit"
-    },
-    "chatcustomizations":{
-      "description":"Customize your chat with emojis, notifications, markdown, and other features",
-      "mentionSoundTitle":"Mention Sound %1",
-      "emotesHeader":"Emotes",
-      "chatenhancementHeader":"Chat Enhancements",
-      "emotesSetHeader":"Emoji Set"
-    },
-    "customcss":{
-      "description":"Set your own room CSS"
-    }
-  },
-  "tooltip":{
-    "stream":"Toggle Video/Audio Stream",
-    "clear":"Hapus obrolan",
-    "afk":"Pesan AFK",
-    "reset":"Reset ke Pengaturan Asal",
-    "muted":"Semua lagu ini dimatikan",
-    "mutedOnce":"Lagu saat ini dinonaktifkan",
-    "quickBan":"Ban user forever",
-    "quickMute":"Mute user for 45 mins",
-    "userInfo":"User Info"
-  },
-  "error":{
-    "userNotFound":"Pengguna tidak ditemukan",
-    "alreadyInWaitList":"%1 pengguna sudah di daftar tunggu",
-    "notInWaitList":"%1 pengguna tidak berada di daftar tunggu",
-    "unknownMenuKey":"Tombol menu tidak diketahui: %1",
-    "invalidAddSyntax":"Sintaks tidak valid untuk menambahkan perintah. Penggunaan: /add @user",
-    "invalidBanSyntax":"Sintaks tidak valik untuk perintah ban. Penggunaan: /ban @user atau /ban @user::time::reason",
-    "invalidBanTime":"Waktu yang ditentukan, %1 tidak valid. Waktu yang berlaku adalah 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Sintaks yang tidak valik untuk perintah menghapus. Penggunaan: /remove @user",
-    "invalidWhoisSyntax":"Sintaks yang tidak valik untuk perintah whois. Penggunaan: /whois @user",
-    "errorGettingPlaylistInfo":"Kesalahan dalam mendapatkan info playlist",
-    "noPlaylistsFound":"Tidak ada playlist yang ditemukan",
-    "yourActivePlaylistIsFull":"Playlist yang aktif penuh",
-    "noNextSong":"Anda tidak punya antrian lagu"
-  },
-  "video":{
-    "show":"Show",
-    "hide":"Hide",
-    "menushow":"Show Video",
-    "menuhide":"Hide Video"
-  }
 }

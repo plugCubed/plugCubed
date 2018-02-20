@@ -1,272 +1,276 @@
 {
-  "running":"Käynnissä plug&#179; versio %1 ",
-  "commandsHelp":"Käytä '/commands' nähdäksesi Chat-komentosi.",
-  "autorespond":{
-    "default":"Olen poissa näppäimistöltä",
-    "disable":"Deaktivoi AFK-automaattinen vastaus keskustellaksesi",
-    "nextIn":"Seuraava AFK-automaattinen vastaus lähetetetään %1",
-    "next":"AFK automaattinen vastaus seuraavassa maininnassa",
-    "commandDisable":"%1 AFK-viesti deaktivoitu"
-  },
-  "autojoin":{
-    "commandDisable":"%1 Automaattinen liittyminen deaktivoitu"
-  },
-  "fullscreen":{
-    "shrink":"Pienennä",
-    "enlarge":"Suurenna"
-  },
-  "commands":{
-    "header":"plug&#179; Komennot",
-    "userCommands":"Käyttäjäkomennot",
-    "modCommands":"Moderointikomennnot",
-    "variables":{
-      "username":"käyttäjänimi",
-      "word":"sana",
-      "on":"päälle",
-      "off":"pois",
-      "reason":"syy",
-      "number":"numero"
+    "running": "Käynnissä plug&#179; versio %1 ",
+    "commandsHelp": "Käytä '/commands' nähdäksesi Chat-komentosi.",
+    "autorespond": {
+        "default": "Olen poissa näppäimistöltä",
+        "disable": "Deaktivoi AFK-automaattinen vastaus keskustellaksesi",
+        "nextIn": "Seuraava AFK-automaattinen vastaus lähetetetään %1",
+        "next": "AFK automaattinen vastaus seuraavassa maininnassa",
+        "commandDisable": "%1 AFK-viesti deaktivoitu"
     },
-    "descriptions":{
-      "join":"liittyy dj boothiin/jonotuslistalle",
-      "leave":"lähtee dj boothilta/jonotuslistalta",
-      "whoami":"hanki oma informaatiosi",
-      "mute":"aseta ääni 0",
-      "automute":"rekisteröi parhaillaan toistettava kappale automaattisesti mykistettäviin kappaleisiin seuraavissa soitoissa",
-      "unmute":"aseta äänenvoimakkkuus viimeisimpään",
-      "nextsong":"näytä seuraava kappale soittolistassa ja jos se on historiassa",
-      "refresh":"päivitä video",
-      "alertson":"antaa äänimerkin, kun määritetyt sanat kirjoitetaan chatissa",
-      "alertsoff":"pysäyttää soitettavan äänen, kun määritetyt sanat on kirjoitettu chatissa",
-      "grab":"lisää nykyinen kappale valitulle soittolistallesi",
-      "badges":"näytä/piilota käyttäjän merkit chatissa",
-      "getpos":"hanki nykyinen jonotuslistasijoitus",
-      "version":"näytä versionumero",
-      "commands":"näyttää tämän listan",
-      "link":"liittää linkin plugCubedin sivulle chattiin",
-      "whois":"antaa yleistietoa käyttäjästä",
-      "skip":"ohittaa nykyisen kappaleen",
-      "ban":"potki kohdennettu käyttäjä",
-      "lockskip":"lukitsee DJ alustan, ohittaa nykyisen kappaleen ja avaa DJ alustan sen jälkeen",
-      "lock":"lukitse DJ alusta",
-      "unlock":"avaa DJ alusta",
-      "add":"lisää kohdennetun käyttäjän dj alustalle/listalle",
-      "remove":"poistaa kohdennetun käyttäjän dj alustalta/listalta",
-      "whois all":"antaa kaikkien huoneessa olevien käyttäjien id:n ja käyttäjänimen",
-      "banall":"porttikielto kaikille huoneessa oleville käyttäjille",
-      "status":"näyttää plug palvelimien tilan",
-      "unload":"Sulkee plug&#179;",
-      "volume":"Aseta äänenvoimakkuus numerolla (0-100), lisää sitä yhdellä + merkillä, vähennä sitä yhdellä - merkillä"
+    "autojoin": {
+        "commandDisable": "%1 Automaattinen liittyminen deaktivoitu"
     },
-    "responses":{
-      "alertson":"Soitetaan ääni seuraavissa sanoissa: %1",
-      "alertsoff":"Ei enää soiteta ääntä asetetuissa sanoissa",
-      "badgeon":"Merkit ovat käytössä",
-      "badgeoff":"Merkit on poistettu käytöstä",
-      "nextsong":"Seuraava kappaleesi jonossa on %1 tekijältä %2",
-      "isHistory":"Varoitus: Tämä kappale on historiassa. (%1 - %2)",
-      "automute":{
-        "automuted":"%1 automaattisesti hiljennetty.",
-        "registered":"%1 rekisteröity automaattiiseen hiljennykseen tuleville soitoille.",
-        "unregistered":"%1 poistettu automaattisen hiljennyksen rekisteristä."
-      },
-      "status":{
-        "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
-      }
+    "fullscreen": {
+        "shrink": "Pienennä",
+        "enlarge": "Suurenna"
+    },
+    "commands": {
+        "header": "plug&#179; Komennot",
+        "userCommands": "Käyttäjäkomennot",
+        "modCommands": "Moderointikomennnot",
+        "variables": {
+            "username": "käyttäjänimi",
+            "word": "sana",
+            "on": "päälle",
+            "off": "pois",
+            "reason": "syy",
+            "number": "numero"
+        },
+        "descriptions": {
+            "join": "liittyy dj boothiin/jonotuslistalle",
+            "leave": "lähtee dj boothilta/jonotuslistalta",
+            "whoami": "hanki oma informaatiosi",
+            "mute": "aseta ääni 0",
+            "automute": "rekisteröi parhaillaan toistettava kappale automaattisesti mykistettäviin kappaleisiin seuraavissa soitoissa",
+            "unmute": "aseta äänenvoimakkkuus viimeisimpään",
+            "nextsong": "näytä seuraava kappale soittolistassa ja jos se on historiassa",
+            "refresh": "päivitä video",
+            "alertson": "antaa äänimerkin, kun määritetyt sanat kirjoitetaan chatissa",
+            "alertsoff": "pysäyttää soitettavan äänen, kun määritetyt sanat on kirjoitettu chatissa",
+            "grab": "lisää nykyinen kappale valitulle soittolistallesi",
+            "badges": "näytä/piilota käyttäjän merkit chatissa",
+            "getpos": "hanki nykyinen jonotuslistasijoitus",
+            "version": "näytä versionumero",
+            "commands": "näyttää tämän listan",
+            "link": "liittää linkin plugCubedin sivulle chattiin",
+            "whois": "antaa yleistietoa käyttäjästä",
+            "skip": "ohittaa nykyisen kappaleen",
+            "ban": "potki kohdennettu käyttäjä",
+            "lockskip": "lukitsee DJ alustan, ohittaa nykyisen kappaleen ja avaa DJ alustan sen jälkeen",
+            "lock": "lukitse DJ alusta",
+            "unlock": "avaa DJ alusta",
+            "add": "lisää kohdennetun käyttäjän dj alustalle/listalle",
+            "remove": "poistaa kohdennetun käyttäjän dj alustalta/listalta",
+            "whois all": "antaa kaikkien huoneessa olevien käyttäjien id:n ja käyttäjänimen",
+            "banall": "porttikielto kaikille huoneessa oleville käyttäjille",
+            "status": "näyttää plug palvelimien tilan",
+            "unload": "Sulkee plug&#179;",
+            "unban": "Unbans targeted user.",
+            "volume": "Aseta äänenvoimakkuus numerolla (0-100), lisää sitä yhdellä + merkillä, vähennä sitä yhdellä - merkillä"
+        },
+        "responses": {
+            "alertson": "Soitetaan ääni seuraavissa sanoissa: %1",
+            "alertsoff": "Ei enää soiteta ääntä asetetuissa sanoissa",
+            "badgeon": "Merkit ovat käytössä",
+            "badgeoff": "Merkit on poistettu käytöstä",
+            "nextsong": "Seuraava kappaleesi jonossa on %1 tekijältä %2",
+            "isHistory": "Varoitus: Tämä kappale on historiassa. (%1 - %2)",
+            "automute": {
+                "automuted": "%1 automaattisesti hiljennetty.",
+                "registered": "%1 rekisteröity automaattiiseen hiljennykseen tuleville soitoille.",
+                "unregistered": "%1 poistettu automaattisen hiljennyksen rekisteristä."
+            },
+            "status": {
+                "rest": "REST: %1 %2 [%3ms]",
+                "socket": "Socket: %1 %2 [%3ms]"
+            }
+        }
+    },
+    "eta": {
+        "boothAvailable": "Jos liityt jonotuslistaan nyt, olisit DJ!",
+        "alreadyDJ": "Olet jo DJ!",
+        "waitListTime": "Olet jonotuslistalla %1/%2, olet DJ noin %3!",
+        "joinTime": "Jos liityt jonotuslistaan nyt, olet DJ noin %1!"
+    },
+    "notify": {
+        "deletedMessages": "poistaja ",
+        "join": "Käyttäjä liittyy",
+        "leave": "Käyttäjä lähtee",
+        "grab": "Käyttäjä lisää",
+        "meh": "Käyttäjä mehaa",
+        "stats": "Kappaletilastot",
+        "updates": "Kappalepäivitykset",
+        "updatesLink": "Kappaleen linkki",
+        "history": "Kappaleet historiassa",
+        "songUnavailable": "Kappale ei ole käytettävissä",
+        "boothAlert": "Jonohälytys (%1 / 50)",
+        "songLength": "Kappaleen pituus (%1 min)",
+        "message": {
+            "boothAlertNext": "Olet pian DJ!",
+            "boothAlertPos": "Olet nyt %1 jonotuslistalla",
+            "grab": "lisäsi %1 - %2",
+            "stats": "Tilastot: %1 woottia -- %2 mehiä -- %3 lisäystä",
+            "updates": "Nyt soi: %1 tekijältä %2<br/>Soittaja: %3",
+            "meh": "mehasi tätä kappaletta",
+            "join": "liittyi huoneeseen",
+            "leave": "lähti huoneesta",
+            "history": "Kappale on historiassa (%1 - %2)",
+            "historySkipped": "Kappale on historiassa (%1 - %2), mutta ohitettiin viimesoitossa",
+            "songLength": "Kappale on pidempi kuin %1 minuuttia",
+            "songDeleted": "Kappale on poistettu",
+            "songPrivate": "Kappale on yksityinen",
+            "songRejected": "Kappale on hylätty syystä %1",
+            "songNotFound": "Kappaletta ei löydy",
+            "songEmbed": "Kappaleelta on upottaminen pois käytöstä",
+            "songStreamable": "Kappale ei tue suoratoistoa"
+        }
+    },
+    "info": {
+        "header": "Käyttäjäinformaatio",
+        "name": "Nimi",
+        "profile": "Käyttäjäprofiili",
+        "title": "Otsikko",
+        "specialTitles": {
+            "developer": "plug&#179; Kehittäjä",
+            "sponsor": "plug&#179; Sponsori",
+            "ambassador": "plug&#179; Suurlähettiläs",
+            "donatorDiamond": "plug&#179; Timanttilahjoittaja",
+            "donatorPlatinum": "plug&#179; Platina lahjoittaja",
+            "donatorGold": "plug&#179; Kultainenlahjoittaja",
+            "donatorSilver": "plug&#179; Hopeinenlahjoittaja",
+            "donatorBronze": "plug&#179; Pronssinen lahjoittaja",
+            "special": "plug&#179; erityinen tukija - %1"
+        },
+        "id": "ID",
+        "rank": "Arvo",
+        "joined": "Liittynyt",
+        "status": "Tila",
+        "vote": "Ääni",
+        "position": "Sijainti",
+        "points": "Pisteet",
+        "wootCount": "Woot määrä",
+        "mehCount": "Meh määrä",
+        "ratio": "Woot/meh suhde",
+        "djing": "Tällä hetkellä DJ",
+        "notInList": "Ei jonotuslistalla tai alustallla",
+        "inWaitlist": "%1/%2 jonotuslistalla",
+        "userDjing": "%1 on tällä hetkellä DJ",
+        "userNextDJ": "%1 on DJ seuraavana",
+        "disconnects": "Yhteyden katkeamiset",
+        "lastDisconnect": "Viimeisin yhteydenkatkaisu",
+        "lastPosition": "Sijainti",
+        "time": "Aika",
+        "lastMessage": "Viimeisin viesti"
+    },
+    "ranks": {
+        "you": "Sinä",
+        "regular": "Tavallinen",
+        "residentdj": "Vakituinen DJ",
+        "bouncer": "Portsari",
+        "manager": "Päällikkö",
+        "cohost": "Apulais-Isäntä",
+        "host": "Isäntä",
+        "ambassador": "Suurlähettiläs",
+        "admin": "Ylläpitäjä"
+    },
+    "roomSpecificSettings": {
+        "infoHeader": "Tämä huone käyttää erityisasetuksia",
+        "infoHeaderCredits": "Huone käyttää erityisasetuksia tekijältä %1",
+        "infoDisable": "Voit poistaa ne käytöstä valikosta"
+    },
+    "menuHeaders": {
+        "features": "Ominaisuudet",
+        "chatnotifs": "Keskusteluilmoitukset",
+        "controlpanel": "Ohjauspaneeli"
+    },
+    "menu": {
+        "autowoot": "Automaattisesti woot",
+        "autojoin": "Automaattisesti jonoon",
+        "chatlog": "Chattiloki",
+        "customchatcolors": "Mukautetut chatin värit",
+        "autorespond": "AFK automaattivastaus",
+        "notify": "Ilmoitukset",
+        "afktimers": "AFK-ajastimet",
+        "etatimer": "ETA-ajastin",
+        "roomsettings": "Huoneen Asetukset",
+        "chatimages": "Keskustelun kuvat",
+        "twitchemotes": "Twich Emojit",
+        "controlpanel": "Ohjauspaneeli",
+        "showdeletedmessages": "Näytä poistetut viestit",
+        "visualizers": "RCS SoundCloud visualisoijat",
+        "inlineuserinfo": "Sisälletyt käyttäjätiedot",
+        "about": "Tietoa plugCubedista",
+        "background": "Vaihda taustakuvaa",
+        "chatcustomizations": "Chatin mukauttaminen",
+        "commands": "Chatin komennot",
+        "customcss": "Mukautettu CSS",
+        "lowlagMode": "Pienen lagin tila",
+        "workMode": "Työtila"
+    },
+    "vote": {
+        "meh": "Meh",
+        "woot": "Woot",
+        "grab": "Grab",
+        "undecided": "Epävarma",
+        "djing": "DJ"
+    },
+    "customchatcolors": {
+        "userRanksHeader": "Käyttäjien arvot",
+        "chatnotifs": "Keskusteluilmoitukset"
+    },
+    "panels": {
+        "about": {
+            "header": "Plug³ tietoa",
+            "version": "Versio",
+            "website": "Sivusto",
+            "websiteText": "plug&#179; Sivusto",
+            "translations": "Käännökset",
+            "translationsText": "plug&#179; Käännökset",
+            "websitetranslationsText": "plug&#179; Sivuston käännökset"
+        },
+        "background": {
+            "description": "Aseta oman huoneesi tausta"
+        },
+        "buttons": {
+            "cancel": "Peruuta",
+            "clear": "Tyhjennä",
+            "submit": "Lähetä"
+        },
+        "chatcustomizations": {
+            "description": "Mukauta chattia emojeilla, ilmoituksilla, markdownilla ja muilla ominaisuuksilla",
+            "mentionSoundTitle": "Maininnan ääni %1",
+            "emotesHeader": "Hymiöt",
+            "chatenhancementHeader": "Chatin parannukset",
+            "emotesSetHeader": "Emojikokoelma"
+        },
+        "customcss": {
+            "description": "Aseta oman huoneesi CSS"
+        }
+    },
+    "tooltip": {
+        "stream": "Estä tai salli video ja ääni",
+        "clear": "Tyhjennä chatti",
+        "afk": "AFK-viesti",
+        "reset": "Palauta oletukset",
+        "muted": "Kaikki kappaleet ovat hiljennettyjä",
+        "mutedOnce": "Nykyinen kappale on hiljennetty",
+        "quickBan": "Ikuinen porttikielto käyttäjälle",
+        "quickMute": "Mykistä käyttäjä 45 minuutiksi",
+        "userInfo": "Käyttäjätiedot"
+    },
+    "error": {
+        "userNotFound": "Käyttäjää ei löydy",
+        "alreadyInWaitList": "Käyttäjä %1 on jo jonotuslistalla",
+        "notInWaitList": "Käyttäjä %1 ei ole jonotuslistalla",
+        "unknownMenuKey": "Tuntematon valikko avain: %1",
+        "invalidAddSyntax": "Virheellinen syntaksi add-komennolle. Käyttö: /add @user",
+        "invalidBanSyntax": "Virheellinen syntaksi ban-komennolle. Käyttö: /ban @user tai /ban @user::time::syy",
+        "invalidBanTime": "Määritetty aika, %1, on virheellinen. Kelvolliset ajat ovat 60, 1, 24, 1440, -1",
+        "invalidRemoveSyntax": "Virheellinen syntaksi remove-komennolle. Käyttö: /remove @user",
+        "invalidWhoisSyntax": "Virheellinen syntaksi whois-komennolle. Käyttö: /whois @user",
+        "errorGettingPlaylistInfo": "Virhe soittolistan infoa haettaessa",
+        "noPlaylistsFound": "Soittolistoja ei löytynyt",
+        "yourActivePlaylistIsFull": "Aktiivinen soittolistasi on täynnä",
+        "noNextSong": "Sinulla ei ole valittua kappaletta"
+    },
+    "video": {
+        "show": "Näytä",
+        "hide": "Piilota",
+        "menushow": "Näytä Video",
+        "menuhide": "Piilota Video",
+        "hidden": "Video Hidden",
+        "disabled": "Video Disabled",
+        "snooze": "Video Snoozed"
     }
-  },
-  "eta":{
-    "boothAvailable":"Jos liityt jonotuslistaan nyt, olisit DJ!",
-    "alreadyDJ":"Olet jo DJ!",
-    "waitListTime":"Olet jonotuslistalla %1/%2, olet DJ noin %3!",
-    "joinTime":"Jos liityt jonotuslistaan nyt, olet DJ noin %1!"
-  },
-  "notify":{
-    "deletedMessages":"poistaja ",
-    "join":"Käyttäjä liittyy",
-    "leave":"Käyttäjä lähtee",
-    "grab":"Käyttäjä lisää",
-    "meh":"Käyttäjä mehaa",
-    "stats":"Kappaletilastot",
-    "updates":"Kappalepäivitykset",
-    "updatesLink":"Kappaleen linkki",
-    "history":"Kappaleet historiassa",
-    "songUnavailable":"Kappale ei ole käytettävissä",
-    "boothAlert":"Jonohälytys (%1 / 50)",
-    "songLength":"Kappaleen pituus (%1 min)",
-    "message":{
-      "boothAlertNext":"Olet pian DJ!",
-      "boothAlertPos":"Olet nyt %1 jonotuslistalla",
-      "grab":"lisäsi %1 - %2",
-      "stats":"Tilastot: %1 woottia -- %2 mehiä -- %3 lisäystä",
-      "updates":"Nyt soi: %1 tekijältä %2<br/>Soittaja: %3",
-      "meh":"mehasi tätä kappaletta",
-      "join":"liittyi huoneeseen",
-      "leave":"lähti huoneesta",
-      "history":"Kappale on historiassa (%1 - %2)",
-      "historySkipped":"Kappale on historiassa (%1 - %2), mutta ohitettiin viimesoitossa",
-      "songLength":"Kappale on pidempi kuin %1 minuuttia",
-      "songDeleted":"Kappale on poistettu",
-      "songPrivate":"Kappale on yksityinen",
-      "songRejected":"Kappale on hylätty syystä %1",
-      "songNotFound":"Kappaletta ei löydy",
-      "songEmbed":"Kappaleelta on upottaminen pois käytöstä",
-      "songStreamable":"Kappale ei tue suoratoistoa"
-    }
-  },
-  "info":{
-    "header":"Käyttäjäinformaatio",
-    "name":"Nimi",
-    "profile":"Käyttäjäprofiili",
-    "title":"Otsikko",
-    "specialTitles":{
-      "developer":"plug&#179; Kehittäjä",
-      "sponsor":"plug&#179; Sponsori",
-      "ambassador":"plug&#179; Suurlähettiläs",
-      "donatorDiamond":"plug&#179; Timanttilahjoittaja",
-      "donatorPlatinum":"plug&#179; Platina lahjoittaja",
-      "donatorGold":"plug&#179; Kultainenlahjoittaja",
-      "donatorSilver":"plug&#179; Hopeinenlahjoittaja",
-      "donatorBronze":"plug&#179; Pronssinen lahjoittaja",
-      "special":"plug&#179; erityinen tukija - %1"
-    },
-    "id":"ID",
-    "rank":"Arvo",
-    "joined":"Liittynyt",
-    "status":"Tila",
-    "vote":"Ääni",
-    "position":"Sijainti",
-    "points":"Pisteet",
-    "wootCount":"Woot määrä",
-    "mehCount":"Meh määrä",
-    "ratio":"Woot/meh suhde",
-    "djing":"Tällä hetkellä DJ",
-    "notInList":"Ei jonotuslistalla tai alustallla",
-    "inWaitlist":"%1/%2 jonotuslistalla",
-    "userDjing":"%1 on tällä hetkellä DJ",
-    "userNextDJ":"%1 on DJ seuraavana",
-    "disconnects":"Yhteyden katkeamiset",
-    "lastDisconnect":"Viimeisin yhteydenkatkaisu",
-    "lastPosition":"Sijainti",
-    "time":"Aika",
-    "lastMessage":"Viimeisin viesti"
-  },
-  "ranks":{
-    "you":"Sinä",
-    "regular":"Tavallinen",
-    "residentdj":"Vakituinen DJ",
-    "bouncer":"Portsari",
-    "manager":"Päällikkö",
-    "cohost":"Apulais-Isäntä",
-    "host":"Isäntä",
-    "ambassador":"Suurlähettiläs",
-    "admin":"Ylläpitäjä"
-  },
-  "roomSpecificSettings":{
-    "infoHeader":"Tämä huone käyttää erityisasetuksia",
-    "infoHeaderCredits":"Huone käyttää erityisasetuksia tekijältä %1",
-    "infoDisable":"Voit poistaa ne käytöstä valikosta"
-  },
-  "menuHeaders":{
-    "features":"Ominaisuudet",
-    "chatnotifs":"Keskusteluilmoitukset",
-    "controlpanel":"Ohjauspaneeli"
-  },
-  "menu":{
-    "autowoot":"Automaattisesti woot",
-    "autojoin":"Automaattisesti jonoon",
-    "chatlog":"Chattiloki",
-    "customchatcolors":"Mukautetut chatin värit",
-    "autorespond":"AFK automaattivastaus",
-    "notify":"Ilmoitukset",
-    "afktimers":"AFK-ajastimet",
-    "etatimer":"ETA-ajastin",
-    "roomsettings":"Huoneen Asetukset",
-    "chatimages":"Keskustelun kuvat",
-    "twitchemotes":"Twich Emojit",
-    "controlpanel":"Ohjauspaneeli",
-    "showdeletedmessages":"Näytä poistetut viestit",
-    "visualizers":"RCS SoundCloud visualisoijat",
-    "inlineuserinfo":"Sisälletyt käyttäjätiedot",
-    "about":"Tietoa plugCubedista",
-    "background":"Vaihda taustakuvaa",
-    "chatcustomizations":"Chatin mukauttaminen",
-    "commands":"Chatin komennot",
-    "customcss":"Mukautettu CSS",
-    "lowlagMode":"Pienen lagin tila",
-    "workMode":"Työtila"
-  },
-  "vote":{
-    "meh":"Meh",
-    "woot":"Woot",
-    "grab":"Grab",
-    "undecided":"Epävarma",
-    "djing":"DJ"
-  },
-  "customchatcolors":{
-    "userRanksHeader":"Käyttäjien arvot",
-    "chatnotifs":"Keskusteluilmoitukset"
-  },
-  "panels":{
-    "about":{
-      "header":"Plug³ tietoa",
-      "version":"Versio",
-      "website":"Sivusto",
-      "websiteText":"plug&#179; Sivusto",
-      "translations":"Käännökset",
-      "translationsText":"plug&#179; Käännökset",
-      "websitetranslationsText":"plug&#179; Sivuston käännökset"
-    },
-    "background":{
-      "description":"Aseta oman huoneesi tausta"
-    },
-    "buttons":{
-      "cancel":"Peruuta",
-      "clear":"Tyhjennä",
-      "submit":"Lähetä"
-    },
-    "chatcustomizations":{
-      "description":"Mukauta chattia emojeilla, ilmoituksilla, markdownilla ja muilla ominaisuuksilla",
-      "mentionSoundTitle":"Maininnan ääni %1",
-      "emotesHeader":"Hymiöt",
-      "chatenhancementHeader":"Chatin parannukset",
-      "emotesSetHeader":"Emojikokoelma"
-    },
-    "customcss":{
-      "description":"Aseta oman huoneesi CSS"
-    }
-  },
-  "tooltip":{
-    "stream":"Estä tai salli video ja ääni",
-    "clear":"Tyhjennä chatti",
-    "afk":"AFK-viesti",
-    "reset":"Palauta oletukset",
-    "muted":"Kaikki kappaleet ovat hiljennettyjä",
-    "mutedOnce":"Nykyinen kappale on hiljennetty",
-    "quickBan":"Ikuinen porttikielto käyttäjälle",
-    "quickMute":"Mykistä käyttäjä 45 minuutiksi",
-    "userInfo":"Käyttäjätiedot"
-  },
-  "error":{
-    "userNotFound":"Käyttäjää ei löydy",
-    "alreadyInWaitList":"Käyttäjä %1 on jo jonotuslistalla",
-    "notInWaitList":"Käyttäjä %1 ei ole jonotuslistalla",
-    "unknownMenuKey":"Tuntematon valikko avain: %1",
-    "invalidAddSyntax":"Virheellinen syntaksi add-komennolle. Käyttö: /add @user",
-    "invalidBanSyntax":"Virheellinen syntaksi ban-komennolle. Käyttö: /ban @user tai /ban @user::time::syy",
-    "invalidBanTime":"Määritetty aika, %1, on virheellinen. Kelvolliset ajat ovat 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Virheellinen syntaksi remove-komennolle. Käyttö: /remove @user",
-    "invalidWhoisSyntax":"Virheellinen syntaksi whois-komennolle. Käyttö: /whois @user",
-    "errorGettingPlaylistInfo":"Virhe soittolistan infoa haettaessa",
-    "noPlaylistsFound":"Soittolistoja ei löytynyt",
-    "yourActivePlaylistIsFull":"Aktiivinen soittolistasi on täynnä",
-    "noNextSong":"Sinulla ei ole valittua kappaletta"
-  },
-  "video":{
-    "show":"Näytä",
-    "hide":"Piilota",
-    "menushow":"Näytä Video",
-    "menuhide":"Piilota Video"
-  }
 }

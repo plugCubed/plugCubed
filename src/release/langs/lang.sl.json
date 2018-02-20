@@ -1,272 +1,276 @@
 {
-  "running":"Delovanje plug&#179; verzija %1",
-  "commandsHelp":"Uporabite »/ukazi« za videti razširjene ukaze klepeta.",
-  "autorespond":{
-    "default":"Jaz sem odsoten od tipkovnice.",
-    "disable":"Onesposobi avtomatski AFK odziv v klepet",
-    "nextIn":"Naslednji AFK odziv bo poslan v %1",
-    "next":"AFK avtomatski odziv ob naslednji omembi",
-    "commandDisable":"%1 AFK sporočilo onemogočeno"
-  },
-  "autojoin":{
-    "commandDisable":"%1 samodejna pridružitev onemogočena"
-  },
-  "fullscreen":{
-    "shrink":"Skrči",
-    "enlarge":"Povečaj"
-  },
-  "commands":{
-    "header":"plug&#179; Ukazi",
-    "userCommands":"Ukazi uporabnikov",
-    "modCommands":"Ukazi moderiranja",
-    "variables":{
-      "username":"uporabniško ime",
-      "word":"beseda",
-      "on":"vključeno",
-      "off":"izključeno",
-      "reason":"razlog",
-      "number":"številka"
+    "running": "Delovanje plug&#179; verzija %1",
+    "commandsHelp": "Uporabite »/ukazi« za videti razširjene ukaze klepeta.",
+    "autorespond": {
+        "default": "Jaz sem odsoten od tipkovnice.",
+        "disable": "Onesposobi avtomatski AFK odziv v klepet",
+        "nextIn": "Naslednji AFK odziv bo poslan v %1",
+        "next": "AFK avtomatski odziv ob naslednji omembi",
+        "commandDisable": "%1 AFK sporočilo onemogočeno"
     },
-    "descriptions":{
-      "join":"pridružite se na Dj mesto/čakalni seznam",
-      "leave":"zapusti Dj mesto/čakalni seznam",
-      "whoami":"pridobi svoje informacije",
-      "mute":"nastavi glasnost na 0",
-      "automute":"registriraj pesem ki se predvaja da bo samodejno utišana za naslednja igranja",
-      "unmute":"nastavi glasnost kot prejšnjič",
-      "nextsong":"prikaži naslednjo pesem v seznamu predvajanj, in če je v zgodovini",
-      "refresh":"osveži video",
-      "alertson":"predvajaj zvok, ko so določene besede napisane v klepet",
-      "alertsoff":"ustavi predvajanje zvoka, ko so določene besede napisane v klepet",
-      "grab":"dodaj trenutno skladbo na izbran seznam",
-      "badges":"pokaži/Skrij uporabnikove značke v klepetu",
-      "getpos":"pridobi trenutno pozicijo na čakalnem seznamu",
-      "version":"prikaže številko različice",
-      "commands":"prikaže ta seznam",
-      "link":"prilepite povezavo do spletne strani plugCubed v klepetu",
-      "whois":"daje splošne informacije o uporabniku",
-      "skip":"preskoči trenutno pesem",
-      "ban":"brcni izbranega uporabnika iz sobe",
-      "lockskip":"zaklene DJ mesto, preskoči in odklene potem",
-      "lock":"zaklene DJ mesto",
-      "unlock":"odklene DJ mesto",
-      "add":"doda izbranega uporabnika na dj mesto/čakalni seznam",
-      "remove":"odstrani izbranega uporabnika iz dj mesta/čakalnega seznama",
-      "whois all":"da id in uporabniško ime vseh uporabnikov v sobi",
-      "banall":"prepovej vstop u sobo vsem uporabnikom",
-      "status":"pokaži stanje plug strežnikov",
-      "unload":"Zapre plug&#179;",
-      "volume":"Nastavi glasnost s številko (0 - 100), povečaj za 1 z +, zmanjšaj za 1 z -"
+    "autojoin": {
+        "commandDisable": "%1 samodejna pridružitev onemogočena"
     },
-    "responses":{
-      "alertson":"Predvajanje zvok na naslednje besede: %1",
-      "alertsoff":"Ne več predvaja zvoka na določene besede",
-      "badgeon":"Značke so vidne",
-      "badgeoff":"Značke so niso vidne",
-      "nextsong":"Vaša naslednja pesem v čakalni vrsti je %1 z %2",
-      "isHistory":"Opozorilo: Ta pesem je še vedno v zgodovini (%1 %2)",
-      "automute":{
-        "automuted":"%1 avtomatsko vtišan.",
-        "registered":"%1registrirano za avtomatsko utišanje za naslednja igranja.",
-        "unregistered":"%1 odstranjeno iz avtomatsko utišanega registra."
-      },
-      "status":{
-        "rest":"OSTALO: %1 %2 [%3ms]",
-        "socket":"Vtičnica: %1 %2 [%3ms]"
-      }
+    "fullscreen": {
+        "shrink": "Skrči",
+        "enlarge": "Povečaj"
+    },
+    "commands": {
+        "header": "plug&#179; Ukazi",
+        "userCommands": "Ukazi uporabnikov",
+        "modCommands": "Ukazi moderiranja",
+        "variables": {
+            "username": "uporabniško ime",
+            "word": "beseda",
+            "on": "vključeno",
+            "off": "izključeno",
+            "reason": "razlog",
+            "number": "številka"
+        },
+        "descriptions": {
+            "join": "pridružite se na Dj mesto/čakalni seznam",
+            "leave": "zapusti Dj mesto/čakalni seznam",
+            "whoami": "pridobi svoje informacije",
+            "mute": "nastavi glasnost na 0",
+            "automute": "registriraj pesem ki se predvaja da bo samodejno utišana za naslednja igranja",
+            "unmute": "nastavi glasnost kot prejšnjič",
+            "nextsong": "prikaži naslednjo pesem v seznamu predvajanj, in če je v zgodovini",
+            "refresh": "osveži video",
+            "alertson": "predvajaj zvok, ko so določene besede napisane v klepet",
+            "alertsoff": "ustavi predvajanje zvoka, ko so določene besede napisane v klepet",
+            "grab": "dodaj trenutno skladbo na izbran seznam",
+            "badges": "pokaži/Skrij uporabnikove značke v klepetu",
+            "getpos": "pridobi trenutno pozicijo na čakalnem seznamu",
+            "version": "prikaže številko različice",
+            "commands": "prikaže ta seznam",
+            "link": "prilepite povezavo do spletne strani plugCubed v klepetu",
+            "whois": "daje splošne informacije o uporabniku",
+            "skip": "preskoči trenutno pesem",
+            "ban": "brcni izbranega uporabnika iz sobe",
+            "lockskip": "zaklene DJ mesto, preskoči in odklene potem",
+            "lock": "zaklene DJ mesto",
+            "unlock": "odklene DJ mesto",
+            "add": "doda izbranega uporabnika na dj mesto/čakalni seznam",
+            "remove": "odstrani izbranega uporabnika iz dj mesta/čakalnega seznama",
+            "whois all": "da id in uporabniško ime vseh uporabnikov v sobi",
+            "banall": "prepovej vstop u sobo vsem uporabnikom",
+            "status": "pokaži stanje plug strežnikov",
+            "unload": "Zapre plug&#179;",
+            "unban": "Unbans targeted user.",
+            "volume": "Nastavi glasnost s številko (0 - 100), povečaj za 1 z +, zmanjšaj za 1 z -"
+        },
+        "responses": {
+            "alertson": "Predvajanje zvok na naslednje besede: %1",
+            "alertsoff": "Ne več predvaja zvoka na določene besede",
+            "badgeon": "Značke so vidne",
+            "badgeoff": "Značke so niso vidne",
+            "nextsong": "Vaša naslednja pesem v čakalni vrsti je %1 z %2",
+            "isHistory": "Opozorilo: Ta pesem je še vedno v zgodovini (%1 %2)",
+            "automute": {
+                "automuted": "%1 avtomatsko vtišan.",
+                "registered": "%1registrirano za avtomatsko utišanje za naslednja igranja.",
+                "unregistered": "%1 odstranjeno iz avtomatsko utišanega registra."
+            },
+            "status": {
+                "rest": "OSTALO: %1 %2 [%3ms]",
+                "socket": "Vtičnica: %1 %2 [%3ms]"
+            }
+        }
+    },
+    "eta": {
+        "boothAvailable": "Če se pridružite čakalnemu seznamu, boste bili DJ!",
+        "alreadyDJ": "Trenutno ste še DJ!",
+        "waitListTime": "Ste na čakalnemu seznamu %1 %2, Dj boste v %3!",
+        "joinTime": "Če se pridružite čakalnemu seznamu zdaj, boste DJ v približno %1!"
+    },
+    "notify": {
+        "deletedMessages": "izbrisal ",
+        "join": "Uporabnik pridruži",
+        "leave": "Uporabnik odšel",
+        "grab": "Uporabnik shrani",
+        "meh": "Uporabnik Meha",
+        "stats": "Statistika pesmi",
+        "updates": "Posodobitve pesmi",
+        "updatesLink": "Povezava pesmi",
+        "history": "Pesem v zgodovini",
+        "songUnavailable": "Pesem ni na voljo",
+        "boothAlert": "Opozotilo Dj mesta (%1 / 50)",
+        "songLength": "Dolžina pesmi (%1 min)",
+        "message": {
+            "boothAlertNext": "Kmalu boste DJ!",
+            "boothAlertPos": "Zdaj ste %1 na čakalnem seznamu",
+            "grab": "zgrabil %1 - %2",
+            "stats": "Statistika: %1 wooti--%2 mehi--%3 zgrabil",
+            "updates": "Trenutno predvajaš: %1 od %2 <br>Igra: %3",
+            "meh": "je meh to skladbo",
+            "join": "se je pridružil",
+            "leave": "je zapustil",
+            "history": "Pesem je v zgodovini (%1 od %2)",
+            "historySkipped": "Pesem je v zgodovini (%1 %2), vendar je bila nazadje preskočena",
+            "songLength": "Pesem je daljša kot %1 minut",
+            "songDeleted": "Pesem je izbrisana",
+            "songPrivate": "Pesem je zasebna",
+            "songRejected": "Pesem je zavrnjena zaradi %1",
+            "songNotFound": "Pesmi ni mogoče najti",
+            "songEmbed": "Pesem ima onemogoče reklame",
+            "songStreamable": "Pesem ne podpira videa"
+        }
+    },
+    "info": {
+        "header": "Informacije o uporabniku",
+        "name": "Ime",
+        "profile": "Uporabniški profil",
+        "title": "Naslov",
+        "specialTitles": {
+            "developer": "plug&#179; razvijalec",
+            "sponsor": "plug&#179; Sponzor",
+            "ambassador": "plug&#179; Ambassador",
+            "donatorDiamond": "plug&#179; Diamantni darovalec",
+            "donatorPlatinum": "plug&#179; Platinum Darovalec",
+            "donatorGold": "plug&#179; Zlat Darovalec",
+            "donatorSilver": "plug&#179; Srebrn Darovalec",
+            "donatorBronze": "plug&#179; Bronast Darovalec",
+            "special": "plug&#179; Poseben zagovornik - %1"
+        },
+        "id": "ID",
+        "rank": "Rank",
+        "joined": "Čas pridružitve",
+        "status": "Status",
+        "vote": "Glasovanje",
+        "position": "Položaj",
+        "points": "Točke",
+        "wootCount": "Število Woot",
+        "mehCount": "Število Meh",
+        "ratio": "Woot/Meh razmerje",
+        "djing": "Trenutni DJ",
+        "notInList": "Ni v čakalnem seznamu in ni Dj",
+        "inWaitlist": "%1/%2 v čakalnem seznamu",
+        "userDjing": "%1 trenutno DJ-a",
+        "userNextDJ": "%1 so nasledni DJ-i",
+        "disconnects": "Prekinjene povezave",
+        "lastDisconnect": "Zadnji odklop",
+        "lastPosition": "Položaj",
+        "time": "Čas",
+        "lastMessage": "Zadnje sporočilo"
+    },
+    "ranks": {
+        "you": "Vi",
+        "regular": "Navadno",
+        "residentdj": "Domači DJ",
+        "bouncer": "Redar",
+        "manager": "Upravljalec",
+        "cohost": "So-gostitelj",
+        "host": "Gostitelj",
+        "ambassador": "Ambasadorji",
+        "admin": "Skrbnik"
+    },
+    "roomSpecificSettings": {
+        "infoHeader": "Ta soba uporablja posebne nastavitve",
+        "infoHeaderCredits": "Ta soba uporablja posebne nastavitve od %1",
+        "infoDisable": "Lahko jih onemogočiš v meniju"
+    },
+    "menuHeaders": {
+        "features": "Značilnosti",
+        "chatnotifs": "Obvestila v klepetu",
+        "controlpanel": "Nadzorna Plošča"
+    },
+    "menu": {
+        "autowoot": "Samodejni Woot",
+        "autojoin": "Samodejna pridružitev",
+        "chatlog": "Dnevnik klepeta",
+        "customchatcolors": "Barve klepeta po meri",
+        "autorespond": "AFK Samodejen odziv",
+        "notify": "Obvestila",
+        "afktimers": "AFK Časi",
+        "etatimer": "ETA Čas",
+        "roomsettings": "Nastavitve sobe",
+        "chatimages": "Slike v klepetu",
+        "twitchemotes": "Twitch Smeški",
+        "controlpanel": "Nadzorna Plošča",
+        "showdeletedmessages": "Pokaži izbrisana sporočila",
+        "visualizers": "RCS SoundCloud Vizualizacija",
+        "inlineuserinfo": "Informacije uporabnika v vrsti",
+        "about": "O plugCubed",
+        "background": "Spremeni ozadje",
+        "chatcustomizations": "Prilagoditve klepeta",
+        "commands": "Ukazi v klepetu",
+        "customcss": "CSS po želji",
+        "lowlagMode": "Način majhnega zaostajanja",
+        "workMode": "Delovni način"
+    },
+    "vote": {
+        "meh": "Meh",
+        "woot": "Woot",
+        "grab": "Shrani",
+        "undecided": "Neodločeni",
+        "djing": "DJ-a"
+    },
+    "customchatcolors": {
+        "userRanksHeader": "Čini uporabnikov",
+        "chatnotifs": "Obvestila v klepetu"
+    },
+    "panels": {
+        "about": {
+            "header": "Informacije o plug³",
+            "version": "Različica",
+            "website": "Spletna stran",
+            "websiteText": "plug&#179; spletna stran",
+            "translations": "Prevodi",
+            "translationsText": "plug&#179; prevodi",
+            "websitetranslationsText": "plug&#179; prevodi strani"
+        },
+        "background": {
+            "description": "Nastavi ozadje sobe"
+        },
+        "buttons": {
+            "cancel": "Prekliči",
+            "clear": "Počisti",
+            "submit": "Pošlji"
+        },
+        "chatcustomizations": {
+            "description": "Prilagodite vaš klepet z smeški, obvestili, in druge funkcije",
+            "mentionSoundTitle": "Zvok omembe %1",
+            "emotesHeader": "Smeški",
+            "chatenhancementHeader": "Izboljšave klepeta",
+            "emotesSetHeader": "Set smeškov"
+        },
+        "customcss": {
+            "description": "Nastavite svoj CSS sobe"
+        }
+    },
+    "tooltip": {
+        "stream": "Preklop Video/Audio Tok",
+        "clear": "Počisti klepet",
+        "afk": "AFK sporočilo",
+        "reset": "Ponastavi na privzeto",
+        "muted": "Vse pesmi so utišane",
+        "mutedOnce": "Trenutna skladba je utišana",
+        "quickBan": "Prepoved uporabnika zavedno",
+        "quickMute": "Utišaj uporabnika za 45 minut",
+        "userInfo": "Podatki o uporabniku"
+    },
+    "error": {
+        "userNotFound": "Uporabnika ni bilo mogoče najti",
+        "alreadyInWaitList": "Uporabnik %1 je že v čakalnem seznamu",
+        "notInWaitList": "Uporabnik %1 ni v čakalnem seznamu",
+        "unknownMenuKey": "Neznan menu ključ: %1",
+        "invalidAddSyntax": "Napačen unos za ukaz dodajanja. Uporaba: /add @user",
+        "invalidBanSyntax": "Napačen unos za prepovedni ukaz. Uporabi: /ban @user ali /ban @user::time::razlog",
+        "invalidBanTime": "Določen čas, %1 ni veljaven. Veljavni časi so 60, 1, 24, 1440, -1",
+        "invalidRemoveSyntax": "Napačen unos za odstranitveni ukaz. Uporabi: /remove @user",
+        "invalidWhoisSyntax": "Napačen unos za kdo je ukaz. Uporaba: /whois @user",
+        "errorGettingPlaylistInfo": "Napaka pri pridobivanju informacij seznama predvajanja",
+        "noPlaylistsFound": "Ni seznamov predvajanj",
+        "yourActivePlaylistIsFull": "Tvoj aktivni seznam predvajanja je poln",
+        "noNextSong": "Nimate pesni v čakalni vrsti"
+    },
+    "video": {
+        "show": "Prikaži",
+        "hide": "Skrij",
+        "menushow": "Prikaži video",
+        "menuhide": "Skrij video",
+        "hidden": "Video Hidden",
+        "disabled": "Video Disabled",
+        "snooze": "Video Snoozed"
     }
-  },
-  "eta":{
-    "boothAvailable":"Če se pridružite čakalnemu seznamu, boste bili DJ!",
-    "alreadyDJ":"Trenutno ste še DJ!",
-    "waitListTime":"Ste na čakalnemu seznamu %1 %2, Dj boste v %3!",
-    "joinTime":"Če se pridružite čakalnemu seznamu zdaj, boste DJ v približno %1!"
-  },
-  "notify":{
-    "deletedMessages":"izbrisal ",
-    "join":"Uporabnik pridruži",
-    "leave":"Uporabnik odšel",
-    "grab":"Uporabnik shrani",
-    "meh":"Uporabnik Meha",
-    "stats":"Statistika pesmi",
-    "updates":"Posodobitve pesmi",
-    "updatesLink":"Povezava pesmi",
-    "history":"Pesem v zgodovini",
-    "songUnavailable":"Pesem ni na voljo",
-    "boothAlert":"Opozotilo Dj mesta (%1 / 50)",
-    "songLength":"Dolžina pesmi (%1 min)",
-    "message":{
-      "boothAlertNext":"Kmalu boste DJ!",
-      "boothAlertPos":"Zdaj ste %1 na čakalnem seznamu",
-      "grab":"zgrabil %1 - %2",
-      "stats":"Statistika: %1 wooti--%2 mehi--%3 zgrabil",
-      "updates":"Trenutno predvajaš: %1 od %2 <br>Igra: %3",
-      "meh":"je meh to skladbo",
-      "join":"se je pridružil",
-      "leave":"je zapustil",
-      "history":"Pesem je v zgodovini (%1 od %2)",
-      "historySkipped":"Pesem je v zgodovini (%1 %2), vendar je bila nazadje preskočena",
-      "songLength":"Pesem je daljša kot %1 minut",
-      "songDeleted":"Pesem je izbrisana",
-      "songPrivate":"Pesem je zasebna",
-      "songRejected":"Pesem je zavrnjena zaradi %1",
-      "songNotFound":"Pesmi ni mogoče najti",
-      "songEmbed":"Pesem ima onemogoče reklame",
-      "songStreamable":"Pesem ne podpira videa"
-    }
-  },
-  "info":{
-    "header":"Informacije o uporabniku",
-    "name":"Ime",
-    "profile":"Uporabniški profil",
-    "title":"Naslov",
-    "specialTitles":{
-      "developer":"plug&#179; razvijalec",
-      "sponsor":"plug&#179; Sponzor",
-      "ambassador":"plug&#179; Ambassador",
-      "donatorDiamond":"plug&#179; Diamantni darovalec",
-      "donatorPlatinum":"plug&#179; Platinum Darovalec",
-      "donatorGold":"plug&#179; Zlat Darovalec",
-      "donatorSilver":"plug&#179; Srebrn Darovalec",
-      "donatorBronze":"plug&#179; Bronast Darovalec",
-      "special":"plug&#179; Poseben zagovornik - %1"
-    },
-    "id":"ID",
-    "rank":"Rank",
-    "joined":"Čas pridružitve",
-    "status":"Status",
-    "vote":"Glasovanje",
-    "position":"Položaj",
-    "points":"Točke",
-    "wootCount":"Število Woot",
-    "mehCount":"Število Meh",
-    "ratio":"Woot/Meh razmerje",
-    "djing":"Trenutni DJ",
-    "notInList":"Ni v čakalnem seznamu in ni Dj",
-    "inWaitlist":"%1/%2 v čakalnem seznamu",
-    "userDjing":"%1 trenutno DJ-a",
-    "userNextDJ":"%1 so nasledni DJ-i",
-    "disconnects":"Prekinjene povezave",
-    "lastDisconnect":"Zadnji odklop",
-    "lastPosition":"Položaj",
-    "time":"Čas",
-    "lastMessage":"Zadnje sporočilo"
-  },
-  "ranks":{
-    "you":"Vi",
-    "regular":"Navadno",
-    "residentdj":"Domači DJ",
-    "bouncer":"Redar",
-    "manager":"Upravljalec",
-    "cohost":"So-gostitelj",
-    "host":"Gostitelj",
-    "ambassador":"Ambasadorji",
-    "admin":"Skrbnik"
-  },
-  "roomSpecificSettings":{
-    "infoHeader":"Ta soba uporablja posebne nastavitve",
-    "infoHeaderCredits":"Ta soba uporablja posebne nastavitve od %1",
-    "infoDisable":"Lahko jih onemogočiš v meniju"
-  },
-  "menuHeaders":{
-    "features":"Značilnosti",
-    "chatnotifs":"Obvestila v klepetu",
-    "controlpanel":"Nadzorna Plošča"
-  },
-  "menu":{
-    "autowoot":"Samodejni Woot",
-    "autojoin":"Samodejna pridružitev",
-    "chatlog":"Dnevnik klepeta",
-    "customchatcolors":"Barve klepeta po meri",
-    "autorespond":"AFK Samodejen odziv",
-    "notify":"Obvestila",
-    "afktimers":"AFK Časi",
-    "etatimer":"ETA Čas",
-    "roomsettings":"Nastavitve sobe",
-    "chatimages":"Slike v klepetu",
-    "twitchemotes":"Twitch Smeški",
-    "controlpanel":"Nadzorna Plošča",
-    "showdeletedmessages":"Pokaži izbrisana sporočila",
-    "visualizers":"RCS SoundCloud Vizualizacija",
-    "inlineuserinfo":"Informacije uporabnika v vrsti",
-    "about":"O plugCubed",
-    "background":"Spremeni ozadje",
-    "chatcustomizations":"Prilagoditve klepeta",
-    "commands":"Ukazi v klepetu",
-    "customcss":"CSS po želji",
-    "lowlagMode":"Način majhnega zaostajanja",
-    "workMode":"Delovni način"
-  },
-  "vote":{
-    "meh":"Meh",
-    "woot":"Woot",
-    "grab":"Shrani",
-    "undecided":"Neodločeni",
-    "djing":"DJ-a"
-  },
-  "customchatcolors":{
-    "userRanksHeader":"Čini uporabnikov",
-    "chatnotifs":"Obvestila v klepetu"
-  },
-  "panels":{
-    "about":{
-      "header":"Informacije o plug³",
-      "version":"Različica",
-      "website":"Spletna stran",
-      "websiteText":"plug&#179; spletna stran",
-      "translations":"Prevodi",
-      "translationsText":"plug&#179; prevodi",
-      "websitetranslationsText":"plug&#179; prevodi strani"
-    },
-    "background":{
-      "description":"Nastavi ozadje sobe"
-    },
-    "buttons":{
-      "cancel":"Prekliči",
-      "clear":"Počisti",
-      "submit":"Pošlji"
-    },
-    "chatcustomizations":{
-      "description":"Prilagodite vaš klepet z smeški, obvestili, in druge funkcije",
-      "mentionSoundTitle":"Zvok omembe %1",
-      "emotesHeader":"Smeški",
-      "chatenhancementHeader":"Izboljšave klepeta",
-      "emotesSetHeader":"Set smeškov"
-    },
-    "customcss":{
-      "description":"Nastavite svoj CSS sobe"
-    }
-  },
-  "tooltip":{
-    "stream":"Preklop Video/Audio Tok",
-    "clear":"Počisti klepet",
-    "afk":"AFK sporočilo",
-    "reset":"Ponastavi na privzeto",
-    "muted":"Vse pesmi so utišane",
-    "mutedOnce":"Trenutna skladba je utišana",
-    "quickBan":"Prepoved uporabnika zavedno",
-    "quickMute":"Utišaj uporabnika za 45 minut",
-    "userInfo":"Podatki o uporabniku"
-  },
-  "error":{
-    "userNotFound":"Uporabnika ni bilo mogoče najti",
-    "alreadyInWaitList":"Uporabnik %1 je že v čakalnem seznamu",
-    "notInWaitList":"Uporabnik %1 ni v čakalnem seznamu",
-    "unknownMenuKey":"Neznan menu ključ: %1",
-    "invalidAddSyntax":"Napačen unos za ukaz dodajanja. Uporaba: /add @user",
-    "invalidBanSyntax":"Napačen unos za prepovedni ukaz. Uporabi: /ban @user ali /ban @user::time::razlog",
-    "invalidBanTime":"Določen čas, %1 ni veljaven. Veljavni časi so 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Napačen unos za odstranitveni ukaz. Uporabi: /remove @user",
-    "invalidWhoisSyntax":"Napačen unos za kdo je ukaz. Uporaba: /whois @user",
-    "errorGettingPlaylistInfo":"Napaka pri pridobivanju informacij seznama predvajanja",
-    "noPlaylistsFound":"Ni seznamov predvajanj",
-    "yourActivePlaylistIsFull":"Tvoj aktivni seznam predvajanja je poln",
-    "noNextSong":"Nimate pesni v čakalni vrsti"
-  },
-  "video":{
-    "show":"Prikaži",
-    "hide":"Skrij",
-    "menushow":"Prikaži video",
-    "menuhide":"Skrij video"
-  }
 }

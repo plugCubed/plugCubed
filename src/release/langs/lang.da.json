@@ -1,272 +1,276 @@
 {
-  "running":"Kører plug&#179; version %1",
-  "commandsHelp":"Brug '/commands' for at se en udvidet liste over chat kommandoer.",
-  "autorespond":{
-    "default":"Jeg er væk fra tastaturet.",
-    "disable":"Slå AFK autosvar fra for at chatte",
-    "nextIn":"Næste AFK autosvar vil blive sendt fra %1",
-    "next":"AFK autosvarer ved næste omtale",
-    "commandDisable":"%1 AFK autosvar slået fra"
-  },
-  "autojoin":{
-    "commandDisable":"%1 autojoin deaktiveret"
-  },
-  "fullscreen":{
-    "shrink":"Formindsk",
-    "enlarge":"Forstør"
-  },
-  "commands":{
-    "header":"plugCubed Kommandoer",
-    "userCommands":"Bruger Kommandoer",
-    "modCommands":"Moderator kommandoer",
-    "variables":{
-      "username":"brugernavn",
-      "word":"ord",
-      "on":"til",
-      "off":"fra",
-      "reason":"begrundelse",
-      "number":"nummer"
+    "running": "Kører plug&#179; version %1",
+    "commandsHelp": "Brug '/commands' for at se en udvidet liste over chat kommandoer.",
+    "autorespond": {
+        "default": "Jeg er væk fra tastaturet.",
+        "disable": "Slå AFK autosvar fra for at chatte",
+        "nextIn": "Næste AFK autosvar vil blive sendt fra %1",
+        "next": "AFK autosvarer ved næste omtale",
+        "commandDisable": "%1 AFK autosvar slået fra"
     },
-    "descriptions":{
-      "join":"tilslut dj boden/ventelisten",
-      "leave":"forlad dj boden/ventelisten",
-      "whoami":"få din egne informationer",
-      "mute":"sæt lydstyrke til 0",
-      "automute":"register nuværende sang til automatisk blive muted fremover",
-      "unmute":"sæt lydstyrken til seneste lydstyrke",
-      "nextsong":"vis næste sang i spillelisten og hvis det er i historien",
-      "refresh":"opdater videoen",
-      "alertson":"afspil lyd når valgte ord bliver skrevet i chat",
-      "alertsoff":"stop med at spille lyd når valgte ord bliver skrevet i chat",
-      "grab":"Tilføj nuværende sang til din valgte afspilningsliste",
-      "badges":"vis/skjul brugerens emblemer i chatten",
-      "getpos":"få nuværende position i ventelisten",
-      "version":"viser versionsnummer",
-      "commands":"viser denne liste",
-      "link":"indsæt link til plugCubed hjemmeside i chat",
-      "whois":"giver generel information om bruger",
-      "skip":"spring over nuværende sang",
-      "ban":"udsmider valgte bruger",
-      "lockskip":"låser DJ bod, spring over og låser op efter",
-      "lock":"låser DJ bod",
-      "unlock":"låser DJ bod op",
-      "add":"tilføjer valgte bruger til DJ bod/venteliste",
-      "remove":"fjerner valgte bruger fra DJ bod/venteliste",
-      "whois all":"giver bruger-id og brugernavn for alle brugere i rummet",
-      "banall":"banner alle brugere i rummet",
-      "status":"viser status for plug-servere",
-      "unload":"Closes plug&#179;",
-      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
+    "autojoin": {
+        "commandDisable": "%1 autojoin deaktiveret"
     },
-    "responses":{
-      "alertson":"Afspiller lyd ved følgende ord: %1",
-      "alertsoff":"Afspiller ikke længere lyd ved specifikke ord",
-      "badgeon":"Badges have been turned on",
-      "badgeoff":"Badges have been turned off",
-      "nextsong":"Din næste sang i køen er %1 af %2",
-      "isHistory":"Advarsel! Denne sang er stadigvæk i historikken (%1 af %2)",
-      "automute":{
-        "automuted":"%1 auto-dæmpet.",
-        "registered":"%1 registeret til at automatisk blive dæmpet fremover.",
-        "unregistered":"%1 fjernet fra automatisk at blive dæmpet fremover."
-      },
-      "status":{
-        "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
-      }
+    "fullscreen": {
+        "shrink": "Formindsk",
+        "enlarge": "Forstør"
+    },
+    "commands": {
+        "header": "plugCubed Kommandoer",
+        "userCommands": "Bruger Kommandoer",
+        "modCommands": "Moderator kommandoer",
+        "variables": {
+            "username": "brugernavn",
+            "word": "ord",
+            "on": "til",
+            "off": "fra",
+            "reason": "begrundelse",
+            "number": "nummer"
+        },
+        "descriptions": {
+            "join": "tilslut dj boden/ventelisten",
+            "leave": "forlad dj boden/ventelisten",
+            "whoami": "få din egne informationer",
+            "mute": "sæt lydstyrke til 0",
+            "automute": "register nuværende sang til automatisk blive muted fremover",
+            "unmute": "sæt lydstyrken til seneste lydstyrke",
+            "nextsong": "vis næste sang i spillelisten og hvis det er i historien",
+            "refresh": "opdater videoen",
+            "alertson": "afspil lyd når valgte ord bliver skrevet i chat",
+            "alertsoff": "stop med at spille lyd når valgte ord bliver skrevet i chat",
+            "grab": "Tilføj nuværende sang til din valgte afspilningsliste",
+            "badges": "vis/skjul brugerens emblemer i chatten",
+            "getpos": "få nuværende position i ventelisten",
+            "version": "viser versionsnummer",
+            "commands": "viser denne liste",
+            "link": "indsæt link til plugCubed hjemmeside i chat",
+            "whois": "giver generel information om bruger",
+            "skip": "spring over nuværende sang",
+            "ban": "udsmider valgte bruger",
+            "lockskip": "låser DJ bod, spring over og låser op efter",
+            "lock": "låser DJ bod",
+            "unlock": "låser DJ bod op",
+            "add": "tilføjer valgte bruger til DJ bod/venteliste",
+            "remove": "fjerner valgte bruger fra DJ bod/venteliste",
+            "whois all": "giver bruger-id og brugernavn for alle brugere i rummet",
+            "banall": "banner alle brugere i rummet",
+            "status": "viser status for plug-servere",
+            "unload": "Closes plug&#179;",
+            "unban": "Unbans targeted user.",
+            "volume": "Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
+        },
+        "responses": {
+            "alertson": "Afspiller lyd ved følgende ord: %1",
+            "alertsoff": "Afspiller ikke længere lyd ved specifikke ord",
+            "badgeon": "Badges have been turned on",
+            "badgeoff": "Badges have been turned off",
+            "nextsong": "Din næste sang i køen er %1 af %2",
+            "isHistory": "Advarsel! Denne sang er stadigvæk i historikken (%1 af %2)",
+            "automute": {
+                "automuted": "%1 auto-dæmpet.",
+                "registered": "%1 registeret til at automatisk blive dæmpet fremover.",
+                "unregistered": "%1 fjernet fra automatisk at blive dæmpet fremover."
+            },
+            "status": {
+                "rest": "REST: %1 %2 [%3ms]",
+                "socket": "Socket: %1 %2 [%3ms]"
+            }
+        }
+    },
+    "eta": {
+        "boothAvailable": "Hvis du tilmelder dig til ventelisten nu ville du være DJ!",
+        "alreadyDJ": "Du er allerede DJ!",
+        "waitListTime": "Du er på ventelisten %1 af %2 og vil være DJ om %3!",
+        "joinTime": "Hvis du tilslutter dig ventelisten nu, vil du være DJ om omkring %1!"
+    },
+    "notify": {
+        "deletedMessages": "deleted by ",
+        "join": "Bruger tilsluttet",
+        "leave": "Bruger Forlader",
+        "grab": "Bruger Grab",
+        "meh": "Bruger kan ikke lide",
+        "stats": "Sang statistik",
+        "updates": "Sang opdateringer",
+        "updatesLink": "Song Link",
+        "history": "Sange i historik",
+        "songUnavailable": "Sangen er ikke tilgængelig",
+        "boothAlert": "Booth Alert (%1 / 50)",
+        "songLength": "Sang længde (%1 min)",
+        "message": {
+            "boothAlertNext": "You are about to DJ!",
+            "boothAlertPos": "You are now %1 in the waitlist",
+            "grab": "Grabbed %1 - %2",
+            "stats": "Statistik: %1 kan lide -- %2 kan ikke lide -- %3 tilføjelser",
+            "updates": "Afspiller nu: %1 af %2<br>Afspillet af: %3",
+            "meh": "%1 kunne ikke lide denne sang",
+            "join": "tilsluttede sig rummet",
+            "leave": "forlod rummet",
+            "history": "Denne sang er i historikken (%1 af %2)",
+            "historySkipped": "Denne sang er i historikken (%1 af %2), men blev sprunget over ved sidste afspilning",
+            "songLength": "Sang er længere end %1 minutter",
+            "songDeleted": "Song is deleted",
+            "songPrivate": "Sangen er privat",
+            "songRejected": "Song is rejected due to %1",
+            "songNotFound": "Sangen blev ikke fundet",
+            "songEmbed": "Sangen har ikke indlejring aktiveret",
+            "songStreamable": "Sangen understøtter ikke streaming"
+        }
+    },
+    "info": {
+        "header": "Brugeroplysninger",
+        "name": "Navn",
+        "profile": "User Profile",
+        "title": "Titel",
+        "specialTitles": {
+            "developer": "plug&#179; Udvikler",
+            "sponsor": "plug&#179; Sponsor",
+            "ambassador": "plug&#179; Ambassadør",
+            "donatorDiamond": "plug&#179; Diamant Doner",
+            "donatorPlatinum": "plug&#179; Platin Doner",
+            "donatorGold": "plug&#179; Guld Doner",
+            "donatorSilver": "plug&#179; Sølv Doner",
+            "donatorBronze": "plug&#179; Bronze Doner",
+            "special": "plug&#179; Særlig Supporter - %1"
+        },
+        "id": "ID",
+        "rank": "Rang",
+        "joined": "Tilslutningstidspunkt",
+        "status": "Status",
+        "vote": "Stemme",
+        "position": "Position",
+        "points": "Point",
+        "wootCount": "Antal som kan lide",
+        "mehCount": "Antal som ikke lan lide",
+        "ratio": "Forholdet mellem Kan lide/Kan ikke lide",
+        "djing": "Nuværende DJ",
+        "notInList": "Ikke på venteliste eller bod",
+        "inWaitlist": "%1/%2 på venteliste",
+        "userDjing": "%1 DJ'er i øjeblikket",
+        "userNextDJ": "%1 DJ'er bagefter",
+        "disconnects": "Forlader",
+        "lastDisconnect": "Seneste Disconnect",
+        "lastPosition": "Position",
+        "time": "Tid",
+        "lastMessage": "Last Message"
+    },
+    "ranks": {
+        "you": "Dig",
+        "regular": "Almindelig",
+        "residentdj": "Husets DJ",
+        "bouncer": "Udsmider",
+        "manager": "Manager",
+        "cohost": "Medvært",
+        "host": "Vært",
+        "ambassador": "Ambassadør",
+        "admin": "Admin"
+    },
+    "roomSpecificSettings": {
+        "infoHeader": "Dette rum bruger specielle instillinger",
+        "infoHeaderCredits": "Dette rum bruger specielle indstillinger af %1",
+        "infoDisable": "Du kan slå dem fra i menuen"
+    },
+    "menuHeaders": {
+        "features": "Features",
+        "chatnotifs": "Chat Notifications",
+        "controlpanel": "Kontrolpanel"
+    },
+    "menu": {
+        "autowoot": "Automatisk Kan lide",
+        "autojoin": "Auto-forbind",
+        "chatlog": "ChatLog",
+        "customchatcolors": "Brugerdefinerede Chat Farver",
+        "autorespond": "AFK Autosvar",
+        "notify": "Notifikationer",
+        "afktimers": "AFK Timere",
+        "etatimer": "ETA Timer",
+        "roomsettings": "Rum-indstillinger",
+        "chatimages": "Chat billeder",
+        "twitchemotes": "Twitch Smileys",
+        "controlpanel": "Kontrolpanel",
+        "showdeletedmessages": "Show Deleted Messages",
+        "visualizers": "RCS SoundCloud Visualizers",
+        "inlineuserinfo": "Inline User Info",
+        "about": "About plugCubed",
+        "background": "Change background",
+        "chatcustomizations": "Chat Customizations",
+        "commands": "Chat commands",
+        "customcss": "Custom CSS",
+        "lowlagMode": "Low Lag Mode",
+        "workMode": "Work Mode"
+    },
+    "vote": {
+        "meh": "Kan ikke lide",
+        "woot": "Kan lide",
+        "grab": "Grab",
+        "undecided": "Uafklaret",
+        "djing": "DJ'er"
+    },
+    "customchatcolors": {
+        "userRanksHeader": "User Ranks",
+        "chatnotifs": "Chat Notifications"
+    },
+    "panels": {
+        "about": {
+            "header": "Information about plug³",
+            "version": "Version",
+            "website": "Website",
+            "websiteText": "plug&#179; Website",
+            "translations": "Translations",
+            "translationsText": "plug&#179; Translations",
+            "websitetranslationsText": "plug&#179; Website Translations"
+        },
+        "background": {
+            "description": "Set your own room background"
+        },
+        "buttons": {
+            "cancel": "Cancel",
+            "clear": "Clear",
+            "submit": "Submit"
+        },
+        "chatcustomizations": {
+            "description": "Customize your chat with emojis, notifications, markdown, and other features",
+            "mentionSoundTitle": "Mention Sound %1",
+            "emotesHeader": "Emotes",
+            "chatenhancementHeader": "Chat Enhancements",
+            "emotesSetHeader": "Emoji Set"
+        },
+        "customcss": {
+            "description": "Set your own room CSS"
+        }
+    },
+    "tooltip": {
+        "stream": "Skift mellem Video/Lyd streaming",
+        "clear": "Ryd Chatten",
+        "afk": "AFK Besked",
+        "reset": "Nulstil til standard",
+        "muted": "Alle sange er dæmpet",
+        "mutedOnce": "Nuværende sang er dæmpet",
+        "quickBan": "Ban user forever",
+        "quickMute": "Mute user for 45 mins",
+        "userInfo": "User Info"
+    },
+    "error": {
+        "userNotFound": "Bruger ikke fundet",
+        "alreadyInWaitList": "User %1 is already in waitlist",
+        "notInWaitList": "User %1 is not in waitlist",
+        "unknownMenuKey": "Ukendt menu knap: %1",
+        "invalidAddSyntax": "Invalid syntax for add command. Usage: /add @user",
+        "invalidBanSyntax": "Invalid syntax for ban command. Usage: /ban @user or /ban @user::time::reason",
+        "invalidBanTime": "The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
+        "invalidRemoveSyntax": "Invalid syntax for remove command. Usage: /remove @user",
+        "invalidWhoisSyntax": "Invalid syntax for whois command. Usage: /whois @user",
+        "errorGettingPlaylistInfo": "Fejl under hentning af afspilningslisten information",
+        "noPlaylistsFound": "Ingen afspilningslister fundet",
+        "yourActivePlaylistIsFull": "Din aktive afspilningsliste er fuld",
+        "noNextSong": "Du har ingen sange i kø"
+    },
+    "video": {
+        "show": "Show",
+        "hide": "Hide",
+        "menushow": "Show Video",
+        "menuhide": "Hide Video",
+        "hidden": "Video Hidden",
+        "disabled": "Video Disabled",
+        "snooze": "Video Snoozed"
     }
-  },
-  "eta":{
-    "boothAvailable":"Hvis du tilmelder dig til ventelisten nu ville du være DJ!",
-    "alreadyDJ":"Du er allerede DJ!",
-    "waitListTime":"Du er på ventelisten %1 af %2 og vil være DJ om %3!",
-    "joinTime":"Hvis du tilslutter dig ventelisten nu, vil du være DJ om omkring %1!"
-  },
-  "notify":{
-    "deletedMessages":"deleted by ",
-    "join":"Bruger tilsluttet",
-    "leave":"Bruger Forlader",
-    "grab":"Bruger Grab",
-    "meh":"Bruger kan ikke lide",
-    "stats":"Sang statistik",
-    "updates":"Sang opdateringer",
-    "updatesLink":"Song Link",
-    "history":"Sange i historik",
-    "songUnavailable":"Sangen er ikke tilgængelig",
-    "boothAlert":"Booth Alert (%1 / 50)",
-    "songLength":"Sang længde (%1 min)",
-    "message":{
-      "boothAlertNext":"You are about to DJ!",
-      "boothAlertPos":"You are now %1 in the waitlist",
-      "grab":"Grabbed %1 - %2",
-      "stats":"Statistik: %1 kan lide -- %2 kan ikke lide -- %3 tilføjelser",
-      "updates":"Afspiller nu: %1 af %2<br>Afspillet af: %3",
-      "meh":"%1 kunne ikke lide denne sang",
-      "join":"tilsluttede sig rummet",
-      "leave":"forlod rummet",
-      "history":"Denne sang er i historikken (%1 af %2)",
-      "historySkipped":"Denne sang er i historikken (%1 af %2), men blev sprunget over ved sidste afspilning",
-      "songLength":"Sang er længere end %1 minutter",
-      "songDeleted":"Song is deleted",
-      "songPrivate":"Sangen er privat",
-      "songRejected":"Song is rejected due to %1",
-      "songNotFound":"Sangen blev ikke fundet",
-      "songEmbed":"Sangen har ikke indlejring aktiveret",
-      "songStreamable":"Sangen understøtter ikke streaming"
-    }
-  },
-  "info":{
-    "header":"Brugeroplysninger",
-    "name":"Navn",
-    "profile":"User Profile",
-    "title":"Titel",
-    "specialTitles":{
-      "developer":"plug&#179; Udvikler",
-      "sponsor":"plug&#179; Sponsor",
-      "ambassador":"plug&#179; Ambassadør",
-      "donatorDiamond":"plug&#179; Diamant Doner",
-      "donatorPlatinum":"plug&#179; Platin Doner",
-      "donatorGold":"plug&#179; Guld Doner",
-      "donatorSilver":"plug&#179; Sølv Doner",
-      "donatorBronze":"plug&#179; Bronze Doner",
-      "special":"plug&#179; Særlig Supporter - %1"
-    },
-    "id":"ID",
-    "rank":"Rang",
-    "joined":"Tilslutningstidspunkt",
-    "status":"Status",
-    "vote":"Stemme",
-    "position":"Position",
-    "points":"Point",
-    "wootCount":"Antal som kan lide",
-    "mehCount":"Antal som ikke lan lide",
-    "ratio":"Forholdet mellem Kan lide/Kan ikke lide",
-    "djing":"Nuværende DJ",
-    "notInList":"Ikke på venteliste eller bod",
-    "inWaitlist":"%1/%2 på venteliste",
-    "userDjing":"%1 DJ'er i øjeblikket",
-    "userNextDJ":"%1 DJ'er bagefter",
-    "disconnects":"Forlader",
-    "lastDisconnect":"Seneste Disconnect",
-    "lastPosition":"Position",
-    "time":"Tid",
-    "lastMessage":"Last Message"
-  },
-  "ranks":{
-    "you":"Dig",
-    "regular":"Almindelig",
-    "residentdj":"Husets DJ",
-    "bouncer":"Udsmider",
-    "manager":"Manager",
-    "cohost":"Medvært",
-    "host":"Vært",
-    "ambassador":"Ambassadør",
-    "admin":"Admin"
-  },
-  "roomSpecificSettings":{
-    "infoHeader":"Dette rum bruger specielle instillinger",
-    "infoHeaderCredits":"Dette rum bruger specielle indstillinger af %1",
-    "infoDisable":"Du kan slå dem fra i menuen"
-  },
-  "menuHeaders":{
-    "features":"Features",
-    "chatnotifs":"Chat Notifications",
-    "controlpanel":"Kontrolpanel"
-  },
-  "menu":{
-    "autowoot":"Automatisk Kan lide",
-    "autojoin":"Auto-forbind",
-    "chatlog":"ChatLog",
-    "customchatcolors":"Brugerdefinerede Chat Farver",
-    "autorespond":"AFK Autosvar",
-    "notify":"Notifikationer",
-    "afktimers":"AFK Timere",
-    "etatimer":"ETA Timer",
-    "roomsettings":"Rum-indstillinger",
-    "chatimages":"Chat billeder",
-    "twitchemotes":"Twitch Smileys",
-    "controlpanel":"Kontrolpanel",
-    "showdeletedmessages":"Show Deleted Messages",
-    "visualizers":"RCS SoundCloud Visualizers",
-    "inlineuserinfo":"Inline User Info",
-    "about":"About plugCubed",
-    "background":"Change background",
-    "chatcustomizations":"Chat Customizations",
-    "commands":"Chat commands",
-    "customcss":"Custom CSS",
-    "lowlagMode":"Low Lag Mode",
-    "workMode":"Work Mode"
-  },
-  "vote":{
-    "meh":"Kan ikke lide",
-    "woot":"Kan lide",
-    "grab":"Grab",
-    "undecided":"Uafklaret",
-    "djing":"DJ'er"
-  },
-  "customchatcolors":{
-    "userRanksHeader":"User Ranks",
-    "chatnotifs":"Chat Notifications"
-  },
-  "panels":{
-    "about":{
-      "header":"Information about plug³",
-      "version":"Version",
-      "website":"Website",
-      "websiteText":"plug&#179; Website",
-      "translations":"Translations",
-      "translationsText":"plug&#179; Translations",
-      "websitetranslationsText":"plug&#179; Website Translations"
-    },
-    "background":{
-      "description":"Set your own room background"
-    },
-    "buttons":{
-      "cancel":"Cancel",
-      "clear":"Clear",
-      "submit":"Submit"
-    },
-    "chatcustomizations":{
-      "description":"Customize your chat with emojis, notifications, markdown, and other features",
-      "mentionSoundTitle":"Mention Sound %1",
-      "emotesHeader":"Emotes",
-      "chatenhancementHeader":"Chat Enhancements",
-      "emotesSetHeader":"Emoji Set"
-    },
-    "customcss":{
-      "description":"Set your own room CSS"
-    }
-  },
-  "tooltip":{
-    "stream":"Skift mellem Video/Lyd streaming",
-    "clear":"Ryd Chatten",
-    "afk":"AFK Besked",
-    "reset":"Nulstil til standard",
-    "muted":"Alle sange er dæmpet",
-    "mutedOnce":"Nuværende sang er dæmpet",
-    "quickBan":"Ban user forever",
-    "quickMute":"Mute user for 45 mins",
-    "userInfo":"User Info"
-  },
-  "error":{
-    "userNotFound":"Bruger ikke fundet",
-    "alreadyInWaitList":"User %1 is already in waitlist",
-    "notInWaitList":"User %1 is not in waitlist",
-    "unknownMenuKey":"Ukendt menu knap: %1",
-    "invalidAddSyntax":"Invalid syntax for add command. Usage: /add @user",
-    "invalidBanSyntax":"Invalid syntax for ban command. Usage: /ban @user or /ban @user::time::reason",
-    "invalidBanTime":"The time specified, %1 is invalid. Valid times are 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Invalid syntax for remove command. Usage: /remove @user",
-    "invalidWhoisSyntax":"Invalid syntax for whois command. Usage: /whois @user",
-    "errorGettingPlaylistInfo":"Fejl under hentning af afspilningslisten information",
-    "noPlaylistsFound":"Ingen afspilningslister fundet",
-    "yourActivePlaylistIsFull":"Din aktive afspilningsliste er fuld",
-    "noNextSong":"Du har ingen sange i kø"
-  },
-  "video":{
-    "show":"Show",
-    "hide":"Hide",
-    "menushow":"Show Video",
-    "menuhide":"Hide Video"
-  }
 }

@@ -1,272 +1,276 @@
 {
-  "running":"執行 plug&#179; 版本 %1",
-  "commandsHelp":"使用 '/commands' 擴大去看聊天指令.",
-  "autorespond":{
-    "default":"我正在暫離電腦中.",
-    "disable":"請先禁用AFK自動回應才能聊天",
-    "nextIn":"下一個 AFK 自動回應 會發送在 %1",
-    "next":"AFK 自動回應在下一個的點名提及",
-    "commandDisable":"%1 AFK 訊息已被禁用"
-  },
-  "autojoin":{
-    "commandDisable":"%1 禁止自動加入排隊"
-  },
-  "fullscreen":{
-    "shrink":"縮小",
-    "enlarge":"放大"
-  },
-  "commands":{
-    "header":"plug&#179; 指令",
-    "userCommands":"用戶指令",
-    "modCommands":"管理指令",
-    "variables":{
-      "username":"用戶名",
-      "word":"字",
-      "on":"開啟",
-      "off":"關閉",
-      "reason":"原因",
-      "number":"數目"
+    "running": "執行 plug&#179; 版本 %1",
+    "commandsHelp": "使用 '/commands' 擴大去看聊天指令.",
+    "autorespond": {
+        "default": "我正在暫離電腦中.",
+        "disable": "請先禁用AFK自動回應才能聊天",
+        "nextIn": "下一個 AFK 自動回應 會發送在 %1",
+        "next": "AFK 自動回應在下一個的點名提及",
+        "commandDisable": "%1 AFK 訊息已被禁用"
     },
-    "descriptions":{
-      "join":"加入dj展台/等候列表",
-      "leave":"離開dj展台/等候列表",
-      "whoami":"得到你自己的資訊",
-      "mute":"設置聲量為 0",
-      "automute":"註冊目前播放中歌曲到播放自動靜音",
-      "unmute":"設置聲量到上次聲量",
-      "nextsong":"在播放清單中顯示下一首歌曲如果它是在歷史紀錄裡",
-      "refresh":"刷新視頻",
-      "alertson":"播放音效當任何設定字詞出現在聊天中",
-      "alertsoff":"停止播放音效當任何設定字詞出現在聊天中",
-      "grab":"添加當前歌曲到你指定的播放清單",
-      "badges":"顯示/隱藏用戶在聊天時的徽章",
-      "getpos":"獲取目前等候清單位置",
-      "version":"顯示版本號碼",
-      "commands":"展示此清單",
-      "link":"張貼plugCubed網址到聊天室",
-      "whois":"提供有關用戶的一般信息",
-      "skip":"跳過目前歌曲",
-      "ban":"踢目標用戶",
-      "lockskip":"鎖定 DJ 展台, 跳過 與 完成後解鎖 ",
-      "lock":"鎖定 DJ 展台",
-      "unlock":"解鎖 DJ 展台",
-      "add":"增加目標用戶到 dj 展台/等候清單",
-      "remove":"從 dj 展台/等候清單 移除目標用戶",
-      "whois all":"提供 整個房間裡所有用戶的 用戶id 與 用戶名 ",
-      "banall":"禁止所有在房間裡的用戶",
-      "status":"顯示plug伺服器的狀態",
-      "unload":"關閉 Plug&#179;",
-      "volume":"設置一個數字 (0-100) 的音量, 以 +1 來增加, 以 -1來減少"
+    "autojoin": {
+        "commandDisable": "%1 禁止自動加入排隊"
     },
-    "responses":{
-      "alertson":"對下列詞語播放聲音: %1",
-      "alertsoff":"不再對特定詞語播放聲音",
-      "badgeon":"勳章已被打開",
-      "badgeoff":"勳章已被關閉",
-      "nextsong":"你下一首排隊的歌曲是 %1 來自 %2",
-      "isHistory":"警告: 這首歌仍在播放歷史紀錄裡 (%1 - %2)",
-      "automute":{
-        "automuted":"%1 已自動靜音.",
-        "registered":"%1 已註冊到未來播放自動靜音.",
-        "unregistered":"%1 已從自動靜音註冊表中刪除."
-      },
-      "status":{
-        "rest":"休息: %1 %2 [%3分秒]",
-        "socket":"通訊端: %1 %2 [%3分秒]"
-      }
+    "fullscreen": {
+        "shrink": "縮小",
+        "enlarge": "放大"
+    },
+    "commands": {
+        "header": "plug&#179; 指令",
+        "userCommands": "用戶指令",
+        "modCommands": "管理指令",
+        "variables": {
+            "username": "用戶名",
+            "word": "字",
+            "on": "開啟",
+            "off": "關閉",
+            "reason": "原因",
+            "number": "數目"
+        },
+        "descriptions": {
+            "join": "加入dj展台/等候列表",
+            "leave": "離開dj展台/等候列表",
+            "whoami": "得到你自己的資訊",
+            "mute": "設置聲量為 0",
+            "automute": "註冊目前播放中歌曲到播放自動靜音",
+            "unmute": "設置聲量到上次聲量",
+            "nextsong": "在播放清單中顯示下一首歌曲如果它是在歷史紀錄裡",
+            "refresh": "刷新視頻",
+            "alertson": "播放音效當任何設定字詞出現在聊天中",
+            "alertsoff": "停止播放音效當任何設定字詞出現在聊天中",
+            "grab": "添加當前歌曲到你指定的播放清單",
+            "badges": "顯示/隱藏用戶在聊天時的徽章",
+            "getpos": "獲取目前等候清單位置",
+            "version": "顯示版本號碼",
+            "commands": "展示此清單",
+            "link": "張貼plugCubed網址到聊天室",
+            "whois": "提供有關用戶的一般信息",
+            "skip": "跳過目前歌曲",
+            "ban": "踢目標用戶",
+            "lockskip": "鎖定 DJ 展台, 跳過 與 完成後解鎖 ",
+            "lock": "鎖定 DJ 展台",
+            "unlock": "解鎖 DJ 展台",
+            "add": "增加目標用戶到 dj 展台/等候清單",
+            "remove": "從 dj 展台/等候清單 移除目標用戶",
+            "whois all": "提供 整個房間裡所有用戶的 用戶id 與 用戶名 ",
+            "banall": "禁止所有在房間裡的用戶",
+            "status": "顯示plug伺服器的狀態",
+            "unload": "關閉 Plug&#179;",
+            "unban": "Unbans targeted user.",
+            "volume": "設置一個數字 (0-100) 的音量, 以 +1 來增加, 以 -1來減少"
+        },
+        "responses": {
+            "alertson": "對下列詞語播放聲音: %1",
+            "alertsoff": "不再對特定詞語播放聲音",
+            "badgeon": "勳章已被打開",
+            "badgeoff": "勳章已被關閉",
+            "nextsong": "你下一首排隊的歌曲是 %1 來自 %2",
+            "isHistory": "警告: 這首歌仍在播放歷史紀錄裡 (%1 - %2)",
+            "automute": {
+                "automuted": "%1 已自動靜音.",
+                "registered": "%1 已註冊到未來播放自動靜音.",
+                "unregistered": "%1 已從自動靜音註冊表中刪除."
+            },
+            "status": {
+                "rest": "休息: %1 %2 [%3分秒]",
+                "socket": "通訊端: %1 %2 [%3分秒]"
+            }
+        }
+    },
+    "eta": {
+        "boothAvailable": "如果你現在加入等候列表, 你將會當Dj播放!",
+        "alreadyDJ": "你已經正在播放!",
+        "waitListTime": "你正在等候列表裡的 %1 / %2, 你將會在大概 %3 後播放!",
+        "joinTime": "如果你現在加入等候列表, 你將會在大概 %1 後播放!"
+    },
+    "notify": {
+        "deletedMessages": "刪除者為 ",
+        "join": "用戶加入",
+        "leave": "用戶離開",
+        "grab": "用戶收藏",
+        "meh": "用戶負評",
+        "stats": "歌曲統計",
+        "updates": "歌曲更新",
+        "updatesLink": "歌曲連接",
+        "history": "在歷史裡的歌曲",
+        "songUnavailable": "歌曲不可用",
+        "boothAlert": "播放提醒 (%1 / 50)",
+        "songLength": "歌曲長度 (%1 分鐘)",
+        "message": {
+            "boothAlertNext": "你就快要播放!",
+            "boothAlertPos": "你目前在等候列表 %1 裡",
+            "grab": "收藏了 %1 - %2",
+            "stats": "統計:   %1 正評 -- %2 負評 -- %3 收藏",
+            "updates": "正在播放: %1 - %2<br />播放者: %3",
+            "meh": "負評了此曲目",
+            "join": "加入了房間",
+            "leave": "離開了房間",
+            "history": "歌曲在歷史紀錄裡 (%1 - %2)",
+            "historySkipped": "歌曲在歷史紀錄裡 (%1 - %2), 但在最後一次播放已被跳過",
+            "songLength": "歌曲長過 %1 分鐘",
+            "songDeleted": "歌曲已被刪除",
+            "songPrivate": "歌曲屬私人",
+            "songRejected": "歌曲已因 %1 被拒絕",
+            "songNotFound": "歌曲不存在",
+            "songEmbed": "歌曲已被禁用嵌入",
+            "songStreamable": "歌曲不支援串流"
+        }
+    },
+    "info": {
+        "header": "用戶資訊",
+        "name": "名字",
+        "profile": "用戶資料",
+        "title": "頭銜",
+        "specialTitles": {
+            "developer": "plug&#179; 開發人員",
+            "sponsor": "plug&#179; 贊助人",
+            "ambassador": "plug&#179; 大使",
+            "donatorDiamond": "plug&#179; 鑽石捐贈人",
+            "donatorPlatinum": "plug&#179; 白金捐贈人",
+            "donatorGold": "plug&#179; 金 捐贈人",
+            "donatorSilver": "plug&#179; 銀 捐贈人",
+            "donatorBronze": "plug&#179; 銅 捐贈人",
+            "special": "plug&#179; 特別支持者 - %1"
+        },
+        "id": "編號",
+        "rank": "等級",
+        "joined": "加入時間",
+        "status": "狀態",
+        "vote": "投票",
+        "position": "位置",
+        "points": "分",
+        "wootCount": "正評計算",
+        "mehCount": "負評計算",
+        "ratio": "正評/負評 比率",
+        "djing": "DJ 中",
+        "notInList": "不在等候清單或展台",
+        "inWaitlist": "%1/%2 在等候清單",
+        "userDjing": "%1  是當前 DJ",
+        "userNextDJ": "%1 是下一個 DJ",
+        "disconnects": "斷線",
+        "lastDisconnect": "上次斷線",
+        "lastPosition": "位置",
+        "time": "時間",
+        "lastMessage": "最後的訊息"
+    },
+    "ranks": {
+        "you": "你",
+        "regular": "一般",
+        "residentdj": "駐場 DJ",
+        "bouncer": "保鏢",
+        "manager": "經理",
+        "cohost": "協辦主持",
+        "host": "主持",
+        "ambassador": "大使",
+        "admin": "管理員"
+    },
+    "roomSpecificSettings": {
+        "infoHeader": "此房間使用特別設定",
+        "infoHeaderCredits": "此房間使用的特別設定是由 %1 所設置",
+        "infoDisable": "你可以在選單中禁用它們"
+    },
+    "menuHeaders": {
+        "features": "功能",
+        "chatnotifs": "聊天通知",
+        "controlpanel": "控制面板"
+    },
+    "menu": {
+        "autowoot": "自動正評",
+        "autojoin": "自動加入排隊",
+        "chatlog": "聊天紀錄",
+        "customchatcolors": "自定義聊天顏色",
+        "autorespond": "AFK 自動回應",
+        "notify": "通知",
+        "afktimers": "AFK 計時",
+        "etatimer": "ETA計時器",
+        "roomsettings": "房間設定",
+        "chatimages": "聊天圖像",
+        "twitchemotes": "搞怪表情",
+        "controlpanel": "控制面板",
+        "showdeletedmessages": "顯示已刪除訊息",
+        "visualizers": "RCS SoundCloud另類展示效果",
+        "inlineuserinfo": "聊天用戶資訊",
+        "about": "關於 plugCubed",
+        "background": "更改背景",
+        "chatcustomizations": "聊天自訂項",
+        "commands": "聊天指令",
+        "customcss": "自訂義 CSS",
+        "lowlagMode": "低遲滯模式",
+        "workMode": "工作模式"
+    },
+    "vote": {
+        "meh": "負評",
+        "woot": "正評",
+        "grab": "收藏",
+        "undecided": "未定",
+        "djing": "DJ 中"
+    },
+    "customchatcolors": {
+        "userRanksHeader": "用戶級別",
+        "chatnotifs": "聊天通知"
+    },
+    "panels": {
+        "about": {
+            "header": "關於 plug³ 的資訊",
+            "version": "版本",
+            "website": "網站",
+            "websiteText": "plug&#179; 網站",
+            "translations": "翻譯",
+            "translationsText": "plug&#179; 翻譯",
+            "websitetranslationsText": "plug&#179; 網站翻譯"
+        },
+        "background": {
+            "description": "設置你自己的房間背景"
+        },
+        "buttons": {
+            "cancel": "取消",
+            "clear": "清除",
+            "submit": "提交"
+        },
+        "chatcustomizations": {
+            "description": "自訂你自己的聊天表情, 通知, 標記, 以及其他功能",
+            "mentionSoundTitle": "提及聲音 %1",
+            "emotesHeader": "表情",
+            "chatenhancementHeader": "聊天功能增強",
+            "emotesSetHeader": "表情集"
+        },
+        "customcss": {
+            "description": "設置你自己房間的 CSS"
+        }
+    },
+    "tooltip": {
+        "stream": "切換 視頻/音頻 流",
+        "clear": "清除聊天",
+        "afk": "AFK 訊息",
+        "reset": "重設為默認值",
+        "muted": "所有歌曲被靜音",
+        "mutedOnce": "當前歌曲已靜音",
+        "quickBan": "永久禁止用戶",
+        "quickMute": "禁音用戶 45分鐘",
+        "userInfo": "用戶資訊"
+    },
+    "error": {
+        "userNotFound": "找不到此用戶",
+        "alreadyInWaitList": "用戶 %1 已在等候列表裡",
+        "notInWaitList": "用戶 %1 並不在等候列表裡",
+        "unknownMenuKey": "未知菜單匙碼: %1",
+        "invalidAddSyntax": "無效的添加指令語法. 用法: /add @用戶",
+        "invalidBanSyntax": "無效的禁止指令語法. 用法: /ban @用戶 或 /ban @用戶::time::原因",
+        "invalidBanTime": "指定的時間, %1是無效的. 有效時間為 60, 1, 24, 1440, -1",
+        "invalidRemoveSyntax": "無效的移除指令語法. 用法: /remove @用戶",
+        "invalidWhoisSyntax": "無效的whois指令語法. 用法: /whois @用戶",
+        "errorGettingPlaylistInfo": "獲取播放清單資訊時出錯",
+        "noPlaylistsFound": "無法找到播放清單",
+        "yourActivePlaylistIsFull": "你的活躍播放清單已滿",
+        "noNextSong": "你沒有歌曲能排隊"
+    },
+    "video": {
+        "show": "顯示",
+        "hide": "隱藏",
+        "menushow": "顯示視頻",
+        "menuhide": "隱藏視頻",
+        "hidden": "Video Hidden",
+        "disabled": "Video Disabled",
+        "snooze": "Video Snoozed"
     }
-  },
-  "eta":{
-    "boothAvailable":"如果你現在加入等候列表, 你將會當Dj播放!",
-    "alreadyDJ":"你已經正在播放!",
-    "waitListTime":"你正在等候列表裡的 %1 / %2, 你將會在大概 %3 後播放!",
-    "joinTime":"如果你現在加入等候列表, 你將會在大概 %1 後播放!"
-  },
-  "notify":{
-    "deletedMessages":"刪除者為 ",
-    "join":"用戶加入",
-    "leave":"用戶離開",
-    "grab":"用戶收藏",
-    "meh":"用戶負評",
-    "stats":"歌曲統計",
-    "updates":"歌曲更新",
-    "updatesLink":"歌曲連接",
-    "history":"在歷史裡的歌曲",
-    "songUnavailable":"歌曲不可用",
-    "boothAlert":"播放提醒 (%1 / 50)",
-    "songLength":"歌曲長度 (%1 分鐘)",
-    "message":{
-      "boothAlertNext":"你就快要播放!",
-      "boothAlertPos":"你目前在等候列表 %1 裡",
-      "grab":"收藏了 %1 - %2",
-      "stats":"統計:   %1 正評 -- %2 負評 -- %3 收藏",
-      "updates":"正在播放: %1 - %2<br />播放者: %3",
-      "meh":"負評了此曲目",
-      "join":"加入了房間",
-      "leave":"離開了房間",
-      "history":"歌曲在歷史紀錄裡 (%1 - %2)",
-      "historySkipped":"歌曲在歷史紀錄裡 (%1 - %2), 但在最後一次播放已被跳過",
-      "songLength":"歌曲長過 %1 分鐘",
-      "songDeleted":"歌曲已被刪除",
-      "songPrivate":"歌曲屬私人",
-      "songRejected":"歌曲已因 %1 被拒絕",
-      "songNotFound":"歌曲不存在",
-      "songEmbed":"歌曲已被禁用嵌入",
-      "songStreamable":"歌曲不支援串流"
-    }
-  },
-  "info":{
-    "header":"用戶資訊",
-    "name":"名字",
-    "profile":"用戶資料",
-    "title":"頭銜",
-    "specialTitles":{
-      "developer":"plug&#179; 開發人員",
-      "sponsor":"plug&#179; 贊助人",
-      "ambassador":"plug&#179; 大使",
-      "donatorDiamond":"plug&#179; 鑽石捐贈人",
-      "donatorPlatinum":"plug&#179; 白金捐贈人",
-      "donatorGold":"plug&#179; 金 捐贈人",
-      "donatorSilver":"plug&#179; 銀 捐贈人",
-      "donatorBronze":"plug&#179; 銅 捐贈人",
-      "special":"plug&#179; 特別支持者 - %1"
-    },
-    "id":"編號",
-    "rank":"等級",
-    "joined":"加入時間",
-    "status":"狀態",
-    "vote":"投票",
-    "position":"位置",
-    "points":"分",
-    "wootCount":"正評計算",
-    "mehCount":"負評計算",
-    "ratio":"正評/負評 比率",
-    "djing":"DJ 中",
-    "notInList":"不在等候清單或展台",
-    "inWaitlist":"%1/%2 在等候清單",
-    "userDjing":"%1  是當前 DJ",
-    "userNextDJ":"%1 是下一個 DJ",
-    "disconnects":"斷線",
-    "lastDisconnect":"上次斷線",
-    "lastPosition":"位置",
-    "time":"時間",
-    "lastMessage":"最後的訊息"
-  },
-  "ranks":{
-    "you":"你",
-    "regular":"一般",
-    "residentdj":"駐場 DJ",
-    "bouncer":"保鏢",
-    "manager":"經理",
-    "cohost":"協辦主持",
-    "host":"主持",
-    "ambassador":"大使",
-    "admin":"管理員"
-  },
-  "roomSpecificSettings":{
-    "infoHeader":"此房間使用特別設定",
-    "infoHeaderCredits":"此房間使用的特別設定是由 %1 所設置",
-    "infoDisable":"你可以在選單中禁用它們"
-  },
-  "menuHeaders":{
-    "features":"功能",
-    "chatnotifs":"聊天通知",
-    "controlpanel":"控制面板"
-  },
-  "menu":{
-    "autowoot":"自動正評",
-    "autojoin":"自動加入排隊",
-    "chatlog":"聊天紀錄",
-    "customchatcolors":"自定義聊天顏色",
-    "autorespond":"AFK 自動回應",
-    "notify":"通知",
-    "afktimers":"AFK 計時",
-    "etatimer":"ETA計時器",
-    "roomsettings":"房間設定",
-    "chatimages":"聊天圖像",
-    "twitchemotes":"搞怪表情",
-    "controlpanel":"控制面板",
-    "showdeletedmessages":"顯示已刪除訊息",
-    "visualizers":"RCS SoundCloud另類展示效果",
-    "inlineuserinfo":"聊天用戶資訊",
-    "about":"關於 plugCubed",
-    "background":"更改背景",
-    "chatcustomizations":"聊天自訂項",
-    "commands":"聊天指令",
-    "customcss":"自訂義 CSS",
-    "lowlagMode":"低遲滯模式",
-    "workMode":"工作模式"
-  },
-  "vote":{
-    "meh":"負評",
-    "woot":"正評",
-    "grab":"收藏",
-    "undecided":"未定",
-    "djing":"DJ 中"
-  },
-  "customchatcolors":{
-    "userRanksHeader":"用戶級別",
-    "chatnotifs":"聊天通知"
-  },
-  "panels":{
-    "about":{
-      "header":"關於 plug³ 的資訊",
-      "version":"版本",
-      "website":"網站",
-      "websiteText":"plug&#179; 網站",
-      "translations":"翻譯",
-      "translationsText":"plug&#179; 翻譯",
-      "websitetranslationsText":"plug&#179; 網站翻譯"
-    },
-    "background":{
-      "description":"設置你自己的房間背景"
-    },
-    "buttons":{
-      "cancel":"取消",
-      "clear":"清除",
-      "submit":"提交"
-    },
-    "chatcustomizations":{
-      "description":"自訂你自己的聊天表情, 通知, 標記, 以及其他功能",
-      "mentionSoundTitle":"提及聲音 %1",
-      "emotesHeader":"表情",
-      "chatenhancementHeader":"聊天功能增強",
-      "emotesSetHeader":"表情集"
-    },
-    "customcss":{
-      "description":"設置你自己房間的 CSS"
-    }
-  },
-  "tooltip":{
-    "stream":"切換 視頻/音頻 流",
-    "clear":"清除聊天",
-    "afk":"AFK 訊息",
-    "reset":"重設為默認值",
-    "muted":"所有歌曲被靜音",
-    "mutedOnce":"當前歌曲已靜音",
-    "quickBan":"永久禁止用戶",
-    "quickMute":"禁音用戶 45分鐘",
-    "userInfo":"用戶資訊"
-  },
-  "error":{
-    "userNotFound":"找不到此用戶",
-    "alreadyInWaitList":"用戶 %1 已在等候列表裡",
-    "notInWaitList":"用戶 %1 並不在等候列表裡",
-    "unknownMenuKey":"未知菜單匙碼: %1",
-    "invalidAddSyntax":"無效的添加指令語法. 用法: /add @用戶",
-    "invalidBanSyntax":"無效的禁止指令語法. 用法: /ban @用戶 或 /ban @用戶::time::原因",
-    "invalidBanTime":"指定的時間, %1是無效的. 有效時間為 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"無效的移除指令語法. 用法: /remove @用戶",
-    "invalidWhoisSyntax":"無效的whois指令語法. 用法: /whois @用戶",
-    "errorGettingPlaylistInfo":"獲取播放清單資訊時出錯",
-    "noPlaylistsFound":"無法找到播放清單",
-    "yourActivePlaylistIsFull":"你的活躍播放清單已滿",
-    "noNextSong":"你沒有歌曲能排隊"
-  },
-  "video":{
-    "show":"顯示",
-    "hide":"隱藏",
-    "menushow":"顯示視頻",
-    "menuhide":"隱藏視頻"
-  }
 }

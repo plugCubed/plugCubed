@@ -1,272 +1,276 @@
 {
-  "running":"Je gebruikt plug&#179; versie %1",
-  "commandsHelp":"Gebruik '/commands' om alle chat commando's te zien",
-  "autorespond":{
-    "default":"Ik ben niet op mijn pc!",
-    "disable":"Zet AFK Automatisch Reageren af om te chatten",
-    "nextIn":"De volgende AFK Automatisch Reageren word verzonden van %1",
-    "next":"AFK autorespond op de volgende vermelding",
-    "commandDisable":"%1 Join automatisch"
-  },
-  "autojoin":{
-    "commandDisable":"%1 Join automatisch"
-  },
-  "fullscreen":{
-    "shrink":"Verkleinen",
-    "enlarge":"Vergroten"
-  },
-  "commands":{
-    "header":"Gebruiker informatie",
-    "userCommands":"Gebruiker commando's",
-    "modCommands":"Moderator Commando's",
-    "variables":{
-      "username":"gebruikersnaam",
-      "word":"woord",
-      "on":"aan",
-      "off":"uit",
-      "reason":"reden",
-      "number":"nummer"
+    "running": "Je gebruikt plug&#179; versie %1",
+    "commandsHelp": "Gebruik '/commands' om alle chat commando's te zien",
+    "autorespond": {
+        "default": "Ik ben niet op mijn pc!",
+        "disable": "Zet AFK Automatisch Reageren af om te chatten",
+        "nextIn": "De volgende AFK Automatisch Reageren word verzonden van %1",
+        "next": "AFK autorespond op de volgende vermelding",
+        "commandDisable": "%1 Join automatisch"
     },
-    "descriptions":{
-      "join":"gebruiker betreed wachtrij",
-      "leave":"gebruiker verlaat wachtrij",
-      "whoami":"Krijg je eigen informatie",
-      "mute":"Zet volume naar 0",
-      "automute":"register huidige nummer aan automatisch demp bij volgende spelen",
-      "unmute":"Zet volume naar laatste volume",
-      "nextsong":"Laat volgende nummer zien in de afspeellijst en of het in de geschiedenis staat",
-      "refresh":"Herlaadt de video ",
-      "alertson":"Maak geluid waneer gedefinieerde woorden zijn geschreven in de chat",
-      "alertsoff":"Stop geluid spelen wanneer gedefinieerde woorden zijn geschreven in de chat",
-      "grab":"Voeg de huidige track toe aan je geselecteerde afspeellijst",
-      "badges":"toon/verberg de gebruiker badges in chat",
-      "getpos":"Krijg huidige wachtlijst positie",
-      "version":"Weergeef versienummer",
-      "commands":"Laat deze lijst zien",
-      "link":"Plak de link naar plugCubed website in de chat",
-      "whois":"Geeft algemene informatie over gebruiker",
-      "skip":"Sla huidige lied over ",
-      "ban":"Trapt gerichte gebruiker",
-      "lockskip":"Sluit DJ booth, overslaan en ontgrendelt daarna",
-      "lock":"Sluit DJ booth",
-      "unlock":"Ontgrendel DJ Booth",
-      "add":"voeg gerichte gebruiker toe aan de dj wachtrij",
-      "remove":"verwijder gerichte gebruiker van de dj wachtrij",
-      "whois all":"geeft gebruikerID en gebruikernaam van iedere gebruiker in de kamer",
-      "banall":"Verbied alle gebruikers in de kamer",
-      "status":"toon status van plug servers",
-      "unload":"Sluit plug&#179;",
-      "volume":"Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
+    "autojoin": {
+        "commandDisable": "%1 Join automatisch"
     },
-    "responses":{
-      "alertson":"Geluid afspelen bij de volgende woorden: %1",
-      "alertsoff":"Niet langer geluid afspelen op specifieke woorden",
-      "badgeon":"Badges worden weergegeven",
-      "badgeoff":"Badges worden verborgen",
-      "nextsong":"Je volgende track in de wachtlijst is %1 van %2",
-      "isHistory":"Waarschuwing: Deze track bevindt zich nog in de geschiedenis (%1 van %2)",
-      "automute":{
-        "automuted":"%1 automatisch gedempt.",
-        "registered":"%1 zal ge-automute worden de volgende keer dat deze draait.",
-        "unregistered":"%1 zal niet meer ge-automute worden."
-      },
-      "status":{
-        "rest":"REST: %1 %2 [%3ms]",
-        "socket":"Socket: %1 %2 [%3ms]"
-      }
+    "fullscreen": {
+        "shrink": "Verkleinen",
+        "enlarge": "Vergroten"
+    },
+    "commands": {
+        "header": "Gebruiker informatie",
+        "userCommands": "Gebruiker commando's",
+        "modCommands": "Moderator Commando's",
+        "variables": {
+            "username": "gebruikersnaam",
+            "word": "woord",
+            "on": "aan",
+            "off": "uit",
+            "reason": "reden",
+            "number": "nummer"
+        },
+        "descriptions": {
+            "join": "gebruiker betreed wachtrij",
+            "leave": "gebruiker verlaat wachtrij",
+            "whoami": "Krijg je eigen informatie",
+            "mute": "Zet volume naar 0",
+            "automute": "register huidige nummer aan automatisch demp bij volgende spelen",
+            "unmute": "Zet volume naar laatste volume",
+            "nextsong": "Laat volgende nummer zien in de afspeellijst en of het in de geschiedenis staat",
+            "refresh": "Herlaadt de video ",
+            "alertson": "Maak geluid waneer gedefinieerde woorden zijn geschreven in de chat",
+            "alertsoff": "Stop geluid spelen wanneer gedefinieerde woorden zijn geschreven in de chat",
+            "grab": "Voeg de huidige track toe aan je geselecteerde afspeellijst",
+            "badges": "toon/verberg de gebruiker badges in chat",
+            "getpos": "Krijg huidige wachtlijst positie",
+            "version": "Weergeef versienummer",
+            "commands": "Laat deze lijst zien",
+            "link": "Plak de link naar plugCubed website in de chat",
+            "whois": "Geeft algemene informatie over gebruiker",
+            "skip": "Sla huidige lied over ",
+            "ban": "Trapt gerichte gebruiker",
+            "lockskip": "Sluit DJ booth, overslaan en ontgrendelt daarna",
+            "lock": "Sluit DJ booth",
+            "unlock": "Ontgrendel DJ Booth",
+            "add": "voeg gerichte gebruiker toe aan de dj wachtrij",
+            "remove": "verwijder gerichte gebruiker van de dj wachtrij",
+            "whois all": "geeft gebruikerID en gebruikernaam van iedere gebruiker in de kamer",
+            "banall": "Verbied alle gebruikers in de kamer",
+            "status": "toon status van plug servers",
+            "unload": "Sluit plug&#179;",
+            "unban": "Unbans targeted user.",
+            "volume": "Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
+        },
+        "responses": {
+            "alertson": "Geluid afspelen bij de volgende woorden: %1",
+            "alertsoff": "Niet langer geluid afspelen op specifieke woorden",
+            "badgeon": "Badges worden weergegeven",
+            "badgeoff": "Badges worden verborgen",
+            "nextsong": "Je volgende track in de wachtlijst is %1 van %2",
+            "isHistory": "Waarschuwing: Deze track bevindt zich nog in de geschiedenis (%1 van %2)",
+            "automute": {
+                "automuted": "%1 automatisch gedempt.",
+                "registered": "%1 zal ge-automute worden de volgende keer dat deze draait.",
+                "unregistered": "%1 zal niet meer ge-automute worden."
+            },
+            "status": {
+                "rest": "REST: %1 %2 [%3ms]",
+                "socket": "Socket: %1 %2 [%3ms]"
+            }
+        }
+    },
+    "eta": {
+        "boothAvailable": "Als je nu de wachtlijst toetreed, DJ je meteen!",
+        "alreadyDJ": "Je bent al de DJ!",
+        "waitListTime": "Je staat in de wachtlijst op plaats %1 van %2. Je zal DJ'en in ongeveer %3!",
+        "joinTime": "Als je nu toetreed tot de wachtlijst ben je aan het DJ'en in ongeveer %1!"
+    },
+    "notify": {
+        "deletedMessages": "deleted by ",
+        "join": "Gebruiker join",
+        "leave": "Gebruiker gaat weg",
+        "grab": "Gebruiker heeft gegrabbed",
+        "meh": "Gebruiker Mehs",
+        "stats": "Nummer Statistieken",
+        "updates": "Nummer Updates",
+        "updatesLink": "Song Link",
+        "history": "Nummers in geschiedenis",
+        "songUnavailable": "Song niet beschikbaar",
+        "boothAlert": "Booth Alert (%1 / 50)",
+        "songLength": "Lengte van een nummer (1% min)",
+        "message": {
+            "boothAlertNext": "You are about to DJ!",
+            "boothAlertPos": "You are now %1 in the waitlist",
+            "grab": "gegrabbed %1 - %2",
+            "stats": "Status: %1 woots - %2 mehs - %3 grabs",
+            "updates": "Nu aan het spelen: %1 by %2<br/> Gespeeld door: %3",
+            "meh": "%1 Heeft deze track gemeh'd",
+            "join": "kamer binnen gekomen",
+            "leave": "kamer verlaten",
+            "history": "Dit liedje is nog steeds in de geschiedenis (%1 van %2)",
+            "historySkipped": "Liedje in geschiedenis (%1 van %2), maar is overgeslagen bij de vorige keer dat het gedraaid is",
+            "songLength": "Lied is langer dan %1 minuten",
+            "songDeleted": "Song is deleted",
+            "songPrivate": "Song is privé",
+            "songRejected": "Song is rejected due to %1",
+            "songNotFound": "Song niet gevonden",
+            "songEmbed": "Song kan niet embed worden",
+            "songStreamable": "Song kan niet gestreamed worden"
+        }
+    },
+    "info": {
+        "header": "Gebruiker informatie",
+        "name": "Naam",
+        "profile": "User Profile",
+        "title": "Titel",
+        "specialTitles": {
+            "developer": "plug&#179; Ontwikkelaar",
+            "sponsor": "plug&#179; Sponsor",
+            "ambassador": "plug&#179; Ambassadeur",
+            "donatorDiamond": "plug&#179; Diamond Donateur",
+            "donatorPlatinum": "plug&#179; Platinum Donateur",
+            "donatorGold": "plug&#179; Gouden Donateur",
+            "donatorSilver": "plug&#179; Zilveren Donateur",
+            "donatorBronze": "plug&#179; Bronzen Donateur",
+            "special": "plug&#179; Speciale Supporter -% 1"
+        },
+        "id": "ID",
+        "rank": "Plaats",
+        "joined": "Tijd Toegetreden ",
+        "status": "Status",
+        "vote": "Stem",
+        "position": "Positie",
+        "points": "Punten",
+        "wootCount": "Woot aantal",
+        "mehCount": "Meh aantal",
+        "ratio": "Woot/Meh Verhouding",
+        "djing": "Aan het DJen",
+        "notInList": "Niet op de wachtlijst of op het podium",
+        "inWaitlist": "%1/%2 in de wachtlijst",
+        "userDjing": "%1 zijn op dit moment DJing",
+        "userNextDJ": "%1 DJing volgende ",
+        "disconnects": "Aantal verbroken verbindingen",
+        "lastDisconnect": "Laatste Disconnect",
+        "lastPosition": "Positie",
+        "time": "Tijd",
+        "lastMessage": "Laatste bericht"
+    },
+    "ranks": {
+        "you": "Jij",
+        "regular": "Regelmatig",
+        "residentdj": "Resident DJ",
+        "bouncer": "Uitsmijter",
+        "manager": "Manager",
+        "cohost": "Co-Host",
+        "host": "Host",
+        "ambassador": "Ambassadeur",
+        "admin": "Administrator"
+    },
+    "roomSpecificSettings": {
+        "infoHeader": "Deze kamer gebruikt speciale instellingen",
+        "infoHeaderCredits": "Deze kamer gebruikt speciale instellingen door %1",
+        "infoDisable": "U kunt ze uitschakelen in het menu"
+    },
+    "menuHeaders": {
+        "features": "Features",
+        "chatnotifs": "Chat Notifications",
+        "controlpanel": "Configuratiescherm"
+    },
+    "menu": {
+        "autowoot": "Autowoot",
+        "autojoin": "AutoJoin",
+        "chatlog": "Chat historie",
+        "customchatcolors": "Veranderlijke chat kleuren",
+        "autorespond": "AFK Automatisch Reageren",
+        "notify": "Notificatie's",
+        "afktimers": "AFK Wekkers",
+        "etatimer": "ETA timer",
+        "roomsettings": "Kamer instellingen",
+        "chatimages": "Chat Afbeeldingen",
+        "twitchemotes": "Twitch emoticons",
+        "controlpanel": "Configuratiescherm",
+        "showdeletedmessages": "Toon verwijderde berichten",
+        "visualizers": "RCS SoundCloud Visualizer",
+        "inlineuserinfo": "Inline User Info",
+        "about": "About plugCubed",
+        "background": "Change background",
+        "chatcustomizations": "Chat Customizations",
+        "commands": "Chat commands",
+        "customcss": "Custom CSS",
+        "lowlagMode": "Low Lag Mode",
+        "workMode": "Work Mode"
+    },
+    "vote": {
+        "meh": "Meh",
+        "woot": "Woot",
+        "grab": "Neem",
+        "undecided": "Niet besloten",
+        "djing": "Aan het DJen"
+    },
+    "customchatcolors": {
+        "userRanksHeader": "User Ranks",
+        "chatnotifs": "Chat Notifications"
+    },
+    "panels": {
+        "about": {
+            "header": "Information about plug³",
+            "version": "Version",
+            "website": "Website",
+            "websiteText": "plug&#179; Website",
+            "translations": "Translations",
+            "translationsText": "plug&#179; Translations",
+            "websitetranslationsText": "plug&#179; Website Translations"
+        },
+        "background": {
+            "description": "Set your own room background"
+        },
+        "buttons": {
+            "cancel": "Cancel",
+            "clear": "Clear",
+            "submit": "Submit"
+        },
+        "chatcustomizations": {
+            "description": "Customize your chat with emojis, notifications, markdown, and other features",
+            "mentionSoundTitle": "Mention Sound %1",
+            "emotesHeader": "Emotes",
+            "chatenhancementHeader": "Chat Enhancements",
+            "emotesSetHeader": "Emoji Set"
+        },
+        "customcss": {
+            "description": "Set your own room CSS"
+        }
+    },
+    "tooltip": {
+        "stream": "Video/Audio Stream Aan/Uit",
+        "clear": "Maak chat schoon ",
+        "afk": "AFK Bericht",
+        "reset": "Reset naar standaard",
+        "muted": "Alle liedjes zijn gedempt",
+        "mutedOnce": "Huidig lied is gedempt",
+        "quickBan": "Ban user forever",
+        "quickMute": "Mute user for 45 mins",
+        "userInfo": "User Info"
+    },
+    "error": {
+        "userNotFound": "Gebruiker niet gevonden",
+        "alreadyInWaitList": "Gebruiker %1 bevindt zich al in de wachtlijst",
+        "notInWaitList": "Gebruiker %1 staat niet in de wachtlijst",
+        "unknownMenuKey": "Onbekende menu key: %1",
+        "invalidAddSyntax": "Ongeldige syntax voor add comando. Gebruik: /add @gebruiker",
+        "invalidBanSyntax": "Ongeldige syntax voor ban commando. Gebruik: /ban @gebruiker of /ban @gebruiker::tijd::reden",
+        "invalidBanTime": "Te gespecificeerde tijd, %1 is ongeldig. Geldige tijden zijn 60, 1, 24, 1440, -1",
+        "invalidRemoveSyntax": "Ongeldige syntax voor remove commando. Gebruik: /remove @gebruiker",
+        "invalidWhoisSyntax": "Ongeldige syntax voor whois commando. Gebruik: /whois @gebruiker",
+        "errorGettingPlaylistInfo": "Fout bij het verkrijgen van afspeellijst info",
+        "noPlaylistsFound": "Geen afspeellijsten gevonden",
+        "yourActivePlaylistIsFull": "Uw actieve afspeellijst is vol",
+        "noNextSong": "Je hebt geen songs in je afspeellijst"
+    },
+    "video": {
+        "show": "Show",
+        "hide": "Hide",
+        "menushow": "Show Video",
+        "menuhide": "Hide Video",
+        "hidden": "Video Hidden",
+        "disabled": "Video Disabled",
+        "snooze": "Video Snoozed"
     }
-  },
-  "eta":{
-    "boothAvailable":"Als je nu de wachtlijst toetreed, DJ je meteen!",
-    "alreadyDJ":"Je bent al de DJ!",
-    "waitListTime":"Je staat in de wachtlijst op plaats %1 van %2. Je zal DJ'en in ongeveer %3!",
-    "joinTime":"Als je nu toetreed tot de wachtlijst ben je aan het DJ'en in ongeveer %1!"
-  },
-  "notify":{
-    "deletedMessages":"deleted by ",
-    "join":"Gebruiker join",
-    "leave":"Gebruiker gaat weg",
-    "grab":"Gebruiker heeft gegrabbed",
-    "meh":"Gebruiker Mehs",
-    "stats":"Nummer Statistieken",
-    "updates":"Nummer Updates",
-    "updatesLink":"Song Link",
-    "history":"Nummers in geschiedenis",
-    "songUnavailable":"Song niet beschikbaar",
-    "boothAlert":"Booth Alert (%1 / 50)",
-    "songLength":"Lengte van een nummer (1% min)",
-    "message":{
-      "boothAlertNext":"You are about to DJ!",
-      "boothAlertPos":"You are now %1 in the waitlist",
-      "grab":"gegrabbed %1 - %2",
-      "stats":"Status: %1 woots - %2 mehs - %3 grabs",
-      "updates":"Nu aan het spelen: %1 by %2<br/> Gespeeld door: %3",
-      "meh":"%1 Heeft deze track gemeh'd",
-      "join":"kamer binnen gekomen",
-      "leave":"kamer verlaten",
-      "history":"Dit liedje is nog steeds in de geschiedenis (%1 van %2)",
-      "historySkipped":"Liedje in geschiedenis (%1 van %2), maar is overgeslagen bij de vorige keer dat het gedraaid is",
-      "songLength":"Lied is langer dan %1 minuten",
-      "songDeleted":"Song is deleted",
-      "songPrivate":"Song is privé",
-      "songRejected":"Song is rejected due to %1",
-      "songNotFound":"Song niet gevonden",
-      "songEmbed":"Song kan niet embed worden",
-      "songStreamable":"Song kan niet gestreamed worden"
-    }
-  },
-  "info":{
-    "header":"Gebruiker informatie",
-    "name":"Naam",
-    "profile":"User Profile",
-    "title":"Titel",
-    "specialTitles":{
-      "developer":"plug&#179; Ontwikkelaar",
-      "sponsor":"plug&#179; Sponsor",
-      "ambassador":"plug&#179; Ambassadeur",
-      "donatorDiamond":"plug&#179; Diamond Donateur",
-      "donatorPlatinum":"plug&#179; Platinum Donateur",
-      "donatorGold":"plug&#179; Gouden Donateur",
-      "donatorSilver":"plug&#179; Zilveren Donateur",
-      "donatorBronze":"plug&#179; Bronzen Donateur",
-      "special":"plug&#179; Speciale Supporter -% 1"
-    },
-    "id":"ID",
-    "rank":"Plaats",
-    "joined":"Tijd Toegetreden ",
-    "status":"Status",
-    "vote":"Stem",
-    "position":"Positie",
-    "points":"Punten",
-    "wootCount":"Woot aantal",
-    "mehCount":"Meh aantal",
-    "ratio":"Woot/Meh Verhouding",
-    "djing":"Aan het DJen",
-    "notInList":"Niet op de wachtlijst of op het podium",
-    "inWaitlist":"%1/%2 in de wachtlijst",
-    "userDjing":"%1 zijn op dit moment DJing",
-    "userNextDJ":"%1 DJing volgende ",
-    "disconnects":"Aantal verbroken verbindingen",
-    "lastDisconnect":"Laatste Disconnect",
-    "lastPosition":"Positie",
-    "time":"Tijd",
-    "lastMessage":"Laatste bericht"
-  },
-  "ranks":{
-    "you":"Jij",
-    "regular":"Regelmatig",
-    "residentdj":"Resident DJ",
-    "bouncer":"Uitsmijter",
-    "manager":"Manager",
-    "cohost":"Co-Host",
-    "host":"Host",
-    "ambassador":"Ambassadeur",
-    "admin":"Administrator"
-  },
-  "roomSpecificSettings":{
-    "infoHeader":"Deze kamer gebruikt speciale instellingen",
-    "infoHeaderCredits":"Deze kamer gebruikt speciale instellingen door %1",
-    "infoDisable":"U kunt ze uitschakelen in het menu"
-  },
-  "menuHeaders":{
-    "features":"Features",
-    "chatnotifs":"Chat Notifications",
-    "controlpanel":"Configuratiescherm"
-  },
-  "menu":{
-    "autowoot":"Autowoot",
-    "autojoin":"AutoJoin",
-    "chatlog":"Chat historie",
-    "customchatcolors":"Veranderlijke chat kleuren",
-    "autorespond":"AFK Automatisch Reageren",
-    "notify":"Notificatie's",
-    "afktimers":"AFK Wekkers",
-    "etatimer":"ETA timer",
-    "roomsettings":"Kamer instellingen",
-    "chatimages":"Chat Afbeeldingen",
-    "twitchemotes":"Twitch emoticons",
-    "controlpanel":"Configuratiescherm",
-    "showdeletedmessages":"Toon verwijderde berichten",
-    "visualizers":"RCS SoundCloud Visualizer",
-    "inlineuserinfo":"Inline User Info",
-    "about":"About plugCubed",
-    "background":"Change background",
-    "chatcustomizations":"Chat Customizations",
-    "commands":"Chat commands",
-    "customcss":"Custom CSS",
-    "lowlagMode":"Low Lag Mode",
-    "workMode":"Work Mode"
-  },
-  "vote":{
-    "meh":"Meh",
-    "woot":"Woot",
-    "grab":"Neem",
-    "undecided":"Niet besloten",
-    "djing":"Aan het DJen"
-  },
-  "customchatcolors":{
-    "userRanksHeader":"User Ranks",
-    "chatnotifs":"Chat Notifications"
-  },
-  "panels":{
-    "about":{
-      "header":"Information about plug³",
-      "version":"Version",
-      "website":"Website",
-      "websiteText":"plug&#179; Website",
-      "translations":"Translations",
-      "translationsText":"plug&#179; Translations",
-      "websitetranslationsText":"plug&#179; Website Translations"
-    },
-    "background":{
-      "description":"Set your own room background"
-    },
-    "buttons":{
-      "cancel":"Cancel",
-      "clear":"Clear",
-      "submit":"Submit"
-    },
-    "chatcustomizations":{
-      "description":"Customize your chat with emojis, notifications, markdown, and other features",
-      "mentionSoundTitle":"Mention Sound %1",
-      "emotesHeader":"Emotes",
-      "chatenhancementHeader":"Chat Enhancements",
-      "emotesSetHeader":"Emoji Set"
-    },
-    "customcss":{
-      "description":"Set your own room CSS"
-    }
-  },
-  "tooltip":{
-    "stream":"Video/Audio Stream Aan/Uit",
-    "clear":"Maak chat schoon ",
-    "afk":"AFK Bericht",
-    "reset":"Reset naar standaard",
-    "muted":"Alle liedjes zijn gedempt",
-    "mutedOnce":"Huidig lied is gedempt",
-    "quickBan":"Ban user forever",
-    "quickMute":"Mute user for 45 mins",
-    "userInfo":"User Info"
-  },
-  "error":{
-    "userNotFound":"Gebruiker niet gevonden",
-    "alreadyInWaitList":"Gebruiker %1 bevindt zich al in de wachtlijst",
-    "notInWaitList":"Gebruiker %1 staat niet in de wachtlijst",
-    "unknownMenuKey":"Onbekende menu key: %1",
-    "invalidAddSyntax":"Ongeldige syntax voor add comando. Gebruik: /add @gebruiker",
-    "invalidBanSyntax":"Ongeldige syntax voor ban commando. Gebruik: /ban @gebruiker of /ban @gebruiker::tijd::reden",
-    "invalidBanTime":"Te gespecificeerde tijd, %1 is ongeldig. Geldige tijden zijn 60, 1, 24, 1440, -1",
-    "invalidRemoveSyntax":"Ongeldige syntax voor remove commando. Gebruik: /remove @gebruiker",
-    "invalidWhoisSyntax":"Ongeldige syntax voor whois commando. Gebruik: /whois @gebruiker",
-    "errorGettingPlaylistInfo":"Fout bij het verkrijgen van afspeellijst info",
-    "noPlaylistsFound":"Geen afspeellijsten gevonden",
-    "yourActivePlaylistIsFull":"Uw actieve afspeellijst is vol",
-    "noNextSong":"Je hebt geen songs in je afspeellijst"
-  },
-  "video":{
-    "show":"Show",
-    "hide":"Hide",
-    "menushow":"Show Video",
-    "menuhide":"Hide Video"
-  }
 }
