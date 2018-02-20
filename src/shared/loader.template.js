@@ -42,7 +42,7 @@
 
         require.config({
             paths:{
-                raven:'https://cdn.ravenjs.com/3.20.1/raven.min'
+                raven:'https://cdn.ravenjs.com/3.22.3/raven.min'
             }
         });
 
@@ -61,11 +61,12 @@
                         'basicbot',
                         'googletag',
                         'nbot',
-                        'ns_error_*',
+                        /NS_ERROR_.*/,
                         'out of memory',
                         'plugdj_pixel_playlist'
                     ],
                     ignoreUrls: [
+                        'rawgit.com',
                         'github.com',
                         'firstimpression.io',
                         'nbot'
