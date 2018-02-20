@@ -1,4 +1,4 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/dialogs/Menu'], function($, Class, p3Lang, Settings, Menu) {
+define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/dialogs/Menu', 'plugCubed/Utils'], function($, Class, p3Lang, Settings, Menu, p3Utils) {
     var hideplaybackButton, Handler, Context;
 
     Context = window.plugCubedModules.context;
@@ -26,20 +26,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Settings', 'pl
             Settings.hideVideo = !Settings.hideVideo;
             if (Settings.hideVideo) {
                 $('#playback-container').hide();
-                $('#playback')
-                    .find('.background')
-                    .find('img')
-                    .after(
-                        $('<div>')
-                            .text(p3Lang.i18n('video.hidden'))
-                            .css({
-                                'text-align': 'center', position: 'absolute', 'font-size': '100px'
-                            })
-                            .attr('id', 'p3-videoHidden')
-                    );
+                p3Utils.toggleVideoOverlay(true, 'video.hidden');
             } else {
                 $('#playback-container').show();
-                $('#p3-videoHidden').remove();
+                p3Utils.toggleVideoOverlay(false, 'video.hidden');
             }
             Settings.save();
             Menu.setEnabled('hidevideo', Settings.hideVideo);
@@ -65,41 +55,25 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Settings', 'pl
     });
 
     $('#playback-controls div.button.snooze').on('click', function() {
-        $('#playback .background img')
-            .after(
-                $('<div>')
-                    .text(p3Lang.i18n('video.snooze'))
-                    .css({
-                        'text-align': 'center', position: 'absolute', 'font-size': '100px'
-                    })
-                    .attr('id', 'p3-videoSnoozed')
-            );
+        p3Utils.toggleVideoOverlay(true, 'video.snoozed');
         $('#playback-controls div.button.p3-hideplayback').hide();
         setTimeout(function() {
-            $('#p3-videoSnoozed').remove();
+            p3Utils.toggleVideoOverlay(false, 'video.snoozed');
             $('#playback-controls div.button.p3-hideplayback').show();
         }, API.getTimeRemaining() * 1000);
     });
     $('#playback-controls div.button.refresh').on('click', function() {
         if ($('#p3-videoSnoozed').length) {
-            $('#p3-videoSnoozed').remove();
+            p3Utils.toggleVideoOverlay(false, 'video.snoozed');
             $('#playback-controls div.button.p3-hideplayback').show();
         }
     });
 
     Context.on('change:streamDisabled', function() {
         if (window.plugCubedModules.database.settings.streamDisabled) {
-            $('#playback .background img')
-                .after(
-                    $('<div>')
-                        .text(p3Lang.i18n('video.disabled'))
-                        .css({
-                            'text-align': 'center', position: 'absolute', 'font-size': '100px'
-                        })
-                        .attr('id', 'p3-VideoDisabled')
-                );
+            p3Utils.toggleVideoOverlay(true, 'video.disabled');
         } else {
-            $('#p3-VideoDisabled').remove();
+            p3Utils.toggleVideoOverlay(false, 'video.disabled');
         }
     });
 

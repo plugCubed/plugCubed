@@ -163,6 +163,23 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             this.toggleBadges(true);
             Settings.save();
         },
+        toggleVideoOverlay: function(enable, string) {
+            if (!API.getDJ() || !string) return;
+
+            if (enable) {
+
+                if ($('#p3-videoText').length) {
+                    $('#p3-videoText').remove();
+                }
+                $('#playback').find('.background').find('img').after($('<div>').text(p3Lang.i18n(string)).css({
+                    'font-size': '100px',
+                    position: 'absolute',
+                    'text-align': 'center'
+                }).attr('id', 'p3-videoText'));
+            } else {
+                $('#p3-videoText').remove();
+            }
+        },
         toggleWorkMode: function() {
             if (!requirejs.defined('plugCubed/Settings') || !requirejs.defined('plugCubed/StyleManager')) return;
 
