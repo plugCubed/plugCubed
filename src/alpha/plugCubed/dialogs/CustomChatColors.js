@@ -1,4 +1,4 @@
-define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColors', 'plugCubed/Settings', 'plugCubed/Utils', 'plugCubed/Lang'], function($, Class, p3Lang, CCC, Settings, p3Utils) {
+define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColors', 'plugCubed/Settings', 'plugCubed/Utils'], function($, Class, p3Lang, CCC, Settings, p3Utils) {
     var Context = window.plugCubedModules.context;
 
     function guiInput(id, text, defaultColor) {
