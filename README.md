@@ -1,5 +1,4 @@
-# plug&#179; (plugCubed) [![Slack Status](https://slack.plugcubed.net/badge.svg)](https://slack.plugcubed.net)
-
+# plug&#179; (plugCubed) [![Discord Server](https://img.shields.io/discord/249303078493224960.svg)](https://plugcubed.net/discord)
 
 ### Information / Installation
 Find out how to install, and read more about plug&#179; [here](http://plugCubed.net/)
