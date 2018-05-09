@@ -5,14 +5,15 @@
   "author": "The plugCubed Team",
   "browserslist": [
     "> 1%",
-    "last 5 versions"
+    "last 5 versions",
+    "not ie < 9"
   ],
   "bugs": {
     "url": "https://github.com/plugcubed/plugcubed/issues",
     "email": "1337alexpham@gmail.com"
   },
   "devDependencies": {
-    "autoprefixer": "^8.2.0",
+    "autoprefixer": "^8.4.1",
     "cssnano": "^4.0.0-rc.2",
     "eslint-config-thedark1337": "^4.13.1",
     "graceful-fs": "^4.1.11",
@@ -31,7 +32,7 @@
     "gulp-zip": "^4.1.0",
     "is-ci": "^1.1.0",
     "make-dir": "^1.2.0",
-    "postcss-unprefix": "^2.1.2",
+    "postcss-unprefix": "^2.1.3",
     "requirejs": "^2.3.5",
     "rimraf": "^2.6.2"
   },

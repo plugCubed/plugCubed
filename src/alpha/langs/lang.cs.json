@@ -57,7 +57,8 @@
             "status": "zobrazí stav plug.dj serverů",
             "unload": "Vypne plug&#179;",
             "unban": "Unbans targeted user.",
-            "volume": "Nastaví hlasitost s číslem (0 - 100), zvýší o 1 použitím +, sníží použitím -"
+            "volume": "Nastaví hlasitost s číslem (0 - 100), zvýší o 1 použitím +, sníží použitím -",
+            "plcount": "Count how many playlists you have and total amount of songs"
         },
         "responses": {
             "alertson": "Zvuk se přehraje při následujících slovech: %1",
@@ -196,7 +197,8 @@
         "commands": "Příkazy chatu",
         "customcss": "Vlastní CSS",
         "lowlagMode": "Režim nízkého zatížení",
-        "workMode": "Pracovní režim"
+        "workMode": "Pracovní režim",
+        "desktopNotifs": "Desktop Notifications"
     },
     "vote": {
         "meh": "Meh",
@@ -272,5 +274,11 @@
         "hidden": "Video Hidden",
         "disabled": "Video Disabled",
         "snooze": "Video Snoozed"
+    },
+    "playlist": {
+        "amount": "Total amount of playlists: %1",
+        "empty": "Total amount of empty playlists: %1",
+        "totalsongs": "Total amount of songs: %1",
+        "totalunavailablesongs": "Total amount of unavailable songs: %1"
     }
 }

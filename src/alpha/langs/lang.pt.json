@@ -56,8 +56,9 @@
             "banall": "bane todos na sala",
             "status": "mostrar o status dos servidores do plug",
             "unload": "Desativa o plug&#179;",
-            "unban": "Unbans targeted user.",
-            "volume": "Set volume with a number (0 - 100), increase by 1 with +, decrease by 1 with -"
+            "unban": "Remove o banimento do usuário selecionado.",
+            "volume": "Defina o volume com um número (0 - 100), aumente por 1 com +, reduza por 1 com -",
+            "plcount": "Count how many playlists you have and total amount of songs"
         },
         "responses": {
             "alertson": "Tocando Alerta para as seguintes palavras: %1",
@@ -91,7 +92,7 @@
         "meh": "Chatos de Usuário",
         "stats": "Estatísticas da Música",
         "updates": "Atualizações da Música",
-        "updatesLink": "Song Link",
+        "updatesLink": "Link da mídia",
         "history": "Músicas no Histórico",
         "songUnavailable": "Música Indisponível",
         "boothAlert": "Alerta de Cabine (%1 / 50)",
@@ -108,9 +109,9 @@
             "history": "A música está no histórico (%1 of %2)",
             "historySkipped": "A música está no histórico (%1 of %2), mas foi pulada na última vez",
             "songLength": "A música tem mais de %1 minutos",
-            "songDeleted": "Song is deleted",
+            "songDeleted": "Mídia excluída",
             "songPrivate": "Música privada",
-            "songRejected": "Song is rejected due to %1",
+            "songRejected": "Mídia rejeitada por %1",
             "songNotFound": "Música não encontrada",
             "songEmbed": "Música tem incorporação desativada",
             "songStreamable": "Música não dá suporte a streaming"
@@ -170,7 +171,7 @@
         "infoDisable": "Você pode desativá-las no menu"
     },
     "menuHeaders": {
-        "features": "Funções",
+        "features": "Funcionalidades",
         "chatnotifs": "Notificações do Chat",
         "controlpanel": "Painel de Controle"
     },
@@ -195,8 +196,9 @@
         "chatcustomizations": "Personalizações de Chat",
         "commands": "Comandos de Chat",
         "customcss": "CSS Personalizado",
-        "lowlagMode": "Low Lag Mode",
-        "workMode": "Modo de trabalho"
+        "lowlagMode": "Modo de Lag Reduzido",
+        "workMode": "Modo de trabalho",
+        "desktopNotifs": "Desktop Notifications"
     },
     "vote": {
         "meh": "Chato",
@@ -206,21 +208,21 @@
         "djing": "Tocando Agora"
     },
     "customchatcolors": {
-        "userRanksHeader": "User Ranks",
+        "userRanksHeader": "Cargos dos usuários",
         "chatnotifs": "Notificações do Chat"
     },
     "panels": {
         "about": {
-            "header": "Informações sobre plug3",
+            "header": "Informações sobre o plug³",
             "version": "Versão",
-            "website": "Site",
-            "websiteText": "plug&#179; Site",
+            "website": "Website",
+            "websiteText": "plug&#179; Website",
             "translations": "Traduções",
             "translationsText": "plug&#179; Traduções",
-            "websitetranslationsText": "plug&#179; Traduções do Site"
+            "websitetranslationsText": "plug&#179; Traduções do Website"
         },
         "background": {
-            "description": "Set your own room background"
+            "description": "Define o seu próprio fundo para a comunidade"
         },
         "buttons": {
             "cancel": "Cancelar",
@@ -228,14 +230,14 @@
             "submit": "Enviar"
         },
         "chatcustomizations": {
-            "description": "Customize your chat with emojis, notifications, markdown, and other features",
-            "mentionSoundTitle": "Mention Sound %1",
+            "description": "Personalize o seu chat com emojis, notificações, markdown e outros recursos",
+            "mentionSoundTitle": "Som de Menção %1",
             "emotesHeader": "Emotes",
-            "chatenhancementHeader": "Chat Enhancements",
-            "emotesSetHeader": "Emoji Set"
+            "chatenhancementHeader": "Aprimoramentos do Chat",
+            "emotesSetHeader": "Pacote de emojis"
         },
         "customcss": {
-            "description": "Set your own room CSS"
+            "description": "Defina seu próprio CSS para a comunidade"
         }
     },
     "tooltip": {
@@ -245,8 +247,8 @@
         "reset": "Redefinir para o padrão",
         "muted": "Todas as músicas estão mutadas",
         "mutedOnce": "Esta música está mutada",
-        "quickBan": "Banir usuário para sempre",
-        "quickMute": "Mute user for 45 mins",
+        "quickBan": "Banir usuário permanentemente",
+        "quickMute": "Calar usuário por 45 mins",
         "userInfo": "Informação do usuário"
     },
     "error": {
@@ -267,10 +269,16 @@
     "video": {
         "show": "Mostrar",
         "hide": "Ocultar",
-        "menushow": "Mostrar Video",
-        "menuhide": "Ocultar Video",
-        "hidden": "Video Hidden",
-        "disabled": "Video Disabled",
-        "snooze": "Video Snoozed"
+        "menushow": "Mostrar Vídeo",
+        "menuhide": "Ocultar Vídeo",
+        "hidden": "Vídeo oculto",
+        "disabled": "Vídeo desativado",
+        "snooze": "Vídeo Silenciado"
+    },
+    "playlist": {
+        "amount": "Total amount of playlists: %1",
+        "empty": "Total amount of empty playlists: %1",
+        "totalsongs": "Total amount of songs: %1",
+        "totalunavailablesongs": "Total amount of unavailable songs: %1"
     }
 }

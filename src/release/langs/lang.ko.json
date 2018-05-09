@@ -57,7 +57,8 @@
             "status": "plug.dj 서버 상태를 표시합니다.",
             "unload": "plug&#179;를 종료합니다.",
             "unban": "Unbans targeted user.",
-            "volume": "지정한 숫자(0 - 100)로 음량을 설정하거나, + 또는 -로 음량을 1씩 증가 또는 감소시킵니다."
+            "volume": "지정한 숫자(0 - 100)로 음량을 설정하거나, + 또는 -로 음량을 1씩 증가 또는 감소시킵니다.",
+            "plcount": "Count how many playlists you have and total amount of songs"
         },
         "responses": {
             "alertson": "단어 %1(이)가 채팅에서 멘션될 시 알림음을 재생하도록 설정했습니다.",
@@ -196,7 +197,8 @@
         "commands": "채팅 명령어",
         "customcss": "사용자 지정 CSS",
         "lowlagMode": "Low Lag Mode",
-        "workMode": "Work Mode"
+        "workMode": "Work Mode",
+        "desktopNotifs": "Desktop Notifications"
     },
     "vote": {
         "meh": "싫어요",
@@ -272,5 +274,11 @@
         "hidden": "Video Hidden",
         "disabled": "Video Disabled",
         "snooze": "Video Snoozed"
+    },
+    "playlist": {
+        "amount": "Total amount of playlists: %1",
+        "empty": "Total amount of empty playlists: %1",
+        "totalsongs": "Total amount of songs: %1",
+        "totalunavailablesongs": "Total amount of unavailable songs: %1"
     }
 }

@@ -28,7 +28,7 @@
 
 ;(function loading() {
     if (!(~window.location.hostname.indexOf('plug.dj'))) return alert('Loading plug³ outside of plug.dj is not supported.');
-    if (window.location.href && !/(?:https?:\/\/(?:[a-z]+.)*plug\.dj)\/(?!about$|ba$|dashboard$|giftsub$|jobs$|legal$|plot$|press$|privacy$|purchase$|subscribe$|team$|terms$|!\/|_\/|@\/)(.+)/i.test(window.location.href)) return;
+    if (window.location.href && !/(?:https?:\/\/(?:[a-z0-9]+.)*plug\.dj)\/(?!about$|ba$|dashboard$|giftsub$|jobs$|legal$|plot$|press$|privacy$|purchase$|subscribe$|team$|terms$|!\/|_\/|@\/)(.+)/i.test(window.location.href)) return;
 
     // Fixes some analytics issues when using tracking / ad blockers
     window.Intercom = window.Intercom || {};
@@ -42,7 +42,7 @@
 
         require.config({
             paths:{
-                raven:'https://cdn.ravenjs.com/3.22.3/raven.min'
+                raven:'https://cdn.ravenjs.com/3.24.2/raven.min'
             }
         });
 
@@ -86,6 +86,6 @@
     }
 
     function isLoaded() {
-        return window.require && window.define && window.API && window.jQuery && window.jQuery('#room').length > 0;
+        return window.require && window.define && window.API && window.jQuery;
     }
 })();

@@ -125,6 +125,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             Context.on('change:role', setFooterIcon);
             Context.on('room:joining', this.clear, this);
             Context.on('room:joined', this.update, this);
+            Context.on('chat:receive', this.checkModUpdate, this);
             setFooterIcon();
         },
         update: function() {
@@ -203,11 +204,10 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                     if (roomSettings.css != null) {
 
                         // css.font
-                        if (roomSettings.css.font != null && _.isArray(roomSettings.css.font)) {
+                        if (roomSettings.css.font != null && Array.isArray(roomSettings.css.font)) {
                             var roomFonts = [];
 
-                            for (i in roomSettings.css.font) {
-                                if (!roomSettings.css.font.hasOwnProperty(i)) continue;
+                            for (i = 0; i < roomSettings.css.font.length; i++) {
                                 var font = roomSettings.css.font[i];
 
                                 if (font.name != null && font.url != null) {
@@ -234,11 +234,15 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                         }
 
                         // css.import
-                        if (roomSettings.css.import != null && _.isArray(roomSettings.css.import)) {
-                            for (i in roomSettings.css.import) {
-                                if (roomSettings.css.import.hasOwnProperty(i) && typeof roomSettings.css.import[i] === 'string') {
-                                    Styles.addImport(roomSettings.css.import[i]);
+                        if (roomSettings.css.import != null) {
+                            if (Array.isArray(roomSettings.css.import)) {
+                                for (i = 0; i < roomSettings.css.import.length; i++) {
+                                    if (typeof roomSettings.css.import[i] === 'string') {
+                                        Styles.addImport(roomSettings.css.import[i]);
+                                    }
                                 }
+                            } else if (typeof roomSettings.css.import === 'string') {
+                                Styles.addImport(roomSettings.css.import);
                             }
                         }
 
@@ -260,32 +264,47 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
                         }
                     }
 
+                    // emotes
+                    if ((roomSettings.emotes != null || roomSettings.emoji != null || roomSettings.emoticons != null) && (roomSettings.rules.allowEmotes == null || roomSettings.rules.allowEmotes === 'true' || roomSettings.rules.allowEmotes === true)) {
+                        roomSettings.emotes || (roomSettings.emotes = roomSettings.emoticons || roomSettings.emoji);
+                        delete roomSettings.emoticons;
+                        delete roomSettings.emoji;
+
+                        for (i in roomSettings.emotes) {
+                            if (!roomSettings.emotes.hasOwnProperty(i) || roomSettings.emotes[i] == null) continue;
+
+                            var emote = roomSettings.emotes[i];
+
+                            if (typeof emote === 'string') {
+                                window.plugCubed.emotes.customEmotes[':' + i + ':'] = {
+                                    url: emote,
+                                    size: 'auto'
+                                };
+                            } else if (emote != null && typeof emote === 'object' && emote.hasOwnProperty('url')) {
+                                if (!('size' in emote) && (!('width' in emote) || !('height' in emote))) {
+                                    emote.size = 'auto';
+                                }
+                                window.plugCubed.emotes.customEmotes[':' + i + ':'] = emote;
+                            }
+
+                        }
+
+                    }
+
                     // images
                     if (roomSettings.images != null) {
 
                         // images.background
                         if (roomSettings.images.background) {
-                            Styles.set('room-settings-background-image', '.room-background { background: url("' + p3Utils.proxifyImage(roomSettings.images.background) + '") !important; }');
+                            Styles.set('room-settings-background-image', '.left-side-wrapper { background-image: url("' + p3Utils.proxifyImage(roomSettings.images.background) + '") !important; background-position-x: center !important; background-position-y: bottom !important; }');
                         }
 
                         // images.playback
-                        var playbackBackground = $('#playback').find('.background img');
-
-                        if (playbackBackground.data('_o') == null) {
-                            playbackBackground.data('_o', playbackBackground.attr('src'));
-                        }
+                        var playbackBackground = $('.left-side-wrapper-inner');
 
                         if (roomSettings.images.playback != null) {
                             if (typeof roomSettings.images.playback === 'string' && roomSettings.images.playback.indexOf('http') === 0) {
-                                var playbackFrame = new Image();
-
-                                playbackFrame.onload = function() {
-                                    playbackBackground.attr('src', this.src);
-                                    RoomLoader.frameHeight = this.height - 10;
-                                    RoomLoader.frameWidth = this.width - 18;
-                                    RoomLoader.onVideoResize(Layout.getSize());
-                                };
-                                playbackFrame.src = p3Utils.proxifyImage(roomSettings.images.playback);
+                                playbackBackground.css('background-image', 'url(' + roomSettings.images.playback + ')');
                             } else if (roomSettings.images.playback === false) {
                                 playbackBackground.hide();
                             }
@@ -380,19 +399,26 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
 
             Styles.unset(['room-settings-background-color', 'room-settings-background-image', 'room-settings-booth', 'room-settings-fonts', 'room-settings-rules', 'room-settings-maingui', 'CCC-text-admin', 'CCC-text-ambassador', 'CCC-text-host', 'CCC-text-cohost', 'CCC-text-manager', 'CCC-text-bouncer', 'CCC-text-residentdj', 'CCC-text-regular', 'CCC-text-you', 'CCC-image-admin', 'CCC-image-ambassador', 'CCC-image-host', 'CCC-image-cohost', 'CCC-image-manager', 'CCC-image-bouncer', 'CCC-image-residentdj']);
             Styles.clearImports();
-            var playbackBackground = $('#playback').find('.background img');
+            var playbackBackground = $('.left-side-wrapper-inner');
 
-            playbackBackground.data('_o', PlugUI.videoframe);
-            playbackBackground.attr('src', playbackBackground.data('_o'));
+            playbackBackground.css('background-image', 'url(' + PlugUI.videoframe + ')');
             playbackBackground.show();
-            RoomLoader.frameHeight = 274;
-            RoomLoader.frameWidth = 490;
-            RoomLoader.onVideoResize(Layout.getSize());
+        },
+
+        /*
+         * RCS compatibility--reload room settings if a moderator chats
+         * "!rcsreload ccs".
+         */
+        checkModUpdate: function(message) {
+            if ((API.hasPermission(message.uid, API.ROLE.COHOST) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) && (p3Utils.startsWith(message.message, '!rcsreload ccs') || p3Utils.startsWith(message.message, '!p3reload ccs'))) {
+                this.update();
+            }
         },
         close: function() {
             Context.off('change:role', setFooterIcon);
             Context.off('room:joining', this.clear, this);
             Context.off('room:joined', this.update, this);
+            Context.off('chat:receive', this.checkModUpdate, this);
             this.clear();
         }
     });

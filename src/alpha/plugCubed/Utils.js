@@ -167,38 +167,36 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (!API.getDJ() || !string) return;
 
             if (enable) {
-
-                if ($('#p3-videoText').length) {
+                if ($('#p3-videoText').length > 0) {
                     $('#p3-videoText').remove();
                 }
-                $('#playback').find('.background').find('img').after($('<div>').text(p3Lang.i18n(string)).css({
-                    'font-size': '100px',
-                    position: 'absolute',
-                    'text-align': 'center'
-                }).attr('id', 'p3-videoText'));
+                $('.left-side-wrapper-inner').append($('<div>').text(p3Lang.i18n(string)).attr('id', 'p3-videoText'));
             } else {
                 $('#p3-videoText').remove();
             }
         },
-        toggleWorkMode: function() {
+        toggleWorkMode: function(enable) {
             if (!requirejs.defined('plugCubed/Settings') || !requirejs.defined('plugCubed/StyleManager')) return;
 
             Settings = require('plugCubed/Settings');
             Styles = require('plugCubed/StyleManager');
-            if (Settings.workMode) {
+            if (Settings.workMode && !enable) {
                 Styles.unset('workMode');
-                $('#playback').show();
+                $('.community__playing').show();
+                $('.left-side-wrapper-inner').css('background-size', '');
                 Settings.workMode = false;
             } else {
-                Styles.set('workMode', '#user-rollover .meta .user-id { left: 15px !important; } #avatars-container { display: none; } #playback .background { display: none; } #chat .emote, #chat .mention, #chat .message, #chat .moderation, #chat .skip, #chat .system, #chat .update, #chat .welcome { min-height: 0px !important; } #chat .badge-box { visibility: hidden; width: 0px;} #chat .msg { padding: 5px 8px 6px 16px !important; } #footer-user .image { display: none !important; } #footer-user .meta {  display: none !important; } #footer-user .points { display: none !important; } #footer-user .info .name {top: 8px !important; font-size: 26px !important; text-align: center !important; left: -60px !important; width: 100% !important; left: 0px !important;} #footer-user .info .icon { display: none !important; } #user-rollover .meta .thumb { display: none !important; } #user-rollover .meta .username { left: 15px !important; } #user-rollover .meta .status { left: 15px !important; } #user-rollover .meta .joined { left: 15px !important; } #user-rollover .meta .p3UserID { left: 15px !important; } #user-rollover .meta .p3Role { left: 15px !important; } #waitlist .list .user .image { display: none !important; } #footer-user .buttons .inventory.button { display: none !important; } #footer-user .buttons .badge.button { display: none !important; } #footer-user .buttons .store.button { display: none !important; } #footer-user .buttons .profile.button { display: none !important; } #footer-user .buttons .settings.button { float: right !important; width: 54px !important;} #footer #footer-user .info { display: block !important; z-index: -1 !important; width: 290px !important; top: 0px !important; background: none; } #footer-user .info .name { width: 100% !important; } #footer-user .info .meta { width: 170px !important; } #footer-user .info .meta div.bar { width: 100px !important; } div.room-background { background-image: url("https://plugcubed.net/scripts/alpha/images/p3WorkMode.png") !important; background-size: cover !important; } .app-right .friends .list .row .image { display: none !important; } .social-menu { display: none !important; }');
-                $('#playback').hide();
+                Styles.set('workMode', '#chat .emote, #chat .mention, #chat .message, #chat .moderation, #chat .skip, #chat .system, #chat .update, #chat .welcome { min-height: 0px !important; } #chat .badge-box { visibility: hidden; width: 0px;} #chat .msg { padding: 5px 8px 6px 16px !important; } #user-rollover .meta .user-id, #user-rollover .meta .p3UserID, #user-rollover .meta .p3Role, #user-rollover .meta .username, #user-rollover .meta .joined, #user-rollover .meta .status { left: 15px !important; } div.left-side-wrapper { background-image: url("https://plugcubed.net/scripts/alpha/images/p3WorkMode.png") !important; background-size: cover !important; } #user-rollover .meta .thumb, .community__audience, .community__booth, .community__top-right .user-profile.thumb.small, .right-side-wrapper .friends .list .row .image, #waitlist .list .user .image { display: none !important; }');
+                $('.community__playing').hide();
+                $('.left-side-wrapper-inner').css('background-size', '0 0');
                 Settings.workMode = true;
             }
             this.toggleEmotes(!Settings.workMode);
+
             Settings.save();
         },
         closePlugMenus: function() {
-            return $('#playlist-button .icon-arrow-down,#history-button .icon-arrow-up,#footer-user.showing .back').click();
+            return $('.back-button').click();
         },
         generateEmoteHash: function() {
             if (!requirejs.defined('plugCubed/Settings')) return;

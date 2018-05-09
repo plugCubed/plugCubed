@@ -5,7 +5,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
     Context = window.plugCubedModules.context;
     Database = window.plugCubedModules.database;
     Lang = window.plugCubedModules.Lang;
-    menuButton = $('<div id="plugcubed"><div class="cube-wrap"><div class="cube"><i class="icon icon-plugcubed"></i><i class="icon icon-plugcubed other"></i></div></div></div>');
+    menuButton = $('<li id="plugcubed"><div class="cube-wrap"><div class="cube"><i class="icon icon-plugcubed"></i><i class="icon icon-plugcubed other"></i></div></div></li>');
     streamButton = $('<div>').addClass('chat-header-button p3-s-stream').data('key', 'stream');
     clearChatButton = $('<div>').addClass('chat-header-button p3-s-clear').data('key', 'clear');
 
@@ -20,12 +20,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
 
             this.shown = false;
 
-            $('#app-menu').after(menuButton);
+            $('.community__left-nav ul.extension').append(menuButton);
             menuButton.click(function() {
                 that.toggleMenu();
                 dialogControlPanel.toggleControlPanel(false);
             });
-            $('#room-bar').css('left', 108).find('.favorite').css('right', 55);
             $('#plugcubed .cube-wrap .cube').bind('webkitAnimationEnd mozAnimationEnd msAnimationEnd animationEnd', function() {
                 $('#plugcubed .cube-wrap .cube').removeClass('spin');
             });
@@ -42,14 +41,14 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 Context.trigger('tooltip:hide');
             }));
             this.onRoomJoin();
-            Context.on('show:user show:history show:dashboard dashboard:disable', this.onPlugMenuOpen, this);
+            Context.on('leftNavigation:open history:toggle playlist:toggle settings:toggle show:user show:history show:dashboard dashboard:disable', this.onPlugMenuOpen, this);
             Context.on('room:joined', this.onRoomJoin, this);
         },
         onRoomJoin: function() {
             this.setEnabled('stream', Database.settings.streamDisabled);
         },
         onPlugMenuOpen: function(isShowing) {
-            if ((typeof isShowing === 'boolean' && isShowing) || typeof isShowing === 'undefined') {
+            if ((typeof isShowing === 'boolean' && isShowing) || typeof isShowing === 'undefined' || (typeof isShowing === 'string' && isShowing === 'store')) {
                 this.toggleMenu(false);
                 dialogControlPanel.toggleControlPanel(false);
             }
@@ -59,10 +58,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             if ($wrapper != null) {
                 $wrapper.remove();
             }
-            $('#room-bar').css('left', 54).find('.favorite').css('right', 0);
             streamButton.remove();
             clearChatButton.remove();
-            Context.off('show:user show:history show:dashboard dashboard:disable', this.onPlugMenuOpen, this);
+            Context.off('leftNavigation:open history:toggle playlist:toggle settings:toggle show:user show:history show:dashboard dashboard:disable', this.onPlugMenuOpen, this);
             Context.off('room:joined', this.onRoomJoin, this);
             dialogControlPanel.close();
         },
@@ -94,7 +92,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                             var dj = API.getDJ();
 
                             if (dj == null || dj.id === API.getUser().id) return;
-                            $('#woot').click();
+                            $('.btn-like').click();
                         })();
                     }
                     break;
@@ -106,7 +104,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                             var dj = API.getDJ();
 
                             if ((dj != null && dj.id === API.getUser().id) || API.getWaitListPosition() > -1) return;
-                            $('#dj-button').click();
+                            $('.room-controls__bottom-item.dj-button').click();
                         })();
                     }
                     break;
@@ -137,7 +135,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     break;
                 case 'controlpanel':
                     dialogControlPanel.toggleControlPanel(true);
-                    dialogControlPanel.openTab('About');
+                    dialogControlPanel.openTab(p3Lang.i18n('menu.about'));
                     this.toggleMenu(false);
                     break;
                 case 'autorespond':
@@ -216,19 +214,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 case 'etatimer':
                     Settings.etaTimer = !Settings.etaTimer;
                     this.setEnabled('etatimer', Settings.etaTimer);
-                    if (Settings.etaTimer) {
-                        Styles.set('etaTimer', '#your-next-media .song { top: 8px!important; }');
-                    } else {
-                        Styles.unset('etaTimer');
-                        var $djButton = $('#dj-button').find('span');
-                        var waitListPos = API.getWaitListPosition();
-
-                        if (waitListPos < 0) {
-                            $djButton.html(API.getWaitList().length < 50 ? Lang.dj.waitJoin : Lang.dj.waitFull);
-                            break;
-                        }
-
-                        $djButton.html(Lang.dj.waitLeave);
+                    if (!Settings.etaTimer) {
+                        $('.p3-eta-timer,.p3-eta-span').remove();
                     }
                     break;
                 case 'notifyUpdatesLink':
@@ -239,12 +226,15 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                     Settings.hideVideo = !Settings.hideVideo;
                     this.setEnabled('hidevideo', Settings.hideVideo);
                     $('div.p3-hideplayback').find('.box').text(Settings.hideVideo ? p3Lang.i18n('video.show') : p3Lang.i18n('video.hide'));
+                    $('.item.p3-s-hidevideo').find('span').text(Settings.hideVideo ? p3Lang.i18n('video.menushow') : p3Lang.i18n('video.menuhide'));
                     if (Settings.hideVideo) {
-                        $('#playback-container').hide();
+                        $('.community__playing').hide();
+                        $('.left-side-wrapper-inner').css('background-size', '0 0');
                         p3Utils.toggleVideoOverlay(true, 'video.hidden');
 
                     } else {
-                        $('#playback-container').show();
+                        $('.community__playing').show();
+                        $('.left-side-wrapper-inner').css('background-size', '');
                         p3Utils.toggleVideoOverlay(false, 'video.hidden');
                     }
                     break;
@@ -255,32 +245,19 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
                 case 'workMode':
                     p3Utils.toggleWorkMode();
                     this.setEnabled('workMode', Settings.workMode);
-
                     break;
                 case 'about':
-                    dialogControlPanel.toggleControlPanel(true);
-                    dialogControlPanel.openTab(p3Lang.i18n('menu.about'));
-                    this.toggleMenu(false);
-                    break;
                 case 'background':
-                    dialogControlPanel.toggleControlPanel(true);
-                    dialogControlPanel.openTab(p3Lang.i18n('menu.background'));
-                    this.toggleMenu(false);
-                    break;
                 case 'chatcustomizations':
-                    dialogControlPanel.toggleControlPanel(true);
-                    dialogControlPanel.openTab(p3Lang.i18n('menu.chatcustomizations'));
-                    this.toggleMenu(false);
-                    break;
                 case 'commands':
-                    dialogControlPanel.toggleControlPanel(true);
-                    dialogControlPanel.openTab(p3Lang.i18n('menu.commands'));
-                    this.toggleMenu(false);
-                    break;
                 case 'customcss':
                     dialogControlPanel.toggleControlPanel(true);
-                    dialogControlPanel.openTab(p3Lang.i18n('menu.customcss'));
+                    dialogControlPanel.openTab(p3Lang.i18n('menu.' + a));
                     this.toggleMenu(false);
+                    break;
+                case 'desktopNotifs':
+                    Settings.desktopNotifs = !Settings.desktopNotifs;
+                    if (!Settings.autorespond) this.setEnabled('desktopNotifs', Settings.desktopNotifs);
                     break;
                 default:
                     API.chatLog(p3Lang.i18n('error.unknownMenuKey', a));
@@ -297,9 +274,12 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             if ($menuDiv != null) {
                 $menuDiv.remove();
             }
-            $menuDiv = $('<div>').css('left', this.shown ? 0 : -500).attr('id', 'p3-settings');
+            $menuDiv = $('<div>').css({
+                left: this.shown ? 50 : -500,
+                'z-index': this.shown ? 1500 : 0
+            }).attr('id', 'p3-settings');
             var header = $('<div>').addClass('header');
-            var container = $('<div>').addClass('container');
+            var container = $('<div>').addClass('p3-container');
 
             // Header
             header.append($('<div>').addClass('back').append($('<i>').addClass('icon icon-arrow-left')).click(function() {
@@ -345,9 +325,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             if (RoomSettings.rules.allowEmotes !== false) {
                 container.append(guiButton(Settings.emotes.twitchEmotes, 'twitchemotes', p3Lang.i18n('menu.twitchemotes')));
             }
-            container.append(guiButton(Settings.hideVideo, 'hidevideo', p3Lang.i18n('video.menuhide')));
+            container.append(guiButton(Settings.hideVideo, 'hidevideo', Settings.hideVideo ? p3Lang.i18n('video.menushow') : p3Lang.i18n('video.menuhide')));
             container.append(guiButton(Settings.lowLagMode, 'lowLagMode', p3Lang.i18n('menu.lowlagMode')));
             container.append(guiButton(Settings.workMode, 'workMode', p3Lang.i18n('menu.workMode')));
+            container.append(guiButton(Settings.desktopNotifs, 'desktopNotifs', p3Lang.i18n('menu.desktopNotifs')));
             container.append(guiButton(false, 'colors', p3Lang.i18n('menu.customchatcolors') + '...'));
             container.append(guiButton(false, 'controlpanel', p3Lang.i18n('menu.controlpanel') + '...'));
 
@@ -427,16 +408,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             if (!this.shown) {
                 dialogColors.hide();
             }
-
             if (this.shown) {
-                $('#playlist-button .icon-arrow-down, #footer-user.showing .back').click();
-                if (window.plugCubedModules && window.plugCubedModules.app && window.plugCubedModules.app.room && window.plugCubedModules.app.room.history) {
-                    window.plugCubedModules.app.room.history.hide();
-                }
+                p3Utils.closePlugMenus();
             }
 
             $menuDiv.animate({
-                left: this.shown ? 0 : -500
+                left: this.shown ? 50 : -500,
+                'z-index': this.shown ? 1500 : 0
             }, {
                 complete: function() {
                     if (!that.shown && $menuDiv) {

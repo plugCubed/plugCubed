@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/tickers/AFKTimer', 'plugCubed/tickers/ETATimer'], function() {
+define(['plugCubed/Class', 'plugCubed/tickers/AFKTimer', 'plugCubed/tickers/ETATimer', 'plugCubed/tickers/UserDataTimer'], function() {
     var modules, Class, instances;
 
     modules = _.toArray(arguments);

@@ -296,27 +296,15 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
 
                         // images.background
                         if (roomSettings.images.background) {
-                            Styles.set('room-settings-background-image', '.room-background { background: url("' + p3Utils.proxifyImage(roomSettings.images.background) + '") !important; }');
+                            Styles.set('room-settings-background-image', '.left-side-wrapper { background-image: url("' + p3Utils.proxifyImage(roomSettings.images.background) + '") !important; background-position-x: center !important; background-position-y: bottom !important; }');
                         }
 
                         // images.playback
-                        var playbackBackground = $('#playback').find('.background img');
-
-                        if (playbackBackground.data('_o') == null) {
-                            playbackBackground.data('_o', playbackBackground.attr('src'));
-                        }
+                        var playbackBackground = $('.left-side-wrapper-inner');
 
                         if (roomSettings.images.playback != null) {
                             if (typeof roomSettings.images.playback === 'string' && roomSettings.images.playback.indexOf('http') === 0) {
-                                var playbackFrame = new Image();
-
-                                playbackFrame.onload = function() {
-                                    playbackBackground.attr('src', this.src);
-                                    RoomLoader.frameHeight = this.height - 10;
-                                    RoomLoader.frameWidth = this.width - 18;
-                                    RoomLoader.onVideoResize(Layout.getSize());
-                                };
-                                playbackFrame.src = p3Utils.proxifyImage(roomSettings.images.playback);
+                                playbackBackground.css('background-image', 'url(' + roomSettings.images.playback + ')');
                             } else if (roomSettings.images.playback === false) {
                                 playbackBackground.hide();
                             }
@@ -411,14 +399,10 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
 
             Styles.unset(['room-settings-background-color', 'room-settings-background-image', 'room-settings-booth', 'room-settings-fonts', 'room-settings-rules', 'room-settings-maingui', 'CCC-text-admin', 'CCC-text-ambassador', 'CCC-text-host', 'CCC-text-cohost', 'CCC-text-manager', 'CCC-text-bouncer', 'CCC-text-residentdj', 'CCC-text-regular', 'CCC-text-you', 'CCC-image-admin', 'CCC-image-ambassador', 'CCC-image-host', 'CCC-image-cohost', 'CCC-image-manager', 'CCC-image-bouncer', 'CCC-image-residentdj']);
             Styles.clearImports();
-            var playbackBackground = $('#playback').find('.background img');
+            var playbackBackground = $('.left-side-wrapper-inner');
 
-            playbackBackground.data('_o', PlugUI.videoframe);
-            playbackBackground.attr('src', playbackBackground.data('_o'));
+            playbackBackground.css('background-image', 'url(' + PlugUI.videoframe + ')');
             playbackBackground.show();
-            RoomLoader.frameHeight = 274;
-            RoomLoader.frameWidth = 490;
-            RoomLoader.onVideoResize(Layout.getSize());
         },
 
         /*

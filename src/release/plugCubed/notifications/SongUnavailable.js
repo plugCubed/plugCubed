@@ -11,7 +11,7 @@ define(['jquery', 'plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'pl
                 }
 
                 if (data.media.format === 1) {
-                    if (gapi != null) {
+                    if (gapi && gapi.client && gapi.client.youtube && gapi.client.youtube.videos && gapi.client.youtube.videos.list && typeof gapi.client.youtube.videos.list === 'function') {
                         gapi.client.youtube.videos.list({
                             fields: 'items(contentDetails(regionRestriction),status(uploadStatus,privacyStatus,embeddable))',
                             id: data.media.cid,
@@ -44,7 +44,7 @@ define(['jquery', 'plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'pl
                             });
                     }
                 } else if (data.media.format === 2) {
-                    if (SC != null) {
+                    if (SC && SC.get && typeof SC.get === 'function') {
                         SC
                             .get('/tracks/' + data.media.cid)
                             .catch(function(err) {

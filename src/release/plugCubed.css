@@ -1,4 +1,37 @@
 @charset "utf-8";
+@media  screen and (max-width: 1366px) {
+    #p3-settings-wrapper {
+        height: 0;
+    }
+    #p3-settings, #p3-settings-custom-colors {
+        min-height: 410px;
+    }
+    #p3-videoText {
+        left: 27%;
+    }
+}
+@media  screen and (min-width: 1600px) {
+    #p3-settings-wrapper {
+        height: auto;
+    }
+    #p3-settings, #p3-settings-custom-colors {
+        min-height: 535px;
+    }
+    #p3-videoText {
+        left: 32.5%;
+    }
+}
+#p3-videoText {
+    cursor: none;
+    font-size: 71px;
+    text-align: center;
+    position: absolute;
+    top: 10%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 .afkTimer {
     position: absolute;
     right: 0;
@@ -72,12 +105,7 @@
 }
 
 #plugcubed {
-    position: absolute;
-    left: 55px;
-    top: 0;
     z-index: 90000;
-    width: 53px;
-    height: 54px;
     cursor: pointer;
     background: #282C35;
     -webkit-box-shadow: inset 0 -2px 0 -1px #0a0a0a;
@@ -91,7 +119,6 @@
 
 .icon.icon-plugcubed {
     left: 4px;
-    top: 11px;
     -webkit-transform: translateZ(19px);
     transform: translateZ(19px);
 }
@@ -131,9 +158,8 @@
 
 #p3-settings-wrapper {
     position: absolute;
-    top: 54px;
+    top: 50px;
     bottom: 54px;
-    height: auto;
     width: 2px;
 }
 
@@ -142,7 +168,6 @@
     position: absolute;
     left: -270px;
     max-height: 100%;
-    min-height: 535px;
     /*below this height, plug stops resizing (vertically)*/
     overflow-y: auto;
     background: #0a0a0a;
@@ -214,52 +239,52 @@
     margin-right: 5px;
 }
 
-#p3-settings .container,
-#p3-settings-custom-colors .container {
+#p3-settings .p3-container,
+#p3-settings-custom-colors .p3-container {
     position: relative;
     float: left;
     width: 100%;
     margin-bottom: 10px;
 }
 
-#p3-settings .container .section,
-#p3-settings-custom-colors .container .section {
+#p3-settings .p3-container .section,
+#p3-settings-custom-colors .p3-container .section {
     position: relative;
     font-size: 18px;
     margin-left: 18px;
     margin-top: 10px;
 }
 
-#p3-settings .container .item,
-#p3-settings-custom-colors .container .item {
+#p3-settings .p3-container .item,
+#p3-settings-custom-colors .p3-container .item {
     position: relative;
     height: 25px;
     margin-top: 6px;
 }
 
-#p3-settings-custom-colors .container .item {
+#p3-settings-custom-colors .p3-container .item {
     padding-right: 150px;
     margin-left: 0;
     text-align: right;
     height: 20px;
 }
 
-#p3-settings .container .item {
+#p3-settings .p3-container .item {
     cursor: pointer;
     width: auto;
 }
 
-#p3-settings .container .item i,
-#p3-settings-custom-colors .container .item i {
+#p3-settings .p3-container .item i,
+#p3-settings-custom-colors .p3-container .item i {
     left: 18px;
     top: 2px;
     display: none;
 }
 
-#p3-settings .container .item span,
-#p3-settings .container .item input,
-#p3-settings-custom-colors .container .item span,
-#p3-settings-custom-colors .container .item input {
+#p3-settings .p3-container .item span,
+#p3-settings .p3-container .item input,
+#p3-settings-custom-colors .p3-container .item span,
+#p3-settings-custom-colors .p3-container .item input {
     color: #808691;
     font-weight: 300;
     margin-left: 45px;
@@ -267,15 +292,15 @@
     white-space: nowrap;
 }
 
-#p3-settings .container .item input {
+#p3-settings .p3-container .item input {
     width: 200px;
 }
 
-#p3-settings-custom-colors .container .item span {
+#p3-settings-custom-colors .p3-container .item span {
     margin-left: 10px;
 }
 
-#p3-settings-custom-colors .container .item span.default {
+#p3-settings-custom-colors .p3-container .item span.default {
     position: absolute;
     right: 5px;
     left: auto;
@@ -286,7 +311,7 @@
     top: 0;
 }
 
-#p3-settings-custom-colors .container .item span.example {
+#p3-settings-custom-colors .p3-container .item span.example {
     position: absolute;
     right: 132px;
     left: auto;
@@ -295,7 +320,7 @@
     top: 0;
 }
 
-#p3-settings-custom-colors .container .item input {
+#p3-settings-custom-colors .p3-container .item input {
     position: absolute;
     right: 30px;
     left: auto;
@@ -306,16 +331,16 @@
     top: 0;
 }
 
-#p3-settings .container .spacer,
-#p3-settings-custom-colors .container .spacer {
+#p3-settings .p3-container .spacer,
+#p3-settings-custom-colors .p3-container .spacer {
     position: relative;
     float: left;
     width: 100%;
     height: 19px;
 }
 
-#p3-settings .container .divider,
-#p3-settings-custom-colors .container .divider {
+#p3-settings .p3-container .divider,
+#p3-settings-custom-colors .p3-container .divider {
     position: absolute;
     left: 0;
     top: 8px;
@@ -352,9 +377,9 @@
     margin-left: 25px;
 }
 
-#p3-settings .container .item.selected i,
+#p3-settings .p3-container .item.selected i,
 #p3-control-panel .p3-item.selected i,
-#p3-settings-custom-colors .container .item.selected i {
+#p3-settings-custom-colors .p3-container .item.selected i {
     display: block;
 }
 
@@ -392,6 +417,8 @@
 
 .p3-s-stream,
 .p3-s-clear {
+    width:  30px !important;
+    top:  8px !important;
     background: no-repeat 0 0;
 }
 
@@ -679,8 +706,8 @@ i.icon.icon-chat-p3donatorBronze,
 #p3-control-panel {
     position: absolute;
     background: rgba(17, 19, 23, 0.9);
-    top: 54px;
-    left: 0;
+    top: 50px;
+    left: 50px;
     overflow: hidden;
 }
 
@@ -864,6 +891,35 @@ i.icon.icon-chat-p3donatorBronze,
     font-size: 10px;
 }
 
+#user-rollover .actions .action.p3-qmute, #user-rollover .actions .action.p3-qinfo, #user-rollover .actions .action.p3-qban {
+    display: block;
+    -webkit-box-shadow: inset 1px 1px 0 0 #1c1f25;
+    box-shadow: inset 1px 1px 0 0 #1c1f25;
+}
+
+.p3-qban {
+    width:  33%;
+}
+i.icon-p3-qban {
+    background-image: url(https://plugcubed.net/scripts/release/images/icons/quick-ban.png);
+    height: 30px;
+    width: 30px;
+}
+
+.p3-qmute {
+    width:  34%;
+}
+
+i.icon-p3-qmute {
+    background-image: url(https://plugcubed.net/scripts/release/images/icons/quick-mute.png);
+    height: 30px;
+    width: 30px;
+}
+
+.p3-qinfo {
+    width:  33%;
+}
+
 .p3-user-info strong {
     color: #a5a5a5;
 }
@@ -882,4 +938,74 @@ blockquote.p3-blockquote {
     quotes: none;
     margin: .5em 10px;
     padding: .5em 10px;
+}
+
+.p3-dropbtn {
+    background-color: inherit;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.p3-mention-dropdown {
+    position: relative;
+    display: inline-block;
+    padding-top: 10px;
+}
+
+.p3-mention-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 181, 230, 0.34);
+    min-width: 160px;
+    -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+
+.p3-mention-dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.p3-mention-dropdown-content a:hover {
+    background-color: #00b5e6;
+}
+
+.p3-mention-dropdown:hover .p3-mention-dropdown-content {
+    display: block;
+}
+
+.p3-mention-dropdown:hover .p3-dropbtn {
+    background-color: #3e8e41;
+}
+
+.p3-command {
+    cursor: pointer;
+    text-decoration:  underline;
+}
+
+.p3-command:hover {
+    text-decoration: none;
+}
+
+.p3-command-args, .p3-command-description {
+    color:  #FFF;
+    font-size: 13px;
+}
+
+table.p3-commands-list {
+    border-collapse: collapse;
+    font-size: 15px;
+    width: 100%;
+    color: #f7f723
+}
+table.p3-commands-list th, table.p3-commands-list td {
+    padding: 8px;
+    border-bottom: 1px solid #232529;
 }

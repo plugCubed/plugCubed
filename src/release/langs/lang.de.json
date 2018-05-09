@@ -57,7 +57,8 @@
             "status": "Zeigt den Status der plug.dj-Server",
             "unload": "Schließt plug&#179;",
             "unban": "Unbans targeted user.",
-            "volume": "Setze die Lautstärke mit einer Zahl (0 - 100), erhöhe sie um 1 mit +, verringere sie um 1 mit -"
+            "volume": "Setze die Lautstärke mit einer Zahl (0 - 100), erhöhe sie um 1 mit +, verringere sie um 1 mit -",
+            "plcount": "Count how many playlists you have and total amount of songs"
         },
         "responses": {
             "alertson": "Ein Ton wird bei folgenden Wörtern abgespielt: %1",
@@ -196,7 +197,8 @@
         "commands": "Chat-Befehle",
         "customcss": "Benutzerdefiniertes CSS",
         "lowlagMode": "Geringer-Lag-Modus",
-        "workMode": "Arbeitsmodus"
+        "workMode": "Arbeitsmodus",
+        "desktopNotifs": "Desktop Notifications"
     },
     "vote": {
         "meh": "Meh",
@@ -272,5 +274,11 @@
         "hidden": "Video Hidden",
         "disabled": "Video Disabled",
         "snooze": "Video Snoozed"
+    },
+    "playlist": {
+        "amount": "Total amount of playlists: %1",
+        "empty": "Total amount of empty playlists: %1",
+        "totalsongs": "Total amount of songs: %1",
+        "totalunavailablesongs": "Total amount of unavailable songs: %1"
     }
 }

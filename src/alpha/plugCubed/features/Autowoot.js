@@ -5,7 +5,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
         var dj = API.getDJ();
 
         if (dj == null || dj.id === API.getUser().id) return;
-        $('#woot').click();
+        $('.btn-like').click();
     };
 
     Handler = TriggerHandler.extend({

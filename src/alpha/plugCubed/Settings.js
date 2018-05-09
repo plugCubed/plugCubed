@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/bridges/PlaybackModel'], function(Class, p3Utils, p3Lang, Styles, PlaybackModel) {
+define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager'], function(Class, p3Utils, p3Lang, Styles) {
     var names = [];
     var curVersion;
 
@@ -6,10 +6,10 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
     names.push('version');
 
     // Features
-    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'chatLog', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'notifyUpdatesLink', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'boothAlert', 'badges', 'emotes', 'customCSS', 'markdown', 'hideVideo', 'mentionSound', 'mentionSoundTitle', 'lowLagMode', 'workMode');
+    names.push('autojoin', 'autorespond', 'autowoot', 'awaymsg', 'badges', 'boothAlert', 'chatImages', 'chatLog', 'customCSS', 'customColors', 'desktopNotifs', 'emotes', 'etaTimer', 'hideVideo', 'lowLagMode', 'markdown', 'mentionSound', 'mentionSoundTitle', 'moderation', 'notify', 'notifySongLength', 'notifyUpdatesLink', 'songTitle', 'twitchEmotes', 'useRoomSettings', 'workMode');
 
     // Registers
-    names.push('registeredSongs', 'alertson', 'colors');
+    names.push('alertson', 'colors', 'registeredSongs');
 
     curVersion = 3.3;
 
@@ -77,6 +77,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         notify: 0,
         customColors: false,
         chatImages: true,
+        desktopNotifs: false,
         emotes: {
             bttvEmotes: false,
             customEmotes: true,
@@ -236,7 +237,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                         var dj = API.getDJ();
 
                         if (dj == null || dj.id === API.getUser().id) return;
-                        $('#woot').click();
+                        $('.btn-like').click();
                     })();
                 }
 
@@ -245,7 +246,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                         var dj = API.getDJ();
 
                         if (dj == null || dj.id === API.getUser().id || API.getWaitListPosition() > -1) return;
-                        $('#dj-button').click();
+                        $('.room-controls__bottom-item.dj-button').click();
                     })();
                 }
                 if (this.emotes.bttvEmotes) {
@@ -264,7 +265,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     require('plugCubed/handlers/ChatHandler').loadTwitchSubEmotes();
                 }
                 if (this.hideVideo) {
-                    $('#playback-container').hide();
+                    $('.community__playing').hide();
+                    $('.left-side-wrapper-inner').css('background-size', '0 0');
                     p3Utils.toggleVideoOverlay(true, 'video.hidden');
                 }
                 if (!this.badges) {
@@ -277,7 +279,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                     p3Utils.toggleLowLagMode();
                 }
                 if (this.workMode) {
-                    p3Utils.toggleWorkMode();
+                    p3Utils.toggleWorkMode(true);
                 }
 
                 if (this.emotes.emoteSet !== 'apple') {
@@ -291,12 +293,8 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 }
 
                 if (this.registeredSongs.length > 0 && API.getMedia() != null && this.registeredSongs.indexOf(API.getMedia().id) > -1) {
-                    PlaybackModel.muteOnce();
+                    API.setVolume(0);
                     API.chatLog(p3Lang.i18n('automuted', API.getMedia().title));
-                }
-
-                if (this.etaTimer) {
-                    Styles.set('etaTimer', '#your-next-media .song { top: 8px!important; }');
                 }
             } catch (e) {
                 console.error('[plug³ Settings] Error loading settings', e, e.stack);

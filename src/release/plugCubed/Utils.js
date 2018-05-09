@@ -1,5 +1,5 @@
 define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function(Class, p3Lang) {
-    var cleanHTMLMessage, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PlugUI, PopoutView, html2text, Settings;
+    var cleanHTMLMessage, Context, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PopoutView, html2text, Settings, Styles;
 
     if (typeof window.plugCubedUserData === 'undefined') {
         window.plugCubedUserData = {};
@@ -28,13 +28,12 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return allowed.indexOf(b.toLowerCase()) > -1 ? a : '';
         });
     };
+    Context = window.plugCubedModules.context;
     Database = window.plugCubedModules.database;
     Lang = window.plugCubedModules.Lang;
     PopoutView = window.plugCubedModules.PopoutView;
     developer = sponsor = ambassador = donatorDiamond = donatorPlatinum = donatorGold = donatorSilver = donatorBronze = [];
     special = {};
-
-    PlugUI = window.plugCubedModules.plugUrls;
 
     $.getJSON('https://plugcubed.net/scripts/titles.json',
 
@@ -126,14 +125,85 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
             return '';
         },
-        closePlugMenus: function() {
-            return $('#playlist-button .icon-arrow-down,#history-button .icon-arrow-up,#footer-user.showing .back').click();
-
-        },
-        generateEmoteHash: function() {
-            var i, emoteHash, allEmotes, firstChar, emoji;
+        toggleBadges: function(toggle) {
+            if (!requirejs.defined('plugCubed/Settings') || !requirejs.defined('plugCubed/StyleManager')) return;
 
             Settings = require('plugCubed/Settings');
+            Styles = require('plugCubed/StyleManager');
+            if ((toggle && !Settings.badges) || !Settings.badges) {
+                Styles.unset('hide-badges');
+                Settings.badges = true;
+            } else if ((toggle && Settings.badges) || Settings.badges) {
+                Styles.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { visibility: none; width: 0px; }');
+                Settings.badges = false;
+            }
+            Settings.save();
+        },
+        toggleEmotes: function(toggle) {
+            if (typeof toggle !== 'boolean') return;
+            Database.settings.emoji = toggle;
+            Context.trigger('ChatFacadeEvent:emoji', Database.settings.emoji);
+            Database.save();
+        },
+        toggleLowLagMode: function() {
+            if (!requirejs.defined('plugCubed/Settings')) return;
+
+            Settings = require('plugCubed/Settings');
+            if (Settings.lowLagMode) {
+                Database.settings.videoOnly = false;
+                Database.save();
+                Context.trigger('change:videoOnly').trigger('audience:pause', Database.settings.videoOnly);
+                Settings.lowLagMode = false;
+            } else {
+                Database.settings.videoOnly = true;
+                Database.save();
+                Context.trigger('change:videoOnly').trigger('audience:pause', Database.settings.videoOnly);
+                Settings.lowLagMode = true;
+            }
+            this.toggleBadges(true);
+            Settings.save();
+        },
+        toggleVideoOverlay: function(enable, string) {
+            if (!API.getDJ() || !string) return;
+
+            if (enable) {
+                if ($('#p3-videoText').length > 0) {
+                    $('#p3-videoText').remove();
+                }
+                $('.left-side-wrapper-inner').append($('<div>').text(p3Lang.i18n(string)).attr('id', 'p3-videoText'));
+            } else {
+                $('#p3-videoText').remove();
+            }
+        },
+        toggleWorkMode: function(enable) {
+            if (!requirejs.defined('plugCubed/Settings') || !requirejs.defined('plugCubed/StyleManager')) return;
+
+            Settings = require('plugCubed/Settings');
+            Styles = require('plugCubed/StyleManager');
+            if (Settings.workMode && !enable) {
+                Styles.unset('workMode');
+                $('.community__playing').show();
+                $('.left-side-wrapper-inner').css('background-size', '');
+                Settings.workMode = false;
+            } else {
+                Styles.set('workMode', '#chat .emote, #chat .mention, #chat .message, #chat .moderation, #chat .skip, #chat .system, #chat .update, #chat .welcome { min-height: 0px !important; } #chat .badge-box { visibility: hidden; width: 0px;} #chat .msg { padding: 5px 8px 6px 16px !important; } #user-rollover .meta .user-id, #user-rollover .meta .p3UserID, #user-rollover .meta .p3Role, #user-rollover .meta .username, #user-rollover .meta .joined, #user-rollover .meta .status { left: 15px !important; } div.left-side-wrapper { background-image: url("https://plugcubed.net/scripts/release/images/p3WorkMode.png") !important; background-size: cover !important; } #user-rollover .meta .thumb, .community__audience, .community__booth, .community__top-right .user-profile.thumb.small, .right-side-wrapper .friends .list .row .image, #waitlist .list .user .image { display: none !important; }');
+                $('.community__playing').hide();
+                $('.left-side-wrapper-inner').css('background-size', '0 0');
+                Settings.workMode = true;
+            }
+            this.toggleEmotes(!Settings.workMode);
+
+            Settings.save();
+        },
+        closePlugMenus: function() {
+            return $('.back-button').click();
+        },
+        generateEmoteHash: function() {
+            if (!requirejs.defined('plugCubed/Settings')) return;
+
+            Settings = require('plugCubed/Settings');
+            var i, emoteHash, allEmotes, firstChar, emoji;
+
             emoteHash = window.plugCubed.emotes.emoteHash = {};
             allEmotes = $.extend({}, (Settings.emotes.twitchEmotes ? window.plugCubed.emotes.twitchEmotes : {}), (Settings.emotes.twitchSubEmotes ? window.plugCubed.emotes.twitchSubEmotes : {}), (Settings.emotes.tastyEmotes ? window.plugCubed.emotes.tastyEmotes : []), (Settings.emotes.bttvEmotes ? window.plugCubed.emotes.bttvEmotes : {}), (Settings.emotes.ffzEmotes ? window.plugCubed.emotes.ffzEmotes : {}));
 
@@ -358,9 +428,12 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             return new Array(count + 1).join(str);
         },
         chatLog: function(type, message, color, fromID, fromName) {
+            if (!requirejs.defined('plugCubed/Settings')) return;
+
             var $chat, b, $message, $box, $msg, $text, $msgSpan, $timestamp, $from, fromUser, chat, lastMessage, lastMessageData;
 
             chat = window.plugCubedModules.chat;
+            Settings = require('plugCubed/Settings');
 
             if (!message) return;
             if (typeof message !== 'string') {
@@ -373,7 +446,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             b = $chat.scrollTop() > $chat[0].scrollHeight - $chat.height() - 20;
 
             $message = $('<div>').addClass('message');
-            if (require('plugCubed/Settings').badges) {
+            if (Settings.badges) {
                 $box = $('<div>').addClass('badge-box').data('uid', fromID ? fromID : 'p3').data('type', type);
             } else {
                 $box = $('<div style="display: inline !important;">').addClass('badge-box').data('uid', fromID ? fromID : 'p3').data('type', type);
@@ -750,7 +823,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             var count = 0;
 
             if (Database.settings.chatSound) {
-                var mentionSound = new Audio(PlugUI.sfx);
+                var mentionSound = new Audio(Settings.mentionSound);
 
                 mentionSound.addEventListener('ended', function() {
                     count++;
@@ -990,6 +1063,128 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
             return num + (suffixes[(remainder - 20) % 10] || suffixes[remainder] || suffixes[0]);
 
+        },
+        banUser: function(userID, duration, reason) {
+            if (!userID || !_.contains(API.BAN, duration) || !(API.getUser().role > API.ROLE.BOUNCER || API.getUser().gRole > window.plugCubedModules.GROLE.PLOT)) return;
+            if (!_.contains([1, 2, 3, 4, 5, 6], reason)) reason = 1;
+
+            var user = API.getUser(userID);
+
+            if (user && (user.role > API.getUser().role || user.gRole > window.plugCubedModules.GROLE.PLOT)) return;
+
+            $.ajax({
+                contentType: 'application/json',
+                type: 'POST',
+                url: '/_/bans/add',
+                data: JSON.stringify({
+                    userID: userID,
+                    duration: duration,
+                    reason: reason
+                })
+            });
+        },
+        unbanUser: function(userID) {
+            if (!userID) return;
+
+            $.ajax({
+                contentType: 'application/json',
+                type: 'DELETE',
+                url: '/_/bans' + userID
+            });
+
+        },
+        moveUser: function(userID, position) {
+            if (!userID || !(API.getUser().role > API.ROLE.MANAGER || API.getUser().gRole > window.plugCubedModules.GROLE.PLOT) || (API.getDJ() && API.getDJ().id === userID)) return;
+            var waitlistPosition = API.getWaitListPosition(userID);
+            var inWaitlist = waitlistPosition > -1;
+
+            if (position > 50) position = 50;
+            if (position < 1) position = 1;
+
+            if (inWaitlist) {
+                $.ajax({
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        userID: userID,
+                        position: position
+                    }),
+                    type: 'POST',
+                    url: '/_/booth/move'
+                });
+            } else {
+                $.ajax({
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        id: userID
+                    }),
+                    url: '/_/booth/add'
+                }).done(function(body) {
+                    if (body.status === 'ok') {
+                        $.ajax({
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                                userID: userID,
+                                position: position
+                            }),
+                            type: 'POST',
+                            url: '/_/booth/move'
+                        });
+                    }
+                });
+            }
+        },
+        muteUser: function(userID, duration, reason) {
+            if (!userID || !_.contains(API.MUTE, duration) || !(API.getUser().role > API.ROLE.BOUNCER || API.getUser().gRole > window.plugCubedModules.GROLE.PLOT)) return;
+            if (!_.contains([1, 2, 3, 4, 5, 6], reason)) reason = 1;
+
+            var role;
+            var user = API.getUser(userID);
+
+            if (user && user.gRole > window.plugCubedModules.GROLE.PLOT) return;
+            if (user && user.role > 0) {
+                role = user.role;
+                $.ajax({
+                    contentType: 'application/json',
+                    type: 'DELETE',
+                    url: '/_/staff/' + userID
+                }).done(function(body) {
+                    if (body.status === 'ok') {
+                        $.ajax({
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                                userID: userID,
+                                duration: duration,
+                                reason: reason
+                            }),
+                            type: 'POST',
+                            url: '/_/mutes'
+                        }).done(function(body2) {
+                            if (body2.status === 'ok') {
+                                $.ajax({
+                                    contentType: 'application/json',
+                                    data: JSON.stringify({
+                                        userID: userID,
+                                        roleID: role
+                                    }),
+                                    type: 'POST',
+                                    url: '/_/staff/update'
+                                });
+                            }
+                        });
+                    }
+                });
+            } else {
+                $.ajax({
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        userID: userID,
+                        duration: duration,
+                        reason: reason
+                    }),
+                    type: 'POST',
+                    url: '/_/mutes'
+                });
+            }
         },
         statusSocket: function(call) {
             var att = 0;

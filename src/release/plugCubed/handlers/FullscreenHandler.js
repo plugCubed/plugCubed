@@ -14,7 +14,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang'], function($, Class, p3Lan
             $('#playback-controls')
                 .append(fullScreenButton)
                 .find('.button')
-                .width('25%')
+                .width('20%')
                 .parent()
                 .find('.button .box .icon')
                 .hide();

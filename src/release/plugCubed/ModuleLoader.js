@@ -165,6 +165,9 @@ define(['plugCubed/Class'], function(Class) {
                                                 case !(m.prototype.defaults && 'avatarID' in m.prototype.defaults && 'role' in m.prototype.defaults):
                                                     moduleName = 'User';
                                                     break;
+                                                case m.prototype.className !== 'community__left-nav':
+                                                    moduleName = 'leftNav';
+                                                    break;
                                                 case m.prototype.id !== 'user-inventory':
                                                     moduleName = 'userInventory';
                                                     break;
@@ -201,7 +204,7 @@ define(['plugCubed/Class'], function(Class) {
                                                 case m.prototype.id !== 'playback':
                                                     moduleName = 'Playback';
                                                     break;
-                                                case m.prototype.id !== 'volume':
+                                                case m.prototype.className !== 'community__player-item volume':
                                                     moduleName = 'Volume';
                                                     break;
                                                 case m.prototype.id !== 'dialog-playlist-create':
@@ -264,12 +267,12 @@ define(['plugCubed/Class'], function(Class) {
                 if (cb.ctx.room) {
                     window.plugCubedModules.app = cb.ctx;
                     window.plugCubedModules.friendsList = window.plugCubedModules.app.room.friends;
-                    window.plugCubedModules.search = window.plugCubedModules.app.footer.playlist.playlist.search;
-                    window.plugCubedModules.pl = window.plugCubedModules.app.footer.playlist.playlist.media;
+                    window.plugCubedModules.search = window.plugCubedModules.app.playlist.search;
+                    window.plugCubedModules.pl = window.plugCubedModules.app.playlist.media;
                     break;
                 }
             }
-            if (window.plugCubedModules.app && !(window.plugCubedModules.chat = window.plugCubedModules.app.room.chat) && window.plugCubedModules.context) {
+            if (window.plugCubedModules.app && !(window.plugCubedModules.chat = window.plugCubedModules.app.room.rightBar.chat) && window.plugCubedModules.context) {
                 for (i = 0; i < (ref3 = window.plugCubedModules.context._events['chat:receive'] || []).length; i++) {
                     ev = ref3[i];
 

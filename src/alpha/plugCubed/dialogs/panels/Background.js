@@ -23,7 +23,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
                         url = p3Utils.proxifyImage(url);
                         $.get(url, function(dat, stat) {
                             if (stat === 'success') {
-                                Styles.set('room-settings-background-image', '.room-background { background: url(' + url + ') !important; }');
+                                Styles.set('room-settings-background-image', '.left-side-wrapper { background: url(' + url + ') !important; }');
                             }
                         });
                         this.changeSubmit(false);

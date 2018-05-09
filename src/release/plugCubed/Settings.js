@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/bridges/PlaybackModel'], function(Class, p3Utils, p3Lang, Styles, PlaybackModel) {
+define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager'], function(Class, p3Utils, p3Lang, Styles) {
     var names = [];
     var curVersion;
 
@@ -6,10 +6,10 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
     names.push('version');
 
     // Features
-    names.push('autowoot', 'autojoin', 'autorespond', 'awaymsg', 'chatLog', 'etaTimer', 'notify', 'customColors', 'moderation', 'notifySongLength', 'useRoomSettings', 'chatImages', 'twitchEmotes', 'songTitle', 'boothAlert', 'badges', 'emotes', 'customCSS', 'markdown');
+    names.push('autojoin', 'autorespond', 'autowoot', 'awaymsg', 'badges', 'boothAlert', 'chatImages', 'chatLog', 'customCSS', 'customColors', 'desktopNotifs', 'emotes', 'etaTimer', 'hideVideo', 'lowLagMode', 'markdown', 'mentionSound', 'mentionSoundTitle', 'moderation', 'notify', 'notifySongLength', 'notifyUpdatesLink', 'songTitle', 'twitchEmotes', 'useRoomSettings', 'workMode');
 
     // Registers
-    names.push('registeredSongs', 'alertson', 'colors');
+    names.push('alertson', 'colors', 'registeredSongs');
 
     curVersion = 3.3;
 
@@ -77,14 +77,18 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         notify: 0,
         customColors: false,
         chatImages: true,
+        desktopNotifs: false,
         emotes: {
             bttvEmotes: false,
+            customEmotes: true,
             emoteSet: 'apple',
             ffzEmotes: false,
             tastyEmotes: false,
             twitchEmotes: false,
             twitchSubEmotes: false
         },
+        mentionSound: window.plugCubedModules.plugUrls.sfx,
+        mentionSoundTitle: 'Default',
         songTitle: false,
         registeredSongs: [],
         alertson: [],
@@ -97,6 +101,10 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         boothAlert: 1,
         markdown: false,
         customCSS: '',
+        hideVideo: false,
+        lowLagMode: false,
+        workMode: false,
+        notifyUpdatesLink: false,
         notifySongLength: 10,
         useRoomSettings: {},
         colorInfo: {
@@ -195,6 +203,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
         load: function() {
             try {
                 var save = JSON.parse(localStorage.getItem('plugCubed')) || {};
+                var i;
 
                 // Upgrade if needed
                 if (save.version == null || save.version !== curVersion) {
@@ -203,7 +212,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 }
 
                 // Get the settings
-                for (var i = 0; i < names.length; i++) {
+                for (i = 0; i < names.length; i++) {
                     if (!names[i]) continue;
                     if (save[names[i]] != null && typeof this[names[i]] == typeof save[names[i]]) {
                         if ($.isPlainObject(this[names[i]])) {
@@ -228,7 +237,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                         var dj = API.getDJ();
 
                         if (dj == null || dj.id === API.getUser().id) return;
-                        $('#woot').click();
+                        $('.btn-like').click();
                     })();
                 }
 
@@ -237,7 +246,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                         var dj = API.getDJ();
 
                         if (dj == null || dj.id === API.getUser().id || API.getWaitListPosition() > -1) return;
-                        $('#dj-button').click();
+                        $('.room-controls__bottom-item.dj-button').click();
                     })();
                 }
                 if (this.emotes.bttvEmotes) {
@@ -255,12 +264,22 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 if (this.emotes.twitchSubEmotes) {
                     require('plugCubed/handlers/ChatHandler').loadTwitchSubEmotes();
                 }
-
+                if (this.hideVideo) {
+                    $('.community__playing').hide();
+                    $('.left-side-wrapper-inner').css('background-size', '0 0');
+                    p3Utils.toggleVideoOverlay(true, 'video.hidden');
+                }
                 if (!this.badges) {
-                    Styles.set('hide-badges', '#chat .msg { padding: 5px 8px 6px 8px; } #chat-messages .badge-box { display: none; }');
+                    p3Utils.toggleBadges(true);
                 }
                 if (this.customCSS !== '') {
                     Styles.set('room-settings-custom-css', this.customCSS);
+                }
+                if (this.lowLagMode) {
+                    p3Utils.toggleLowLagMode();
+                }
+                if (this.workMode) {
+                    p3Utils.toggleWorkMode(true);
                 }
 
                 if (this.emotes.emoteSet !== 'apple') {
@@ -274,15 +293,11 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Style
                 }
 
                 if (this.registeredSongs.length > 0 && API.getMedia() != null && this.registeredSongs.indexOf(API.getMedia().id) > -1) {
-                    PlaybackModel.muteOnce();
+                    API.setVolume(0);
                     API.chatLog(p3Lang.i18n('automuted', API.getMedia().title));
                 }
-
-                if (this.etaTimer) {
-                    Styles.set('etaTimer', '#your-next-media .song { top: 8px!important; }');
-                }
             } catch (e) {
-                console.error('[plug³ Settings] Error loading settings', e.stack);
+                console.error('[plug³ Settings] Error loading settings', e, e.stack);
                 p3Utils.chatLog('system', 'Error loading settings');
             }
         },

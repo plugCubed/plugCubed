@@ -13,8 +13,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/handlers/TriggerHandler', 'plugC
         },
         setWaitList: function(waitList) {
             this.current.waitList = [];
-            for (var i in waitList) {
-                if (!waitList.hasOwnProperty(i)) continue;
+            for (var i = 0; i < waitList.length; i++) {
                 this.current.waitList.push(waitList[i].id);
             }
             this.incrementState();
@@ -85,10 +84,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/handlers/TriggerHandler', 'plugC
             }
             var users = API.getUsers();
 
-            for (var i in users) {
-                if (users.hasOwnProperty(i)) {
-                    p3Utils.setUserData(users[i].id, 'curVote', 0);
-                }
+            for (var i = 0; i < users.length; i++) {
+                p3Utils.setUserData(users[i].id, 'curVote', 0);
             }
         },
         onWaitListUpdate: function(data) {

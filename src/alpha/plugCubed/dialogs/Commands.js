@@ -18,7 +18,8 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/Utils'], funct
         ['/commands', 'commands.descriptions.commands'],
         ['/link', 'commands.descriptions.link'],
         ['/unload', 'commands.descriptions.unload'],
-        ['/volume', '(commands.variables.number / + / | / - )', 'commands.descriptions.volume']
+        ['/volume', '(commands.variables.number / + / | / - )', 'commands.descriptions.volume'],
+        ['/plcount', 'commands.descriptions.plcount']
     ];
     var modCmds = [
         ['/whois', '(commands.variables.username)', 'commands.descriptions.whois', API.ROLE.BOUNCER],

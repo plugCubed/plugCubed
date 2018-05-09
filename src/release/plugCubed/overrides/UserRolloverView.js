@@ -1,6 +1,7 @@
 define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/Lang'], function($, OverrideHandler, p3Utils, p3Lang) {
-    var CurrentUser, Handler, UserRolloverView;
+    var Context, CurrentUser, Handler, UserRolloverView;
 
+    Context = window.plugCubedModules.context;
     CurrentUser = window.plugCubedModules.CurrentUser;
     UserRolloverView = window.plugCubedModules.userRollover;
     Handler = OverrideHandler.extend({
@@ -17,6 +18,7 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
                 this._showSimple(a, b);
                 var specialIconInfo = p3Utils.getPlugCubedSpecial(a.id);
                 var rank = p3Utils.getRank(a.id);
+                var actions = this.$el.find('.actions');
 
                 if (rank === 'dj') rank = 'residentdj';
 
@@ -26,6 +28,60 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
                 if (CurrentUser.hasPermission(API.ROLE.BOUNCER) || CurrentUser.hasPermission(API.ROLE.BOUNCER, true) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) {
                     if (this.$p3VoteIcon == null) {
                         this.$p3VoteIcon = $('<i>');
+                    }
+                    if (((CurrentUser.get('role') > this.user.get('role')) || CurrentUser.get('gRole') > window.plugCubedModules.GROLE.PLOT) && this.user.get('gRole') < window.plugCubedModules.GROLE.SITEMOD) {
+                        this.$quickBan = $('<div>').addClass('action p3-qban').append($('<i>').addClass('icon-p3-qban'));
+                        this.$quickMute = $('<div>').addClass('action p3-qmute').append($('<i>').addClass('icon-p3-qmute'));
+                        this.$quickInfo = $('<div>').addClass('action p3-qinfo').append($('<i>').addClass('icon icon-user-white'));
+
+                        this.$quickBan.on({
+                            click: function() {
+                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickBan'), $(this), true);
+                                p3Utils.banUser(this.user.get('id'), API.BAN.PERMA);
+                                this.cleanup();
+                            }.bind(this),
+                            mouseenter: function() {
+                                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.quickBan'), $(this), true);
+                            },
+                            mouseleave: function() {
+                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickBan'), $(this), true);
+                            }
+                        });
+                        this.$quickInfo.on({
+                            click: function() {
+                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.userInfo'), $(this), true);
+                                p3Utils.getUserInfo(this.user.get('id'));
+                                this.cleanup();
+                            }.bind(this),
+                            mouseenter: function() {
+                                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.userInfo'), $(this), true);
+                            },
+                            mouseleave: function() {
+                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.userInfo'), $(this), true);
+                            }
+                        });
+                        this.$quickMute.on({
+                            click: function() {
+                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickMute'), $(this), true);
+                                p3Utils.muteUser(this.user.get('id'), API.MUTE.LONG);
+                                this.cleanup();
+                            }.bind(this),
+                            mouseenter: function() {
+                                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.quickMute'), $(this), true);
+                            },
+                            mouseleave: function() {
+                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickMute'), $(this), true);
+                            }
+                        });
+                        if (!this.$el.find('.actions .p3-qban').length && !this.$el.find('.actions .rcs-qban').length) {
+                            actions.append(this.$quickBan);
+                        }
+                        if (!this.$el.find('.actions .p3-qmute').length && !this.$el.find('.actions .rcs-qmute').length) {
+                            actions.append(this.$quickMute);
+                        }
+                        if (!this.$el.find('.actions .p3-qinfo').length && !this.$el.find('.actions .rcs-qinfo').length) {
+                            actions.append(this.$quickInfo);
+                        }
                     }
 
                     if (a.get('vote') && (a.get('vote') === 1 || a.get('vote') === -1)) {
@@ -81,6 +137,15 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
                 }
                 if (this.$p3VoteIcon != null) {
                     this.$p3VoteIcon.empty();
+                }
+                if (this.$quickBan != null) {
+                    this.$quickBan.remove();
+                }
+                if (this.$quickInfo != null) {
+                    this.$quickInfo.remove();
+                }
+                if (this.$quickMute != null) {
+                    this.$quickMute.remove();
                 }
                 this.$meta.removeClass('has-p3Role is-p3developer is-p3sponsor is-p3special is-p3ambassador is-p3donatorDiamond is-p3donatorPlatinum is-p3donatorGold is-p3donatorSilver is-p3donatorBronze rank-regular rank-residentdj rank-bouncer rank-manager rank-cohost rank--host rank-ambassador rank-admin');
             };

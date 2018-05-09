@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/dialogs/panels/About', 'plugCubed/dialogs/panels/Background', 'plugCubed/dialogs/panels/ChatCustomization', 'plugCubed/dialogs/panels/CustomCSS'], function() {
+define(['plugCubed/Class', 'plugCubed/dialogs/panels/About', 'plugCubed/dialogs/panels/Background', 'plugCubed/dialogs/panels/Commands', 'plugCubed/dialogs/panels/ChatCustomization', 'plugCubed/dialogs/panels/CustomCSS'], function() {
     var modules, Class, Handler;
 
     modules = _.toArray(arguments);

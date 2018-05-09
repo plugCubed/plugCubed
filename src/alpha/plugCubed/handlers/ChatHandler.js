@@ -277,6 +277,34 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
         }
     }
 
+    function notif(data) {
+        var badge, badgeURL, title, notification;
+
+        badge = API.getUser(data.uid).badge;
+        badgeURL = 'https://cdn.rawgit.com/WiBla/Plug-Badges/master/img/' + (badge === 'beachb-e01' ? badge + '.gif' : badge === 'beachb-e02' ? badge + '.gif' : badge === 'nycb-e01' ? badge + '.gif' : badge === 'nycb-e02' ? badge + '.gif' : badge + '.png');
+
+        if ((p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER, true) || p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) && Settings.moderation.inlineUserInfo) {
+            title = 'You have been mentioned by: ' + p3Utils.cleanHTML(data.un, '*') + ' (LVL: ' + API.getUser(data.uid).level + ' | ID: ' + data.uid + ')';
+        } else title = 'You have been mentioned by: ' + p3Utils.cleanHTML(data.un, '*');
+
+        p3Utils.cleanHTML(data.message.replace(/<br\s*\/*>/gi, '\n'), ['div', 'table', 'tr', 'td', 'span']);
+        Notification.requestPermission(function(perm) {
+            if (perm === 'granted') {
+                notification = new Notification(title, {
+                    icon: badgeURL,
+                    body: p3Utils.cleanHTML(data.message, ['div', 'table', 'tr', 'td', 'span'], ['img', 'video', 'source']),
+                    timestamp: data.timestamp
+                });
+
+                notification.onclick = function(e) {
+                    window.focus();
+                    this.close();
+                };
+                setTimeout(notification.close.bind(notification), 10 * 1000);
+            }
+        });
+    }
+
     function onChatReceived(data) {
         if (!data.uid) return;
 
@@ -388,29 +416,33 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                 .append(deleteButton);
         }
 
+        if (data.type === 'mention' && Settings.desktopNotifs && !Settings.autorespond) {
+            if (!document.hasFocus()) notif(data);
+        }
+
         $msg.html(previousMessages + p3Utils.cleanHTML(data.message, ['div', 'table', 'tr', 'td'], ['img', 'video', 'source']));
 
-        $this.dblclick(function(e) {
+        $msg.dblclick(function(e) {
             if (!e.ctrlKey) return;
             if (!/message|mention|emote/i.test(e.currentTarget.className)) return;
 
-            var element = $(e.currentTarget);
-            var url = 'https://translate.yandex.net/api/v1.5/tr.json/translate';
-            var apiKey = 'trnsl.1.1.20180213T120107Z.45d63416cc4229dc.58d28e5eba318bc498d2723cb08edca39a80ab82';
-            var xhr = new XMLHttpRequest();
-            var text = element.find('.text').html().replace(/<br\s*\/*>/gi, '\n');
-            var lang = API.getUser().language;
-            var msgBeforeTranslate = element.data('msgBeforeTranslate');
-            var translate;
+            var element, url, apiKey, xhr, text, lang, msgBeforeTranslate, translate;
+
+            element = $(e.currentTarget);
+            url = 'https://translate.yandex.net/api/v1.5/tr.json/translate';
+            apiKey = 'trnsl.1.1.20180213T120107Z.45d63416cc4229dc.58d28e5eba318bc498d2723cb08edca39a80ab82';
+            xhr = new XMLHttpRequest();
+            text = element.find('.text').html().replace(/<br\s*\/*>/gi, '\n');
+            lang = API.getUser().language;
+            msgBeforeTranslate = element.data('msgBeforeTranslate');
 
             if (element.data('translated')) {
-                element.find('.text').html(msgBeforeTranslate.replace(/\n/gi, '<br>'));
+                element.html(msgBeforeTranslate.replace(/\n/gi, '<br>'));
                 element.data({
                     msgBeforeTranslate: null, translated: false
                 });
-
             } else {
-                translate = 'key=' + apiKey + '&text=' + text + '&lang=' + lang;
+                translate = 'key=' + apiKey + '&text=' + encodeURIComponent(text) + '&lang=' + lang;
                 xhr.open('POST', url, true);
                 xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                 xhr.send(translate);
@@ -424,7 +456,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                                 msgBeforeTranslate: text, translated: true
                             });
 
-                            return element.find('.text').html(json.text[0].replace(/\n/gi, '<br>'));
+                            element.html(json.text[0].replace(/\n/gi, '<br>'));
                         }
                     }
                 };

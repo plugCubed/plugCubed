@@ -38,13 +38,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
             if (div != null) {
                 if (div.css('left') === '-500px') {
                     div.animate({
-                        left: $settings.width() + 1
+                        left: $settings.width() + 50
                     });
 
                     return;
                 }
                 div.animate({
-                    left: -div.width() - 2
+                    left: -div.width() - 100
                 }, {
                     complete: function() {
                         if (div) {
@@ -56,14 +56,14 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
 
                 return;
             }
-            var container = $('<div class="container">').append($('<div class="section">').text('User Ranks'));
+            var container = $('<div class="p3-container">').append($('<div class="section">').text(p3Lang.i18n('customchatcolors.userRanksHeader')));
 
             for (i in Settings.colorInfo.ranks) {
                 if (Settings.colorInfo.ranks.hasOwnProperty(i)) {
                     container.append(guiInput(i, p3Lang.i18n(Settings.colorInfo.ranks[i].title), Settings.colorInfo.ranks[i].color));
                 }
             }
-            container.append($('<div class="spacer">').append($('<div class="divider">'))).append($('<div class="section">').text(p3Lang.i18n('notify.header')));
+            container.append($('<div class="spacer">').append($('<div class="divider">'))).append($('<div class="section">').text(p3Lang.i18n('customchatcolors.chatnotifs')));
             for (i in Settings.colorInfo.notifications) {
                 if (Settings.colorInfo.notifications.hasOwnProperty(i)) {
                     if (i === 'songLength') {
@@ -91,14 +91,14 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
                     });
                 }
             })).append($('<div class="title">').append($('<span>').text(p3Lang.i18n('menu.customchatcolors'))))).append(container).animate({
-                left: $settings.width() + 1
+                left: $settings.width() + 50
             });
             $('#p3-settings-wrapper').append(div);
         },
         hide: function() {
             if (div != null) {
                 div.animate({
-                    left: -div.width() - 2
+                    left: -div.width() - 100
                 }, {
                     complete: function() {
                         if (div) {

@@ -33,6 +33,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
             $table.append($('<tr>').append($('<td>').attr('colspan', 2).append($('<strong>').text('Twitter: ')).append($('<span>').css('color', '#FFFFFF').html('<a href="https://twitter.com/plugCubed" target="_blank" style="color:#FFFFFF;">plug³ Twitter</a>'))));
 
             $contentDiv.append($('<br>')).append($table);
+
             panel.addContent($contentDiv);
 
         },

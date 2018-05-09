@@ -1,7 +1,8 @@
-define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/dialogs/Commands', 'plugCubed/Settings', 'plugCubed/Version', 'plugCubed/StyleManager', 'plugCubed/bridges/PlaybackModel'], function(TriggerHandler, p3Utils, p3Lang, dialogCommands, Settings, Version, StyleManager, PlaybackModel) {
-    var CommandHandler, user, Context;
+define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/dialogs/Commands', 'plugCubed/Settings', 'plugCubed/Version', 'plugCubed/StyleManager'], function(TriggerHandler, p3Utils, p3Lang, dialogCommands, Settings, Version, StyleManager) {
+    var CommandHandler, user, Context, PlaybackModel;
 
     Context = window.plugCubedModules.context;
+    PlaybackModel = window.plugCubedModules.currentMedia;
 
     function commandLog(message) {
         p3Utils.chatLog('message', message, undefined, -11);
@@ -80,7 +81,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
     CommandHandler = TriggerHandler.extend({
         trigger: API.CHAT_COMMAND,
         handler: function(value) {
-            var i, msg, time, reason;
+            var i, msg, time, reason, pls, plsAmount, plTotalSongs, plsEmpty, pl;
             var commandData = commandParser(value);
             var args = commandData.args;
             var mappedArgs = commandData.mappedArgs;
@@ -153,13 +154,13 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 commandLog(p3Lang.i18n('running', Version));
             } else if (p3Utils.equalsIgnoreCase(command, 'mute')) {
                 if (API.getVolume() === 0) return;
-                PlaybackModel.mute();
+                API.setVolume(0);
             } else if (p3Utils.equalsIgnoreCase(command, 'unmute')) {
                 if (API.getVolume() > 0) return;
-                PlaybackModel.unmute();
+                API.setVolume(100);
             } else if (p3Utils.equalsIgnoreCase(command, 'muteonce')) {
                 if (API.getVolume() === 0) return;
-                PlaybackModel.muteOnce();
+                API.setVolume(100);
             } else if (p3Utils.equalsIgnoreCase(command, 'link')) {
                 var message = 'plugCubed: https://plugcubed.net';
 
@@ -197,11 +198,11 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 if (media == null) return;
                 if (Settings.registeredSongs.indexOf(media.id) < 0) {
                     Settings.registeredSongs.push(media.id);
-                    PlaybackModel.muteOnce();
+                    API.setVolume(0);
                     commandLog(p3Lang.i18n('commands.responses.automute.registered', media.title));
                 } else {
                     Settings.registeredSongs.splice(Settings.registeredSongs.indexOf(media.id), 1);
-                    PlaybackModel.unmute();
+                    API.setVolume(100);
                     commandLog(p3Lang.i18n('commands.responses.automute.unregistered', media.title));
                 }
                 Settings.save();
@@ -248,6 +249,65 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Utils', 'plugCubed/Lang'
                 Settings.alertson = [];
                 Settings.save();
                 commandLog(p3Lang.i18n('commands.responses.alertsoff'));
+            } else if (p3Utils.equalsIgnoreCaseTrim(value, '/plcount') || p3Utils.startsWithIgnoreCase(value, '/plcount')) {
+                pls = window.plugCubedModules.playlists;
+
+                if (!pls.models) return commandLog(p3Lang.i18n('errorGettingPlaylistInfo'));
+                if (!pls.models.length) return commandLog(p3Lang.i18n('error.noPlaylistsFound'));
+                plsAmount = pls.models.length;
+                plTotalSongs = 0;
+                plsEmpty = 0;
+                switch (args[0]) {
+                    default:
+                    case 'all':
+                        for (i = 0; i < plsAmount; i++) {
+                            pl = pls.models[i].attributes;
+                            plTotalSongs += pl.count;
+                        }
+
+                        p3Utils.chatLog(undefined, p3Lang.i18n('playlist.amount', plsAmount));
+                        p3Utils.chatLog(undefined, p3Lang.i18n('playlist.totalsongs', plTotalSongs));
+
+                        break;
+                    case 'empty':
+                        for (i = 0; i < plsAmount; i++) {
+                            pl = pls.models[i].attributes;
+
+                            if (pl.count === 0) plsEmpty += 1;
+                        }
+
+                        p3Utils.chatLog(undefined, p3Lang.i18n('playlist.empty', plsEmpty));
+
+                        break;
+                    case 'unavailable':
+                        for (i = 0; i < plsAmount; i++) {
+                            pl = pls.models[i].attributes;
+
+                            $.getJSON('/_/playlists/' + pl.id + '/media')
+                                .done(function(resp) {
+                                    for (var s = 0; s < resp.data.length; s++) {
+                                        var url = 'https://www.googleapis.com/youtube/v3/videos?id=' + resp.data[s].id + '&part=status&key=' + gapi.config.get().client.apiKey;
+
+                                        $.ajax({
+                                            url: url,
+                                            type: 'GET',
+                                            dataType: 'jsonp',
+                                            cache: false,
+                                            success: function(videoData) {
+                                                if (videoData.items.length > 0) {
+                                                    if (!videoData.items.status.embedable) {
+                                                        plTotalSongs += 1;
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    }
+                                    p3Utils.chatLog(undefined, p3Lang.i18n('playlist.amount', plsAmount));
+                                    p3Utils.chatLog(undefined, p3Lang.i18n('playlist.totalunavailablesongs', plTotalSongs));
+                                });
+                        }
+                        break;
+                }
             }
 
             /* Bouncer and above or p3 Ambassador / Dev */

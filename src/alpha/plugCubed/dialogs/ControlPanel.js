@@ -287,6 +287,10 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             this.shown = typeof shown === 'boolean' ? shown : !this.shown;
             shownHeight = $(document).height() - 108;
 
+            if (this.shown) {
+                p3Utils.closePlugMenus();
+            }
+
             var that = this;
 
             $controlPanelDiv.animate({

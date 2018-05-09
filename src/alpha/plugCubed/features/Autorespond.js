@@ -1,4 +1,4 @@
-define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/RoomSettings', 'plugCubed/Utils', 'plugCubed/bridges/PlaybackModel', 'plugCubed/dialogs/Menu'], function(TriggerHandler, p3Lang, Settings, RoomSettings, p3Utils, PlaybackModel, Menu) {
+define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Lang', 'plugCubed/Settings', 'plugCubed/RoomSettings', 'plugCubed/Utils', 'plugCubed/dialogs/Menu'], function(TriggerHandler, p3Lang, Settings, RoomSettings, p3Utils, Menu) {
     var Lang, Handler;
 
     Lang = window.plugCubedModules.Lang;

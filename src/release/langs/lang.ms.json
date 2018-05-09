@@ -57,7 +57,8 @@
             "status": "Menunjukkan status Pelayan Plug",
             "unload": "Tutupkan Plug&#179;",
             "unban": "Unbans targeted user.",
-            "volume": "Menetapkan kelantangan dengan nombor (0-100), meningkatkan dengan 1 bersama +, menurun dengan 1 bersama -"
+            "volume": "Menetapkan kelantangan dengan nombor (0-100), meningkatkan dengan 1 bersama +, menurun dengan 1 bersama -",
+            "plcount": "Count how many playlists you have and total amount of songs"
         },
         "responses": {
             "alertson": "Berbunyi pada perkataan yang berikut: %1",
@@ -196,7 +197,8 @@
         "commands": "Perintah chat",
         "customcss": "Kustom CSS",
         "lowlagMode": "Mod Lag Rendah",
-        "workMode": "Mod Kerja"
+        "workMode": "Mod Kerja",
+        "desktopNotifs": "Desktop Notifications"
     },
     "vote": {
         "meh": "Meh",
@@ -272,5 +274,11 @@
         "hidden": "Video Hidden",
         "disabled": "Video Disabled",
         "snooze": "Video Snoozed"
+    },
+    "playlist": {
+        "amount": "Total amount of playlists: %1",
+        "empty": "Total amount of empty playlists: %1",
+        "totalsongs": "Total amount of songs: %1",
+        "totalunavailablesongs": "Total amount of unavailable songs: %1"
     }
 }

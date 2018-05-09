@@ -277,6 +277,34 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
         }
     }
 
+    function notif(data) {
+        var badge, badgeURL, title, notification;
+
+        badge = API.getUser(data.uid).badge;
+        badgeURL = 'https://cdn.rawgit.com/WiBla/Plug-Badges/master/img/' + (badge === 'beachb-e01' ? badge + '.gif' : badge === 'beachb-e02' ? badge + '.gif' : badge === 'nycb-e01' ? badge + '.gif' : badge === 'nycb-e02' ? badge + '.gif' : badge + '.png');
+
+        if ((p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER, true) || p3Utils.hasPermission(data.uid, API.ROLE.BOUNCER) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador()) && Settings.moderation.inlineUserInfo) {
+            title = 'You have been mentioned by: ' + p3Utils.cleanHTML(data.un, '*') + ' (LVL: ' + API.getUser(data.uid).level + ' | ID: ' + data.uid + ')';
+        } else title = 'You have been mentioned by: ' + p3Utils.cleanHTML(data.un, '*');
+
+        p3Utils.cleanHTML(data.message.replace(/<br\s*\/*>/gi, '\n'), ['div', 'table', 'tr', 'td', 'span']);
+        Notification.requestPermission(function(perm) {
+            if (perm === 'granted') {
+                notification = new Notification(title, {
+                    icon: badgeURL,
+                    body: p3Utils.cleanHTML(data.message, ['div', 'table', 'tr', 'td', 'span'], ['img', 'video', 'source']),
+                    timestamp: data.timestamp
+                });
+
+                notification.onclick = function(e) {
+                    window.focus();
+                    this.close();
+                };
+                setTimeout(notification.close.bind(notification), 10 * 1000);
+            }
+        });
+    }
+
     function onChatReceived(data) {
         if (!data.uid) return;
 
@@ -388,35 +416,57 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
                 .append(deleteButton);
         }
 
+        if (data.type === 'mention' && Settings.desktopNotifs && !Settings.autorespond) {
+            if (!document.hasFocus()) notif(data);
+        }
+
         $msg.html(previousMessages + p3Utils.cleanHTML(data.message, ['div', 'table', 'tr', 'td'], ['img', 'video', 'source']));
 
-        $this.data('translated', false);
-        $this.dblclick(function(e) {
+        $msg.dblclick(function(e) {
             if (!e.ctrlKey) return;
-            if ($this.data('translated')) {
-                $msg.html(previousMessages + convertEmotes(convertImageLinks(data.message)));
-                $this.data('translated', false);
+            if (!/message|mention|emote/i.test(e.currentTarget.className)) return;
+
+            var element, url, apiKey, xhr, text, lang, msgBeforeTranslate, translate;
+
+            element = $(e.currentTarget);
+            url = 'https://translate.yandex.net/api/v1.5/tr.json/translate';
+            apiKey = 'trnsl.1.1.20180213T120107Z.45d63416cc4229dc.58d28e5eba318bc498d2723cb08edca39a80ab82';
+            xhr = new XMLHttpRequest();
+            text = element.find('.text').html().replace(/<br\s*\/*>/gi, '\n');
+            lang = API.getUser().language;
+            msgBeforeTranslate = element.data('msgBeforeTranslate');
+
+            if (element.data('translated')) {
+                element.html(msgBeforeTranslate.replace(/\n/gi, '<br>'));
+                element.data({
+                    msgBeforeTranslate: null, translated: false
+                });
             } else {
-                $msg.html('<em>Translating...</em>');
-                $.getJSON('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20161006T200452Z.20a8f9334badc4dc.03bec1dcee7047013bf54af595d257c5e8fca99d&lang=en&options=1&text=' + encodeURIComponent(data.message.replace('&nbsp;', ' ')))
-                    .done(function(langData) {
-                        if (langData.error) {
-                            $msg.html(previousMessages + convertEmotes(convertImageLinks(data.message)));
-                            $this.data('translated', false);
-                        } else if (langData.detected && langData.detected.lang && langData.detected.lang !== 'en') {
-                            $msg.html(previousMessages + convertEmotes(convertImageLinks((Array.isArray(langData.text) && langData.text.length > 0 ? langData.text[0] : data.message))));
-                            $this.data('translated', true);
-                        } else {
-                            $msg.html(previousMessages + convertEmotes(convertImageLinks(data.message)));
-                            $this.data('translated', false);
+                translate = 'key=' + apiKey + '&text=' + encodeURIComponent(text) + '&lang=' + lang;
+                xhr.open('POST', url, true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.send(translate);
+                xhr.onreadystatechange = function() {
+                    if (this.readyState === 4 && this.status === 200) {
+                        var res = this.responseText;
+                        var json = JSON.parse(res);
+
+                        if (json.code === 200) {
+                            element.data({
+                                msgBeforeTranslate: text, translated: true
+                            });
+
+                            element.html(json.text[0].replace(/\n/gi, '<br>'));
                         }
-                    })
-                    .fail(function() {
-                        $msg.html(previousMessages + convertEmotes(convertImageLinks(data.message)));
-                        $this.data('translated', false);
-                    });
+                    }
+                };
             }
-            e.stopPropagation();
+        });
+
+        $this.on('mouseover', function() {
+            if ($this.data('translated')) Context.trigger('tooltip:show', 'Translated', $(this), true);
+        }).on('mouseout', function() {
+            Context.trigger('tooltip:hide');
         });
     }
 

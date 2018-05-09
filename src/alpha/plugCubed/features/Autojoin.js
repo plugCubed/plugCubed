@@ -5,7 +5,7 @@ define(['plugCubed/handlers/TriggerHandler', 'plugCubed/Settings', 'plugCubed/Ro
         var dj = API.getDJ();
 
         if ((dj != null && dj.id === API.getUser().id) || API.getWaitListPosition() > -1 || API.getWaitList().length === 50) return;
-        $('#dj-button').click();
+        $('.room-controls__bottom-item.dj-button').click();
     };
 
     Handler = TriggerHandler.extend({

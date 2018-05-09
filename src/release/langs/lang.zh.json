@@ -57,7 +57,8 @@
             "status": "顯示plug伺服器的狀態",
             "unload": "關閉 Plug&#179;",
             "unban": "Unbans targeted user.",
-            "volume": "設置一個數字 (0-100) 的音量, 以 +1 來增加, 以 -1來減少"
+            "volume": "設置一個數字 (0-100) 的音量, 以 +1 來增加, 以 -1來減少",
+            "plcount": "Count how many playlists you have and total amount of songs"
         },
         "responses": {
             "alertson": "對下列詞語播放聲音: %1",
@@ -196,7 +197,8 @@
         "commands": "聊天指令",
         "customcss": "自訂義 CSS",
         "lowlagMode": "低遲滯模式",
-        "workMode": "工作模式"
+        "workMode": "工作模式",
+        "desktopNotifs": "Desktop Notifications"
     },
     "vote": {
         "meh": "負評",
@@ -272,5 +274,11 @@
         "hidden": "Video Hidden",
         "disabled": "Video Disabled",
         "snooze": "Video Snoozed"
+    },
+    "playlist": {
+        "amount": "Total amount of playlists: %1",
+        "empty": "Total amount of empty playlists: %1",
+        "totalsongs": "Total amount of songs: %1",
+        "totalunavailablesongs": "Total amount of unavailable songs: %1"
     }
 }
