@@ -58,7 +58,7 @@
             "unload": "Suleb plug³",
             "unban": "unbannitud sihitud kasutaja.",
             "volume": "Määra helitugevus numbri (0-100), suurendage 1 võrra + väärtusega, vähendage 1 võrra -",
-            "plcount": "Count how many playlists you have and total amount of songs"
+            "plcount": "Loendama kui palju teil on esitusloendeid ja laulude kogusumma"
         },
         "responses": {
             "alertson": "Mängib heli järgmised sõnad: %1",
@@ -198,7 +198,7 @@
         "customcss": "Kohandatud CSS",
         "lowlagMode": "Madal Lag Režiim",
         "workMode": "Töö Režiim",
-        "desktopNotifs": "Desktop Notifications"
+        "desktopNotifs": "Töölaua Teavitused"
     },
     "vote": {
         "meh": "Kehv lugu",
@@ -276,9 +276,9 @@
         "snooze": "Video Tukastas"
     },
     "playlist": {
-        "amount": "Total amount of playlists: %1",
-        "empty": "Total amount of empty playlists: %1",
-        "totalsongs": "Total amount of songs: %1",
-        "totalunavailablesongs": "Total amount of unavailable songs: %1"
+        "amount": "Kogu summa Esitusloendis: %1",
+        "empty": "Kogu summa Tühjade Esitusloendis: %1",
+        "totalsongs": "Kogu summa laulud: %1",
+        "totalunavailablesongs": "Kogu summa mitte saadaval laulud: %1"
     }
 }

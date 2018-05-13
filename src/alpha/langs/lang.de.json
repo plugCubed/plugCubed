@@ -56,9 +56,9 @@
             "banall": "Bannt alle Benutzer im Raum",
             "status": "Zeigt den Status der plug.dj-Server",
             "unload": "Schließt plug&#179;",
-            "unban": "Unbans targeted user.",
+            "unban": "Entbannt den gewählten Nutzer.",
             "volume": "Setze die Lautstärke mit einer Zahl (0 - 100), erhöhe sie um 1 mit +, verringere sie um 1 mit -",
-            "plcount": "Count how many playlists you have and total amount of songs"
+            "plcount": "Zähle, wie viele Playlists und Songs du hast"
         },
         "responses": {
             "alertson": "Ein Ton wird bei folgenden Wörtern abgespielt: %1",
@@ -198,7 +198,7 @@
         "customcss": "Benutzerdefiniertes CSS",
         "lowlagMode": "Geringer-Lag-Modus",
         "workMode": "Arbeitsmodus",
-        "desktopNotifs": "Desktop Notifications"
+        "desktopNotifs": "Desktop Benachrichtigungen"
     },
     "vote": {
         "meh": "Meh",
@@ -271,14 +271,14 @@
         "hide": "Ausblenden",
         "menushow": "Video Anzeigen",
         "menuhide": "Video ausblenden",
-        "hidden": "Video Hidden",
-        "disabled": "Video Disabled",
-        "snooze": "Video Snoozed"
+        "hidden": "Video versteckt",
+        "disabled": "Video deaktiviert",
+        "snooze": "Video stumm"
     },
     "playlist": {
-        "amount": "Total amount of playlists: %1",
-        "empty": "Total amount of empty playlists: %1",
-        "totalsongs": "Total amount of songs: %1",
-        "totalunavailablesongs": "Total amount of unavailable songs: %1"
+        "amount": "Anzahl an Playlists: %1",
+        "empty": "Anzahl an leeren Playlists: %1",
+        "totalsongs": "Anzahl verfügbarer Songs: %1",
+        "totalunavailablesongs": "Anzahl nicht verfügbarer Songs: %1"
     }
 }
