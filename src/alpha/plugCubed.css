@@ -35,7 +35,7 @@
 .afkTimer {
     position: absolute;
     right: 0;
-    top: 23px;
+    top: 14px;
     font-size: 12px;
     color: rgb(150, 150, 150);
 }
@@ -289,6 +289,7 @@
     font-weight: 300;
     margin-left: 45px;
     margin-right: 10px;
+    text-transform: capitalize;
     white-space: nowrap;
 }
 
@@ -1008,4 +1009,26 @@ table.p3-commands-list {
 table.p3-commands-list th, table.p3-commands-list td {
     padding: 8px;
     border-bottom: 1px solid #232529;
+}
+
+
+/** Plug fixes **/
+
+/** Move the X on waitlist to the side **/
+.right-side-wrapper #waitlist .icon-x-white {
+    right: -8px !important;
+}
+/** Make badges great again **/
+#chat .badge-box i {
+    -webkit-transform: unset;
+    -ms-transform: unset;
+    transform: unset;
+}
+/** Remove the blue from player **/
+.community .community__playing-top {
+    background-color:  unset;
+}
+/** Fixes the song title **/
+.community__playing-bottom-container {
+    max-width: 100%;
 }

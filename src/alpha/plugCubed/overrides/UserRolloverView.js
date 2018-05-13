@@ -1,7 +1,6 @@
-define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/Lang'], function($, OverrideHandler, p3Utils, p3Lang) {
-    var Context, CurrentUser, Handler, UserRolloverView;
+define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plugCubed/Lang', 'lang/Lang'], function($, OverrideHandler, p3Utils, p3Lang, Lang) {
+    var CurrentUser, Handler, UserRolloverView;
 
-    Context = window.plugCubedModules.context;
     CurrentUser = window.plugCubedModules.CurrentUser;
     UserRolloverView = window.plugCubedModules.userRollover;
     Handler = OverrideHandler.extend({
@@ -36,43 +35,22 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
 
                         this.$quickBan.on({
                             click: function() {
-                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickBan'), $(this), true);
                                 p3Utils.banUser(this.user.get('id'), API.BAN.PERMA);
                                 this.cleanup();
-                            }.bind(this),
-                            mouseenter: function() {
-                                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.quickBan'), $(this), true);
-                            },
-                            mouseleave: function() {
-                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickBan'), $(this), true);
-                            }
-                        });
+                            }.bind(this)
+                        }).attr('title', p3Lang.i18n('tooltip.quickBan'));
                         this.$quickInfo.on({
                             click: function() {
-                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.userInfo'), $(this), true);
                                 p3Utils.getUserInfo(this.user.get('id'));
                                 this.cleanup();
-                            }.bind(this),
-                            mouseenter: function() {
-                                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.userInfo'), $(this), true);
-                            },
-                            mouseleave: function() {
-                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.userInfo'), $(this), true);
-                            }
-                        });
+                            }.bind(this)
+                        }).attr('title', p3Lang.i18n('tooltip.userInfo'));
                         this.$quickMute.on({
                             click: function() {
-                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickMute'), $(this), true);
                                 p3Utils.muteUser(this.user.get('id'), API.MUTE.LONG);
                                 this.cleanup();
-                            }.bind(this),
-                            mouseenter: function() {
-                                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.quickMute'), $(this), true);
-                            },
-                            mouseleave: function() {
-                                Context.trigger('tooltip:hide', p3Lang.i18n('tooltip.quickMute'), $(this), true);
-                            }
-                        });
+                            }.bind(this)
+                        }).attr('title', p3Lang.i18n('tooltip.quickMute'));
                         if (!this.$el.find('.actions .p3-qban').length && !this.$el.find('.actions .rcs-qban').length) {
                             actions.append(this.$quickBan);
                         }
@@ -86,8 +64,9 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
 
                     if (a.get('vote') && (a.get('vote') === 1 || a.get('vote') === -1)) {
                         var vote = a.get('vote');
+                        var voteType = vote === -1 ? 'meh' : 'woot';
 
-                        this.$p3VoteIcon.removeClass().addClass('p3VoteIcon icon icon-' + (vote === -1 ? 'meh' : 'woot'));
+                        this.$p3VoteIcon.removeClass().addClass('p3VoteIcon icon icon-' + voteType).attr('title', Lang.vote[voteType]);
                         this.$meta.append(this.$p3VoteIcon);
                     } else {
                         this.$p3VoteIcon.remove();
@@ -120,11 +99,12 @@ define(['jquery', 'plugCubed/handlers/OverrideHandler', 'plugCubed/Utils', 'plug
                     if (specialIconInfo != null) {
                         this.$p3Role.text($('<span>').html(specialIconInfo.title).text()).css({
                             'background-image': 'url("https://plugcubed.net/scripts/alpha/images/ranks/p3special.' + specialIconInfo.icon + '.png")'
-                        });
+                        }).attr('title', specialIconInfo.title);
                     } else {
-                        this.$p3Role.text($('<span>').html(p3Utils.getHighestRankString(a.id)).text());
+                        this.$p3Role.text($('<span>').html(p3Utils.getHighestRankString(a.id)).text()).attr('title', p3Utils.getHighestRankString(a.id));
                     }
                 }
+                p3Utils.initTooltips();
             };
 
             UserRolloverView.clear = function() {

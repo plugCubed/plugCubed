@@ -1,5 +1,5 @@
-define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function(Class, p3Lang) {
-    var cleanHTMLMessage, Context, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PopoutView, html2text, Settings, Styles;
+define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader', 'lang/Lang'], function(Class, p3Lang, Lang) {
+    var cleanHTMLMessage, Context, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, PopoutView, html2text, Settings, Styles;
 
     if (typeof window.plugCubedUserData === 'undefined') {
         window.plugCubedUserData = {};
@@ -30,7 +30,6 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
     };
     Context = window.plugCubedModules.context;
     Database = window.plugCubedModules.database;
-    Lang = window.plugCubedModules.Lang;
     PopoutView = window.plugCubedModules.PopoutView;
     developer = sponsor = ambassador = donatorDiamond = donatorPlatinum = donatorGold = donatorSilver = donatorBronze = [];
     special = {};
@@ -85,6 +84,10 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
     };
 
     var Handler = Class.extend({
+        initTooltips: function() {
+            if (window.plugCubedModules && window.plugCubedModules.app && window.plugCubedModules.app.setupTooltips && typeof window.plugCubedModules.app.setupTooltips === 'function') window.plugCubedModules.app.setupTooltips();
+
+        },
         proxifyImage: function(url) {
             if (!this.startsWithIgnoreCase(url, 'https://api.plugCubed.net/proxy/')) {
                 return 'https://api.plugCubed.net/proxy/' + url;
@@ -707,13 +710,13 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
                 switch (user.vote) {
                     case -1:
-                        voted = p3Lang.i18n('vote.meh');
+                        voted = Lang.vote.meh;
                         break;
                     default:
-                        voted = p3Lang.i18n('vote.undecided');
+                        voted = Lang.vote.grab;
                         break;
                     case 1:
-                        voted = p3Lang.i18n('vote.woot');
+                        voted = Lang.vote.woot;
                         break;
                 }
                 if (inbooth) {

@@ -7,23 +7,18 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
     plugEmotes = window.plugCubedModules.emoji;
     regEmotes = /:([a-zA-Z0-9]+):/g;
     plugEmotes.include_title = true;
-
     $('#chat-messages').on('mouseover', '.p3-twitch-emote, .p3-tasty-emote, .p3-bttv-emote, .p3-twitch-sub-emote, .p3-ffz-emote, .emoji-inner', function() {
         if ($(this)[0].title != null && $(this)[0].title.length > 0) {
             $(this)[0].dataset.emote = ' ' + $(this)[0].title;
-            $(this)[0].removeAttribute('title');
         }
         if ($(this)[0].className && $(this)[0].className.indexOf('gemoji-plug-') > -1) {
             $(this)[0].dataset.emote = /gemoji-plug-(.*)/gi.exec($(this)[0].className)[1];
         }
 
         if ($(this).data('emote') != null && $(this).data('emote').length > 0) {
-            Context.trigger('tooltip:show', $(this).data('emote'), $(this), true);
+            $(this).attr('title', $(this).data('emote'));
         }
-    }).on('mouseout', '.p3-twitch-emote, .p3-tasty-emote, .p3-bttv-emote, .p3-twitch-sub-emote, .p3-ffz-emote, .emoji-inner', function() {
-        Context.trigger('tooltip:hide');
     });
-
     function convertImageLinks(text, $message) {
         if (Settings.chatImages) {
             if (text.toLowerCase().indexOf('nsfw') < 0) {
@@ -261,7 +256,13 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
             emote = emoteData[lowerCode] || shortcode;
 
             if (emote && emote.imageURL) {
-                temp = temp.empty().append(image.removeClass().addClass(className).addClass('p3-emote').attr('src', emote.imageURL).attr('data-emote', p3Utils.html2text(emote.emote)));
+                var emoteText = p3Utils.html2text(emote.emote);
+
+                temp = temp.empty().append(image.removeClass().addClass(className).addClass('p3-emote').attr({
+                    src: emote.imageURL,
+                    'data-emote': emoteText,
+                    title: emoteText
+                }));
 
                 return shortcode.replace(emote.emoteRegex, temp.html());
             }
@@ -382,13 +383,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
 
             if (p3Rank != null) {
 
-                $icon = $('<i>').addClass('icon icon-chat-p3' + p3Rank).prependTo($this.find('.from'));
-
-                $icon.mouseover(function() {
-                    Context.trigger('tooltip:show', $('<span>').html(p3Utils.getAllPlugCubedRanks(data.uid)).text(), $(this), true);
-                }).mouseout(function() {
-                    Context.trigger('tooltip:hide');
-                });
+                $icon = $('<i>').addClass('icon icon-chat-p3' + p3Rank).prependTo($this.find('.from')).attr('title', p3Utils.getAllPlugCubedRanks(data.uid));
 
                 if (specialIconInfo != null) {
                     $icon.css('background-image', 'url("https://plugcubed.net/scripts/alpha/images/ranks/p3special.' + specialIconInfo.icon + '.png")');
@@ -463,11 +458,15 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
             }
         });
 
-        $this.on('mouseover', function() {
-            if ($this.data('translated')) Context.trigger('tooltip:show', 'Translated', $(this), true);
-        }).on('mouseout', function() {
-            Context.trigger('tooltip:hide');
-        });
+        /**
+         *
+         * $this.on('mouseover', function() {
+         * if ($this.data('translated')) Context.trigger('tooltip:show', 'Translated', $(this), true);
+         * }).on('mouseout', function() {
+         * Context.trigger('tooltip:hide');
+         * });
+         *
+         */
     }
 
     function onInputKeyUp(e) {

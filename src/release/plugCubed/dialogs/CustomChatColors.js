@@ -1,16 +1,11 @@
 define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColors', 'plugCubed/Settings', 'plugCubed/Utils'], function($, Class, p3Lang, CCC, Settings, p3Utils) {
-    var Context = window.plugCubedModules.context;
 
     function guiInput(id, text, defaultColor) {
         if (!Settings.colors[id]) {
             Settings.colors[id] = defaultColor;
         }
 
-        return $('<div class="item">').addClass('p3-s-cc-' + id).append($('<span>').text(text)).append($('<span>').addClass('default').css('display', (p3Utils.equalsIgnoreCase(Settings.colors[id], defaultColor) ? 'none' : 'block')).mouseover(function() {
-            Context.trigger('tooltip:show', p3Lang.i18n('tooltip.reset'), $(this), false);
-        }).mouseout(function() {
-            Context.trigger('tooltip:hide');
-        }).click(function() {
+        var element = $('<div class="item">').addClass('p3-s-cc-' + id).append($('<span>').text(text)).append($('<span>').addClass('default').css('display', (p3Utils.equalsIgnoreCase(Settings.colors[id], defaultColor) ? 'none' : 'block')).attr('title', p3Lang.i18n('tooltip.reset')).click(function() {
             $(this).parent().find('input').val(defaultColor);
             $(this).parent().find('.example').css('background-color', p3Utils.toRGB(defaultColor));
             $(this).css('display', 'none');
@@ -26,6 +21,10 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang', 'plugCubed/CustomChatColo
             }
             $(this).parent().find('.default').css('display', (p3Utils.equalsIgnoreCase($(this).val(), defaultColor) ? 'none' : 'block'));
         }));
+
+        p3Utils.initTooltips();
+
+        return element;
     }
 
     var div;
