@@ -1,5 +1,5 @@
-define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader', 'lang/Lang'], function(Class, p3Lang, Lang) {
-    var cleanHTMLMessage, Context, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, PopoutView, html2text, Settings, Styles;
+define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function(Class, p3Lang) {
+    var cleanHTMLMessage, Context, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, PopoutView, html2text, Settings, Styles, Lang;
 
     if (typeof window.plugCubedUserData === 'undefined') {
         window.plugCubedUserData = {};
@@ -30,6 +30,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader', 'lang/Lan
     };
     Context = window.plugCubedModules.context;
     Database = window.plugCubedModules.database;
+    Lang = window.plugCubedModules.Lang;
     PopoutView = window.plugCubedModules.PopoutView;
     developer = sponsor = ambassador = donatorDiamond = donatorPlatinum = donatorGold = donatorSilver = donatorBronze = [];
     special = {};
