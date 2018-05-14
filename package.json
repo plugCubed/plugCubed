@@ -48,7 +48,6 @@
     "buildAlpha": "gulp build:alpha",
     "buildDev": "gulp build:dev",
     "buildRelease": "gulp build:release",
-    "firefox": "jpm xpi --verbose --addon-dir ./extensions/Firefox",
     "test": "npm run testAlpha && npm run testRelease",
     "testAlpha": "gulp test:alpha",
     "testDev": "gulp test:dev",
