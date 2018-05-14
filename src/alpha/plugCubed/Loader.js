@@ -47,7 +47,6 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         FullscreenHandler.create();
         HideVideoHandler.create();
         VolumeSliderHandler.register();
-        window.plugCubedModules.currentMedia.on('playback:changeVolume', VolumeSliderHandler.onScroll);
 
         Settings.load();
 
