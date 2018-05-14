@@ -161,6 +161,7 @@
     top: 50px;
     bottom: 54px;
     width: 2px;
+    z-index: 100;
 }
 
 #p3-settings,
@@ -295,6 +296,11 @@
 
 #p3-settings .p3-container .item input {
     width: 200px;
+    background: transparent;
+    border: 2px solid;
+    border-radius: 10px;
+    padding-left: 5px;
+    height: 18px;
 }
 
 #p3-settings-custom-colors .p3-container .item span {
@@ -1025,7 +1031,11 @@ table.p3-commands-list th, table.p3-commands-list td {
     padding: 8px;
     border-bottom: 1px solid #232529;
 }
-
+#p3-eta-timer-span {
+    font-weight: normal !important;
+    font-size: 8px;
+    color: slategrey;
+}
 
 /** Plug fixes **/
 
@@ -1046,4 +1056,8 @@ table.p3-commands-list th, table.p3-commands-list td {
 /** Fixes the song title **/
 .community__playing-bottom-container {
     max-width: 100%;
+}
+.room-controls__bottom-text {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
