@@ -12,12 +12,14 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
             panel.addContent($contentDiv);
 
             $formDiv = $('<div>').width(780).css({
-                margin: '25px auto auto auto',
-                'maring-left': '200px'
+                margin: '25px auto auto 18px'
             });
-            $previewImg = $('<img id="p3-preview-background" style="max-width: 1000px; max-height: 500px">');
+            $previewImg = $('<img id="p3-preview-background" style="max-width: 664px; max-height: 500px">');
             $localFileInput = ControlPanel.inputField('url', undefined, 'URL To Background').change(function(e) {
                 value = e.target.value;
+            });
+            $localFileInput.getJQueryElement().find('input').css({
+                width: '640px'
             });
             $submitButton = ControlPanel.button(p3Lang.i18n('panels.buttons.submit'), true, function() {
                 if (value != null) {
@@ -27,7 +29,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
                         url = p3Utils.proxifyImage(url);
                         $.get(url, function(dat, stat) {
                             if (stat === 'success') {
-                                Styles.set('room-settings-background-image', '.left-side-wrapper { background: url(' + url + ') !important; }');
+                                Styles.set('room-settings-background-image', '.left-side-wrapper { background-image: url("' + url + '") !important; background-position-x: center !important; background-position-y: bottom !important; }');
                             }
                         });
                         this.changeSubmit(false);
@@ -35,6 +37,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
                     }
                 }
             });
+
             $clearButton = ControlPanel.button(p3Lang.i18n('panels.buttons.clear'), false, function() {
                 RoomSettings.execute();
                 this.changeSubmit(false);
@@ -56,7 +59,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
                 }
             });
             $previewButton.getJQueryElement().addClass('preview');
-            $formDiv.append($localFileInput.getJQueryElement()).append($submitButton.getJQueryElement()).append($clearButton.getJQueryElement()).append($previewButton.getJQueryElement()).append($previewImg);
+            $formDiv.append($localFileInput.getJQueryElement()).append($('<div>').addClass('btn-group').append($submitButton.getJQueryElement()).append($clearButton.getJQueryElement()).append($previewButton.getJQueryElement())).append($previewImg);
 
             panel.addContent($formDiv);
         },

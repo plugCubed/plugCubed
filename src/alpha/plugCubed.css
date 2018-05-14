@@ -1,5 +1,5 @@
 @charset "utf-8";
-@media screen and (max-width: 1366px) {
+@media  screen and (max-width: 1366px) {
     #p3-settings-wrapper {
         height: 0;
     }
@@ -10,8 +10,7 @@
         left: 27%;
     }
 }
-
-@media screen and (min-width: 1600px) {
+@media  screen and (min-width: 1600px) {
     #p3-settings-wrapper {
         height: auto;
     }
@@ -22,21 +21,6 @@
         left: 32.5%;
     }
 }
-
-#p3-settings-wrapper {
-    z-index: 100;
-}
-
-#p3-settings::-webkit-scrollbar {
-    width: 9px;
-}
-
-#p3-settings::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 50px rgba(233, 0, 71, 1);
-    box-shadow: inset 0 0 50px rgba(233, 0, 71, 1);
-    border-radius: 10px;
-}
-
 #p3-videoText {
     cursor: none;
     font-size: 71px;
@@ -48,7 +32,6 @@
     -ms-user-select: none;
     user-select: none;
 }
-
 .afkTimer {
     position: absolute;
     right: 0;
@@ -147,7 +130,7 @@
     width: 26px;
 }
 
-#app-menu.open~#plugcubed .icon.icon-plugcubed {
+#app-menu.open ~ #plugcubed .icon.icon-plugcubed {
     display: none;
 }
 
@@ -180,7 +163,8 @@
     width: 2px;
 }
 
-#p3-settings, #p3-settings-custom-colors {
+#p3-settings,
+#p3-settings-custom-colors {
     position: absolute;
     left: -270px;
     max-height: 100%;
@@ -196,13 +180,15 @@
     z-index: 1499;
 }
 
-#p3-settings .header, #p3-settings-custom-colors .header {
+#p3-settings .header,
+#p3-settings-custom-colors .header {
     background: #1c1f25;
     height: 59px;
     padding-right: 60px;
 }
 
-#p3-settings .header .back, #p3-settings-custom-colors .header .back {
+#p3-settings .header .back,
+#p3-settings-custom-colors .header .back {
     position: absolute;
     right: 0;
     top: 0;
@@ -212,21 +198,25 @@
     cursor: pointer;
 }
 
-#p3-settings .header .back i, #p3-settings-custom-colors .header .back i {
+#p3-settings .header .back i,
+#p3-settings-custom-colors .header .back i {
     left: 15px;
     top: 15px;
 }
 
-#p3-settings .header .title, #p3-settings-custom-colors .header .title {
+#p3-settings .header .title,
+#p3-settings-custom-colors .header .title {
     padding-top: 5px;
     padding-left: 6px;
 }
 
-#p3-settings .header .title i, #p3-settings-custom-colors .header .title i {
+#p3-settings .header .title i,
+#p3-settings-custom-colors .header .title i {
     top: 14px;
 }
 
-#p3-settings .header .title span, #p3-settings-custom-colors .header .title span {
+#p3-settings .header .title span,
+#p3-settings-custom-colors .header .title span {
     font-size: 23px;
     font-weight: 300;
     margin-top: -4px;
@@ -249,21 +239,24 @@
     margin-right: 5px;
 }
 
-#p3-settings .p3-container, #p3-settings-custom-colors .p3-container {
+#p3-settings .p3-container,
+#p3-settings-custom-colors .p3-container {
     position: relative;
     float: left;
     width: 100%;
     margin-bottom: 10px;
 }
 
-#p3-settings .p3-container .section, #p3-settings-custom-colors .p3-container .section {
+#p3-settings .p3-container .section,
+#p3-settings-custom-colors .p3-container .section {
     position: relative;
     font-size: 18px;
     margin-left: 18px;
     margin-top: 10px;
 }
 
-#p3-settings .p3-container .item, #p3-settings-custom-colors .p3-container .item {
+#p3-settings .p3-container .item,
+#p3-settings-custom-colors .p3-container .item {
     position: relative;
     height: 25px;
     margin-top: 6px;
@@ -281,13 +274,17 @@
     width: auto;
 }
 
-#p3-settings .p3-container .item i, #p3-settings-custom-colors .p3-container .item i {
+#p3-settings .p3-container .item i,
+#p3-settings-custom-colors .p3-container .item i {
     left: 18px;
     top: 2px;
     display: none;
 }
 
-#p3-settings .p3-container .item span, #p3-settings .p3-container .item input, #p3-settings-custom-colors .p3-container .item span, #p3-settings-custom-colors .p3-container .item input {
+#p3-settings .p3-container .item span,
+#p3-settings .p3-container .item input,
+#p3-settings-custom-colors .p3-container .item span,
+#p3-settings-custom-colors .p3-container .item input {
     color: #808691;
     font-weight: 300;
     margin-left: 45px;
@@ -298,11 +295,6 @@
 
 #p3-settings .p3-container .item input {
     width: 200px;
-    background: transparent;
-    border: 2px solid;
-    border-radius: 10px;
-    padding-left: 5px;
-    height: 18px;
 }
 
 #p3-settings-custom-colors .p3-container .item span {
@@ -340,14 +332,16 @@
     top: 0;
 }
 
-#p3-settings .p3-container .spacer, #p3-settings-custom-colors .p3-container .spacer {
+#p3-settings .p3-container .spacer,
+#p3-settings-custom-colors .p3-container .spacer {
     position: relative;
     float: left;
     width: 100%;
     height: 19px;
 }
 
-#p3-settings .p3-container .divider, #p3-settings-custom-colors .p3-container .divider {
+#p3-settings .p3-container .divider,
+#p3-settings-custom-colors .p3-container .divider {
     position: absolute;
     left: 0;
     top: 8px;
@@ -384,11 +378,14 @@
     margin-left: 25px;
 }
 
-#p3-settings .p3-container .item.selected i, #p3-control-panel .p3-item.selected i, #p3-settings-custom-colors .p3-container .item.selected i {
+#p3-settings .p3-container .item.selected i,
+#p3-control-panel .p3-item.selected i,
+#p3-settings-custom-colors .p3-container .item.selected i {
     display: block;
 }
 
-#p3-control-panel-current .p3-control-left, #p3-control-panel-current .p3-control-right {
+#p3-control-panel-current .p3-control-left,
+#p3-control-panel-current .p3-control-right {
     position: relative;
     width: 50%;
 }
@@ -419,9 +416,10 @@
     margin-right: 18px;
 }
 
-.p3-s-stream, .p3-s-clear {
-    width: 30px !important;
-    top: 8px !important;
+.p3-s-stream,
+.p3-s-clear {
+    width:  30px !important;
+    top:  8px !important;
     background: no-repeat 0 0;
 }
 
@@ -447,7 +445,9 @@
     z-index: -1;
 }
 
-.p3slider .hit, .p3slider .line, .p3slider .circle {
+.p3slider .hit,
+.p3slider .line,
+.p3slider .circle {
     position: absolute;
 }
 
@@ -487,65 +487,170 @@
     z-index: 2;
 }
 
-.is-p3developer .from .icon, i.icon.icon-is-p3developer, .meta i.icon.icon.is-p3developer, .user i.icon.icon.is-p3developer .is-p3sponsor .from .icon, .name .has-p3Role.is-p3sponsor.icon, i.icon.icon-chat-p3sponsor, .meta i.icon.icon-chat-p3sponsor, .user i.icon.icon-chat-p3sponsor, .is-p3special .from .icon, .name .has-p3Role.is-p3special.icon, i.icon.icon-is-p3special, .meta i.icon.icon-is-p3special, .user i.icon.icon-is-p3special, .is-p3ambassador .from .icon, .name .has-p3Role.is-p3ambassador.icon, i.icon.icon-is-p3ambassador, .meta i.icon-icon-is-p3ambassador, .user i.icon-icon-is-p3ambassador, .is-p3donatorDiamond .from .icon, .name .has-p3Role.is-p3donatorDiamond.icon, i.icon.icon-is-p3donatorDiamond, .meta i.icon.icon-is-p3donatorDiamond, .user i.icon.icon-is-p3donatorDiamond, .is-p3donatorPlatinum .from .icon, .name .has-p3Role.is-p3donatorPlatinum.icon, i.icon.icon-is-p3donatorPlatinum, .meta i.icon.icon-is-p3donatorPlatinum, .user i.icon.icon-is-p3donatorPlatinum, .is-p3donatorGold .from .icon, .name .has-p3Role.is-p3donatorGold.icon, i.icon.icon-is-p3donatorGold, .meta i.icon.icon-is-p3donatorGold, .user i.icon.icon-is-p3donatorGold, .is-p3donatorSilver .from .icon, .name .has-p3Role.is-p3donatorSilver.icon, i.icon.icon-is-p3donatorSilver, .meta i.icon.icon-is-p3donatorSilver, .user i.icon.icon-is-p3donatorSilver, .is-p3donatorBronze .from .icon, .name .has-p3Role.is-p3donatorBronze.icon, i.icon.icon-is-p3donatorBronze, .meta i.icon.icon-is-p3donatorBronze, .user i.icon.icon-is-p3donatorBronze {
+.is-p3developer .from .icon,
+i.icon.icon-is-p3developer,
+.meta i.icon.icon.is-p3developer,
+.user i.icon.icon.is-p3developer
+.is-p3sponsor .from .icon,
+.name .has-p3Role.is-p3sponsor.icon,
+i.icon.icon-chat-p3sponsor,
+.meta i.icon.icon-chat-p3sponsor,
+.user i.icon.icon-chat-p3sponsor,
+.is-p3special .from .icon,
+.name .has-p3Role.is-p3special.icon,
+i.icon.icon-is-p3special,
+.meta i.icon.icon-is-p3special,
+.user i.icon.icon-is-p3special,
+.is-p3ambassador .from .icon,
+.name .has-p3Role.is-p3ambassador.icon,
+i.icon.icon-is-p3ambassador,
+.meta i.icon-icon-is-p3ambassador,
+.user i.icon-icon-is-p3ambassador,
+.is-p3donatorDiamond .from .icon,
+.name .has-p3Role.is-p3donatorDiamond.icon,
+i.icon.icon-is-p3donatorDiamond,
+.meta i.icon.icon-is-p3donatorDiamond,
+.user i.icon.icon-is-p3donatorDiamond,
+.is-p3donatorPlatinum .from .icon,
+.name .has-p3Role.is-p3donatorPlatinum.icon,
+i.icon.icon-is-p3donatorPlatinum,
+.meta i.icon.icon-is-p3donatorPlatinum,
+.user i.icon.icon-is-p3donatorPlatinum,
+.is-p3donatorGold .from .icon,
+.name .has-p3Role.is-p3donatorGold.icon,
+i.icon.icon-is-p3donatorGold,
+.meta i.icon.icon-is-p3donatorGold,
+.user i.icon.icon-is-p3donatorGold,
+.is-p3donatorSilver .from .icon,
+.name .has-p3Role.is-p3donatorSilver.icon,
+i.icon.icon-is-p3donatorSilver,
+.meta i.icon.icon-is-p3donatorSilver,
+.user i.icon.icon-is-p3donatorSilver,
+.is-p3donatorBronze .from .icon,
+.name .has-p3Role.is-p3donatorBronze.icon,
+i.icon.icon-is-p3donatorBronze,
+.meta i.icon.icon-is-p3donatorBronze,
+.user i.icon.icon-is-p3donatorBronze {
     width: 16px;
     height: 16px;
 }
 
-.is-p3developer .from .icon-chat-subscriber, .is-p3sponsor .from .icon-chat-subscriber .is-p3special .from .icon-chat-subscriber, .is-p3ambassador .from .icon-chat-subscriber, .is-p3donatorDiamond .from .icon-chat-subscriber, .is-p3donatorPlatinum .from .icon-chat-subscriber, .is-p3donatorGold .from .icon-chat-subscriber, .is-p3donatorSilver .from .icon-chat-subscriber, .is-p3donatorBronze .from .icon-chat-subscriber {
+.is-p3developer .from .icon-chat-subscriber,
+.is-p3sponsor .from .icon-chat-subscriber .is-p3special .from .icon-chat-subscriber,
+.is-p3ambassador .from .icon-chat-subscriber,
+.is-p3donatorDiamond .from .icon-chat-subscriber,
+.is-p3donatorPlatinum .from .icon-chat-subscriber,
+.is-p3donatorGold .from .icon-chat-subscriber,
+.is-p3donatorSilver .from .icon-chat-subscriber,
+.is-p3donatorBronze .from .icon-chat-subscriber {
     background-position: -175px -350px !important;
 }
 
-.is-p3developer .from .icon-chat-silver-subscriber, .is-p3sponsor .icon-chat-silver-subscriber .is-p3special .from .icon-chat-silver-subscriber, .is-p3ambassador .from .icon-chat-silver-subscriber, .is-p3donatorDiamond .from .icon-chat-silver-subscriber, .is-p3donatorPlatinum .icon-chat-silver-subscriber, .is-p3donatorGold .from .icon-chat-silver-subscriber, .is-p3donatorSilver .icon-chat-silver-subscriber, .is-p3donatorBronze .from .icon-chat-silver-subscriber {
+.is-p3developer .from .icon-chat-silver-subscriber,
+.is-p3sponsor .icon-chat-silver-subscriber .is-p3special .from .icon-chat-silver-subscriber,
+.is-p3ambassador .from .icon-chat-silver-subscriber,
+.is-p3donatorDiamond .from .icon-chat-silver-subscriber,
+.is-p3donatorPlatinum .icon-chat-silver-subscriber,
+.is-p3donatorGold .from .icon-chat-silver-subscriber,
+.is-p3donatorSilver .icon-chat-silver-subscriber,
+.is-p3donatorBronze .from .icon-chat-silver-subscriber {
     background-position: -175px -365px !important;
 }
 
-.icon.icon-chat-p3developer, .icon.icon-chat-p3sponsor, .icon.icon-chat-p3ambassador, .icon.icon-chat-p3donatorDiamond, .icon.icon-chat-p3donatorPlatinum, .icon.icon-chat-p3donatorGold, .icon.icon-chat-p3donatorBronze, .icon.icon-chat-p3donatorSilver {
+.icon.icon-chat-p3developer,
+.icon.icon-chat-p3sponsor,
+.icon.icon-chat-p3ambassador,
+.icon.icon-chat-p3donatorDiamond,
+.icon.icon-chat-p3donatorPlatinum,
+.icon.icon-chat-p3donatorGold,
+.icon.icon-chat-p3donatorBronze,
+.icon.icon-chat-p3donatorSilver {
     height: 16px;
     width: 16px;
 }
 
-.icon.icon-chat-p3developer, i.icon.icon-chat-p3developer, .meta i.icon.icon.chat-p3developer, .user i.icon.icon.chat-p3developer, .name .has-p3Role.is-p3developer.icon, #user-rollover .meta.has-p3Role.is-p3developer .p3Role {
+.icon.icon-chat-p3developer,
+i.icon.icon-chat-p3developer,
+.meta i.icon.icon.chat-p3developer,
+.user i.icon.icon.chat-p3developer,
+.name .has-p3Role.is-p3developer.icon,
+#user-rollover .meta.has-p3Role.is-p3developer .p3Role {
     background-image: url('https://plugcubed.net/scripts/alpha/images/ranks/p3dev.png') !important;
     background-position: 0, 0;
 }
 
-.icon.icon-chat-p3sponsor, i.icon.icon-chat-p3sponsor, .meta i.icon.icon-chat-p3sponsor, .user i.icon.icon-chat-p3sponsor, .name .has-p3Role.is-p3sponsor.icon, #user-rollover .meta.has-p3Role.is-p3sponsor .p3Role {
+.icon.icon-chat-p3sponsor,
+i.icon.icon-chat-p3sponsor,
+.meta i.icon.icon-chat-p3sponsor,
+.user i.icon.icon-chat-p3sponsor,
+.name .has-p3Role.is-p3sponsor.icon,
+#user-rollover .meta.has-p3Role.is-p3sponsor .p3Role {
     background-image: url('https://plugcubed.net/scripts/alpha/images/ranks/p3sponsor.png') !important;
     background-position: 0, 0;
 }
 
-.icon.icon-chat-p3ambassador, i.icon.icon-chat-p3ambassador, .meta i.icon.icon.chat-p3ambassador, .user i.icon.icon.chat-p3ambassador, .name .has-p3Role.is-p3ambassador.icon, #user-rollover .meta.has-p3Role.is-p3ambassador .p3Role {
+.icon.icon-chat-p3ambassador,
+i.icon.icon-chat-p3ambassador,
+.meta i.icon.icon.chat-p3ambassador,
+.user i.icon.icon.chat-p3ambassador,
+.name .has-p3Role.is-p3ambassador.icon,
+#user-rollover .meta.has-p3Role.is-p3ambassador .p3Role {
     background-image: url('https://plugcubed.net/scripts/alpha/images/ranks/p3ambassador.png') !important;
     background-position: 0, 0;
 }
 
-.icon.icon-chat-p3donatorDiamond, i.icon.icon-chat-p3donatorDiamond, .meta i.icon.icon-chat-p3donatorDiamond, .user i.icon.icon-chat-p3donatorDiamond, .name .has-p3Role.is-p3donatorDiamond.icon, #user-rollover .meta.has-p3Role.is-p3donatorDiamond .p3Role {
+.icon.icon-chat-p3donatorDiamond,
+i.icon.icon-chat-p3donatorDiamond,
+.meta i.icon.icon-chat-p3donatorDiamond,
+.user i.icon.icon-chat-p3donatorDiamond,
+.name .has-p3Role.is-p3donatorDiamond.icon,
+#user-rollover .meta.has-p3Role.is-p3donatorDiamond .p3Role {
     background-image: url('https://plugcubed.net/scripts/alpha/images/ranks/p3donator.diamond.png') !important;
     background-position: 0, 0;
 }
 
-.icon.icon-chat-p3donatorPlatinum, i.icon.icon-chat-p3donatorPlatinum, .meta i.icon.icon-chat-p3donatorPlatinum, .user i.icon.icon-chat-p3donatorPlatinum, .name .has-p3Role.is-p3donatorPlatinum.icon, #user-rollover .meta.has-p3Role.is-p3donatorPlatinum .p3Role {
+.icon.icon-chat-p3donatorPlatinum,
+i.icon.icon-chat-p3donatorPlatinum,
+.meta i.icon.icon-chat-p3donatorPlatinum,
+.user i.icon.icon-chat-p3donatorPlatinum,
+.name .has-p3Role.is-p3donatorPlatinum.icon,
+#user-rollover .meta.has-p3Role.is-p3donatorPlatinum .p3Role {
     background-image: url('https://plugcubed.net/scripts/alpha/images/ranks/p3donator.platinum.png') !important;
     background-position: 0, 0;
 }
 
-.icon.icon-chat-p3donatorGold, i.icon.icon-chat-p3donatorGold, .meta i.icon.icon-chat-p3donatorGold, .user i.icon.icon-chat-p3donatorGold, .name .has-p3Role.is-p3donatorGold.icon, #user-rollover .meta.has-p3Role.is-p3donatorGold .p3Role {
+.icon.icon-chat-p3donatorGold,
+i.icon.icon-chat-p3donatorGold,
+.meta i.icon.icon-chat-p3donatorGold,
+.user i.icon.icon-chat-p3donatorGold,
+.name .has-p3Role.is-p3donatorGold.icon,
+#user-rollover .meta.has-p3Role.is-p3donatorGold .p3Role {
     background-image: url('https://plugcubed.net/scripts/alpha/images/ranks/p3donator.gold.png') !important;
     background-position: 0, 0;
 }
 
-.icon.icon-chat-p3donatorSilver, i.icon.icon-chat-p3donatorSilver, .meta i.icon.icon-chat-p3donatorSilver, .user i.icon.icon-chat-p3donatorSilver, .name .has-p3Role.is-p3donatorSilver.icon, #user-rollover .meta.has-p3Role.is-p3donatorSilver .p3Role {
+.icon.icon-chat-p3donatorSilver,
+i.icon.icon-chat-p3donatorSilver,
+.meta i.icon.icon-chat-p3donatorSilver,
+.user i.icon.icon-chat-p3donatorSilver,
+.name .has-p3Role.is-p3donatorSilver.icon,
+#user-rollover .meta.has-p3Role.is-p3donatorSilver .p3Role {
     background-image: url('https://plugcubed.net/scripts/alpha/images/ranks/p3donator.silver.png') !important;
     background-position: 0, 0;
 }
 
-.icon.icon-chat-p3donatorBronze, i.icon.icon-chat-p3donatorBronze, .meta i.icon.icon-chat-p3donatorBronze, .user i.icon.icon-chat-p3donatorBronze, .name .has-p3Role.is-p3donatorBronze.icon, #user-rollover .meta.has-p3Role.is-p3donatorBronze .p3Role {
+.icon.icon-chat-p3donatorBronze,
+i.icon.icon-chat-p3donatorBronze,
+.meta i.icon.icon-chat-p3donatorBronze,
+.user i.icon.icon-chat-p3donatorBronze,
+.name .has-p3Role.is-p3donatorBronze.icon,
+#user-rollover .meta.has-p3Role.is-p3donatorBronze .p3Role {
     background-image: url('https://plugcubed.net/scripts/alpha/images/ranks/p3donator.bronze.png') !important;
     background-position: 0, 0;
 }
 
-.is-p3developer .bdg, .is-p3ambassador .bdg {
+.is-p3developer .bdg,
+.is-p3ambassador .bdg {
     background-size: cover !important;
     background-position: 0 0;
     height: 30px;
@@ -560,15 +665,25 @@
     background-image: url('https://plugcubed.net/scripts/alpha/images/badges/p3ambassador.png') !important;
 }
 
-#chat-header, #user-lists .header, #waitlist .header {
+#chat-header,
+#user-lists .header,
+#waitlist .header {
     background-color: #0A0A0A;
 }
 
-#chat .is-p3developer .un, #waitlist .user .name .has-p3Role.is-p3developer+span, #user-lists .user>.icon.icon-chat-p3developer+.name, #user-rollover .meta.is-p3developer .p3Role, #user-rollover .meta.is-p3developer .username {
+#chat .is-p3developer .un,
+#waitlist .user .name .has-p3Role.is-p3developer + span,
+#user-lists .user > .icon.icon-chat-p3developer + .name,
+#user-rollover .meta.is-p3developer .p3Role,
+#user-rollover .meta.is-p3developer .username {
     color: #17B7EF !important;
 }
 
-#chat .is-p3ambassador .un, #waitlist .user .name .has-p3Role.is-p3ambassador+span, #user-lists .user>.icon.icon-chat-p3ambassador+.name, #user-rollover .meta.is-p3ambassador .p3Role, #user-rollover .meta.is-p3ambassador .username {
+#chat .is-p3ambassador .un,
+#waitlist .user .name .has-p3Role.is-p3ambassador + span,
+#user-lists .user > .icon.icon-chat-p3ambassador + .name,
+#user-rollover .meta.is-p3ambassador .p3Role,
+#user-rollover .meta.is-p3ambassador .username {
     color: #FFC926 !important;
 }
 
@@ -579,7 +694,7 @@
     width: 90%;
 }
 
-.pm>.icon {
+.pm > .icon {
     background-image: url('https://plugcubed.net/scripts/alpha/images/icons/pm.png') !important;
 }
 
@@ -652,7 +767,7 @@
 }
 
 #p3-control-panel input {
-    width: 780px;
+    width: 220px;
     font-size: 20px;
     font-family: "Open Sans", sans-serif;
     border: none;
@@ -662,6 +777,21 @@
     color: #eeeeee;
 }
 
+#p3-control-panel input::-webkit-input-placeholder {
+    text-align: center;
+}
+
+#p3-control-panel input:-ms-input-placeholder {
+    text-align: center;
+}
+
+#p3-control-panel input::-ms-input-placeholder {
+    text-align: center;
+}
+
+#p3-control-panel input::placeholder {
+    text-align: center;
+}
 #p3-control-panel .label {
     font-size: 20px;
     font-family: "Open Sans", sans-serif;
@@ -673,7 +803,7 @@
     background: #282c35;
     font-size: 20px;
     font-family: "Open Sans", sans-serif;
-    width: 260px;
+    width: 220px;
     color: #808691;
     text-align: center;
     vertical-align: middle;
@@ -691,22 +821,6 @@
 #p3-control-panel .button.submit {
     background: #00b5e6;
     color: #eeeeee;
-}
-
-#p3-control-panel .button.preview {
-    background: #00b5e6;
-    color: #eeeeee;
-    margin-top: -47px;
-    margin-left: 540px
-}
-
-#p3-control-panel .button.clear {
-    margin-top: -47px;
-    margin-left: 270px;
-}
-
-#p3-control-panel .imgdiv {
-    margin-top: 10px
 }
 
 #p3-control-panel-close {
@@ -800,9 +914,8 @@
 }
 
 .p3-qban {
-    width: 33%;
+    width:  33%;
 }
-
 i.icon-p3-qban {
     background-image: url(https://plugcubed.net/scripts/alpha/images/icons/quick-ban.png);
     height: 30px;
@@ -810,7 +923,7 @@ i.icon-p3-qban {
 }
 
 .p3-qmute {
-    width: 34%;
+    width:  34%;
 }
 
 i.icon-p3-qmute {
@@ -820,7 +933,7 @@ i.icon-p3-qmute {
 }
 
 .p3-qinfo {
-    width: 33%;
+    width:  33%;
 }
 
 .p3-user-info strong {
@@ -868,6 +981,7 @@ blockquote.p3-blockquote {
     z-index: 1;
 }
 
+
 .p3-mention-dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -889,7 +1003,7 @@ blockquote.p3-blockquote {
 
 .p3-command {
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration:  underline;
 }
 
 .p3-command:hover {
@@ -897,7 +1011,7 @@ blockquote.p3-blockquote {
 }
 
 .p3-command-args, .p3-command-description {
-    color: #FFF;
+    color:  #FFF;
     font-size: 13px;
 }
 
@@ -907,17 +1021,11 @@ table.p3-commands-list {
     width: 100%;
     color: #f7f723
 }
-
 table.p3-commands-list th, table.p3-commands-list td {
     padding: 8px;
     border-bottom: 1px solid #232529;
 }
 
-#p3-eta-timer {
-    position: absolute;
-    margin-top: 10px;
-    margin-left: -8px;
-}
 
 /** Plug fixes **/
 
@@ -931,23 +1039,11 @@ table.p3-commands-list th, table.p3-commands-list td {
     -ms-transform: unset;
     transform: unset;
 }
-
 /** Remove the blue from player **/
-
 .community .community__playing-top {
-    background-color: unset;
+    background-color:  unset;
 }
-
 /** Fixes the song title **/
-
 .community__playing-bottom-container {
     max-width: 100%;
-}
-
-.btn-no-dj-secondary__icon {
-    margin-bottom: 5px;
-}
-
-.room-controls__bottom-text{
-    margin-bottom: 5px;
 }
