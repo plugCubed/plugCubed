@@ -459,6 +459,7 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/Setti
         });
 
         /**
+         *
          * $this.on('mouseover', function() {
          * if ($this.data('translated')) Context.trigger('tooltip:show', 'Translated', $(this), true);
          * }).on('mouseout', function() {

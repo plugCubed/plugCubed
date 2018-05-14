@@ -56,9 +56,9 @@
             "banall": "porttikielto kaikille huoneessa oleville käyttäjille",
             "status": "näyttää plug palvelimien tilan",
             "unload": "Sulkee plug&#179;",
-            "unban": "Unbans targeted user.",
+            "unban": "Poistaa porttikiellon käyttäjältä.",
             "volume": "Aseta äänenvoimakkuus numerolla (0-100), lisää sitä yhdellä + merkillä, vähennä sitä yhdellä - merkillä",
-            "plcount": "Count how many playlists you have and total amount of songs"
+            "plcount": "Laske montako soittolistaa sinulla on ja niissä olevien kappaleiden yhteismäärä"
         },
         "responses": {
             "alertson": "Soitetaan ääni seuraavissa sanoissa: %1",
@@ -198,7 +198,7 @@
         "customcss": "Mukautettu CSS",
         "lowlagMode": "Pienen lagin tila",
         "workMode": "Työtila",
-        "desktopNotifs": "Desktop Notifications"
+        "desktopNotifs": "Työpöytäilmoitukset"
     },
     "vote": {
         "meh": "Meh",
@@ -271,14 +271,14 @@
         "hide": "Piilota",
         "menushow": "Näytä Video",
         "menuhide": "Piilota Video",
-        "hidden": "Video Hidden",
-        "disabled": "Video Disabled",
-        "snooze": "Video Snoozed"
+        "hidden": "Video Piilotettu",
+        "disabled": "Video Deaktivoitu",
+        "snooze": "Video Torkutettu"
     },
     "playlist": {
-        "amount": "Total amount of playlists: %1",
-        "empty": "Total amount of empty playlists: %1",
-        "totalsongs": "Total amount of songs: %1",
-        "totalunavailablesongs": "Total amount of unavailable songs: %1"
+        "amount": "Soittolistojen määrä: %1",
+        "empty": "Tyhjien soittolistojen määrä: %1",
+        "totalsongs": "Kappaleiden määrä: %1",
+        "totalunavailablesongs": "Ei saatavilla olevien kappaleiden määrä: %1"
     }
 }

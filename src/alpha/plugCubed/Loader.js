@@ -10,7 +10,6 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         p3Utils.chatLog(undefined, p3Lang.i18n('running', Version) + '</span><br><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), Settings.colors.infoMessage1, -10);
 
         $('head').append('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://plugcubed.net/scripts/alpha/plugCubed.css?v=' + Version.getSemver() + '"/>');
-
         RoomUsersListView.prototype.RowClass = p3RoomUserListRow;
         Overrides.override();
 

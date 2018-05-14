@@ -922,13 +922,10 @@ table.p3-commands-list th, table.p3-commands-list td {
 /** Plug fixes **/
 
 /** Move the X on waitlist to the side **/
-
 .right-side-wrapper #waitlist .icon-x-white {
     right: -8px !important;
 }
-
 /** Make badges great again **/
-
 #chat .badge-box i {
     -webkit-transform: unset;
     -ms-transform: unset;

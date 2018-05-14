@@ -1,4 +1,4 @@
-define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader', 'lang/Lang'], function(Class, p3Lang) {
+define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function(Class, p3Lang) {
     var cleanHTMLMessage, Context, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, PopoutView, html2text, Settings, Styles, Lang;
 
     if (typeof window.plugCubedUserData === 'undefined') {
@@ -87,6 +87,7 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader', 'lang/Lan
     var Handler = Class.extend({
         initTooltips: function() {
             if (window.plugCubedModules && window.plugCubedModules.app && window.plugCubedModules.app.setupTooltips && typeof window.plugCubedModules.app.setupTooltips === 'function') window.plugCubedModules.app.setupTooltips();
+
         },
         proxifyImage: function(url) {
             if (!this.startsWithIgnoreCase(url, 'https://api.plugCubed.net/proxy/')) {

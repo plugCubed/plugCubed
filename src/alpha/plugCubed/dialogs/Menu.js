@@ -33,7 +33,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             });
             $('#chat-header').append(streamButton.click($.proxy(this.onClick, this))).append(clearChatButton.click($.proxy(this.onClick, this)));
             this.onRoomJoin();
-            Context.off('leftNavigation:open history:toggle playlist:toggle settings:toggle show:user show:history show:dashboard dashboard:disable show:settings', this.onPlugMenuOpen, this);
+            Context.on('leftNavigation:open history:toggle playlist:toggle settings:toggle show:user show:history show:dashboard dashboard:disable show:settings', this.onPlugMenuOpen, this);
             Context.on('room:joined', this.onRoomJoin, this);
         },
         onRoomJoin: function() {
