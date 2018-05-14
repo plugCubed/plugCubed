@@ -56,9 +56,9 @@
             "banall": "zbanuj wszystkich użytkowników w tym pokoju",
             "status": "pokaż status serwerów plug.dj",
             "unload": "Wyłącz plug&#179;",
-            "unban": "Unbans targeted user.",
+            "unban": "Odbanowuje wybranego użytkownika.",
             "volume": "Ustaw głośność liczbą z przedziału 0 - 100, zwiększ o jeden poprzez +, zmniejsz o 1 poprzez -",
-            "plcount": "Count how many playlists you have and total amount of songs"
+            "plcount": "Zlicza ile playlist posiadasz oraz ile piosenek się na nich znajduje"
         },
         "responses": {
             "alertson": "Odtwarzanie dźwięku na następujące słowa: %1",
@@ -198,7 +198,7 @@
         "customcss": "Niestandardowy CSS",
         "lowlagMode": "Tryb wydajności",
         "workMode": "Tryb pracy",
-        "desktopNotifs": "Desktop Notifications"
+        "desktopNotifs": "Powiadomienia na pulpicie"
     },
     "vote": {
         "meh": "Meh",
@@ -271,14 +271,14 @@
         "hide": "Ukryj",
         "menushow": "Pokaż wideo",
         "menuhide": "Ukryj wideo",
-        "hidden": "Video Hidden",
-        "disabled": "Video Disabled",
-        "snooze": "Video Snoozed"
+        "hidden": "Video ukryte",
+        "disabled": "Video wyłączone",
+        "snooze": "Video wyciszone"
     },
     "playlist": {
-        "amount": "Total amount of playlists: %1",
-        "empty": "Total amount of empty playlists: %1",
-        "totalsongs": "Total amount of songs: %1",
-        "totalunavailablesongs": "Total amount of unavailable songs: %1"
+        "amount": "Ilość playlist: %1",
+        "empty": "Ilość pustych playlist: %1",
+        "totalsongs": "Całkowita ilość utworów: %1",
+        "totalunavailablesongs": "Całkowita ilość niedostępnych utworów: %1"
     }
 }

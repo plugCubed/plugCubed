@@ -201,9 +201,6 @@
         "desktopNotifs": "Desktop Notifications"
     },
     "vote": {
-        "meh": "Meh",
-        "woot": "Woot",
-        "grab": "Grab",
         "undecided": "Undecided",
         "djing": "DJing"
     },
@@ -227,7 +224,8 @@
         "buttons": {
             "cancel": "Cancel",
             "clear": "Clear",
-            "submit": "Submit"
+            "submit": "Submit",
+            "preview": "Preview"
         },
         "chatcustomizations": {
             "description": "Customize your chat with emojis, notifications, markdown, and other features",

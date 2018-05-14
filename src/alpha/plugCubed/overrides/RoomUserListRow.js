@@ -1,7 +1,6 @@
-define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/RoomSettings'], function($, p3Lang, p3Utils, RoomSettings) {
-    var Context, CurrentUser, RoomUserListRow, RoomUsersListView;
+define(['jquery', 'plugCubed/Utils', 'plugCubed/RoomSettings', 'lang/Lang'], function($, p3Utils, RoomSettings, Lang) {
+    var CurrentUser, RoomUserListRow, RoomUsersListView;
 
-    Context = window.plugCubedModules.context;
     CurrentUser = window.plugCubedModules.CurrentUser;
     RoomUsersListView = window.plugCubedModules.RoomUsersListView;
     RoomUserListRow = RoomUsersListView.prototype.RowClass;
@@ -16,13 +15,13 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/RoomSettings']
                 var isStaff = (CurrentUser.hasPermission(API.ROLE.BOUNCER) || CurrentUser.hasPermission(API.ROLE.BOUNCER, true) || p3Utils.isPlugCubedDeveloper() || p3Utils.isPlugCubedAmbassador());
 
                 if (this.model.get('grab')) {
-                    this.$icon.removeClass().addClass('icon icon-grab');
+                    this.$icon.removeClass().addClass('icon icon-grab').attr('title', Lang.vote.grab);
                 } else if (this.model.get('vote') === 1) {
-                    this.$icon.removeClass().addClass('icon icon-woot');
+                    this.$icon.removeClass().addClass('icon icon-woot').attr('title', Lang.vote.woot);
                 } else if (this.model.get('vote') === -1 && (isStaff || (!isStaff && RoomSettings.rules.allowShowingMehs))) {
-                    this.$icon.removeClass().addClass('icon icon-meh');
+                    this.$icon.removeClass().addClass('icon icon-meh').attr('title', Lang.vote.meh);
                 } else {
-                    this.$icon.removeClass();
+                    this.$icon.removeClass().removeAttr('title');
                 }
             } else if (this.$icon) {
                 this.$icon.remove();
@@ -30,7 +29,6 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/RoomSettings']
             }
 
             var id = this.model.get('id');
-            var $voteIcon = this.$el.find('.icon-woot,.icon-meh,.icon-grab');
 
             if (p3Utils.havePlugCubedRank(id) || p3Utils.hasPermission(id, API.ROLE.DJ)) {
                 var $icon = this.$el.find('.icon:not(.icon-woot,.icon-meh,.icon-grab)');
@@ -45,27 +43,13 @@ define(['jquery', 'plugCubed/Lang', 'plugCubed/Utils', 'plugCubed/RoomSettings']
                     $icon.removeClass('icon-chat-subscriber');
                     $icon.removeClass('icon-chat-silver-subscriber');
                     $icon.addClass('icon-chat-p3' + p3Utils.getHighestRank(id));
+                    $icon.attr('title', p3Utils.getAllPlugCubedRanks(id));
                 }
-
-                $icon.mouseover(function() {
-                    Context.trigger('tooltip:show', $('<span>').html(p3Utils.getAllPlugCubedRanks(id)).text(), $(this), true);
-                }).mouseout(function() {
-                    Context.trigger('tooltip:hide');
-                });
 
                 if (specialIconInfo != null) {
                     $icon.css('background-image', 'url("https://plugcubed.net/scripts/alpha/images/ranks/p3special.' + specialIconInfo.icon + '.png")');
                 }
             }
-
-            if ($voteIcon.length > 0) {
-                $voteIcon.mouseover(function() {
-                    Context.trigger('tooltip:show', $('<span>').html(p3Lang.i18n('vote.' + ($voteIcon.hasClass('icon-grab') ? 'grab' : ($voteIcon.hasClass('icon-woot') ? 'woot' : 'meh')))).text(), $(this), true);
-                }).mouseout(function() {
-                    Context.trigger('tooltip:hide');
-                });
-            }
         }
     });
 });
-

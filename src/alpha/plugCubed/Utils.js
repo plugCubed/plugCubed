@@ -1,5 +1,5 @@
-define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function(Class, p3Lang) {
-    var cleanHTMLMessage, Context, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, Lang, PopoutView, html2text, Settings, Styles;
+define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader', 'lang/Lang'], function(Class, p3Lang) {
+    var cleanHTMLMessage, Context, Database, developer, sponsor, ambassador, donatorDiamond, donatorPlatinum, donatorGold, donatorSilver, donatorBronze, special, PopoutView, html2text, Settings, Styles, Lang;
 
     if (typeof window.plugCubedUserData === 'undefined') {
         window.plugCubedUserData = {};
@@ -85,6 +85,9 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
     };
 
     var Handler = Class.extend({
+        initTooltips: function() {
+            if (window.plugCubedModules && window.plugCubedModules.app && window.plugCubedModules.app.setupTooltips && typeof window.plugCubedModules.app.setupTooltips === 'function') window.plugCubedModules.app.setupTooltips();
+        },
         proxifyImage: function(url) {
             if (!this.startsWithIgnoreCase(url, 'https://api.plugCubed.net/proxy/')) {
                 return 'https://api.plugCubed.net/proxy/' + url;
@@ -149,16 +152,23 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (!requirejs.defined('plugCubed/Settings')) return;
 
             Settings = require('plugCubed/Settings');
+            var oldDbSettings = Database.settings;
+
             if (Settings.lowLagMode) {
                 Database.settings.videoOnly = false;
+                Database.settings.avatarcap = 1;
+                Database.settings.dancing = false;
+                Database.settings.hdVideo = false;
+                Database.settings.emoji = false;
                 Database.save();
-                Context.trigger('change:videoOnly').trigger('audience:pause', Database.settings.videoOnly);
-                Settings.lowLagMode = false;
+                Context.trigger('change:videoOnly', Database.settings.videoOnly);
+                window.plugCubedModules.context._events['audience:test'][0].context.paused = true;
             } else {
-                Database.settings.videoOnly = true;
+                Database.settings = oldDbSettings;
                 Database.save();
-                Context.trigger('change:videoOnly').trigger('audience:pause', Database.settings.videoOnly);
-                Settings.lowLagMode = true;
+                Context.trigger('change:videoOnly', Database.settings.videoOnly);
+                window.plugCubedModules.context._events['audience:test'][0].context.paused = false;
+                Context.trigger('');
             }
             this.toggleBadges(true);
             Settings.save();
@@ -707,13 +717,13 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
 
                 switch (user.vote) {
                     case -1:
-                        voted = p3Lang.i18n('vote.meh');
+                        voted = Lang.vote.meh;
                         break;
                     default:
-                        voted = p3Lang.i18n('vote.undecided');
+                        voted = Lang.vote.grab;
                         break;
                     case 1:
-                        voted = p3Lang.i18n('vote.woot');
+                        voted = Lang.vote.woot;
                         break;
                 }
                 if (inbooth) {

@@ -10,30 +10,30 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
             init: function() {
                 this.myID = API.getUser().id;
                 this.$etaText = null;
-                this.$span = null;
+                this.$div = null;
                 this._super();
             },
             createElement: function() {
-                if (this.$span == null || $('.p3-eta-span').length === 0) {
-                    if (this.$span != null) {
-                        this.$span.remove();
-                        this.$span = null;
+                if (this.$div == null || $('.p3-eta-span').length === 0) {
+                    if (this.$div != null) {
+                        this.$div.remove();
+                        this.$div = null;
                     }
-                    this.$span = $('<span class="p3-eta-span">').css({
+                    this.$div = $('<div id="p3-eta-timer-footer">').append($('<span class="p3-eta-span">').css({
                         'font-size': '14px',
                         position: 'absolute',
                         bottom: '70px',
                         'white-space': 'nowrap',
                         left: '60px'
-                    });
-                    $('.community__bottom').before(this.$span);
+                    }));
+                    $('.community__bottom').before(this.$div);
                 }
                 if (this.$etaText == null || $('.p3-eta-timer').length === 0) {
                     if (this.$etaText != null) {
                         this.$etaText.remove();
                         this.$etaText = null;
                     }
-                    this.$etaText = $('<small class="p3-eta-timer dark-label">');
+                    this.$etaText = $('<div id="p3-eta-timer">').append('<small class="p3-eta-timer" style="color: slategrey;">');
                     $('.room-controls__bottom-text').after(this.$etaText);
                 }
             },
@@ -49,10 +49,10 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
                     this.createElement();
 
                     if (API.getHistory() == null || (boothAttributes.isLocked && (API.getUser().role < API.ROLE.MANAGER || (API.getUser().gRole > 0 && API.getUser().gRole < window.plugCubedModules.GROLE.AMBASSADOR))) || (boothAttributes.waitingDJS && boothAttributes.waitingDJS.length > 50)) {
-                        this.$span.remove();
+                        this.$div.remove();
                         this.$etaText.remove();
                     } else if (boothAttributes.currentDJ == null) {
-                        this.$span.text(p3Lang.i18n('eta.boothAvailable'));
+                        this.$div.find('span').text(p3Lang.i18n('eta.boothAvailable'));
                         this.$etaText.remove();
                     } else {
                         var time, waitListPos, timePerSong, historyArr;
@@ -75,23 +75,23 @@ define(['jquery', 'plugCubed/handlers/TickerHandler', 'plugCubed/Settings', 'plu
                         timePerSong = Math.round(timePerSong / historyArr.length);
 
                         if (boothAttributes && boothAttributes.currentDJ === this.myID) {
-                            this.$span.text(p3Lang.i18n('eta.alreadyDJ'));
+                            this.$div.find('span').text(p3Lang.i18n('eta.alreadyDJ'));
                         } else if (waitListPos < 0) {
                             time = p3Utils.formatTime((API.getWaitList().length * timePerSong) + API.getTimeRemaining());
-                            this.$span.text(p3Lang.i18n('eta.joinTime', time));
-                            this.$etaText.text('ETA: ' + time + '!');
+                            this.$div.find('span').text(p3Lang.i18n('eta.joinTime', time));
+                            this.$etaText.find('small').text('ETA: ' + time + '!');
                         } else {
                             time = p3Utils.formatTime((waitListPos * timePerSong) + API.getTimeRemaining());
-                            this.$span.text(p3Lang.i18n('eta.waitListTime', waitListPos + 1, API.getWaitList().length, time), 10);
-                            this.$etaText.text('ETA: ' + time + ' (' + (waitListPos + 1) + '/' + API.getWaitList().length + ')');
+                            this.$div.find('span').text(p3Lang.i18n('eta.waitListTime', waitListPos + 1, API.getWaitList().length, time), 10);
+                            this.$etaText.find('small').text('ETA: ' + time + ' (' + (waitListPos + 1) + '/' + API.getWaitList().length + ')');
                         }
                     }
                 }
             },
             close: function() {
-                if (this.$span != null) {
-                    this.$span.remove();
-                    this.$span = null;
+                if (this.$div != null) {
+                    this.$div.remove();
+                    this.$div = null;
                 }
                 if (this.$etaText != null) {
                     this.$etaText.remove();

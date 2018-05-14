@@ -31,24 +31,16 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             $('#plugcubed').mouseenter(function() {
                 $('#plugcubed .cube-wrap .cube').addClass('spin');
             });
-            $('#chat-header').append(streamButton.click($.proxy(this.onClick, this)).mouseover(function() {
-                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.stream'), $(this), true);
-            }).mouseout(function() {
-                Context.trigger('tooltip:hide');
-            })).append(clearChatButton.click($.proxy(this.onClick, this)).mouseover(function() {
-                Context.trigger('tooltip:show', p3Lang.i18n('tooltip.clear'), $(this), true);
-            }).mouseout(function() {
-                Context.trigger('tooltip:hide');
-            }));
+            $('#chat-header').append(streamButton.click($.proxy(this.onClick, this))).append(clearChatButton.click($.proxy(this.onClick, this)));
             this.onRoomJoin();
-            Context.on('leftNavigation:open history:toggle playlist:toggle settings:toggle show:user show:history show:dashboard dashboard:disable', this.onPlugMenuOpen, this);
+            Context.off('leftNavigation:open history:toggle playlist:toggle settings:toggle show:user show:history show:dashboard dashboard:disable show:settings', this.onPlugMenuOpen, this);
             Context.on('room:joined', this.onRoomJoin, this);
         },
         onRoomJoin: function() {
             this.setEnabled('stream', Database.settings.streamDisabled);
         },
         onPlugMenuOpen: function(isShowing) {
-            if ((typeof isShowing === 'boolean' && isShowing) || typeof isShowing === 'undefined' || (typeof isShowing === 'string' && isShowing === 'store')) {
+            if ((typeof isShowing === 'boolean' && isShowing) || typeof isShowing === 'undefined' || typeof isShowing === 'string') {
                 this.toggleMenu(false);
                 dialogControlPanel.toggleControlPanel(false);
             }
@@ -60,7 +52,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             }
             streamButton.remove();
             clearChatButton.remove();
-            Context.off('leftNavigation:open history:toggle playlist:toggle settings:toggle show:user show:history show:dashboard dashboard:disable', this.onPlugMenuOpen, this);
+            Context.off('leftNavigation:open history:toggle playlist:toggle settings:toggle show:user show:history show:dashboard dashboard:disable show:settings', this.onPlugMenuOpen, this);
             Context.off('room:joined', this.onRoomJoin, this);
             dialogControlPanel.close();
         },
@@ -274,6 +266,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             if ($menuDiv != null) {
                 $menuDiv.remove();
             }
+            clearChatButton.attr('title', p3Lang.i18n('tooltip.clear'));
+            streamButton.attr('title', p3Lang.i18n('tooltip.stream'));
+            p3Utils.initTooltips();
             $menuDiv = $('<div>').css({
                 left: this.shown ? 50 : -500,
                 'z-index': this.shown ? 1500 : 0
@@ -299,15 +294,11 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
 
             if (RoomSettings.rules.allowAutorespond !== false) {
                 container.append(guiButton(Settings.autorespond, 'autorespond', p3Lang.i18n('menu.autorespond')));
-                container.append($('<div class="item">').addClass('p3-s-autorespond-input').append($('<input>').val(Settings.awaymsg === '' ? p3Lang.i18n('autorespond.default') : Settings.awaymsg).keyup(function() {
+                container.append($('<div class="item">').addClass('p3-s-autorespond-input').css('padding-left', '10px').append($('<input>').attr('id', 'p3-s-autorespond-text').val(Settings.awaymsg === '' ? p3Lang.i18n('autorespond.default') : Settings.awaymsg).keyup(function() {
                     $(this).val($(this).val().split('@').join(''));
                     Settings.awaymsg = $(this).val().trim();
                     Settings.save();
-                })).mouseover(function() {
-                    Context.trigger('tooltip:show', p3Lang.i18n('tooltip.afk'), $(this), false);
-                }).mouseout(function() {
-                    Context.trigger('tooltip:hide');
-                }));
+                })).attr('title', 'tooltip.afk').attr('title', p3Lang.i18n('tooltip.afk')));
             }
 
             if (p3Utils.isPlugCubedDeveloper() || API.hasPermission(undefined, API.ROLE.BOUNCER)) {
@@ -328,7 +319,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             container.append(guiButton(Settings.hideVideo, 'hidevideo', Settings.hideVideo ? p3Lang.i18n('video.menushow') : p3Lang.i18n('video.menuhide')));
             container.append(guiButton(Settings.lowLagMode, 'lowLagMode', p3Lang.i18n('menu.lowlagMode')));
             container.append(guiButton(Settings.workMode, 'workMode', p3Lang.i18n('menu.workMode')));
-            container.append(guiButton(Settings.desktopNotifs, 'desktopNotifs', p3Lang.i18n('menu.desktopNotifs')));
             container.append(guiButton(false, 'colors', p3Lang.i18n('menu.customchatcolors') + '...'));
             container.append(guiButton(false, 'controlpanel', p3Lang.i18n('menu.controlpanel') + '...'));
 
@@ -338,6 +328,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             // Notification
             container.append($('<div class="section">' + p3Lang.i18n('menuHeaders.chatnotifs') + '</div>'));
 
+            container.append(guiButton(Settings.desktopNotifs, 'desktopNotifs', p3Lang.i18n('menu.desktopNotifs')));
             container.append(guiButton((Settings.notify & enumNotifications.USER_JOIN) === enumNotifications.USER_JOIN, 'notify-join', p3Lang.i18n('notify.join')).data('bit', enumNotifications.USER_JOIN));
             container.append(guiButton((Settings.notify & enumNotifications.USER_LEAVE) === enumNotifications.USER_LEAVE, 'notify-leave', p3Lang.i18n('notify.leave')).data('bit', enumNotifications.USER_LEAVE));
             container.append(guiButton((Settings.notify & enumNotifications.USER_GRAB) === enumNotifications.USER_GRAB, 'notify-grab', p3Lang.i18n('notify.grab')).data('bit', enumNotifications.USER_GRAB));

@@ -56,9 +56,9 @@
             "banall": "zabanuje všechny uživatele v této místnosti",
             "status": "zobrazí stav plug.dj serverů",
             "unload": "Vypne plug&#179;",
-            "unban": "Unbans targeted user.",
+            "unban": "Odbanuje vybrané uživatele.",
             "volume": "Nastaví hlasitost s číslem (0 - 100), zvýší o 1 použitím +, sníží použitím -",
-            "plcount": "Count how many playlists you have and total amount of songs"
+            "plcount": "Spočítá kolik máš playlistů a skladeb celkem"
         },
         "responses": {
             "alertson": "Zvuk se přehraje při následujících slovech: %1",
@@ -198,7 +198,7 @@
         "customcss": "Vlastní CSS",
         "lowlagMode": "Režim nízkého zatížení",
         "workMode": "Pracovní režim",
-        "desktopNotifs": "Desktop Notifications"
+        "desktopNotifs": "Oznámení na plochu"
     },
     "vote": {
         "meh": "Meh",
@@ -271,14 +271,14 @@
         "hide": "Skrýt",
         "menushow": "Zobrazit video",
         "menuhide": "Skrýt video",
-        "hidden": "Video Hidden",
-        "disabled": "Video Disabled",
-        "snooze": "Video Snoozed"
+        "hidden": "Video je skryto",
+        "disabled": "Video je vypnuto",
+        "snooze": "Video je pozastavené"
     },
     "playlist": {
-        "amount": "Total amount of playlists: %1",
-        "empty": "Total amount of empty playlists: %1",
-        "totalsongs": "Total amount of songs: %1",
-        "totalunavailablesongs": "Total amount of unavailable songs: %1"
+        "amount": "Celkový počet playlistů: %1",
+        "empty": "Celkový počet prázdných playlistů: %1",
+        "totalsongs": "Celkový počet skladeb: %1",
+        "totalunavailablesongs": "Celkový počet nedostupných skladeb: %1"
     }
 }

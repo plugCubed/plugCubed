@@ -1,5 +1,5 @@
 define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 'plugCubed/StyleManager', 'plugCubed/RoomSettings', 'plugCubed/Lang'], function(Class, p3Utils, ControlPanel, Styles, RoomSettings, p3Lang) {
-    var Handler, $contentDiv, $formDiv, $localFileInput, $clearButton, $submitButton, panel, value;
+    var Handler, $contentDiv, $formDiv, $localFileInput, $clearButton, $submitButton, $previewButton, panel, value, $previewImg;
 
     Handler = Class.extend({
         register: function() {
@@ -11,7 +11,11 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
 
             panel.addContent($contentDiv);
 
-            $formDiv = $('<div>').width(280).css('margin', '25px auto auto auto');
+            $formDiv = $('<div>').width(780).css({
+                margin: '25px auto auto auto',
+                'maring-left': '200px'
+            });
+            $previewImg = $('<img id="p3-preview-background" style="max-width: 1000px; max-height: 500px">');
             $localFileInput = ControlPanel.inputField('url', undefined, 'URL To Background').change(function(e) {
                 value = e.target.value;
             });
@@ -36,8 +40,23 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
                 this.changeSubmit(false);
                 $submitButton.changeSubmit(true);
             });
+            $clearButton.getJQueryElement().addClass('clear');
+            $previewButton = ControlPanel.button(p3Lang.i18n('panels.buttons.preview'), true, function() {
+                if (value != null) {
+                    var url = value;
 
-            $formDiv.append($localFileInput.getJQueryElement()).append($submitButton.getJQueryElement()).append($clearButton.getJQueryElement());
+                    if (p3Utils.endsWithIgnoreCase(url, ['.gif', '.jpg', '.jpeg', '.png']) || p3Utils.endsWithIgnoreCase(p3Utils.getBaseURL(url), ['.gif', '.jpg', '.jpeg', '.png'])) {
+                        url = p3Utils.proxifyImage(url);
+                        $.get(url, function(dat, stat) {
+                            if (stat === 'success') {
+                                $('#p3-preview-background').attr('src', url);
+                            }
+                        });
+                    }
+                }
+            });
+            $previewButton.getJQueryElement().addClass('preview');
+            $formDiv.append($localFileInput.getJQueryElement()).append($submitButton.getJQueryElement()).append($clearButton.getJQueryElement()).append($previewButton.getJQueryElement()).append($previewImg);
 
             panel.addContent($formDiv);
         },
