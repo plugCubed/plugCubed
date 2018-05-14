@@ -115,12 +115,12 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
 
             if (panel === null) return; // This happens if the panel already exists.
 
-            $contentDiv = $('<div>').append($('<h2>').text('plug³ Commands').css({
+            $contentDiv = $('<center>').append($('<div>').append($('<h2>').text('plug³ Commands').css({
                 'text-align': 'center'
             })).css({
                 width: '650px',
                 'font-size': '17px'
-            });
+            }));
             $table = $('<table>').addClass('p3-commands-list');
 
             $table.append(userCommands());

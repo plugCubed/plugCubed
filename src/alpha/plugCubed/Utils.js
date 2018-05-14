@@ -153,16 +153,23 @@ define(['plugCubed/Class', 'plugCubed/Lang', 'plugCubed/ModuleLoader'], function
             if (!requirejs.defined('plugCubed/Settings')) return;
 
             Settings = require('plugCubed/Settings');
+            var oldDbSettings = Database.settings;
+
             if (Settings.lowLagMode) {
                 Database.settings.videoOnly = false;
+                Database.settings.avatarcap = 1;
+                Database.settings.dancing = false;
+                Database.settings.hdVideo = false;
+                Database.settings.emoji = false;
                 Database.save();
-                Context.trigger('change:videoOnly').trigger('audience:pause', Database.settings.videoOnly);
-                Settings.lowLagMode = false;
+                Context.trigger('change:videoOnly', Database.settings.videoOnly);
+                window.plugCubedModules.context._events['audience:test'][0].context.paused = true;
             } else {
-                Database.settings.videoOnly = true;
+                Database.settings = oldDbSettings;
                 Database.save();
-                Context.trigger('change:videoOnly').trigger('audience:pause', Database.settings.videoOnly);
-                Settings.lowLagMode = true;
+                Context.trigger('change:videoOnly', Database.settings.videoOnly);
+                window.plugCubedModules.context._events['audience:test'][0].context.paused = false;
+                Context.trigger('');
             }
             this.toggleBadges(true);
             Settings.save();

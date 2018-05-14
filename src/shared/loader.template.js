@@ -71,6 +71,9 @@
                         'firstimpression.io',
                         'nbot'
                     ],
+                    whitelistUrls: [
+                        'plugcubed.net/scripts/'
+                    ],
                     release: Version.getSemver(),
                     user: {
                         id: API.getUser().id,
