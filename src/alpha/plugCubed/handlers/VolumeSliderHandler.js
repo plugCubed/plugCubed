@@ -4,11 +4,13 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang'], function($, Class, p3Lan
     Handler = Class.extend({
         register: function() {
             $('.volume-bar').on('DOMMouseScroll mousewheel', $.proxy(this.onScroll, this));
-            $('div.bottom__playback-controls--desktop ul.list-unstyled li.community__player-item.pause').closest('ul').append($('<li id="p3-vol-percent" class="community__player-item percentage" style="display:flex;">').append($('<span>').text(API.getVolume() + '%')));
+            $('.community__bottom .bottom__playback-controls--desktop > .list-unstyled').first().append($('<li id="p3-vol-percent" class="community__player-item percentage" style="display:flex;">').append($('<span>').text(API.getVolume() + '%')));
             window.plugCubedModules.currentMedia.on('change:volume', this.onVolChange);
         },
         onVolChange: function(volumeModel) {
             var currentVolume = volumeModel.get('volume');
+
+            console.log('Volume:', currentVolume);
 
             $('#p3-vol-percent').find('span').text(currentVolume + '%');
         },
