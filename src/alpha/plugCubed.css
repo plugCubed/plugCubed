@@ -9,6 +9,19 @@
     #p3-videoText {
         left: 27%;
     }
+    #p3-vol-percent {
+        margin-left: -25px;
+        padding: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+    [data-view=room] .bottom__playback-controls .volume-bar .progress-wrapper {
+        width: calc(100% - 55px);
+    }
+    .community__player-item.volume {
+        margin-right: 0;
+    }
 }
 @media  screen and (min-width: 1600px) {
     #p3-settings-wrapper {
