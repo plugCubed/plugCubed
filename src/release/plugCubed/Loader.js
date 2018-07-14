@@ -10,6 +10,14 @@ define(['module', 'plugCubed/Class', 'plugCubed/Notifications', 'plugCubed/Versi
         p3Utils.chatLog(undefined, p3Lang.i18n('running', Version) + '</span><br><span class="chat-text" style="color:#66FFFF">' + p3Lang.i18n('commandsHelp'), Settings.colors.infoMessage1, -10);
 
         $('head').append('<link rel="stylesheet" type="text/css" id="plugcubed-css" href="https://plugcubed.net/scripts/release/plugCubed.css?v=' + Version.getSemver() + '"/>');
+        var users = API.getUsers();
+
+        for (var i = 0; i < users.length; i++) {
+            if (p3Utils.getUserData(users[i].id, 'joinTime', -1) < 0) {
+                p3Utils.setUserData(users[i].id, 'inRoom', true);
+                p3Utils.setUserData(users[i].id, 'joinTime', Date.now());
+            }
+        }
         RoomUsersListView.prototype.RowClass = p3RoomUserListRow;
         Overrides.override();
 
