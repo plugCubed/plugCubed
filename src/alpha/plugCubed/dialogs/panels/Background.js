@@ -11,9 +11,10 @@ define(['plugCubed/Class', 'plugCubed/Utils', 'plugCubed/dialogs/ControlPanel', 
 
             panel.addContent($contentDiv);
 
-            $formDiv = $('<div>').width(780).css({
-                margin: '25px auto auto 18px'
+            $formDiv = $('<div>').width('100%').css({
+                margin: '3% auto auto 17%'
             });
+
             $previewImg = $('<img id="p3-preview-background" style="max-width: 664px; max-height: 500px">');
             $localFileInput = ControlPanel.inputField('url', undefined, 'URL To Background').change(function(e) {
                 value = e.target.value;

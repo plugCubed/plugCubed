@@ -9,6 +9,19 @@
     #p3-videoText {
         left: 27%;
     }
+    #p3-vol-percent {
+        margin-left: -25px;
+        padding: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+    [data-view=room] .bottom__playback-controls .volume-bar .progress-wrapper {
+        width: calc(100% - 55px);
+    }
+    .community__player-item.volume {
+        margin-right: 0;
+    }
 }
 @media  screen and (min-width: 1600px) {
     #p3-settings-wrapper {
@@ -161,6 +174,7 @@
     top: 50px;
     bottom: 54px;
     width: 2px;
+    z-index: 100;
 }
 
 #p3-settings,
@@ -295,6 +309,11 @@
 
 #p3-settings .p3-container .item input {
     width: 200px;
+    background: transparent;
+    border: 2px solid;
+    border-radius: 10px;
+    padding-left: 5px;
+    height: 18px;
 }
 
 #p3-settings-custom-colors .p3-container .item span {
@@ -767,7 +786,7 @@ i.icon.icon-chat-p3donatorBronze,
 }
 
 #p3-control-panel input {
-    width: 260px;
+    width: 220px;
     font-size: 20px;
     font-family: "Open Sans", sans-serif;
     border: none;
@@ -777,6 +796,21 @@ i.icon.icon-chat-p3donatorBronze,
     color: #eeeeee;
 }
 
+#p3-control-panel input::-webkit-input-placeholder {
+    text-align: center;
+}
+
+#p3-control-panel input:-ms-input-placeholder {
+    text-align: center;
+}
+
+#p3-control-panel input::-ms-input-placeholder {
+    text-align: center;
+}
+
+#p3-control-panel input::placeholder {
+    text-align: center;
+}
 #p3-control-panel .label {
     font-size: 20px;
     font-family: "Open Sans", sans-serif;
@@ -788,7 +822,7 @@ i.icon.icon-chat-p3donatorBronze,
     background: #282c35;
     font-size: 20px;
     font-family: "Open Sans", sans-serif;
-    width: 260px;
+    width: 220px;
     color: #808691;
     text-align: center;
     vertical-align: middle;
@@ -1010,7 +1044,11 @@ table.p3-commands-list th, table.p3-commands-list td {
     padding: 8px;
     border-bottom: 1px solid #232529;
 }
-
+#p3-eta-timer-span {
+    font-weight: normal !important;
+    font-size: 8px;
+    color: slategrey;
+}
 
 /** Plug fixes **/
 
@@ -1031,4 +1069,8 @@ table.p3-commands-list th, table.p3-commands-list td {
 /** Fixes the song title **/
 .community__playing-bottom-container {
     max-width: 100%;
+}
+.room-controls__bottom-text {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }

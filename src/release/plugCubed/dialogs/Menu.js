@@ -294,7 +294,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
 
             if (RoomSettings.rules.allowAutorespond !== false) {
                 container.append(guiButton(Settings.autorespond, 'autorespond', p3Lang.i18n('menu.autorespond')));
-                container.append($('<div class="item">').addClass('p3-s-autorespond-input').append($('<input>').val(Settings.awaymsg === '' ? p3Lang.i18n('autorespond.default') : Settings.awaymsg).keyup(function() {
+                container.append($('<div class="item">').addClass('p3-s-autorespond-input').css('padding-left', '10px').append($('<input>').attr('id', 'p3-s-autorespond-text').val(Settings.awaymsg === '' ? p3Lang.i18n('autorespond.default') : Settings.awaymsg).keyup(function() {
                     $(this).val($(this).val().split('@').join(''));
                     Settings.awaymsg = $(this).val().trim();
                     Settings.save();
@@ -319,7 +319,6 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             container.append(guiButton(Settings.hideVideo, 'hidevideo', Settings.hideVideo ? p3Lang.i18n('video.menushow') : p3Lang.i18n('video.menuhide')));
             container.append(guiButton(Settings.lowLagMode, 'lowLagMode', p3Lang.i18n('menu.lowlagMode')));
             container.append(guiButton(Settings.workMode, 'workMode', p3Lang.i18n('menu.workMode')));
-            container.append(guiButton(Settings.desktopNotifs, 'desktopNotifs', p3Lang.i18n('menu.desktopNotifs')));
             container.append(guiButton(false, 'colors', p3Lang.i18n('menu.customchatcolors') + '...'));
             container.append(guiButton(false, 'controlpanel', p3Lang.i18n('menu.controlpanel') + '...'));
 
@@ -329,6 +328,7 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Version', 'plugCubed/enums/Notif
             // Notification
             container.append($('<div class="section">' + p3Lang.i18n('menuHeaders.chatnotifs') + '</div>'));
 
+            container.append(guiButton(Settings.desktopNotifs, 'desktopNotifs', p3Lang.i18n('menu.desktopNotifs')));
             container.append(guiButton((Settings.notify & enumNotifications.USER_JOIN) === enumNotifications.USER_JOIN, 'notify-join', p3Lang.i18n('notify.join')).data('bit', enumNotifications.USER_JOIN));
             container.append(guiButton((Settings.notify & enumNotifications.USER_LEAVE) === enumNotifications.USER_LEAVE, 'notify-leave', p3Lang.i18n('notify.leave')).data('bit', enumNotifications.USER_LEAVE));
             container.append(guiButton((Settings.notify & enumNotifications.USER_GRAB) === enumNotifications.USER_GRAB, 'notify-grab', p3Lang.i18n('notify.grab')).data('bit', enumNotifications.USER_GRAB));

@@ -3,7 +3,14 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang'], function($, Class, p3Lan
 
     Handler = Class.extend({
         register: function() {
-            $('#volume').on('DOMMouseScroll mousewheel', $.proxy(this.onScroll, this));
+            $('.volume-bar').on('DOMMouseScroll mousewheel', $.proxy(this.onScroll, this));
+            $('.community__bottom .bottom__playback-controls--desktop > .list-unstyled').first().append($('<li id="p3-vol-percent" class="community__player-item percentage">').append($('<span>').text(API.getVolume() + '%')));
+            window.plugCubedModules.currentMedia.on('change:volume', this.onVolChange);
+        },
+        onVolChange: function(volumeModel) {
+            var currentVolume = volumeModel.get('volume');
+
+            $('#p3-vol-percent').find('span').text(currentVolume + '%');
         },
         onScroll: function(scrollEvent) {
             if (scrollEvent.originalEvent.wheelDelta !== undefined) {
@@ -13,7 +20,9 @@ define(['jquery', 'plugCubed/Class', 'plugCubed/Lang'], function($, Class, p3Lan
             }
         },
         close: function() {
-            $('#volume').off('DOMMouseScroll mousewheel', $.proxy(this.onScroll, this));
+            $('.volume-bar').off('DOMMouseScroll mousewheel', $.proxy(this.onScroll, this));
+            $('#p3-vol-percent').remove();
+            window.plugCubedModules.currentMedia.off('change:volume', this.onVolChange);
         }
     });
 

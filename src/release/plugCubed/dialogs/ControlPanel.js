@@ -54,7 +54,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
         init: function(label, submit) {
             var that = this;
 
-            this.$div = $('<div>').addClass('button').text(label);
+            this.$div = $('<div>').addClass('button').addClass('btn').text(label);
             if (submit) {
                 this.$div.addClass('submit');
             }

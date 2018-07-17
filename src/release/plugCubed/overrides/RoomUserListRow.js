@@ -53,4 +53,3 @@ define(['jquery', 'plugCubed/Utils', 'plugCubed/RoomSettings', 'lang/Lang'], fun
         }
     });
 });
-
