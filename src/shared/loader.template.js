@@ -42,7 +42,10 @@
 
         require.config({
             paths:{
-                raven:'https://cdn.ravenjs.com/3.24.2/raven.min'
+                raven: [
+                    'https://cdn.ravenjs.com/3.26.3/raven.min',
+                    'https://api.plugcubed.net/raven'
+                ]
             }
         });
 
@@ -51,7 +54,6 @@
         }
         <%= code %>
         require(['plugCubed/Loader', 'raven', 'plugCubed/Version'], function(Loader, Raven, Version) {
-
             if (typeof Raven !== 'undefined') {
                 Raven.config('https://a0f31a6f42e14b42a0eb5383f1bf7647@sentry.tfle.xyz/5', {
                     debug: true,
