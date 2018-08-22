@@ -1,6 +1,6 @@
 define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed/Lang', 'plugCubed/StyleManager', 'plugCubed/Settings'], function($, _, Class, p3Utils, p3Lang, Styles, Settings) {
 
-    var Context, Layout, PlugUI, RoomModel, RoomLoader, Handler, showMessage, oriLang, Lang, langKeys, ranks, that;
+    var Context, PlugUI, RoomModel, Handler, showMessage, oriLang, Lang, langKeys, ranks, that;
 
     /**
      * @property {{ background: String, chat: { admin: String, ambassador: String, bouncer: String, cohost: String, residentdj: String, host: String, manager: String }|null, footer: String, header: String }|null} colors
@@ -13,10 +13,8 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
     var roomSettings; // eslint-disable-line one-var
 
     Context = window.plugCubedModules.context;
-    Layout = window.plugCubedModules.Layout;
     Lang = window.plugCubedModules.Lang;
     PlugUI = window.plugCubedModules.plugUrls;
-    RoomLoader = window.plugCubedModules.roomLoader;
     RoomModel = window.plugCubedModules.room;
     showMessage = false;
     oriLang = _.extend({}, Lang);
@@ -129,7 +127,7 @@ define(['jquery', 'underscore', 'plugCubed/Class', 'plugCubed/Utils', 'plugCubed
             setFooterIcon();
         },
         update: function() {
-            parseDescription(p3Utils.cleanHTML(RoomModel.get('description')));
+            parseDescription(p3Utils.cleanHTML(RoomModel.get('long_description')));
         },
 
         // Converts RCS CCS to P3 RSS Format. Written by ReAnna.
