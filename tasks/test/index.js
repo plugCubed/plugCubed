@@ -1,5 +1,7 @@
 'use strict';
 
+const ciInfo = require('ci-info');
+const fs = require('fs');
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const gulpIf = require('gulp-if');
@@ -15,6 +17,7 @@ versions.forEach((version) => {
                 fix: !isCI
             }))
             .pipe(eslint.format())
+            .pipe(eslint.format('checkstyle', fs.createWriteStream('checkstyle-eslint.xml')))
             .pipe(eslint.failAfterError())
             .pipe(gulpIf((file) => file.eslint && file.eslint.fixed, gulp.dest(`src/${version}/plugCubed/`)));
     });

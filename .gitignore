@@ -31,3 +31,4 @@ extensions/*.crx
 extensions/*.zip
 extensions/*.mxaddon
 extensions/**/plugCubed.js
+checkstyle-*.xml
